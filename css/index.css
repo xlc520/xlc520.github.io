@@ -1,0 +1,165 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #ececec;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    -khtml-user-select:none;
+    user-select:none;
+}
+#ground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+#board{
+    width: 401px;
+    height: 451px;
+    padding: 30px;
+    background-color: #8f7a66;
+    position: relative;
+    top: 45%;
+    left: 0;
+    right: 0;
+    margin: -220px auto;
+    border: 3px solid rgb(192, 166, 137);
+    border-radius: 2px;
+    box-shadow: 0 0 25px rgba(143, 97, 76, 0.35);
+}
+#board #line{
+    width: 100%;
+    height: 100%;
+}
+#board #line #rows{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#board #line #lines{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: -100%;
+    overflow: hidden;
+}
+#board #line .row{
+    width: 100%;
+    height: 1px;
+    background-color: #571b16;
+    margin-bottom: 49px;
+}
+#board #line .line{
+    width: 1px;
+    height: 100%;
+    background-color: #571b16;
+    margin-right: 49px;
+    float: left;
+}
+#board #line .end{
+    margin: 0;
+}
+#board #line #river{
+    width: 461px;
+    height: 100%;
+    position: relative;
+    top: -200%;
+    left: -30px;
+}
+#board #line #river article{
+    position: relative;
+    top:201px;
+    width: 100%;
+    height: 49px;
+    background-color: rgba(143, 122, 102, 0.95);
+    /*background-image: url("ass/Riv.png");*/
+    box-shadow: inset 0 0 25px rgba(79, 139, 191, 0.55);
+    font-family: Arial,sans-serif;
+    font-size: 45px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #817c77;
+    opacity: 0.95;
+}
+#board #flower{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: -300%;
+    overflow: hidden;
+}
+#board #flower article{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    left: 37px;
+    top: 37px;
+    float: left;
+    border: 1px solid rgba(134, 42, 3, 0.55);
+    transform:rotate(45deg);
+}
+#board #flower .L2{
+    width: 100%;
+    height: 50px;
+}
+#board #flower .L5{
+    width: 100%;
+    height: 50px;
+}
+#board #flower .L2 article:nth-child(2)
+{
+    margin-left: 273px;
+}
+#board #flower .L5 article:nth-child(1n+2)
+{
+    margin-left: 73px;
+}
+#board #flower .L5 article:nth-child(1)
+{
+    margin-left: -50px;
+}
+#board #flower .L5 article:nth-child(2)
+{
+    margin-left: 50px;
+}
+#board #flower #F{
+    margin-top: 50px;
+    height: 200px;
+}
+#board #cross{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: -400%;
+}
+#board #cross #T{
+    width: 100%;
+    height: 200px;
+    margin-bottom: 51px;
+}
+#board #cross #B{
+    width: 100%;
+    height: 200px;
+}
+#board #cross article{
+    margin: 0 auto;
+    width: 140px;
+    height: 1px;
+    position: relative;
+    top: 50px;
+    background-color: #752e2b;
+}
+#board #cross article:nth-child(1){
+    transform:rotate(45deg);
+}
+#board #cross  article:nth-child(2){
+    margin-top: -1px;
+    transform:rotate(-45deg);
+}
+#board #cross #B article{
+    position: relative;
+    top: 149px;
+}
