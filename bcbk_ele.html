@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>别踩白块</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<style type="text/css">
+	*{margin: 0px;padding: 0px;}
+	#bg{width: 300px;height: 600px;border: 1px solid green;margin: 20px auto;position: relative;overflow: hidden;}
+	.entity{background: url(./img/bg.png);position: absolute;}
+	.sm{width: 75px;height: 100px;float: left;}
+	.smb{width: 75px;height: 100px;float: left;background: url(./img/hk.png);}
+	#nnn{width: 300px;height: 600px;background: url(./img/bg.png);position: absolute;top: 0px;}
+	.bs{background:red;border:red 3px solid;}
+	</style>
+	<script type="text/javascript">
+	var loc=600;//黑块落地失败判定
+	var count=0;//点击总数
+	//用闭包函数使每次创建的大框的ID不一样
+		var list=(function(){
+			var li="A";
+			return function(){
+				if(li=='yyy')li='nnn';
+				else li='yyy';
+				return li;
+			}
+		})()
+		var rArr=[];
+		//每次点击判定结果
+		function judge(){
+			var num=this.id.substr(3)
+			if(num!=rArr.pop()){
+				clearTimeout(timer);
+				alert("你的得分为："+count+"分！");
+				return;
+			}else{
+				loc+=100;
+				this.style.background="silver";
+				count+=1;
+			}
+			if(count!=0&&count%15==0){
+				clearTimeout(timer);
+				newtimer=50-count/15*5;
+				timer=setInterval('move()',newtimer);
+			}
+		}
+		//给每个小块添加事件
+		function add_event(ddd,dArr){
+			for(var i=0;i<24;i++){
+				var ele=document.getElementById(ddd+i);
+				if(dArr.indexOf(i)>-1){
+					ele.setAttribute('class','smb')
+				}else{
+					ele.setAttribute('class','sm');
+				}
+				ele.addEventListener('click',judge,false);
+			}
+		}
+		//产生大框中小黑框位置的随机数
+		function generateRand(){
+			var numArr=[];
+			for(var j=0;j<6;j++){
+				var num=Math.floor(Math.random()*4)+j*4;
+				numArr.push(num);
+			}
+			return numArr;
+		}
+		//每次调用在图的上方升成一个待往下滚动的大方框，并将其黑色的部分的数字PUSH进rArr中
+		function drawEntity(){			
+			var dArr=generateRand();
+			rArr=dArr.concat(rArr);
+			var entity=document.createElement('div');
+			var ddd=list();
+			entity.setAttribute('id',ddd);
+			entity.setAttribute('class','entity');
+			entity.style.top='-600px';
+			for(var i=0;i<24;i++){
+				var ele=document.createElement('div');
+				ele.setAttribute('id',ddd+i);
+				entity.appendChild(ele);
+			}
+			var bg=document.getElementById('bg');
+			bg.appendChild(entity);
+			add_event(ddd,dArr);
+		}
+		//找到脚本中存在的三个大方框，使其往下滚动
+		function move(){
+			bg=document.getElementById('bg');
+			var a=document.getElementById('yyy');
+			var anowtop=parseInt(a.style.top);
+			if(anowtop==595){
+				bg.removeChild(a);
+				drawEntity();
+			}
+			anowtop+=5;
+			a.style.top=anowtop+"px";				
+			var b=document.getElementById('nnn');
+			var bnowtop=parseInt(b.style.top);
+			if(bnowtop==595){
+				bg.removeChild(b);
+				drawEntity();
+			}
+			bnowtop+=5;
+			b.style.top=bnowtop+"px";
+			loc-=5;
+			if(loc==0){
+				clearTimeout(timer);
+				alert("你的得分为："+count+"分！");
+				return;
+			}
+		}
+	</script>
+</head>
+<body>
+<div id="bg"><div id="nnn"></div></div>
+</body>
+<script type="text/javascript">
+	var bbb=document.getElementById('nnn');
+	bbb.style.top='0px';
+	drawEntity();
+	move();
+var timer=setInterval('move()',50);
+</script>
+
+</html>

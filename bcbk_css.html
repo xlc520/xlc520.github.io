@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>别踩白块</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<style type="text/css">
+	*{margin: 0px;padding: 0px;box-sizing: border-box;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+	#gameZone{width: 302px;height: 602px;margin: 20px auto;position: relative;overflow: hidden;border: 1px solid orange;}
+	.square{width: 75px;height: 100px;float: left;border: 1px solid black;}
+	.squareBlack{width: 75px;height: 100px;float: left;border: 1px solid black;background: black;}
+	</style>
+	<script type="text/javascript">
+	var loc=600;//黑块落地失败判定
+	var count=0;//点击总数
+	//用闭包函数使每次创建的大框的ID不一样
+		var order=(function(){
+			var li="A";
+			return function(){
+				if(li=='boarda')li='boardb';
+				else li='boarda';
+				return li;
+			}
+		})()
+		var locArr=[];
+		//每次点击判定结果
+		function judge(){
+			var num=this.id.substr(3)
+			if(num!=locArr.pop()){
+				clearTimeout(timer);
+				alert("你的得分为："+count+"分！");
+				return;
+			}else{
+				loc+=100;
+				this.style.background="silver";
+				count+=1;
+			}
+			if(count!=0&&count%15==0){
+				clearTimeout(timer);
+				newtimer=50-count/15*5;
+				timer=setInterval('fall()',newtimer);
+			}
+		}
+		
+		//产生大框中小黑框位置的随机数
+		function generateRand(){
+			var numArr=[];
+			for(var j=0;j<6;j++){
+				var num=Math.floor(Math.random()*4)+j*4;
+				numArr.push(num);
+			}
+			return numArr;
+		}
+		//每次调用在图的上方升成一个待往下滚动的大方框，并将其黑色的部分的数字PUSH进locArr中
+		function drawBoard(){			
+			var temArr=generateRand();
+			locArr=temArr.concat(locArr);
+			var board=document.createElement('div');
+			board.setAttribute('id',order());
+			board.style.position="absolute";
+			board.style.top='-600px';
+			for(var i=0;i<24;i++){
+				var ele=document.createElement('div');
+				ele.setAttribute('id',"ele"+i);
+				if(temArr.indexOf(i)>-1){
+					ele.setAttribute('class','squareBlack')
+				}else{
+					ele.setAttribute('class','square');
+				}
+				ele.addEventListener('click',judge,false);
+				board.appendChild(ele);
+			}
+			var gameZone=document.getElementById('gameZone');
+			gameZone.appendChild(board);
+		}
+		//找到脚本中存在的三个大方框，使其往下滚动
+		function fall(){
+			gameZone=document.getElementById('gameZone');
+			var boarda=document.getElementById('boarda');
+			var anowtop=parseInt(boarda.style.top);
+			if(anowtop==595){
+				gameZone.removeChild(boarda);
+				drawBoard();
+			}
+			anowtop+=5;
+			boarda.style.top=anowtop+"px";				
+			var boardb=document.getElementById('boardb');
+			var bnowtop=parseInt(boardb.style.top);
+			if(bnowtop==595){
+				gameZone.removeChild(boardb);
+				drawBoard();
+			}
+			bnowtop+=5;
+			boardb.style.top=bnowtop+"px";
+			loc-=5;
+			if(loc==0){
+				clearTimeout(timer);
+				alert("你的得分为："+count+"分！");
+				return;
+			}
+		}
+		window.onload=function(){
+			drawBoard();
+			fall();
+			var timer=setInterval('fall()',50);
+		}
+	</script>
+</head>
+<body>
+<div id="gameZone"><div id="boardb" style="position: absolute;top: 0px;"></div></div>
+</body>
+</html>
