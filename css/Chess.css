@@ -1,0 +1,108 @@
+#board #space{
+    width: 450px;
+    height: 500px;
+    position: relative;
+    top: -100%;
+    margin: -25px;
+}
+#board #space article{
+    width: 44px;
+    height: 44px;
+    float: left;
+    transition: box-shadow 0.35s,outline 0.35s,border 0.35s,transform 0.35s;
+    border: 3px solid rgba(0, 0, 0, 0);
+}
+#board #space article:hover{
+    box-shadow:0 0 25pt rgba(0, 0, 0, 0.35);
+    border: 3px double rgba(0, 0, 0, 0.15);
+    transform: scale(1.1,1.1);
+}
+.CS{
+    border-radius: 500px;
+}
+.C{
+    font-family: "微软雅黑 light", "微软雅黑", Arial,sans-serif;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    border-radius: 50px;
+    line-height: 40px;
+    text-align: center;
+    border: 2px solid rgba(0, 0, 0, 0);
+    box-shadow: 0 0 25pt rgba(0, 0, 0, 0.35);
+    transition:transform 0.35s ;
+    cursor: pointer;
+}
+/*.C:hover{
+    transform: scale(1.1,1.1);
+}*/
+.BR{
+    border-color: #6ec672;
+    color: #f3f3f3;
+    background-color: #46804a;
+}
+.BB{
+    border-color: #6ec672;
+    color: #232323;
+    background-color: #46804a;
+}
+.PR{
+    border-color: #c69c13;
+    color: #f3f3f3;
+    background-color: #805435;
+}
+.PB{
+    border-color: #c69c13;
+    color: #232323;
+    background-color: #805435;
+}
+.JR{
+    border-color: #c6385a;
+    color: #f3f3f3;
+    background-color: rgba(128, 43, 34, 0.75);
+}
+.JB{
+    border-color: #c6385a;
+    color: #232323;
+    background-color: rgba(128, 43, 34, 0.75);
+}
+.MR{
+    border-color: #c6a902;
+    color: #f3f3f3;
+    background-color: #806328;
+}
+.MB{
+    border-color: #c6a902;
+    color: #232323;
+    background-color: #806328;
+}
+.XR{
+    border-color: #2c806e;
+    color: #f3f3f3;
+    background-color: #5d9eb2;
+}
+.XB{
+    border-color: #2c806e;
+    color: #232323;
+    background-color: #5d9eb2;
+}
+.SR{
+    border-color: #bebebe;
+    color: #820725;
+    background-color: rgba(216, 216, 216, 0.95);
+}
+.SB{
+    border-color: #bebebe;
+    color: #232323;
+    background-color: rgba(216, 216, 216, 0.95);
+}
+.J{
+    border-color: #820725;
+    color: #820725;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.S{
+    border-color: #232323;
+    color: #232323;
+    background-color: rgba(0, 0, 0, 0.25);
+}
