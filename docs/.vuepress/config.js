@@ -58,7 +58,7 @@ module.exports = config({
 	nav: [
 		{ text: 'Home', link: '/' , icon: "home"},
 		{ text: '学习', link: '/study/' ,icon: "note"},
-		{ text: 'IDEA', link: '/idea/' },
+		{ text: 'Java', link: '/Java/' },
 		{ text: 'Linux', link: '/linux/' },
 		{ text: '脚本', link: '/script/' },
 		{ text: '工具', link: '/tools/' },
@@ -156,6 +156,7 @@ module.exports = config({
 	git:{
 		contributor: false,
 		timezone: 'Asia/Shanghai', 	//时区列表:https://www.zeitverschiebung.net/cn/all-time-zones.html
+		//transformer: `${dayjs(timestamp).format('LL')} ${dayjs(timestamp).format('HH:mm')}`
 		// transformer: (timestamp, lang) => {
 		// 			  return dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')
 		// 			},
