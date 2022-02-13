@@ -78,7 +78,7 @@ module.exports = config({
 			'git_emoji', /* /bar/three.html */
 			'GitHub-Auto-Commit',
       ],
-      '/idea/':[
+      '/Java/':[
 			'',
 			'idea-tips',
       ],
