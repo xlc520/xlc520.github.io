@@ -104,7 +104,7 @@ public class WebExceptionControl {
 
 很简单创建对应的URL就好
 
-![图片](static/img/640-164346343241051.webp)
+![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241051.webp)
 
 ### [5.拦截器创建](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
@@ -168,9 +168,9 @@ public class WebMvcConfg implements WebMvcConfigurer {
 
 分别在token中传入用户1-3的key，访问不同url就可以看到效果，如下
 
-[![图片](static/img/640-164346343241052.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241052.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
-[![图片](static/img/640-164346343241053.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241053.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 > “
 >
@@ -218,21 +218,21 @@ public @interface UrlAnnotation {
 
 打上自定义的注解，代表对应方法是什么操作
 
-[![图片](static/img/640-164346343241054.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241054.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 ### [4.修改一下之前的拦截器](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 添加对注解上面的操作类型的获取，并用type类型去对比判断
 
-[![图片](static/img/640-164346343241055.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241055.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 ### [5.验证结果](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 其他都不变
 
-[![图片](static/img/640-164346343241056.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241056.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
-[![图片](static/img/640-164346343241157.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241157.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 ## [角色权限](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
@@ -259,17 +259,17 @@ public class Constant {
 
 模拟两个模块
 
-[![图片](static/img/640-164346343241158.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241158.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 ### [3.修改一下拦截器](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
-[![图片](static/img/640-164346343241159.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241159.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
 ### [4.结果测试](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
-[![图片](static/img/640-164346343241160.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+[![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346343241160.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 
-[![图片](static/img/640-164346343241161.webp)](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+
 
 ## [总结](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
 

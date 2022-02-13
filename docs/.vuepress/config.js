@@ -4,7 +4,7 @@ module.exports = config({
   title: "StudyNote",
   description: "一个自己学习的笔记，学习工具，各种技巧，各种使用教程。",
 
-  dest: "./pages",
+  dest: "./html",
 
   head: [
     [

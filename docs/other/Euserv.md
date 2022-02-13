@@ -1,8 +1,8 @@
 # Euserv
 
-EUserv是一家德国主机商，提供[VPS主机](https://wzfou.com/vps/)、服务器等，目前该商家提供免费ipv6主机服务器，配置信息是CPU：1 Core、内存：1 GB、硬盘：10 GB HDD、带宽：1 Gbit，提供一个IPv6地址，想要IPv4地址那就付费了。虽然[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机看起来配置很好，但是用起来非常地卡。
+EUserv是一家德国主机商，提供VPS主机、服务器等，目前该商家提供免费ipv6主机服务器，配置信息是CPU：1 Core、内存：1 GB、硬盘：10 GB HDD、带宽：1 Gbit，提供一个IPv6地址，想要IPv4地址那就付费了。虽然免费VPS主机看起来配置很好，但是用起来非常地卡。
 
-申请[EUserv](https://wzfou.com/tag/euserv/)免费VPS主机的过程并不复杂，也不需要什么Paypal、信用卡之类的验证，但是EUserv免费VPS主机申请要人工审核，一般来说48小时内会收到回复。当然，也有申请EUserv[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机失败的，或者是EUserv[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机被删号的。
+申请EUserv免费VPS主机的过程并不复杂，也不需要什么Paypal、信用卡之类的验证，但是EUserv免费VPS主机申请要人工审核，一般来说48小时内会收到回复。当然，也有申请EUserv免费VPS主机失败的，或者是EUserv免费VPS主机被删号的。
 
 [![EUserv免费VPS主机申请与使用-纯IPv6 VPS主机连接管理与安装网站应用](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_00-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_00.png)
 
@@ -21,11 +21,11 @@ EUserv是一家德国主机商，提供[VPS主机](https://wzfou.com/vps/)、服
 
 进入网站后，可以将网站的语言切换为英文，或者是直接用浏览器翻译成中文。找到导航栏的免费VPS主机申请链接。
 
-[![EUserv免费VPS申请地址](static/img/EUserv_01-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_01.png)
+[![EUserv免费VPS申请地址](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_01-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_01.png)
 
 确定申请。
 
-[![EUserv免费VPS提交申请](static/img/EUserv_02-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_02.png)
+[![EUserv免费VPS提交申请](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_02-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_02.png)
 
 可以看到EUserv免费VPS是免费一个月的，不过可以免费续期。
 
@@ -33,7 +33,7 @@ EUserv是一家德国主机商，提供[VPS主机](https://wzfou.com/vps/)、服
 
 在页面最下方点击结算。
 
-[![EUserv免费VPS开始结算](static/img/EUserv_04-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_04.png)
+[![EUserv免费VPS开始结算](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_04-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_04.png)
 
 此时，注册一个新账号。
 
@@ -49,7 +49,7 @@ EUserv是一家德国主机商，提供[VPS主机](https://wzfou.com/vps/)、服
 
 再次登录到EUserv后台，会提示让你补充你的详细信息，主要是街道地址、编号、手机号码等，填写参考下图：
 
-[![EUserv免费VPS补充信息](static/img/EUserv_08-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_08.png)
+[![EUserv免费VPS补充信息](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_08-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_08.png)
 
 完成注册并申请VPS主机，等待审核开通。
 
@@ -63,15 +63,15 @@ EUserv免费VPS开通后，你就可以点击进入到VPS主机控制面板了�
 
 在EUserv免费VPS控制面板中，主要有查看VPS信息、重装系统以及IPv6地址等功能。
 
-[![EUserv免费VPS查看管理中心](static/img/EUserv_11-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_11.png)
+[![EUserv免费VPS查看管理中心](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_11-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_11.png)
 
 这是EUserv免费VPS重装系统页面。
 
-[![EUserv免费VPS重装系统](static/img/EUserv_12-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_12.png)
+[![EUserv免费VPS重装系统](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_12-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_12.png)
 
 这是EUserv免费VPS查看信息页面，重装系统成功后，你就可以看到root的密码了，还有IPv6地址。
 
-[![EUserv免费VPS查看密码](static/img/EUserv_13-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_13.png)
+
 
 ## 三、EUserv免费VPS连接
 
@@ -123,11 +123,11 @@ ping -6 ipv6.test-ipv6.com
 
 现在你就可以开始使用客户端连接你的EUserv免费VPS了。
 
-[![EUserv免费VPS连接成功](static/img/EUserv_14-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_14.png)
+[![EUserv免费VPS连接成功](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_14-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_14.png)
 
 详细的操作方法请参考：[Windows 10系统利用IPv6隧道开启IPv6访问](https://wzfou.com/question/19085/)。使用浏览器访问IPv6地址，类似于：http://[2a01:4f8:191:48c:2018:2019::ed]，如下图：
 
-[![EUserv免费VPS浏览器查看](static/img/EUserv_18-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_18.png)
+[![EUserv免费VPS浏览器查看](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_18-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_18.png)
 
 ## 四、纯IPv6的VPS搭建网站
 
@@ -181,7 +181,7 @@ rm -f /www/server/panel/data/ipv6.pl && /etc/init.d/bt restart
 
 对于IPv6地址，DNS解析选择AAAA记录类型记录，记录值为IPv6地址即可。
 
-[![EUserv免费VPS添加解析](static/img/EUserv_20-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_20.png)
+[![EUserv免费VPS添加解析](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_20-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_20.png)
 
 ### 4.3 兼顾IPv4用户访问
 
@@ -189,15 +189,15 @@ rm -f /www/server/panel/data/ipv6.pl && /etc/init.d/bt restart
 
 接入了Cloudflare后，你就可以先设置AAAA记录了。
 
-[![EUserv免费VPS启用CDN](static/img/EUserv_21-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_21.png)
+[![EUserv免费VPS启用CDN](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_21-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_21.png)
 
 接着在[Cloudflare Partner](https://wzfou.com/tag/cloudflare-partner/)接入平台会得到CNAME记录，这时你就可以到你的域名DNS管理处修改CNAME记录了。
 
-[![EUserv免费VPS兼顾IPv4地址](static/img/EUserv_22-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_22.png)
+[![EUserv免费VPS兼顾IPv4地址](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_22-680x366.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_22.png)
 
 成功将纯IPv6的VPS主机接入到了Cloudflare的CDN网络后，不管用户是不是支持IPv6访问都可以访问你的网站了，与普通的网站没有什么 区别。
 
-[![EUserv免费VPS访问成功](static/img/EUserv_23.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_23.png)
+[![EUserv免费VPS访问成功](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_23.png)](https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_23.png)
 
 ## 五、总结
 
@@ -217,35 +217,35 @@ EUserv[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机官网打开速度很
 
 打开 https://console.cloud.tencent.com/scf/ 登录腾讯云，初次使用云函数SCF要授权。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15.webp)
 
 ### 2. 新建BeautifulSoup层
 
 新建层 BeautifulSoup ，将 [BeautifulSoup.zip](https://github.com/o0oo0ooo0/EUserv_extend/releases/download/0.1/BeautifulSoup.zip) 导入 ，添加运行环境 Python 3.6 。注意层的位置选择香港等海外地区，因为我们要续费的VPS在德国。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528787822.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528787822.webp)
 
 建好层后如下，后面用的上。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788023.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788023.webp)
 
 ### 3. 新建腾讯云函数EUserv_extend
 
 运行环境选择 Python 3.6，创建方式选择 空白函数，内存选择 64M，执行超时时间建议为 300 s（网站在国外访问比较慢，建议部署在非大陆区域，例如HK、SG等，需要和上面创建层的位置是一样的。），将修改后的 **main.py** 粘贴进去。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788124.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788124.webp)
 
 选择自定义创建，按下图配置
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788125.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788125.webp)
 
 复制https://github.com/o0oo0ooo0/EUserv_extend库中的main.py文件。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788226.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788226.webp)
 
 复制粘贴到上图index.py文本，然后粘贴到刚才打开的腾讯云函数服务编辑框中，修改其中的用户名，密码。
 
-![img](static/img/ngcb15-164191528788327.webp)
+![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788327.webp)
 
 USERNAME: 你的EUserv账户邮箱或Customer ID
 
@@ -271,27 +271,27 @@ SCKEY = 'XX'
 
 设置64M内存就够用了，300秒延时。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788328.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788328.webp)
 
 其他默认就可，然后点完成。完成云函数配置。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788429.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788429.webp)
 
 ### 4. 绑定层 BeautifulSoup
 
 在 EUserv_extend⇨函数管理⇨层管理 里绑定层 BeautifulSoup。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788430.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788430.webp)
 
 ### 5. 测试并创建时间触发
 
 点击下图的测试，或会提示config等不存在，可以忽略。
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788531.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788531.webp)
 
 测试没错误，就点EUserv_extend⇨触发管理⇨创建触发器触发周期⇨自定义触发周期。填入0 0 8 */7 * * *
 
-![EUserv德国免费VPS自动续期](static/img/ngcb15-164191528788632.webp)
+![EUserv德国免费VPS自动续期](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788632.webp)
 
 每 7 天的 8 点执行，可修改成你想要的时间。
 

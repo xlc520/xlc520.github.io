@@ -1,24 +1,3 @@
----
-# 这是页面的图标
-icon: page
-# 这是文章的标题
-title: 微软Office 365 E5 开发人员计划
-# 设置作者
-author: xlc520
-# 设置写作时间
-time: 2022-01-10
-# 一个页面只能有一个分类
-category: 其他
-# 一个页面可以有多个标签
-tag:
-  - Office
-# 设置当前文章是否在列表中置顶，此页面会在文章列表指定
-sticky: false
-# 设置当前文章是否收藏在博客主题的文章列表中。当填入数字时，数字越大，排名越靠前。
-star: true
-# 你可以自定义页脚
-# footer: 这是测试显示的页脚
----
 # 申请加入 微软Office 365 E5 开发人员计划
 
 # 前言
@@ -35,19 +14,19 @@ Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/d
 
 打开链接就是大大的 **立即加入** 几个大字 （注：此过程也许国内网络访问并不友好）
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_01.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_01.jpg)
 
 点 **立即加入** 就弹出填写信息的界面，如果你没有登录账号，就会让你登录。
 
 填写信息正常填即可
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_02.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_02.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_03.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_03.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_04.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_04.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_05.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_05.jpg)
 
 到这里就OK了，可以订阅我们需要的 **E5** 了
 
@@ -57,13 +36,13 @@ Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/d
 
 账号是一个邮箱的形式，用户名可以随意，域需要唯一
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_06.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_06.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_07.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_07.jpg)
 
 填好后点 **继续** 就完成了，成功订阅了E5。
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](/static/img/officee5_08.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_08.jpg)
 
 # 管理E5订阅
 
