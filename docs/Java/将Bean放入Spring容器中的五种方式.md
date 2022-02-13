@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: SpringBoot将Bean放入Spring容器中的五种方式
+description: SpringBoot将Bean放入Spring容器中的五种方式
+time: 
+category: Java
+tags: Java
+article: true
+timeline: true
+icon: 
+password: 
+---
 # SpringBoot将Bean放入Spring容器中的五种方式
 
 ## 1、@Configuration + @Bean

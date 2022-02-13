@@ -24,28 +24,12 @@ module.exports = config({
     ],
   ],
 
- //  locales: {
- //    "/": {
- //      lang: "zh-CN",
- //    },
- //    "/zh/": {
-	// 	lang: "zh-CN",
- //      title: "Theme Demo",
- //      description: "vuepress-theme-hope 的 demo",
- //    },
-	// "/en/": {
-	// 	lang: "en-US",
-	//   title: "Theme Demo",
-	//   description: "vuepress-theme-hope  demo",
-	// },
- //  },
-
   themeConfig: {
     logo: "/logo.svg",
-    hostname: "https://xlc520.github.io/StudyNote/",
+    hostname: "https://xlc520.github.io/",
 	wordPerminute: 120, 	//每分钟的阅读字数
     author: "xlc520",
-    repo: "https://github.com/xlc520/StudyNote",
+    repo: "https://github.com/xlc520/xlc520.github.io",
 	//内置搜索
 	search: true,
 	searchMaxSuggestions: 10,
@@ -68,69 +52,69 @@ module.exports = config({
 		{ text: 'DownGit', link: 'https://git.xulc.workers.dev/' },
 	],
 
+	// sidebar: "auto",		//自动生成侧栏
 	sidebarDepth: 2,	//最大的深度
 	displayAllHeaders: true, //显示所有页面的标题链接 默认值: false
 	activeHeaderLinks: true, // 活动的标题链接默认值: true
-	sidebar: "auto",		//自动生成侧栏
-    sidebar: {
-      '/git/': [
-      		'',
-			'git_emoji', /* /bar/three.html */
-			'GitHub-Auto-Commit',
-      ],
-      '/Java/':[
-			'',
-			'idea-tips',
-      ],
-      '/linux/':[
-			'',
-			'Centos7Minimal',
-			'NodeJS-Maven-Mysql',
-			'bt',
-			'Euserv',
-			'Nginx安装Web应用防火墙',
-			'openssl一键自签证书',
-      ],
-	  '/other/':[
-		  '',
-		  'OfficeE5',
-		  '安装WSA-激活GPU-双击安装APK',
-		  '程序员常逛的网站',
-		  '电子书网站',
-		  '临时邮箱和接码',
-		  '免费插图',
-		  '免费工具集锦',
-		  '免费图标',
-		  '免费图库',
-		  '免费资源集锦',
-		  '影视',
+   //  sidebar: {
+   //    '/git/': [
+   //    		'',
+			// 'git_emoji', /* /bar/three.html */
+			// 'GitHub-Auto-Commit',
+   //    ],
+   //    '/Java/':[
+			// '',
+			// 'idea-tips',
+   //    ],
+   //    '/linux/':[
+			// '',
+			// 'Centos7Minimal',
+			// 'NodeJS-Maven-Mysql',
+			// 'bt',
+			// 'Euserv',
+			// 'Nginx安装Web应用防火墙',
+			// 'openssl一键自签证书',
+   //    ],
+	  // '/other/':[
+		 //  '',
+		 //  'OfficeE5',
+		 //  '安装WSA-激活GPU-双击安装APK',
+		 //  '程序员常逛的网站',
+		 //  '电子书网站',
+		 //  '临时邮箱和接码',
+		 //  '免费插图',
+		 //  '免费工具集锦',
+		 //  '免费图标',
+		 //  '免费图库',
+		 //  '免费资源集锦',
+		 //  '影视',
 		  
-	  ],
-      '/script/':[
-      			'',
-      			'repository',
-				'脚本仓库',
-      ],
-      '/source_code/':[
-      			'',
-      			'admin'
-      ],
-	  '/study/': [
-	  			 '',
-	    'vuepress',  /* /foo/one.html */
-	  ],
-      '/tools/': [
-			'',
-			'software',
-			'develop-tools',
-			'lenovo',
-			'SSH客户端软件',
-			'StartAllBack(StartIsBack)v3.2.1Stable',
-      ],
-      '/': [
-        '',        /* / */
-      ]
-    },
+	  // ],
+   //    '/script/':[
+   //    			'',
+   //    			'repository',
+			// 	'脚本仓库',
+   //    ],
+   //    '/source_code/':[
+   //    			'',
+   //    			'admin'
+   //    ],
+	  // '/study/': [
+	  // 			 '',
+	  //   'vuepress',  /* /foo/one.html */
+	  // ],
+   //    '/tools/': [
+			// '',
+			// 'software',
+			// 'develop-tools',
+			// 'lenovo',
+			// 'SSH客户端软件',
+			// 'StartAllBack(StartIsBack)v3.2.1Stable',
+   //    ],
+   //    '/': [
+   //      '',        /* / */
+   //    ]
+   //  },
 	// custom containers
 	tip: "提示",
 	warning: "注意",
@@ -167,42 +151,11 @@ module.exports = config({
 	      lang: "zh-CN",
 	    },
 	  },
-    // locales: {
-    //   "/zh/": {
-    //     nav: [
-    //       { text: "博客主页", link: "/zh/", icon: "home" },
-    //       { text: "项目主页", link: "/zh/home/", icon: "home" },
-    //       {
-    //         text: "如何使用",
-    //         icon: "creative",
-    //         link: "/zh/guide/",
-    //       },
-    //       {
-    //         text: "主题文档",
-    //         icon: "note",
-    //         link: "https://vuepress-theme-hope.github.io/zh/",
-    //       },
-    //     ],
-    //     sidebar: {
-    //       "/zh/": [
-    //         "",
-    //         "home",
-    //         "slides",
-    //         "layout",
-    //         {
-    //           title: "如何使用",
-    //           icon: "creative",
-    //           prefix: "guide/",
-    //           children: ["", "page", "markdown", "disable", "encrypt"],
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
 
     blog: {
       intro: "/intro",
       sidebarDisplay: "always",
+	  autoExcerpt: true,  //自动摘要
 	  timeline: true,
       links: {
         Github: "https://github.com/xlc520",
@@ -313,6 +266,27 @@ module.exports = config({
 
 plugins: [
 		"photo-swipe",
+		"vuepress-plugin-auto-sidebar",{
+			sort: {
+				mode: "created_time_desc",
+				readmeFirst: true,
+				readmeFirstForce: false
+			},
+			title: {
+				mode: "default",
+				map: {}
+			},
+			sidebarDepth: 1,
+			collapse: {
+				open: false,
+				collapseList: [],
+				uncollapseList: []
+			},
+			ignore: [],
+			git: {
+				trackStatus: 'all'
+			}
+		},
 		'cursor-effects',{
 		//vuepress 插件光标效果  https://moefyit.github.io/moefy-vuepress/packages/cursor-effects.html
 			size: 2, // size of the particle, default: 2

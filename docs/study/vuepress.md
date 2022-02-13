@@ -26,3 +26,6 @@
 ## vuepress-theme-reco
 一款简洁而优雅的 vuepress 博客 & 文档 主题。
 [https://vuepress-theme-reco.recoluan.com/](https://vuepress-theme-reco.recoluan.com/)
+
+## Vuepress Plugin Auto Sidebar
+[https://shanyuhai123.github.io/vuepress-plugin-auto-sidebar/zh/](https://shanyuhai123.github.io/vuepress-plugin-auto-sidebar/zh/)

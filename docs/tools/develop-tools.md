@@ -1,19 +1,3 @@
----
-tags:
- - 1.阿尔萨斯Java在线诊断工具
- - 2.Cloud Toolkit IDE插件
- - 3.ChaosBlade混沌工程故障注入工具
- - 4.阿里巴巴Java编码指南
- - 5.应用实时监控服务（ARMS）
- - 6.Docsite开源静态网站生成器
- - 7.Freeline - Android的二级编译解决方案
- - 8.阿里云应用高可用性服务（AHAS）
- - 9.EasyExcel数据处理工具
- - 10.HandyJSON for iOS
- - 11.Druid数据库连接池
- - 12.阿里巴巴DragonwellJava开发套件
----
-
 # 12 个后端开发工具
 
 

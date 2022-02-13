@@ -1,5 +1,12 @@
-# linux
-- [linux](/linux/)
-- [Centos7Minimal](Centos7Minimal)
-- [NodeJS-Maven-Mysql](NodeJS-Maven-Mysql)
-- [bt](bt)
+---
+author: xlc520
+title: Linux
+description: Linux分类
+time: 
+category: Linux
+tags: Linux
+article: true
+timeline: true
+icon: 
+password: 
+---

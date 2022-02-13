@@ -1,3 +1,16 @@
+---
+author: xlc520
+title: commit规范 & emoji表情
+description: commit规范 & emoji表情
+time: 
+category: Git
+tags: Git
+article: true
+timeline: true
+icon: 
+password: 
+---
+
 # Git丨commit规范 & emoji表情
 
 ## 一、文字规范

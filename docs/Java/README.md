@@ -1,7 +1,12 @@
 ---
-time: 2021-12-13
 author: xlc520
+title: Java
+description: Java
+time: 
+category: Java
+tags: Java
+article: true
+timeline: true
+icon: 
+password: 
 ---
-# IDEA
-- [IDEA](/idea/)
-- [idea-tips](idea-tips)

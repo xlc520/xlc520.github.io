@@ -1,3 +1,16 @@
+---
+author: xlc520
+title: SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
+description: SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
+time: 
+category: Java
+tags: Java
+article: true
+timeline: true
+icon: 
+password: 
+---
+
 # SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
 
 ## 前言

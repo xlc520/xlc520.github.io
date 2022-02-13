@@ -13,6 +13,7 @@
     "@mr-hope/vuepress-plugin-components": "^1.27.1",
     "@mr-hope/vuepress-plugin-seo": "^1.26.0",
     "vuepress": "^1.9.5",
+    "vuepress-plugin-auto-sidebar": "^2.3.2",
     "vuepress-plugin-cursor-effects": "^1.0.2",
     "vuepress-plugin-fulltext-search": "^2.2.1",
     "vuepress-theme-hope": "^1.27.3",

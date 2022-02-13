@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: Centos7 Minimal 安装后初始化配置
+description: Centos7 Minimal 安装后初始化配置
+time: 
+category: Linux
+tags: Linux
+article: true
+timeline: true
+icon: 
+password: 
+---
 # Centos7 Minimal 安装后初始化配置
 
  

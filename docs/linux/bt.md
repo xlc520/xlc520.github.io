@@ -1,5 +1,14 @@
 ---
-title: 宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号
+author: xlc520
+title: 宝塔面板绕过绑定账号
+description: 宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号
+time: 
+category: Linux
+tags: Linux
+article: true
+timeline: true
+icon: 
+password: 
 ---
 
 # 宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号
