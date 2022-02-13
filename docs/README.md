@@ -3,7 +3,7 @@ blog: true
 home: true
 icon: home
 title: 首页
-heroImage: /static/img/study.jpg
+heroImage: /assets/icon/study.jpg
 heroText: StudyNote
 heroFullScreen: true
 tagline: 加油
