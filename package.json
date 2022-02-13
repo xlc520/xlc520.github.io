@@ -1,0 +1,25 @@
+{
+  "name": "StudyNote",
+  "version": "1.0.0",
+  "description": "一个自己学习的笔记，学习工具，各种技巧，各种使用教程。",
+  "license": "MIT",
+  "scripts": {
+    "docs:build": "vuepress build docs",
+    "docs:clean-dev": "vuepress dev docs --no-cache",
+    "docs:dev": "vuepress dev docs",
+    "docs:eject-theme": "vuepress eject-hope docs"
+  },
+  "devDependencies": {
+    "@mr-hope/vuepress-plugin-components": "^1.27.1",
+    "@mr-hope/vuepress-plugin-seo": "^1.26.0",
+    "vuepress": "^1.9.5",
+    "vuepress-plugin-cursor-effects": "^1.0.2",
+    "vuepress-plugin-fulltext-search": "^2.2.1",
+    "vuepress-theme-hope": "^1.27.3",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "cache-loader": "^4.1.0",
+    "vue-loader": "^15.9.8"
+  }
+}
