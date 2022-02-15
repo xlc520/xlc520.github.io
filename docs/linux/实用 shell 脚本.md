@@ -1,7 +1,4 @@
-
-
 ---
-
 author: xlc520
 title: 实用 shell 脚本
 description: 实用 shell 脚本，建议收藏！
