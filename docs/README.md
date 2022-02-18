@@ -3,7 +3,9 @@ blog: true
 home: true
 icon: home
 title: 首页
+hero: true
 heroImage: /assets/icon/study.jpg
+bgImage: http://xlc.pp.ua/bing-api/index.php?rand=true
 heroText: StudyNote
 heroFullScreen: true
 tagline: 加油

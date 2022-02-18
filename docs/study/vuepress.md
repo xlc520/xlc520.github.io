@@ -1,12 +1,13 @@
 # VuePress 学习
 
 ## VuePress  Vue 驱动的静态网站生成器
-[https://vuepress.vuejs.org/zh/](https://vuepress.vuejs.org/zh/)
+[https://vuepress.vuejs.org/](https://vuepress.vuejs.org/)
 
 ## vuepress-theme-hope
-[https://vuepress-theme-hope.github.io/zh/](https://vuepress-theme-hope.github.io/zh/)
+[https://vuepress-theme-hope.github.io/](https://vuepress-theme-hope.github.io/)
 
 ## vuepress-theme-vdoing
+
 🚀一款简洁高效的VuePress 知识管理&博客 主题
 [https://doc.xugaoyi.com/](https://doc.xugaoyi.com/)
 [https://doc.xugaoyi.com/pages/db78e2/#插件推荐](https://doc.xugaoyi.com/pages/db78e2/#插件推荐)
