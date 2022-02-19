@@ -42,7 +42,7 @@ module.exports = config({
 	nav: [
 		{ text: 'Home', link: '/' , icon: "home"},
 		{ text: '学习', link: '/study/' ,icon: "note"},
-		{ text: 'Java', link: '/Java/' },
+		{ text: 'Java', link: '/java/' },
 		{ text: 'Linux', link: '/linux/' },
 		{ text: '脚本', link: '/script/' },
 		{ text: '工具', link: '/tools/' },
