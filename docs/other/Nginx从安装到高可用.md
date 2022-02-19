@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: Nginx从安装到高可用
+description: Nginx从安装到高可用
+time: 2022-01-16
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # Nginx从安装到高可用
 
 ```

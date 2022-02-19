@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: SpringBoot打包不同环境配置与shell脚本部署
+description: SpringBoot打包不同环境配置与shell脚本部署
+time: 2022-01-15
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # SpringBoot打包不同环境配置与shell脚本部署
 
 本篇和大家分享的是springboot打包并结合shell脚本命令部署，重点在分享一个shell程序启动工具，希望能便利工作；

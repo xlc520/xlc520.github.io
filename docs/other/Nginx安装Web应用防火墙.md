@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: Nginx安装Web应用防火墙
+description: Nginx安装Web应用防火墙
+time: 2022-01-15
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # Nginx安装Web应用防火墙
 
 LNMP一键安装包 ngx_lua_waf waf(web应用防火墙) 安装设置。WAF中文名是Web应用防火墙，WAF能够根据规则拦截SQL注入、恶意请求、黑客扫描等HTTP请求从而保护WEB应用的安全。

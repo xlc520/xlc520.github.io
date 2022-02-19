@@ -48,6 +48,7 @@ module.exports = config({
 		{ text: '工具', link: '/tools/' },
 		{ text: '源码', link: '/source_code/' },
 		{ text: 'Git', link: '/git/' },
+		{ text: '日常', link: '/daily/' },
 		{ text: '其他', link: '/other/' },
 		{ text: 'DownGit', link: 'https://git.xulc.workers.dev/' },
 	],

@@ -1,4 +1,15 @@
-
+---
+author: xlc520
+title: win10快捷键
+description: win10快捷键
+time: 2022-02-07
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 
 # win10快捷键
 

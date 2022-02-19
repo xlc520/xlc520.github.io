@@ -1,4 +1,16 @@
-# openssl一键自签证书
+---
+author: xlc520
+title: Openssl一键自签证书
+description: Openssl一键自签证书
+time: 2022-01-18
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
+# Openssl一键自签证书
 
 `vim openssl.sh`
 

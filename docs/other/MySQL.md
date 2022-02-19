@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: MySQL 8
+description: MySQL 8
+time: 2022-01-23
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 
 
 # MySQL 8

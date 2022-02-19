@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: 安装WSA-激活GPU-双击安装APK
+description: 安装WSA-激活GPU-双击安装APK
+time: 2022-02-11
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # 安装WSA-激活GPU-双击安装APK
 
 仅支持Windows11（包含正式版、RP、Beta、Dev）

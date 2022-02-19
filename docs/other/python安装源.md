@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: python安装源
+description: python安装源
+time: 2022-01-19
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # python安装源
 
 在`C:\Users\Administrator\pip`下，新建`pip.ini`，输入以下内容：

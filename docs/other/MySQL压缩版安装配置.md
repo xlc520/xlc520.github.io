@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: MySQL压缩版安装配置
+description: MySQL压缩版安装配置
+time: 2022-01-24
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # MySQL压缩版安装配置
 
 ## 1 下载

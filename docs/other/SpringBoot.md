@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
+description: SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
+time: 2022-01-15
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
 
 - [前言](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&chksm=fa496f8ecd3ee698f4954c00efb80fe955ec9198fff3ef4011e331aa37f55a6a17bc8c0335a8&scene=21&token=899450012&lang=zh_CN#wechat_redirect)

@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: 卸载windows服务，删除 windows 服务
+description: 卸载windows服务，删除 windows 服务
+time: 2022-01-27
+category: other
+tags: other
+article: true
+timeline: true
+icon: 
+password: 
+---
 # 卸载windows服务，删除 windows 服务
 
 ## 方法/步骤
