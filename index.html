@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//fastly.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- 文件夹样式 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />
+</head>
+<body>
+  <div id="app">加载中。。。。</div>
+  <script>
+    window.$docsify = {
+      name: 'StudyNote',//文档标题
+      nameLink: '/',
+      repo: 'xlc520/StudyNote',
+      loadSidebar: true,
+      autoHeader: true,//可以根据 _sidebar.md 的内容自动为每个页面增加标题
+      alias: {
+          "/.*/_sidebar.md": "/_sidebar.md",
+        },
+      subMaxLevel: 2,
+      maxLevel: 4,//默认情况下会抓取文档中所有标题渲染成目录
+      auto2top: true,//是否自动跳转到页面顶部
+      // 启用相对路径
+      relativePath: true,
+      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+
+      // 全文搜索
+      search: {
+          depth: 6,
+          noData: "没有搜到!",
+          placeholder: "搜索...",
+          // 避免搜索索引冲突,同一域下的多个网站之间
+          namespace: "website-1",
+        },
+      
+    //字数统计
+    count:{
+      countable:true,
+      fontsize:'0.9em',
+      color:'rgb(90,90,90)',
+      language:'chinese'
+    },
+    // 底部导航
+    pagination: {
+      previousText: "上一页",
+      nextText: "下一页",
+      crossChapter: true,
+      crossChapterText: true,
+    },
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify@4"></script>
+  <!-- 整合自定义导航栏与 emoji 插件 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <!-- 全文搜索 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//polyfill.io/v3/polyfill.min.js?features=String.prototype.normalize"></script>
+  <!-- 图片缩放 - Zoom image  -->
+  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- 复制到剪贴板 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <!-- 字数统计 -->
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 代码高亮 -->
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+  <!-- 侧边栏目录折叠 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- 页面右侧 TOC -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-toc@1.1.0/dist/docsify-plugin-toc.min.js"></script> -->
+</body>
+</html>
