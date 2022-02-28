@@ -36,8 +36,6 @@ Podman 官网地址：https://podman.io/
 - podman直接调用OCI,runtime（runC），通过common作为容器进程的管理工具，但不需要dockerd这种以root身份运行的守护进程。([点击下载2021年最新阿里p7面试题](http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&mid=2247499357&idx=1&sn=77697f0fbec449d80e58cafbfb1f7eb4&chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&scene=21#wechat_redirect)教程) 
 - 在podman体系中，有个称之为common的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common的父则通常是1号进程。podman中的common其实相当于docker体系中的containerd-shim。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
 图中所体现的事情是，podman不需要守护进程，而dorker需要守护进程。在这个图的示意中，dorcker的containerd-shim与podman的common被归在Container一层。
 
 #### **「Podman的使用与docker有什么区别？」**
