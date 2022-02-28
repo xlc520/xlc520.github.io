@@ -34,9 +34,9 @@ module.exports = config({
 	search: true,
 	searchMaxSuggestions: 10,
 	searchPlaceholder: "搜索...",
-	// editLinks: true,	//显示编辑本页链接
+	editLinks: true,	//显示编辑本页链接
 	editLinkText: "在 GitHub 上编辑此页",
-	pageInfo: ['author','visitor','time','category','tag','word','reading-time'],
+	pageInfo: ['author','time','category','tag','word','reading-time'],
 	photoSwipe: true, //图片预览
 	seo: false,
 	nav: [
@@ -140,7 +140,7 @@ module.exports = config({
 	},
 	git:{
 		contributor: false,
-		timezone: 'Asia/Shanghai', 	//时区列表:https://www.zeitverschiebung.net/cn/all-time-zones.html
+		timezone: "Asia/Shanghai", 	//时区列表:https://www.zeitverschiebung.net/cn/all-time-zones.html
 		//transformer: `${dayjs(timestamp).format('LL')} ${dayjs(timestamp).format('HH:mm')}`
 		// transformer: (timestamp, lang) => {
 		// 			  return dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')
