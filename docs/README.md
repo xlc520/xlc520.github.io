@@ -5,7 +5,9 @@ icon: home
 title: 首页
 hero: true
 heroImage: /assets/icon/study.jpg
-bgImage: http://xlc.pp.ua/bing-api/index.php?rand=true
+# https://7ed.net/bing/api?rand=true
+# http://xlc.pp.ua/bing-api/index.php?rand=true
+bgImage: https://7ed.net/bing/api?rand=true
 heroText: StudyNote
 heroFullScreen: true
 tagline: 加油
