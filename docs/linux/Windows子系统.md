@@ -142,13 +142,14 @@ vim /etc/docker/daemon.json
 	"registry-mirrors":[
         "https://docker.mirrors.ustc.edu.cn",
         "http://hub-mirror.c.163.com",
+        "http://f1361db2.m.daocloud.io",
+        "https://ovfftd6p.mirror.aliyuncs.com",
         "https://ayyx3zqn.mirror.aliyuncs.com",
         "https://registry.docker-cn.com",
         "https://dockerhub.azk8s.cn",
         "https://reg-mirror.qiniu.com"
     ]
 }
-
 ```
 
 检查docker安装正常
