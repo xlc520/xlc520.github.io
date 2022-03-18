@@ -134,3 +134,85 @@ http://patorjk.com/software/taag/
 https://spring-boot-banner-gen.cfapps.io/ 可以将上传图片转为文本形式的字符画，只是感觉风格比较鬼畜
 
 http://www.degraeve.com/img2txt.php 可以根据在线的图片网址生成字符画，比如可以直接将公司logo的地址粘贴进去生成字符画
+
+
+
+
+
+## 补充
+
+通过将 banner.txt 文件添加到类路径或将 spring.banner.location 属性设置为此类文件的位置，可以更改启动时打印的横幅。如果文件的编码不是UTF-8，则可以设置 spring.banner.charset 。除了文本文件，您还可以将 banner.gif ， banner.jpg 或 banner.png 图像文件添加到类路径或设置 spring.banner.image.location 属性。图像将转换为ASCII艺术表示，并打印在任何文本横幅上方。在 banner.txt 文件中，您可以使用以下任何占位符：
+
+表23.1。横幅变量
+
+变量 描述
+
+${application.version} 应用程序的版本号，如 MANIFEST.MF 中声明的那样。例
+
+如， Implementation-Version: 1.0 打印为 1.0 。
+
+${application.formatted-version} 应用程序的版本号，在 MANIFEST.MF 中声明并格式化以显示（用括号括起来并以 v 为前缀）。例如 (v1.0) 。
+
+${spring-boot.version} 您正在使用的Spring Boot版本。例如 2.1.1.RELEASE 。
+
+如果要以编程方式生成横幅，可以使用 SpringApplication.setBanner(… ) 方法。使用 org.springframework.boot.Banner
+
+接口并实现您自己的 printBanner() 方法。
+
+您还可以使用 spring.main.banner-mode 属性来确定是否必须在 System.out （ console ）上打印横幅，发送到配置的记录器（ log ），或者根本不产生横幅（ off ）。
+
+打印的横幅以下列名称注册为单身bean：springBootBanner 。
+
+YAML将 off 映射到 false ，因此如果要在应用程序中禁用横幅，请务必添加引号，如以下示例所示：
+
+spring:
+
+main:
+
+banner-mode: "off"
+
+23.3自定义SpringApplication
+
+如果 SpringApplication 默认值不符合您的口味，您可以改为创建本地实例并对其进行自定义。例如，要关闭横幅，您可以写：
+
+```java
+public static void main(String[] args) {
+
+SpringApplication app = new SpringApplication(MySpringConfiguration.class);
+
+app.setBannerMode(Banner.Mode.OFF);
+
+app.run(args);
+
+}
+```
+
+
+
+传递给 SpringApplication 的构造函数参数是Spring beans的配置源。在大多数情况下，这些是对 @Configuration 类的引用，
+
+但它们也可以是对XML配置或应扫描的包的引用。
+
+也可以使用 application.properties 文件配置 SpringApplication 。有关详细信息，请参见第24章，外部化配置。
+
+有关配置选项的完整列表，请参阅 SpringApplication Javadoc。
+
+23.4 Fluent Builder API
+
+如果您需要构建 ApplicationContext 层次结构（具有父/子关系的多个上下文）或者您更喜欢使用“流畅”构建器API，则可以使用 SpringApplicationBuilder 。
+
+SpringApplicationBuilder 允许您将多个方法调用链接在一起，并包含允许您创建层次结构的 parent 和 child 方法，如以下示例所示：
+
+```java
+new SpringApplicationBuilder()
+
+.sources(Parent.class)
+
+.child(Application.class)
+```
+
+
+
+创建 ApplicationContext 层次结构时存在一些限制。例如，Web组件必须包含在子上下文中，并且父/子上下文使用相同
+
+的 Environment 。有关详细信息，请参阅 SpringApplicationBuilder Javadoc。
