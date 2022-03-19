@@ -29,7 +29,7 @@ star: true
 1. 使用本插件来控制commit次数.
 2. 如下图，你甚至可以规划一下`commit`次数，然后画出图形, 天空才是你的极限。
 
-![img](/static/img/5245297-2c357937f3122b08.jpg)
+![img](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-2c357937f3122b08.jpg)
 
 ### 功能特性
 
@@ -50,7 +50,7 @@ star: true
 
 #### 自动commit演示：
 
-![image-20220111141608365](/static/img/image-20220111141608365.png)
+![image-20220111141608365](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/image-20220111141608365.png)
 
 ### 安装
 
@@ -63,7 +63,7 @@ star: true
 2. 输入`> auto commit`将会看到如下图所示的命令选项，然后用鼠标点击或者回车都可启动插件。
    - 实际上可以输入下方选项的任何一段文字，都可以匹配到插件命令选项。
 
-![img](/static/img/5245297-832f45c19fdca38e.jpg)
+![img](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-832f45c19fdca38e.jpg)
 
 image
 
@@ -87,7 +87,7 @@ image
 
 3. **要打开私有仓库贡献可见 ，别人才能看到私有仓库的commit** ,否则只能自己看到:
 
-![img](/static/img/5245297-4b6984da51d815cd.jpg)
+![img](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-4b6984da51d815cd.jpg)
 
 
 
@@ -122,7 +122,7 @@ image
 
 后面的没有再测试了，应该最深的颜色就是`#196127`。
 
-![img](/static/img/5245297-73427fb0f18ccfa8.jpg)
+![img](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-73427fb0f18ccfa8.jpg)
 
 commit颜色
 
@@ -154,7 +154,7 @@ PS： 最小值为2，即每个日期随机commi 1/2次。
  12/07~12/08 每天提交三次
  12/09~12/19 每天提交四次
 
-![img](/static/img/5245297-5d9be61e7da96d62.jpg)
+![img](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-5d9be61e7da96d62.jpg)
 
 image
 

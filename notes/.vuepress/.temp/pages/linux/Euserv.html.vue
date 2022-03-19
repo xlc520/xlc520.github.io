@@ -15,32 +15,32 @@
 <li>https://www.euserv.com/en/</li>
 </ol>
 <p>进入网站后，可以将网站的语言切换为英文，或者是直接用浏览器翻译成中文。找到导航栏的免费VPS主机申请链接。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_01.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_01-680x366.png" alt="EUserv免费VPS申请地址" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_01.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_01-680x366.png" alt="EUserv免费VPS申请地址" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>确定申请。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_02.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_02-680x366.png" alt="EUserv免费VPS提交申请" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_02.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_02-680x366.png" alt="EUserv免费VPS提交申请" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>可以看到EUserv免费VPS是免费一个月的，不过可以免费续期。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_03.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_03-680x366.png" alt="EUserv免费VPS确定申请" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_03.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_03-680x366.png" alt="EUserv免费VPS确定申请" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>在页面最下方点击结算。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_04.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_04-680x366.png" alt="EUserv免费VPS开始结算" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_04.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_04-680x366.png" alt="EUserv免费VPS开始结算" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>此时，注册一个新账号。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_05.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_05-680x366.png" alt="EUserv免费VPS注册账号" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_05.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_05-680x366.png" alt="EUserv免费VPS注册账号" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>填写你的注册信息。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_06.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_06-680x366.png" alt="EUserv免费VPS填写邮箱" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_06.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_06-680x366.png" alt="EUserv免费VPS填写邮箱" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>完成注册。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_07.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_07-680x366.png" alt="EUserv免费VPS完成注册" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_07.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_07-680x366.png" alt="EUserv免费VPS完成注册" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>再次登录到EUserv后台，会提示让你补充你的详细信息，主要是街道地址、编号、手机号码等，填写参考下图：</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_08.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_08-680x366.png" alt="EUserv免费VPS补充信息" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_08.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_08-680x366.png" alt="EUserv免费VPS补充信息" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>完成注册并申请VPS主机，等待审核开通。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_09.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_09-680x366.png" alt="EUserv免费VPS审核开通" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_09.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_09-680x366.png" alt="EUserv免费VPS审核开通" loading="lazy"><ExternalLinkIcon/></a></p>
 <h2 id="二、euserv免费vps管理" tabindex="-1"><a class="header-anchor" href="#二、euserv免费vps管理" aria-hidden="true">#</a> 二、EUserv免费VPS管理</h2>
 <p>EUserv免费VPS开通后，你就可以点击进入到VPS主机控制面板了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_10.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_10-680x366.png" alt="EUserv免费VPS管理" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_10.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_10-680x366.png" alt="EUserv免费VPS管理" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>在EUserv免费VPS控制面板中，主要有查看VPS信息、重装系统以及IPv6地址等功能。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_11.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_11-680x366.png" alt="EUserv免费VPS查看管理中心" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_11.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_11-680x366.png" alt="EUserv免费VPS查看管理中心" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>这是EUserv免费VPS重装系统页面。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_12.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_12-680x366.png" alt="EUserv免费VPS重装系统" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_12.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_12-680x366.png" alt="EUserv免费VPS重装系统" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>这是EUserv免费VPS查看信息页面，重装系统成功后，你就可以看到root的密码了，还有IPv6地址。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_13.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_13-680x366.png" alt="EUserv免费VPS查看密码" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_13.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_13-680x366.png" alt="EUserv免费VPS查看密码" loading="lazy"><ExternalLinkIcon/></a></p>
 <h2 id="三、euserv免费vps连接" tabindex="-1"><a class="header-anchor" href="#三、euserv免费vps连接" aria-hidden="true">#</a> 三、EUserv免费VPS连接</h2>
 <p>EUserv免费VPS只提供纯IPv6地址，所以连接管理EUserv免费VPS就是一个难题了。我们可以利用IPv6隧道来让本地的Windows系统支持访问IPv6网站。</p>
 <p>Win+R 打开 CMD 或 Windows PowerShell（管理员），输入命令：</p>
@@ -59,7 +59,7 @@ netsh interface teredo <span class="token builtin class-name">set</span> state e
 netsh interface ipv6 reset 
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>**重启系统。**通过命令ipconfig /all 查看当前网络信息，看到 Teredo Tunneling Pseudo-Interface 有以 2001 开头的 IPv6 地址即可。</p>
 <p>启动 IE 浏览器，访问 http://test-ipv6.com 或 http://ipv6.test-ipv6.com，如果选项卡 “测试项目” 下面的 “不使用域名的 IPv6 测试” 显示成功，则隧道建立成功。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_17.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_17-680x366.png" alt="EUserv免费VPS测试IPv6" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_17.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_17-680x366.png" alt="EUserv免费VPS测试IPv6" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>如果经过上面操作后仍无法启用 IPv6，可能是 Teredo 服务器无法正常连接，也可能是 Windows 自身配置问题，可尝试以下两种方法：</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>// 第一种：修改 Teredo 服务器为 teredo.remlab.net 
 
@@ -73,9 +73,9 @@ netsh interface Teredo <span class="token builtin class-name">set</span> state <
 
 <span class="token function">ping</span> -6 ipv6.test-ipv6.com 
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>现在你就可以开始使用客户端连接你的EUserv免费VPS了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_14.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_14-680x366.png" alt="EUserv免费VPS连接成功" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_14.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_14-680x366.png" alt="EUserv免费VPS连接成功" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>详细的操作方法请参考：<a href="https://wzfou.com/question/19085/" target="_blank" rel="noopener noreferrer">Windows 10系统利用IPv6隧道开启IPv6访问<ExternalLinkIcon/></a>。使用浏览器访问IPv6地址，类似于：http://[2a01:4f8:191:48c:2018:2019::ed]，如下图：</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_18.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_18-680x366.png" alt="EUserv免费VPS浏览器查看" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_18.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_18-680x366.png" alt="EUserv免费VPS浏览器查看" loading="lazy"><ExternalLinkIcon/></a></p>
 <h2 id="四、纯ipv6的vps搭建网站" tabindex="-1"><a class="header-anchor" href="#四、纯ipv6的vps搭建网站" aria-hidden="true">#</a> 四、纯IPv6的VPS搭建网站</h2>
 <h3 id="_4-1-搭建web环境" tabindex="-1"><a class="header-anchor" href="#_4-1-搭建web环境" aria-hidden="true">#</a> 4.1 搭建Web环境</h3>
 <p>纯IPv6的VPS安装<a href="https://wzfou.com/tag/vps-mianban/" target="_blank" rel="noopener noreferrer">VPS主机面板<ExternalLinkIcon/></a>基本上是没有什么问题，例如<a href="https://wzfou.com/tag/lnmp/" target="_blank" rel="noopener noreferrer">LNMP<ExternalLinkIcon/></a>、<a href="https://wzfou.com/oneinstack/" target="_blank" rel="noopener noreferrer">Oneinstack<ExternalLinkIcon/></a>，经过挖站否的测试都正常。可能有一些面板会出现一些莫名其妙的问题，更多的面板参考：<a href="https://wzfou.com/vps-mianban/" target="_blank" rel="noopener noreferrer">服务器控制面板榜单<ExternalLinkIcon/></a>。</p>
@@ -111,15 +111,15 @@ bt restart
 ​    root /www/wwwroot/www.wzfou.com<span class="token punctuation">;</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_4-2-ipv6-dns解析" tabindex="-1"><a class="header-anchor" href="#_4-2-ipv6-dns解析" aria-hidden="true">#</a> 4.2 IPv6 DNS解析</h3>
 <p>对于IPv6地址，DNS解析选择AAAA记录类型记录，记录值为IPv6地址即可。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_20.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_20-680x366.png" alt="EUserv免费VPS添加解析" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_20.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_20-680x366.png" alt="EUserv免费VPS添加解析" loading="lazy"><ExternalLinkIcon/></a></p>
 <h3 id="_4-3-兼顾ipv4用户访问" tabindex="-1"><a class="header-anchor" href="#_4-3-兼顾ipv4用户访问" aria-hidden="true">#</a> 4.3 兼顾IPv4用户访问</h3>
 <p>对于纯IPv6的网站，为了可以让IPv4的用户访问，我们可以接入到Cloudflare免费CDN网络，如果不想修改NS服务器为Cloudflare，可以使用Cloudflare Partner平台，例如：<a href="https://wzfou.com/cloudflare-railgun/" target="_blank" rel="noopener noreferrer">Cloudflare Partner接入管理Cloudflare CDN<ExternalLinkIcon/></a>。</p>
 <p>接入了Cloudflare后，你就可以先设置AAAA记录了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_21.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_21-680x366.png" alt="EUserv免费VPS启用CDN" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_21.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_21-680x366.png" alt="EUserv免费VPS启用CDN" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>接着在<a href="https://wzfou.com/tag/cloudflare-partner/" target="_blank" rel="noopener noreferrer">Cloudflare Partner<ExternalLinkIcon/></a>接入平台会得到CNAME记录，这时你就可以到你的域名DNS管理处修改CNAME记录了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_22.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_22-680x366.png" alt="EUserv免费VPS兼顾IPv4地址" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_22.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_22-680x366.png" alt="EUserv免费VPS兼顾IPv4地址" loading="lazy"><ExternalLinkIcon/></a></p>
 <p>成功将纯IPv6的VPS主机接入到了Cloudflare的CDN网络后，不管用户是不是支持IPv6访问都可以访问你的网站了，与普通的网站没有什么 区别。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_23.png" target="_blank" rel="noopener noreferrer"><img src="/static/img/EUserv_23.png" alt="EUserv免费VPS访问成功" loading="lazy"><ExternalLinkIcon/></a></p>
+<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_23.png" target="_blank" rel="noopener noreferrer"><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/EUserv_23.png" alt="EUserv免费VPS访问成功" loading="lazy"><ExternalLinkIcon/></a></p>
 <h2 id="五、总结" tabindex="-1"><a class="header-anchor" href="#五、总结" aria-hidden="true">#</a> 五、总结</h2>
 <p>EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS<ExternalLinkIcon/></a>主机官网打开速度很慢，需要一定耐心。实际测试EUserv免费VPS主机的性能非常地差，见：<a href="https://wzfou.com/question/97087/" target="_blank" rel="noopener noreferrer">分享euserv提供的免费ipv6小鸡<ExternalLinkIcon/></a>，至于如何在IPv6上的VPS主机跑“QQ”可以参考：<a href="https://wzfou.com/ipv6-vps/#ftoc-heading-4" target="_blank" rel="noopener noreferrer">纯IPv6的VPS安装应用<ExternalLinkIcon/></a>。</p>
 <p>关于给 EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS<ExternalLinkIcon/></a>主机自动续期的方法，请参考：https://bawodu.com/euserv-renew/</p>
@@ -128,21 +128,21 @@ bt restart
 <p>目的：自动获取账号内所有的VPS项目，并检测是否需要续期，需要续期会自动续期。</p>
 <h3 id="_1-打开腾讯云函数sfc" tabindex="-1"><a class="header-anchor" href="#_1-打开腾讯云函数sfc" aria-hidden="true">#</a> 1. 打开腾讯云函数SFC</h3>
 <p>打开 https://console.cloud.tencent.com/scf/ 登录腾讯云，初次使用云函数SCF要授权。</p>
-<p><img src="/static/img/ngcb15.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <h3 id="_2-新建beautifulsoup层" tabindex="-1"><a class="header-anchor" href="#_2-新建beautifulsoup层" aria-hidden="true">#</a> 2. 新建BeautifulSoup层</h3>
 <p>新建层 BeautifulSoup ，将 <a href="https://github.com/o0oo0ooo0/EUserv_extend/releases/download/0.1/BeautifulSoup.zip" target="_blank" rel="noopener noreferrer">BeautifulSoup.zip<ExternalLinkIcon/></a> 导入 ，添加运行环境 Python 3.6 。注意层的位置选择香港等海外地区，因为我们要续费的VPS在德国。</p>
-<p><img src="/static/img/ngcb15-164191528787822.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528787822.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>建好层后如下，后面用的上。</p>
-<p><img src="/static/img/ngcb15-164191528788023.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788023.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <h3 id="_3-新建腾讯云函数euserv-extend" tabindex="-1"><a class="header-anchor" href="#_3-新建腾讯云函数euserv-extend" aria-hidden="true">#</a> 3. 新建腾讯云函数EUserv_extend</h3>
 <p>运行环境选择 Python 3.6，创建方式选择 空白函数，内存选择 64M，执行超时时间建议为 300 s（网站在国外访问比较慢，建议部署在非大陆区域，例如HK、SG等，需要和上面创建层的位置是一样的。），将修改后的 <strong>main.py</strong> 粘贴进去。</p>
-<p><img src="/static/img/ngcb15-164191528788124.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788124.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>选择自定义创建，按下图配置</p>
-<p><img src="/static/img/ngcb15-164191528788125.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788125.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>复制https://github.com/o0oo0ooo0/EUserv_extend库中的main.py文件。</p>
-<p><img src="/static/img/ngcb15-164191528788226.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788226.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>复制粘贴到上图index.py文本，然后粘贴到刚才打开的腾讯云函数服务编辑框中，修改其中的用户名，密码。</p>
-<p><img src="/static/img/ngcb15-164191528788327.webp" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788327.webp" alt="img" loading="lazy"></p>
 <p>USERNAME: 你的EUserv账户邮箱或Customer ID</p>
 <p>USERNAME = ‘user@gmail.com’
 USERNAME = ‘user1@gmail.com user2@gmail.com’ # 多个账号写法</p>
@@ -154,17 +154,17 @@ PASSWORD = ‘password1 password2’ # 多个账号写法</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>SCKEY = 'XX'
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><strong>环境配置</strong></p>
 <p>设置64M内存就够用了，300秒延时。</p>
-<p><img src="/static/img/ngcb15-164191528788328.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788328.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>其他默认就可，然后点完成。完成云函数配置。</p>
-<p><img src="/static/img/ngcb15-164191528788429.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788429.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <h3 id="_4-绑定层-beautifulsoup" tabindex="-1"><a class="header-anchor" href="#_4-绑定层-beautifulsoup" aria-hidden="true">#</a> 4. 绑定层 BeautifulSoup</h3>
 <p>在 EUserv_extend⇨函数管理⇨层管理 里绑定层 BeautifulSoup。</p>
-<p><img src="/static/img/ngcb15-164191528788430.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788430.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <h3 id="_5-测试并创建时间触发" tabindex="-1"><a class="header-anchor" href="#_5-测试并创建时间触发" aria-hidden="true">#</a> 5. 测试并创建时间触发</h3>
 <p>点击下图的测试，或会提示config等不存在，可以忽略。</p>
-<p><img src="/static/img/ngcb15-164191528788531.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788531.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>测试没错误，就点EUserv_extend⇨触发管理⇨创建触发器触发周期⇨自定义触发周期。填入0 0 8 */7 * * *</p>
-<p><img src="/static/img/ngcb15-164191528788632.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-164191528788632.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
 <p>每 7 天的 8 点执行，可修改成你想要的时间。</p>
 <h3 id="_6-查看运行日志" tabindex="-1"><a class="header-anchor" href="#_6-查看运行日志" aria-hidden="true">#</a> 6. 查看运行日志</h3>
 <p>日志提示有2台VPS，说明以上成功设置了腾讯云函数SCF续期脚本。</p>

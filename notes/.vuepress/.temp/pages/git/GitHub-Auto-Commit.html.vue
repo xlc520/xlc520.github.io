@@ -7,7 +7,7 @@
 <li>使用本插件来控制commit次数.</li>
 <li>如下图，你甚至可以规划一下<code>commit</code>次数，然后画出图形, 天空才是你的极限。</li>
 </ol>
-<p><img src="/static/img/5245297-2c357937f3122b08.jpg" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-2c357937f3122b08.jpg" alt="img" loading="lazy"></p>
 <h3 id="功能特性" tabindex="-1"><a class="header-anchor" href="#功能特性" aria-hidden="true">#</a> 功能特性</h3>
 <ol>
 <li><strong>选择多个日期范围</strong>：一次操作即可提交不同日期<code>commit</code></li>
@@ -24,7 +24,7 @@
 <h3 id="仓库地址" tabindex="-1"><a class="header-anchor" href="#仓库地址" aria-hidden="true">#</a> 仓库地址:</h3>
 <p><a href="https://github.com/OBKoro1/autoCommit" target="_blank" rel="noopener noreferrer">https://github.com/OBKoro1/autoCommit<ExternalLinkIcon/></a></p>
 <h4 id="自动commit演示" tabindex="-1"><a class="header-anchor" href="#自动commit演示" aria-hidden="true">#</a> 自动commit演示：</h4>
-<p><img src="/static/img/image-20220111141608365.png" alt="image-20220111141608365" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/image-20220111141608365.png" alt="image-20220111141608365" loading="lazy"></p>
 <h3 id="安装" tabindex="-1"><a class="header-anchor" href="#安装" aria-hidden="true">#</a> 安装</h3>
 <p>在 Vscode 扩展商店中搜索<code>Auto Commit</code>,点击安装即可。</p>
 <h3 id="插件入口" tabindex="-1"><a class="header-anchor" href="#插件入口" aria-hidden="true">#</a> 插件入口</h3>
@@ -40,7 +40,7 @@
 </ul>
 </li>
 </ol>
-<p><img src="/static/img/5245297-832f45c19fdca38e.jpg" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-832f45c19fdca38e.jpg" alt="img" loading="lazy"></p>
 <p>image</p>
 <h3 id="使用须知" tabindex="-1"><a class="header-anchor" href="#使用须知" aria-hidden="true">#</a> 使用须知</h3>
 <h2 id="git相关" tabindex="-1"><a class="header-anchor" href="#git相关" aria-hidden="true">#</a> Git相关</h2>
@@ -60,7 +60,7 @@
 <p><strong>要打开私有仓库贡献可见 ，别人才能看到私有仓库的commit</strong> ,否则只能自己看到:</p>
 </li>
 </ol>
-<p><img src="/static/img/5245297-4b6984da51d815cd.jpg" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-4b6984da51d815cd.jpg" alt="img" loading="lazy"></p>
 <h4 id="确保能够正常提交" tabindex="-1"><a class="header-anchor" href="#确保能够正常提交" aria-hidden="true">#</a> 确保能够正常提交</h4>
 <ol>
 <li>
@@ -87,7 +87,7 @@
 一天15-20次commit颜色为<code>#239a3b</code>
 一天21-63次commit颜色为<code>#196127</code></p>
 <p>后面的没有再测试了，应该最深的颜色就是<code>#196127</code>。</p>
-<p><img src="/static/img/5245297-73427fb0f18ccfa8.jpg" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-73427fb0f18ccfa8.jpg" alt="img" loading="lazy"></p>
 <p>commit颜色</p>
 <h2 id="插件运行机制相关" tabindex="-1"><a class="header-anchor" href="#插件运行机制相关" aria-hidden="true">#</a> 插件运行机制相关</h2>
 <h4 id="随机commit次数" tabindex="-1"><a class="header-anchor" href="#随机commit次数" aria-hidden="true">#</a> 随机commit次数</h4>
@@ -108,7 +108,7 @@
 <p>12/01~12/06 使用默认commit次数，每天将会提交一次
 12/07~12/08 每天提交三次
 12/09~12/19 每天提交四次</p>
-<p><img src="/static/img/5245297-5d9be61e7da96d62.jpg" alt="img" loading="lazy"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/5245297-5d9be61e7da96d62.jpg" alt="img" loading="lazy"></p>
 <p>image</p>
 <h4 id="commit次数的最大值" tabindex="-1"><a class="header-anchor" href="#commit次数的最大值" aria-hidden="true">#</a> commit次数的最大值</h4>
 <p>所有计数器的最大值设定为30。</p>
