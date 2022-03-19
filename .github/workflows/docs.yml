@@ -49,9 +49,9 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v2
         with:
           # 部署到 gh-pages 分支
-          target_branch: gh-pages
+          target_branch: gh-pages-v2
           # 部署目录为 VuePress 的默认输出目录
-          # build_dir: html
+          build_dir: public
         env:
           # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
