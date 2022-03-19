@@ -2,8 +2,8 @@ name: docs-build
 
 on:
   # 每当 push 到 master 分支时触发部署
-  push:
-    branches: [master]
+  # push:
+  #   branches: [master]
   # 手动触发部署
   workflow_dispatch:
 
