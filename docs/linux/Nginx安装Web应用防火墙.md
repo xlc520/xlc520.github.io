@@ -130,6 +130,6 @@ ngx_lua_waf安装到此结束。
 
 ### 4. ngx_lua_waf效果图
 
-![ngx_lua_waf waf(web应用防火墙)](/static/img/ngcb15.webp)
-![ngx_lua_waf waf(web应用防火墙)](/static/img/ngcb15-16419157753881.webp)
+![ngx_lua_waf waf(web应用防火墙)](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15.webp)
+![ngx_lua_waf waf(web应用防火墙)](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-16419157753881.webp)
 
