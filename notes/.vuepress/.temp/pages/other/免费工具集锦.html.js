@@ -610,20 +610,22 @@ export const data = {
       "children": []
     }
   ],
-  "git": {
-    "createdTime": 1647698494000,
-    "updatedTime": 1647698494000,
-    "contributors": [
-      {
-        "name": "xlc520",
-        "email": "2215400217@qq.com",
-        "commits": 1
-      }
-    ]
-  },
   "readingTime": {
     "minutes": 17.61,
     "words": 5282
   },
   "filePathRelative": "other/免费工具集锦.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

@@ -1,16 +1,22 @@
 export const data = {
   "key": "v-e52c881c",
   "path": "/article/",
-  "title": "文章",
+  "title": "Nice Article",
   "lang": "zh-CN",
   "frontmatter": {
-    "title": "文章",
-    "blog": {
-      "type": "type",
-      "key": "article"
-    },
-    "layout": "Blog",
-    "summary": "",
+    "author": "xlc520",
+    "title": "Nice Article",
+    "description": "article分类",
+    "category": [
+      "Article"
+    ],
+    "tag": [
+      "article"
+    ],
+    "article": true,
+    "timeline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,14 +36,21 @@ export const data = {
         "meta",
         {
           "property": "og:title",
-          "content": "文章"
+          "content": "Nice Article"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "og:description",
+          "content": "article分类"
         }
       ],
       [
         "meta",
         {
           "property": "og:type",
-          "content": "website"
+          "content": "article"
         }
       ],
       [
@@ -46,15 +59,49 @@ export const data = {
           "property": "og:locale",
           "content": "zh-CN"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "article"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-03-20T00:00:00.000Z"
+        }
       ]
-    ]
+    ],
+    "date": "2022-03-20T00:00:00.000Z"
   },
   "excerpt": "",
   "headers": [],
-  "git": {},
   "readingTime": {
     "minutes": 0,
     "words": 0
   },
-  "filePathRelative": null
+  "filePathRelative": "article/README.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

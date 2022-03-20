@@ -93,20 +93,22 @@ export const data = {
       "children": []
     }
   ],
-  "git": {
-    "createdTime": 1647698494000,
-    "updatedTime": 1647698494000,
-    "contributors": [
-      {
-        "name": "xlc520",
-        "email": "2215400217@qq.com",
-        "commits": 1
-      }
-    ]
-  },
   "readingTime": {
     "minutes": 19.13,
     "words": 5739
   },
   "filePathRelative": "tools/在线万能查询和在线工具.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

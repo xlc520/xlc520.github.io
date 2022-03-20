@@ -7,6 +7,20 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "Nice Article",
+    "headers": [],
+    "path": "/article/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "人生三境界",
+    "headers": [],
+    "path": "/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "daily",
     "headers": [],
     "path": "/daily/",
@@ -1969,6 +1983,31 @@ export const searchIndex = [
         "title": "图片压缩",
         "slug": "图片压缩",
         "children": []
+      },
+      {
+        "level": 2,
+        "title": "接口大全-免费API,收集所有免费的API",
+        "slug": "接口大全-免费api-收集所有免费的api",
+        "children": [
+          {
+            "level": 3,
+            "title": "ICO图片类api",
+            "slug": "ico图片类api",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "各实用API收集分享",
+            "slug": "各实用api收集分享",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "短网址API:",
+            "slug": "短网址api",
+            "children": []
+          }
+        ]
       }
     ],
     "path": "/other/API.html",
@@ -3612,6 +3651,159 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "免费随机图片api",
+    "headers": [
+      {
+        "level": 2,
+        "title": "api接口整合",
+        "slug": "api接口整合",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "随机图库 Lorem Picsum",
+        "slug": "随机图库-lorem-picsum",
+        "children": [
+          {
+            "level": 3,
+            "title": "获取指定大小的随机图片",
+            "slug": "获取指定大小的随机图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "获取指定id的图片",
+            "slug": "获取指定id的图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "静态随机图片",
+            "slug": "静态随机图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "灰度图片",
+            "slug": "灰度图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "模糊图片",
+            "slug": "模糊图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "高级用法",
+            "slug": "高级用法",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "列出图片",
+            "slug": "列出图片",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "图像细节",
+            "slug": "图像细节",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "樱花",
+        "slug": "樱花",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "晓晴博客",
+        "slug": "晓晴博客",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Unsplash Source | API Documentation",
+        "slug": "unsplash-source-api-documentation",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "夏沫博客",
+        "slug": "夏沫博客",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "二次元随机图",
+        "slug": "二次元随机图",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "搏天api",
+        "slug": "搏天api",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "姬长信API For Docker",
+        "slug": "姬长信api-for-docker",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "樱道",
+        "slug": "樱道",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "小歪API",
+        "slug": "小歪api",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "保罗｜API",
+        "slug": "保罗-api",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "墨天逸",
+        "slug": "墨天逸",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "动漫星空",
+        "slug": "动漫星空",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "岁月小筑",
+        "slug": "岁月小筑",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "东方Project",
+        "slug": "东方project",
+        "children": []
+      }
+    ],
+    "path": "/other/%E5%85%8D%E8%B4%B9%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "卸载windows服务，删除 windows 服务",
     "headers": [
       {
@@ -5000,13 +5192,6 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "文章",
-    "headers": [],
-    "path": "/article/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
     "title": "加密",
     "headers": [],
     "path": "/encrypted/",
@@ -5031,6 +5216,20 @@ export const searchIndex = [
     "title": "时间轴",
     "headers": [],
     "path": "/timeline/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Article 分类",
+    "headers": [],
+    "path": "/category/article/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "article 标签",
+    "headers": [],
+    "path": "/tag/article/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5252,3 +5451,16 @@ export const searchIndex = [
     "extraFields": []
   }
 ]
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateSearchIndex) {
+    __VUE_HMR_RUNTIME__.updateSearchIndex(searchIndex)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ searchIndex }) => {
+    __VUE_HMR_RUNTIME__.updateSearchIndex(searchIndex)
+  })
+}

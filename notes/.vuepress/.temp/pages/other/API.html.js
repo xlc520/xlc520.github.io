@@ -127,22 +127,49 @@ export const data = {
       "title": "图片压缩",
       "slug": "图片压缩",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "接口大全-免费API,收集所有免费的API",
+      "slug": "接口大全-免费api-收集所有免费的api",
+      "children": [
+        {
+          "level": 3,
+          "title": "ICO图片类api",
+          "slug": "ico图片类api",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "各实用API收集分享",
+          "slug": "各实用api收集分享",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "短网址API:",
+          "slug": "短网址api",
+          "children": []
+        }
+      ]
     }
   ],
-  "git": {
-    "createdTime": 1647698494000,
-    "updatedTime": 1647698494000,
-    "contributors": [
-      {
-        "name": "xlc520",
-        "email": "2215400217@qq.com",
-        "commits": 1
-      }
-    ]
-  },
   "readingTime": {
-    "minutes": 0.7,
-    "words": 209
+    "minutes": 1.37,
+    "words": 411
   },
   "filePathRelative": "other/API.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

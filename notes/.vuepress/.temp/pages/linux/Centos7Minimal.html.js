@@ -116,20 +116,22 @@ export const data = {
       ]
     }
   ],
-  "git": {
-    "createdTime": 1647698494000,
-    "updatedTime": 1647698494000,
-    "contributors": [
-      {
-        "name": "xlc520",
-        "email": "2215400217@qq.com",
-        "commits": 1
-      }
-    ]
-  },
   "readingTime": {
     "minutes": 0.58,
     "words": 175
   },
   "filePathRelative": "linux/Centos7Minimal.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }
