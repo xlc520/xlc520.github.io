@@ -3,9 +3,9 @@ name: Deploy V2 Docs
 on:
   # 手动触发部署
   workflow_dispatch:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
 
 jobs:
   deploy-gh-pages:
