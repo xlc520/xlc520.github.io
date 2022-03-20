@@ -2,7 +2,7 @@
 author: xlc520
 title: Bing必应API
 description: Bing必应壁纸API
-time: 2022-02-18
+date: 2022-02-18
 category: other
 tag: other
 article: true

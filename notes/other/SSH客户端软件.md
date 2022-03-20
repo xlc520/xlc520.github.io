@@ -2,7 +2,7 @@
 author: xlc520
 title: SSH客户端软件
 description: SSH客户端软件
-time: 2022-01-17
+date: 2022-01-17
 category: other
 tag: other
 article: true

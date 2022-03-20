@@ -2,7 +2,7 @@
 author: xlc520
 title: 数据类型Java类型
 description: Java数据类型和MySql数据类型对应表
-time: 2022-03-03
+date: 2022-03-03
 category: Java
 tag: Java
 article: true

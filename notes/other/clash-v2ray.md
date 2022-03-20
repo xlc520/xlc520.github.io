@@ -2,7 +2,7 @@
 author: xlc520
 title: Clash - V2ray订阅
 description: Clash - V2ray订阅
-time: 2022-01-19
+date: 2022-01-19
 category: other
 tag: other
 article: true

@@ -6,7 +6,7 @@ title: Intellij idea高效使用教程
 # 设置作者
 author: xlc520
 # 设置写作时间
-time: 2022-03-17
+date: 2022-03-17
 # 一个页面只能有一个分类
 category: IDEA
 # 一个页面可以有多个标签

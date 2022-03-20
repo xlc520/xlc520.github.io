@@ -6,7 +6,7 @@ title: Euserv
 # 设置作者
 author: xlc520
 # 设置写作时间
-time: 2022-01-10
+date: 2022-01-10
 # 一个页面只能有一个分类
 category: Euserv
 # 一个页面可以有多个标签

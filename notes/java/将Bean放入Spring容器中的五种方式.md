@@ -2,7 +2,7 @@
 author: xlc520
 title: SpringBoot将Bean放入Spring容器中的五种方式
 description: SpringBoot将Bean放入Spring容器中的五种方式
-time: 2022-02-12
+date: 2022-02-12
 category: Java
 tag: Java
 article: true

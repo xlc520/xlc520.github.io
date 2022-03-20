@@ -2,7 +2,7 @@
 author: xlc520
 title: 免费VPS
 description: 免费VPS
-time: 2022-01-26
+date: 2022-01-26
 category: other
 tag: other
 article: true

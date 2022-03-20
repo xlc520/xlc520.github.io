@@ -2,7 +2,7 @@
 author: xlc520
 title: Spring Boot启动的时候默认的banner
 description: Spring Boot启动的时候默认的banner是spring的字样
-time: 2022-03-02
+date: 2022-03-02
 category: Java
 tag: Java
 article: true

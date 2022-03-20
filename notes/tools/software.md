@@ -1,6 +1,16 @@
 ---
+author: xlc520
 title: 各种软件
+description: Tools分类
+date: 2022-1-9
+category: Tools
+tag: Tools
+article: true
+dateline: true
+icon: 
+password: 
 ---
+# 各种软件
 
 ## 电脑QQv9.5.4(28063)特别版
 https://lanzoux.com/b0dpnvapi

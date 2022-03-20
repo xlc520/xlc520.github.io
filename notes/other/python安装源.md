@@ -2,7 +2,7 @@
 author: xlc520
 title: python安装源
 description: python安装源
-time: 2022-01-19
+date: 2022-01-19
 category: other
 tag: other
 article: true

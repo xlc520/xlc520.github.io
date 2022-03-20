@@ -2,7 +2,7 @@
 author: xlc520
 title:  Xposed-edge-pro Shell命令
 description: 定时自动签到、发送消息、定时自动偷能量及刷支付宝步数、游戏定时登录做任务……【shell命令】
-time: 2022-02-07
+date: 2022-02-07
 category: daily
 tag: daily
 article: true

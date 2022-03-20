@@ -2,7 +2,7 @@
 author: xlc520
 title: Linux
 description: Linux分类
-time: 
+date: 2022-1-20
 category: Linux
 tag: Linux
 article: true

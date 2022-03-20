@@ -1,5 +1,5 @@
 node_modules
-notes/.vuepress/.temp
+.temp
 # Build files
 packages/*/lib/
 

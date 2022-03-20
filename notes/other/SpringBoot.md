@@ -2,7 +2,7 @@
 author: xlc520
 title: SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
 description: SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
-time: 2022-01-15
+date: 2022-01-15
 category: other
 tag: other
 article: true

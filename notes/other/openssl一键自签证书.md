@@ -2,7 +2,7 @@
 author: xlc520
 title: Openssl一键自签证书
 description: Openssl一键自签证书
-time: 2022-01-18
+date: 2022-01-18
 category: other
 tag: other
 article: true

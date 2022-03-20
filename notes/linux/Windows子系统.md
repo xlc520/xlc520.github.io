@@ -2,7 +2,7 @@
 author: xlc520
 title: Windows子系统
 description: Windows子系统优化,ubuntu,docker
-time: 2022-02-16
+date: 2022-02-16
 category: Linux
 tag: Linux
 article: true

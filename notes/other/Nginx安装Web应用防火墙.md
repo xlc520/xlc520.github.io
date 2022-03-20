@@ -2,7 +2,7 @@
 author: xlc520
 title: Nginx安装Web应用防火墙
 description: Nginx安装Web应用防火墙
-time: 2022-01-15
+date: 2022-01-15
 category: other
 tag: other
 article: true

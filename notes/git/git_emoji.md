@@ -2,7 +2,7 @@
 author: xlc520
 title: commit规范 & emoji表情
 description: commit规范 & emoji表情
-date: 
+date: 2022-02-13
 category: Git
 tag: Git
 article: true

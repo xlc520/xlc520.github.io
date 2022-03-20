@@ -2,7 +2,7 @@
 author: xlc520
 title: 使用docker快速安装oracle
 description: 使用docker快速安装oracle
-time: 2022-03-02
+date: 2022-03-02
 category: Java
 tag: Java
 article: true

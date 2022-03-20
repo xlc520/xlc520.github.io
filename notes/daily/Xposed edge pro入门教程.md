@@ -2,7 +2,7 @@
 author: xlc520
 title: Xposed edge pro入门教程
 description: Xposed edge pro小白入门教程详解，即学即会！
-time: 2022-02-06
+date: 2022-02-06
 category: daily
 tag: daily
 article: true

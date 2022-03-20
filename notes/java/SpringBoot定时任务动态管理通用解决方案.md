@@ -2,7 +2,7 @@
 author: xlc520
 title: SpringBoot 定时任务动态管理通用解决方案
 description: SpringBoot 定时任务动态管理通用解决方案
-time: 2022-03-19
+date: 2022-03-19
 category: Java
 tag: Java
 article: true

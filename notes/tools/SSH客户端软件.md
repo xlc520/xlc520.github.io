@@ -1,3 +1,15 @@
+---
+author: xlc520
+title: SSH客户端软件
+description: SSH客户端软件
+date: 2022-1-9
+category: Tools
+tag: Tools
+article: true
+dateline: true
+icon: 
+password: 
+---
 # SSH客户端软件
 
 SSH客户端是在管理和配置Linux服务器用到很多的软件了，一款好的SSH管理软件不但可以让你更好地执行[Linux命令](https://www.v1tx.com/post/linux-commands/)，对于工作效率的提升也是非常明显，在本文中我们就来介绍几款非常好用的SSH客户端软件

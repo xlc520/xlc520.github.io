@@ -2,7 +2,7 @@
 author: xlc520
 title: 实用 shell 脚本
 description: 实用 shell 脚本，建议收藏！
-time: 2022-02-15
+date: 2022-02-15
 category: Linux
 tag: Linux
 article: true

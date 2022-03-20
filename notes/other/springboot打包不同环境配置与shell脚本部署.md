@@ -2,7 +2,7 @@
 author: xlc520
 title: SpringBoot打包不同环境配置与shell脚本部署
 description: SpringBoot打包不同环境配置与shell脚本部署
-time: 2022-01-15
+date: 2022-01-15
 category: other
 tag: other
 article: true

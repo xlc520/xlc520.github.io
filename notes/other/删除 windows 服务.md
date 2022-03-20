@@ -2,7 +2,7 @@
 author: xlc520
 title: 卸载windows服务，删除 windows 服务
 description: 卸载windows服务，删除 windows 服务
-time: 2022-01-27
+date: 2022-01-27
 category: other
 tag: other
 article: true

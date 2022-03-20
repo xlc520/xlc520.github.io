@@ -2,7 +2,7 @@
 author: xlc520
 title: Podman开源的容器
 description: Docker 大势已去，Podman 即将崛起
-time: 2022-02-28
+date: 2022-02-28
 category: Linux
 tag: Linux
 article: true

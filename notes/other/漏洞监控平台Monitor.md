@@ -2,7 +2,7 @@
 author: xlc520
 title: 漏洞监控平台——Monitor
 description: 漏洞监控平台——Monitor
-time: 2022-02-11
+date: 2022-02-11
 category: other
 tag: other
 article: true

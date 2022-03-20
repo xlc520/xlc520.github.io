@@ -2,7 +2,7 @@
 author: xlc520
 title: Linux脚本工具
 description: Linux脚本工具
-time: 2022-01-21
+date: 2022-01-21
 category: other
 tag: other
 article: true

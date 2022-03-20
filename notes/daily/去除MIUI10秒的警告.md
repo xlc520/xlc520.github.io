@@ -2,7 +2,7 @@
 author: xlc520
 title: 去除MIUI10秒的警告
 description: 去除MIUI10秒的警告
-time: 2022-02-17
+date: 2022-02-17
 category: daily
 tag: daily
 article: true

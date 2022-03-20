@@ -2,7 +2,7 @@
 author: xlc520
 title: Nginx从安装到高可用
 description: Nginx从安装到高可用
-time: 2022-01-16
+date: 2022-01-16
 category: other
 tag: other
 article: true

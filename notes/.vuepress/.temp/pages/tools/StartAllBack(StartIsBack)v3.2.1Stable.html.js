@@ -4,7 +4,19 @@ export const data = {
   "title": "StartAllBack",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "StartAllBack StartAllBack(StartIsBack) v3.2.1 Stable Windows11开始菜单增强工具StartAllBack正式版发布了！在任务栏上为Windows 11恢复经典样式的Windows 7主题风格开始菜单，主要功能包括：恢复和改进开始菜单样式、个性化任务栏、资源管理器等功能。 新版变化 StartIsBa",
+    "author": "xlc520",
+    "title": "StartAllBack",
+    "description": "StartAllBack",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +42,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "StartAllBack"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +58,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-07T16:00:00.000Z"
         }
       ]
     ]

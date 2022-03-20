@@ -2,7 +2,7 @@
 author: xlc520
 title: 安装WSA-激活GPU-双击安装APK
 description: 安装WSA-激活GPU-双击安装APK
-time: 2022-02-11
+date: 2022-02-11
 category: other
 tag: other
 article: true

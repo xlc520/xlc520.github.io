@@ -2,7 +2,7 @@
 author: xlc520
 title:  Xposed-edge-pro Shell命令-打开微信好友聊天界面
 description: 打开微信好友聊天界面
-time: 2022-02-06
+date: 2022-02-06
 category: daily
 tag: daily
 article: true

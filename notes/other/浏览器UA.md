@@ -2,7 +2,7 @@
 author: xlc520
 title: 浏览器UA
 description: 浏览器UA
-time: 2022-02-11
+date: 2022-02-11
 category: other
 tag: other
 article: true
