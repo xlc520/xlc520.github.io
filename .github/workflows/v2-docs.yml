@@ -79,5 +79,5 @@ jobs:
         with:
           repository-name: vuepress-theme-hope/v2
           branch: gh-pages-v2
-          folder: dist
+          folder: /
           token: ${{ secrets.ACCESS_TOKEN }}
