@@ -17,7 +17,8 @@ export default defineThemeConfig({
   repo: "https://github.com/xlc520/xlc520.github.io",
 
   docsDir: "notes",
-
+  docsRepo: "https://github.com/xlc520/xlc520.github.io",
+  docsBranch: "master",
   // navbar
   navbar: navbar,
 
