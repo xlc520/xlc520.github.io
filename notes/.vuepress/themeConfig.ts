@@ -89,13 +89,18 @@ export default defineThemeConfig({
       // Zhihu: "https://example.com",
     },
   },
+  pwa:{
+    cachePic: true,
+    cacheHTML: true,
+    update: "available",
+  },
 
   encrypt: {
     config: {
       //"/guide/encrypt.html": ["1234"],
     },
   },
-
+  // seo:true,
   plugins: {
     
     blog: {
