@@ -1,3 +1,7 @@
+# [xlc520.github.io](https://xlc520.github.io/)
+
+个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程、java开发及其报错解决、Python及其报错解决、环境安装及其报错解决、日常学习、文章、美文。
+
 <p align="center">
  <img width="200px" src="https://avatars.githubusercontent.com/u/56480807?s=400&u=35fd0849b4836090297776ba863242a2267690ac&v=4"  alt="GitHub Readme Stats" />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://camo.githubusercontent.com/a5c7c7397871b9348b88302ac5cd56ddbf8774b3/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f73792d7265636f7264732f73746174696366696c65406d61737465722f696d616765732f3230323030372f6875616a692e676966">
@@ -71,7 +75,7 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
     </tr>
   </tbody>
 </table>
-<p align="center"> 
+<p align="center">
   您是第  <img src="https://profile-counter.glitch.me/xlc520/count.svg" />  位访问者
 </p>
 
@@ -81,7 +85,7 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
 
 <h2><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/> Hey! Nice to see you.</h2>
 
-​			Welcome to my page! 
+​			Welcome to my page!
 
 - 🌱 I’m currently learning Java、Python、Vue.
 - 🔭 I’m currently working on ...
@@ -90,7 +94,7 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
 - 💬 Ask me about something.
 - 📫 How to reach me: GitHub
 
-💪 **正在学习:** 
+💪 **正在学习:**
 
 &emsp;&emsp;
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=flat-square&logo=c&logoColor=white)
@@ -111,7 +115,7 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
 
 🧰 **常用的工具:**
 
-&emsp;&emsp; 
+&emsp;&emsp;
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=style=flat-square&logo=linux&logoColor=black)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)
