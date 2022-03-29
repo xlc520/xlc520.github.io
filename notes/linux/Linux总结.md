@@ -2,7 +2,7 @@
 author: xlc520
 title: Linux系统总结
 description: 2万字系统总结，带你实现 Linux 命令自由
-date: 2022-3-22
+date: 2022-03-22
 category: Linux
 tag: Linux
 article: true

@@ -7,7 +7,7 @@ category: Git
 tag: Git
 article: true
 dateline: true
-icon: 
+icon: git
 password: 
 ---
 

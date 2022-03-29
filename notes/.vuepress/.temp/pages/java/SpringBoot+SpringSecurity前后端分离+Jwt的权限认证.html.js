@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "SpringBoot+SpringSecurity前后端分离+Jwt的权限认证",
     "description": "SpringBoot+SpringSecurity前后端分离+Jwt的权限认证",
+    "date": "2022-02-13T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-13T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-13T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

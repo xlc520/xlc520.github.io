@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "SpringBoot打包不同环境配置与shell脚本部署",
     "description": "SpringBoot打包不同环境配置与shell脚本部署",
+    "date": "2022-01-15T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-01-15T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-15T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

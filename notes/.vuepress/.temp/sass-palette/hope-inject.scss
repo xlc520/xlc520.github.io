@@ -20,8 +20,8 @@ $variables: meta.module-variables("hope-palette");
       #{$key}: #{$value};
     }
   } @else if helper.color-islegal($value) {
-    @if meta.global-variable-exists("darkSelector", $module: "hope-config") {
-      @include helper.inject-color($key, $value, $darkSelector: hope-config.$darkSelector);
+    @if meta.global-variable-exists("dark-selector", $module: "hope-config") {
+      @include helper.inject-color($key, $value, $dark-selector: hope-config.$dark-selector);
     } @else {
       @include helper.inject-color($key, $value);
     }

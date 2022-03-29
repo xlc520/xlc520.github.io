@@ -4,7 +4,20 @@ export const data = {
   "title": "SSH客户端软件",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "SSH客户端软件 SSH客户端是在管理和配置Linux服务器用到很多的软件了，一款好的SSH管理软件不但可以让你更好地执行Linux命令，对于工作效率的提升也是非常明显，在本文中我们就来介绍几款非常好用的SSH客户端软件 Xshell Xshell Plus Linux连接SSH工具 v7.0.0092 特别版 https://lanzoui.com/b01",
+    "author": "xlc520",
+    "title": "SSH客户端软件",
+    "description": "SSH客户端软件",
+    "date": "2022-01-09T00:00:00.000Z",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "SSH客户端软件"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-09T00:00:00.000Z"
         }
       ]
     ]

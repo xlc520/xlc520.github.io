@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "关闭微信朋友圈广告和公众号推荐流",
     "description": "实用！教你一招“彻底”关闭微信朋友圈广告和公众号推荐流！",
+    "date": "2022-02-14T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-14T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-14T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

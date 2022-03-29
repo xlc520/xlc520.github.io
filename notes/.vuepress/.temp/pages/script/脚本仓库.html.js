@@ -4,7 +4,20 @@ export const data = {
   "title": "脚本仓库",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "脚本仓库",
+    "author": "xlc520",
+    "title": "脚本仓库",
+    "description": "脚本仓库",
+    "date": "2022-01-04T00:00:00.000Z",
+    "category": [
+      "Script"
+    ],
+    "tag": [
+      "Script"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "脚本仓库"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Script"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-04T00:00:00.000Z"
         }
       ]
     ]

@@ -125,6 +125,13 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "一百多影视VIP视频解析接口",
+    "headers": [],
+    "path": "/daily/%E4%B8%80%E7%99%BE%E5%A4%9A%E5%BD%B1%E8%A7%86VIP%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "全球各大免费电子图书馆汇集",
     "headers": [],
     "path": "/daily/%E5%85%A8%E7%90%83%E5%90%84%E5%A4%A7%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%B1%87%E9%9B%86.html",
@@ -198,6 +205,13 @@ export const searchIndex = [
     "title": "去除MIUI10秒的警告",
     "headers": [],
     "path": "/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "广告拦截规则整理",
+    "headers": [],
+    "path": "/daily/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86.html",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -352,6 +366,1640 @@ export const searchIndex = [
     "title": "Git",
     "headers": [],
     "path": "/git/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "宝塔面板绕过绑定账号",
+    "headers": [],
+    "path": "/linux/bt.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Centos7 Minimal 安装后初始化配置",
+    "headers": [
+      {
+        "level": 2,
+        "title": "1:更新yum",
+        "slug": "_1-更新yum",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "2: 安装基础命令",
+        "slug": "_2-安装基础命令",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "3: 设置IP",
+        "slug": "_3-设置ip",
+        "children": [
+          {
+            "level": 3,
+            "title": "3.1 分配随机IP",
+            "slug": "_3-1-分配随机ip",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "3.2: 设置静态IP",
+            "slug": "_3-2-设置静态ip",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "3:永久关闭Selinux",
+            "slug": "_3-永久关闭selinux",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/linux/Centos7Minimal.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Euserv",
+    "headers": [
+      {
+        "level": 2,
+        "title": "一、EUserv免费VPS申请",
+        "slug": "一、euserv免费vps申请",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "二、EUserv免费VPS管理",
+        "slug": "二、euserv免费vps管理",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "三、EUserv免费VPS连接",
+        "slug": "三、euserv免费vps连接",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "四、纯IPv6的VPS搭建网站",
+        "slug": "四、纯ipv6的vps搭建网站",
+        "children": [
+          {
+            "level": 3,
+            "title": "4.1 搭建Web环境",
+            "slug": "_4-1-搭建web环境",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "4.2 IPv6 DNS解析",
+            "slug": "_4-2-ipv6-dns解析",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "4.3 兼顾IPv4用户访问",
+            "slug": "_4-3-兼顾ipv4用户访问",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "五、总结",
+        "slug": "五、总结",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "六、用腾讯云函数给EUserv德国免费VPS自动续期",
+        "slug": "六、用腾讯云函数给euserv德国免费vps自动续期",
+        "children": [
+          {
+            "level": 3,
+            "title": "1. 打开腾讯云函数SFC",
+            "slug": "_1-打开腾讯云函数sfc",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "2. 新建BeautifulSoup层",
+            "slug": "_2-新建beautifulsoup层",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "3. 新建腾讯云函数EUserv_extend",
+            "slug": "_3-新建腾讯云函数euserv-extend",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "4. 绑定层 BeautifulSoup",
+            "slug": "_4-绑定层-beautifulsoup",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "5. 测试并创建时间触发",
+            "slug": "_5-测试并创建时间触发",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "6. 查看运行日志",
+            "slug": "_6-查看运行日志",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "7. 总结",
+            "slug": "_7-总结",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/linux/Euserv.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Linux系统总结",
+    "headers": [
+      {
+        "level": 2,
+        "title": "操作系统",
+        "slug": "操作系统",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "什么是 Linux",
+        "slug": "什么是-linux",
+        "children": [
+          {
+            "level": 3,
+            "title": "Linux 系统内核与 Linux 发行套件的区别",
+            "slug": "linux-系统内核与-linux-发行套件的区别",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "Linux 对比 Windows",
+            "slug": "linux-对比-windows",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "Linux 系统种类",
+            "slug": "linux-系统种类",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "终端连接阿里云服务器",
+        "slug": "终端连接阿里云服务器",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Shell",
+        "slug": "shell",
+        "children": [
+          {
+            "level": 3,
+            "title": "Shell 的种类",
+            "slug": "shell-的种类",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "命令",
+        "slug": "命令",
+        "children": [
+          {
+            "level": 3,
+            "title": "命令行提示符",
+            "slug": "命令行提示符",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "命令格式",
+            "slug": "命令格式",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "快捷方式",
+        "slug": "快捷方式",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "文件和目录",
+        "slug": "文件和目录",
+        "children": [
+          {
+            "level": 3,
+            "title": "文件的组织",
+            "slug": "文件的组织",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "查看路径",
+            "slug": "查看路径",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "浏览和切换目录",
+            "slug": "浏览和切换目录",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "浏览和创建文件",
+            "slug": "浏览和创建文件",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "文件的复制和移动",
+            "slug": "文件的复制和移动",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "文件的删除和链接",
+            "slug": "文件的删除和链接",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "用户与权限",
+        "slug": "用户与权限",
+        "children": [
+          {
+            "level": 3,
+            "title": "用户",
+            "slug": "用户",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "群组的管理",
+            "slug": "群组的管理",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "文件权限管理",
+            "slug": "文件权限管理",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "查找文件",
+        "slug": "查找文件",
+        "children": [
+          {
+            "level": 3,
+            "title": "locate",
+            "slug": "locate",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "find",
+            "slug": "find",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "软件仓库",
+        "slug": "软件仓库",
+        "children": [
+          {
+            "level": 3,
+            "title": "yum 常用命令",
+            "slug": "yum-常用命令",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "切换 CentOS 软件源",
+            "slug": "切换-centos-软件源",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "阅读手册",
+        "slug": "阅读手册",
+        "children": [
+          {
+            "level": 3,
+            "title": "man",
+            "slug": "man",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "help",
+            "slug": "help",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "文本操作",
+        "slug": "文本操作",
+        "children": [
+          {
+            "level": 3,
+            "title": "grep",
+            "slug": "grep",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "sort",
+            "slug": "sort",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "wc",
+            "slug": "wc",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "uniq",
+            "slug": "uniq",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "cut",
+            "slug": "cut",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "重定向 管道 流",
+        "slug": "重定向-管道-流",
+        "children": [
+          {
+            "level": 3,
+            "title": "重定向",
+            "slug": "重定向",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "管道 |",
+            "slug": "管道",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "流",
+            "slug": "流",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "查看进程",
+        "slug": "查看进程",
+        "children": [
+          {
+            "level": 3,
+            "title": "w",
+            "slug": "w",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "ps",
+            "slug": "ps",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "top",
+            "slug": "top",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "kill",
+            "slug": "kill",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "管理进程",
+        "slug": "管理进程",
+        "children": [
+          {
+            "level": 3,
+            "title": "进程状态",
+            "slug": "进程状态",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "前台进程 & 后台进程",
+            "slug": "前台进程-后台进程",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "&",
+            "slug": "",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "nohup",
+            "slug": "nohup",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "bg",
+            "slug": "bg",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "jobs",
+            "slug": "jobs",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "fg",
+            "slug": "fg",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "守护进程",
+        "slug": "守护进程",
+        "children": [
+          {
+            "level": 3,
+            "title": "systemd",
+            "slug": "systemd",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "文件压缩解压",
+        "slug": "文件压缩解压",
+        "children": [
+          {
+            "level": 3,
+            "title": "tar",
+            "slug": "tar",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "gzip / gunzip",
+            "slug": "gzip-gunzip",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "tar 归档+压缩",
+            "slug": "tar-归档-压缩",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "zcat、zless、zmore",
+            "slug": "zcat、zless、zmore",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "zip/unzip",
+            "slug": "zip-unzip",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "编译安装软件",
+        "slug": "编译安装软件",
+        "children": [
+          {
+            "level": 3,
+            "title": "编译安装",
+            "slug": "编译安装",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "网络",
+        "slug": "网络",
+        "children": [
+          {
+            "level": 3,
+            "title": "ifconfig",
+            "slug": "ifconfig",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "host",
+            "slug": "host",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "ssh 连接远程服务器",
+            "slug": "ssh-连接远程服务器",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "wget",
+            "slug": "wget",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "备份",
+        "slug": "备份",
+        "children": [
+          {
+            "level": 3,
+            "title": "scp",
+            "slug": "scp",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "rsync",
+            "slug": "rsync",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "系统",
+        "slug": "系统",
+        "children": [
+          {
+            "level": 3,
+            "title": "halt",
+            "slug": "halt",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "reboot",
+            "slug": "reboot",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "poweroff",
+            "slug": "poweroff",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Vim 是什么？",
+        "slug": "vim-是什么",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Vim 常用模式",
+        "slug": "vim-常用模式",
+        "children": [
+          {
+            "level": 3,
+            "title": "交互模式",
+            "slug": "交互模式",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "插入模式",
+            "slug": "插入模式",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "命令模式",
+            "slug": "命令模式",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "基本操作",
+        "slug": "基本操作",
+        "children": [
+          {
+            "level": 3,
+            "title": "打开 Vim",
+            "slug": "打开-vim",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "插入",
+            "slug": "插入",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "移动",
+            "slug": "移动",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "跳至行首和行末",
+            "slug": "跳至行首和行末",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "按单词移动",
+            "slug": "按单词移动",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "退出文件",
+            "slug": "退出文件",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "标准操作",
+        "slug": "标准操作",
+        "children": [
+          {
+            "level": 3,
+            "title": "删除字符",
+            "slug": "删除字符",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "删除（剪切）单词，行",
+            "slug": "删除-剪切-单词-行",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "复制单词，行",
+            "slug": "复制单词-行",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "粘贴",
+            "slug": "粘贴",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "替换一个字符",
+            "slug": "替换一个字符",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "撤销操作",
+            "slug": "撤销操作",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "重做",
+            "slug": "重做",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "跳转到指定行",
+            "slug": "跳转到指定行",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "高级操作",
+        "slug": "高级操作",
+        "children": [
+          {
+            "level": 3,
+            "title": "查找",
+            "slug": "查找",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "查找并替换",
+            "slug": "查找并替换",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "合并文件",
+            "slug": "合并文件",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "分屏",
+            "slug": "分屏",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "运行外部命令 :!",
+            "slug": "运行外部命令",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "可视模式",
+            "slug": "可视模式",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Vim 配置",
+        "slug": "vim-配置",
+        "children": [
+          {
+            "level": 3,
+            "title": "选项参数",
+            "slug": "选项参数",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": ".vimrc",
+            "slug": "vimrc",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/linux/Linux%E6%80%BB%E7%BB%93.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Nginx万字总结",
+    "headers": [
+      {
+        "level": 2,
+        "title": "配置文件结构",
+        "slug": "配置文件结构",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "配置文件 main 段核心参数",
+        "slug": "配置文件-main-段核心参数",
+        "children": [
+          {
+            "level": 3,
+            "title": "user",
+            "slug": "user",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "pid",
+            "slug": "pid",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_rlimit_nofile_number",
+            "slug": "worker-rlimit-nofile-number",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_rlimit_core",
+            "slug": "worker-rlimit-core",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_processes_number",
+            "slug": "worker-processes-number",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_cpu_affinity",
+            "slug": "worker-cpu-affinity",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_priority",
+            "slug": "worker-priority",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_shutdown_timeout",
+            "slug": "worker-shutdown-timeout",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "timer_resolution",
+            "slug": "timer-resolution",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "daemon",
+            "slug": "daemon",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "配置文件 events 段核心参数",
+        "slug": "配置文件-events-段核心参数",
+        "children": [
+          {
+            "level": 3,
+            "title": "use",
+            "slug": "use",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "worker_connections",
+            "slug": "worker-connections",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "accept_mutex",
+            "slug": "accept-mutex",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "server_name 指令",
+        "slug": "server-name-指令",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "root",
+        "slug": "root",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "alias",
+        "slug": "alias",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "location",
+        "slug": "location",
+        "children": [
+          {
+            "level": 3,
+            "title": "location 中的反斜线",
+            "slug": "location-中的反斜线",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "return",
+            "slug": "return",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "rewrite",
+        "slug": "rewrite",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "if 指令",
+        "slug": "if-指令",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "autoindex",
+        "slug": "autoindex",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "变量",
+        "slug": "变量",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "正向代理",
+        "slug": "正向代理",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "反向代理",
+        "slug": "反向代理",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "动静分离",
+        "slug": "动静分离",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "负载均衡",
+        "slug": "负载均衡",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "upstream",
+        "slug": "upstream",
+        "children": [
+          {
+            "level": 3,
+            "title": "server",
+            "slug": "server",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "keepalive",
+            "slug": "keepalive",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "keepalive_requests",
+            "slug": "keepalive-requests",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "keepalive_timeout",
+            "slug": "keepalive-timeout",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "配置实例",
+            "slug": "配置实例",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "proxy_pass",
+        "slug": "proxy-pass",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "配置反向代理",
+        "slug": "配置反向代理",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "配置负载均衡",
+        "slug": "配置负载均衡",
+        "children": [
+          {
+            "level": 3,
+            "title": "hash 算法",
+            "slug": "hash-算法",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "ip_hash",
+            "slug": "ip-hash",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "最少连接数算法",
+            "slug": "最少连接数算法",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "配置缓存",
+        "slug": "配置缓存",
+        "children": [
+          {
+            "level": 3,
+            "title": "proxy_cache",
+            "slug": "proxy-cache",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "proxy_cache_path",
+            "slug": "proxy-cache-path",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "proxy_cache_key",
+            "slug": "proxy-cache-key",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "proxy_cache_valid",
+            "slug": "proxy-cache-valid",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "proxy_no_cache",
+            "slug": "proxy-no-cache",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "proxy_cache_bypass",
+            "slug": "proxy-cache-bypass",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "upstream_cache_status 变量",
+            "slug": "upstream-cache-status-变量",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "配置实例",
+            "slug": "配置实例-1",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "HTTPS",
+        "slug": "https",
+        "children": [
+          {
+            "level": 3,
+            "title": "HTTPS 工作流程",
+            "slug": "https-工作流程",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "配置证书",
+            "slug": "配置证书",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "配置跨域 CORS",
+        "slug": "配置跨域-cors",
+        "children": [
+          {
+            "level": 3,
+            "title": "跨域的定义",
+            "slug": "跨域的定义",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "同源的定义",
+            "slug": "同源的定义",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "Nginx 解决跨域的原理",
+            "slug": "nginx-解决跨域的原理",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "title": "配置开启 gzip 压缩",
+        "slug": "配置开启-gzip-压缩",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "进程结构",
+        "slug": "进程结构",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "配置文件重载原理",
+        "slug": "配置文件重载原理",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Nginx 模块化管理机制",
+        "slug": "nginx-模块化管理机制",
+        "children": []
+      }
+    ],
+    "path": "/linux/Nginx%E4%B8%87%E5%AD%97%E6%80%BB%E7%BB%93.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Nginx安装Web应用防火墙",
+    "headers": [
+      {
+        "level": 2,
+        "title": "ngx_lua_waf安装",
+        "slug": "ngx-lua-waf安装",
+        "children": [
+          {
+            "level": 3,
+            "title": "1. lua支持安装",
+            "slug": "_1-lua支持安装",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "2. 安装ngx_lua_waf",
+            "slug": "_2-安装ngx-lua-waf",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "3. ngx_lua_waf防火墙配置",
+            "slug": "_3-ngx-lua-waf防火墙配置",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "4. ngx_lua_waf效果图",
+            "slug": "_4-ngx-lua-waf效果图",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/linux/Nginx%E5%AE%89%E8%A3%85Web%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "安装NodeJS-Maven-Mysql",
+    "headers": [
+      {
+        "level": 2,
+        "title": "安装NodeJS",
+        "slug": "安装nodejs",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "安装Maven",
+        "slug": "安装maven",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "安装MySQL",
+        "slug": "安装mysql",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "",
+        "slug": "",
+        "children": []
+      }
+    ],
+    "path": "/linux/NodeJS-Maven-Mysql.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Openssl一键自签证书",
+    "headers": [],
+    "path": "/linux/openssl%E4%B8%80%E9%94%AE%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Podman开源的容器",
+    "headers": [
+      {
+        "level": 3,
+        "title": "什么是Podman？",
+        "slug": "什么是podman",
+        "children": []
+      },
+      {
+        "level": 3,
+        "title": "Podman常用命令",
+        "slug": "podman常用命令",
+        "children": []
+      },
+      {
+        "level": 3,
+        "title": "「Podman 加速器」",
+        "slug": "「podman-加速器」",
+        "children": []
+      },
+      {
+        "level": 3,
+        "title": "「使用 Podman」",
+        "slug": "「使用-podman」",
+        "children": []
+      },
+      {
+        "level": 3,
+        "title": "「用户操作」",
+        "slug": "「用户操作」",
+        "children": []
+      },
+      {
+        "level": 3,
+        "title": "卷",
+        "slug": "卷",
+        "children": []
+      }
+    ],
+    "path": "/linux/Podman%E5%BC%80%E6%BA%90%E7%9A%84%E5%AE%B9%E5%99%A8.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Linux",
+    "headers": [],
+    "path": "/linux/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Windows子系统",
+    "headers": [
+      {
+        "level": 2,
+        "title": "更换apt源。",
+        "slug": "更换apt源。",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "在WSL2下安装Docker",
+        "slug": "在wsl2下安装docker",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Win10与wsl2子系统互相访问",
+        "slug": "win10与wsl2子系统互相访问",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "FAQ",
+        "slug": "faq",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "systemctl命令无法使用",
+        "slug": "systemctl命令无法使用",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Vmmem 进程占用过多内存",
+        "slug": "vmmem-进程占用过多内存",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "（可选）使用Podman取代Docker",
+        "slug": "可选-使用podman取代docker",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "WSL2 系统占用磁盘空间不释放",
+        "slug": "wsl2-系统占用磁盘空间不释放",
+        "children": []
+      }
+    ],
+    "path": "/linux/Windows%E5%AD%90%E7%B3%BB%E7%BB%9F.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "实用 shell 脚本",
+    "headers": [
+      {
+        "level": 2,
+        "title": "1、服务器系统配置初始化",
+        "slug": "_1、服务器系统配置初始化",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "2、批量创建多个用户并设置密码",
+        "slug": "_2、批量创建多个用户并设置密码",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "3、一键查看服务器利用率",
+        "slug": "_3、一键查看服务器利用率",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "4、找出占用CPU 内存过高的进程",
+        "slug": "_4、找出占用cpu-内存过高的进程",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "5、查看网卡的实时流量",
+        "slug": "_5、查看网卡的实时流量",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "6、监控多台服务器磁盘利用率脚本",
+        "slug": "_6、监控多台服务器磁盘利用率脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "7、批量检测网站是否异常并邮件通知",
+        "slug": "_7、批量检测网站是否异常并邮件通知",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "8、批量主机远程执行命令脚本",
+        "slug": "_8、批量主机远程执行命令脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "9、一键部署LNMP网站平台脚本",
+        "slug": "_9、一键部署lnmp网站平台脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "10、监控MySQL主从同步状态是否异常脚本",
+        "slug": "_10、监控mysql主从同步状态是否异常脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "11、MySql数据库备份脚本",
+        "slug": "_11、mysql数据库备份脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "12、Nginx访问日志分析",
+        "slug": "_12、nginx访问日志分析",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "13、Nginx访问日志自动按天（周、月）切割",
+        "slug": "_13、nginx访问日志自动按天-周、月-切割",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "14、自动发布Java项目（Tomcat）",
+        "slug": "_14、自动发布java项目-tomcat",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "15、自动发布PHP项目",
+        "slug": "_15、自动发布php项目",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "16、DOS攻击防范（自动屏蔽攻击IP）",
+        "slug": "_16、dos攻击防范-自动屏蔽攻击ip",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "17、目录入侵检测与告警",
+        "slug": "_17、目录入侵检测与告警",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "18、Dos攻击防范（自动屏蔽攻击IP）",
+        "slug": "_18、dos攻击防范-自动屏蔽攻击ip",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "19、Linux系统发送告警脚本",
+        "slug": "_19、linux系统发送告警脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "20、MySQL数据库备份单循环",
+        "slug": "_20、mysql数据库备份单循环",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "21、MySQL数据库备份多循环",
+        "slug": "_21、mysql数据库备份多循环",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "22、Nginx 访问访问日志按天切割",
+        "slug": "_22、nginx-访问访问日志按天切割",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "23、Nginx访问日志分析脚本",
+        "slug": "_23、nginx访问日志分析脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "24、查看网卡实时流量脚本",
+        "slug": "_24、查看网卡实时流量脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "25、服务器系统配置初始化脚本",
+        "slug": "_25、服务器系统配置初始化脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "26、监控100台服务器磁盘利用率脚本",
+        "slug": "_26、监控100台服务器磁盘利用率脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "27、监控MySQL主从同步状态是否异常脚本",
+        "slug": "_27、监控mysql主从同步状态是否异常脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "28、目录文件变化监控和实时文件同步",
+        "slug": "_28、目录文件变化监控和实时文件同步",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "29、批量创建100用户并设置密码脚本",
+        "slug": "_29、批量创建100用户并设置密码脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "30、批量检测网站是否异常脚本",
+        "slug": "_30、批量检测网站是否异常脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "31、批量主机远程执行命令脚本",
+        "slug": "_31、批量主机远程执行命令脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "32、一键部署LNMP网站平台脚本",
+        "slug": "_32、一键部署lnmp网站平台脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "33、一键查看服务器资源利用率",
+        "slug": "_33、一键查看服务器资源利用率",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "34、找出占用CPU 内存过高的进程脚本",
+        "slug": "_34、找出占用cpu-内存过高的进程脚本",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "35、自动发布Java项目（Tomcat）",
+        "slug": "_35、自动发布java项目-tomcat",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "36、自动发布PHP项目脚本",
+        "slug": "_36、自动发布php项目脚本",
+        "children": []
+      }
+    ],
+    "path": "/linux/%E5%AE%9E%E7%94%A8%20shell%20%E8%84%9A%E6%9C%AC.html",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -1129,6 +2777,32 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "SpringBoot定时任务动态管理",
+    "headers": [
+      {
+        "level": 2,
+        "title": "一、功能说明",
+        "slug": "一、功能说明",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "二、快速使用",
+        "slug": "二、快速使用",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "三、实现原理",
+        "slug": "三、实现原理",
+        "children": []
+      }
+    ],
+    "path": "/java/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "SpringBoot 定时任务动态管理通用解决方案",
     "headers": [
       {
@@ -1239,6 +2913,80 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "Spring Cloud Alibaba",
+    "headers": [
+      {
+        "level": 2,
+        "title": "一、Spring Boot（服务基座）",
+        "slug": "一、spring-boot-服务基座",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "二、Nacos（注册中心、分布式配置中心）",
+        "slug": "二、nacos-注册中心、分布式配置中心",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "三、RestTemplate + Ribbon （远程调用）",
+        "slug": "三、resttemplate-ribbon-远程调用",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "四、OpenFeign（远程调用）",
+        "slug": "四、openfeign-远程调用",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "五、Dubbo Spring Cloud（远程调用）",
+        "slug": "五、dubbo-spring-cloud-远程调用",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "六、Spring Cloud Gateway（网关）",
+        "slug": "六、spring-cloud-gateway-网关",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "七、Sentinel（熔断、限流、降级）",
+        "slug": "七、sentinel-熔断、限流、降级",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "八、Seata（分布式事务）",
+        "slug": "八、seata-分布式事务",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "九、Spring Cloud Stream （异步消息）",
+        "slug": "九、spring-cloud-stream-异步消息",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "十、SkyWalking（分布式链路追踪）",
+        "slug": "十、skywalking-分布式链路追踪",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "十一、XXL-JOB（分布式任务调度）",
+        "slug": "十一、xxl-job-分布式任务调度",
+        "children": []
+      }
+    ],
+    "path": "/java/SpringCloudAlibaba.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "使用docker快速安装oracle",
     "headers": [],
     "path": "/java/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html",
@@ -1248,6 +2996,60 @@ export const searchIndex = [
   {
     "title": "SpringBoot将Bean放入Spring容器中的五种方式",
     "headers": [
+      {
+        "level": 2,
+        "title": "更新：2022年3月23日11:25:11",
+        "slug": "更新-2022年3月23日11-25-11",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "背景",
+        "slug": "背景",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过注解注入的一般形式",
+        "slug": "通过注解注入的一般形式",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过构造方法注入Bean",
+        "slug": "通过构造方法注入bean",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过set方法注入Bean",
+        "slug": "通过set方法注入bean",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过属性去注入Bean",
+        "slug": "通过属性去注入bean",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过List注入Bean",
+        "slug": "通过list注入bean",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "通过Map去注入Bean",
+        "slug": "通过map去注入bean",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "2022-02-12",
+        "slug": "_2022-02-12",
+        "children": []
+      },
       {
         "level": 2,
         "title": "1、@Configuration + @Bean",
@@ -1310,13 +3112,19 @@ export const searchIndex = [
         "children": []
       }
     ],
-    "path": "/java/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F.html",
+    "path": "/java/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html",
     "pathLocale": "/",
     "extraFields": []
   },
   {
     "title": "开发中报错异常解决",
     "headers": [
+      {
+        "level": 2,
+        "title": "vue打包部署 刷新404",
+        "slug": "vue打包部署-刷新404",
+        "children": []
+      },
       {
         "level": 2,
         "title": "1.Spring Boot集成Druid异常discard long time none received connection.",
@@ -1373,569 +3181,22 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "宝塔面板绕过绑定账号",
-    "headers": [],
-    "path": "/linux/bt.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Centos7 Minimal 安装后初始化配置",
+    "title": "腾讯云后端总结的面试15问",
     "headers": [
       {
         "level": 2,
-        "title": "1:更新yum",
-        "slug": "_1-更新yum",
+        "title": "14， RocketMQ 如何保证消息的准确性和安全性？",
+        "slug": "_14-rocketmq-如何保证消息的准确性和安全性",
         "children": []
       },
       {
         "level": 2,
-        "title": "2: 安装基础命令",
-        "slug": "_2-安装基础命令",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "3: 设置IP",
-        "slug": "_3-设置ip",
-        "children": [
-          {
-            "level": 3,
-            "title": "3.1 分配随机IP",
-            "slug": "_3-1-分配随机ip",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "3.2: 设置静态IP",
-            "slug": "_3-2-设置静态ip",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "3:永久关闭Selinux",
-            "slug": "_3-永久关闭selinux",
-            "children": []
-          }
-        ]
-      }
-    ],
-    "path": "/linux/Centos7Minimal.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Euserv",
-    "headers": [
-      {
-        "level": 2,
-        "title": "一、EUserv免费VPS申请",
-        "slug": "一、euserv免费vps申请",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "二、EUserv免费VPS管理",
-        "slug": "二、euserv免费vps管理",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "三、EUserv免费VPS连接",
-        "slug": "三、euserv免费vps连接",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "四、纯IPv6的VPS搭建网站",
-        "slug": "四、纯ipv6的vps搭建网站",
-        "children": [
-          {
-            "level": 3,
-            "title": "4.1 搭建Web环境",
-            "slug": "_4-1-搭建web环境",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "4.2 IPv6 DNS解析",
-            "slug": "_4-2-ipv6-dns解析",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "4.3 兼顾IPv4用户访问",
-            "slug": "_4-3-兼顾ipv4用户访问",
-            "children": []
-          }
-        ]
-      },
-      {
-        "level": 2,
-        "title": "五、总结",
-        "slug": "五、总结",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "六、用腾讯云函数给EUserv德国免费VPS自动续期",
-        "slug": "六、用腾讯云函数给euserv德国免费vps自动续期",
-        "children": [
-          {
-            "level": 3,
-            "title": "1. 打开腾讯云函数SFC",
-            "slug": "_1-打开腾讯云函数sfc",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "2. 新建BeautifulSoup层",
-            "slug": "_2-新建beautifulsoup层",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "3. 新建腾讯云函数EUserv_extend",
-            "slug": "_3-新建腾讯云函数euserv-extend",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "4. 绑定层 BeautifulSoup",
-            "slug": "_4-绑定层-beautifulsoup",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "5. 测试并创建时间触发",
-            "slug": "_5-测试并创建时间触发",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "6. 查看运行日志",
-            "slug": "_6-查看运行日志",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "7. 总结",
-            "slug": "_7-总结",
-            "children": []
-          }
-        ]
-      }
-    ],
-    "path": "/linux/Euserv.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Nginx安装Web应用防火墙",
-    "headers": [
-      {
-        "level": 2,
-        "title": "ngx_lua_waf安装",
-        "slug": "ngx-lua-waf安装",
-        "children": [
-          {
-            "level": 3,
-            "title": "1. lua支持安装",
-            "slug": "_1-lua支持安装",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "2. 安装ngx_lua_waf",
-            "slug": "_2-安装ngx-lua-waf",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "3. ngx_lua_waf防火墙配置",
-            "slug": "_3-ngx-lua-waf防火墙配置",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "4. ngx_lua_waf效果图",
-            "slug": "_4-ngx-lua-waf效果图",
-            "children": []
-          }
-        ]
-      }
-    ],
-    "path": "/linux/Nginx%E5%AE%89%E8%A3%85Web%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "安装NodeJS-Maven-Mysql",
-    "headers": [
-      {
-        "level": 2,
-        "title": "安装NodeJS",
-        "slug": "安装nodejs",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "安装Maven",
-        "slug": "安装maven",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "安装MySQL",
-        "slug": "安装mysql",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "",
-        "slug": "",
+        "title": "15. 三个数求和",
+        "slug": "_15-三个数求和",
         "children": []
       }
     ],
-    "path": "/linux/NodeJS-Maven-Mysql.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Openssl一键自签证书",
-    "headers": [],
-    "path": "/linux/openssl%E4%B8%80%E9%94%AE%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Podman开源的容器",
-    "headers": [
-      {
-        "level": 3,
-        "title": "什么是Podman？",
-        "slug": "什么是podman",
-        "children": []
-      },
-      {
-        "level": 3,
-        "title": "Podman常用命令",
-        "slug": "podman常用命令",
-        "children": []
-      },
-      {
-        "level": 3,
-        "title": "「Podman 加速器」",
-        "slug": "「podman-加速器」",
-        "children": []
-      },
-      {
-        "level": 3,
-        "title": "「使用 Podman」",
-        "slug": "「使用-podman」",
-        "children": []
-      },
-      {
-        "level": 3,
-        "title": "「用户操作」",
-        "slug": "「用户操作」",
-        "children": []
-      },
-      {
-        "level": 3,
-        "title": "卷",
-        "slug": "卷",
-        "children": []
-      }
-    ],
-    "path": "/linux/Podman%E5%BC%80%E6%BA%90%E7%9A%84%E5%AE%B9%E5%99%A8.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Linux",
-    "headers": [],
-    "path": "/linux/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Windows子系统",
-    "headers": [
-      {
-        "level": 2,
-        "title": "更换apt源。",
-        "slug": "更换apt源。",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "在WSL2下安装Docker",
-        "slug": "在wsl2下安装docker",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "Win10与wsl2子系统互相访问",
-        "slug": "win10与wsl2子系统互相访问",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "FAQ",
-        "slug": "faq",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "systemctl命令无法使用",
-        "slug": "systemctl命令无法使用",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "Vmmem 进程占用过多内存",
-        "slug": "vmmem-进程占用过多内存",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "（可选）使用Podman取代Docker",
-        "slug": "可选-使用podman取代docker",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "WSL2 系统占用磁盘空间不释放",
-        "slug": "wsl2-系统占用磁盘空间不释放",
-        "children": []
-      }
-    ],
-    "path": "/linux/Windows%E5%AD%90%E7%B3%BB%E7%BB%9F.html",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "实用 shell 脚本",
-    "headers": [
-      {
-        "level": 2,
-        "title": "1、服务器系统配置初始化",
-        "slug": "_1、服务器系统配置初始化",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "2、批量创建多个用户并设置密码",
-        "slug": "_2、批量创建多个用户并设置密码",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "3、一键查看服务器利用率",
-        "slug": "_3、一键查看服务器利用率",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "4、找出占用CPU 内存过高的进程",
-        "slug": "_4、找出占用cpu-内存过高的进程",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "5、查看网卡的实时流量",
-        "slug": "_5、查看网卡的实时流量",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "6、监控多台服务器磁盘利用率脚本",
-        "slug": "_6、监控多台服务器磁盘利用率脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "7、批量检测网站是否异常并邮件通知",
-        "slug": "_7、批量检测网站是否异常并邮件通知",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "8、批量主机远程执行命令脚本",
-        "slug": "_8、批量主机远程执行命令脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "9、一键部署LNMP网站平台脚本",
-        "slug": "_9、一键部署lnmp网站平台脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "10、监控MySQL主从同步状态是否异常脚本",
-        "slug": "_10、监控mysql主从同步状态是否异常脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "11、MySql数据库备份脚本",
-        "slug": "_11、mysql数据库备份脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "12、Nginx访问日志分析",
-        "slug": "_12、nginx访问日志分析",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "13、Nginx访问日志自动按天（周、月）切割",
-        "slug": "_13、nginx访问日志自动按天-周、月-切割",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "14、自动发布Java项目（Tomcat）",
-        "slug": "_14、自动发布java项目-tomcat",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "15、自动发布PHP项目",
-        "slug": "_15、自动发布php项目",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "16、DOS攻击防范（自动屏蔽攻击IP）",
-        "slug": "_16、dos攻击防范-自动屏蔽攻击ip",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "17、目录入侵检测与告警",
-        "slug": "_17、目录入侵检测与告警",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "18、Dos攻击防范（自动屏蔽攻击IP）",
-        "slug": "_18、dos攻击防范-自动屏蔽攻击ip",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "19、Linux系统发送告警脚本",
-        "slug": "_19、linux系统发送告警脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "20、MySQL数据库备份单循环",
-        "slug": "_20、mysql数据库备份单循环",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "21、MySQL数据库备份多循环",
-        "slug": "_21、mysql数据库备份多循环",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "22、Nginx 访问访问日志按天切割",
-        "slug": "_22、nginx-访问访问日志按天切割",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "23、Nginx访问日志分析脚本",
-        "slug": "_23、nginx访问日志分析脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "24、查看网卡实时流量脚本",
-        "slug": "_24、查看网卡实时流量脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "25、服务器系统配置初始化脚本",
-        "slug": "_25、服务器系统配置初始化脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "26、监控100台服务器磁盘利用率脚本",
-        "slug": "_26、监控100台服务器磁盘利用率脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "27、监控MySQL主从同步状态是否异常脚本",
-        "slug": "_27、监控mysql主从同步状态是否异常脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "28、目录文件变化监控和实时文件同步",
-        "slug": "_28、目录文件变化监控和实时文件同步",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "29、批量创建100用户并设置密码脚本",
-        "slug": "_29、批量创建100用户并设置密码脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "30、批量检测网站是否异常脚本",
-        "slug": "_30、批量检测网站是否异常脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "31、批量主机远程执行命令脚本",
-        "slug": "_31、批量主机远程执行命令脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "32、一键部署LNMP网站平台脚本",
-        "slug": "_32、一键部署lnmp网站平台脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "33、一键查看服务器资源利用率",
-        "slug": "_33、一键查看服务器资源利用率",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "34、找出占用CPU 内存过高的进程脚本",
-        "slug": "_34、找出占用cpu-内存过高的进程脚本",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "35、自动发布Java项目（Tomcat）",
-        "slug": "_35、自动发布java项目-tomcat",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "36、自动发布PHP项目脚本",
-        "slug": "_36、自动发布php项目脚本",
-        "children": []
-      }
-    ],
-    "path": "/linux/%E5%AE%9E%E7%94%A8%20shell%20%E8%84%9A%E6%9C%AC.html",
+    "path": "/java/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%E7%9A%84%E9%9D%A2%E8%AF%9515%E9%97%AE.html",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -4688,6 +5949,41 @@ export const searchIndex = [
     "extraFields": []
   },
   {
+    "title": "电脑",
+    "headers": [],
+    "path": "/pc/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "电脑故障问题解决",
+    "headers": [
+      {
+        "level": 2,
+        "title": "新版本Edge提示由你的组织管理，如何取消 ？",
+        "slug": "新版本edge提示由你的组织管理-如何取消",
+        "children": []
+      }
+    ],
+    "path": "/pc/%E6%96%B0%E7%89%88%E6%9C%ACEdge%E6%8F%90%E7%A4%BA%E7%94%B1%E4%BD%A0%E7%9A%84%E7%BB%84%E7%BB%87%E7%AE%A1%E7%90%86.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "激活码",
+    "headers": [
+      {
+        "level": 2,
+        "title": "Windows",
+        "slug": "windows",
+        "children": []
+      }
+    ],
+    "path": "/pc/%E6%BF%80%E6%B4%BB%E7%A0%81.html",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
     "title": "Script",
     "headers": [],
     "path": "/script/",
@@ -4870,7 +6166,7 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Lenovo",
+    "title": "Lenovo联想",
     "headers": [
       {
         "level": 2,
@@ -5276,34 +6572,6 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "IDEA 分类",
-    "headers": [],
-    "path": "/category/idea/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "IDEA 标签",
-    "headers": [],
-    "path": "/tag/idea/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Java 分类",
-    "headers": [],
-    "path": "/category/java/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
-    "title": "Java 标签",
-    "headers": [],
-    "path": "/tag/java/",
-    "pathLocale": "/",
-    "extraFields": []
-  },
-  {
     "title": "Linux 分类",
     "headers": [],
     "path": "/category/linux/",
@@ -5332,9 +6600,9 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Other 分类",
+    "title": "IDEA 分类",
     "headers": [],
-    "path": "/category/other/",
+    "path": "/category/idea/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5346,9 +6614,9 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Script 分类",
+    "title": "Java 分类",
     "headers": [],
-    "path": "/category/script/",
+    "path": "/category/java/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5360,9 +6628,9 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Code 分类",
+    "title": "Other 分类",
     "headers": [],
-    "path": "/category/code/",
+    "path": "/category/other/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5374,9 +6642,9 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Study 分类",
+    "title": "Pc 分类",
     "headers": [],
-    "path": "/category/study/",
+    "path": "/category/pc/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5388,9 +6656,9 @@ export const searchIndex = [
     "extraFields": []
   },
   {
-    "title": "Tools 分类",
+    "title": "Script 分类",
     "headers": [],
-    "path": "/category/tools/",
+    "path": "/category/script/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5398,6 +6666,41 @@ export const searchIndex = [
     "title": "Openssl 标签",
     "headers": [],
     "path": "/tag/openssl/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Code 分类",
+    "headers": [],
+    "path": "/category/code/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "IDEA 标签",
+    "headers": [],
+    "path": "/tag/idea/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Study 分类",
+    "headers": [],
+    "path": "/category/study/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Java 标签",
+    "headers": [],
+    "path": "/tag/java/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "Tools 分类",
+    "headers": [],
+    "path": "/category/tools/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5412,6 +6715,13 @@ export const searchIndex = [
     "title": "蓝奏 标签",
     "headers": [],
     "path": "/tag/%E8%93%9D%E5%A5%8F/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "pc 标签",
+    "headers": [],
+    "path": "/tag/pc/",
     "pathLocale": "/",
     "extraFields": []
   },
@@ -5447,6 +6757,13 @@ export const searchIndex = [
     "title": "Tools 标签",
     "headers": [],
     "path": "/tag/tools/",
+    "pathLocale": "/",
+    "extraFields": []
+  },
+  {
+    "title": "API 标签",
+    "headers": [],
+    "path": "/tag/api/",
     "pathLocale": "/",
     "extraFields": []
   }

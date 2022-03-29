@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "影视软件TV-APK",
     "description": "影视软件TV-APK",
+    "date": "2022-03-18T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-18T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-18T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

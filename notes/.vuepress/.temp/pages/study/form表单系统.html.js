@@ -4,7 +4,20 @@ export const data = {
   "title": "表单系统",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "表单系统\r\" 包括了前端 和 后端\" Variant Form 🚀一款高效的Vue 2低代码表单，可视化设计，一键生成源码 https://www.vform666.com/ Element UI表单设计及代码生成器 jakhuang.github.io/form-generator https://github.com/JakHuang/form-gen",
+    "author": "xlc520",
+    "title": "表单系统",
+    "description": "表单系统",
+    "date": "2022-01-01T00:00:00.000Z",
+    "category": [
+      "Study"
+    ],
+    "tag": [
+      "Study"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "表单系统"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Study"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-01T00:00:00.000Z"
         }
       ]
     ]

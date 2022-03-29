@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Windows子系统",
     "description": "Windows子系统优化,ubuntu,docker",
+    "date": "2022-02-16T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-16T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-16T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

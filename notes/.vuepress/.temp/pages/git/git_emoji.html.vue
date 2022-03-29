@@ -56,4 +56,260 @@ deps: 升级依赖</p>
 🔧 (扳手)	:wrench:	修改配置文件
 🌐 (地球)	:globe_with_meridians:	国际化与本地化
 ✏️ (铅笔)	:pencil2:	修复 typo
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><table>
+<thead>
+<tr>
+<th style="text-align:center">样式</th>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">🎨</td>
+<td style="text-align:center"><code>:art:</code></td>
+<td style="text-align:center">改进代码结构/格式</td>
+</tr>
+<tr>
+<td style="text-align:center">⚡️</td>
+<td style="text-align:center"><code>:zap:</code></td>
+<td style="text-align:center">提高性能</td>
+</tr>
+<tr>
+<td style="text-align:center">🔥</td>
+<td style="text-align:center"><code>:fire:</code></td>
+<td style="text-align:center">移除代码或文件</td>
+</tr>
+<tr>
+<td style="text-align:center">🐛</td>
+<td style="text-align:center"><code>:bug:</code></td>
+<td style="text-align:center">修复了Bug</td>
+</tr>
+<tr>
+<td style="text-align:center">🚑</td>
+<td style="text-align:center"><code>:ambulance:</code></td>
+<td style="text-align:center">重要补丁</td>
+</tr>
+<tr>
+<td style="text-align:center">✨</td>
+<td style="text-align:center"><code>:sparkles:</code></td>
+<td style="text-align:center">引入新功能</td>
+</tr>
+<tr>
+<td style="text-align:center">📝</td>
+<td style="text-align:center"><code>:memo:</code></td>
+<td style="text-align:center">写文档</td>
+</tr>
+<tr>
+<td style="text-align:center">🚀</td>
+<td style="text-align:center"><code>:rocket:</code></td>
+<td style="text-align:center">部署程</td>
+</tr>
+<tr>
+<td style="text-align:center">💄</td>
+<td style="text-align:center"><code>:lipstick:</code></td>
+<td style="text-align:center">更新UI和样式文件</td>
+</tr>
+<tr>
+<td style="text-align:center">🎉</td>
+<td style="text-align:center"><code>:tada:</code></td>
+<td style="text-align:center">初次提交</td>
+</tr>
+<tr>
+<td style="text-align:center">✅</td>
+<td style="text-align:center"><code>:white_check_mark:</code></td>
+<td style="text-align:center">增加测试</td>
+</tr>
+<tr>
+<td style="text-align:center">🔑</td>
+<td style="text-align:center"><code>:lock:</code></td>
+<td style="text-align:center">修复安全问题</td>
+</tr>
+<tr>
+<td style="text-align:center">🍎</td>
+<td style="text-align:center"><code>:apple:</code></td>
+<td style="text-align:center">修复macOS上的东西</td>
+</tr>
+<tr>
+<td style="text-align:center">🐧</td>
+<td style="text-align:center"><code>:penguin:</code></td>
+<td style="text-align:center">修复Linux上的东西</td>
+</tr>
+<tr>
+<td style="text-align:center">🏁</td>
+<td style="text-align:center"><code>:checkered_flag:</code></td>
+<td style="text-align:center">修复Windows上的东西</td>
+</tr>
+<tr>
+<td style="text-align:center">🤖️</td>
+<td style="text-align:center"><code>:robot:</code></td>
+<td style="text-align:center">修复Android上的东西</td>
+</tr>
+<tr>
+<td style="text-align:center">🍏</td>
+<td style="text-align:center"><code>:green_apple:</code></td>
+<td style="text-align:center">修复iOS上的东西</td>
+</tr>
+<tr>
+<td style="text-align:center">🔖</td>
+<td style="text-align:center"><code>:bookmark:</code></td>
+<td style="text-align:center">发布/版本标签</td>
+</tr>
+<tr>
+<td style="text-align:center">🚨</td>
+<td style="text-align:center"><code>:rotating_light:</code></td>
+<td style="text-align:center">移除linter警告</td>
+</tr>
+<tr>
+<td style="text-align:center">🚧</td>
+<td style="text-align:center"><code>:construction:</code></td>
+<td style="text-align:center">工作进行时</td>
+</tr>
+<tr>
+<td style="text-align:center">💚</td>
+<td style="text-align:center"><code>:green_heart:</code></td>
+<td style="text-align:center">修复CI构建</td>
+</tr>
+<tr>
+<td style="text-align:center">⬇️</td>
+<td style="text-align:center"><code>:arrow_down:</code></td>
+<td style="text-align:center">依赖降级</td>
+</tr>
+<tr>
+<td style="text-align:center">⬆️</td>
+<td style="text-align:center"><code>:arrow_up:</code></td>
+<td style="text-align:center">依赖升级</td>
+</tr>
+<tr>
+<td style="text-align:center">👷</td>
+<td style="text-align:center"><code>:construction_worker:</code></td>
+<td style="text-align:center">添加CI构建系统</td>
+</tr>
+<tr>
+<td style="text-align:center">📈</td>
+<td style="text-align:center"><code>:chart_with_upwards_trend:</code></td>
+<td style="text-align:center">添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td style="text-align:center">🔨</td>
+<td style="text-align:center"><code>:hammer:</code></td>
+<td style="text-align:center">重构代码</td>
+</tr>
+<tr>
+<td style="text-align:center">➖</td>
+<td style="text-align:center"><code>:heavy_minus_sign:</code></td>
+<td style="text-align:center">移除依赖</td>
+</tr>
+<tr>
+<td style="text-align:center">➕</td>
+<td style="text-align:center"><code>:heavy_plus_sign:</code></td>
+<td style="text-align:center">添加依赖</td>
+</tr>
+<tr>
+<td style="text-align:center">🐳</td>
+<td style="text-align:center"><code>:whale:</code></td>
+<td style="text-align:center">关于Docker的工作</td>
+</tr>
+<tr>
+<td style="text-align:center">🔧</td>
+<td style="text-align:center"><code>:wrench:</code></td>
+<td style="text-align:center">更改配置文件</td>
+</tr>
+<tr>
+<td style="text-align:center">🌐</td>
+<td style="text-align:center"><code>:globe_with_meridians:</code></td>
+<td style="text-align:center">国际化与本地化</td>
+</tr>
+<tr>
+<td style="text-align:center">✏️</td>
+<td style="text-align:center"><code>:pencil2:</code></td>
+<td style="text-align:center">改正错字</td>
+</tr>
+<tr>
+<td style="text-align:center">💩</td>
+<td style="text-align:center"><code>:hankey:</code></td>
+<td style="text-align:center">编写了需要改进的差代码</td>
+</tr>
+<tr>
+<td style="text-align:center">⏪</td>
+<td style="text-align:center"><code>:rewind:</code></td>
+<td style="text-align:center">恢复更改</td>
+</tr>
+<tr>
+<td style="text-align:center">🔀</td>
+<td style="text-align:center"><code>:twisted_rightwards_arrows:</code></td>
+<td style="text-align:center">合并分支</td>
+</tr>
+<tr>
+<td style="text-align:center">📦</td>
+<td style="text-align:center"><code>:package:</code></td>
+<td style="text-align:center">更新已编译的文件或包</td>
+</tr>
+<tr>
+<td style="text-align:center">👽</td>
+<td style="text-align:center"><code>:alien:</code></td>
+<td style="text-align:center">由于外部API的更改而更新代码</td>
+</tr>
+<tr>
+<td style="text-align:center">🚚</td>
+<td style="text-align:center"><code>:truck:</code></td>
+<td style="text-align:center">移动或重命名文件</td>
+</tr>
+<tr>
+<td style="text-align:center">📄</td>
+<td style="text-align:center"><code>:page_facing_up:</code></td>
+<td style="text-align:center">添加或更新许可证</td>
+</tr>
+<tr>
+<td style="text-align:center">💥</td>
+<td style="text-align:center"><code>:boom:</code></td>
+<td style="text-align:center">引入突破性变化</td>
+</tr>
+<tr>
+<td style="text-align:center">🍱</td>
+<td style="text-align:center"><code>:bento:</code></td>
+<td style="text-align:center">添加或更新资源文件</td>
+</tr>
+<tr>
+<td style="text-align:center">👌</td>
+<td style="text-align:center"><code>:ok_hand:</code></td>
+<td style="text-align:center">由于代码审查而更新代码</td>
+</tr>
+<tr>
+<td style="text-align:center">♿️</td>
+<td style="text-align:center"><code>:wheelchair:</code></td>
+<td style="text-align:center">改善易达到</td>
+</tr>
+<tr>
+<td style="text-align:center">💡</td>
+<td style="text-align:center"><code>:bulb:</code></td>
+<td style="text-align:center">记录源代码</td>
+</tr>
+<tr>
+<td style="text-align:center">🍻</td>
+<td style="text-align:center"><code>:beers:</code></td>
+<td style="text-align:center">醉着写代码</td>
+</tr>
+<tr>
+<td style="text-align:center">💬</td>
+<td style="text-align:center"><code>:speech_balloon:</code></td>
+<td style="text-align:center">更新文字</td>
+</tr>
+<tr>
+<td style="text-align:center">🗃️</td>
+<td style="text-align:center"><code>:card_file_box:</code></td>
+<td style="text-align:center">执行数据库相关更改</td>
+</tr>
+<tr>
+<td style="text-align:center">🔉</td>
+<td style="text-align:center"><code>:loud_sound:</code></td>
+<td style="text-align:center">添加日志</td>
+</tr>
+<tr>
+<td style="text-align:center">🔇</td>
+<td style="text-align:center"><code>:mute:</code></td>
+<td style="text-align:center">移除日志</td>
+</tr>
+</tbody>
+</table>
+</template>

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "全球各大免费电子图书馆汇集",
     "description": "全球各大免费电子图书馆汇集",
+    "date": "2022-02-08T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-08T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-08T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

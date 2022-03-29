@@ -2,7 +2,7 @@
 author: xlc520
 title: Lenovo联想
 description: Lenovo联想
-date: 2022-1-10
+date: 2022-01-10
 category: Tools
 tag: Tools
 article: true

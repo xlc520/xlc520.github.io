@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Xposed edge pro入门教程",
     "description": "Xposed edge pro小白入门教程详解，即学即会！",
+    "date": "2022-02-06T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-06T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-06T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

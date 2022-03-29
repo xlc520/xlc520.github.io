@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Xposed-edge-pro Shell命令",
     "description": "定时自动签到、发送消息、定时自动偷能量及刷支付宝步数、游戏定时登录做任务……【shell命令】",
+    "date": "2022-02-07T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-07T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-07T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

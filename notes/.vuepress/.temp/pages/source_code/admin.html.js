@@ -4,7 +4,20 @@ export const data = {
   "title": "开源后台管理项目",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "开源后台管理项目 1、vue-Element-Admin Github Star 数 45100， Github 地址： https://github.com/PanJiaChen/vue-element-admin https://panjiachen.github.io/vue-element-admin-site/zh/ 一个基于 vue2.0 和 E",
+    "author": "xlc520",
+    "title": "开源后台管理项目",
+    "description": "开源后台管理项目",
+    "date": "2022-01-21T00:00:00.000Z",
+    "category": [
+      "Code"
+    ],
+    "tag": [
+      "Code"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "开源后台管理项目"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Code"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-21T00:00:00.000Z"
         }
       ]
     ]

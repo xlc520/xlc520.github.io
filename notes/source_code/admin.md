@@ -2,7 +2,7 @@
 author: xlc520
 title: 开源后台管理项目
 description: 开源后台管理项目
-date: 2022-1-21
+date: 2022-01-21
 category: Code
 tag: Code
 article: true

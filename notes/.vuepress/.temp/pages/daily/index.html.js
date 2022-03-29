@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "daily",
     "description": "daily分类",
+    "date": "2022-02-05T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "timeline": true,
-    "icon": null,
+    "icon": "date",
     "password": null,
     "head": [
       [
@@ -81,14 +82,13 @@ export const data = {
           "content": "2022-02-05T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-05T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "daily/README.md"
 }

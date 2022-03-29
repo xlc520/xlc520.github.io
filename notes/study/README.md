@@ -2,12 +2,12 @@
 author: xlc520
 title: Study
 description: Study
-date: 2022-1-1
+date: 2022-01-01
 category: Study
 tag: Study
 article: true
 dateline: true
-icon: 
+icon: note
 password: 
 ---
 

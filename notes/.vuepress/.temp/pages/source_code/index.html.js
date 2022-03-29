@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Code",
     "description": "Code分类",
+    "date": "2022-01-20T00:00:00.000Z",
     "category": [
       "Code"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "dateline": true,
-    "icon": null,
+    "icon": "code",
     "password": null,
     "head": [
       [
@@ -73,14 +74,21 @@ export const data = {
           "property": "article:tag",
           "content": "Code"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-20T00:00:00.000Z"
+        }
       ]
     ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "source_code/README.md"
 }

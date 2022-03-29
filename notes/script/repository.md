@@ -2,7 +2,7 @@
 author: xlc520
 title: 京东脚本仓库
 description: 京东脚本仓库
-date: 2022-1-3
+date: 2022-01-03
 category: Script
 tag: Script
 article: true

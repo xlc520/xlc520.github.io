@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "临时邮箱和接码",
     "description": "临时邮箱和接码",
+    "date": "2022-02-10T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-10T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-10T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

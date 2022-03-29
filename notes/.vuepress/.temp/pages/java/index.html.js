@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Java",
     "description": "Java",
+    "date": "2022-01-05T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "timeline": true,
-    "icon": null,
+    "icon": "java",
     "password": null,
     "head": [
       [
@@ -73,14 +74,21 @@ export const data = {
           "property": "article:tag",
           "content": "Java"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-05T00:00:00.000Z"
+        }
       ]
     ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "java/README.md"
 }

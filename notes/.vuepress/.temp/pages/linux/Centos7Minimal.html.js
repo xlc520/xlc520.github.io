@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Centos7 Minimal 安装后初始化配置",
     "description": "Centos7 Minimal 安装后初始化配置",
+    "date": "2022-01-28T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -72,6 +73,13 @@ export const data = {
         {
           "property": "article:tag",
           "content": "Linux"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-28T00:00:00.000Z"
         }
       ]
     ]

@@ -1,4 +1,5 @@
-<template><h2 id="电脑qqv9-5-4-28063-特别版" tabindex="-1"><a class="header-anchor" href="#电脑qqv9-5-4-28063-特别版" aria-hidden="true">#</a> 电脑QQv9.5.4(28063)特别版</h2>
+<template><h1 id="各种软件" tabindex="-1"><a class="header-anchor" href="#各种软件" aria-hidden="true">#</a> 各种软件</h1>
+<h2 id="电脑qqv9-5-4-28063-特别版" tabindex="-1"><a class="header-anchor" href="#电脑qqv9-5-4-28063-特别版" aria-hidden="true">#</a> 电脑QQv9.5.4(28063)特别版</h2>
 <p>https://lanzoux.com/b0dpnvapi</p>
 <ul>
 <li>安装使用QQ前请先自行安装齐全 Visual C++ 和 Universal C 运行库</li>

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "阿里十大最受开发者欢迎的工具",
     "description": "阿里十大最受开发者欢迎的工具",
+    "date": "2022-02-19T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-19T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-19T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

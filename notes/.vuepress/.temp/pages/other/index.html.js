@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "其他",
     "description": "Other",
+    "date": "2022-01-14T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "timeline": true,
-    "icon": null,
+    "icon": "others",
     "password": null,
     "head": [
       [
@@ -81,14 +82,13 @@ export const data = {
           "content": "2022-01-14T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-14T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "other/README.md"
 }

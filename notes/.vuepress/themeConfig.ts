@@ -33,6 +33,8 @@ export default defineThemeConfig({
     "/source_code/": "structure",
     "/git/": "structure",
     "/daily/": "structure",
+    "/pc/": "structure",
+    "/article/": "structure",
     "/other/": "structure",
     // fallback
     "/": [

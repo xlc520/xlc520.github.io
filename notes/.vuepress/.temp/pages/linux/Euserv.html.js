@@ -7,6 +7,7 @@ export const data = {
     "icon": "page",
     "title": "Euserv",
     "author": "xlc520",
+    "date": "2022-01-10T00:00:00.000Z",
     "category": [
       "Euserv"
     ],
@@ -73,8 +74,7 @@ export const data = {
           "content": "2022-01-10T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-10T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

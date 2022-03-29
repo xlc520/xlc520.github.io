@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理",
     "description": "SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理",
+    "date": "2022-01-15T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-01-15T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-15T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

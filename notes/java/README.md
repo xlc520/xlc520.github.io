@@ -2,12 +2,12 @@
 author: xlc520
 title: Java
 description: Java
-date: 2022-1-5
+date: 2022-01-05
 category: Java
 tag: Java
 article: true
 timeline: true
-icon: 
+icon: java
 password: 
 ---
 

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "宝塔面板绕过绑定账号",
     "description": "宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号",
+    "date": "2022-01-14T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -72,6 +73,13 @@ export const data = {
         {
           "property": "article:tag",
           "content": "Linux"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-14T00:00:00.000Z"
         }
       ]
     ]

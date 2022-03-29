@@ -2,7 +2,7 @@
 author: xlc520
 title: VuePress 学习
 description: VuePress 学习
-date: 2022-1-2
+date: 2022-01-02
 category: Study
 tag: Study
 article: true

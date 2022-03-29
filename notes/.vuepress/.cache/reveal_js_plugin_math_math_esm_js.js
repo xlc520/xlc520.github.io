@@ -1521,7 +1521,7 @@ var ha = Plugin = Object.assign(pa(), { KaTeX: function() {
   } } };
   return { id: "mathjax3", init: function(e2) {
     var n2 = e2.getConfig().mathjax3 || {}, r2 = on(on({}, t2), n2);
-    r2.tex = on(on({}, t2.tex), n2.tex), r2.options = on(on({}, r2.options), t2.options), r2.startup = on(on({}, t2.startup), n2.startup);
+    r2.tex = on(on({}, t2.tex), n2.tex), r2.options = on(on({}, t2.options), n2.options), r2.startup = on(on({}, t2.startup), n2.startup);
     var o2 = r2.mathjax || "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
     r2.mathjax = null, window.MathJax = r2, function(t3, e3) {
       var n3 = document.createElement("script");

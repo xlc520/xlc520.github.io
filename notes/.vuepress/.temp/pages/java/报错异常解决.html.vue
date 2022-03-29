@@ -1,6 +1,45 @@
 <template><h1 id="开发中报错异常解决" tabindex="-1"><a class="header-anchor" href="#开发中报错异常解决" aria-hidden="true">#</a> 开发中报错异常解决</h1>
 <p>2022年2月6日 开始整理开发中遇到的问题</p>
-<h2 id="_1-spring-boot集成druid异常discard-long-time-none-received-connection" tabindex="-1"><a class="header-anchor" href="#_1-spring-boot集成druid异常discard-long-time-none-received-connection" aria-hidden="true">#</a> 1.Spring Boot集成Druid异常discard long time none received connection.</h2>
+<h2 id="vue打包部署-刷新404" tabindex="-1"><a class="header-anchor" href="#vue打包部署-刷新404" aria-hidden="true">#</a> vue打包部署 刷新404</h2>
+<blockquote>
+<p>2022年3月20日22:14:21</p>
+</blockquote>
+<p><code>vue hash</code>模式下，<code>URL</code>中存在<code>'#'</code>，用<code>'history'</code>模式就能解决这个问题。但是<code>history</code>模式会出现刷新页面后，页面出现404。解决的办法是用<code>nginx</code>配置一下。
+在<code>nginx</code>的配置文件中修改</p>
+<p><strong>方法一：</strong></p>
+<div class="language-awk ext-awk line-numbers-mode"><pre v-pre class="language-awk"><code>location /{
+    root   /data/nginx/html;
+    index  index.html index.htm;
+    if (!-e $request_filename) {
+        rewrite ^/(.*) /index.html last;
+        break;
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>方法二：</strong>
+vue.js官方教程里提到的</p>
+<p><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" target="_blank" rel="noopener noreferrer">https://router.vuejs.org/zh/guide/essentials/history-mode.html<ExternalLinkIcon/></a></p>
+<div class="language-nginx ext-nginx line-numbers-mode"><pre v-pre class="language-nginx"><code>  <span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+		<span class="token directive"><span class="token keyword">listen</span>       <span class="token number">80</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">server_name</span>  localhost</span><span class="token punctuation">;</span>
+        
+    	<span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+            <span class="token directive"><span class="token keyword">root</span>   html</span><span class="token punctuation">;</span>
+            <span class="token comment"># 第一种方法</span>
+            <span class="token directive"><span class="token keyword">try_files</span> <span class="token variable">$uri</span> <span class="token variable">$uri</span>/ /index.html</span><span class="token punctuation">;</span>
+            <span class="token comment"># 第二种方法，需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span>
+            <span class="token comment">#try_files $uri $uri/ @router;</span>
+            <span class="token directive"><span class="token keyword">index</span>  index.html index.htm</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">#对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span>
+        <span class="token comment">#因此需要rewrite到index.html中，然后交给路由在处理请求资源</span>
+        <span class="token directive"><span class="token keyword">location</span> @router</span> <span class="token punctuation">{</span>
+            <span class="token directive"><span class="token keyword">rewrite</span> ^.*$ /index.html last</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> 
+  <span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><strong>方案三</strong></p>
+<p>去掉这行代码。url上会出现带有#的地址。</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>mode: 'history',
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h2 id="_1-spring-boot集成druid异常discard-long-time-none-received-connection" tabindex="-1"><a class="header-anchor" href="#_1-spring-boot集成druid异常discard-long-time-none-received-connection" aria-hidden="true">#</a> 1.Spring Boot集成Druid异常discard long time none received connection.</h2>
 <blockquote>
 <p>2022年2月6日15:54:03</p>
 </blockquote>

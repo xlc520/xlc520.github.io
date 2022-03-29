@@ -4,7 +4,21 @@ export const data = {
   "title": "API",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "API hutool 一个小而全的 Java 工具类库，通过静态方法封装，并提供详细完整的中文文档和注释，使Java拥有函数式语言般的优雅。 https://hutool.cn/ apipost https://www.apipost.cn/ 代码转图片 该网站将代码片段转为美观的图片，可以贴到社交媒体上面。 https://www.codepng.app/",
+    "author": "xlc520",
+    "title": "API",
+    "description": "API",
+    "date": "2022-01-12T00:00:00.000Z",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools",
+      "API"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +44,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "API"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +60,34 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "API"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-12T00:00:00.000Z"
         }
       ]
     ]

@@ -4,7 +4,20 @@ export const data = {
   "title": "12 个后端开发工具",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "12 个后端开发工具 从手动编码到自动化，从重复工作到创新，开发人员工具随着技术的发展而不断发展。阿里巴巴集团和阿里巴巴云已通过开源发布和基于云的实施向公众提供其技术。通过在各种业务场景中的多年开发积累了这些技术。本文介绍了一些阿里巴巴开发人员工具，希望它们可以帮助您的开发过程更加高效和优雅。 鉴于开发人员可能参与的技术分支的多样性，本文介绍了一些可能对后端",
+    "author": "xlc520",
+    "title": "12 个后端开发工具",
+    "description": "12 个后端开发工具",
+    "date": "2022-01-11T00:00:00.000Z",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "12 个后端开发工具"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-11T00:00:00.000Z"
         }
       ]
     ]

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "python安装源",
     "description": "python安装源",
+    "date": "2022-01-19T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-01-19T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-19T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

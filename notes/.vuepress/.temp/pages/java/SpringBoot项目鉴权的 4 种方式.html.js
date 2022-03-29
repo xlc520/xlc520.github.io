@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Spring Boot 项目鉴权的 4 种方式",
     "description": "Spring Boot 项目鉴权的 4 种方式",
+    "date": "2022-03-01T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-01T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-01T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

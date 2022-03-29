@@ -7,6 +7,7 @@ export const data = {
     "icon": "page",
     "title": "安装NodeJS-Maven-Mysql",
     "author": "xlc520",
+    "date": "2022-01-10T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -89,8 +90,7 @@ export const data = {
           "content": "2022-01-10T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-10T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

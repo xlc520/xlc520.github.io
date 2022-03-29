@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Linux",
     "description": "Linux分类",
+    "date": "2022-01-20T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "timeline": true,
-    "icon": null,
+    "icon": "linux",
     "password": null,
     "head": [
       [
@@ -73,14 +74,21 @@ export const data = {
           "property": "article:tag",
           "content": "Linux"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-20T00:00:00.000Z"
+        }
       ]
     ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "linux/README.md"
 }

@@ -2,7 +2,7 @@
 author: xlc520
 title: 表单系统
 description: 表单系统
-date: 2022-1-1
+date: 2022-01-01
 category: Study
 tag: Study
 article: true

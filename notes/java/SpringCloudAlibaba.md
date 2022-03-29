@@ -2,7 +2,7 @@
 author: xlc520
 title: Spring Cloud Alibaba
 description: Spring Cloud Alibaba
-date: 2022-3-23
+date: 2022-03-23
 category: Java
 tag: Java
 article: true

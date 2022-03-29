@@ -2,7 +2,7 @@
 author: xlc520
 title: 各种软件
 description: Tools分类
-date: 2022-1-9
+date: 2022-01-09
 category: Tools
 tag: Tools
 article: true

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "JApiDocs教程",
     "description": "JApiDocs教程",
+    "date": "2022-02-12T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-12T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-12T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Openssl一键自签证书",
     "description": "Openssl一键自签证书",
+    "date": "2022-01-18T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-01-18T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-18T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

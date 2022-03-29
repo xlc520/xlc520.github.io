@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "SpringBoot 定时任务动态管理通用解决方案",
     "description": "SpringBoot 定时任务动态管理通用解决方案",
+    "date": "2022-03-19T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-19T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-19T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

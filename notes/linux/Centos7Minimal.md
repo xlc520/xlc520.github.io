@@ -2,7 +2,7 @@
 author: xlc520
 title: Centos7 Minimal 安装后初始化配置
 description: Centos7 Minimal 安装后初始化配置
-date: 2022-1-28
+date: 2022-01-28
 category: Linux
 tag: Linux
 article: true

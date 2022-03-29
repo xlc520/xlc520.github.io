@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "去除MIUI10秒的警告",
     "description": "去除MIUI10秒的警告",
+    "date": "2022-02-17T00:00:00.000Z",
     "category": [
       "Daily"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-17T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-17T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

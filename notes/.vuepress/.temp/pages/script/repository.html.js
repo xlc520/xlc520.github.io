@@ -4,7 +4,20 @@ export const data = {
   "title": "京东脚本仓库",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "京东脚本仓库 2022年2月8日 https://github.com/danteswx/fxxk https://github.com/woaim65/Oz https://github.com/xdhgsq/xdh https://github.com/whzsyx/xuescripts https://github.com/sanbing666/scr",
+    "author": "xlc520",
+    "title": "京东脚本仓库",
+    "description": "京东脚本仓库",
+    "date": "2022-01-03T00:00:00.000Z",
+    "category": [
+      "Script"
+    ],
+    "tag": [
+      "Script"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "京东脚本仓库"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Script"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-03T00:00:00.000Z"
         }
       ]
     ]

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "卸载windows服务，删除 windows 服务",
     "description": "卸载windows服务，删除 windows 服务",
+    "date": "2022-01-27T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-01-27T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-01-27T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

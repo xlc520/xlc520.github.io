@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "开发中报错异常解决",
     "description": "开发中报错异常解决",
+    "date": "2022-02-20T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,11 +82,16 @@ export const data = {
           "content": "2022-02-20T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-20T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [
+    {
+      "level": 2,
+      "title": "vue打包部署 刷新404",
+      "slug": "vue打包部署-刷新404",
+      "children": []
+    },
     {
       "level": 2,
       "title": "1.Spring Boot集成Druid异常discard long time none received connection.",
@@ -131,8 +137,8 @@ export const data = {
     }
   ],
   "readingTime": {
-    "minutes": 3.63,
-    "words": 1090
+    "minutes": 4.52,
+    "words": 1357
   },
   "filePathRelative": "java/报错异常解决.md"
 }

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Nice Article",
     "description": "article分类",
+    "date": "2022-03-20T00:00:00.000Z",
     "category": [
       "Article"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "timeline": true,
-    "icon": null,
+    "icon": "article",
     "password": null,
     "head": [
       [
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-20T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-20T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "win10快捷键",
     "description": "win10快捷键",
+    "date": "2022-02-07T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-07T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-07T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

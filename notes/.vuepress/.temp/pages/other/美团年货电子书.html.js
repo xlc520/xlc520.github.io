@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "美团年货电子书",
     "description": "美团年货电子书",
+    "date": "2022-02-08T00:00:00.000Z",
     "category": [
       "Other"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-08T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-08T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

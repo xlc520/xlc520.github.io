@@ -4,7 +4,20 @@ export const data = {
   "title": "VuePress 学习",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "VuePress 学习 VuePress Vue 驱动的静态网站生成器 https://vuepress.vuejs.org/ vuepress-theme-hope https://vuepress-theme-hope.github.io/ vuepress-theme-vdoing 🚀一款简洁高效的VuePress 知识管理&博客 主题 https:",
+    "author": "xlc520",
+    "title": "VuePress 学习",
+    "description": "VuePress 学习",
+    "date": "2022-01-02T00:00:00.000Z",
+    "category": [
+      "Study"
+    ],
+    "tag": [
+      "Study"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -30,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "VuePress 学习"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Study"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-02T00:00:00.000Z"
         }
       ]
     ]

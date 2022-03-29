@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "使用docker快速安装oracle",
     "description": "使用docker快速安装oracle",
+    "date": "2022-03-02T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-02T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-02T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

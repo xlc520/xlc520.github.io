@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "数据类型Java类型",
     "description": "Java数据类型和MySql数据类型对应表",
+    "date": "2022-03-03T00:00:00.000Z",
     "category": [
       "Java"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-03-03T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-03T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [],

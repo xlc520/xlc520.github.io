@@ -37,92 +37,6 @@ export const themeData = {
   "fullscreen": true,
   "locales": {
     "/": {
-      "repoDisplay": true,
-      "navbarIcon": true,
-      "navbarAutoHide": "mobile",
-      "hideSiteNameonMobile": true,
-      "sidebar": {
-        "/study/": "structure",
-        "/java/": "structure",
-        "/linux/": "structure",
-        "/script/": "structure",
-        "/tools/": "structure",
-        "/source_code/": "structure",
-        "/git/": "structure",
-        "/daily/": "structure",
-        "/other/": "structure",
-        "/": [
-          ""
-        ]
-      },
-      "sidebarIcon": true,
-      "headingDepth": 2,
-      "author": {
-        "name": "xlc520",
-        "url": "https://xlc520.github.io"
-      },
-      "logo": "/logo.svg",
-      "repo": "https://github.com/xlc520/xlc520.github.io",
-      "docsDir": "notes",
-      "navbar": [
-        {
-          "text": "Home",
-          "link": "/",
-          "icon": "home"
-        },
-        {
-          "text": "学习",
-          "link": "/study/",
-          "icon": "note"
-        },
-        {
-          "text": "Java",
-          "link": "/java/"
-        },
-        {
-          "text": "Linux",
-          "link": "/linux/"
-        },
-        {
-          "text": "脚本",
-          "link": "/script/"
-        },
-        {
-          "text": "工具",
-          "link": "/tools/"
-        },
-        {
-          "text": "源码",
-          "link": "/source_code/"
-        },
-        {
-          "text": "Git",
-          "link": "/git/"
-        },
-        {
-          "text": "日常",
-          "link": "/daily/"
-        },
-        {
-          "text": "其他",
-          "link": "/other/"
-        },
-        {
-          "text": "DownGit",
-          "link": "https://git.xulc.workers.dev/"
-        }
-      ],
-      "footer": "两情若是久长时，又岂在朝朝暮暮",
-      "displayFooter": true,
-      "pageInfo": [
-        "Author",
-        "Original",
-        "Date",
-        "Category",
-        "Tag",
-        "ReadingTime",
-        "Word"
-      ],
       "blog": {
         "avatar": "https://avatars.githubusercontent.com/u/56480807?v=4",
         "description": "山有木兮木有枝,心悦君兮君不知",
@@ -144,6 +58,120 @@ export const themeData = {
           "Baidu": "https://baidu.com",
           "Email": "xulinch@88.com"
         }
+      },
+      "repoDisplay": true,
+      "navbarIcon": true,
+      "navbarAutoHide": "mobile",
+      "hideSiteNameonMobile": true,
+      "sidebar": {
+        "/study/": "structure",
+        "/java/": "structure",
+        "/linux/": "structure",
+        "/script/": "structure",
+        "/tools/": "structure",
+        "/source_code/": "structure",
+        "/git/": "structure",
+        "/daily/": "structure",
+        "/pc/": "structure",
+        "/article/": "structure",
+        "/other/": "structure",
+        "/": [
+          ""
+        ]
+      },
+      "sidebarIcon": true,
+      "headerDepth": 2,
+      "author": {
+        "name": "xlc520",
+        "url": "https://xlc520.github.io"
+      },
+      "logo": "/logo.svg",
+      "repo": "https://github.com/xlc520/xlc520.github.io",
+      "docsDir": "notes",
+      "docsRepo": "https://github.com/xlc520/xlc520.github.io",
+      "docsBranch": "master",
+      "navbar": [
+        {
+          "text": "Home",
+          "link": "/",
+          "icon": "home"
+        },
+        {
+          "text": "学习",
+          "link": "/study/",
+          "icon": "note"
+        },
+        {
+          "text": "Java",
+          "link": "/java/",
+          "icon": "java"
+        },
+        {
+          "text": "Linux",
+          "link": "/linux/",
+          "icon": "linux"
+        },
+        {
+          "text": "脚本",
+          "link": "/script/",
+          "icon": "script"
+        },
+        {
+          "text": "工具",
+          "link": "/tools/",
+          "icon": "tool"
+        },
+        {
+          "text": "源码",
+          "link": "/source_code/",
+          "icon": "code"
+        },
+        {
+          "text": "Git",
+          "link": "/git/",
+          "icon": "git"
+        },
+        {
+          "text": "日常",
+          "link": "/daily/",
+          "icon": "date"
+        },
+        {
+          "text": "电脑",
+          "link": "/pc/",
+          "icon": "computer"
+        },
+        {
+          "text": "文章",
+          "link": "/article/",
+          "icon": "article"
+        },
+        {
+          "text": "其他",
+          "link": "/other/",
+          "icon": "others"
+        },
+        {
+          "text": "DownGit",
+          "link": "https://git.xulc.workers.dev/",
+          "icon": "github"
+        }
+      ],
+      "footer": "两情若是久长时，又岂在朝朝暮暮",
+      "displayFooter": true,
+      "pageInfo": [
+        "Author",
+        "Original",
+        "Date",
+        "Category",
+        "Tag",
+        "ReadingTime",
+        "Word"
+      ],
+      "pwa": {
+        "cachePic": true,
+        "cacheHTML": true,
+        "update": "available"
       },
       "lang": "zh-CN",
       "navbarLocales": {

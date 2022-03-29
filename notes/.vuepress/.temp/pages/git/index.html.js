@@ -16,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "dateline": true,
-    "icon": null,
+    "icon": "git",
     "password": null,
     "head": [
       [
@@ -87,8 +87,8 @@ export const data = {
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "git/README.md"
 }

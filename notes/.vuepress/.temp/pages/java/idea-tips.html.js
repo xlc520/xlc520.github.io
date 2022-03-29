@@ -7,6 +7,7 @@ export const data = {
     "icon": "page",
     "title": "Intellij idea高效使用教程",
     "author": "xlc520",
+    "date": "2022-03-17T00:00:00.000Z",
     "category": [
       "IDEA"
     ],
@@ -73,8 +74,7 @@ export const data = {
           "content": "2022-03-17T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-03-17T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Script",
     "description": "Script",
+    "date": "2022-01-03T00:00:00.000Z",
     "category": [
       "Script"
     ],
@@ -15,7 +16,7 @@ export const data = {
     ],
     "article": true,
     "dateline": true,
-    "icon": null,
+    "icon": "script",
     "password": null,
     "head": [
       [
@@ -73,14 +74,21 @@ export const data = {
           "property": "article:tag",
           "content": "Script"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-03T00:00:00.000Z"
+        }
       ]
     ]
   },
   "excerpt": "",
   "headers": [],
   "readingTime": {
-    "minutes": 0,
-    "words": 0
+    "minutes": 0.47,
+    "words": 142
   },
   "filePathRelative": "script/README.md"
 }

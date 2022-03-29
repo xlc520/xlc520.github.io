@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "Podman开源的容器",
     "description": "Docker 大势已去，Podman 即将崛起",
+    "date": "2022-02-28T00:00:00.000Z",
     "category": [
       "Linux"
     ],
@@ -81,8 +82,7 @@ export const data = {
           "content": "2022-02-28T00:00:00.000Z"
         }
       ]
-    ],
-    "date": "2022-02-28T00:00:00.000Z"
+    ]
   },
   "excerpt": "",
   "headers": [

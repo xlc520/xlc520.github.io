@@ -2,7 +2,7 @@
 author: xlc520
 title: Nginx万字总结
 description: 万字总结，体系化带你全面认识 Nginx
-date: 2022-3-21
+date: 2022-03-21
 category: Linux
 tag: Linux
 article: true

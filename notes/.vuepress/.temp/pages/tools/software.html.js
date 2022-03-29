@@ -4,8 +4,20 @@ export const data = {
   "title": "各种软件",
   "lang": "zh-CN",
   "frontmatter": {
+    "author": "xlc520",
     "title": "各种软件",
-    "summary": "电脑QQv9.5.4(28063)特别版 https://lanzoux.com/b0dpnvapi\r安装使用QQ前请先自行安装齐全 Visual C++ 和 Universal C 运行库; \r最新运行库合集下载：https://xiaodao.lanzouo.com/iV8JYx9cakj 密码：xdnb; PC搜狗输入法v11.6.0.5419精简版 ",
+    "description": "Tools分类",
+    "date": "2022-01-09T00:00:00.000Z",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -31,6 +43,13 @@ export const data = {
       [
         "meta",
         {
+          "property": "og:description",
+          "content": "Tools分类"
+        }
+      ],
+      [
+        "meta",
+        {
           "property": "og:type",
           "content": "article"
         }
@@ -40,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-09T00:00:00.000Z"
         }
       ]
     ]
@@ -174,8 +214,8 @@ export const data = {
     }
   ],
   "readingTime": {
-    "minutes": 1.22,
-    "words": 366
+    "minutes": 1.23,
+    "words": 370
   },
   "filePathRelative": "tools/software.md"
 }

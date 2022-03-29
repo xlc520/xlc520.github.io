@@ -7,6 +7,7 @@ export const data = {
     "author": "xlc520",
     "title": "commit规范 & emoji表情",
     "description": "commit规范 & emoji表情",
+    "date": "2022-02-13T00:00:00.000Z",
     "category": [
       "Git"
     ],
@@ -73,6 +74,13 @@ export const data = {
           "property": "article:tag",
           "content": "Git"
         }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-02-13T00:00:00.000Z"
+        }
       ]
     ]
   },
@@ -92,8 +100,8 @@ export const data = {
     }
   ],
   "readingTime": {
-    "minutes": 1.89,
-    "words": 566
+    "minutes": 3.06,
+    "words": 917
   },
   "filePathRelative": "git/git_emoji.md"
 }

@@ -14,6 +14,7 @@ import {
   onScopeDispose,
   onUnmounted,
   onUpdated,
+  provide,
   reactive,
   readonly,
   ref,
@@ -218,6 +219,14 @@ function createGlobalState(stateFactory) {
     }
     return state;
   };
+}
+function createInjectionState(composable) {
+  const key = Symbol("InjectionState");
+  const useProvidingState = (...args) => {
+    provide(key, composable(...args));
+  };
+  const useInjectedState = () => inject(key);
+  return [useProvidingState, useInjectedState];
 }
 function tryOnScopeDispose(fn) {
   if (getCurrentScope()) {
@@ -2148,10 +2157,7 @@ function useStorage(key, initialValue, storage, options = {}) {
       console.error(e);
     }
   } = options;
-  const rawInit = unref(initialValue);
-  const type = guessSerializerType(rawInit);
   const data = (shallow ? shallowRef : ref)(initialValue);
-  const serializer = (_a2 = options.serializer) != null ? _a2 : StorageSerializers[type];
   if (!storage) {
     try {
       storage = getSSRHandler("getDefaultStorage", () => {
@@ -2162,55 +2168,55 @@ function useStorage(key, initialValue, storage, options = {}) {
       onError(e);
     }
   }
-  let synced = false;
-  function read(event) {
-    if (!storage || event && event.key !== key)
-      return;
+  if (!storage)
+    return data;
+  const rawInit = unref(initialValue);
+  const type = guessSerializerType(rawInit);
+  const serializer = (_a2 = options.serializer) != null ? _a2 : StorageSerializers[type];
+  const { pause: pauseWatch, resume: resumeWatch } = watchPausable(data, () => write(data.value), { flush, deep, eventFilter });
+  if (window2 && listenToStorageChanges) {
+    useEventListener(window2, "storage", (e) => {
+      setTimeout(() => update(e), 0);
+    });
+  }
+  update();
+  return data;
+  function write(v) {
     try {
-      const rawValue = event ? event.newValue : storage.getItem(key);
-      if (rawValue == null) {
-        data.value = rawInit;
-        if (writeDefaults && rawInit !== null)
-          storage.setItem(key, serializer.write(rawInit));
-      } else if (typeof rawValue !== "string") {
-        data.value = rawValue;
-      } else {
-        data.value = serializer.read(rawValue);
-      }
+      if (v == null)
+        storage.removeItem(key);
+      else
+        storage.setItem(key, serializer.write(v));
     } catch (e) {
       onError(e);
     }
   }
-  read();
-  if (window2 && listenToStorageChanges) {
-    useEventListener(window2, "storage", (e) => {
-      setTimeout(() => {
-        if (synced) {
-          synced = false;
-          return;
-        }
-        read(e);
-      }, 0);
-    });
-  }
-  if (storage) {
-    watchWithFilter(data, () => {
-      try {
-        if (data.value == null)
-          storage.removeItem(key);
-        else
-          storage.setItem(key, serializer.write(data.value));
-        synced = true;
-      } catch (e) {
-        onError(e);
+  function read(event) {
+    if (event && event.key !== key)
+      return;
+    pauseWatch();
+    try {
+      const rawValue = event ? event.newValue : storage.getItem(key);
+      if (rawValue == null) {
+        if (writeDefaults && rawInit !== null)
+          storage.setItem(key, serializer.write(rawInit));
+        return rawInit;
+      } else if (typeof rawValue !== "string") {
+        return rawValue;
+      } else {
+        return serializer.read(rawValue);
       }
-    }, {
-      flush,
-      deep,
-      eventFilter
-    });
+    } catch (e) {
+      onError(e);
+    } finally {
+      nextTick(resumeWatch);
+    }
   }
-  return data;
+  function update(event) {
+    if (event && event.key !== key)
+      return;
+    data.value = read(event);
+  }
 }
 function usePreferredDark(options) {
   return useMediaQuery("(prefers-color-scheme: dark)", options);
@@ -4098,6 +4104,15 @@ function useMagicKeys(options = {}) {
     return {};
   }, current };
   const refs = useReactive ? reactive(obj) : obj;
+  const metaDeps = /* @__PURE__ */ new Set();
+  function setRefs(key, value) {
+    if (key in refs) {
+      if (useReactive)
+        refs[key] = value;
+      else
+        refs[key].value = value;
+    }
+  }
   function updateRefs(e, value) {
     var _a2, _b2;
     const key = (_a2 = e.key) == null ? void 0 : _a2.toLowerCase();
@@ -4109,13 +4124,16 @@ function useMagicKeys(options = {}) {
       else
         current.delete(e.code);
     }
-    for (const key2 of values) {
-      if (key2 in refs) {
-        if (useReactive)
-          refs[key2] = value;
-        else
-          refs[key2].value = value;
-      }
+    for (const key2 of values)
+      setRefs(key2, value);
+    if (key === "meta" && !value) {
+      metaDeps.forEach((key2) => {
+        current.delete(key2);
+        setRefs(key2, false);
+      });
+      metaDeps.clear();
+    } else if (e.getModifierState("Meta") && value) {
+      [...current, ...values].forEach((key2) => metaDeps.add(key2));
     }
   }
   if (target) {
@@ -6686,6 +6704,7 @@ export {
   createFetch,
   createFilterWrapper,
   createGlobalState,
+  createInjectionState,
   reactify as createReactiveFn,
   createSharedComposable,
   createSingletonPromise,

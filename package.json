@@ -6,7 +6,7 @@
   "scripts": {
     "build": "vuepress build notes",
     "clean-dev": "vuepress dev notes --clean-cache",
-    "dev": "vuepress dev notes"
+    "dev": "vuepress dev notes --open"
   },
   "devDependencies": {
     "@vuepress/plugin-search": "^2.0.0-beta.36",

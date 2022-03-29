@@ -1,10 +1,23 @@
 export const data = {
   "key": "v-5239b90e",
   "path": "/tools/lenovo.html",
-  "title": "Lenovo",
+  "title": "Lenovo联想",
   "lang": "zh-CN",
   "frontmatter": {
-    "summary": "Lenovo 联想工程师204个内部专用工具 http://u7.1.xainjo.com/pc/lxzyxgj.zip",
+    "author": "xlc520",
+    "title": "Lenovo联想",
+    "description": "Lenovo联想",
+    "date": "2022-01-10T00:00:00.000Z",
+    "category": [
+      "Tools"
+    ],
+    "tag": [
+      "Tools"
+    ],
+    "article": true,
+    "dateline": true,
+    "icon": null,
+    "password": null,
     "head": [
       [
         "meta",
@@ -24,7 +37,14 @@ export const data = {
         "meta",
         {
           "property": "og:title",
-          "content": "Lenovo"
+          "content": "Lenovo联想"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "og:description",
+          "content": "Lenovo联想"
         }
       ],
       [
@@ -39,6 +59,27 @@ export const data = {
         {
           "property": "og:locale",
           "content": "zh-CN"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:author",
+          "content": "xlc520"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:tag",
+          "content": "Tools"
+        }
+      ],
+      [
+        "meta",
+        {
+          "property": "article:published_time",
+          "content": "2022-01-10T00:00:00.000Z"
         }
       ]
     ]
