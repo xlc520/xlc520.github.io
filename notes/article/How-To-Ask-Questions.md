@@ -1,7 +1,7 @@
 ---
 author: xlc520
 title: 提问的智慧
-description: 提问的智慧
+description: 提问的智慧，How To Ask Questions The Smart Way
 date: 2022-03-29
 category: article
 tag: article
@@ -670,11 +670,8 @@ RTFM 有一个年轻的亲戚。如果你收到```STFW（Search The Fucking Web�
 
 如果你是在研究一番后才做出的回答，**_展现你的技巧而不是直接端出结果_**。毕竟```授人以鱼不如授人以渔```。
 
-## 相关资源
-
-如果你需要个人电脑、Unix 系统和网络如何运作的基础知识，参阅[Unix系统和网络基本原理](http://en.tldp.org/HOWTO/Unix-and-Internet-Fundamentals-HOWTO/)。
-
-当你发布软件或补丁时，试着按[软件发布实践](http://en.tldp.org/HOWTO/Software-Release-Practice-HOWTO/index.html)操作。
 
 ## 鸣谢
-Evelyn Mitchel贡献了一些愚蠢问题例子并启发了编写```如何更好地回答问题```这一节， Mikhail Ramendik贡献了一些特别有价值的建议和改进。
+- Evelyn Mitchel贡献了一些愚蠢问题例子并启发了编写```如何更好地回答问题```这一节
+- Mikhail Ramendik贡献了一些特别有价值的建议和改进
+- xlc520重新编辑了部分，并加入插图
