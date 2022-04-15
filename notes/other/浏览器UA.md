@@ -16,6 +16,12 @@ password:
 
 > 有`MicroMessenger/8.0.16.2640(0x28001037) `有会导致CSDN打开跳微信登陆
 
+更新：2022年4月14日09:11:07
+百度+简单搜索+csdn+zhihu
+```
+Mozilla/5.0 (Linux; Android 11; zh-cn; Redmi K30 5G Build/RKQ1.200826.002; wv lite baiduboxapp) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.80 Mobile Safari/537.36 SearchCraft/3.9.2 T7/13.3 SP-engine/2.41.0 baiduboxapp/ (Baidu; P1 11) CSDNApp/5.3.0(Android)wToken/0.0.1 com.zhihu.android/Futureve/8.14.0
+```
+
 Mozilla/5.0 (Linux; Android 11; zh-cn; Redmi K30 5G Build/RKQ1.200826.002; wv lite baiduboxapp) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.80 Mobile Safari/537.36 SearchCraft/3.9.2 T7/13.3 SP-engine/2.41.0 baiduboxapp/ (Baidu; P1 11) MQQBrowser/26 Quark/4.5.5.155 UCBrowser/13.0.0.1080 Redmi K30 5G_11_weibo_12.2.1_android MMWEBID/999 Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64
 
 苹果+百度+简单搜索+夸克+微信，（带自动翻页）
