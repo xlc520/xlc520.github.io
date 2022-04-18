@@ -92,9 +92,60 @@ vim /usr/local/maven/conf/settings.xml
 ```
 按下ECS退出编辑模式，输入:wq保存并退出Vim编辑器。
 
+经过自己测试，大部分是在最后一个搜索
+
+其他源：
+
+```xml
+<mirrors>
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>*</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror> 
+    <mirror>
+      <id>nexus-aliyun</id>
+      <name>Nexus aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url> 
+      <mirrorOf>*</mirrorOf> 
+   </mirror>
+    <mirror>
+        <id>nexus-tencentyun</id>
+        <mirrorOf>*</mirrorOf>
+        <name>Nexus tencentyun</name>
+        <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+    </mirror> 
+    <mirror>
+        <id>huaweicloud</id>
+        <mirrorOf>*</mirrorOf>
+        <name>华为云</name>
+        <url>https://repo.huaweicloud.com/repository/maven/</url>
+    </mirror>
+    <!-- JBoss的仓库 -->
+    <mirror> 
+      <id>jboss-public-repository-group</id> 
+      <mirrorOf>central</mirrorOf> 
+      <name>JBoss Public Repository Group</name> 
+      <url>http://repository.jboss.org/nexus/content/groups/public</url> 
+    </mirror>
+    <!-- 剩下就是国外的了，maven官方运维的2号仓库 -->
+    <mirror> 
+      <id>repo2</id> 
+      <name>Mirror from Maven Repo2</name> 
+      <url>http://repo2.maven.org/maven2/</url> 
+      <mirrorOf>central</mirrorOf> 
+    </mirror>
+ </mirrors>
+```
+
+
+
+
+
 
 ## 安装MySQL
-## 
+
 1.  下载安装MySQL的Yum源。
 ```
 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
