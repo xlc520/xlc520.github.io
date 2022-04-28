@@ -3,13 +3,7 @@ import { defineNavbarConfig } from "vuepress-theme-hope";
 export default defineNavbarConfig([
   { text: 'Home', link: '/' , icon: "home"},
   { text: '学习', link: '/study/' ,icon: "note"},
-  { text: 'Java', link: '/java/' ,icon:"java",
-    // children:[{
-    //   text:"编码规范",
-    //   icon:"code",
-    //   link:"/java/coding-standard/"
-    // }]
-  },
+  { text: '开发', link: '/dev/' ,icon:"java" },
   { text: 'Linux', link: '/linux/' ,icon:"linux"},
   { text: '脚本', link: '/script/' ,icon:"script"},
   { text: '工具', link: '/tools/' ,icon:"tool"},
