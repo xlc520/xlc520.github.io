@@ -4,10 +4,10 @@ name: 部署文档
 on:
   # 手动触发部署
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     # 确保这是你正在使用的分支名称
-  #     - main
+  push:
+    branches:
+      # 确保这是你正在使用的分支名称
+      - master
 
 jobs:
   deploy-gh-pages:
@@ -35,7 +35,7 @@ jobs:
       - name: 构建文档
         env:
           NODE_OPTIONS: --max_old_space_size=4096
-        run: yarn run docs:build
+        run: yarn run build
 
       - name: 部署文档
         uses: JamesIves/github-pages-deploy-action@v4
