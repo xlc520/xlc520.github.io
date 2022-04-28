@@ -1,0 +1,1 @@
+const t={key:"v-011c74f0",path:"/daily/%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6.html",title:"\u4E16\u754C\u5927\u5B66",lang:"zh-CN",frontmatter:{author:"xlc520",title:"\u4E16\u754C\u5927\u5B66",description:"\u4E16\u754C\u5927\u5B66",date:"2022-04-13T00:00:00.000Z",category:"daily",tag:"daily",article:!0,timeline:!0,icon:"date",password:null},excerpt:"",headers:[]};export{t as data};

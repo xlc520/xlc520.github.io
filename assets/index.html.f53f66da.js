@@ -1,0 +1,1 @@
+const a={key:"v-7445cd33",path:"/dev/",title:"Java",lang:"zh-CN",frontmatter:{author:"xlc520",title:"Java",description:"Java",date:"2022-01-05T00:00:00.000Z",category:"Java",tag:"Java",article:!0,timeline:!0,icon:"java",password:null},excerpt:"",headers:[]};export{a as data};

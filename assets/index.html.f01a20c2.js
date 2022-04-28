@@ -1,0 +1,1 @@
+const t={key:"v-f0383c18",path:"/linux/",title:"Linux",lang:"zh-CN",frontmatter:{author:"xlc520",title:"Linux",description:"Linux\u5206\u7C7B",date:"2022-01-20T00:00:00.000Z",category:"Linux",tag:"Linux",article:!0,timeline:!0,icon:"linux",password:null},excerpt:"",headers:[]};export{t as data};

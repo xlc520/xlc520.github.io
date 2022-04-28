@@ -1,0 +1,1 @@
+const t={key:"v-d7188082",path:"/study/",title:"Study",lang:"zh-CN",frontmatter:{author:"xlc520",title:"Study",description:"Study",date:"2022-01-01T00:00:00.000Z",category:"Study",tag:"Study",article:!0,dateline:!0,icon:"note",password:null},excerpt:"",headers:[]};export{t as data};
