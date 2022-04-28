@@ -1,1 +1,0 @@
-const t={key:"v-2d0aaf03",path:"/pc/",title:"\u7535\u8111",lang:"zh-CN",frontmatter:{author:"xlc520",title:"\u7535\u8111",description:"\u7535\u8111",date:"2022-03-28T00:00:00.000Z",category:"pc",tag:"pc",article:!0,timeline:!0,icon:"computer",password:null},excerpt:"",headers:[]};export{t as data};

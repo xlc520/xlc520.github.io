@@ -1,1 +1,0 @@
-const t={key:"v-7af25863",path:"/other/%E7%9B%B4%E6%92%AD%E6%BA%90.html",title:"\u76F4\u64AD\u6E90",lang:"zh-CN",frontmatter:{author:"xlc520",title:"\u76F4\u64AD\u6E90",description:"\u76F4\u64AD\u6E90",date:"2022-01-29T00:00:00.000Z",category:"other",tag:"other",article:!0,timeline:!0,icon:null,password:null},excerpt:"",headers:[]};export{t as data};

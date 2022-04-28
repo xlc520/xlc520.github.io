@@ -1,1 +1,0 @@
-const t={key:"v-464c88aa",path:"/script/",title:"Script",lang:"zh-CN",frontmatter:{author:"xlc520",title:"Script",description:"Script",date:"2022-01-03T00:00:00.000Z",category:"Script",tag:"Script",article:!0,dateline:!0,icon:"script",password:null},excerpt:"",headers:[]};export{t as data};

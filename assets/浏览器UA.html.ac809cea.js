@@ -1,1 +1,0 @@
-const t={key:"v-7a7f0bea",path:"/other/%E6%B5%8F%E8%A7%88%E5%99%A8UA.html",title:"\u6D4F\u89C8\u5668UA",lang:"zh-CN",frontmatter:{author:"xlc520",title:"\u6D4F\u89C8\u5668UA",description:"\u6D4F\u89C8\u5668UA",date:"2022-02-11T00:00:00.000Z",category:"other",tag:"other",article:!0,timeline:!0,icon:null,password:null},excerpt:"",headers:[]};export{t as data};

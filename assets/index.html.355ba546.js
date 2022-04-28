@@ -1,1 +1,0 @@
-const e={key:"v-f3213f92",path:"/source_code/",title:"Code",lang:"zh-CN",frontmatter:{author:"xlc520",title:"Code",description:"Code\u5206\u7C7B",date:"2022-01-20T00:00:00.000Z",category:"Code",tag:"Code",article:!0,dateline:!0,icon:"code",password:null},excerpt:"",headers:[]};export{e as data};

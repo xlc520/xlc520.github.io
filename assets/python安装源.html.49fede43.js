@@ -1,1 +1,0 @@
-const t={key:"v-532eea10",path:"/other/python%E5%AE%89%E8%A3%85%E6%BA%90.html",title:"python\u5B89\u88C5\u6E90",lang:"zh-CN",frontmatter:{author:"xlc520",title:"python\u5B89\u88C5\u6E90",description:"python\u5B89\u88C5\u6E90",date:"2022-01-19T00:00:00.000Z",category:"other",tag:"other",article:!0,timeline:!0,icon:null,password:null},excerpt:"",headers:[]};export{t as data};

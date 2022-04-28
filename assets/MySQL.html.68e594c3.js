@@ -1,1 +1,0 @@
-const t={key:"v-5efaf9e2",path:"/other/MySQL.html",title:"MySQL 8",lang:"zh-CN",frontmatter:{author:"xlc520",title:"MySQL 8",description:"MySQL 8",date:"2022-01-23T00:00:00.000Z",category:"other",tag:"other",article:!0,timeline:!0,icon:null,password:null},excerpt:"",headers:[]};export{t as data};

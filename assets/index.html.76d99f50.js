@@ -1,1 +1,0 @@
-const t={key:"v-4377e9a2",path:"/dev/coding-standard/",title:"\u7F16\u7801\u89C4\u8303",lang:"zh-CN",frontmatter:{author:"xlc520",title:"\u7F16\u7801\u89C4\u8303",description:"\u7F16\u7801\u89C4\u8303",date:"2022-04-20T00:00:00.000Z",category:"coding",tag:"coding",article:!0,timeline:!0,icon:"code",password:null},excerpt:"",headers:[]};export{t as data};
