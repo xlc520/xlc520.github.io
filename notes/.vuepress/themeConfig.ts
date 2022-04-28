@@ -26,7 +26,7 @@ export default defineThemeConfig({
   //sidebar: sidebar,
   sidebar: {
     "/study/": "structure",
-    "/java/": "structure",
+    "/dev/": "structure",
     "/linux/": "structure",
     "/script/": "structure",
     "/tools/": "structure",
