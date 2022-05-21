@@ -27,7 +27,7 @@ password:
 
 预期效果，未接收到请求前----->id为3的提交了异常，id为3的王五变成了红色
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015031414701-272219147.png)　　　　![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015031659597-188497867.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015031414701-272219147.png)　　　　![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015031659597-188497867.png)
 
  
 
@@ -159,11 +159,11 @@ password:
 
 项目结构是这样子的，后面的代码关键注释都有，就不重复描述了
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015032104670-873058355.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015032104670-873058355.png)
 
  1、新建SpringBoot工程，选择web和WebSockt依赖
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015105941687-95294147.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015105941687-95294147.png)
 
  2、配置application.yml
 
@@ -302,19 +302,19 @@ public class WebSocketController {
 
 控制台输出，连接成功
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113024421-1327852737.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113024421-1327852737.png)
 
  2、因为是模拟数据，所以全部显示正常，没有异常提交时的页面呈现
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113143733-1496142658.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113143733-1496142658.png)
 
  3、接下来，我们用接口测试工具Postman提交一个异常
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113458808-127776265.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113458808-127776265.png)
 
  **注意id为3的这个数据的状态变化**
 
-![img](https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113537561-246899024.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113537561-246899024.png)
 
 我们可以看到，id为3的王五状态已经变成异常的了，实时通讯成功。
 

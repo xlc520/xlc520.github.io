@@ -49,7 +49,7 @@ ssh-keygen -t rsa -C "your_email@example.com"
 
 默认会在相应路径下（/your_home_path）生成id_rsa和id_rsa.pub两个文件，此时终端会显示：
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/1549588/1644164187476-6676ff38-2c76-44cb-a75e-93295b945a75.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644164187476-6676ff38-2c76-44cb-a75e-93295b945a75.png)
 
 连续回车即可，也可能会让你输入密码，密码就是你的开机密码 
 
@@ -59,11 +59,11 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 - 步骤3.将SSH Key添加到Github和Gitee中
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/1549588/1644163954973-29d7b898-0036-4f48-b13b-b771f3b3064b.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644163954973-29d7b898-0036-4f48-b13b-b771f3b3064b.png)
 
 ***图：Github\***
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/1549588/1644164425045-94537f86-65d3-4a34-8554-08bcd00020f6.png)
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644164425045-94537f86-65d3-4a34-8554-08bcd00020f6.png)
 
 ***图：Gitee\***[
 

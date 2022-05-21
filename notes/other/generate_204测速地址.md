@@ -1,7 +1,7 @@
 ---
 author: xlc520
-title: generate_204 测速地址
-description: generate_204 测速地址
+title: generate_204测速地址
+description: generate_204测速地址
 date: 2022-04-02
 category: other
 tag: other
@@ -12,7 +12,6 @@ password:
 ---
 
 # generate_204 测速地址
-
 
 
 http://www.gstatic.com/generate_204
