@@ -30,7 +30,7 @@ yum provides ifconfig
 ## 3: 设置IP
 `ip addr`
 
-![](/linux/Centos7Minimal_files/3.jpg)
+![](http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/3.jpg)
 
  暂时未分配IP, 所以进行如下修改
 ### 3.1 分配随机IP 
@@ -41,7 +41,7 @@ yum provides ifconfig
 cd /etc/sysconfig/network-scripts
 vim ifcfg-ens192
 ```
-![](/linux/Centos7Minimal_files/1.jpg)
+![](http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/1.jpg)
 
 将ONBOOT=no修改为ONBOOT=yes保存退出
 重启网络服务
@@ -54,7 +54,7 @@ vim ifcfg-ens192
  
 ### 3.2: 设置静态IP
 
-![](/linux/Centos7Minimal_files/2.jpg)
+![](http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/2.jpg)
 
 设置完,重启网络
 `service network restart`

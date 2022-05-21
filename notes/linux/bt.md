@@ -51,7 +51,7 @@ password:
 ```
 
 示例：
-![](/linux/bt_files/2.png)
+![](http://alist.ciberviler.top/d/ecloud180/images/linux/bt_files/2.png)
 
 修改完成后重启面板，重启完成后就可以直接安装收费的插件了，Nginx防火墙也可以直接安装使用
 
@@ -69,7 +69,7 @@ password:
 ```
 
 示例：
-![](/linux/bt_files/1.png)
+![](http://alist.ciberviler.top/d/ecloud180/images/linux/bt_files/1.png)
 
 然后再次重启面板，即可使用网站监控报表插件了；
 
