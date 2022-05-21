@@ -1,15 +1,20 @@
-node_modules
-.temp
+guide
+posts
+
+node_modules/
+
 # Build files
 packages/*/lib/
 
 # Vuepress Cache
 .cache
+notes/.vuepress/.cache/
 # Vuepress Temp
 .temp
+notes/.vuepress/.temp/
 # Vuepress Output
 dist
-
+notes/.vuepress/dist/
 # VS Code Config file
 .vscode
 

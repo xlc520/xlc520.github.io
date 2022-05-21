@@ -1,10 +1,17 @@
-import { defineHopeConfig } from "vuepress-theme-hope";
-import themeConfig from "./themeConfig";
+import { defineUserConfig } from "vuepress";
+import theme from "./theme";
+import { searchPlugin } from "@vuepress/plugin-search";
 
-export default defineHopeConfig({
+import smplayer from "vuepress-plugin-smplayer";
+import type { SmPlayerPluginOption } from "vuepress-plugin-smplayer/types";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+
+export default defineUserConfig({
+  lang: "zh-CN",
+  title: "StudyNote",
+  description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
+
   base: "/",
-
-  dest: "./dist",
 
   head: [
     [
@@ -15,7 +22,6 @@ export default defineHopeConfig({
       },
     ],
   ],
-
   locales: {
     "/": {
       lang: "zh-CN",
@@ -23,21 +29,22 @@ export default defineHopeConfig({
       description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
     },
   },
+  theme,
+  shouldPrefetch: false,
 
-  themeConfig,
   plugins: [
     [
-      '@vuepress/plugin-search',
-      {
-        hotKeys: ['s', '/'],
-        maxSuggestions: 13,//指定搜索结果的最大条数
-        locales: {
-          '/': {
-            placeholder: '搜索',
-          }
+    searchPlugin({
+      locales: {
+        "/": {
+          placeholder: "搜索",
         },
       },
-      
-    ],
+      hotKeys:['s', '/'],
+      maxSuggestions: 13,//指定搜索结果的最大条数
+    }),
+  
   ],
+  
+]
 });
