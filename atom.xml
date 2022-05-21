@@ -3,7 +3,7 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-21T06:42:18.004Z</updated>
+  <updated>2022-05-21T09:04:54.907Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
@@ -766,7 +766,7 @@
     <title type="html">SpringBoot+WebSocket实时监控异常</title>
     <id>https://xlc520.github.io/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html</id>
     <link href="https://xlc520.github.io/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html"/>
-    <updated>2022-05-16T08:00:14.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">SpringBoot+WebSocket实时监控异常</summary>
     <content type="html"><![CDATA[<h1 id="springboot-websocket实时监控异常" tabindex="-1"> SpringBoot+WebSocket实时监控异常</h1>
 <h2 id="需求" tabindex="-1"> 需求</h2>
@@ -776,7 +776,7 @@
 <p>前端略微复杂，需要在一张位置分布图上进行鼠标描点定位各个设备和根据不同屏幕大小渲染，本文不做介绍，只是简单地用页面样式进行效果呈现。</p>
 <p><strong>绿色代表正常，红色代表异常</strong></p>
 <p>预期效果，未接收到请求前-----&gt;id为3的提交了异常，id为3的王五变成了红色</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015031414701-272219147.png" alt="img" loading="lazy">　　　　<img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015031659597-188497867.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015031414701-272219147.png" alt="img" loading="lazy">　　　　<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015031659597-188497867.png" alt="img" loading="lazy"></p>
 <h2 id="实现-前端" tabindex="-1"> 实现-前端：</h2>
 <p>直接贴代码</p>
 <div><pre><code><span><span>&lt;!</span><span>DOCTYPE</span> <span>html</span><span>></span></span>
@@ -898,9 +898,9 @@
 <span><span><span>&lt;/</span>html</span><span>></span></span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="实现-后端" tabindex="-1"> 实现-后端：</h2>
 <p>项目结构是这样子的，后面的代码关键注释都有，就不重复描述了</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015032104670-873058355.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015032104670-873058355.png" alt="img" loading="lazy"></p>
 <p>1、新建SpringBoot工程，选择web和WebSockt依赖</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015105941687-95294147.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015105941687-95294147.png" alt="img" loading="lazy"></p>
 <p>2、配置application.yml</p>
 <div><pre><code><span>#端口</span>
 <span>server</span><span>:</span>
@@ -1019,13 +1019,13 @@
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="测试" tabindex="-1"> 测试</h2>
 <p>1、打开前端页面，进行WebSocket连接</p>
 <p>控制台输出，连接成功</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113024421-1327852737.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113024421-1327852737.png" alt="img" loading="lazy"></p>
 <p>2、因为是模拟数据，所以全部显示正常，没有异常提交时的页面呈现</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113143733-1496142658.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113143733-1496142658.png" alt="img" loading="lazy"></p>
 <p>3、接下来，我们用接口测试工具Postman提交一个异常</p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113458808-127776265.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113458808-127776265.png" alt="img" loading="lazy"></p>
 <p><strong>注意id为3的这个数据的状态变化</strong></p>
-<p><img src="https://img2020.cnblogs.com/blog/2519868/202110/2519868-20211015113537561-246899024.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2519868-20211015113537561-246899024.png" alt="img" loading="lazy"></p>
 <p>我们可以看到，id为3的王五状态已经变成异常的了，实时通讯成功。</p>
 <p>参考：https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket</p>
 ]]></content>
@@ -2186,25 +2186,25 @@ system:此文件夹是IntelliJ IDEA发生什么不可预知性的错误时，比
     <title type="html">7000字+24张图，带你彻底弄懂线程池</title>
     <id>https://xlc520.github.io/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html</id>
     <link href="https://xlc520.github.io/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html"/>
-    <updated>2022-05-13T15:30:25.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">7000字+24张图，带你彻底弄懂线程池</summary>
     <content type="html"><![CDATA[<h1 id="_7000字-24张图-带你彻底弄懂线程池" tabindex="-1"> 7000字+24张图，带你彻底弄懂线程池</h1>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MBJI4AQAPA" alt="img" loading="lazy"></p>
 <p>图片失效看 ====》7000字+24张图，带你彻底弄懂线程池
 https://kdocs.cn/l/cg3BmyfdA9Ko</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MBJI4AQAPA.png" alt="img" loading="lazy"></p>
 <p>今天跟大家聊一聊无论是在工作中常用还是在面试中常问的线程池，通过画图的方式来彻底弄懂线程池的工作原理，以及在实际项目中该如何自定义适合业务的线程池。</p>
 <h3 id="一、什么是线程池" tabindex="-1"> 一、什么是线程池</h3>
 <p>线程池其实是一种池化的技术的实现，池化技术的核心思想其实就是实现资源的一个复用，避免资源的重复创建和销毁带来的性能开销。在线程池中，线程池可以管理一堆线程，让线程执行完任务之后不会进行销毁，而是继续去处理其它线程已经提交的任务。</p>
 <p>使用线程池的好处</p>
 <ul>
-<li>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
-<li>提高响应速度。 当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
-<li>提高线程的可管理性。 线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统 的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+<li><strong>降低资源消耗。</strong> 通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
+<li><strong>提高响应速度。</strong> 当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
+<li><strong>提高线程的可管理性。</strong> 线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统 的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
 </ul>
 <h3 id="二、线程池的构造" tabindex="-1"> 二、线程池的构造</h3>
 <p>Java中主要是通过构建<code>ThreadPoolExecutor</code>来创建线程池的。接下来我们看一下线程池是如何构造出来的</p>
 <p>ThreadPoolExecutor的构造方法</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MBJI4AQA3M" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MBJI4AQA3M.png" alt="img" loading="lazy"></p>
 <ul>
 <li><code>corePoolSize</code>：线程池中用来工作的核心的线程数量。</li>
 <li><code>maximumPoolSize</code>：最大线程数，线程池允许创建的最大线程数。</li>
@@ -2218,27 +2218,27 @@ https://kdocs.cn/l/cg3BmyfdA9Ko</p>
 <h3 id="三、线程池的运行原理" tabindex="-1"> 三、线程池的运行原理</h3>
 <p>说完线程池的核心构造参数的意思，接下来就来画图讲解这些参数在线程池中是如何工作的。</p>
 <p>线程池刚创建出来是什么样子呢，如下图</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/DJKI4AQAQI" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/DJKI4AQAQI.png" alt="img" loading="lazy"></p>
 <p>不错，刚创建出来的线程池中只有一个构造时传入的阻塞队列而已，此时里面并没有的任何线程，但是如果你想要在执行之前已经创建好核心线程数，可以调用<code>prestartAllCoreThreads</code>方法来实现，默认是没有线程的。</p>
 <p>当有线程通过execute方法提交了一个任务，会发生什么呢？</p>
 <p>提交任务的时候，其实会去进行任务的处理</p>
 <p>首先会去判断当前线程池的线程数是否小于核心线程数，也就是线程池构造时传入的参数<code>corePoolSize</code>。</p>
 <p>如果小于，那么就直接通过<code>ThreadFactory</code>创建一个线程来执行这个任务，如图</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/CNJY4AQAW4" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/CNJY4AQAW4.png" alt="img" loading="lazy"></p>
 <p>当任务执行完之后，线程不会退出，而是会去从阻塞队列中获取任务，如下图</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/EFJY4AQALI" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/EFJY4AQALI.png" alt="img" loading="lazy"></p>
 <p>接下来如果又提交了一个任务，也会按照上述的步骤，去判断是否小于核心线程数，如果小于，还是会创建线程来执行任务，执行完之后也会从阻塞队列中获取任务。这里有个细节，就是提交任务的时候，就算有线程池里的线程从阻塞队列中获取不到任务，如果线程池里的线程数还是小于核心线程数，那么依然会继续创建线程，而不是复用已有的线程。</p>
 <p>如果线程池里的线程数不再小于核心线程数呢？那么此时就会尝试将任务放入阻塞队列中，入队成功之后，如图</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MJJI4AQAKA" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MJJI4AQAKA.png" alt="img" loading="lazy"></p>
 <p>这样在阻塞的线程就可以获取到任务了。</p>
 <p>但是，随着任务越来越多，队列已经满了，任务放入失败了，那怎么办呢？</p>
 <p>此时就会判断当前线程池里的线程数是否小于最大线程数，也就是入参时的<code>maximumPoolSize</code>参数</p>
 <p>如果小于最大线程数，那么也会创建非核心线程来执行提交的任务，如图</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MJJI4AQA4I" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MJJI4AQA4I.png" alt="img" loading="lazy"></p>
 <p>所以，从这里可以发现，就算队列中有任务，新创建的线程还是优先处理这个提交的任务，而不是从队列中获取已有的任务执行，从这可以看出，先提交的任务不一定先执行。</p>
 <p>但是不幸的事发生了，线程数已经达到了最大线程数量，那么此时会怎么办呢？</p>
 <p>此时就会执行拒绝策略，也就是构造线程池的时候，传入的<code>RejectedExecutionHandler</code>对象，来处理这个任务。</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MNJI4AQA5Y" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MNJI4AQA5Y.jpeg" alt="img" loading="lazy"></p>
 <p><code>RejectedExecutionHandler</code>的实现JDK自带的默认有4种</p>
 <ul>
 <li><code>AbortPolicy</code>：丢弃任务，抛出运行时异常</li>
@@ -2249,7 +2249,7 @@ https://kdocs.cn/l/cg3BmyfdA9Ko</p>
 <p>线程池创建的时候，如果不指定拒绝策略就默认是<code>AbortPolicy</code>策略。当然，你也可以自己实现<code>RejectedExecutionHandler</code>接口，比如将任务存在数据库或者缓存中，这样就数据库或者缓存中获取到被拒绝掉的任务了。</p>
 <p>到这里，我们发现，线程池构造的几个参数<code>corePoolSize、maximumPoolSize、workQueue、threadFactory、handler</code>我们都在上述的执行过程中讲到了，那么还差两个参数<code>keepAliveTime</code>和<code>unit</code>(unit是keepAliveTime的时间单位)没讲到，所以<code>keepAliveTime</code>是如何起到作用的呢，这个问题留到后面分析。</p>
 <p>说完整个执行的流程，接下来看看execute方法代码是如何实现的。</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/HBJY4AQA3M" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/HBJY4AQA3M.png" alt="img" loading="lazy"></p>
 <ul>
 <li><code>workerCountOf(c)&lt;corePoolSize</code>:这行代码就是判断是否小于核心线程数，是的话就通过addWorker方法，addWorker就是添加线程来执行任务。</li>
 <li><code>workQueue.offer(command)</code>：这行代码就表示尝试往阻塞队列中添加任务</li>
@@ -2257,21 +2257,21 @@ https://kdocs.cn/l/cg3BmyfdA9Ko</p>
 <li>如果还是添加非核心线程失败了，那么就会调用<code>reject(command)</code>来拒绝这个任务。</li>
 </ul>
 <p>最后再来另画一张图总结execute执行流程</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/IJJY4AQADE" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/IJJY4AQADE.png" alt="img" loading="lazy"></p>
 <h3 id="四、线程池中线程实现复用的原理" tabindex="-1"> 四、线程池中线程实现复用的原理</h3>
 <p>线程池的核心功能就是实现了线程的重复利用，那么线程池是如何实现线程的复用呢？</p>
 <p>线程在线程池内部其实是被封装成一个Worker对象</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/K5JY4AQAW4" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/K5JY4AQAW4.png" alt="img" loading="lazy"></p>
 <p>Worker继承了AQS，也就是有一定锁的特性。</p>
 <p>创建线程来执行任务的方法上面提到是通过addWorker方法创建的。在创建Worker对象的时候，会把线程和任务一起封装到Worker内部，然后调用runWorker方法来让线程执行任务，接下来我们就来看一下runWorker方法。</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MRJI4AQA7A" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MRJI4AQA7A.jpeg" alt="img" loading="lazy"></p>
 <p>从这张图可以看出线程执行完任务不会退出的原因，runWorker内部使用了while死循环，当第一个任务执行完之后，会不断地通过getTask方法获取任务，只要能获取到任务，就会调用run方法，继续执行任务，这就是线程能够复用的主要原因。</p>
 <p>但是如果从getTask获取不到方法的时候，最后就会调用finally中的<code>processWorkerExit</code>方法，来将线程退出。</p>
 <p>这里有个一个细节就是，因为Worker继承了AQS，每次在执行任务之前都会调用Worker的lock方法，执行完任务之后，会调用<code>unlock</code>方法，这样做的目的就可以通过<code>Woker</code>的加锁状态就能判断出当前线程是否正在运行任务。</p>
 <p>如果想知道线程是否正在运行任务，只需要调用Woker的<code>tryLock</code>方法，根据是否加锁成功就能判断，加锁成功说明当前线程没有加锁，也就没有执行任务了，在调用<code>shutdown</code>方法关闭线程池的时候，就用这种方式来判断线程有没有在执行任务，如果没有的话，来尝试打断没有执行任务的线程。</p>
 <h3 id="五、线程是如何获取任务的以及如何实现超时的" tabindex="-1"> 五、线程是如何获取任务的以及如何实现超时的</h3>
 <p>上一节我们说到，线程在执行完任务之后，会继续从getTask方法中获取任务，获取不到就会退出。接下来我们就来看一看getTask方法的实现。</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MVJI4AQARI" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MVJI4AQARI.jpeg" alt="img" loading="lazy"></p>
 <p>getTask方法，前面就是线程池的一些状态的判断，这里有一行代码</p>
 <p>boolean timed = allowCoreThreadTimeOut || wc &gt; corePoolSize;</p>
 <p>这行代码是判断，当前过来获取任务的线程是否可以超时退出。如果<code>allowCoreThreadTimeOut</code>设置为true或者线程池当前的线程数大于核心线程数，也就是<code>corePoolSize</code>，那么该获取任务的线程就可以超时退出。</p>
@@ -2281,34 +2281,34 @@ https://kdocs.cn/l/cg3BmyfdA9Ko</p>
 <p>所以到这里应该就知道线程池中的线程为什么可以做到空闲一定时间就退出了吧。其实最主要的是利用了阻塞队列的poll方法的实现，这个方法可以指定超时时间，一旦线程达到了<code>keepAliveTime</code>还没有获取到任务，那么就会返回null，上一小节提到，<code>getTask</code>方法返回null，线程就会退出。</p>
 <p>这里也有一个细节，就是判断当前获取任务的线程是否可以超时退出的时候，如果将<code>allowCoreThreadTimeOut</code>设置为true，那么所有线程走到这个timed都是true，那么所有的线程，包括核心线程都可以做到超时退出。如果你的线程池需要将核心线程超时退出，那么可以通过<code>allowCoreThreadTimeOut</code>方法将<code>allowCoreThreadTimeOut</code>变量设置为true。</p>
 <p>整个getTask方法以及线程超时退出的机制如图所示</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/UVJY4AQARI" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/UVJY4AQARI.png" alt="img" loading="lazy"></p>
 <h3 id="六、线程池的5种状态" tabindex="-1"> 六、线程池的5种状态</h3>
 <p>线程池内部有5个常量来代表线程池的五种状态</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/VRJY4AQAWU" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/VRJY4AQAWU.png" alt="img" loading="lazy"></p>
 <ul>
-<li><em><strong>*RUNNING*</strong></em>：线程池创建时就是这个状态，能够接收新任务，以及对已添加的任务进行处理。</li>
-<li><em><strong>*SHUTDOWN*</strong></em>：调用<code>shutdown</code>方法线程池就会转换成<code>SHUTDOWN</code>状态，此时线程池不再接收新任务，但能继续处理已添加的任务到队列中任务。</li>
-<li><em><strong>*STOP*</strong></em>：调用<code>shutdownNow</code>方法线程池就会转换成<code>STOP</code>状态，不接收新任务，也不能继续处理已添加的任务到队列中任务，并且会尝试中断正在处理的任务的线程。</li>
-<li><em><strong>*TIDYING*</strong></em>：</li>
+<li><strong>RUNNING</strong>：线程池创建时就是这个状态，能够接收新任务，以及对已添加的任务进行处理。</li>
+<li><strong>SHUTDOWN</strong>：调用<code>shutdown</code>方法线程池就会转换成<code>SHUTDOWN</code>状态，此时线程池不再接收新任务，但能继续处理已添加的任务到队列中任务。</li>
+<li><strong>STOP</strong>：调用<code>shutdownNow</code>方法线程池就会转换成<code>STOP</code>状态，不接收新任务，也不能继续处理已添加的任务到队列中任务，并且会尝试中断正在处理的任务的线程。</li>
+<li><strong>TIDYING</strong>：</li>
 </ul>
 <p><code>SHUTDOWN</code> 状态下，任务数为 0， 其他所有任务已终止，线程池会变为 <code>TIDYING</code> 状态。</p>
 <p>线程池在 <code>SHUTDOWN</code> 状态，任务队列为空且执行中任务为空，线程池会变为 <code>TIDYING</code> 状态。</p>
 <p>线程池在 <code>STOP</code> 状态，线程池中执行中任务为空时，线程池会变为 <code>TIDYING</code> 状态。</p>
 <ul>
-<li><em><strong>*TERMINATED*</strong></em>：线程池彻底终止。线程池在 <code>TIDYING</code> 状态执行完 <code>terminated()</code>方法就会转变为 <code>TERMINATED</code> 状态。</li>
+<li><strong>TERMINATED</strong>：线程池彻底终止。线程池在 <code>TIDYING</code> 状态执行完 <code>terminated()</code>方法就会转变为 <code>TERMINATED</code> 状态。</li>
 </ul>
 <p>线程池状态具体是存在ctl成员变量中，ctl中不仅存储了线程池的状态还存储了当前线程池中线程数的大小</p>
 <p>private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));</p>
 <p>最后画个图来总结一下这5种状态的流转</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/MZJI4AQA3M" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/MZJI4AQA3M.png" alt="img" loading="lazy"></p>
 <p>其实，在线程池运行过程中，绝大多数操作执行前都得判断当前线程池处于哪种状态，再来决定是否继续执行该操作。</p>
 <h3 id="七、线程池的关闭" tabindex="-1"> 七、线程池的关闭</h3>
 <p>线程池提供了<code>shutdown</code>和<code>shutdownNow</code>两个方法来关闭线程池。</p>
-<h5 id="shutdown方法" tabindex="-1"> <em><strong>*shutdown方法*</strong></em></h5>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/M5JI4AQA2Q" alt="img" loading="lazy"></p>
+<h5 id="shutdown方法" tabindex="-1"> <strong>shutdown方法</strong></h5>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/M5JI4AQA2Q.png" alt="img" loading="lazy"></p>
 <p>就是将线程池的状态修改为<code>SHUTDOWN</code>，然后尝试打断空闲的线程（如何判断空闲，上面在说Worker继承AQS的时候说过），也就是在阻塞等待任务的线程。</p>
-<h5 id="shutdownnow方法" tabindex="-1"> <em><strong>*shutdownNow方法*</strong></em></h5>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/M5JI4AQA7A" alt="img" loading="lazy"></p>
+<h5 id="shutdownnow方法" tabindex="-1"> <strong>shutdownNow方法</strong></h5>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/M5JI4AQA7A.png" alt="img" loading="lazy"></p>
 <p>就是将线程池的状态修改为STOP，然后尝试打断所有的线程，从阻塞队列中移除剩余的任务，这也是为什么<code>shutdownNow</code>不能执行剩余任务的原因。</p>
 <p>所以也可以看出<code>shutdown</code>方法和<code>shutdownNow</code>方法的主要区别就是，<code>shutdown</code>之后还能处理在队列中的任务，<code>shutdownNow</code>直接就将任务从队列中移除，线程池里的线程就不再处理了。</p>
 <h3 id="八、线程池的监控" tabindex="-1"> 八、线程池的监控</h3>
@@ -2323,26 +2323,26 @@ https://kdocs.cn/l/cg3BmyfdA9Ko</p>
 <h3 id="九、executors构建线程池以及问题分析" tabindex="-1"> 九、Executors构建线程池以及问题分析</h3>
 <p>JDK内部提供了Executors这个工具类，来快速的创建线程池。</p>
 <p>1）固定线程数量的线程池：核心线程数与最大线程数相等</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/NBJI4AQA3M" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/NBJI4AQA3M.png" alt="img" loading="lazy"></p>
 <p>2）单个线程数量的线程池</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/NBJI4AQA5Y" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/NBJI4AQA5Y.png" alt="img" loading="lazy"></p>
 <p>3）接近无限大线程数量的线程池</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/4FJY4AQA3M" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/4FJY4AQA3M.png" alt="img" loading="lazy"></p>
 <p>4)带定时调度功能的线程池</p>
-<p><img src="https://www.kdocs.cn/api/v3/office/copy/UFBodGtFWnpaMFR0TmJCZFR6V2dPL2pLeER6T1NtUU5oWjNMS2YwVWhpclBPbnZhTlRMVEMxNXlCU1lFVy9qdnV4d3hsTURtOUFISUc5czA0dk1uc2VjcVFKZXcraDdyb3RxTWVKVzJKL2wxYzFWdHVFR2NoQVVoVUpzaWJOYVQxamNEWXpSNTN6VUJBcTBjaXEyQW5nR1NjemlCKzBBV0wzYnlDY2x6YXI0dVdKU2N0cUxVRjhjWG9rdUl6ZFNFVnZWTTFIbUh4NGFxY0RkaW1Lbz0=/attach/object/ZNJY4AQAQI" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/ZNJY4AQAQI.png" alt="img" loading="lazy"></p>
 <p>虽然JDK提供了快速创建线程池的方法，但是其实不推荐使用<code>Executors</code>来创建线程池，因为从上面构造线程池可以看出，<code>newFixedThreadPool</code>线程池，由于使用了<code>LinkedBlockingQueue</code>，队列的容量默认是无限大，实际使用中出现任务过多时会导致内存溢出；<code>newCachedThreadPool</code>线程池由于核心线程数无限大，当任务过多的时候，会导致创建大量的线程，可能机器负载过高，可能会导致服务宕机。</p>
 <h3 id="十、线程池的使用场景" tabindex="-1"> 十、线程池的使用场景</h3>
 <p>在java程序中，其实经常需要用到多线程来处理一些业务，但是不建议单纯使用继承Thread或者实现Runnable接口的方式来创建线程，那样就会导致频繁创建及销毁线程，同时创建过多的线程也可能引发资源耗尽的风险。所以在这种情况下，使用线程池是一种更合理的选择，方便管理任务，实现了线程的重复利用。所以线程池一般适合那种需要异步或者多线程处理任务的场景。</p>
 <h3 id="十一、实际项目中如何合理的自定义线程池" tabindex="-1"> 十一、实际项目中如何合理的自定义线程池</h3>
 <p>通过上面分析提到，通过Executors这个工具类来创建的线程池其实都无法满足实际的使用场景，那么在实际的项目中，到底该如何构造线程池呢，该如何合理的设置参数？</p>
-<h5 id="_1-线程数" tabindex="-1"> 1）线程数</h5>
+<h5 id="_1-线程数" tabindex="-1"> <strong>1）线程数</strong></h5>
 <p>线程数的设置主要取决于业务是IO密集型还是CPU密集型。</p>
 <p>CPU密集型指的是任务主要使用来进行大量的计算，没有什么导致线程阻塞。一般这种场景的线程数设置为CPU核心数+1。</p>
 <p>IO密集型：当执行任务需要大量的io，比如磁盘io，网络io，可能会存在大量的阻塞，所以在IO密集型任务中使用多线程可以大大地加速任务的处理。一般线程数设置为 <code>2*CPU核心数</code></p>
 <p>java中用来获取CPU核心数的方法是：<code>Runtime.getRuntime().availableProcessors();</code></p>
-<h5 id="_2-线程工厂" tabindex="-1"> 2）线程工厂</h5>
+<h5 id="_2-线程工厂" tabindex="-1"> <strong>2）线程工厂</strong></h5>
 <p>一般建议自定义线程工厂，构建线程的时候设置线程的名称，这样就在查日志的时候就方便知道是哪个线程执行的代码。</p>
-<h6 id="_3-有界队列" tabindex="-1"> 3）有界队列</h6>
+<h6 id="_3-有界队列" tabindex="-1"> <strong>3）有界队列</strong></h6>
 <p>一般需要设置有界队列的大小，比如<code>LinkedBlockingQueue</code>在构造的时候就可以传入参数，来限制队列中任务数据的大小，这样就不会因为无限往队列中扔任务导致系统的oom。</p>
 ]]></content>
     <author>
@@ -2744,7 +2744,7 @@ CharSequence: length == 0
     <title type="html">Java导入导出Excel-POI</title>
     <id>https://xlc520.github.io/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html</id>
     <link href="https://xlc520.github.io/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html"/>
-    <updated>2022-05-02T02:33:43.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Java导入导出Excel-POI</summary>
     <content type="html"><![CDATA[<h1 id="java导入导出excel-poi" tabindex="-1"> Java导入导出Excel-POI</h1>
 <h2 id="一、介绍" tabindex="-1"> 一、介绍</h2>
@@ -2880,7 +2880,7 @@ output.flush();
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>HSSF读取文件同样还是使用这几个对象，只是把相应的createXXX方法变成了getXXX方法即可。可见只要理解了其中原理，不管是读还是写亦或是特定格式都可以轻松实现，正所谓知其然更要知其所以然。</p>
 <h3 id="_2-4-导出excel应用实例" tabindex="-1"> 2.4 导出Excel应用实例</h3>
 <p>在2.3中我们寥寥几行代码实际上就已经就是实现了导出Excel一个简单示例，下面我们在看如何实现导出如图所示的Excel表格？</p>
-<p><img src="https://images0.cnblogs.com/blog2015/708076/201503/170838550954408.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/170838550954408.png" alt="img" loading="lazy"></p>
 <p>代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如Servlet的doGet/doPost方法或Struts框架的execute方法中）</p>
 <div><pre><code>//创建HSSFWorkbook对象(excel的文档对象)
       HSSFWorkbook wb = new HSSFWorkbook();
@@ -6752,7 +6752,7 @@ public class TransactionDemo <span>{</span>
     <title type="html">Spring Boot启动的时候默认的banner</title>
     <id>https://xlc520.github.io/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html</id>
     <link href="https://xlc520.github.io/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Spring Boot启动的时候默认的banner是spring的字样</summary>
     <content type="html"><![CDATA[<h1 id="spring-boot启动默认的banner" tabindex="-1"> Spring Boot启动默认的banner</h1>
 <p>自定义banner只需要在resource下新建一个<code>banner.txt</code>文件，将我们需要的banner字样放进去，启动的时候就会去读取使用这个文本文件中的banner。</p>
@@ -6783,7 +6783,7 @@ public class TransactionDemo <span>{</span>
 <p>AnsiBackground： 用来设定字符的背景色</p>
 <p>AnsiStyle： 用来控制加粗、斜体、下划线等等。</p>
 <p>使用${AnsiFoo.Bar}来指定样式，当指定样式的时候会有提示的：</p>
-<p><a href="http://images2017.cnblogs.com/blog/784924/201708/784924-20170831000837983-2143253150.png" target="_blank" rel="noopener noreferrer"><img src="https://images2017.cnblogs.com/blog/784924/201708/784924-20170831000838452-507152231.png" alt="image" loading="lazy"></a></p>
+<p><a href="http://alist.ciberviler.top/d/ecloud180/images/blogImage/784924-20170831000838452-507152231.png" target="_blank" rel="noopener noreferrer">image</a></p>
 <p>指定一种试一下，比如下面这种：</p>
 <div><pre><code>${AnsiColor.BRIGHT_YELLOW}
                    _ooOoo_
@@ -11388,7 +11388,7 @@ vue.js官方教程里提到的</p>
     <title type="html">数据库表结构文档生成工具</title>
     <id>https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html</id>
     <link href="https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">数据库表结构文档生成工具</summary>
     <content type="html"><![CDATA[<h1 id="数据库表结构文档生成工具" tabindex="-1"> 数据库表结构文档生成工具</h1>
 <h2 id="特点" tabindex="-1"> 特点</h2>
@@ -14653,11 +14653,11 @@ private static final int INTERRUPTED  = 6;
     <rights>Copyright by xlc520</rights>
   </entry>
   <entry>
-    <title type="html">generate_204 测速地址</title>
+    <title type="html">generate_204测速地址</title>
     <id>https://xlc520.github.io/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html</id>
     <link href="https://xlc520.github.io/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html"/>
-    <updated>2022-04-03T05:55:41.000Z</updated>
-    <summary type="html">generate_204 测速地址</summary>
+    <updated>2022-05-21T09:03:15.000Z</updated>
+    <summary type="html">generate_204测速地址</summary>
     <content type="html"><![CDATA[<h1 id="generate-204-测速地址" tabindex="-1"> generate_204 测速地址</h1>
 <p>http://www.gstatic.com/generate_204</p>
 <p>http://connect.rom.miui.com/generate_204</p>
@@ -18037,21 +18037,21 @@ syntax on " 激活语法高亮
     <title type="html">人生三境界</title>
     <id>https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html</id>
     <link href="https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html"/>
-    <updated>2022-03-29T02:05:28.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">人生三境界，格局决定结局，境界决定人生</summary>
     <content type="html"><![CDATA[<h1 id="人生三境界-格局决定结局-境界决定人生" tabindex="-1"> 人生三境界，格局决定结局，境界决定人生</h1>
 <p>人生能够成就什么与自身的境界密切相关，人生格局决定人生结局，人生有什么样的境界就有什么样的格局。从古到今，成就大事业，大学问的人，都是经过这三种境界的人。</p>
 <p>人生的第一境界是：<strong>昨夜西风凋碧树，独上高楼，望尽天涯路</strong>。这一境界就是人生要立志、要下决心、做人要自强、自立、自信、自奋，人生有了目标，才能有前进的方向，成功者总是从立志开始的，做人没有志向，哪来的成功呢？</p>
-<p><img src="https://pics4.baidu.com/feed/c8ea15ce36d3d539ad9b54e1d0bf0e58352ab02b.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/c8ea15ce36d3d539ad9b54e1d0bf0e58352ab02b.jpeg" alt="img" loading="lazy"></p>
 <p>人生的第二境界是：**衣带渐宽终不悔，为伊消得人憔悴。**人生有了理想、有了目标，就需要靠脚踏实地的奋斗来实现，奋斗需要勤奋和刻苦，奋斗需要顽强拼搏，在奋斗的路上不管是苦、是累都无怨无悔，即使是人瘦了，也在所不辞，一个人有了如此执着的精神，便会痴迷于人生的事业和兴趣，成为一个不懈努力的追梦者。</p>
 <p>人生的第三境界是：**众时寻他千百度，蓦然回首，那人却在灯火阑珊处。**一个人的成功总不会是一帆风顺的，要成功就需要努力付出，有汗水才会有收获，有付出才会有回报，梅花香自苦寒来，功到自然成，人生只有经过奋斗和拼搏，经过磨砺才能绽放人生美丽的异彩！</p>
-<p><img src="https://pics2.baidu.com/feed/58ee3d6d55fbb2fb4bc601d49472c7ac4423dccc.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/58ee3d6d55fbb2fb4bc601d49472c7ac4423dccc.jpeg" alt="img" loading="lazy"></p>
 <p>做人是需要境界的，人有了境界才能站得高，看得远，如此，才能有美好的人生。人生的三个境界分为四个层次，也就是欲求境界、求知境界、道德境界、审美境界，做人有了境界之分，便有了有德之人，无德之人；有了低级趣味的人，也有高级趣味的人。</p>
 <p>做人不能做无德之人，做低级趣味的人，人大多都是凡人和普通的人，即使是凡人和普通的人也要有自己的境界和追求，这就是做一个平凡而不平庸的人。做人要做有德之人，做有健康趣味的人，只有如此 ，人生之路才走得远，像吴亦凡混得如此有名、如此有钱，但他却是无德的人，是一个低级趣味的人，最终他摔得很惨。这就是见证，做人一定要有格局，要有品味，要有追求，要有精神境界，不然，人生就走不远，也飞不高。</p>
-<p><img src="https://pics7.baidu.com/feed/9d82d158ccbf6c8113a64f776606563d32fa4059.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/9d82d158ccbf6c8113a64f776606563d32fa4059.jpeg" alt="img" loading="lazy"></p>
 <p>人是高级动物，有思想、有灵魂、有智慧，人的高级决定了人必须有精神追求，不能沉迷于物质享受之中。商品经济时代，做人更要经得住各种物欲的诱惑和考验，要受得住寂寞，耐得住宁静，如此才能坚定自己的人生理想，不忘初心，永远前行，做最好的自己。</p>
 <p>人的境界靠的自律精神，一个人不自律便会猪狗不如，有境界的人是靠自律约束出来的，自律就是人生的最高境界，人不自律便会放纵，人一旦放纵了便会自毁人生。做人一定要能够克制自己的言行，约束自己的行为。</p>
-<p><img src="https://pics4.baidu.com/feed/279759ee3d6d55fba7ea1c63b71aa84220a4dd0c.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/279759ee3d6d55fba7ea1c63b71aa84220a4dd0c.jpeg" alt="img" loading="lazy"></p>
 <p>孔子曰：<strong>君子有三戒：少之时，血气未定，戒之在色；及其壮也，血气方刚，戒之在斗；及其老也，血气既衰，戒之在得</strong>。孔子是智慧的人，更是自律的人，做人自律就是戒，也就是做人生的减法，约束自己的行为，管住自己的嘴，管住自己的手，如此，做人的境界才能高，格局才能大，路才行得远。</p>
 ]]></content>
     <author>
@@ -19197,7 +19197,7 @@ com.miui.permcenter.privacymanager.SpecialPermissionInterceptActivity
     <title type="html">Git、GitHub、Gitee</title>
     <id>https://xlc520.github.io/git/Git%E3%80%81GitHub%E3%80%81Gitee.html</id>
     <link href="https://xlc520.github.io/git/Git%E3%80%81GitHub%E3%80%81Gitee.html"/>
-    <updated>2022-03-19T14:01:34.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Git、GitHub、Gitee使用</summary>
     <content type="html"><![CDATA[<h1 id="git、github、gitee" tabindex="-1"> Git、GitHub、Gitee</h1>
 <h2 id="一-git介绍与mac下如何生成ssh-key" tabindex="-1"> 一：Git介绍与Mac下如何生成ssh key</h2>
@@ -19222,16 +19222,16 @@ com.miui.permcenter.privacymanager.SpecialPermissionInterceptActivity
 <p>（2）情况二：终端未出现id_rsa.pub 或 id_dsa.pub文件，表示该电脑还没有配置SSH Key，此时需要输入命令：</p>
 <p>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</p>
 <p>默认会在相应路径下（/your_home_path）生成id_rsa和id_rsa.pub两个文件，此时终端会显示：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1549588/1644164187476-6676ff38-2c76-44cb-a75e-93295b945a75.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644164187476-6676ff38-2c76-44cb-a75e-93295b945a75.png" alt="img" loading="lazy"></p>
 <p>连续回车即可，也可能会让你输入密码，密码就是你的开机密码</p>
 <p>此时再输入命令：ls -al ~/.ssh    就会出现id_rsa.pub 和 id_dsa.pub两个文件，然后重复情况一的步骤即输入以下命令再进行步骤3即可：</p>
 <p>pbcopy &lt; ~/.ssh/id_rsa.pub</p>
 <ul>
 <li>步骤3.将SSH Key添加到Github和Gitee中</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1549588/1644163954973-29d7b898-0036-4f48-b13b-b771f3b3064b.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644163954973-29d7b898-0036-4f48-b13b-b771f3b3064b.png" alt="img" loading="lazy"></p>
 <p>*<strong>图：Github*</strong></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1549588/1644164425045-94537f86-65d3-4a34-8554-08bcd00020f6.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1644164425045-94537f86-65d3-4a34-8554-08bcd00020f6.png" alt="img" loading="lazy"></p>
 <p>*<strong>图：Gitee*</strong>[</p>
 <p>](https://blog.csdn.net/wsdxsyb/article/details/81904472)</p>
 <h2 id="二-常用命令" tabindex="-1"> 二：常用命令</h2>
@@ -20631,7 +20631,7 @@ LISTEN      0           128                       [::]:22                     [:
     <title type="html">Windows子系统</title>
     <id>https://xlc520.github.io/linux/Windows%E5%AD%90%E7%B3%BB%E7%BB%9F.html</id>
     <link href="https://xlc520.github.io/linux/Windows%E5%AD%90%E7%B3%BB%E7%BB%9F.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
+    <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Windows子系统优化,ubuntu,docker</summary>
     <content type="html"><![CDATA[<h1 id="windows子系统" tabindex="-1"> Windows子系统</h1>
 <h2 id="更换apt源。" tabindex="-1"> 更换apt源。</h2>
@@ -20729,7 +20729,7 @@ sudo service docker <span>start</span>
 <div><pre><code>cd \\wsl$\Ubuntu\
 </code></pre><div aria-hidden="true"><div></div></div></div><p>可以进入Ubuntu-20.04子系统根目录</p>
 <p>或者打开文件资源管理器，在地址栏输入<code>\\wsl$\Ubuntu\</code>，也可以Ubuntu子系统根目录。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/6645072-861e342815516794.png" alt="https://upload-images.jianshu.io/upload_images/6645072-861e342815516794.png" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/6645072-861e342815516794.png" alt="6645072-861e342815516794.png" loading="lazy"></p>
 <h2 id="faq" tabindex="-1"> FAQ</h2>
 <h2 id="systemctl命令无法使用" tabindex="-1"> systemctl命令无法使用</h2>
 <p>现象为在命令行执行<code>systemctl</code>命令，报如下错误：</p>
