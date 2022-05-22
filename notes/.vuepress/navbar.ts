@@ -13,5 +13,32 @@ export default navbar([
   { text: '电脑', link: '/pc/' ,icon:"computer"},
   { text: '文章', link: '/article/' ,icon:"article"},
   { text: '其他', link: '/other/' ,icon:"others"},
-  { text: 'DownGit', link: 'https://git.xulc.workers.dev/' ,icon:"github"},
+  {
+    text: "链接",
+    icon: "guide",
+    // prefix: "/zh/cookbook/",
+    children: [
+      {
+        text: "Alist",
+        icon: "share",
+        link: "http://alist.ciberviler.top",
+      },
+      {
+        text: "Cloudreve",
+        icon: "share",
+        link: "https://pan.ciberviler.top",
+      },
+      {
+        text: "DownGit-tk",
+        icon: "github",
+        link: "https://git.xlc520.tk",
+      },
+      {
+        text: "DownGit-ml",
+        icon: "github",
+        link: "https://git.xlc520.ml",
+      }, 
+    ],
+  },
+  // { text: 'DownGit', link: 'https://git.xulc.workers.dev/' ,icon:"github"},
 ]);
