@@ -4,10 +4,10 @@ layout: Blog
 icon: home
 title: 博客主页
 # heroImage: /logo.svg
-heroText: StudyNote
+heroText: StudyNote - 个人学习笔记
 heroFullScreen: true
-bgImage: https://api.btstu.cn/sjbz/api.php?lx=suiji&format=images
-tagline: <p>昨夜西风凋碧树，独上高楼，望尽天涯路。</p><p>衣带渐宽终不悔，为伊消得人憔悴。</p> <p>众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。</p>
+bgImage: https://api.btstu.cn/sjbz/api.php?lx=fengjing&format=images
+tagline: 昨夜西风凋碧树，独上高楼，望尽天涯路。<br><br>衣带渐宽终不悔，为伊消得人憔悴。<br><br>众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。
 projects:
   - icon: project
     name: 学习
