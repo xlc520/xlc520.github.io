@@ -3,12 +3,12 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-24T08:26:46.667Z</updated>
+  <updated>2022-05-24T14:55:37.753Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
-  <category term="Linux"/>
   <category term="Java"/>
+  <category term="Linux"/>
   <category term="java"/>
   <category term="article"/>
   <category term="pc"/>
@@ -23,6 +23,542 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</title>
+    <id>https://xlc520.github.io/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html</id>
+    <link href="https://xlc520.github.io/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html"/>
+    <updated>2022-05-24T14:53:48.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot-引入线程池-queue缓冲队列实现高并发下单业务" tabindex="-1"> SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</h1>
+<ul>
+<li>1.首先是springBoot的项目框架如下：</li>
+<li>2.业务测试流程涉及的类，如下</li>
+<li>3.使用JMeter模拟并发下单请求</li>
+<li>4.结果</li>
+</ul>
+<hr>
+<p>主要是自己在项目中(中小型项目) 有支付下单业务(只是办理VIP，没有涉及到商品库存)，目前用户量还没有上来，目前没有出现问题，但是想到如果用户量变大，下单并发量变大，可能会出现一系列的问题，趁着空闲时间，做了这个demo测试相关问题。</p>
+<p>可能遇到的问题如下：</p>
+<ol>
+<li>订单重复</li>
+<li>高并发下，性能变慢</li>
+</ol>
+<p>解决方式：<code>ThreadPoolExecutor</code>线程池 + Queue队列</p>
+<h2 id="_1-首先是springboot的项目框架如下" tabindex="-1"> 1.首先是springBoot的项目框架如下：</h2>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524225159288.png" alt="image-20220524225159288" loading="lazy"></p>
+<h2 id="_2-业务测试流程涉及的类-如下" tabindex="-1"> 2.业务测试流程涉及的类，如下</h2>
+<ul>
+<li>BusinessThread 类</li>
+</ul>
+<div><pre><code>package com.springboot.demo.Threads;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")//spring 多例
+public class BusinessThread implements Runnable{
+
+    private String acceptStr;
+
+    public BusinessThread(String acceptStr) {
+        this.acceptStr = acceptStr;
+    }
+
+    public String getAcceptStr() {
+        return acceptStr;
+    }
+
+    public void setAcceptStr(String acceptStr) {
+        this.acceptStr = acceptStr;
+    }
+
+    @Override
+    public void run() {
+        //业务操作
+        System.out.println("多线程已经处理订单插入系统，订单号："+acceptStr);
+
+        //线程阻塞
+        /*try {
+            Thread.sleep(1000);
+            System.out.println("多线程已经处理订单插入系统，订单号："+acceptStr);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+    }
+}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>TestThreadPoolManager 类</li>
+</ul>
+<div><pre><code>package com.springboot.demo.Threads;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.*;
+
+@Component
+public class TestThreadPoolManager implements BeanFactoryAware {
+
+    //用于从IOC里取对象
+    private BeanFactory factory; //如果实现Runnable的类是通过spring的application.xml文件进行注入,可通过 factory.getBean()获取，这里只是提一下
+
+    // 线程池维护线程的最少数量
+    private final static int CORE_POOL_SIZE = 2;
+    // 线程池维护线程的最大数量
+    private final static int MAX_POOL_SIZE = 10;
+    // 线程池维护线程所允许的空闲时间
+    private final static int KEEP_ALIVE_TIME = 0;
+    // 线程池所使用的缓冲队列大小
+    private final static int WORK_QUEUE_SIZE = 50;
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        factory = beanFactory;
+    }
+
+    /**
+     * 用于储存在队列中的订单,防止重复提交,在真实场景中，可用redis代替 验证重复
+     */
+    Map&lt;String, Object> cacheMap = new ConcurrentHashMap&lt;>();
+
+
+    /**
+     * 订单的缓冲队列,当线程池满了，则将订单存入到此缓冲队列
+     */
+    Queue&lt;Object> msgQueue = new LinkedBlockingQueue&lt;Object>();
+
+
+    /**
+     * 当线程池的容量满了，执行下面代码，将订单存入到缓冲队列
+     */
+    final RejectedExecutionHandler handler = new RejectedExecutionHandler() {
+        @Override
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+            //订单加入到缓冲队列
+            msgQueue.offer(((BusinessThread) r).getAcceptStr());
+            System.out.println("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
+        }
+    };
+
+
+    /**创建线程池*/
+   final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue(WORK_QUEUE_SIZE), this.handler);
+
+
+    /**将任务加入订单线程池*/
+    public void addOrders(String orderId){
+        System.out.println("此订单准备添加到线程池，订单号：" + orderId);
+        //验证当前进入的订单是否已经存在
+        if (cacheMap.get(orderId) == null) {
+            cacheMap.put(orderId, new Object());
+            BusinessThread businessThread = new BusinessThread(orderId);
+            threadPool.execute(businessThread);
+        }
+    }
+
+    /**
+     * 线程池的定时任务----> 称为(调度线程池)。此线程池支持 定时以及周期性执行任务的需求。
+     */
+    final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
+
+
+    /**
+     * 检查(调度线程池)，每秒执行一次，查看订单的缓冲队列是否有 订单记录，则重新加入到线程池
+     */
+    final ScheduledFuture scheduledFuture = scheduler.scheduleAtFixedRate(new Runnable() {
+        @Override
+        public void run() {
+            //判断缓冲队列是否存在记录
+            if(!msgQueue.isEmpty()){
+                //当线程池的队列容量少于WORK_QUEUE_SIZE，则开始把缓冲队列的订单 加入到 线程池
+                if (threadPool.getQueue().size() &lt; WORK_QUEUE_SIZE) {
+                    String orderId = (String) msgQueue.poll();
+                    BusinessThread businessThread = new BusinessThread(orderId);
+                    threadPool.execute(businessThread);
+                    System.out.println("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号："+orderId);
+                }
+            }
+        }
+    }, 0, 1, TimeUnit.SECONDS);
+
+
+    /**获取消息缓冲队列*/
+    public Queue&lt;Object> getMsgQueue() {
+        return msgQueue;
+    }
+
+    /**终止订单线程池+调度线程池*/
+    public void shutdown() {
+        //true表示如果定时任务在执行，立即中止，false则等待任务结束后再停止
+        System.out.println("终止订单线程池+调度线程池："+scheduledFuture.cancel(false));
+        scheduler.shutdown();
+        threadPool.shutdown();
+
+    }
+}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>TestController 类</li>
+</ul>
+<div><pre><code>package com.springboot.demo;
+
+import com.springboot.demo.Threads.TestThreadPoolManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Queue;
+import java.util.UUID;
+
+/**
+ * Created by Administrator on 2018/5/9.
+ */
+@RestController
+public class TestController {
+
+    @Autowired
+    TestThreadPoolManager testThreadPoolManager;
+
+    /**
+     * 测试模拟下单请求 入口
+     * @param id
+     * @return
+     */
+    @GetMapping("/start/{id}")
+    public String start(@PathVariable Long id) {
+        //模拟的随机数
+        String orderNo = System.currentTimeMillis() + UUID.randomUUID().toString();
+
+        testThreadPoolManager.addOrders(orderNo);
+
+        return "Test ThreadPoolExecutor start";
+    }
+
+    /**
+     * 停止服务
+     * @param id
+     * @return
+     */
+    @GetMapping("/end/{id}")
+    public String end(@PathVariable Long id) {
+
+        testThreadPoolManager.shutdown();
+
+        Queue q = testThreadPoolManager.getMsgQueue();
+        System.out.println("关闭了线程服务，还有未处理的信息条数：" + q.size());
+        return "Test ThreadPoolExecutor start";
+    }
+}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。</p>
+<p>项目地址：https://github.com/YunaiV/onemall</p>
+</blockquote>
+<h2 id="_3-使用jmeter模拟并发下单请求" tabindex="-1"> 3.使用JMeter模拟并发下单请求</h2>
+<p>[<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16533988082341.png" alt="图片" loading="lazy">]</p>
+<h2 id="_4-结果" tabindex="-1"> 4.结果</h2>
+<p>打印的日志说明，开始的订单直接执行插入到系统，当线程池的容量已经满了，则使用<code>RejectedExecutionHandler</code>方法把后面的订单添加到 Queue缓冲队列，使用<code>ScheduledFuture</code>方法定时(我这里是每秒一次)检查Queue队列，重新把队列里面的订单添加到线程池，执行后面的插入任务。</p>
+<p>部分日志如下</p>
+<p>[<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16533988082342.png" alt="图片" loading="lazy">]</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-05-26T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
+  <entry>
+    <title type="html">Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查</title>
+    <id>https://xlc520.github.io/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html</id>
+    <link href="https://xlc520.github.io/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html"/>
+    <updated>2022-05-24T14:53:56.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="spring-boot-mybatis-plus-clickhouse-轻松实现增删改查" tabindex="-1"> Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查</h1>
+<h2 id="项目场景" tabindex="-1"> 项目场景：</h2>
+<p><strong>ClickHouse 操作基于 Mybatis-puls源码扩展开发。解决ClickHouse的修改和删除 SQL操作与Mysql不相同。</strong></p>
+<h2 id="基于-mybatis-puls" tabindex="-1"> 基于 <strong>Mybatis-puls</strong>：</h2>
+<p>update 、updateById 、 delete 函数</p>
+<p>1、<code>SqlMethodDiv.java</code> 文件枚举类，对sql脚本定义</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>enums</span><span>;</span>
+ 
+<span>/**
+ * <span>@author</span> liuxiansong
+ */</span>
+<span>public</span> <span>enum</span> <span>SqlMethodDiv</span> <span>{</span>
+ 
+    <span>/**
+     * 删除
+     */</span>
+    <span>DELETE_BY_ID</span><span>(</span><span>"deleteByIdClickHouse"</span><span>,</span> <span>"根据ID 删除一条数据"</span><span>,</span> <span>"&lt;script>\nALTER TABLE %s DELETE WHERE %s=#{%s}\n&lt;/script>"</span><span>)</span><span>,</span>
+ 
+    <span>/**
+     * 逻辑删除
+     */</span>
+    <span>LOGIC_DELETE_BY_ID</span><span>(</span><span>"deleteByIdClickHouse"</span><span>,</span> <span>"根据ID 逻辑删除一条数据"</span><span>,</span> <span>"&lt;script>\nALTER TABLE %s UPDATE %s where %s=#{%s} %s\n&lt;/script>"</span><span>)</span><span>,</span>
+ 
+    <span>/**
+     * 修改 条件主键
+     */</span>
+    <span>UPDATE_BY_ID</span><span>(</span><span>"updateByIdClickHouse"</span><span>,</span> <span>"根据ID 选择修改数据"</span><span>,</span> <span>"&lt;script>\nALTER TABLE %s UPDATE %s where %s=#{%s} %s\n&lt;/script>"</span><span>)</span><span>,</span>
+    <span>/**
+     * 修改 条件主键
+     */</span>
+    <span>UPDATE</span><span>(</span><span>"updateClickHouse"</span><span>,</span> <span>"根据 whereEntity 条件，更新记录"</span><span>,</span> <span>"&lt;script>\nALTER TABLE %s UPDATE  %s %s %s\n&lt;/script>"</span><span>)</span><span>;</span>
+ 
+    <span>private</span> <span>final</span> <span>String</span> method<span>;</span>
+    <span>private</span> <span>final</span> <span>String</span> desc<span>;</span>
+    <span>private</span> <span>final</span> <span>String</span> sql<span>;</span>
+ 
+    <span>SqlMethodDiv</span><span>(</span><span>String</span> method<span>,</span> <span>String</span> desc<span>,</span> <span>String</span> sql<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>method <span>=</span> method<span>;</span>
+        <span>this</span><span>.</span>desc <span>=</span> desc<span>;</span>
+        <span>this</span><span>.</span>sql <span>=</span> sql<span>;</span>
+    <span>}</span>
+ 
+    <span>public</span> <span>String</span> <span>getMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> method<span>;</span>
+    <span>}</span>
+ 
+    <span>public</span> <span>String</span> <span>getDesc</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> desc<span>;</span>
+    <span>}</span>
+ 
+    <span>public</span> <span>String</span> <span>getSql</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> sql<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2、<code>UpdateByIdClickHouse.java</code> 类文件，继承 AbstractMethod 重载 injectMappedStatement</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>methods</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>injector<span>.</span></span><span>AbstractMethod</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>TableInfo</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>toolkit<span>.</span>sql<span>.</span></span><span>SqlScriptUtils</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>enums<span>.</span></span><span>SqlMethodDiv</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>executor<span>.</span>keygen<span>.</span></span><span>NoKeyGenerator</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>mapping<span>.</span></span><span>MappedStatement</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>mapping<span>.</span></span><span>SqlSource</span></span><span>;</span>
+ 
+<span>/**
+ * <span>@author</span> liuxiansong
+ * <span>@date</span> 2021-05-20
+ * <span>@desc</span> 通过MybatisPlus源码 扩展修改
+ */</span>
+<span>public</span> <span>class</span> <span>UpdateByIdClickHouse</span> <span>extends</span> <span>AbstractMethod</span> <span>{</span>
+ 
+    <span>@Override</span>
+    <span>public</span> <span>MappedStatement</span> <span>injectMappedStatement</span><span>(</span><span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> mapperClass<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> modelClass<span>,</span> <span>TableInfo</span> tableInfo<span>)</span> <span>{</span>
+        <span>SqlMethodDiv</span> sqlMethod <span>=</span> <span>SqlMethodDiv</span><span>.</span>UPDATE_BY_ID<span>;</span>
+ 
+        <span>final</span> <span>String</span> additional <span>=</span> <span>optlockVersion</span><span>(</span>tableInfo<span>)</span> <span>+</span> tableInfo<span>.</span><span>getLogicDeleteSql</span><span>(</span><span>true</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+        <span>String</span> sql <span>=</span> <span>String</span><span>.</span><span>format</span><span>(</span>sqlMethod<span>.</span><span>getSql</span><span>(</span><span>)</span><span>,</span> tableInfo<span>.</span><span>getTableName</span><span>(</span><span>)</span><span>,</span>
+                <span>this</span><span>.</span><span>sqlSet</span><span>(</span>tableInfo<span>.</span><span>isWithLogicDelete</span><span>(</span><span>)</span><span>,</span> <span>false</span><span>,</span> tableInfo<span>,</span> <span>false</span><span>,</span> ENTITY<span>,</span> ENTITY_DOT<span>)</span><span>,</span>
+                tableInfo<span>.</span><span>getKeyColumn</span><span>(</span><span>)</span><span>,</span> ENTITY_DOT <span>+</span> tableInfo<span>.</span><span>getKeyProperty</span><span>(</span><span>)</span><span>,</span> additional<span>)</span><span>;</span>
+        <span>SqlSource</span> sqlSource <span>=</span> languageDriver<span>.</span><span>createSqlSource</span><span>(</span>configuration<span>,</span> sql<span>,</span> modelClass<span>)</span><span>;</span>
+        <span>return</span> <span>this</span><span>.</span><span>addInsertMappedStatement</span><span>(</span>mapperClass<span>,</span> modelClass<span>,</span>
+                sqlMethod<span>.</span><span>getMethod</span><span>(</span><span>)</span><span>,</span> sqlSource<span>,</span> <span>new</span> <span>NoKeyGenerator</span><span>(</span><span>)</span><span>,</span> <span>null</span><span>,</span> <span>null</span><span>)</span><span>;</span>
+    <span>}</span>
+ 
+ 
+    <span>/**
+     * SQL 更新 set 语句
+     *
+     * <span>@param</span> <span>logic</span>  是否逻辑删除注入器
+     * <span>@param</span> <span>ew</span>     是否存在 UpdateWrapper 条件
+     * <span>@param</span> <span>table</span>  表信息
+     * <span>@param</span> <span>alias</span>  别名
+     * <span>@param</span> <span>prefix</span> 前缀
+     * <span>@return</span> sql
+     */</span>
+    <span>@Override</span>
+    <span>protected</span> <span>String</span> <span>sqlSet</span><span>(</span><span>boolean</span> logic<span>,</span> <span>boolean</span> ew<span>,</span> <span>TableInfo</span> table<span>,</span> <span>boolean</span> judgeAliasNull<span>,</span> <span>final</span> <span>String</span> alias<span>,</span>
+                            <span>final</span> <span>String</span> prefix<span>)</span> <span>{</span>
+        <span>String</span> sqlScript <span>=</span> table<span>.</span><span>getAllSqlSet</span><span>(</span>logic<span>,</span> prefix<span>)</span><span>;</span>
+        <span>if</span> <span>(</span>judgeAliasNull<span>)</span> <span>{</span>
+            sqlScript <span>=</span> <span>SqlScriptUtils</span><span>.</span><span>convertIf</span><span>(</span>sqlScript<span>,</span> <span>String</span><span>.</span><span>format</span><span>(</span><span>"%s != null"</span><span>,</span> alias<span>)</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>if</span> <span>(</span>ew<span>)</span> <span>{</span>
+            sqlScript <span>+=</span> NEWLINE<span>;</span>
+            sqlScript <span>+=</span> <span>SqlScriptUtils</span><span>.</span><span>convertIf</span><span>(</span><span>SqlScriptUtils</span><span>.</span><span>unSafeParam</span><span>(</span>U_WRAPPER_SQL_SET<span>)</span><span>,</span>
+                    <span>String</span><span>.</span><span>format</span><span>(</span><span>"%s != null and %s != null"</span><span>,</span> WRAPPER<span>,</span> U_WRAPPER_SQL_SET<span>)</span><span>,</span> <span>false</span><span>)</span><span>;</span>
+        <span>}</span>
+        sqlScript <span>=</span> <span>convertSet</span><span>(</span>sqlScript<span>)</span><span>;</span>
+        <span>return</span> sqlScript<span>;</span>
+    <span>}</span>
+ 
+    <span>/**
+     * 去掉sest 和 suffixOverrides=","代表去掉第一个逗号
+     *
+     * <span>@param</span> <span>sqlScript</span>
+     * <span>@return</span>
+     */</span>
+    <span>public</span> <span>static</span> <span>String</span> <span>convertSet</span><span>(</span><span>final</span> <span>String</span> sqlScript<span>)</span> <span>{</span>
+        <span>return</span> <span>"&lt;trim prefix=\"\" suffixOverrides=\",\"> "</span> <span>+</span> sqlScript <span>+</span> <span>"\n"</span> <span>+</span> <span>"&lt;/trim>"</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>3、<code>ClickHouseSqlInjector.java</code> 注册方法，继承 DefaultSqlInjector</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>injector<span>.</span></span><span>AbstractMethod</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>injector<span>.</span></span><span>DefaultSqlInjector</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>methods<span>.</span></span><span>DeleteClickHouse</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>methods<span>.</span></span><span>UpdateByIdClickHouse</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>injector<span>.</span>methods<span>.</span></span><span>UpdateClickHouse</span></span><span>;</span>
+ 
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>List</span></span><span>;</span>
+ 
+<span>/**
+ * 注册方法
+ *
+ * <span>@author</span> liuxiansong
+ */</span>
+<span>public</span> <span>class</span> <span>ClickHouseSqlInjector</span> <span>extends</span> <span>DefaultSqlInjector</span> <span>{</span>
+ 
+    <span>@Override</span>
+    <span>public</span> <span>List</span><span><span>&lt;</span><span>AbstractMethod</span><span>></span></span> <span>getMethodList</span><span>(</span><span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> mapperClass<span>)</span> <span>{</span>
+        <span>/**
+         * 这里很重要，先要通过父类方法，获取到原有的集合，不然会自带的通用方法会失效的
+         */</span>
+        <span>List</span><span><span>&lt;</span><span>AbstractMethod</span><span>></span></span> methodList <span>=</span> <span>super</span><span>.</span><span>getMethodList</span><span>(</span>mapperClass<span>)</span><span>;</span>
+        <span>/***
+         * 添加自定义方法类
+         */</span>
+        methodList<span>.</span><span>add</span><span>(</span><span>new</span> <span>UpdateByIdClickHouse</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        methodList<span>.</span><span>add</span><span>(</span><span>new</span> <span>UpdateClickHouse</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        methodList<span>.</span><span>add</span><span>(</span><span>new</span> <span>DeleteClickHouse</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> methodList<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>4、编写SuperMapper 继承BaseMapper，让所有Mapper 继承extends</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>domain<span>.</span>mapper</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>conditions<span>.</span></span><span>Wrapper</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>mapper<span>.</span></span><span>BaseMapper</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>annotations<span>.</span></span><span>Param</span></span><span>;</span>
+ 
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>Serializable</span></span><span>;</span>
+ 
+<span>/**
+ * <span>@author</span> liuxiansong
+ * 自定义方法
+ */</span>
+<span>@SuppressWarnings</span><span>(</span><span>"all"</span><span>)</span>
+<span>public</span> <span>interface</span> <span>SuperMapper</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>{</span>
+ 
+    <span>/**
+     * <span>@return</span>
+     * @Description: 删除并填充删除人信息
+     * <span>@param</span>: id 主键id
+     * <span>@auther</span>: zpq
+     * <span>@date</span>: 2020/11/10 11:47 上午
+     */</span>
+    <span>boolean</span> <span>updateByIdClickHouse</span><span>(</span><span>@Param</span><span>(</span><span>"et"</span><span>)</span> <span>T</span> entity<span>)</span><span>;</span>
+ 
+ 
+    <span>/**
+     * <span>@return</span>
+     * @Description: 删除并填充删除人信息
+     * <span>@param</span>: id 主键id
+     * <span>@auther</span>: zpq
+     * <span>@date</span>: 2020/11/10 11:47 上午
+     */</span>
+    <span>boolean</span> <span>updateClickHouse</span><span>(</span><span>@Param</span><span>(</span><span>"et"</span><span>)</span> <span>T</span> entity<span>,</span> <span>@Param</span><span>(</span><span>"ew"</span><span>)</span> <span>Wrapper</span><span><span>&lt;</span><span>T</span><span>></span></span> updateWrapper<span>)</span><span>;</span>
+ 
+    <span>/**
+     * 主键删除
+     *
+     * <span>@param</span> <span>id</span>
+     * <span>@return</span>
+     */</span>
+    <span>int</span> <span>deleteByIdClickHouse</span><span>(</span><span>Serializable</span> id<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>5、单元测试看效果</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>test</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span></span><span>DemoClickHouse</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>domain<span>.</span>dataobject<span>.</span></span><span>User</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>domain<span>.</span>service<span>.</span></span><span>UserService</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>infrastructure<span>.</span>util<span>.</span>page<span>.</span></span><span>PageResult</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>junit<span>.</span></span><span>Test</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>junit<span>.</span>runner<span>.</span></span><span>RunWith</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>beans<span>.</span>factory<span>.</span>annotation<span>.</span></span><span>Autowired</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>boot<span>.</span>test<span>.</span>context<span>.</span></span><span>SpringBootTest</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>test<span>.</span>context<span>.</span>junit4<span>.</span></span><span>SpringRunner</span></span><span>;</span>
+ 
+<span>@RunWith</span><span>(</span><span>SpringRunner</span><span>.</span><span>class</span><span>)</span>
+<span>@SpringBootTest</span><span>(</span>classes <span>=</span> <span>DemoClickHouse</span><span>.</span><span>class</span><span>)</span>
+<span>public</span> <span>class</span> <span>UserMapperTest</span> <span>{</span>
+ 
+    <span>@Autowired</span>
+    <span>UserService</span> userService<span>;</span>
+ 
+ 
+    <span>@Test</span>
+    <span>public</span> <span>void</span> <span>findById_Test</span><span>(</span><span>)</span> <span>{</span>
+        <span>User</span> byId <span>=</span> userService<span>.</span><span>findById</span><span>(</span><span>1</span><span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"查询用户ID=1信息："</span> <span>+</span> byId<span>)</span><span>;</span>
+    <span>}</span>
+ 
+    <span>@Test</span>
+    <span>public</span> <span>void</span> <span>page_Test</span><span>(</span><span>)</span> <span>{</span>
+        <span>User</span> user <span>=</span> <span>new</span> <span>User</span><span>(</span><span>)</span><span>;</span>
+        <span>Integer</span> page <span>=</span> <span>1</span><span>;</span>
+        <span>Integer</span> limit <span>=</span> <span>2</span><span>;</span>
+        <span>PageResult</span><span><span>&lt;</span><span>User</span><span>></span></span> userList <span>=</span> userService<span>.</span><span>page</span><span>(</span>user<span>,</span> page<span>,</span> limit<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"查询用户信息分页："</span> <span>+</span> userList<span>)</span><span>;</span>
+    <span>}</span>
+ 
+    <span>@Test</span>
+    <span>public</span> <span>void</span> <span>create_Test</span><span>(</span><span>)</span> <span>{</span>
+        <span>User</span> user <span>=</span> <span>new</span> <span>User</span><span>(</span><span>)</span><span>;</span>
+        user<span>.</span><span>setUserName</span><span>(</span><span>"张三"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setPassWord</span><span>(</span><span>"123"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setPhone</span><span>(</span><span>"12312222"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setEmail</span><span>(</span><span>"326427540@qq.com"</span><span>)</span><span>;</span>
+        userService<span>.</span><span>create</span><span>(</span>user<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"创建："</span> <span>+</span> user<span>)</span><span>;</span>
+    <span>}</span>
+ 
+    <span>@Test</span>
+    <span>public</span> <span>void</span> <span>update_Test</span><span>(</span><span>)</span> <span>{</span>
+        <span>User</span> user <span>=</span> <span>new</span> <span>User</span><span>(</span><span>)</span><span>;</span>
+        user<span>.</span><span>setId</span><span>(</span><span>1395347901827317761l</span><span>)</span><span>;</span>
+        user<span>.</span><span>setUserName</span><span>(</span><span>"小李飞刀"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setPassWord</span><span>(</span><span>"123"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setPhone</span><span>(</span><span>"12312222"</span><span>)</span><span>;</span>
+        user<span>.</span><span>setEmail</span><span>(</span><span>"326427540@qq.com"</span><span>)</span><span>;</span>
+        userService<span>.</span><span>update</span><span>(</span>user<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"创建："</span> <span>+</span> user<span>)</span><span>;</span>
+    <span>}</span>
+ 
+ 
+    <span>@Test</span>
+    <span>public</span> <span>void</span> <span>delete_Test</span><span>(</span><span>)</span> <span>{</span>
+        userService<span>.</span><span>delete</span><span>(</span><span>1l</span><span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"删除："</span> <span>+</span> <span>1l</span><span>)</span><span>;</span>
+    <span>}</span>
+ 
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524224012350.png" alt="image-20220524224012350" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16534030656526.png" alt="图片" loading="lazy"></p>
+<h2 id="源码" tabindex="-1"> 源码</h2>
+<p>https://github.com/saimen90/clickhouse</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-05-27T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">Linux图形化管理服务器的神器：Cockpit</title>
     <id>https://xlc520.github.io/linux/Linux%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%A5%9E%E5%99%A8Cockpit.html</id>
@@ -8885,37 +9421,26 @@ runnable.setChain(new Chain(points));
     <rights>Copyright by xlc520</rights>
   </entry>
   <entry>
-    <title type="html">SpringBoot 定时任务动态管理通用解决方案</title>
+    <title type="html">SpringBoot定时任务动态管理通用解决方案</title>
     <id>https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</id>
     <link href="https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">SpringBoot 定时任务动态管理通用解决方案</summary>
-    <content type="html"><![CDATA[<h1 id="springboot-定时任务动态管理通用解决方案" tabindex="-1"> SpringBoot 定时任务动态管理通用解决方案</h1>
-<h2 id="一、功能说明" tabindex="-1"> <strong><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">一、功能说明</a></strong></h2>
+    <updated>2022-05-24T14:53:38.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot定时任务动态管理通用解决方案" tabindex="-1"> SpringBoot定时任务动态管理通用解决方案</h1>
+<h2 id="一、功能说明" tabindex="-1"> 一、功能说明</h2>
 <p>SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改</p>
-<blockquote>
-<p>基于 Spring Boot + MyBatis Plus + Vue &amp; Element 实现的后台管理系统 + 用户小程序，支持 RBAC 动态权限、多租户、数据权限、工作流、三方登录、支付、短信、商城等功能。</p>
-<p>项目地址：https://github.com/YunaiV/ruoyi-vue-pro</p>
-</blockquote>
-<h2 id="二、快速使用" tabindex="-1"> <strong><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">二、快速使用</a></strong></h2>
+<h2 id="二、快速使用" tabindex="-1"> 二、快速使用</h2>
 <p>具体的功能已经封装成SpringBoot-starter即插即用</p>
 <div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
     <span><span><span>&lt;</span>groupId</span><span>></span></span>com.github.guoyixing<span><span><span>&lt;/</span>groupId</span><span>></span></span>
     <span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-super-scheduled<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
     <span><span><span>&lt;</span>version</span><span>></span></span>0.3.1<span><span><span>&lt;/</span>version</span><span>></span></span>
 <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>使用方法和源码：</p>
-<blockquote>
-<p>码云：https://gitee.com/qiaodaimadewangcai/super-scheduled</p>
-<p>github：https://github.com/guoyixing/super-scheduled</p>
-</blockquote>
-<blockquote>
-<p>基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。</p>
-<p>项目地址：https://github.com/YunaiV/onemall</p>
-</blockquote>
-<h2 id="三、实现原理" tabindex="-1"> <strong><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">三、实现原理</a></strong></h2>
-<h4 id="_1、动态管理实现" tabindex="-1"> <a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">1、动态管理实现</a></h4>
-<p>(1) 配置管理介绍</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>使用方法和源码：
+码云：https://gitee.com/qiaodaimadewangcai/super-scheduled
+github：<a href="https://github.com/guoyixing/super-scheduled/" target="_blank" rel="noopener noreferrer">https://github.com/guoyixing/super-scheduled</a></p>
+<h2 id="三、实现原理" tabindex="-1"> 三、实现原理</h2>
+<h3 id="_1、动态管理实现" tabindex="-1"> 1、动态管理实现</h3>
+<h4 id="_1-配置管理介绍" tabindex="-1"> (1) 配置管理介绍</h4>
 <div><pre><code><span>@Component</span><span>(</span><span>"superScheduledConfig"</span><span>)</span>
 <span>public</span> <span>class</span> <span>SuperScheduledConfig</span> <span>{</span>
     <span>/**
@@ -8937,15 +9462,14 @@ runnable.setChain(new Chain(points));
      * 定时任务名称与定时任务的源信息  的关联关系容器
      */</span>
     <span>private</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>ScheduledSource</span><span>></span></span> nameToScheduledSource <span>=</span> <span>new</span> <span>ConcurrentHashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
- <span>/* 普通的get/sets省略 */</span>
+	<span>/* 普通的get/sets省略 */</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(2) 使用后处理器拦截SpringBoot原本的定时任务</p>
-<ul>
-<li>实现ApplicationContextAware接口拿到SpringBoot的上下文</li>
-<li>实现BeanPostProcessor接口，将这个类标记为后处理器，后处理器会在每个bean实例化之后执行</li>
-<li>使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类</li>
-<li>主要实现逻辑在postProcessAfterInitialization()方法中</li>
-</ul>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2-使用后处理器拦截springboot原本的定时任务" tabindex="-1"> (2) 使用后处理器拦截SpringBoot原本的定时任务</h4>
+<p>1、实现ApplicationContextAware接口拿到SpringBoot的上下文
+2、实现BeanPostProcessor接口，将这个类标记为后处理器，后处理器会在每个bean实例化之后执行
+3、使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
+4、主要实现逻辑在postProcessAfterInitialization()方法中</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524212320260.png" alt="image-20220524212320260" loading="lazy"></p>
 <div><pre><code><span>@DependsOn</span><span>(</span><span>{</span><span>"superScheduledConfig"</span><span>}</span><span>)</span>
 <span>@Component</span>
 <span>@Order</span>
@@ -8980,7 +9504,7 @@ runnable.setChain(new Chain(points));
         <span>//循环处理对每个方法逐一处理</span>
         <span>if</span> <span>(</span>methods<span>.</span>length <span>></span> <span>0</span><span>)</span> <span>{</span>
             <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-             <span>//3.尝试在该方法上获取@Scheduled注解（SpringBoot的定时任务注解）</span>
+            	<span>//3.尝试在该方法上获取@Scheduled注解（SpringBoot的定时任务注解）</span>
                 <span>Scheduled</span> annotation <span>=</span> method<span>.</span><span>getAnnotation</span><span>(</span><span>Scheduled</span><span>.</span><span>class</span><span>)</span><span>;</span>
                 <span>//如果无法获取到@Scheduled注解，就跳过这个方法</span>
                 <span>if</span> <span>(</span>annotation <span>==</span> <span>null</span><span>)</span> <span>{</span>
@@ -8998,7 +9522,7 @@ runnable.setChain(new Chain(points));
                 <span>//将以key-value的形式，将源数据存入配置管理器中，key：定时任务的名称 value：源数据</span>
                 superScheduledConfig<span>.</span><span>addScheduledSource</span><span>(</span>name<span>,</span> scheduledSource<span>)</span><span>;</span>
                 <span>try</span> <span>{</span>
-                 <span>//5.将原本SpringBoot的定时任务取消掉</span>
+                	<span>//5.将原本SpringBoot的定时任务取消掉</span>
                     <span>clearOriginalScheduled</span><span>(</span>annotation<span>)</span><span>;</span>
                 <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
                     <span>throw</span> <span>new</span> <span>SuperScheduledException</span><span>(</span><span>"在关闭原始方法"</span> <span>+</span> beanName <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span> <span>+</span> <span>"时出现错误"</span><span>)</span><span>;</span>
@@ -9034,21 +9558,20 @@ runnable.setChain(new Chain(points));
         <span>this</span><span>.</span>applicationContext <span>=</span> applicationContext<span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(3) 使用ApplicationRunner初始化自定义的定时任务运行器</p>
-<ul>
-<li>实现ApplicationContextAware接口拿到SpringBoot的上下文</li>
-<li>使用@DependsOn注解强制依赖threadPoolTaskScheduler类</li>
-<li>实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑</li>
-<li>主要实现逻辑在run()方法中</li>
-</ul>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_3-使用applicationrunner初始化自定义的定时任务运行器" tabindex="-1"> (3) 使用ApplicationRunner初始化自定义的定时任务运行器</h4>
+<p>1、实现ApplicationContextAware接口拿到SpringBoot的上下文
+2、使用@DependsOn注解强制依赖threadPoolTaskScheduler类
+3、实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
+4、主要实现逻辑在run()方法中</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524212339560.png" alt="image-20220524212339560" loading="lazy"></p>
 <div><pre><code><span>@DependsOn</span><span>(</span><span>"threadPoolTaskScheduler"</span><span>)</span>
 <span>@Component</span>
 <span>public</span> <span>class</span> <span>SuperScheduledApplicationRunner</span> <span>implements</span> <span>ApplicationRunner</span><span>,</span> <span>ApplicationContextAware</span> <span>{</span>
     <span>protected</span> <span>final</span> <span>Log</span> logger <span>=</span> <span>LogFactory</span><span>.</span><span>getLog</span><span>(</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>;</span>
     <span>private</span> <span>DateTimeFormatter</span> df <span>=</span> <span>DateTimeFormatter</span><span>.</span><span>ofPattern</span><span>(</span><span>"yyyy-MM-dd HH:mm:ss"</span><span>)</span><span>;</span>
     <span>private</span> <span>ApplicationContext</span> applicationContext<span>;</span>
- 
- <span>/**
+	
+	<span>/**
      * 定时任务配置管理器
      */</span>
     <span>@Autowired</span>
@@ -9061,7 +9584,7 @@ runnable.setChain(new Chain(points));
 
     <span>@Override</span>
     <span>public</span> <span>void</span> <span>run</span><span>(</span><span>ApplicationArguments</span> args<span>)</span> <span>{</span>
-     <span>//1.定时任务配置管理器中缓存  定时任务执行线程</span>
+    	<span>//1.定时任务配置管理器中缓存  定时任务执行线程</span>
         superScheduledConfig<span>.</span><span>setTaskScheduler</span><span>(</span>threadPoolTaskScheduler<span>)</span><span>;</span>
         <span>//2.获取所有定时任务源数据</span>
         <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>ScheduledSource</span><span>></span></span> nameToScheduledSource <span>=</span> superScheduledConfig<span>.</span><span>getNameToScheduledSource</span><span>(</span><span>)</span><span>;</span>
@@ -9079,7 +9602,7 @@ runnable.setChain(new Chain(points));
             <span>//6.逐一处理增强类（增强器实现原理后面具体分析）</span>
             <span>List</span><span><span>&lt;</span><span>Point</span><span>></span></span> points <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span>baseStrengthenBeanNames<span>.</span>length<span>)</span><span>;</span>
             <span>for</span> <span>(</span><span>String</span> baseStrengthenBeanName <span>:</span> baseStrengthenBeanNames<span>)</span> <span>{</span>
-             <span>//7.将增强器代理成point</span>
+            	<span>//7.将增强器代理成point</span>
                 <span>Object</span> baseStrengthenBean <span>=</span> applicationContext<span>.</span><span>getBean</span><span>(</span>baseStrengthenBeanName<span>)</span><span>;</span>
                 <span>//创建代理</span>
                 <span>Point</span> proxy <span>=</span> <span>ProxyUtils</span><span>.</span><span>getInstance</span><span>(</span><span>Point</span><span>.</span><span>class</span><span>,</span> <span>new</span> <span>RunnableBaseInterceptor</span><span>(</span>baseStrengthenBean<span>,</span> runnable<span>)</span><span>)</span><span>;</span>
@@ -9087,12 +9610,12 @@ runnable.setChain(new Chain(points));
                 <span>//8.所有的points连成起来</span>
                 points<span>.</span><span>add</span><span>(</span>proxy<span>)</span><span>;</span>
             <span>}</span>
-   <span>//将point形成调用链</span>
+			<span>//将point形成调用链</span>
             runnable<span>.</span><span>setChain</span><span>(</span><span>new</span> <span>Chain</span><span>(</span>points<span>)</span><span>)</span><span>;</span>
             <span>//将执行逻辑封装并缓存到定时任务配置管理器中</span>
             superScheduledConfig<span>.</span><span>addRunnable</span><span>(</span>name<span>,</span> runnable<span>::</span><span>invoke</span><span>)</span><span>;</span>
             <span>try</span> <span>{</span>
-             <span>//8.启动定时任务</span>
+            	<span>//8.启动定时任务</span>
                 <span>ScheduledFuture</span><span><span>&lt;</span><span>?</span><span>></span></span> schedule <span>=</span> <span>ScheduledFutureFactory</span><span>.</span><span>create</span><span>(</span>threadPoolTaskScheduler
                         <span>,</span> scheduledSource<span>,</span> runnable<span>::</span><span>invoke</span><span>)</span><span>;</span>
                 <span>//将线程回调钩子存到任务配置管理器中</span>
@@ -9110,7 +9633,7 @@ runnable.setChain(new Chain(points));
         <span>this</span><span>.</span>applicationContext <span>=</span> applicationContext<span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(4) 进行动态管理</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_4-进行动态管理" tabindex="-1"> (4) 进行动态管理</h4>
 <div><pre><code><span>@Component</span>
 <span>public</span> <span>class</span> <span>SuperScheduledManager</span> <span>{</span>
     <span>protected</span> <span>final</span> <span>Log</span> logger <span>=</span> <span>LogFactory</span><span>.</span><span>getLog</span><span>(</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>;</span>
@@ -9283,9 +9806,9 @@ runnable.setChain(new Chain(points));
         runnable<span>.</span><span>run</span><span>(</span><span>)</span><span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2、增强接口实现" tabindex="-1"> <a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">2、增强接口实现</a></h4>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_2、增强接口实现" tabindex="-1"> 2、增强接口实现</h3>
 <p>增强器实现的整体思路与SpringAop的思路一致，实现没有Aop复杂</p>
-<p>(1) 增强接口</p>
+<h4 id="_1-增强接口" tabindex="-1"> (1) 增强接口</h4>
 <div><pre><code><span>@Order</span><span>(</span><span>Ordered</span><span>.</span>HIGHEST_PRECEDENCE<span>)</span>
 <span>public</span> <span>interface</span> <span>BaseStrengthen</span> <span>{</span>
     <span>/**
@@ -9326,7 +9849,7 @@ runnable.setChain(new Chain(points));
      */</span>
     <span>void</span> <span>afterFinally</span><span>(</span><span>Object</span> bean<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(2) 代理抽象类</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2-代理抽象类" tabindex="-1"> (2) 代理<a href="https://so.csdn.net/so/search?q=%E6%8A%BD%E8%B1%A1%E7%B1%BB&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">抽象类</a></h4>
 <div><pre><code><span>public</span> <span>abstract</span> <span>class</span> <span>Point</span> <span>{</span>
     <span>/**
      * 定时任务名
@@ -9341,7 +9864,7 @@ runnable.setChain(new Chain(points));
     
     <span>/* 普通的get/sets省略 */</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(3) 调用链类</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_3-调用链类" tabindex="-1"> (3) 调用链类</h4>
 <div><pre><code><span>public</span> <span>class</span> <span>Chain</span> <span>{</span>
     <span>private</span> <span>List</span><span><span>&lt;</span><span>Point</span><span>></span></span> list<span>;</span>
     <span>private</span> <span>int</span> index <span>=</span> <span>-</span><span>1</span><span>;</span>
@@ -9359,7 +9882,7 @@ runnable.setChain(new Chain(points));
         <span>this</span><span>.</span>index <span>=</span> <span>-</span><span>1</span><span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(4) cglib动态代理实现</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_4-cglib动态代理实现" tabindex="-1"> (4) <a href="https://so.csdn.net/so/search?q=cglib&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">cglib</a>动态代理实现</h4>
 <p>使用cglib代理增强器，将增强器全部代理成调用链节点Point</p>
 <div><pre><code><span>public</span> <span>class</span> <span>RunnableBaseInterceptor</span> <span>implements</span> <span>MethodInterceptor</span> <span>{</span>
     <span>/**
@@ -9376,24 +9899,24 @@ runnable.setChain(new Chain(points));
         <span>Object</span> result<span>;</span>
         <span>//如果执行的是invoke()方法</span>
         <span>if</span> <span>(</span><span>"invoke"</span><span>.</span><span>equals</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
-         <span>//前置强化方法</span>
+        	<span>//前置强化方法</span>
             strengthen<span>.</span><span>before</span><span>(</span>obj<span>,</span> method<span>,</span> args<span>)</span><span>;</span>
             <span>try</span> <span>{</span>
-             <span>//调用执行器中的invoke()方法</span>
+            	<span>//调用执行器中的invoke()方法</span>
                 result <span>=</span> runnable<span>.</span><span>invoke</span><span>(</span><span>)</span><span>;</span>
             <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
-             <span>//异常强化方法</span>
+            	<span>//异常强化方法</span>
                 strengthen<span>.</span><span>exception</span><span>(</span>obj<span>,</span> method<span>,</span> args<span>)</span><span>;</span>
                 <span>throw</span> <span>new</span> <span>SuperScheduledException</span><span>(</span>strengthen<span>.</span><span>getClass</span><span>(</span><span>)</span> <span>+</span> <span>"中强化执行时发生错误"</span><span>,</span> e<span>)</span><span>;</span>
             <span>}</span> <span>finally</span> <span>{</span>
-             <span>//Finally强化方法，出现异常也会执行</span>
+            	<span>//Finally强化方法，出现异常也会执行</span>
                 strengthen<span>.</span><span>afterFinally</span><span>(</span>obj<span>,</span> method<span>,</span> args<span>)</span><span>;</span>
             <span>}</span>
             <span>//后置强化方法</span>
             strengthen<span>.</span><span>after</span><span>(</span>obj<span>,</span> method<span>,</span> args<span>)</span><span>;</span>
 
         <span>}</span> <span>else</span> <span>{</span>
-         <span>//直接执行方法</span>
+        	<span>//直接执行方法</span>
             result <span>=</span> methodProxy<span>.</span><span>invokeSuper</span><span>(</span>obj<span>,</span> args<span>)</span><span>;</span>
         <span>}</span>
         <span>return</span> result<span>;</span>
@@ -9412,7 +9935,7 @@ runnable.setChain(new Chain(points));
 
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(5) 定时任务执行器实现</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_5-定时任务执行器实现" tabindex="-1"> (5) 定时任务执行器实现</h4>
 <div><pre><code><span>public</span> <span>class</span> <span>SuperScheduledRunnable</span> <span>{</span>
     <span>/**
      * 原始的方法
@@ -9453,8 +9976,8 @@ runnable.setChain(new Chain(points));
     
     <span>/* 普通的get/sets省略 */</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>(6) 增强器代理逻辑</p>
-<p><code>com.gyx.superscheduled.core.SuperScheduledApplicationRunner</code>类中的代码片段</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_6-增强器代理逻辑" tabindex="-1"> (6) 增强器代理逻辑</h4>
+<p>com.gyx.superscheduled.core.SuperScheduledApplicationRunner类中的代码片段</p>
 <div><pre><code><span>//创建执行控制器</span>
 <span>SuperScheduledRunnable</span> runnable <span>=</span> <span>new</span> <span>SuperScheduledRunnable</span><span>(</span><span>)</span><span>;</span>
 runnable<span>.</span><span>setMethod</span><span>(</span>scheduledSource<span>.</span><span>getMethod</span><span>(</span><span>)</span><span>)</span><span>;</span>
@@ -9463,7 +9986,7 @@ runnable<span>.</span><span>setBean</span><span>(</span>scheduledSource<span>.</
 <span>List</span><span><span>&lt;</span><span>Point</span><span>></span></span> points <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span>baseStrengthenBeanNames<span>.</span>length<span>)</span><span>;</span>
 <span>//循环所有的增强器的beanName</span>
 <span>for</span> <span>(</span><span>String</span> baseStrengthenBeanName <span>:</span> baseStrengthenBeanNames<span>)</span> <span>{</span>
- <span>//获取增强器的bean对象</span>
+	<span>//获取增强器的bean对象</span>
     <span>Object</span> baseStrengthenBean <span>=</span> applicationContext<span>.</span><span>getBean</span><span>(</span>baseStrengthenBeanName<span>)</span><span>;</span>
     <span>//将增强器代理成Point节点</span>
     <span>Point</span> proxy <span>=</span> <span>ProxyUtils</span><span>.</span><span>getInstance</span><span>(</span><span>Point</span><span>.</span><span>class</span><span>,</span> <span>new</span> <span>RunnableBaseInterceptor</span><span>(</span>baseStrengthenBean<span>,</span> runnable<span>)</span><span>)</span><span>;</span>
@@ -9482,7 +10005,7 @@ runnable<span>.</span><span>setChain</span><span>(</span><span>new</span> <span>
     <contributor>
       <name>xlc520</name>
     </contributor>
-    <published>2022-03-19T00:00:00.000Z</published>
+    <published>2022-05-25T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
   <entry>
@@ -25295,117 +25818,6 @@ Configuration.HTTPS.Password设置为PFX文件的密码</p>
 使用想要关联的OAuth账号（Microsoft/Github）在任意站点登录/注册均可看到此账号的OAuthID,记录此ID</p>
 <p>通过管理员密码登录自己的站点：管理员功能-用户列表 找到管理员账户 点击“编辑”按钮填写记录的OAuthID 保存</p>
 <p>直接在主登录页面使用与管理员账户关联的OAuth账号登录即可</p>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="other"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-17T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">其他</title>
-    <id>https://xlc520.github.io/other/</id>
-    <link href="https://xlc520.github.io/other/"/>
-    <updated>2022-03-29T01:52:40.000Z</updated>
-    <summary type="html">Other</summary>
-    <content type="html"><![CDATA[<p align="center"> 
-  <img src="https://metrics.lecoq.io/xlc520?template=classic&isocalendar=1&languages=1&people=1&activity=1&achievements=1&lines=1&repositories=1&notable=1&introduction=1&pagespeed=1&repositories=100&repositories.batch=100&repositories.forks=false&repositories.affiliations=owner&isocalendar.duration=full-year&languages.limit=8&languages.threshold=0%&languages.colors=github&languages.sections=most-used&languages.indepth=false&languages.analysis.timeout=15&languages.categories=markup%2C programming&languages.recent.categories=markup%2C programming&languages.recent.load=300&languages.recent.days=14&people.limit=24&people.identicons=false&people.identicons.hide=false&people.size=28&people.types=followers%2C following&people.shuffle=false&activity.limit=5&activity.load=300&activity.days=14&activity.visibility=all&activity.timestamps=false&activity.filter=all&achievements.threshold=C&achievements.secrets=true&achievements.display=detailed&achievements.limit=0&notable.from=organization&notable.repositories=false&notable.indepth=false&notable.types=commit&repositories.featured= xlc520%2Fxlc520.github.io&introduction.title=true&pagespeed.url=xlc520.github.io&pagespeed.detailed=false&pagespeed.screenshot=false&config.timezone=Asia%2FShanghai" /> 
-</p>
-<p align="center"> 
-  您是第  <img src="https://profile-counter.glitch.me/xlc520/count.svg" />  位访问者
-</p>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="other"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-14T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">SSH客户端软件</title>
-    <id>https://xlc520.github.io/other/SSH%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6.html</id>
-    <link href="https://xlc520.github.io/other/SSH%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
-    <summary type="html">SSH客户端软件</summary>
-    <content type="html"><![CDATA[<h1 id="ssh客户端软件" tabindex="-1"> SSH客户端软件</h1>
-<p>SSH客户端是在管理和配置Linux服务器用到很多的软件了，一款好的SSH管理软件不但可以让你更好地执行<a href="https://www.v1tx.com/post/linux-commands/" target="_blank" rel="noopener noreferrer">Linux命令</a>，对于工作效率的提升也是非常明显，在本文中我们就来介绍几款非常好用的SSH客户端软件</p>
-<h2 id="xshell" tabindex="-1"> Xshell</h2>
-<p>Xshell Plus Linux连接SSH工具 v7.0.0092 特别版</p>
-<p>https://lanzoui.com/b010yn1di</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019103708637-800x493.jpg" alt="Xshell" loading="lazy"></p>
-<p><a href="https://www.netsarang.com/zh/xshell/" target="_blank" rel="noopener noreferrer">Xshell</a> 是国内比较流行的SSH软件，和其他的SSH客户端相比，Xshell更加注重用户体验的一些东西，比如其现代化的界面，多种语言包括简体中文支持，代码高亮等，对于新手非常友好。</p>
-<p>Xshell中还提供了一些高级功能，比如标签管理、批量命令等，不过有一些为高级功能，需要升级付费版才能使用，当然，因为现在很多操作都可以在<a href="https://www.v1tx.com/post/best-hosting-control-panels/" target="_blank" rel="noopener noreferrer">网站面板</a>完成，对于新手来说，其实Xshell免费版本已经足够了，而专业人员使用频率足够高的话付费购买也是非常值得的</p>
-<h2 id="finalshell" tabindex="-1"> Finalshell</h2>
-<p>FinalShell v3.9.2 破解版SSH工具</p>
-<p>https://lanzoui.com/iAZxSx022ah</p>
-<ul>
-<li>点击菜单-&gt;激活/升级-&gt;登陆/激活，即破解离线激活高级版！</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190911171724.jpg" alt="img" loading="lazy"></p>
-<p><a href="http://www.hostbuf.com/" target="_blank" rel="noopener noreferrer">Finalshell</a> 是一款国人开发的远程连接工具，支持 Windows、Linux 和 macOS，通过界面我们可以看出这款软件非常强大，你不仅可以在远程窗口上执行命令，还可以实时监测到系统的消耗，比如CPU、内存、网络等资源的使用量</p>
-<p>Finalshell 还有比较方便的一点就是文件的传输，在软件的右下角有一个文件夹管理界面，让你可以像在<a href="https://www.v1tx.com/post/best-ftp-client/" target="_blank" rel="noopener noreferrer">FTP软件</a>中那样传输文件，支持右键上传下载，支持鼠标拖拽文件上传到服务器，省去了很多命令行的繁琐步骤</p>
-<p>除了基础功能，Finalshell 还可以升级到专业版，包括打包传输、高级网络监控、高级进程管理、多地点ping监控等</p>
-<h2 id="windterm-v2-2-0" tabindex="-1"> WindTerm v2.2.0</h2>
-<p>连接SSH/Telnet/Serial/Shell/Sftp开源工具</p>
-<p>项目地址:https://github.com/kingToolbox/WindTerm/
-https://lanzoui.com/iafhqwr0fba</p>
-<h2 id="nxshell-v1-4-6" tabindex="-1"> NxShell v1.4.6</h2>
-<p>绿色版/安装版 : https://lanzoui.com/b010z3paf</p>
-<h2 id="mobaxterm" tabindex="-1"> MobaXterm</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019101843976-800x496.jpg" alt="MobaXterm" loading="lazy"></p>
-<p><a href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener noreferrer">MobaXterm</a> 是一个功能强大的SSH工具，除了支持基本的SSH终端管理外，还有非常多的增强和扩展功能</p>
-<ul>
-<li>有绿色版本软件，使用方便</li>
-<li>多标签管理，随时切换</li>
-<li>支持SSH、Telent、FTP、SFTP等多种协议</li>
-<li>支持RDP远程连接Windows</li>
-<li>图形化SFTP管理，可上传下载文件</li>
-<li>内置MobaTextEditor，可以直接在服务端编辑和保存文件</li>
-<li>应用内分屏，最多支持4个屏幕</li>
-<li>支持安装插件</li>
-</ul>
-<p>MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协议的支持，让其不管是Linux、Windows还是VNC等，都可以在一个软件中进行操作管理，配合内置的SFTP文件管理和MobaTextEditor，可以让远程终端文件管理更加便捷</p>
-<p><a href="https://www.v1tx.com/post/mobaxterm/" target="_blank" rel="noopener noreferrer">MobaXterm 多功能的Windows终端工具</a></p>
-<h2 id="termius" tabindex="-1"> Termius</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200101100956-1024x670.jpg" alt="img" loading="lazy"></p>
-<p><a href="https://termius.com/" target="_blank" rel="noopener noreferrer">Termius</a> 是一款全平台的SSH客户端，该软件最大的特点就是支持全部平台，包括Windows、Mac、Linux、iOS、Android等，有了移动设备支持，只要有网络，你可以在任何时间地点管理服务器</p>
-<p>如果你的工作经常用到SSH连接，还可以升级高级版实现全平台同步，全平台的好处就是只要你在一个平台添加或修改了服务器，其他平台会自动同步，随时随地管理主机，而且也不用在手机上输入复杂的密码了</p>
-<p>在功能上，Termius 也有很多实用的东西，比如SFTP、代码片段、选项卡等，可以省下很多事情</p>
-<h2 id="putty" tabindex="-1"> PuTTY</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019163024711-800x505.jpg" alt="PuTTY" loading="lazy"></p>
-<p><a href="https://www.putty.org/" target="_blank" rel="noopener noreferrer">PuTTY</a> 是一款开源免费的SSH客户端，支持SCP，SSH，Telnet，rlogin等多种网络协议，该软件的特点非常小巧，大小只有1M左右， 而且有绿色版本下载下来就能使用，再加上其开源的特性，很多人都一直在使用PuTTY管理Linux服务器，不过由于软件是全英文的界面，而且有些东西需要学习设置，对新手来说可能并不是那么友好</p>
-<h2 id="simpleremote" tabindex="-1"> SimpleRemote</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190911170438-1024x568.jpg" alt="img" loading="lazy"></p>
-<p><a href="http://www.91fk.net/" target="_blank" rel="noopener noreferrer">SimpleRemote</a> 是一款免费开源的远程连接管理工具，软件非常的小巧，解压后只有不到3MB的大小</p>
-<p>虽然是一款很小的软件，但是基本远程连接功能都有，比如常用的多标签、配色方案、密钥连接、RDP、Telnet等，对于大多数人来说，功能完全够用，而且对于重要的信息，还可以为SimpleRemote设置打开密码，只有输入正确的密码才能使用</p>
-<h2 id="zoc-terminal" tabindex="-1"> ZOC Terminal</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019171854023-800x570.jpg" alt="ZOC Terminal" loading="lazy"></p>
-<p><a href="https://www.emtec.com/zoc/" target="_blank" rel="noopener noreferrer">ZOC Terminal</a> 是一款强大的终端模拟器，其支持Windows和Mac平台，软件使用很方便，可以快速连接、也可以保存主机，支持多标签、多窗口，如果你对基础的界面不满意，还可以定制样式，包括背景、字体、颜色等，组成自己喜欢的界面，不过这款软件并没有提供免费版本，需要付费购买</p>
-<h2 id="juicessh" tabindex="-1"> JuiceSSH</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20201202073329-1024x499.jpg" alt="Android SSH客户端 JuiceSSH" loading="lazy"></p>
-<p><a href="https://juicessh.com/" target="_blank" rel="noopener noreferrer">JuiceSSH</a> 是一款Android上的免费SSH客户端，你可以用它快速连接到Linux服务器，也可以添加账号密码或密钥保存多台机器，Juice 让你在手机上就能非常方便地执行这些操作</p>
-<p>它的主要功能有</p>
-<ul>
-<li>全彩色终端显示，多个主题可选</li>
-<li>轻松输入，弹出键盘可以方便地输入常用的特殊字符</li>
-<li>Telnet 和 本地 Shell 命令执行</li>
-<li>第三方插件支持，比如性能监控、OpenSSH导入等</li>
-<li>其他高级功能</li>
-</ul>
-<p>对于想要在安卓手机上管理服务器的人来说，JuiceSSH 是一个非常好的选择，免费版本以及足够使用，付费版还有更多强大功能，包括端口转发、自动执行代码段、快捷方式等，能够极大提升运维效率</p>
-<h2 id="servercat" tabindex="-1"> ServerCat</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20201202073517-1024x515.jpg" alt="iOS SSH客户端 ServerCat" loading="lazy"></p>
-<p><a href="https://apps.apple.com/cn/app/servercat-linux-%E7%9B%91%E6%8E%A7-ssh-%E7%BB%88%E7%AB%AF/id1501532023" target="_blank" rel="noopener noreferrer">ServerCat</a> 是一款iOS平台上的Linux管理软件，它可以让你在iPhone上连接远程服务器，用来监视系统性能、管理Docker和执行SSH命令，软件内提供了很多监控参数，比如CPU、内存、系统负载、网速、硬盘等，并且以可视化的形式展示，你可以随时查看自己服务器的系统状态，避免因负载过高则影响产品服务</p>
-<h2 id="shellfish" tabindex="-1"> ShellFish</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20210719141114-1024x517.jpg" alt="iPhone和iPad上的SSH客户端 ShellFish" loading="lazy"></p>
-<p><a href="https://apps.apple.com/cn/app/secure-shellfish/id1336634154" target="_blank" rel="noopener noreferrer">ShellFish</a> 是一款SFTP和SSH结合的软件，支持iPhone和iPad，你可以用它来连接远程服务并管理上面的文件，它专为移动设备做了很多优化，比如你可以使用SFTP管理服务器上的文件，使用专用键盘执行命令，创建代码片段快速使用等，而且还有一个很不错的地方在于它是支持<a href="https://www.v1tx.com/post/shortcuts/" target="_blank" rel="noopener noreferrer">快捷指令</a>的，你可以和其他APP配合使用，使用语音执行命令等</p>
 ]]></content>
     <author>
       <name>xlc520</name>
