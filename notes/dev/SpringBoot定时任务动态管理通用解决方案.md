@@ -1,27 +1,25 @@
 ---
 author: xlc520
-title: SpringBoot 定时任务动态管理通用解决方案
-description: SpringBoot 定时任务动态管理通用解决方案
-date: 2022-03-19
+title: SpringBoot定时任务动态管理通用解决方案
+description: 
+date: 2022-05-25
 category: Java
 tag: Java
 article: true
 timeline: true
-icon: 
+icon: java
 password: 
 ---
 
-# SpringBoot 定时任务动态管理通用解决方案
 
-## **[一、功能说明](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)**
 
-SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改
+# SpringBoot定时任务动态管理通用解决方案
 
-> 基于 Spring Boot + MyBatis Plus + Vue & Element 实现的后台管理系统 + 用户小程序，支持 RBAC 动态权限、多租户、数据权限、工作流、三方登录、支付、短信、商城等功能。
->
-> 项目地址：https://github.com/YunaiV/ruoyi-vue-pro
+## 一、功能说明
 
-## **[二、快速使用](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)**
+  SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改
+
+## 二、快速使用
 
 具体的功能已经封装成SpringBoot-starter即插即用
 
@@ -34,20 +32,14 @@ SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任
 ```
 
 使用方法和源码：
+码云：https://gitee.com/qiaodaimadewangcai/super-scheduled
+github：[https://github.com/guoyixing/super-scheduled](https://github.com/guoyixing/super-scheduled/)
 
-> 码云：https://gitee.com/qiaodaimadewangcai/super-scheduled
->
-> github：https://github.com/guoyixing/super-scheduled
+## 三、实现原理
 
-> 基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。
->
-> 项目地址：https://github.com/YunaiV/onemall
+### 1、动态管理实现
 
-## **[三、实现原理](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)**
-
-#### [1、动态管理实现](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
-
-(1) 配置管理介绍
+#### (1) 配置管理介绍
 
 ```java
 @Component("superScheduledConfig")
@@ -71,17 +63,18 @@ public class SuperScheduledConfig {
      * 定时任务名称与定时任务的源信息  的关联关系容器
      */
     private Map<String, ScheduledSource> nameToScheduledSource = new ConcurrentHashMap<>();
- /* 普通的get/sets省略 */
+	/* 普通的get/sets省略 */
 }
 ```
 
-(2) 使用后处理器拦截SpringBoot原本的定时任务
+#### (2) 使用后处理器拦截SpringBoot原本的定时任务
 
-- 实现ApplicationContextAware接口拿到SpringBoot的上下文
-- 实现BeanPostProcessor接口，将这个类标记为后处理器，后处理器会在每个bean实例化之后执行
-- 使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
-- 主要实现逻辑在postProcessAfterInitialization()方法中
+1、实现ApplicationContextAware接口拿到SpringBoot的上下文
+2、实现BeanPostProcessor接口，将这个类标记为后处理器，后处理器会在每个bean实例化之后执行
+3、使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
+4、主要实现逻辑在postProcessAfterInitialization()方法中
 
+![image-20220524212320260](E:\source\blogImage\image-20220524212320260.png)
 
 ```java
 @DependsOn({"superScheduledConfig"})
@@ -118,7 +111,7 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
         //循环处理对每个方法逐一处理
         if (methods.length > 0) {
             for (Method method : methods) {
-             //3.尝试在该方法上获取@Scheduled注解（SpringBoot的定时任务注解）
+            	//3.尝试在该方法上获取@Scheduled注解（SpringBoot的定时任务注解）
                 Scheduled annotation = method.getAnnotation(Scheduled.class);
                 //如果无法获取到@Scheduled注解，就跳过这个方法
                 if (annotation == null) {
@@ -136,7 +129,7 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
                 //将以key-value的形式，将源数据存入配置管理器中，key：定时任务的名称 value：源数据
                 superScheduledConfig.addScheduledSource(name, scheduledSource);
                 try {
-                 //5.将原本SpringBoot的定时任务取消掉
+                	//5.将原本SpringBoot的定时任务取消掉
                     clearOriginalScheduled(annotation);
                 } catch (Exception e) {
                     throw new SuperScheduledException("在关闭原始方法" + beanName + method.getName() + "时出现错误");
@@ -174,14 +167,14 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
 }
 ```
 
-(3) 使用ApplicationRunner初始化自定义的定时任务运行器
+#### (3) 使用ApplicationRunner初始化自定义的定时任务运行器
 
-- 实现ApplicationContextAware接口拿到SpringBoot的上下文
-- 使用@DependsOn注解强制依赖threadPoolTaskScheduler类
-- 实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
-- 主要实现逻辑在run()方法中
+1、实现ApplicationContextAware接口拿到SpringBoot的上下文
+2、使用@DependsOn注解强制依赖threadPoolTaskScheduler类
+3、实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
+4、主要实现逻辑在run()方法中
 
-
+![image-20220524212339560](E:\source\blogImage\image-20220524212339560.png)
 
 ```java
 @DependsOn("threadPoolTaskScheduler")
@@ -190,8 +183,8 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
     protected final Log logger = LogFactory.getLog(getClass());
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private ApplicationContext applicationContext;
- 
- /**
+	
+	/**
      * 定时任务配置管理器
      */
     @Autowired
@@ -204,7 +197,7 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
 
     @Override
     public void run(ApplicationArguments args) {
-     //1.定时任务配置管理器中缓存  定时任务执行线程
+    	//1.定时任务配置管理器中缓存  定时任务执行线程
         superScheduledConfig.setTaskScheduler(threadPoolTaskScheduler);
         //2.获取所有定时任务源数据
         Map<String, ScheduledSource> nameToScheduledSource = superScheduledConfig.getNameToScheduledSource();
@@ -222,7 +215,7 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
             //6.逐一处理增强类（增强器实现原理后面具体分析）
             List<Point> points = new ArrayList<>(baseStrengthenBeanNames.length);
             for (String baseStrengthenBeanName : baseStrengthenBeanNames) {
-             //7.将增强器代理成point
+            	//7.将增强器代理成point
                 Object baseStrengthenBean = applicationContext.getBean(baseStrengthenBeanName);
                 //创建代理
                 Point proxy = ProxyUtils.getInstance(Point.class, new RunnableBaseInterceptor(baseStrengthenBean, runnable));
@@ -230,12 +223,12 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
                 //8.所有的points连成起来
                 points.add(proxy);
             }
-   //将point形成调用链
+			//将point形成调用链
             runnable.setChain(new Chain(points));
             //将执行逻辑封装并缓存到定时任务配置管理器中
             superScheduledConfig.addRunnable(name, runnable::invoke);
             try {
-             //8.启动定时任务
+            	//8.启动定时任务
                 ScheduledFuture<?> schedule = ScheduledFutureFactory.create(threadPoolTaskScheduler
                         , scheduledSource, runnable::invoke);
                 //将线程回调钩子存到任务配置管理器中
@@ -255,7 +248,7 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
 }
 ```
 
-(4) 进行动态管理
+#### (4) 进行动态管理
 
 ```java
 @Component
@@ -432,11 +425,11 @@ public class SuperScheduledManager {
 }
 ```
 
-#### [2、增强接口实现](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&scene=21#wechat_redirect)
+### 2、增强接口实现
 
 增强器实现的整体思路与SpringAop的思路一致，实现没有Aop复杂
 
-(1) 增强接口
+#### (1) 增强接口
 
 ```java
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -481,7 +474,7 @@ public interface BaseStrengthen {
 }
 ```
 
-(2) 代理抽象类
+#### (2) 代理[抽象类](https://so.csdn.net/so/search?q=抽象类&spm=1001.2101.3001.7020)
 
 ```java
 public abstract class Point {
@@ -500,7 +493,7 @@ public abstract class Point {
 }
 ```
 
-(3) 调用链类
+#### (3) 调用链类
 
 ```java
 public class Chain {
@@ -522,7 +515,7 @@ public class Chain {
 }
 ```
 
-(4) cglib动态代理实现
+#### (4) [cglib](https://so.csdn.net/so/search?q=cglib&spm=1001.2101.3001.7020)动态代理实现
 
 使用cglib代理增强器，将增强器全部代理成调用链节点Point
 
@@ -542,24 +535,24 @@ public class RunnableBaseInterceptor implements MethodInterceptor {
         Object result;
         //如果执行的是invoke()方法
         if ("invoke".equals(method.getName())) {
-         //前置强化方法
+        	//前置强化方法
             strengthen.before(obj, method, args);
             try {
-             //调用执行器中的invoke()方法
+            	//调用执行器中的invoke()方法
                 result = runnable.invoke();
             } catch (Exception e) {
-             //异常强化方法
+            	//异常强化方法
                 strengthen.exception(obj, method, args);
                 throw new SuperScheduledException(strengthen.getClass() + "中强化执行时发生错误", e);
             } finally {
-             //Finally强化方法，出现异常也会执行
+            	//Finally强化方法，出现异常也会执行
                 strengthen.afterFinally(obj, method, args);
             }
             //后置强化方法
             strengthen.after(obj, method, args);
 
         } else {
-         //直接执行方法
+        	//直接执行方法
             result = methodProxy.invokeSuper(obj, args);
         }
         return result;
@@ -580,7 +573,7 @@ public class RunnableBaseInterceptor implements MethodInterceptor {
 }
 ```
 
-(5) 定时任务执行器实现
+#### (5) 定时任务执行器实现
 
 ```java
 public class SuperScheduledRunnable {
@@ -625,9 +618,9 @@ public class SuperScheduledRunnable {
 }
 ```
 
-(6) 增强器代理逻辑
+#### (6) 增强器代理逻辑
 
-`com.gyx.superscheduled.core.SuperScheduledApplicationRunner`类中的代码片段
+com.gyx.superscheduled.core.SuperScheduledApplicationRunner类中的代码片段
 
 ```java
 //创建执行控制器
@@ -638,7 +631,7 @@ runnable.setBean(scheduledSource.getBean());
 List<Point> points = new ArrayList<>(baseStrengthenBeanNames.length);
 //循环所有的增强器的beanName
 for (String baseStrengthenBeanName : baseStrengthenBeanNames) {
- //获取增强器的bean对象
+	//获取增强器的bean对象
     Object baseStrengthenBean = applicationContext.getBean(baseStrengthenBeanName);
     //将增强器代理成Point节点
     Point proxy = ProxyUtils.getInstance(Point.class, new RunnableBaseInterceptor(baseStrengthenBean, runnable));
@@ -650,4 +643,3 @@ for (String baseStrengthenBeanName : baseStrengthenBeanNames) {
 //执行控制器中设置调用链
 runnable.setChain(new Chain(points));
 ```
-
