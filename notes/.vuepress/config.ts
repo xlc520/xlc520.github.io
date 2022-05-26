@@ -1,10 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme";
-import { searchPlugin } from "@vuepress/plugin-search";
-
-import smplayer from "vuepress-plugin-smplayer";
-import type { SmPlayerPluginOption } from "vuepress-plugin-smplayer/types";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+// import { searchPlugin } from "@vuepress/plugin-search";
+import pluginFullTextSearch from "vuepress2-plugin-full-text-search";
 
 export default defineUserConfig({
   lang: "zh-CN",
@@ -34,15 +31,16 @@ export default defineUserConfig({
 
   plugins: [
     [
-    searchPlugin({
-      locales: {
-        "/": {
-          placeholder: "搜索",
-        },
-      },
-      hotKeys:['s', '/'],
-      maxSuggestions: 13,//指定搜索结果的最大条数
-    }),
+      pluginFullTextSearch,
+    // searchPlugin({
+    //   locales: {
+    //     "/": {
+    //       placeholder: "搜索",
+    //     },
+    //   },
+    //   hotKeys:['s', '/'],
+    //   maxSuggestions: 13,//指定搜索结果的最大条数
+    // }),
   
   ],
   
