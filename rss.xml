@@ -6,8 +6,8 @@
     <link>https://xlc520.github.io/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 26 May 2022 03:45:31 GMT</pubDate>
-    <lastBuildDate>Thu, 26 May 2022 03:45:31 GMT</lastBuildDate>
+    <pubDate>Thu, 26 May 2022 05:06:54 GMT</pubDate>
+    <lastBuildDate>Thu, 26 May 2022 05:06:54 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Java</category>
@@ -25,6 +25,734 @@
     <category>Git</category>
     <category>Euserv</category>
     <category>linux</category>
+    <item>
+      <title>Quartz - 任务调度框架整合使用</title>
+      <link>https://xlc520.github.io/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html</link>
+      <guid>https://xlc520.github.io/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">Quartz - 任务调度框架整合使用</source>
+      <category>Java</category>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="quartz-任务调度框架整合使用" tabindex="-1"> Quartz - 任务调度框架整合使用</h1>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548287.png" alt="图片" loading="lazy"></p>
+<p>各种实现自定义定时任务的方案，从Quartz到Xxl-job，再到Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz 的保姆级教程，在这里分享给大家；</p>
+<h2 id="_1前言" tabindex="-1"> 1前言</h2>
+<p>项目中遇到一个，需要 客户自定任务启动时间 的需求。原来一直都是在项目里硬编码一些定时器，所以没有学习过。</p>
+<p>很多开源的项目管理框架都已经做了 Quartz 的集成。我们居然连这么常用得东西居然没有做成模块化，实在是不应该。</p>
+<p>Quartz是<code>OpenSymphony</code>开源组织在<code>Job scheduling</code>领域又一个开源项目，完全由Java开发，可以用来执行定时任务，类似于<code>java.util.Timer</code>。但是相较于Timer， Quartz增加了很多功能：</p>
+<ul>
+<li>持久性作业 - 就是保持调度定时的状态;</li>
+<li>作业管理 - 对调度作业进行有效的管理;</li>
+</ul>
+<p>官方文档：</p>
+<ul>
+<li>http://www.quartz-scheduler.org/documentation/</li>
+<li>http://www.quartz-scheduler.org/api/2.3.0/index.html</li>
+</ul>
+<h2 id="_2基础使用" tabindex="-1"> 2基础使用</h2>
+<p>Quartz 的核心类有以下三部分：</p>
+<ul>
+<li><strong>任务 Job ：</strong> 需要实现的任务类，实现 <code>execute()</code> 方法，执行后完成任务。</li>
+<li><strong>触发器 Trigger ：</strong> 包括 <code>SimpleTrigger</code> 和 <code>CronTrigger</code>。</li>
+<li><strong>调度器 Scheduler ：</strong> 任务调度器，负责基于 <code>Trigger</code>触发器，来执行 Job任务。</li>
+</ul>
+<p>主要关系如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548281.png" alt="图片" loading="lazy"></p>
+<h2 id="_3demo" tabindex="-1"> 3Demo</h2>
+<p>按照官网的 Demo，搭建一个纯 maven 项目，添加依赖：</p>
+<div><pre><code><span>&lt;!-- 核心包 --></span>
+<span><span><span>&lt;</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>groupId</span><span>></span></span>org.quartz-scheduler<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+    <span><span><span>&lt;</span>artifactId</span><span>></span></span>quartz<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;</span>version</span><span>></span></span>2.3.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+<span>&lt;!-- 工具包 --></span>
+<span><span><span>&lt;</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>groupId</span><span>></span></span>org.quartz-scheduler<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+    <span><span><span>&lt;</span>artifactId</span><span>></span></span>quartz-jobs<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;</span>version</span><span>></span></span>2.3.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>新建一个任务，实现了 <code>org.quartz.Job</code> 接口：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>MyJob</span> <span>implements</span> <span>Job</span> <span>{</span>
+    <span>@Override</span>
+    <span>public</span> <span>void</span> <span>execute</span><span>(</span><span>JobExecutionContext</span> context<span>)</span> <span>throws</span> <span>JobExecutionException</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"任务被执行了。。。"</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>main 方法，创建调度器、jobDetail 实例、trigger 实例、执行：</p>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+    <span>// 1.创建调度器 Scheduler</span>
+    <span>SchedulerFactory</span> factory <span>=</span> <span>new</span> <span>StdSchedulerFactory</span><span>(</span><span>)</span><span>;</span>
+    <span>Scheduler</span> scheduler <span>=</span> factory<span>.</span><span>getScheduler</span><span>(</span><span>)</span><span>;</span>
+
+    <span>// 2.创建JobDetail实例，并与MyJob类绑定(Job执行内容)</span>
+    <span>JobDetail</span> job <span>=</span> <span>JobBuilder</span><span>.</span><span>newJob</span><span>(</span><span>MyJob</span><span>.</span><span>class</span><span>)</span>
+        <span>.</span><span>withIdentity</span><span>(</span><span>"job1"</span><span>,</span> <span>"group1"</span><span>)</span>
+        <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+
+    <span>// 3.构建Trigger实例,每隔30s执行一次</span>
+    <span>Trigger</span> trigger <span>=</span> <span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span>
+        <span>.</span><span>withIdentity</span><span>(</span><span>"trigger1"</span><span>,</span> <span>"group1"</span><span>)</span>
+        <span>.</span><span>startNow</span><span>(</span><span>)</span>
+        <span>.</span><span>withSchedule</span><span>(</span><span>simpleSchedule</span><span>(</span><span>)</span>
+                      <span>.</span><span>withIntervalInSeconds</span><span>(</span><span>30</span><span>)</span>
+                      <span>.</span><span>repeatForever</span><span>(</span><span>)</span><span>)</span>
+        <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+
+    <span>// 4.执行，开启调度器</span>
+    scheduler<span>.</span><span>scheduleJob</span><span>(</span>job<span>,</span> trigger<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>System</span><span>.</span><span>currentTimeMillis</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    scheduler<span>.</span><span>start</span><span>(</span><span>)</span><span>;</span>
+
+    <span>//主线程睡眠1分钟，然后关闭调度器</span>
+    <span>TimeUnit</span><span>.</span>MINUTES<span>.</span><span>sleep</span><span>(</span><span>1</span><span>)</span><span>;</span>
+    scheduler<span>.</span><span>shutdown</span><span>(</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>System</span><span>.</span><span>currentTimeMillis</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>日志打印情况：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548282.png" alt="图片" loading="lazy"></p>
+<h2 id="_4jobdetail" tabindex="-1"> 4JobDetail</h2>
+<p>JobDetail 的作用是绑定 Job，是一个任务实例，它为 Job 添加了许多扩展参数。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548293.png" alt="图片" loading="lazy"></p>
+<p>每次<code>Scheduler</code>调度执行一个Job的时候，首先会拿到对应的Job，然后创建该Job实例，再去执行Job中的<code>execute()</code>的内容，任务执行结束后，关联的Job对象实例会被释放，且会被JVM GC清除。</p>
+<p><strong>为什么设计成JobDetail + Job，不直接使用Job？</strong></p>
+<p>JobDetail 定义的是任务数据，而真正的执行逻辑是在Job中。</p>
+<p>这是因为任务是有可能并发执行，如果Scheduler直接使用Job，就会存在对同一个Job实例并发访问的问题。</p>
+<p>而<code>JobDetail &amp; Job</code> 方式，Sheduler每次执行，都会根据JobDetail创建一个新的Job实例，这样就可以 规避并发访问 的问题。</p>
+<h2 id="_5jobexecutioncontext" tabindex="-1"> 5JobExecutionContext</h2>
+<ul>
+<li>当 <code>Scheduler</code> 调用一个 job，就会将 <code>JobExecutionContext</code> 传递给 Job 的 <code>execute()</code> 方法;</li>
+<li>Job 能通过 <code>JobExecutionContext</code> 对象访问到 Quartz 运行时候的环境以及 Job 本身的明细数据。</li>
+</ul>
+<p>任务实现的 <code>execute()</code> 方法，可以通过 context 参数获取。</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>Job</span> <span>{</span>
+    <span>void</span> <span>execute</span><span>(</span><span>JobExecutionContext</span> context<span>)</span>
+        <span>throws</span> <span>JobExecutionException</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 <code>Builder</code> 建造过程中，可以使用如下方法：</p>
+<div><pre><code><span>usingJobData</span><span>(</span><span>"tiggerDataMap"</span><span>,</span> <span>"测试传参"</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><p>在 <code>execute</code> 方法中获取：</p>
+<div><pre><code>context<span>.</span><span>getTrigger</span><span>(</span><span>)</span><span>.</span><span>getJobDataMap</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span><span>"tiggerDataMap"</span><span>)</span><span>;</span>
+context<span>.</span><span>getJobDetail</span><span>(</span><span>)</span><span>.</span><span>getJobDataMap</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span><span>"tiggerDataMap"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="_6job-状态参数" tabindex="-1"> 6Job 状态参数</h2>
+<p>有状态的 job 可以理解为多次 job调用期间可以持有一些状态信息，这些状态信息存储在 <code>JobDataMap</code> 中。</p>
+<p>而默认的无状态 job，每次调用时都会创建一个新的 <code>JobDataMap</code>。</p>
+<p>示例如下：</p>
+<div><pre><code><span>//多次调用 Job 的时候，将参数保留在 JobDataMap</span>
+<span>@PersistJobDataAfterExecution</span>
+<span>public</span> <span>class</span> <span>JobStatus</span> <span>implements</span> <span>Job</span> <span>{</span>
+    <span>@Override</span>
+    <span>public</span> <span>void</span> <span>execute</span><span>(</span><span>JobExecutionContext</span> context<span>)</span> <span>throws</span> <span>JobExecutionException</span> <span>{</span>
+        <span>long</span> count <span>=</span> <span>(</span><span>long</span><span>)</span> context<span>.</span><span>getJobDetail</span><span>(</span><span>)</span><span>.</span><span>getJobDataMap</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span><span>"count"</span><span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"当前执行，第"</span> <span>+</span> count <span>+</span> <span>"次"</span><span>)</span><span>;</span>
+        context<span>.</span><span>getJobDetail</span><span>(</span><span>)</span><span>.</span><span>getJobDataMap</span><span>(</span><span>)</span><span>.</span><span>put</span><span>(</span><span>"count"</span><span>,</span> <span>++</span>count<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+<span>JobDetail</span> job <span>=</span> <span>JobBuilder</span><span>.</span><span>newJob</span><span>(</span><span>JobStatus</span><span>.</span><span>class</span><span>)</span>
+                <span>.</span><span>withIdentity</span><span>(</span><span>"statusJob"</span><span>,</span> <span>"group1"</span><span>)</span>
+                <span>.</span><span>usingJobData</span><span>(</span><span>"count"</span><span>,</span> <span>1L</span><span>)</span>
+                <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>输出结果：</p>
+<div><pre><code>当前执行，第1次
+<span>[</span>main<span>]</span> INFO org.quartz.core.QuartzScheduler - Scheduler DefaultQuartzScheduler_<span>$_NON_CLUSTERED</span> started.
+当前执行，第2次
+当前执行，第3次
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h2 id="_7trigger" tabindex="-1"> 7Trigger</h2>
+<h3 id="定时启动-关闭" tabindex="-1"> 定时启动/关闭</h3>
+<p><code>Trigger</code> 可以设置任务的开始结束时间， <code>Scheduler</code> 会根据参数进行触发。</p>
+<div><pre><code><span>Calendar</span> instance <span>=</span> <span>Calendar</span><span>.</span><span>getInstance</span><span>(</span><span>)</span><span>;</span>
+<span>Date</span> startTime <span>=</span> instance<span>.</span><span>getTime</span><span>(</span><span>)</span><span>;</span>
+instance<span>.</span><span>add</span><span>(</span><span>Calendar</span><span>.</span>MINUTE<span>,</span> <span>1</span><span>)</span><span>;</span>
+<span>Date</span> endTime <span>=</span> instance<span>.</span><span>getTime</span><span>(</span><span>)</span><span>;</span>
+
+<span>// 3.构建Trigger实例</span>
+<span>Trigger</span> trigger <span>=</span> <span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span>
+    <span>.</span><span>withIdentity</span><span>(</span><span>"trigger1"</span><span>,</span> <span>"group1"</span><span>)</span>
+    <span>// 开始时间</span>
+    <span>.</span><span>startAt</span><span>(</span>startTime<span>)</span>
+    <span>// 结束时间</span>
+    <span>.</span><span>endAt</span><span>(</span>endTime<span>)</span>
+    <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>在 job 中也能拿到对应的时间，并进行业务判断</p>
+<div><pre><code><span>public</span> <span>void</span> <span>execute</span><span>(</span><span>JobExecutionContext</span> context<span>)</span> <span>throws</span> <span>JobExecutionException</span> <span>{</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"任务执行。。。"</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>context<span>.</span><span>getTrigger</span><span>(</span><span>)</span><span>.</span><span>getStartTime</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>context<span>.</span><span>getTrigger</span><span>(</span><span>)</span><span>.</span><span>getEndTime</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>运行结果：</p>
+<div><pre><code><span>[</span>main<span>]</span> INFO <span><span>org<span>.</span>quartz<span>.</span>impl<span>.</span></span>StdSchedulerFactory</span> <span>-</span> <span>Quartz</span> scheduler version<span>:</span> <span>2.3</span><span>.0</span>
+<span>1633149326723</span>
+任务执行。。。
+<span>Sat</span> <span>Oct</span> <span>02</span> <span>12</span><span>:</span><span>35</span><span>:</span><span>26</span> CST <span>2021</span>
+<span>Sat</span> <span>Oct</span> <span>02</span> <span>12</span><span>:</span><span>36</span><span>:</span><span>26</span> CST <span>2021</span>
+<span>[</span>main<span>]</span> INFO <span><span>org<span>.</span>quartz<span>.</span>core<span>.</span></span>QuartzScheduler</span> <span>-</span> <span>Scheduler</span> <span>DefaultQuartzScheduler_</span>$_NON_CLUSTERED started<span>.</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_8simpletrigger" tabindex="-1"> 8SimpleTrigger</h2>
+<p>这是比较简单的一类触发器，用它能实现很多基础的应用。使用它的主要场景包括：</p>
+<ul>
+<li>
+<p><strong>在指定时间段内，执行一次任务</strong></p>
+<p>最基础的 Trigger 不设置循环，设置开始时间。</p>
+</li>
+<li>
+<p><strong>在指定时间段内，循环执行任务</strong></p>
+<p>在 1 基础上加上循环间隔。可以指定 永远循环、运行指定次数</p>
+<div><pre><code><span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span>
+    <span>.</span><span>withSchedule</span><span>(</span><span>SimpleScheduleBuilder</span>
+                  <span>.</span><span>simpleSchedule</span><span>(</span><span>)</span>
+                  <span>.</span><span>withIntervalInSeconds</span><span>(</span><span>30</span><span>)</span>
+                  <span>.</span><span>repeatForever</span><span>(</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p><code>withRepeatCount(count)</code> 是重复次数，实际运行次数为 <code>count+1</code></p>
+</blockquote>
+<div><pre><code><span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span>
+    <span>.</span><span>withSchedule</span><span>(</span><span>SimpleScheduleBuilder</span>
+                  <span>.</span><span>simpleSchedule</span><span>(</span><span>)</span>
+                  <span>.</span><span>withIntervalInSeconds</span><span>(</span><span>30</span><span>)</span>
+                  <span>.</span><span>withRepeatCount</span><span>(</span><span>5</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div></li>
+<li>
+<p><strong>立即开始，指定时间结束</strong></p>
+<p>这个，略。</p>
+</li>
+</ul>
+<h2 id="_9crontrigger" tabindex="-1"> 9CronTrigger</h2>
+<p><code>CronTrigger</code> 是基于日历的任务调度器，在实际应用中更加常用。</p>
+<p>虽然很常用，但是知识点都一样，只是可以通过表达式来设置时间而已。</p>
+<p>使用方式就是绑定调度器时换一下：</p>
+<div><pre><code>TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("* * * * * ?"))
+</code></pre><div aria-hidden="true"><div></div></div></div><p>Cron 表达式这里不介绍，贴个图跳过</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548294.png" alt="图片" loading="lazy"></p>
+<p>顺便推荐一个非常好用的Cron 表达式在线生成，反解析的工具：www.matools.com/cron 非常好用，点几下，就能得到自己想要的cron表达式；</p>
+<h2 id="_10springboot-整合" tabindex="-1"> 10SpringBoot 整合</h2>
+<p>下面集成应用截图来自 Ruoyi 框架：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548295.png" alt="图片" loading="lazy"></p>
+<p>从上面的截图中，可以看到这个定时任务模块实现了：</p>
+<ul>
+<li>cron表达式定时执行</li>
+<li>并发执行</li>
+<li>错误策略</li>
+<li>启动执行、暂停执行</li>
+</ul>
+<p>如果再加上：设置启动时间、停止时间 就更好了。不过启停时间只是调用两个方法而已，也就不写了。</p>
+<p>这一部分就主要是看 RuoYi 框架 代码，然后加一点我需要用的功能。</p>
+<p>前端部分就不写了，全部用 swagger 代替，一些基础字段也删除了，仅复制主体功能。</p>
+<p>已完成代码示例：</p>
+<blockquote>
+<p>https://gitee.com/qianwei4712/code-of-shiva/tree/master/quartz</p>
+</blockquote>
+<h2 id="_11环境准备" tabindex="-1"> 11环境准备</h2>
+<p>从 springboot 2.4.10 开始，添加 quartz 的 maven 依赖：</p>
+<div><pre><code><span>&lt;!--  Quartz 任务调度 --></span>
+<span><span><span>&lt;</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+    <span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-quartz<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>application 配置文件：</p>
+<div><pre><code><span># 开发环境配置</span>
+<span>server</span><span>:</span>
+  <span># 服务器的HTTP端口</span>
+  <span>port</span><span>:</span> <span>80</span>
+  <span>servlet</span><span>:</span>
+    <span># 应用的访问路径</span>
+    <span>context-path</span><span>:</span> /
+  <span>tomcat</span><span>:</span>
+    <span># tomcat的URI编码</span>
+    <span>uri-encoding</span><span>:</span> UTF<span>-</span><span>8</span>
+
+<span>spring</span><span>:</span>
+  <span>datasource</span><span>:</span>
+    <span>username</span><span>:</span> root
+    <span>password</span><span>:</span> root
+    <span>url</span><span>:</span> jdbc<span>:</span>mysql<span>:</span>//127.0.0.1<span>:</span>3306/quartz<span>?</span>useUnicode=true<span>&amp;characterEncoding=utf-8&amp;useSSL=true</span>
+    <span>driver-class-name</span><span>:</span> com.mysql.cj.jdbc.Driver
+
+    <span># HikariPool 较佳配置</span>
+    <span>hikari</span><span>:</span>
+      <span># 客户端（即您）等待来自池的连接的最大毫秒数</span>
+      <span>connection-timeout</span><span>:</span> <span>60000</span>
+      <span># 控制将测试连接的活动性的最长时间</span>
+      <span>validation-timeout</span><span>:</span> <span>3000</span>
+      <span># 控制允许连接在池中保持空闲状态的最长时间</span>
+      <span>idle-timeout</span><span>:</span> <span>60000</span>
+
+      <span>login-timeout</span><span>:</span> <span>5</span>
+      <span># 控制池中连接的最大生存期</span>
+      <span>max-lifetime</span><span>:</span> <span>60000</span>
+      <span># 控制允许池达到的最大大小，包括空闲和使用中的连接</span>
+      <span>maximum-pool-size</span><span>:</span> <span>10</span>
+      <span># 控制HikariCP尝试在池中维护的最小空闲连接数</span>
+      <span>minimum-idle</span><span>:</span> <span>10</span>
+      <span># 控制默认情况下从池获得的连接是否处于只读模式</span>
+      <span>read-only</span><span>:</span> <span>false</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Quartz 自带有数据库模式，脚本都是现成的：</p>
+<p>下载这个脚本：</p>
+<blockquote>
+<p>https://gitee.com/qianwei4712/code-of-shiva/blob/master/quartz/quartz.sql</p>
+</blockquote>
+<p>保存任务的数据库表：</p>
+<div><pre><code><span>CREATE</span> <span>TABLE</span> <span><span>`</span>quartz_job<span>`</span></span> <span>(</span>
+  <span><span>`</span>job_id<span>`</span></span> <span>bigint</span><span>(</span><span>20</span><span>)</span> <span>NOT</span> <span>NULL</span> <span>AUTO_INCREMENT</span> <span>COMMENT</span> <span>'任务ID'</span><span>,</span>
+  <span><span>`</span>job_name<span>`</span></span> <span>varchar</span><span>(</span><span>64</span><span>)</span> <span>NOT</span> <span>NULL</span> <span>DEFAULT</span> <span>''</span> <span>COMMENT</span> <span>'任务名称'</span><span>,</span>
+  <span><span>`</span>job_group<span>`</span></span> <span>varchar</span><span>(</span><span>64</span><span>)</span> <span>NOT</span> <span>NULL</span> <span>DEFAULT</span> <span>'DEFAULT'</span> <span>COMMENT</span> <span>'任务组名'</span><span>,</span>
+  <span><span>`</span>invoke_target<span>`</span></span> <span>varchar</span><span>(</span><span>500</span><span>)</span> <span>NOT</span> <span>NULL</span> <span>COMMENT</span> <span>'调用目标字符串'</span><span>,</span>
+  <span><span>`</span>cron_expression<span>`</span></span> <span>varchar</span><span>(</span><span>255</span><span>)</span> <span>DEFAULT</span> <span>''</span> <span>COMMENT</span> <span>'cron执行表达式'</span><span>,</span>
+  <span><span>`</span>misfire_policy<span>`</span></span> <span>varchar</span><span>(</span><span>20</span><span>)</span> <span>DEFAULT</span> <span>'3'</span> <span>COMMENT</span> <span>'计划执行错误策略（1立即执行 2执行一次 3放弃执行）'</span><span>,</span>
+  <span><span>`</span>concurrent<span>`</span></span> <span>char</span><span>(</span><span>1</span><span>)</span> <span>DEFAULT</span> <span>'1'</span> <span>COMMENT</span> <span>'是否并发执行（0允许 1禁止）'</span><span>,</span>
+  <span><span>`</span>status<span>`</span></span> <span>char</span><span>(</span><span>1</span><span>)</span> <span>DEFAULT</span> <span>'0'</span> <span>COMMENT</span> <span>'状态（0正常 1暂停）'</span><span>,</span>
+  <span><span>`</span>remark<span>`</span></span> <span>varchar</span><span>(</span><span>500</span><span>)</span> <span>DEFAULT</span> <span>''</span> <span>COMMENT</span> <span>'备注信息'</span><span>,</span>
+  <span>PRIMARY</span> <span>KEY</span> <span>(</span><span><span>`</span>job_id<span>`</span></span><span>,</span><span><span>`</span>job_name<span>`</span></span><span>,</span><span><span>`</span>job_group<span>`</span></span><span>)</span>
+<span>)</span> <span>ENGINE</span><span>=</span><span>InnoDB</span> <span>AUTO_INCREMENT</span><span>=</span><span>2</span> <span>DEFAULT</span> <span>CHARSET</span><span>=</span>utf8 <span>COMMENT</span><span>=</span><span>'定时任务调度表'</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>最后准备一个任务方法：</p>
+<div><pre><code><span>@Slf4j</span>
+<span>@Component</span><span>(</span><span>"mysqlJob"</span><span>)</span>
+<span>public</span> <span>class</span> <span>MysqlJob</span> <span>{</span>
+    <span>protected</span> <span>final</span> <span>Logger</span> logger <span>=</span> <span>LoggerFactory</span><span>.</span><span>getLogger</span><span>(</span><span>this</span><span>.</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>public</span> <span>void</span> <span>execute</span><span>(</span><span>String</span> param<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"执行 Mysql Job，当前时间：{}，任务参数：{}"</span><span>,</span> <span>LocalDateTime</span><span>.</span><span>now</span><span>(</span><span>)</span><span>.</span><span>format</span><span>(</span><span>DateTimeFormatter</span><span>.</span><span>ofPattern</span><span>(</span><span>"yyyy-MM-dd HH:mm:ss"</span><span>)</span><span>)</span><span>,</span> param<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12核心代码" tabindex="-1"> 12核心代码</h2>
+<p><code>ScheduleConfig</code> 配置代码类：</p>
+<div><pre><code><span>@Configuration</span>
+<span>public</span> <span>class</span> <span>ScheduleConfig</span> <span>{</span>
+
+    <span>@Bean</span>
+    <span>public</span> <span>SchedulerFactoryBean</span> <span>schedulerFactoryBean</span><span>(</span><span>DataSource</span> dataSource<span>)</span> <span>{</span>
+        <span>SchedulerFactoryBean</span> factory <span>=</span> <span>new</span> <span>SchedulerFactoryBean</span><span>(</span><span>)</span><span>;</span>
+        factory<span>.</span><span>setDataSource</span><span>(</span>dataSource<span>)</span><span>;</span>
+
+        <span>// quartz参数</span>
+        <span>Properties</span> prop <span>=</span> <span>new</span> <span>Properties</span><span>(</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.scheduler.instanceName"</span><span>,</span> <span>"shivaScheduler"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.scheduler.instanceId"</span><span>,</span> <span>"AUTO"</span><span>)</span><span>;</span>
+        <span>// 线程池配置</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.threadPool.class"</span><span>,</span> <span>"org.quartz.simpl.SimpleThreadPool"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.threadPool.threadCount"</span><span>,</span> <span>"20"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.threadPool.threadPriority"</span><span>,</span> <span>"5"</span><span>)</span><span>;</span>
+        <span>// JobStore配置</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.class"</span><span>,</span> <span>"org.quartz.impl.jdbcjobstore.JobStoreTX"</span><span>)</span><span>;</span>
+        <span>// 集群配置</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.isClustered"</span><span>,</span> <span>"true"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.clusterCheckinInterval"</span><span>,</span> <span>"15000"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.maxMisfiresToHandleAtATime"</span><span>,</span> <span>"1"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.txIsolationLevelSerializable"</span><span>,</span> <span>"true"</span><span>)</span><span>;</span>
+
+        <span>// sqlserver 启用</span>
+        <span>// prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.misfireThreshold"</span><span>,</span> <span>"12000"</span><span>)</span><span>;</span>
+        prop<span>.</span><span>put</span><span>(</span><span>"org.quartz.jobStore.tablePrefix"</span><span>,</span> <span>"QRTZ_"</span><span>)</span><span>;</span>
+        factory<span>.</span><span>setQuartzProperties</span><span>(</span>prop<span>)</span><span>;</span>
+
+        factory<span>.</span><span>setSchedulerName</span><span>(</span><span>"shivaScheduler"</span><span>)</span><span>;</span>
+        <span>// 延时启动</span>
+        factory<span>.</span><span>setStartupDelay</span><span>(</span><span>1</span><span>)</span><span>;</span>
+        factory<span>.</span><span>setApplicationContextSchedulerContextKey</span><span>(</span><span>"applicationContextKey"</span><span>)</span><span>;</span>
+        <span>// 可选，QuartzScheduler</span>
+        <span>// 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了</span>
+        factory<span>.</span><span>setOverwriteExistingJobs</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        <span>// 设置自动启动，默认为true</span>
+        factory<span>.</span><span>setAutoStartup</span><span>(</span><span>true</span><span>)</span><span>;</span>
+
+        <span>return</span> factory<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><code>ScheduleUtils</code> 调度工具类，这是本篇中最核心的代码：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>ScheduleUtils</span> <span>{</span>
+    <span>/**
+     * 得到quartz任务类
+     *
+     * <span>@param</span> <span>job</span> 执行计划
+     * <span>@return</span> 具体执行任务类
+     */</span>
+    <span>private</span> <span>static</span> <span>Class</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Job</span><span>></span></span> <span>getQuartzJobClass</span><span>(</span><span>QuartzJob</span> job<span>)</span> <span>{</span>
+        <span>boolean</span> isConcurrent <span>=</span> <span>"0"</span><span>.</span><span>equals</span><span>(</span>job<span>.</span><span>getConcurrent</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> isConcurrent <span>?</span> <span>QuartzJobExecution</span><span>.</span><span>class</span> <span>:</span> <span>QuartzDisallowConcurrentExecution</span><span>.</span><span>class</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 构建任务触发对象
+     */</span>
+    <span>public</span> <span>static</span> <span>TriggerKey</span> <span>getTriggerKey</span><span>(</span><span>Long</span> jobId<span>,</span> <span>String</span> jobGroup<span>)</span> <span>{</span>
+        <span>return</span> <span>TriggerKey</span><span>.</span><span>triggerKey</span><span>(</span><span>ScheduleConstants</span><span>.</span>TASK_CLASS_NAME <span>+</span> jobId<span>,</span> jobGroup<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 构建任务键对象
+     */</span>
+    <span>public</span> <span>static</span> <span>JobKey</span> <span>getJobKey</span><span>(</span><span>Long</span> jobId<span>,</span> <span>String</span> jobGroup<span>)</span> <span>{</span>
+        <span>return</span> <span>JobKey</span><span>.</span><span>jobKey</span><span>(</span><span>ScheduleConstants</span><span>.</span>TASK_CLASS_NAME <span>+</span> jobId<span>,</span> jobGroup<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 创建定时任务
+     */</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>createScheduleJob</span><span>(</span><span>Scheduler</span> scheduler<span>,</span> <span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Job</span><span>></span></span> jobClass <span>=</span> <span>getQuartzJobClass</span><span>(</span>job<span>)</span><span>;</span>
+        <span>// 构建job信息</span>
+        <span>Long</span> jobId <span>=</span> job<span>.</span><span>getJobId</span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> jobGroup <span>=</span> job<span>.</span><span>getJobGroup</span><span>(</span><span>)</span><span>;</span>
+        <span>JobDetail</span> jobDetail <span>=</span> <span>JobBuilder</span><span>.</span><span>newJob</span><span>(</span>jobClass<span>)</span><span>.</span><span>withIdentity</span><span>(</span><span>getJobKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+
+        <span>// 表达式调度构建器</span>
+        <span>CronScheduleBuilder</span> cronScheduleBuilder <span>=</span> <span>CronScheduleBuilder</span><span>.</span><span>cronSchedule</span><span>(</span>job<span>.</span><span>getCronExpression</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        cronScheduleBuilder <span>=</span> <span>handleCronScheduleMisfirePolicy</span><span>(</span>job<span>,</span> cronScheduleBuilder<span>)</span><span>;</span>
+
+        <span>// 按新的cronExpression表达式构建一个新的trigger</span>
+        <span>CronTrigger</span> trigger <span>=</span> <span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span><span>.</span><span>withIdentity</span><span>(</span><span>getTriggerKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span>
+                <span>.</span><span>withSchedule</span><span>(</span>cronScheduleBuilder<span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+
+        <span>// 放入参数，运行时的方法可以获取</span>
+        jobDetail<span>.</span><span>getJobDataMap</span><span>(</span><span>)</span><span>.</span><span>put</span><span>(</span><span>ScheduleConstants</span><span>.</span>TASK_PROPERTIES<span>,</span> job<span>)</span><span>;</span>
+
+        <span>// 判断是否存在</span>
+        <span>if</span> <span>(</span>scheduler<span>.</span><span>checkExists</span><span>(</span><span>getJobKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span><span>)</span> <span>{</span>
+            <span>// 防止创建时存在数据问题 先移除，然后在执行创建操作</span>
+            scheduler<span>.</span><span>deleteJob</span><span>(</span><span>getJobKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+
+        scheduler<span>.</span><span>scheduleJob</span><span>(</span>jobDetail<span>,</span> trigger<span>)</span><span>;</span>
+
+        <span>// 暂停任务</span>
+        <span>if</span> <span>(</span>job<span>.</span><span>getStatus</span><span>(</span><span>)</span><span>.</span><span>equals</span><span>(</span><span>ScheduleConstants<span>.</span>Status</span><span>.</span>PAUSE<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
+            scheduler<span>.</span><span>pauseJob</span><span>(</span><span>ScheduleUtils</span><span>.</span><span>getJobKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 设置定时任务策略
+     */</span>
+    <span>public</span> <span>static</span> <span>CronScheduleBuilder</span> <span>handleCronScheduleMisfirePolicy</span><span>(</span><span>QuartzJob</span> job<span>,</span> <span>CronScheduleBuilder</span> cb<span>)</span>
+            <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>switch</span> <span>(</span>job<span>.</span><span>getMisfirePolicy</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>case</span> <span>ScheduleConstants</span><span>.</span>MISFIRE_DEFAULT<span>:</span>
+                <span>return</span> cb<span>;</span>
+            <span>case</span> <span>ScheduleConstants</span><span>.</span>MISFIRE_IGNORE_MISFIRES<span>:</span>
+                <span>return</span> cb<span>.</span><span>withMisfireHandlingInstructionIgnoreMisfires</span><span>(</span><span>)</span><span>;</span>
+            <span>case</span> <span>ScheduleConstants</span><span>.</span>MISFIRE_FIRE_AND_PROCEED<span>:</span>
+                <span>return</span> cb<span>.</span><span>withMisfireHandlingInstructionFireAndProceed</span><span>(</span><span>)</span><span>;</span>
+            <span>case</span> <span>ScheduleConstants</span><span>.</span>MISFIRE_DO_NOTHING<span>:</span>
+                <span>return</span> cb<span>.</span><span>withMisfireHandlingInstructionDoNothing</span><span>(</span><span>)</span><span>;</span>
+            <span>default</span><span>:</span>
+                <span>throw</span> <span>new</span> <span>Exception</span><span>(</span><span>"The task misfire policy '"</span> <span>+</span> job<span>.</span><span>getMisfirePolicy</span><span>(</span><span>)</span>
+                        <span>+</span> <span>"' cannot be used in cron schedule tasks"</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>这里可以看到，在完成任务与触发器的关联后，如果是暂停状态，会先让调度器停止任务。</p>
+<p><code>AbstractQuartzJob</code> 抽象任务：</p>
+<div><pre><code><span>public</span> <span>abstract</span> <span>class</span> <span>AbstractQuartzJob</span> <span>implements</span> <span>Job</span> <span>{</span>
+    <span>private</span> <span>static</span> <span>final</span> <span>Logger</span> log <span>=</span> <span>LoggerFactory</span><span>.</span><span>getLogger</span><span>(</span><span>AbstractQuartzJob</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+    <span>/**
+     * 线程本地变量
+     */</span>
+    <span>private</span> <span>static</span> <span>ThreadLocal</span><span><span>&lt;</span><span>Date</span><span>></span></span> threadLocal <span>=</span> <span>new</span> <span>ThreadLocal</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>void</span> <span>execute</span><span>(</span><span>JobExecutionContext</span> context<span>)</span> <span>throws</span> <span>JobExecutionException</span> <span>{</span>
+        <span>QuartzJob</span> job <span>=</span> <span>new</span> <span>QuartzJob</span><span>(</span><span>)</span><span>;</span>
+        <span>BeanUtils</span><span>.</span><span>copyBeanProp</span><span>(</span>job<span>,</span> context<span>.</span><span>getMergedJobDataMap</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span><span>ScheduleConstants</span><span>.</span>TASK_PROPERTIES<span>)</span><span>)</span><span>;</span>
+        <span>try</span> <span>{</span>
+            <span>before</span><span>(</span>context<span>,</span> job<span>)</span><span>;</span>
+            <span>if</span> <span>(</span>job <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+                <span>doExecute</span><span>(</span>context<span>,</span> job<span>)</span><span>;</span>
+            <span>}</span>
+            <span>after</span><span>(</span>context<span>,</span> job<span>,</span> <span>null</span><span>)</span><span>;</span>
+        <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
+            log<span>.</span><span>error</span><span>(</span><span>"任务执行异常  - ："</span><span>,</span> e<span>)</span><span>;</span>
+            <span>after</span><span>(</span>context<span>,</span> job<span>,</span> e<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 执行前
+     *
+     * <span>@param</span> <span>context</span> 工作执行上下文对象
+     * <span>@param</span> <span>job</span>     系统计划任务
+     */</span>
+    <span>protected</span> <span>void</span> <span>before</span><span>(</span><span>JobExecutionContext</span> context<span>,</span> <span>QuartzJob</span> job<span>)</span> <span>{</span>
+        threadLocal<span>.</span><span>set</span><span>(</span><span>new</span> <span>Date</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 执行后
+     *
+     * <span>@param</span> <span>context</span> 工作执行上下文对象
+     * <span>@param</span> <span>sysJob</span>  系统计划任务
+     */</span>
+    <span>protected</span> <span>void</span> <span>after</span><span>(</span><span>JobExecutionContext</span> context<span>,</span> <span>QuartzJob</span> sysJob<span>,</span> <span>Exception</span> e<span>)</span> <span>{</span>
+
+    <span>}</span>
+
+    <span>/**
+     * 执行方法，由子类重载
+     *
+     * <span>@param</span> <span>context</span> 工作执行上下文对象
+     * <span>@param</span> <span>job</span>     系统计划任务
+     * <span>@throws</span> <span><span>Exception</span></span> 执行过程中的异常
+     */</span>
+    <span>protected</span> <span>abstract</span> <span>void</span> <span>doExecute</span><span>(</span><span>JobExecutionContext</span> context<span>,</span> <span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>这个类将原本 <code>execute</code> 方法执行的任务，下放到了子类重载的 <code>doExecute</code> 方法中</p>
+</blockquote>
+<p>同时准备实现，分了允许并发和不允许并发，差别就是一个注解：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>QuartzJobExecution</span> <span>extends</span> <span>AbstractQuartzJob</span> <span>{</span>
+    <span>@Override</span>
+    <span>protected</span> <span>void</span> <span>doExecute</span><span>(</span><span>JobExecutionContext</span> context<span>,</span> <span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>JobInvokeUtil</span><span>.</span><span>invokeMethod</span><span>(</span>job<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+<span>@DisallowConcurrentExecution</span>
+<span>public</span> <span>class</span> <span>QuartzDisallowConcurrentExecution</span> <span>extends</span> <span>AbstractQuartzJob</span> <span>{</span>
+    <span>@Override</span>
+    <span>protected</span> <span>void</span> <span>doExecute</span><span>(</span><span>JobExecutionContext</span> context<span>,</span> <span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>JobInvokeUtil</span><span>.</span><span>invokeMethod</span><span>(</span>job<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>最后由 <code>JobInvokeUtil</code> 通过反射，进行实际的方法调用：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>JobInvokeUtil</span> <span>{</span>
+    <span>/**
+     * 执行方法
+     *
+     * <span>@param</span> <span>job</span> 系统任务
+     */</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>invokeMethod</span><span>(</span><span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>String</span> invokeTarget <span>=</span> job<span>.</span><span>getInvokeTarget</span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> beanName <span>=</span> <span>getBeanName</span><span>(</span>invokeTarget<span>)</span><span>;</span>
+        <span>String</span> methodName <span>=</span> <span>getMethodName</span><span>(</span>invokeTarget<span>)</span><span>;</span>
+        <span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> methodParams <span>=</span> <span>getMethodParams</span><span>(</span>invokeTarget<span>)</span><span>;</span>
+
+        <span>if</span> <span>(</span><span>!</span><span>isValidClassName</span><span>(</span>beanName<span>)</span><span>)</span> <span>{</span>
+            <span>Object</span> bean <span>=</span> <span>SpringUtils</span><span>.</span><span>getBean</span><span>(</span>beanName<span>)</span><span>;</span>
+            <span>invokeMethod</span><span>(</span>bean<span>,</span> methodName<span>,</span> methodParams<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>Object</span> bean <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span>beanName<span>)</span><span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+            <span>invokeMethod</span><span>(</span>bean<span>,</span> methodName<span>,</span> methodParams<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 调用任务方法
+     *
+     * <span>@param</span> <span>bean</span>         目标对象
+     * <span>@param</span> <span>methodName</span>   方法名称
+     * <span>@param</span> <span>methodParams</span> 方法参数
+     */</span>
+    <span>private</span> <span>static</span> <span>void</span> <span>invokeMethod</span><span>(</span><span>Object</span> bean<span>,</span> <span>String</span> methodName<span>,</span> <span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> methodParams<span>)</span>
+            <span>throws</span> <span>NoSuchMethodException</span><span>,</span> <span>SecurityException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>IllegalArgumentException</span><span>,</span>
+            <span>InvocationTargetException</span> <span>{</span>
+        <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>isNotNull</span><span>(</span>methodParams<span>)</span> <span>&amp;&amp;</span> methodParams<span>.</span><span>size</span><span>(</span><span>)</span> <span>></span> <span>0</span><span>)</span> <span>{</span>
+            <span>Method</span> method <span>=</span> bean<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getDeclaredMethod</span><span>(</span>methodName<span>,</span> <span>getMethodParamsType</span><span>(</span>methodParams<span>)</span><span>)</span><span>;</span>
+            method<span>.</span><span>invoke</span><span>(</span>bean<span>,</span> <span>getMethodParamsValue</span><span>(</span>methodParams<span>)</span><span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>Method</span> method <span>=</span> bean<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getDeclaredMethod</span><span>(</span>methodName<span>)</span><span>;</span>
+            method<span>.</span><span>invoke</span><span>(</span>bean<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 校验是否为为class包名
+     *
+     * <span>@param</span> <span>invokeTarget</span> 名称
+     * <span>@return</span> true是 false否
+     */</span>
+    <span>public</span> <span>static</span> <span>boolean</span> <span>isValidClassName</span><span>(</span><span>String</span> invokeTarget<span>)</span> <span>{</span>
+        <span>return</span> <span>StringUtils</span><span>.</span><span>countMatches</span><span>(</span>invokeTarget<span>,</span> <span>"."</span><span>)</span> <span>></span> <span>1</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取bean名称
+     *
+     * <span>@param</span> <span>invokeTarget</span> 目标字符串
+     * <span>@return</span> bean名称
+     */</span>
+    <span>public</span> <span>static</span> <span>String</span> <span>getBeanName</span><span>(</span><span>String</span> invokeTarget<span>)</span> <span>{</span>
+        <span>String</span> beanName <span>=</span> <span>StringUtils</span><span>.</span><span>substringBefore</span><span>(</span>invokeTarget<span>,</span> <span>"("</span><span>)</span><span>;</span>
+        <span>return</span> <span>StringUtils</span><span>.</span><span>substringBeforeLast</span><span>(</span>beanName<span>,</span> <span>"."</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取bean方法
+     *
+     * <span>@param</span> <span>invokeTarget</span> 目标字符串
+     * <span>@return</span> method方法
+     */</span>
+    <span>public</span> <span>static</span> <span>String</span> <span>getMethodName</span><span>(</span><span>String</span> invokeTarget<span>)</span> <span>{</span>
+        <span>String</span> methodName <span>=</span> <span>StringUtils</span><span>.</span><span>substringBefore</span><span>(</span>invokeTarget<span>,</span> <span>"("</span><span>)</span><span>;</span>
+        <span>return</span> <span>StringUtils</span><span>.</span><span>substringAfterLast</span><span>(</span>methodName<span>,</span> <span>"."</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取method方法参数相关列表
+     *
+     * <span>@param</span> <span>invokeTarget</span> 目标字符串
+     * <span>@return</span> method方法相关参数列表
+     */</span>
+    <span>public</span> <span>static</span> <span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> <span>getMethodParams</span><span>(</span><span>String</span> invokeTarget<span>)</span> <span>{</span>
+        <span>String</span> methodStr <span>=</span> <span>StringUtils</span><span>.</span><span>substringBetween</span><span>(</span>invokeTarget<span>,</span> <span>"("</span><span>,</span> <span>")"</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>isEmpty</span><span>(</span>methodStr<span>)</span><span>)</span> <span>{</span>
+            <span>return</span> <span>null</span><span>;</span>
+        <span>}</span>
+        <span>String</span><span>[</span><span>]</span> methodParams <span>=</span> methodStr<span>.</span><span>split</span><span>(</span><span>","</span><span>)</span><span>;</span>
+        <span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> classs <span>=</span> <span>new</span> <span>LinkedList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> methodParams<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>String</span> str <span>=</span> <span>StringUtils</span><span>.</span><span>trimToEmpty</span><span>(</span>methodParams<span>[</span>i<span>]</span><span>)</span><span>;</span>
+            <span>// String字符串类型，包含'</span>
+            <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>contains</span><span>(</span>str<span>,</span> <span>"'"</span><span>)</span><span>)</span> <span>{</span>
+                classs<span>.</span><span>add</span><span>(</span><span>new</span> <span>Object</span><span>[</span><span>]</span><span>{</span><span>StringUtils</span><span>.</span><span>replace</span><span>(</span>str<span>,</span> <span>"'"</span><span>,</span> <span>""</span><span>)</span><span>,</span> <span>String</span><span>.</span><span>class</span><span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>// boolean布尔类型，等于true或者false</span>
+            <span>else</span> <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>equals</span><span>(</span>str<span>,</span> <span>"true"</span><span>)</span> <span>||</span> <span>StringUtils</span><span>.</span><span>equalsIgnoreCase</span><span>(</span>str<span>,</span> <span>"false"</span><span>)</span><span>)</span> <span>{</span>
+                classs<span>.</span><span>add</span><span>(</span><span>new</span> <span>Object</span><span>[</span><span>]</span><span>{</span><span>Boolean</span><span>.</span><span>valueOf</span><span>(</span>str<span>)</span><span>,</span> <span>Boolean</span><span>.</span><span>class</span><span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>// long长整形，包含L</span>
+            <span>else</span> <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>containsIgnoreCase</span><span>(</span>str<span>,</span> <span>"L"</span><span>)</span><span>)</span> <span>{</span>
+                classs<span>.</span><span>add</span><span>(</span><span>new</span> <span>Object</span><span>[</span><span>]</span><span>{</span><span>Long</span><span>.</span><span>valueOf</span><span>(</span><span>StringUtils</span><span>.</span><span>replaceIgnoreCase</span><span>(</span>str<span>,</span> <span>"L"</span><span>,</span> <span>""</span><span>)</span><span>)</span><span>,</span> <span>Long</span><span>.</span><span>class</span><span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>// double浮点类型，包含D</span>
+            <span>else</span> <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>containsIgnoreCase</span><span>(</span>str<span>,</span> <span>"D"</span><span>)</span><span>)</span> <span>{</span>
+                classs<span>.</span><span>add</span><span>(</span><span>new</span> <span>Object</span><span>[</span><span>]</span><span>{</span><span>Double</span><span>.</span><span>valueOf</span><span>(</span><span>StringUtils</span><span>.</span><span>replaceIgnoreCase</span><span>(</span>str<span>,</span> <span>"D"</span><span>,</span> <span>""</span><span>)</span><span>)</span><span>,</span> <span>Double</span><span>.</span><span>class</span><span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>// 其他类型归类为整形</span>
+            <span>else</span> <span>{</span>
+                classs<span>.</span><span>add</span><span>(</span><span>new</span> <span>Object</span><span>[</span><span>]</span><span>{</span><span>Integer</span><span>.</span><span>valueOf</span><span>(</span>str<span>)</span><span>,</span> <span>Integer</span><span>.</span><span>class</span><span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> classs<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取参数类型
+     *
+     * <span>@param</span> <span>methodParams</span> 参数相关列表
+     * <span>@return</span> 参数类型列表
+     */</span>
+    <span>public</span> <span>static</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> <span>getMethodParamsType</span><span>(</span><span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> methodParams<span>)</span> <span>{</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> classs <span>=</span> <span>new</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span>methodParams<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+        <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+        <span>for</span> <span>(</span><span>Object</span><span>[</span><span>]</span> os <span>:</span> methodParams<span>)</span> <span>{</span>
+            classs<span>[</span>index<span>]</span> <span>=</span> <span>(</span><span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>)</span> os<span>[</span><span>1</span><span>]</span><span>;</span>
+            index<span>++</span><span>;</span>
+        <span>}</span>
+        <span>return</span> classs<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取参数值
+     *
+     * <span>@param</span> <span>methodParams</span> 参数相关列表
+     * <span>@return</span> 参数值列表
+     */</span>
+    <span>public</span> <span>static</span> <span>Object</span><span>[</span><span>]</span> <span>getMethodParamsValue</span><span>(</span><span>List</span><span>&lt;</span><span>Object</span><span>[</span><span>]</span><span>></span> methodParams<span>)</span> <span>{</span>
+        <span>Object</span><span>[</span><span>]</span> classs <span>=</span> <span>new</span> <span>Object</span><span>[</span>methodParams<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+        <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+        <span>for</span> <span>(</span><span>Object</span><span>[</span><span>]</span> os <span>:</span> methodParams<span>)</span> <span>{</span>
+            classs<span>[</span>index<span>]</span> <span>=</span> <span>(</span><span>Object</span><span>)</span> os<span>[</span><span>0</span><span>]</span><span>;</span>
+            index<span>++</span><span>;</span>
+        <span>}</span>
+        <span>return</span> classs<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>启动程序后可以看到，调度器已经启动：</p>
+<div><pre><code>2021-10-06 16:26:05.162  INFO 10764 --- [shivaScheduler]] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now, after delay of 1 seconds
+2021-10-06 16:26:05.306  INFO 10764 --- [shivaScheduler]] org.quartz.core.QuartzScheduler          : Scheduler shivaScheduler_$_DESKTOP-OKMJ1351633508761366 started.
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="_13新增调度任务" tabindex="-1"> 13新增调度任务</h2>
+<p>添加任务，使用如下 json 进行请求：</p>
+<div><pre><code><span>{</span>
+  <span>"concurrent"</span><span>:</span> <span>"1"</span><span>,</span>
+  <span>"cronExpression"</span><span>:</span> <span>"0/10 * * * * ?"</span><span>,</span>
+  <span>"invokeTarget"</span><span>:</span> <span>"mysqlJob.execute('got it!!!')"</span><span>,</span>
+  <span>"jobGroup"</span><span>:</span> <span>"mysqlGroup"</span><span>,</span>
+  <span>"jobId"</span><span>:</span> <span>9</span><span>,</span>
+  <span>"jobName"</span><span>:</span> <span>"新增 mysqlJob 任务"</span><span>,</span>
+  <span>"misfirePolicy"</span><span>:</span> <span>"1"</span><span>,</span>
+  <span>"remark"</span><span>:</span> <span>""</span><span>,</span>
+  <span>"status"</span><span>:</span> <span>"0"</span>
+<span>}</span>
+<span>@Override</span>
+<span>@Transactional</span><span>(</span>rollbackFor <span>=</span> <span>Exception</span><span>.</span><span>class</span><span>)</span>
+<span>public</span> <span>int</span> <span>insertJob</span><span>(</span><span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+    <span>// 先将任务设置为暂停状态</span>
+    job<span>.</span><span>setStatus</span><span>(</span><span>ScheduleConstants<span>.</span>Status</span><span>.</span>PAUSE<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>int</span> rows <span>=</span> quartzMapper<span>.</span><span>insert</span><span>(</span>job<span>)</span><span>;</span>
+    <span>if</span> <span>(</span>rows <span>></span> <span>0</span><span>)</span> <span>{</span>
+        <span>ScheduleUtils</span><span>.</span><span>createScheduleJob</span><span>(</span>scheduler<span>,</span> job<span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> rows<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>先将任务设置为暂停状态，数据库插入成功后，在调度器创建任务。</p>
+<p>再手动启动任务，根据 ID 来启动任务：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548296.png" alt="图片" loading="lazy"></p>
+<p>实现代码：</p>
+<div><pre><code><span>@Override</span>
+    <span>public</span> <span>int</span> <span>changeStatus</span><span>(</span><span>Long</span> jobId<span>,</span> <span>String</span> status<span>)</span> <span>throws</span> <span>SchedulerException</span> <span>{</span>
+        <span>int</span> rows <span>=</span> quartzMapper<span>.</span><span>changeStatus</span><span>(</span>jobId<span>,</span> status<span>)</span><span>;</span>
+        <span>if</span> <span>(</span>rows <span>==</span> <span>0</span><span>)</span> <span>{</span>
+            <span>return</span> rows<span>;</span>
+        <span>}</span>
+        <span>//更新成功，需要改调度器内任务的状态</span>
+        <span>//拿到整个任务</span>
+        <span>QuartzJob</span> job <span>=</span> quartzMapper<span>.</span><span>selectJobById</span><span>(</span>jobId<span>)</span><span>;</span>
+        <span>//根据状态来启动或者关闭</span>
+        <span>if</span> <span>(</span><span>ScheduleConstants<span>.</span>Status</span><span>.</span>NORMAL<span>.</span><span>getValue</span><span>(</span><span>)</span><span>.</span><span>equals</span><span>(</span>status<span>)</span><span>)</span> <span>{</span>
+            rows <span>=</span> <span>resumeJob</span><span>(</span>job<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>ScheduleConstants<span>.</span>Status</span><span>.</span>PAUSE<span>.</span><span>getValue</span><span>(</span><span>)</span><span>.</span><span>equals</span><span>(</span>status<span>)</span><span>)</span> <span>{</span>
+            rows <span>=</span> <span>pauseJob</span><span>(</span>job<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> rows<span>;</span>
+    <span>}</span>
+<span>@Override</span>
+<span>public</span> <span>int</span> <span>resumeJob</span><span>(</span><span>QuartzJob</span> job<span>)</span> <span>throws</span> <span>SchedulerException</span> <span>{</span>
+    <span>Long</span> jobId <span>=</span> job<span>.</span><span>getJobId</span><span>(</span><span>)</span><span>;</span>
+    <span>String</span> jobGroup <span>=</span> job<span>.</span><span>getJobGroup</span><span>(</span><span>)</span><span>;</span>
+    job<span>.</span><span>setStatus</span><span>(</span><span>ScheduleConstants<span>.</span>Status</span><span>.</span>NORMAL<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>int</span> rows <span>=</span> quartzMapper<span>.</span><span>updateById</span><span>(</span>job<span>)</span><span>;</span>
+    <span>if</span> <span>(</span>rows <span>></span> <span>0</span><span>)</span> <span>{</span>
+        scheduler<span>.</span><span>resumeJob</span><span>(</span><span>ScheduleUtils</span><span>.</span><span>getJobKey</span><span>(</span>jobId<span>,</span> jobGroup<span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> rows<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>暂停任务的代码也相同。</p>
+<p>调用启动后可以看到控制台打印日志：</p>
+<div><pre><code>2021-10-06 20:36:30.018  INFO 8536 --- [eduler_Worker-3] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:30，任务参数：got it!!!
+2021-10-06 20:36:40.016  INFO 8536 --- [eduler_Worker-4] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:40，任务参数：got it!!!
+2021-10-06 20:36:50.017  INFO 8536 --- [eduler_Worker-5] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:50，任务参数：got it!!!
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>如果涉及到任务修改，需要在调度器先删除原有任务，重新创建调度任务。</p>
+<h3 id="启动初始化任务" tabindex="-1"> 启动初始化任务</h3>
+<p>这部分倒是比较简单，初始化的时候清空原有任务，重新创建就好了：</p>
+<div><pre><code><span>/**
+  * 项目启动时，初始化定时器 主要是防止手动修改数据库导致未同步到定时任务处理（注：不能手动修改数据库ID和任务组名，否则会导致脏数据）
+  */</span>
+<span>@PostConstruct</span>
+<span>public</span> <span>void</span> <span>init</span><span>(</span><span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+    scheduler<span>.</span><span>clear</span><span>(</span><span>)</span><span>;</span>
+    <span>List</span><span><span>&lt;</span><span>QuartzJob</span><span>></span></span> jobList <span>=</span> quartzMapper<span>.</span><span>selectJobAll</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>QuartzJob</span> job <span>:</span> jobList<span>)</span> <span>{</span>
+        <span>ScheduleUtils</span><span>.</span><span>createScheduleJob</span><span>(</span>scheduler<span>,</span> job<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_14其他说明" tabindex="-1"> 14其他说明</h2>
+<h3 id="并发执行" tabindex="-1"> 并发执行</h3>
+<p>上面有并发和非并发的区别，通过 <code>@DisallowConcurrentExecution</code> 注解来实现阻止并发。</p>
+<p>Quartz定时任务默认都是并发执行的，不会等待上一次任务执行完毕，只要间隔时间到就会执行, 如果定时任执行太长，会长时间占用资源，导致其它任务堵塞。</p>
+<p><code>@DisallowConcurrentExecution</code> 禁止并发执行多个相同定义的JobDetail, 这个注解是加在Job类上的, 但意思并不是不能同时执行多个Job, 而是不能并发执行同一个<code>Job Definition</code>(由JobDetail定义), 但是可以同时执行多个不同的JobDetail。</p>
+<p>举例说明，我们有一个Job类,叫做SayHelloJob, 并在这个Job上加了这个注解, 然后在这个Job上定义了很多个<code>JobDetail</code>, <code>如sayHelloToJoeJobDetail</code>, <code>sayHelloToMikeJobDetail</code>, 那么当scheduler启动时, 不会并发执行多个<code>sayHelloToJoeJobDetail</code>或者<code>sayHelloToMikeJobDetail</code>, 但可以同时执行<code>sayHelloToJoeJobDetail</code>跟<code>sayHelloToMikeJobDetail</code></p>
+<p><code>@PersistJobDataAfterExecution</code> 同样, 也是加在Job上。表示当正常执行完Job后, JobDataMap中的数据应该被改动, 以被下一次调用时用。</p>
+<p>当使用 <code>@PersistJobDataAfterExecution</code> 注解时, 为了避免并发时, 存储数据造成混乱, 强烈建议把 <code>@DisallowConcurrentExecution</code> 注解也加上。</p>
+<p>测试代码，设定的时间间隔为3秒,但job执行时间是5秒,设置 <code>@DisallowConcurrentExecution</code>以 后程序会等任务执行完毕以后再去执行,否则会在3秒时再启用新的线程执行。</p>
+<h3 id="阻止特定时间运行" tabindex="-1"> 阻止特定时间运行</h3>
+<p>仍然是通过调度器实现的：</p>
+<div><pre><code><span>//2014-8-15这一天不执行任何任务</span>
+<span>Calendar</span> c <span>=</span> <span>new</span> <span>GregorianCalendar</span><span>(</span><span>2014</span><span>,</span> <span>7</span><span>,</span> <span>15</span><span>)</span><span>;</span>
+cal<span>.</span><span>setDayExcluded</span><span>(</span>c<span>,</span> <span>true</span><span>)</span><span>;</span>
+scheduler<span>.</span><span>addCalendar</span><span>(</span><span>"exclude"</span><span>,</span> cal<span>,</span> <span>false</span><span>,</span> <span>false</span><span>)</span><span>;</span>
+
+<span>//...中间省略</span>
+<span>TriggerBuilder</span><span>.</span><span>newTrigger</span><span>(</span><span>)</span><span>.</span><span>modifiedByCalendar</span><span>(</span><span>"exclude"</span><span>)</span><span>.</span><span>.</span><span>.</span><span>.</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548287.png" type="image/png"/>
+    </item>
     <item>
       <title>Java 命名规范</title>
       <link>https://xlc520.github.io/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html</link>
@@ -24542,134 +25270,6 @@ service mysqld restart
 mysql <span>-</span>u test <span>-</span>p
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
       <enclosure url="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428143824709-218907811.png" type="image/png"/>
-    </item>
-    <item>
-      <title>MySQL压缩版安装配置</title>
-      <link>https://xlc520.github.io/other/MySQL%E5%8E%8B%E7%BC%A9%E7%89%88%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE.html</link>
-      <guid>https://xlc520.github.io/other/MySQL%E5%8E%8B%E7%BC%A9%E7%89%88%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">MySQL压缩版安装配置</source>
-      <description>MySQL压缩版安装配置</description>
-      <category>other</category>
-      <pubDate>Mon, 24 Jan 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="mysql压缩版安装配置" tabindex="-1"> MySQL压缩版安装配置</h1>
-<h2 id="_1-下载" tabindex="-1"> 1 下载</h2>
-<p>官网：https://www.mysql.com/
-最新版下载地址：https://dev.mysql.com/downloads/mysql/
-多版本下载地址：https://downloads.mysql.com/archives/community/
-在这里，我使用的是MySQL8.0.19解压缩版，附上下载链接：https://cdn.mysql.com/archives/mysql-8.0/mysql-8.0.19-winx64.zip</p>
-<p>此时的MySQL版本已经更新到8.0.23，所以我需要进入多版本链接进行下载。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>旧版本中存在漏洞</li>
-<li><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/image-20220115155838758.png" alt="image-20220115155838758" loading="lazy"></li>
-</ul>
-<h2 id="_2-安装" tabindex="-1"> 2 安装</h2>
-<p>1.我们提前创建好解压目录：</p>
-<p>找到刚才下载的压缩包，复制到我们上一步创建的解压目录下：</p>
-<p>右键进行解压，解压后的目录如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png" alt="img" loading="lazy"></p>
-<p>接下来创建我们的数据库文件存放位置，这里我在mysql解压目录的同级目录下创建了<code>databases</code>文件夹，作为数据库存放目录</p>
-<p>接下来进行初始化安装：
-用管理员身份打开cmd命令，并进入到mysql解压目录下的bin目录，如：<code>D:\ProgramFiles\MySQL8\bin</code></p>
-<p><strong>2、创建一个名为my.ini的文件：</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ZmFuZ3poZW5naGVpdGk.png" alt="img" loading="lazy"></p>
-<p><strong>3、修改my.ini文件：</strong></p>
-<div><pre><code><span>[</span>mysql<span>]</span>
-<span># 设置mysql客户端默认字符集</span>
-<span>default</span><span>-</span><span>character</span><span>-</span><span>set</span><span>=</span>utf8
-<span>[</span>mysqld<span>]</span>
-<span># 设置3306端口</span>
-port <span>=</span> <span>3306</span>
-<span># 设置mysql的安装目录</span>
-basedir <span>=</span> D:\\Program Files\\mysql\\
-<span># 设置mysql数据库的数据的存放目录</span>
-datadir <span>=</span> D:\\Program Files\\mysql\\<span>data</span>
-<span># 允许最大连接数</span>
-max_connections<span>=</span><span>20</span>
-<span># 服务端使用的字符集默认为8比特编码的latin1字符集</span>
-<span>character</span><span>-</span><span>set</span><span>-</span>server<span>=</span>utf8
-<span># 创建新表时将使用的默认存储引擎</span>
-<span>default</span><span>-</span>storage<span>-</span><span>engine</span><span>=</span><span>INNODB</span>
-<span># 创建模式</span>
-sql_mode <span>=</span> NO_ENGINE_SUBSTITUTION<span>,</span>STRICT_TRANS_TABLES
-
-
-
-<span>[</span>mysqld<span>]</span>
-<span># 设置服务端使⽤用的字符集为utf-8</span>
-<span>character</span><span>-</span><span>set</span><span>-</span>server<span>=</span>utf8
-<span># 绑定IPv4地址</span>
-bind<span>-</span>address <span>=</span> <span>127.0</span><span>.0</span><span>.1</span>
-<span># 设置mysql的端⼝口号</span>
-port <span>=</span> <span>3306</span>
-<span># 设置mysql的安装⽬目录</span>
-basedir<span>=</span>D:<span>/</span>ProgramFiles<span>/</span>MySQL8
-<span># 设置mysql数据库的数据的存放⽬目录</span>
-datadir<span>=</span>D:<span>/</span>ProgramFiles<span>/</span>MySQL8<span>/</span><span>data</span>
-<span># 允许最⼤大连接数</span>
-max_connections<span>=</span><span>20</span>
-<span># 创建新表时将使⽤用的默认存储引擎</span>
-<span>default</span><span>-</span>storage<span>-</span><span>engine</span><span>=</span><span>INNODB</span>
-<span>default</span><span>-</span>time_zone<span>=</span><span>'+8:00'</span>
-<span># 设置mysql以及数据库的默认编码</span>
-<span>[</span>mysql<span>]</span>
-<span>default</span><span>-</span><span>character</span><span>-</span><span>set</span><span>=</span>utf8
-<span>[</span>mysql<span>.</span>server<span>]</span>
-<span>default</span><span>-</span><span>character</span><span>-</span><span>set</span><span>=</span>utf8
-<span># 设置客户端默认字符集</span>
-<span>[</span>client<span>]</span>
-<span>default</span><span>-</span><span>character</span><span>-</span><span>set</span><span>=</span>utf8
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>特别要注意：</strong></p>
-<p>（1）D:\Program Files\mysql\data 这个目录一定要是“\”，千万别弄成“\”不然会报错，或者可以用“/”；
-（2）Mysq安装目录和数据存放目录一定要修改为你自己设定的目录，除非你设置的目录与上述一致。</p>
-<h2 id="_3-配置" tabindex="-1"> 3.配置</h2>
-<p>3.用管理员身份打开cmd窗口：win -&gt; windows系统 -&gt; 右击命令提示符 -&gt; 更多 -&gt; 以管理员身份运行</p>
-<p>4.进入到bin目录下</p>
-<p>5.执行 <code>mysqld --install</code> 命令安装（执行 <code>mysqld --remove</code> 卸载安装）</p>
-<p>6.继续执行 <code>mysqld --initialize --user=root --console</code> 命令</p>
-<p>注意：初始化完成后MySQL会给root用户创建一个默认随机密码，下图白色部分就是密码，同时在data目录下也添加了相关的配置文件，如果密码有字符辨识不了，则把date目录下的文件都删了，重新执行这一步。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/1780812-20190829212537656-1187829463.png" alt="img" loading="lazy"></p>
-<p>7.执行<code>net start mysql</code>启动服务（执行<code>net stop mysql</code>关闭服务）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/1780812-20190829212232857-537058421.png" alt="img" loading="lazy"></p>
-<p>8.执行<code>mysql -uroot -pqLBiVku7k%f</code>登录MySQL（-u后面是用户名，-p后面是密码，即上面的默认随机密码）</p>
-<p>9.修改密码</p>
-<p>mysql版本是7:</p>
-<p><code>set password = password('root');</code></p>
-<p>注意：如果mysql版本是8或以上，则使用 alter user 'root'@'localhost' identified by '新的密码'; 修改密码</p>
-<p><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';</code>
-这样我们就可以将<code>roo</code>t账户的密码修改为<code>123456</code>了，将<code>123456</code>处替换为你们要修改的密码，回车执行就可以了。</p>
-<p>12.登录MySQL后可以添加一个用户</p>
-<p>添加格式：</p>
-<p>grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'</p>
-<p>实例：</p>
-<p><code>grant all on *.* to test@'%' identified by'test'</code></p>
-<h2 id="_4-安装错误提示" tabindex="-1"> 4 安装错误提示</h2>
-<h3 id="提示" tabindex="-1"> 提示</h3>
-<p>安装过程中如果出现以下错误，是我们的电脑缺少运行时环境。
-**注：**在这里我们有出现这种情况，但为了以防万一，还是给大家说一下，这里的图片用的网图，如有侵权，请评论删图！</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200131203311761.png" alt="img" loading="lazy"></p>
-<p>解决办法：
-下载vcruntime140_1.dll，链接：https://cn.dll-files.com/vcruntime140_1.dll.html</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/16422331874666.png" alt="在这里插入图片描述" loading="lazy">
-下载完成后，解压提取文件，将提取出来的<code>vcruntime140_1.dll</code>文件复制到我们的<code>C:\Windows\System32</code>
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/16422331874677.png" alt="在这里插入图片描述" loading="lazy">
-<strong>注意, 32位版本的<code>vcruntime140_1.dll</code>需要复制到<code>C:\Windows\SysWOW64</code>下</strong></p>
-<h3 id="tips2" tabindex="-1"> tips2：</h3>
-<p>mysqld –initialize-insecure自动生成无密码的root用户；
-mysqld –initialize自动生成带随机密码的root用户；
-mysqld -remove移除自己的mysqld服务；
-net stop mysql命令，停止mysql服务
-如果报错，清空data文件夹，最好还是删掉data文件，重新执行remove--initialize--install--start（这些不是命令）流程即可；</p>
-<h2 id="_5-配置mysql的环境变量" tabindex="-1"> 5 配置mysql的环境变量</h2>
-<div><pre><code>MYSQL_HOME
-
-D<span>:</span>\<span>Program</span> <span>Files</span>\mysql
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200303112518670.png" alt="img" loading="lazy"></p>
-<p>点击Path，增加：</p>
-<div><pre><code><span>%</span>MYSQL_HOME<span>%</span>\<span>bin</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190831112741174.png" alt="img" loading="lazy"></p>
-]]></content:encoded>
-      <enclosure url="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/image-20220115155838758.png" type="image/png"/>
     </item>
   </channel>
 </rss>
