@@ -2,7 +2,6 @@ import { defineUserConfig } from "vuepress";
 import theme from "./theme";
 // import { searchPlugin } from "@vuepress/plugin-search";
 import pluginFullTextSearch from "vuepress2-plugin-full-text-search";
-
 export default defineUserConfig({
   lang: "zh-CN",
   title: "StudyNote",
@@ -28,9 +27,9 @@ export default defineUserConfig({
   },
   theme,
   shouldPrefetch: false,
-
   plugins: [
     [
+      // require("vuepress2-plugin-full-text-search").default,
       pluginFullTextSearch,
     // searchPlugin({
     //   locales: {
