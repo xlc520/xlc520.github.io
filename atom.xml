@@ -3,17 +3,17 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-26T07:05:53.956Z</updated>
+  <updated>2022-05-27T07:58:14.740Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
+  <category term="Linux"/>
   <category term="Java"/>
+  <category term="pc"/>
   <category term="Python"/>
   <category term="Tools"/>
-  <category term="Linux"/>
   <category term="java"/>
   <category term="article"/>
-  <category term="pc"/>
   <category term="IDEA"/>
   <category term="coding"/>
   <category term="daily"/>
@@ -25,6 +25,323 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">服务器入侵排查</title>
+    <id>https://xlc520.github.io/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html</id>
+    <link href="https://xlc520.github.io/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html"/>
+    <updated>2022-05-27T07:56:31.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="服务器入侵排查" tabindex="-1"> 服务器入侵排查</h1>
+<h3 id="_1-入侵者可能会删除机器的日志信息" tabindex="-1"> 1.<strong>入侵者可能会删除机器的日志信息</strong></h3>
+<p>可以查看日志信息是否还存在或者是否被清空，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084712.png" alt="图片" loading="lazy"></p>
+<h3 id="_2-入侵者可能创建一个新的存放用户名及密码文件" tabindex="-1"> 2.<strong>入侵者可能创建一个新的存放用户名及密码文件</strong></h3>
+<p>可以查看/etc/passwd及/etc/shadow文件，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708461.png" alt="图片" loading="lazy"></p>
+<h3 id="_3-入侵者可能修改用户名及密码文件" tabindex="-1"> 3.<strong>入侵者可能修改用户名及密码文件</strong></h3>
+<p>可以查看/etc/passwd及/etc/shadow文件内容进行鉴别，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708462.png" alt="图片" loading="lazy"></p>
+<h3 id="_4-查看机器最近成功登陆的事件和最后一次不成功的登陆事" tabindex="-1"> 4.<strong>查看机器最近成功登陆的事件和最后一次不成功的登陆事</strong></h3>
+<p>对应日志“/var/log/lastlog”，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708473.png" alt="图片" loading="lazy"></p>
+<h3 id="_5-查看机器当前登录的全部用户" tabindex="-1"> 5.<strong>查看机器当前登录的全部用户</strong></h3>
+<p>对应日志文件“/var/run/utmp”，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708474.png" alt="图片" loading="lazy"></p>
+<h3 id="_6-查看机-器创建以来登陆过的用户" tabindex="-1"> 6.*<em>查看机***<em>器创建以来登陆过的用户</em></em></h3>
+<p>对应日志文件“/var/log/wtmp”，相关命令示例：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708475.png" alt="图片" loading="lazy"></p>
+<h3 id="_7-查看机器所有用户的连接时间-小时" tabindex="-1"> 7.<strong>查看机器所有用户的连接时间（小时）</strong></h3>
+<p>对应日志文件“/var/log/wtmp”，相关命令示例：<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708476.png" alt="图片" loading="lazy"></p>
+<h3 id="_8-如果发现机器产生了异常流量" tabindex="-1"> 8.<strong>如果发现机器产生了异常流量</strong></h3>
+<p>可以使用命令“tcpdump”抓取网络包查看流量情况或者使用工具”iperf”查看流量情况</p>
+<h3 id="_9-可以查看-var-log-secure日志文件" tabindex="-1"> 9.<strong>可以查看/var/log/secure日志文件</strong></h3>
+<p>尝试发现入侵者的信息，相关命令示例：<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708477.png" alt="图片" loading="lazy"></p>
+<h3 id="_10-查询异常进程所对应的执行脚本文件" tabindex="-1"> 10.查询异常进程所对应的执行脚本文件</h3>
+<p>a.top命令查看异常进程对应的PID</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708478.jpeg" alt="图片" loading="lazy"></p>
+<p>b.在虚拟文件系统目录查找该进程的可执行文件</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535740708479.png" alt="图片" loading="lazy"></p>
+<h3 id="_11-如果确认机器已被入侵-重要文件已被删除-可以尝试找回被删除的文件note" tabindex="-1"> 11.如果确认机器已被入侵，重要文件已被删除，可以尝试找回被删除的文件Note:</h3>
+<p>1、当进程打开了某个文件时，只要该进程保持打开该文件，即使将其删除，它依然存在于磁盘中。这意味着，进程并不知道文件已经被删除，它仍然可以向打开该文件时提供给它的文件描述符进行读取和写入。除了该进程之外，这个文件是不可见的，因为已经删除了其相应的目录索引节点。</p>
+<p>2、在/proc 目录下，其中包含了反映内核和进程树的各种文件。/proc目录挂载的是在内存中所映射的一块区域，所以这些文件和目录并不存在于磁盘中，因此当我们对这些文件进行读取和写入时，实际上是在从内存中获取相关信息。大多数与 lsof 相关的信息都存储于以进程的 PID 命名的目录中，即 /proc/1234 中包含的是 PID 为 1234 的进程的信息。每个进程目录中存在着各种文件，它们可以使得应用程序简单地了解进程的内存空间、文件描述符列表、指向磁盘上的文件的符号链接和其他系统信息。lsof 程序使用该信息和其他关于内核内部状态的信息来产生其输出。所以lsof 可以显示进程的文件描述符和相关的文件名等信息。也就是我们通过访问进程的文件描述符可以找到该文件的相关信息。</p>
+<p>3、当系统中的某个文件被意外地删除了，只要这个时候系统中还有进程正在访问该文件，那么我们就可以通过lsof从/proc目录下恢复该文件的内容。</p>
+<p>假设入侵者将/var/log/secure文件删除掉了，尝试将/var/log/secure文件恢复的方法可以参考如下：</p>
+<p>a.查看/var/log/secure文件，发现已经没有该文件</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084710.png" alt="图片" loading="lazy"></p>
+<p>b.使用lsof命令查看当前是否有进程打开/var/log/secure，</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084711.png" alt="图片" loading="lazy"></p>
+<p>c.从上面的信息可以看到 PID 1264（rsyslogd）打开文件的文件描述符为4。同时还可以看到/var/log/ secure已经标记为被删除了。因此我们可以在/proc/1264/fd/4（fd下的每个以数字命名的文件表示进程对应的文件描述符）中查看相应的信息，如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084812.jpeg" alt="图片" loading="lazy"></p>
+<p>d.从上面的信息可以看出，查看/proc/1264/fd/4就可以得到所要恢复的数据。如果可以通过文件描述符查看相应的数据，那么就可以使用I/O重定向将其重定向到文件中，如:</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084813.png" alt="图片" loading="lazy"></p>
+<p>e.再次查看/var/log/secure，发现该文件已经存在。对于许多应用程序，尤其是日志文件和数据库，这种恢复删除文件的方法非常有用。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-165357407084814.jpeg" alt="图片" loading="lazy"></p>
+<p><strong>版权申明：内容来源网络，版权归原创者所有。除非无法确认，都会标明作者及出处，如有侵权，烦请告知，我们会立即删除!</strong></p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Linux"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-07T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
+  <entry>
+    <title type="html">搞定 SpringBoot 接口恶意刷新和暴力请求</title>
+    <id>https://xlc520.github.io/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html</id>
+    <link href="https://xlc520.github.io/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html"/>
+    <updated>2022-05-27T07:56:12.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="搞定-springboot-接口恶意刷新和暴力请求" tabindex="-1"> 搞定 SpringBoot 接口恶意刷新和暴力请求</h1>
+<p>在实际项目使用中，必须要考虑服务的安全性，当服务部署到互联网以后，就要考虑服务被恶意请求和暴力攻击的情况，下面的教程，通过<code>intercept</code>和<code>redis</code>针对<code>url+ip</code>在一定时间内访问的次数来将ip禁用，可以根据自己的需求进行相应的修改，来打打自己的目的；</p>
+<p>首先工程为springboot框架搭建，不再详细叙述。</p>
+<p>首先创建一个自定义的拦截器类，也是最核心的代码：</p>
+<div><pre><code><span>/**
+ * <span>@package</span>: com.technicalinterest.group.interceptor
+ * <span>@className</span>: IpUrlLimitInterceptor
+ * <span>@description</span>: ip+url重复请求现在拦截器
+ * <span>@author</span>: Shuyu.Wang
+ * <span>@since</span>: 0.1
+ **/</span>
+<span>@Slf4j</span>
+<span>public</span> <span>class</span> <span>IpUrlLimitInterceptor</span> <span>implements</span> <span>HandlerInterceptor</span> <span>{</span>
+ 
+ 
+ <span>private</span> <span>RedisUtil</span> <span>getRedisUtil</span><span>(</span><span>)</span> <span>{</span>
+  <span>return</span>  <span>SpringContextUtil</span><span>.</span><span>getBean</span><span>(</span><span>RedisUtil</span><span>.</span><span>class</span><span>)</span><span>;</span>
+ <span>}</span>
+ 
+ <span>private</span> <span>static</span> <span>final</span> <span>String</span> LOCK_IP_URL_KEY<span>=</span><span>"lock_ip_"</span><span>;</span>
+ 
+ <span>private</span> <span>static</span> <span>final</span> <span>String</span> IP_URL_REQ_TIME<span>=</span><span>"ip_url_times_"</span><span>;</span>
+ 
+ <span>private</span> <span>static</span> <span>final</span> <span>long</span> LIMIT_TIMES<span>=</span><span>5</span><span>;</span>
+ 
+ <span>private</span> <span>static</span> <span>final</span> <span>int</span> IP_LOCK_TIME<span>=</span><span>60</span><span>;</span>
+ 
+ <span>@Override</span>
+ <span>public</span> <span>boolean</span> <span>preHandle</span><span>(</span><span>HttpServletRequest</span> httpServletRequest<span>,</span> <span>HttpServletResponse</span> httpServletResponse<span>,</span> <span>Object</span> o<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+  log<span>.</span><span>info</span><span>(</span><span>"request请求地址uri={},ip={}"</span><span>,</span> httpServletRequest<span>.</span><span>getRequestURI</span><span>(</span><span>)</span><span>,</span> <span>IpAdrressUtil</span><span>.</span><span>getIpAdrress</span><span>(</span>httpServletRequest<span>)</span><span>)</span><span>;</span>
+  <span>if</span> <span>(</span><span>ipIsLock</span><span>(</span><span>IpAdrressUtil</span><span>.</span><span>getIpAdrress</span><span>(</span>httpServletRequest<span>)</span><span>)</span><span>)</span><span>{</span>
+   log<span>.</span><span>info</span><span>(</span><span>"ip访问被禁止={}"</span><span>,</span><span>IpAdrressUtil</span><span>.</span><span>getIpAdrress</span><span>(</span>httpServletRequest<span>)</span><span>)</span><span>;</span>
+   <span>ApiResult</span> result <span>=</span> <span>new</span> <span>ApiResult</span><span>(</span><span>ResultEnum</span><span>.</span>LOCK_IP<span>)</span><span>;</span>
+   <span>returnJson</span><span>(</span>httpServletResponse<span>,</span> JSON<span>.</span><span>toJSONString</span><span>(</span>result<span>)</span><span>)</span><span>;</span>
+   <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+  <span>if</span><span>(</span><span>!</span><span>addRequestTime</span><span>(</span><span>IpAdrressUtil</span><span>.</span><span>getIpAdrress</span><span>(</span>httpServletRequest<span>)</span><span>,</span>httpServletRequest<span>.</span><span>getRequestURI</span><span>(</span><span>)</span><span>)</span><span>)</span><span>{</span>
+   <span>ApiResult</span> result <span>=</span> <span>new</span> <span>ApiResult</span><span>(</span><span>ResultEnum</span><span>.</span>LOCK_IP<span>)</span><span>;</span>
+   <span>returnJson</span><span>(</span>httpServletResponse<span>,</span> JSON<span>.</span><span>toJSONString</span><span>(</span>result<span>)</span><span>)</span><span>;</span>
+   <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+  <span>return</span> <span>true</span><span>;</span>
+ <span>}</span>
+ 
+ <span>@Override</span>
+ <span>public</span> <span>void</span> <span>postHandle</span><span>(</span><span>HttpServletRequest</span> httpServletRequest<span>,</span> <span>HttpServletResponse</span> httpServletResponse<span>,</span> <span>Object</span> o<span>,</span> <span>ModelAndView</span> modelAndView<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+ 
+ <span>}</span>
+ 
+ <span>@Override</span>
+ <span>public</span> <span>void</span> <span>afterCompletion</span><span>(</span><span>HttpServletRequest</span> httpServletRequest<span>,</span> <span>HttpServletResponse</span> httpServletResponse<span>,</span> <span>Object</span> o<span>,</span> <span>Exception</span> e<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+ 
+ <span>}</span>
+ 
+ <span>/**
+  * @Description: 判断ip是否被禁用
+  * <span>@author</span>: shuyu.wang
+  * <span>@date</span>: 2019-10-12 13:08
+  * <span>@param</span> <span>ip</span>
+  * <span>@return</span> java.lang.Boolean
+  */</span>
+ <span>private</span> <span>Boolean</span> <span>ipIsLock</span><span>(</span><span>String</span> ip<span>)</span><span>{</span>
+  <span>RedisUtil</span> redisUtil<span>=</span><span>getRedisUtil</span><span>(</span><span>)</span><span>;</span>
+  <span>if</span><span>(</span>redisUtil<span>.</span><span>hasKey</span><span>(</span>LOCK_IP_URL_KEY<span>+</span>ip<span>)</span><span>)</span><span>{</span>
+   <span>return</span> <span>true</span><span>;</span>
+  <span>}</span>
+  <span>return</span> <span>false</span><span>;</span>
+ <span>}</span>
+ <span>/**
+  * @Description: 记录请求次数
+  * <span>@author</span>: shuyu.wang
+  * <span>@date</span>: 2019-10-12 17:18
+  * <span>@param</span> <span>ip</span>
+  * <span>@param</span> <span>uri</span>
+  * <span>@return</span> java.lang.Boolean
+  */</span>
+ <span>private</span> <span>Boolean</span> <span>addRequestTime</span><span>(</span><span>String</span> ip<span>,</span><span>String</span> uri<span>)</span><span>{</span>
+  <span>String</span> key<span>=</span>IP_URL_REQ_TIME<span>+</span>ip<span>+</span>uri<span>;</span>
+  <span>RedisUtil</span> redisUtil<span>=</span><span>getRedisUtil</span><span>(</span><span>)</span><span>;</span>
+  <span>if</span> <span>(</span>redisUtil<span>.</span><span>hasKey</span><span>(</span>key<span>)</span><span>)</span><span>{</span>
+   <span>long</span> time<span>=</span>redisUtil<span>.</span><span>incr</span><span>(</span>key<span>,</span><span>(</span><span>long</span><span>)</span><span>1</span><span>)</span><span>;</span>
+   <span>if</span> <span>(</span>time<span>>=</span>LIMIT_TIMES<span>)</span><span>{</span>
+    redisUtil<span>.</span><span>getLock</span><span>(</span>LOCK_IP_URL_KEY<span>+</span>ip<span>,</span>ip<span>,</span>IP_LOCK_TIME<span>)</span><span>;</span>
+    <span>return</span> <span>false</span><span>;</span>
+   <span>}</span>
+  <span>}</span><span>else</span> <span>{</span>
+   redisUtil<span>.</span><span>getLock</span><span>(</span>key<span>,</span><span>(</span><span>long</span><span>)</span><span>1</span><span>,</span><span>1</span><span>)</span><span>;</span>
+  <span>}</span>
+  <span>return</span> <span>true</span><span>;</span>
+ <span>}</span>
+ 
+ <span>private</span> <span>void</span> <span>returnJson</span><span>(</span><span>HttpServletResponse</span> response<span>,</span> <span>String</span> json<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+  <span>PrintWriter</span> writer <span>=</span> <span>null</span><span>;</span>
+  response<span>.</span><span>setCharacterEncoding</span><span>(</span><span>"UTF-8"</span><span>)</span><span>;</span>
+  response<span>.</span><span>setContentType</span><span>(</span><span>"text/json; charset=utf-8"</span><span>)</span><span>;</span>
+  <span>try</span> <span>{</span>
+   writer <span>=</span> response<span>.</span><span>getWriter</span><span>(</span><span>)</span><span>;</span>
+   writer<span>.</span><span>print</span><span>(</span>json<span>)</span><span>;</span>
+  <span>}</span> <span>catch</span> <span>(</span><span>IOException</span> e<span>)</span> <span>{</span>
+   log<span>.</span><span>error</span><span>(</span><span>"LoginInterceptor response error ---> {}"</span><span>,</span> e<span>.</span><span>getMessage</span><span>(</span><span>)</span><span>,</span> e<span>)</span><span>;</span>
+  <span>}</span> <span>finally</span> <span>{</span>
+   <span>if</span> <span>(</span>writer <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+    writer<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+   <span>}</span>
+  <span>}</span>
+ <span>}</span>
+ 
+ 
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>代码中redis的使用的是分布式锁的形式，这样可以最大程度保证线程安全和功能的实现效果。代码中设置的是1S内同一个接口通过同一个ip访问5次，就将该ip禁用1个小时，根据自己项目需求可以自己适当修改，实现自己想要的功能；</p>
+<p>redis分布式锁的关键代码:</p>
+<div><pre><code><span>/**
+ * <span>@package</span>: com.shuyu.blog.util
+ * <span>@className</span>: RedisUtil
+ * <span>@description</span>:
+ * <span>@author</span>: Shuyu.Wang
+ * <span>@since</span>: 0.1
+ **/</span>
+<span>@Component</span>
+<span>@Slf4j</span>
+<span>public</span> <span>class</span> <span>RedisUtil</span> <span>{</span>
+ 
+ <span>private</span> <span>static</span> <span>final</span> <span>Long</span> SUCCESS <span>=</span> <span>1L</span><span>;</span>
+ 
+ <span>@Autowired</span>
+ <span>private</span> <span>RedisTemplate</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> redisTemplate<span>;</span>
+ <span>// =============================common============================</span>
+ 
+ 
+ 
+ <span>/**
+  * 获取锁
+  * <span>@param</span> <span>lockKey</span>
+  * <span>@param</span> <span>value</span>
+  * <span>@param</span> <span>expireTime</span>：单位-秒
+  * <span>@return</span>
+  */</span>
+ <span>public</span> <span>boolean</span> <span>getLock</span><span>(</span><span>String</span> lockKey<span>,</span> <span>Object</span> value<span>,</span> <span>int</span> expireTime<span>)</span> <span>{</span>
+  <span>try</span> <span>{</span>
+   log<span>.</span><span>info</span><span>(</span><span>"添加分布式锁key={},expireTime={}"</span><span>,</span>lockKey<span>,</span>expireTime<span>)</span><span>;</span>
+   <span>String</span> script <span>=</span> <span>"if redis.call('setNx',KEYS[1],ARGV[1]) then if redis.call('get',KEYS[1])==ARGV[1] then return redis.call('expire',KEYS[1],ARGV[2]) else return 0 end end"</span><span>;</span>
+   <span>RedisScript</span><span><span>&lt;</span><span>String</span><span>></span></span> redisScript <span>=</span> <span>new</span> <span>DefaultRedisScript</span><span><span>&lt;</span><span>></span></span><span>(</span>script<span>,</span> <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+   <span>Object</span> result <span>=</span> redisTemplate<span>.</span><span>execute</span><span>(</span>redisScript<span>,</span> <span>Collections</span><span>.</span><span>singletonList</span><span>(</span>lockKey<span>)</span><span>,</span> value<span>,</span> expireTime<span>)</span><span>;</span>
+   <span>if</span> <span>(</span>SUCCESS<span>.</span><span>equals</span><span>(</span>result<span>)</span><span>)</span> <span>{</span>
+    <span>return</span> <span>true</span><span>;</span>
+   <span>}</span>
+  <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
+   e<span>.</span><span>printStackTrace</span><span>(</span><span>)</span><span>;</span>
+  <span>}</span>
+  <span>return</span> <span>false</span><span>;</span>
+ <span>}</span>
+ 
+ <span>/**
+  * 释放锁
+  * <span>@param</span> <span>lockKey</span>
+  * <span>@param</span> <span>value</span>
+  * <span>@return</span>
+  */</span>
+ <span>public</span> <span>boolean</span> <span>releaseLock</span><span>(</span><span>String</span> lockKey<span>,</span> <span>String</span> value<span>)</span> <span>{</span>
+  <span>String</span> script <span>=</span> <span>"if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end"</span><span>;</span>
+  <span>RedisScript</span><span><span>&lt;</span><span>String</span><span>></span></span> redisScript <span>=</span> <span>new</span> <span>DefaultRedisScript</span><span><span>&lt;</span><span>></span></span><span>(</span>script<span>,</span> <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+  <span>Object</span> result <span>=</span> redisTemplate<span>.</span><span>execute</span><span>(</span>redisScript<span>,</span> <span>Collections</span><span>.</span><span>singletonList</span><span>(</span>lockKey<span>)</span><span>,</span> value<span>)</span><span>;</span>
+  <span>if</span> <span>(</span>SUCCESS<span>.</span><span>equals</span><span>(</span>result<span>)</span><span>)</span> <span>{</span>
+   <span>return</span> <span>true</span><span>;</span>
+  <span>}</span>
+  <span>return</span> <span>false</span><span>;</span>
+ <span>}</span>
+ 
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>最后将上面自定义的拦截器通过<code>registry.addInterceptor</code>添加一下，就生效了；</p>
+<div><pre><code><span>@Configuration</span>
+<span>@Slf4j</span>
+<span>public</span> <span>class</span> <span>MyWebAppConfig</span> <span>extends</span> <span>WebMvcConfigurerAdapter</span> <span>{</span>
+    <span>@Bean</span>
+ <span>IpUrlLimitInterceptor</span> <span>getIpUrlLimitInterceptor</span><span>(</span><span>)</span><span>{</span>
+     <span>return</span> <span>new</span> <span>IpUrlLimitInterceptor</span><span>(</span><span>)</span><span>;</span>
+ <span>}</span>
+ 
+ <span>@Override</span>
+    <span>public</span> <span>void</span> <span>addInterceptors</span><span>(</span><span>InterceptorRegistry</span> registry<span>)</span> <span>{</span>
+  registry<span>.</span><span>addInterceptor</span><span>(</span><span>getIpUrlLimitInterceptor</span><span>(</span><span>)</span><span>)</span><span>.</span><span>addPathPatterns</span><span>(</span><span>"/**"</span><span>)</span><span>;</span>
+        <span>super</span><span>.</span><span>addInterceptors</span><span>(</span>registry<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>自己可以写一个for循环来测试方面的功能，这里就不详细介绍了。</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-05T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
+  <entry>
+    <title type="html">9个很酷的CMD命令</title>
+    <id>https://xlc520.github.io/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html</id>
+    <link href="https://xlc520.github.io/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html"/>
+    <updated>2022-05-27T07:56:04.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="_9个很酷的cmd命令" tabindex="-1"> 9个很酷的CMD命令</h1>
+<h2 id="ipconfig" tabindex="-1"> <strong>ipconfig</strong></h2>
+<p>功能：查询本机IP地址</p>
+<p>操作方法：只要在在打开的cmd命令界面中输入“ipconfig”就可以了。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928341.png" alt="图片" loading="lazy"></p>
+<h2 id="msg" tabindex="-1"> <strong>msg</strong></h2>
+<p>功能：向对方电脑发送一条文本提示</p>
+<p>操作方法：首先你要知道对方的IP地址，接下来输入命令“msg /server:对方电脑IP * ”。在“*”后输入你要发送的内容即可。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928331.png" alt="图片" loading="lazy"></p>
+<h2 id="net-user" tabindex="-1"> <strong>Net user</strong></h2>
+<p>功能：查看本机账户情况</p>
+<p>操作方法：和ipconfig一样，net user也有很多衍生的命令后缀，比方说“net user xxx 123456 /add”，输入后就会在系统中创建一个名为“xxx”的新用户，而新用户密码则是“123456”。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928342.png" alt="图片" loading="lazy"></p>
+<h2 id="net-share" tabindex="-1"> <strong>Net share</strong></h2>
+<p>作用：查看共享资源</p>
+<p>操作方法：在cmd界面中输入“net share”查看所有已共享资源，然后输入“net share 要删除的共享文件夹 /delete”就可以啦！</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
+<h2 id="nslookup" tabindex="-1"> <strong>Nslookup</strong></h2>
+<p>作用：检查网站IP地址</p>
+<p>操作方法：在提示符状态输入“nslookup 对方网站域名”，哒哒哒哒……结果出来了！</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928343.png" alt="图片" loading="lazy"></p>
+<h2 id="netsh-wlan-show" tabindex="-1"> <strong>Netsh wlan show</strong></h2>
+<p>作用：探秘Wi-Fi配置文件</p>
+<p>操作方法：在提示符状态输入命令“netsh wlan show profile SSID key=clear”，输入完成后Windows会自动返回当前已连接WIFI的详细信息，包括SSID和连接密码。当前这里有一个前提，那就是你现在已经成功连接了。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928344.png" alt="图片" loading="lazy"></p>
+<h2 id="telnet" tabindex="-1"> <strong>telnet</strong></h2>
+<p>作用：看电影《星球大战》</p>
+<p>操作方法：在提示符状态输入命令“telnet towel.blinkenlights.nl”，输入完成后稍等一会即可，电影会自动开演</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
+<h2 id="" tabindex="-1"> <strong>|</strong></h2>
+<p>作用：将命令结果输出到剪贴板</p>
+<p>操作方法：在需要导出结果的命令后方添加“|”，再加入导出位置就可以了。比方说“| clip”是导出到剪贴板，“| xxx.txt”是导出到xxx.txt。总之，你需要什么地方用，就放到哪儿，“|”支持绝大多数CMD指令。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928345.png" alt="图片" loading="lazy"></p>
+<h2 id="-1" tabindex="-1"> <strong>&amp;&amp;</strong></h2>
+<p>作用：将多个命令“连接”起来，一步运行多组命令</p>
+<p>操作方法：&amp;&amp;是CMD里一项“命令连接”语句，直接放在要连接的命令行中间即可。效果就是下图所示，一次输入后CMD会顺序执行所有命令。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535737928346.png" alt="图片" loading="lazy"></p>
+<p>--- EOF ---</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="pc"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-03T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">Quartz - 任务调度框架整合使用</title>
     <id>https://xlc520.github.io/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html</id>
@@ -25674,244 +25991,6 @@ PASSWORD = ‘password1 password2’ # 多个账号写法</p>
       <name>xlc520</name>
     </contributor>
     <published>2022-01-20T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">Linux脚本工具</title>
-    <id>https://xlc520.github.io/other/Linux%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7.html</id>
-    <link href="https://xlc520.github.io/other/Linux%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
-    <summary type="html">Linux脚本工具</summary>
-    <content type="html"><![CDATA[<h1 id="linux脚本工具" tabindex="-1"> Linux脚本工具</h1>
-<h2 id="ednovas-的-toolbox-工具箱" tabindex="-1"> EdNovas 的 Toolbox 工具箱</h2>
-<p><strong>脚本地址</strong></p>
-<p>https://github.com/wdm1732418365/vpstoolbox</p>
-<p>最新版：</p>
-<div><pre><code>CODE
-<span>wget</span> -N https://raw.githubusercontent.com/wdm1732418365/vpstoolbox/main/ednovastool.sh <span>&amp;&amp;</span> <span>chmod</span> +x ednovastool.sh <span>&amp;&amp;</span> ./ednovastool.sh
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="other"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-21T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">MyEclipsev2021永久激活版</title>
-    <id>https://xlc520.github.io/other/MyEclipse.html</id>
-    <link href="https://xlc520.github.io/other/MyEclipse.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
-    <summary type="html">MyEclipsev2021永久激活版</summary>
-    <content type="html"><![CDATA[<h1 id="myeclipsev2021永久激活版" tabindex="-1"> MyEclipsev2021永久激活版</h1>
-<h3 id="激活码" tabindex="-1"> 激活码</h3>
-<p>1、zLR8ZC-855575-6154505816197416
-2、3LR8ZC-855575-61567256274007429
-3、zLR8ZC-855575-61567256215416341
-4、3LR8ZC-855575-61567256646682235
-5、zLR8ZC-855575-61567256903775584
-6、oLR8ZC-855575-77665356722269248
-7、fLR8ZC-855575-7766535033841152
-8、gLR8ZC-855575-78507056841444089
-9、GLR8ZC-855575-7850705925145157</p>
-<h3 id="软件特色" tabindex="-1"> 软件特色</h3>
-<p>【企业级开发】
-软件为完成工作提供了智能的企业工具。Java EE库和功能是企业级项目的基础，支持部署到几十个企业友好的应用服务器进行快速检测。
-【Java Web开发】
-有了它，你就拥有了所有的Web开发技术。支持快速添加技术功能到Web项目中，使用可视化编辑器以便编码和配置，并且还可以在多种应用服务器上测试你的任务。
-【云开发】
-脱离缓存，使用内置功能连接到云，支持探索和连接服务，为他人提供自己的REST Web服务。无论是定位还是虚拟的微博，它都能轻松地创建云连接。
-【移动开发】
-移动应用开发再也无需使用特殊工具或学习新的编程语言。软件支持使用Java、HTML和JQuery进行编码，使用移动工具创建拥有良好编码的应用，并嵌入到原生iOS和Android应用中。</p>
-<h3 id="myeclipse2021破解教程" tabindex="-1"> MyEclipse2021破解教程</h3>
-<p>1、在软件学堂下载软件安装包，并对压缩包进行解压得到安装程序和破解文件。
-2、然后双击运行软件安装程序，按照安装向导进行安装。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280930579127.jpg" alt="img" loading="lazy">
-3、接受软件安装协议，点击Next进行下一步。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931029971.jpg" alt="img" loading="lazy">
-4、选择软件安装位置，一般默认安装在c盘，用户也可自定义选择其他位置，注意千万不要出现中文目录。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931116442.jpg" alt="img" loading="lazy">
-5、软件正在安装中，请用户耐心等待。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931181934.jpg" alt="img" loading="lazy">
-6、待到安装完成后，退出安装向导。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931248968.jpg" alt="img" loading="lazy">
-7、接下来进入软件主界面，在弹出注册界面，点击Enter License默认进入。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931301641123212.jpg" alt="img" loading="lazy">
-8、然后将软件包中的注册码输入到该界面中，再点击Enable Now。
-9、接着载点击Activate Now即可完成激活啦。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202106280931445590.jpg" alt="img" loading="lazy"></p>
-<h3 id="功能介绍" tabindex="-1"> 功能介绍</h3>
-<p>1、优化JavaEE开发
-确保企业开发使用的是MyEclipse中当前最新的JavaEE技术，并且它强大的功能随时可用。
-2、保持厂商中立
-如果IBMWebSphere是你企业开发的重要组成部分，那么厂商锁定肯定会阻碍你的选择。你可以让开发更加自由，为WebSphere开发提供了工具，并支持大量的其他关键性技术。
-3、RESTfulWeb服务开发
-支持使用RESTweb服务创建云应用。使用REST特殊工具生成和测试添加到应用中的服务。
-4、项目工作流中保持Maven
-通过标准的Maven项目架构和菜单内置的启动命令，你可以在当前IDE下使用Maven管理项目。</p>
-<h3 id="myeclipse-eclipse使用教程" tabindex="-1"> MyEclipse/Eclipse使用教程</h3>
-<p>设置工作空间编码格式
-点击Windows → preference → WorkSpace
-或者搜索workspace
-选择编码格式，默认为GBK，不过选择UTF-8为好。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202107091052554606.jpg" alt="img" loading="lazy">
-成功更改工作空间编码之后，如果对默认字体不适应，可以选择更改字体。
-更改字体
-点击Windows → preference → General →Appearence → Color and Fonts → Basic
-或者搜索Colors and fonts
-选择 Text font ，点击Edit编辑，就可以更改字体了，选择合适的就行。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202107091053019148.jpg" alt="img" loading="lazy">
-字体设置完之后，最好顺便设置下注释模版，注释模版就是在使用/** <em>/这种注释的时候，会自动按照所设置的注释模版注释。注释是个好习惯。
-设置注释模版
-Class类的注释模板打开Eclipse/MyEclipse工具，点击 Window-&gt;<a href="http://www.xue51.com/zt/Premierebbdq/" target="_blank" rel="noopener noreferrer">Pr</a>eferences弹出首选项设置窗口，Java-&gt;Code Style-&gt;Code Template选项列表，点击Types。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20210709105305842.jpg" alt="img" loading="lazy">
-可以输入/<strong>，然后回车或按shift+alt+j快捷键补齐注释内容。
-<img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/202107091053091687.jpg" alt="img" loading="lazy">
-注释模版代码:
-1、/</strong>
-2、</em> Title: ${type_name}
-3、* Description:
-4、* Version:1.0.0
-5、* @author ${user}
-6、* @date ${date}
-7、*/</p>
-<h3 id="常用快捷建" tabindex="-1"> 常用快捷建</h3>
-<p>Ctrl+H 全局搜索
-Ctrl+F 本类搜索以及替换
-Ctrl+shift+R 搜索文件
-shift+tab 整体代码向左移
-ctrl+shift+↓ 复制当前代码并向下移一行ctrl+shift+R 搜索文件
-ctrl+H 搜索所有文件包括代码
-ctrl+f 搜索当前页面存盘
-Ctrl+s(肯定知道)注释代码
-Ctrl+/取消注释
-Ctrl+1 快速修复
-Ctrl+L 定位在某行
-Ctrl+O 快速显示 OutLine
-Ctrl+T 快速显示当前类的继承结构
-Ctrl+W 关闭当前Editer
-Ctrl+K 快速定位到下一个
-Ctrl+E 快速显示当前Editer的下拉列表
-Ctrl+J 正向增量查找
-Ctrl+D: 删除当前行
-Ctrl+Alt+↓ 复制当前行到下一行(复制增加)
-Ctrl+Alt+↑ 复制当前行到上一行(复制增加)</p>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="other"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-22T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">MySQL 8</title>
-    <id>https://xlc520.github.io/other/MySQL.html</id>
-    <link href="https://xlc520.github.io/other/MySQL.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
-    <summary type="html">MySQL 8</summary>
-    <content type="html"><![CDATA[<h1 id="mysql-8" tabindex="-1"> MySQL 8</h1>
-<p>mysql从5.7一下子跳跃到了8.0，其中的改变还是很大，有点这里就不说了，小伙伴们自己去百度了解一下，这里重点说一下，安装的事</p>
-<p>1.解压后，文件下下面是没有my.ini 和 data目录的，需要自己新建一个my.ini和data目录</p>
-<p>my.ini的基本代码就这几行配置，足矣，更详细的自己官网上看（F:\mysql-8.0.11-winx64 是我的解压路径）</p>
-<div><pre><code>
-[mysqld]
-# 设置3306端口
-port=3306
-# 设置mysql的安装目录
-basedir=E:\Software\mysql-8.0.19-winx64
-# 设置mysql数据库的数据的存放目录，在安装mysql-5.7.30-winx64.zip版本的时候，此配置不可添加，否则mysql将无法启动。
-# datadir=E:\Software\mysql-8.0.19-winx64\data
-# 允许最大连接数
-max_connections=200
-# 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统
-max_connect_errors=10
-# 服务端使用的字符集默认为UTF8
-character-set-server=utf8
-# 创建新表时将使用的默认存储引擎
-default-storage-engine=INNODB
-# 默认使用“mysql_native_password”插件认证
-default_authentication_plugin=mysql_native_password
-# 关闭ssl
-skip_ssl
-# 配置时区
-default-time_zone='+8:00'
-[mysql]
-# 设置mysql客户端默认字符集
-default-character-set=utf8
-[client]
-# 设置mysql客户端连接服务端时默认使用的端口
-port=3306
-default-character-set=utf8
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2.配置环境变量，将解压目录下的bin文件夹的路径配置到系统变量中的path下（F:\mysql-8.0.11-winx64\bin）</p>
-<p>3.以管理员身份运行命令提示符</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428143824709-218907811.png" alt="img" loading="lazy"></p>
-<p>如果顺利会产生下面的信息：</p>
-<p>第4行的信息尤其重要，这是初始化密码，请拿笔或者截图记下，这个随机密码会很随机，随机到可能有一些符号；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428143923105-1817069252.png" alt="img" loading="lazy"></p>
-<p>提示：如果你关了这个窗口，或者没记住，那也没事，删掉初始化的 datadir 目录（就是解压文件夹下的data文件夹）里面的东西，不要删除data文件夹，再执行一遍初始化命令，又会重新生成的。</p>
-<p>4.安装服务 mysqld --install 服务名（可以不写，默认是MySql,如果你的电脑上要安装付哦个mysql,这里的服务名写一下做区分），安装成功后控制它会提示：success ** (忘记了)</p>
-<div><pre><code>mysqld --install [服务名]
-</code></pre><div aria-hidden="true"><div></div></div></div><p>5.启动服务（这时候不要去登录mysql,登录不进去的，必须要先启动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428144751212-1355452928.png" alt="img" loading="lazy"></p>
-<p>6.登录mysql，当然是为了修改密码啊，那个随机密码鬼才能记得住，这时候也不要尝试用图形化管理工具（navicat for mysql）去登录，会报错的，继续往下看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428145014478-776409826.png" alt="img" loading="lazy"></p>
-<p>这里踩坑的小朋友一般是密码输错了，或者服务没启动，一直登录不进去。</p>
-<p>7.修改密码</p>
-<p>ALTER USER &quot;root&quot;@&quot;localhost&quot; IDENTIFIED BY &quot;你的新密码&quot;;</p>
-<p><strong>注意：重点啊，如果你没有设置认证方式，默认的密码加密方式是：caching_sha2_password，而现在很多客户端工具还不支持这种加密认证方式，连接测试的时候就会报错：client does not support authentication protocol requested by server; consider upgrading MySQL client，这里的错误信息就是不支持身份认证方式，没关系，去my.ini里面在[mysqld]下面加上这句话即可：</strong></p>
-<div><pre><code>default_authentication_plugin=mysql_native_password
-</code></pre><div aria-hidden="true"><div></div></div></div><p>8.打开远程访问</p>
-<p>对于允许远程访问，有两种角色，一种是我们的root用户，还有一种是非root用户，从安全的角度（我也不知道什么角度，听别人说的，暂且相信着吧），远程访问最后不要用root用户</p>
-<div><pre><code>用root用户访问：
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '密码' WITH GRANT OPTION;
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>这里允许root用户远程的时候，如果出现如下的错误，就先去把root用的host改成%，再运行上面那句话，对于mysql用户管理这一块不熟悉的朋友们，请看我另一篇博客--mysql 用户及权限管理</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428150157767-1407082633.png" alt="img" loading="lazy"></p>
-<p>非root用户，这里就要先去创建一个用户</p>
-<div><pre><code>切换数据库
-mysql>use mysql;
-
-创建用户(user1:用户名;%:任意ip,也可以指定，root默认就是localhost;123456：登录密码)
-mysql>CREATE USER 'user1'@'%' IDENTIFIED BY '123456';
-
-授权，默认创建的用户权限是usage,就是无权限，只能登录而已，（all：所有权限，这里有select,update等等权限，可以去搜一下；后面的*.*：指定数据库.指定表，这里是所有；to后面就是你刚才创建的用户）mysql>grant all on *.* to 'user1'@'%'；
-注意:用以上命令授权的用户不能给其它用户授权,如果想让该用户可以授权,用以下命令: 
-GRANT all ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION; 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>其他：</p>
-<div><pre><code><span># 修改密码</span>
-<span>ALTER</span> <span>USER</span> <span>'test'</span><span>@'localhost'</span> IDENTIFIED <span>WITH</span> MYSQL_NATIVE_PASSWORD <span>BY</span> <span>'新密码'</span><span>;</span>
-
-<span>ALTER</span> <span>USER</span> <span>'ynau'</span><span>@'localhost'</span> IDENTIFIED <span>WITH</span> MYSQL_NATIVE_PASSWORD <span>BY</span> <span>'123456'</span><span>;</span>
-
-<span># 创建用户</span>
-<span>CREATE</span> <span>USER</span> <span>'ynau'</span><span>@'%'</span> IDENTIFIED <span>BY</span> <span>'123456'</span><span>;</span>
-
-<span>#授权</span>
-<span>grant</span> <span>all</span> <span>on</span> <span>*</span><span>.</span><span>*</span> <span>to</span> <span>'ynau'</span><span>@'%'</span><span>;</span>
-
-<span>#刷新：</span>
-flush <span>privileges</span><span>;</span>
-
-<span>#重启mysql服务</span>
-service mysqld restart
-
-<span>#验证是否修改成功</span>
-mysql <span>-</span>u test <span>-</span>p
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="other"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-23T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
