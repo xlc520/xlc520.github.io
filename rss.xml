@@ -6,10 +6,12 @@
     <link>https://xlc520.github.io/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 27 May 2022 07:58:14 GMT</pubDate>
-    <lastBuildDate>Fri, 27 May 2022 07:58:14 GMT</lastBuildDate>
+    <pubDate>Fri, 27 May 2022 11:26:47 GMT</pubDate>
+    <lastBuildDate>Fri, 27 May 2022 11:26:47 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>Script</category>
+    <category>other</category>
     <category>Linux</category>
     <category>Java</category>
     <category>pc</category>
@@ -20,11 +22,628 @@
     <category>IDEA</category>
     <category>coding</category>
     <category>daily</category>
-    <category>other</category>
     <category>GitHub</category>
     <category>Git</category>
     <category>Euserv</category>
     <category>linux</category>
+    <item>
+      <title>使用CloudFlareWorkers反代网站</title>
+      <link>https://xlc520.github.io/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html</link>
+      <guid>https://xlc520.github.io/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">使用CloudFlareWorkers反代网站</source>
+      <category>Script</category>
+      <pubDate>Thu, 09 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="使用cloudflareworkers反代网站" tabindex="-1"> 使用CloudFlareWorkers反代网站</h1>
+<p>给出三种反代源码。</p>
+<h2 id="镜像整个网站" tabindex="-1"> 镜像整个网站</h2>
+<div><pre><code><span>// 替换成你想镜像的站点</span>
+<span>const</span> upstream <span>=</span> <span>'www.google.com'</span>
+ 
+<span>// 如果那个站点有专门的移动适配站点，否则保持和上面一致</span>
+<span>const</span> upstream_mobile <span>=</span> <span>'www.google.com'</span>
+ 
+<span>// 你希望禁止哪些国家访问</span>
+<span>const</span> blocked_region <span>=</span> <span>[</span><span>'RU'</span><span>]</span>
+ 
+<span>// 禁止自访问</span>
+<span>const</span> blocked_ip_address <span>=</span> <span>[</span><span>'0.0.0.0'</span><span>,</span> <span>'127.0.0.1'</span><span>]</span>
+ 
+<span>// 替换成你想镜像的站点</span>
+<span>const</span> replace_dict <span>=</span> <span>{</span>
+    <span>'$upstream'</span><span>:</span> <span>'$custom_domain'</span><span>,</span>
+    <span>'//www.google.com'</span><span>:</span> <span>''</span>
+<span>}</span>
+ 
+<span>//以下内容都不用动</span>
+<span>addEventListener</span><span>(</span><span>'fetch'</span><span>,</span> <span>event</span> <span>=></span> <span>{</span>
+    event<span>.</span><span>respondWith</span><span>(</span><span>fetchAndApply</span><span>(</span>event<span>.</span>request<span>)</span><span>)</span><span>;</span>
+<span>}</span><span>)</span>
+ 
+<span>async</span> <span>function</span> <span>fetchAndApply</span><span>(</span><span>request</span><span>)</span> <span>{</span>
+ 
+    <span>const</span> region <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-ipcountry'</span><span>)</span><span>.</span><span>toUpperCase</span><span>(</span><span>)</span><span>;</span>
+    <span>const</span> ip_address <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-connecting-ip'</span><span>)</span><span>;</span>
+    <span>const</span> user_agent <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'user-agent'</span><span>)</span><span>;</span>
+ 
+    <span>let</span> response <span>=</span> <span>null</span><span>;</span>
+    <span>let</span> url <span>=</span> <span>new</span> <span>URL</span><span>(</span>request<span>.</span>url<span>)</span><span>;</span>
+    <span>let</span> url_host <span>=</span> url<span>.</span>host<span>;</span>
+ 
+    <span>if</span> <span>(</span>url<span>.</span>protocol <span>==</span> <span>'http:'</span><span>)</span> <span>{</span>
+        url<span>.</span>protocol <span>=</span> <span>'https:'</span>
+        response <span>=</span> Response<span>.</span><span>redirect</span><span>(</span>url<span>.</span>href<span>)</span><span>;</span>
+        <span>return</span> response<span>;</span>
+    <span>}</span>
+ 
+    <span>if</span> <span>(</span><span>await</span> <span>device_status</span><span>(</span>user_agent<span>)</span><span>)</span> <span>{</span>
+        upstream_domain <span>=</span> upstream
+    <span>}</span> <span>else</span> <span>{</span>
+        upstream_domain <span>=</span> upstream_mobile
+    <span>}</span>
+ 
+    url<span>.</span>host <span>=</span> upstream_domain<span>;</span>
+ 
+    <span>if</span> <span>(</span>blocked_region<span>.</span><span>includes</span><span>(</span>region<span>)</span><span>)</span> <span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: WorkersProxy is not available in your region yet.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span> <span>if</span><span>(</span>blocked_ip_address<span>.</span><span>includes</span><span>(</span>ip_address<span>)</span><span>)</span><span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: Your IP address is blocked by WorkersProxy.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span><span>{</span>
+        <span>let</span> method <span>=</span> request<span>.</span>method<span>;</span>
+        <span>let</span> request_headers <span>=</span> request<span>.</span>headers<span>;</span>
+        <span>let</span> new_request_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>request_headers<span>)</span><span>;</span>
+ 
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Host'</span><span>,</span> upstream_domain<span>)</span><span>;</span>
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Referer'</span><span>,</span> url<span>.</span>href<span>)</span><span>;</span>
+ 
+        <span>let</span> original_response <span>=</span> <span>await</span> <span>fetch</span><span>(</span>url<span>.</span>href<span>,</span> <span>{</span>
+            <span>method</span><span>:</span> method<span>,</span>
+            <span>headers</span><span>:</span> new_request_headers
+        <span>}</span><span>)</span>
+ 
+        <span>let</span> original_response_clone <span>=</span> original_response<span>.</span><span>clone</span><span>(</span><span>)</span><span>;</span>
+        <span>let</span> original_text <span>=</span> <span>null</span><span>;</span>
+        <span>let</span> response_headers <span>=</span> original_response<span>.</span>headers<span>;</span>
+        <span>let</span> new_response_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>response_headers<span>)</span><span>;</span>
+        <span>let</span> status <span>=</span> original_response<span>.</span>status<span>;</span>
+ 
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-origin'</span><span>,</span> <span>'*'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-credentials'</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy-report-only'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'clear-site-data'</span><span>)</span><span>;</span>
+ 
+        <span>const</span> content_type <span>=</span> new_response_headers<span>.</span><span>get</span><span>(</span><span>'content-type'</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span>content_type<span>.</span><span>includes</span><span>(</span><span>'text/html'</span><span>)</span> <span>&amp;&amp;</span> content_type<span>.</span><span>includes</span><span>(</span><span>'UTF-8'</span><span>)</span><span>)</span> <span>{</span>
+            original_text <span>=</span> <span>await</span> <span>replace_response_text</span><span>(</span>original_response_clone<span>,</span> upstream_domain<span>,</span> url_host<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            original_text <span>=</span> original_response_clone<span>.</span>body
+        <span>}</span>
+ 
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span>original_text<span>,</span> <span>{</span>
+            status<span>,</span>
+            <span>headers</span><span>:</span> new_response_headers
+        <span>}</span><span>)</span>
+    <span>}</span>
+    <span>return</span> response<span>;</span>
+<span>}</span>
+ 
+<span>async</span> <span>function</span> <span>replace_response_text</span><span>(</span><span>response<span>,</span> upstream_domain<span>,</span> host_name</span><span>)</span> <span>{</span>
+    <span>let</span> text <span>=</span> <span>await</span> response<span>.</span><span>text</span><span>(</span><span>)</span>
+ 
+    <span>var</span> i<span>,</span> j<span>;</span>
+    <span>for</span> <span>(</span>i <span>in</span> replace_dict<span>)</span> <span>{</span>
+        j <span>=</span> replace_dict<span>[</span>i<span>]</span>
+        <span>if</span> <span>(</span>i <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            i <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>i <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            i <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>if</span> <span>(</span>j <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            j <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>j <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            j <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>let</span> re <span>=</span> <span>new</span> <span>RegExp</span><span>(</span>i<span>,</span> <span>'g'</span><span>)</span>
+        text <span>=</span> text<span>.</span><span>replace</span><span>(</span>re<span>,</span> j<span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> text<span>;</span>
+<span>}</span>
+ 
+<span>async</span> <span>function</span> <span>device_status</span> <span>(</span><span>user_agent_info</span><span>)</span> <span>{</span>
+    <span>var</span> agents <span>=</span> <span>[</span><span>"Android"</span><span>,</span> <span>"iPhone"</span><span>,</span> <span>"SymbianOS"</span><span>,</span> <span>"Windows Phone"</span><span>,</span> <span>"iPad"</span><span>,</span> <span>"iPod"</span><span>]</span><span>;</span>
+    <span>var</span> flag <span>=</span> <span>true</span><span>;</span>
+    <span>for</span> <span>(</span><span>var</span> v <span>=</span> <span>0</span><span>;</span> v <span>&lt;</span> agents<span>.</span>length<span>;</span> v<span>++</span><span>)</span> <span>{</span> <span>if</span> <span>(</span>user_agent_info<span>.</span><span>indexOf</span><span>(</span>agents<span>[</span>v<span>]</span><span>)</span> <span>></span> <span>0</span><span>)</span> <span>{</span>
+            flag <span>=</span> <span>false</span><span>;</span>
+            <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+    <span>return</span> flag<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="镜像网站带密码访问" tabindex="-1"> 镜像网站带密码访问</h2>
+<div><pre><code><span>// 替换成你想镜像的站点</span>
+<span>const</span> upstream <span>=</span> <span>'google.com'</span>
+ 
+<span>// 如果那个站点有专门的移动适配站点，否则保持和上面一致</span>
+<span>const</span> upstream_mobile <span>=</span> <span>'m.google.com'</span>
+ 
+<span>// 密码访问</span>
+ 
+<span>const</span> openAuth <span>=</span> <span>false</span>
+<span>const</span> username <span>=</span> <span>'username'</span>
+<span>const</span> password <span>=</span> <span>'password'</span>
+ 
+<span>// 你希望禁止哪些国家访问</span>
+<span>const</span> blocked_region <span>=</span> <span>[</span><span>'RU'</span><span>]</span>
+ 
+<span>// 禁止自访问</span>
+<span>const</span> blocked_ip_address <span>=</span> <span>[</span><span>'0.0.0.0'</span><span>,</span> <span>'127.0.0.1'</span><span>]</span>
+ 
+<span>// 替换成你想镜像的站点</span>
+<span>const</span> replace_dict <span>=</span> <span>{</span>
+    <span>'$upstream'</span><span>:</span> <span>'$custom_domain'</span><span>,</span>
+    <span>'//google.com'</span><span>:</span> <span>''</span>
+<span>}</span>
+ 
+<span>function</span> <span>unauthorized</span><span>(</span><span>)</span> <span>{</span>
+  <span>return</span> <span>new</span> <span>Response</span><span>(</span><span>'Unauthorized'</span><span>,</span> <span>{</span>
+    <span>headers</span><span>:</span> <span>{</span>
+      <span>'WWW-Authenticate'</span><span>:</span> <span>'Basic realm="goindex"'</span><span>,</span>
+      <span>'Access-Control-Allow-Origin'</span><span>:</span> <span>'*'</span>
+    <span>}</span><span>,</span>
+    <span>status</span><span>:</span> <span>401</span>
+  <span>}</span><span>)</span><span>;</span>
+<span>}</span>
+ 
+<span>function</span> <span>parseBasicAuth</span><span>(</span><span>auth</span><span>)</span> <span>{</span>
+    <span>try</span> <span>{</span>
+      <span>return</span> <span>atob</span><span>(</span>auth<span>.</span><span>split</span><span>(</span><span>' '</span><span>)</span><span>.</span><span>pop</span><span>(</span><span>)</span><span>)</span><span>.</span><span>split</span><span>(</span><span>':'</span><span>)</span><span>;</span>
+    <span>}</span> <span>catch</span> <span>(</span>e<span>)</span> <span>{</span>
+      <span>return</span> <span>[</span><span>]</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+ 
+<span>function</span> <span>doBasicAuth</span><span>(</span><span>request</span><span>)</span> <span>{</span>
+  <span>const</span> auth <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'Authorization'</span><span>)</span><span>;</span>
+ 
+  <span>if</span> <span>(</span><span>!</span>auth <span>||</span> <span>!</span><span><span>/</span><span>^Basic [A-Za-z0-9._~+/-]+=*$</span><span>/</span><span>i</span></span><span>.</span><span>test</span><span>(</span>auth<span>)</span><span>)</span> <span>{</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+ 
+  <span>const</span> <span>[</span>user<span>,</span> pass<span>]</span> <span>=</span> <span>parseBasicAuth</span><span>(</span>auth<span>)</span><span>;</span>
+  <span>return</span> user <span>===</span> username <span>&amp;&amp;</span> pass <span>===</span> password<span>;</span>
+<span>}</span>
+ 
+ 
+<span>async</span> <span>function</span> <span>fetchAndApply</span><span>(</span><span>request</span><span>)</span> <span>{</span>
+  <span>if</span> <span>(</span>request<span>.</span>method <span>===</span> <span>'OPTIONS'</span><span>)</span> <span>// allow preflight request</span>
+    <span>return</span> <span>new</span> <span>Response</span><span>(</span><span>''</span><span>,</span> <span>{</span>
+      <span>status</span><span>:</span> <span>200</span><span>,</span>
+      <span>headers</span><span>:</span> <span>{</span>
+        <span>'Access-Control-Allow-Origin'</span><span>:</span> <span>'*'</span><span>,</span>
+        <span>'Access-Control-Allow-Headers'</span><span>:</span> <span>'*'</span><span>,</span>
+        <span>'Access-Control-Allow-Methods'</span><span>:</span> <span>'GET, POST, PUT, HEAD, OPTIONS'</span>
+      <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+ 
+  <span>if</span> <span>(</span>openAuth <span>&amp;&amp;</span> <span>!</span><span>doBasicAuth</span><span>(</span>request<span>)</span><span>)</span> <span>{</span>
+    <span>return</span> <span>unauthorized</span><span>(</span><span>)</span><span>;</span>
+  <span>}</span>
+    <span>const</span> region <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-ipcountry'</span><span>)</span><span>.</span><span>toUpperCase</span><span>(</span><span>)</span><span>;</span>
+    <span>const</span> ip_address <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-connecting-ip'</span><span>)</span><span>;</span>
+    <span>const</span> user_agent <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'user-agent'</span><span>)</span><span>;</span>
+ 
+    <span>let</span> response <span>=</span> <span>null</span><span>;</span>
+    <span>let</span> url <span>=</span> <span>new</span> <span>URL</span><span>(</span>request<span>.</span>url<span>)</span><span>;</span>
+    <span>let</span> url_host <span>=</span> url<span>.</span>host<span>;</span>
+ 
+    <span>if</span> <span>(</span>url<span>.</span>protocol <span>==</span> <span>'http:'</span><span>)</span> <span>{</span>
+        url<span>.</span>protocol <span>=</span> <span>'https:'</span>
+        response <span>=</span> Response<span>.</span><span>redirect</span><span>(</span>url<span>.</span>href<span>)</span><span>;</span>
+        <span>return</span> response<span>;</span>
+    <span>}</span>
+ 
+    <span>if</span> <span>(</span><span>await</span> <span>device_status</span><span>(</span>user_agent<span>)</span><span>)</span> <span>{</span>
+        upstream_domain <span>=</span> upstream
+    <span>}</span> <span>else</span> <span>{</span>
+        upstream_domain <span>=</span> upstream_mobile
+    <span>}</span>
+ 
+    url<span>.</span>host <span>=</span> upstream_domain<span>;</span>
+ 
+    <span>if</span> <span>(</span>blocked_region<span>.</span><span>includes</span><span>(</span>region<span>)</span><span>)</span> <span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: WorkersProxy is not available in your region yet.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span> <span>if</span><span>(</span>blocked_ip_address<span>.</span><span>includes</span><span>(</span>ip_address<span>)</span><span>)</span><span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: Your IP address is blocked by WorkersProxy.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span><span>{</span>
+        <span>let</span> method <span>=</span> request<span>.</span>method<span>;</span>
+        <span>let</span> request_headers <span>=</span> request<span>.</span>headers<span>;</span>
+        <span>let</span> new_request_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>request_headers<span>)</span><span>;</span>
+ 
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Host'</span><span>,</span> upstream_domain<span>)</span><span>;</span>
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Referer'</span><span>,</span> url<span>.</span>href<span>)</span><span>;</span>
+ 
+        <span>let</span> original_response <span>=</span> <span>await</span> <span>fetch</span><span>(</span>url<span>.</span>href<span>,</span> <span>{</span>
+            <span>method</span><span>:</span> method<span>,</span>
+            <span>headers</span><span>:</span> new_request_headers
+        <span>}</span><span>)</span>
+ 
+        <span>let</span> original_response_clone <span>=</span> original_response<span>.</span><span>clone</span><span>(</span><span>)</span><span>;</span>
+        <span>let</span> original_text <span>=</span> <span>null</span><span>;</span>
+        <span>let</span> response_headers <span>=</span> original_response<span>.</span>headers<span>;</span>
+        <span>let</span> new_response_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>response_headers<span>)</span><span>;</span>
+        <span>let</span> status <span>=</span> original_response<span>.</span>status<span>;</span>
+ 
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-origin'</span><span>,</span> <span>'*'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-credentials'</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy-report-only'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'clear-site-data'</span><span>)</span><span>;</span>
+ 
+        <span>const</span> content_type <span>=</span> new_response_headers<span>.</span><span>get</span><span>(</span><span>'content-type'</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span>content_type<span>.</span><span>includes</span><span>(</span><span>'text/html'</span><span>)</span> <span>&amp;&amp;</span> content_type<span>.</span><span>includes</span><span>(</span><span>'UTF-8'</span><span>)</span><span>)</span> <span>{</span>
+            original_text <span>=</span> <span>await</span> <span>replace_response_text</span><span>(</span>original_response_clone<span>,</span> upstream_domain<span>,</span> url_host<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            original_text <span>=</span> original_response_clone<span>.</span>body
+        <span>}</span>
+ 
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span>original_text<span>,</span> <span>{</span>
+            status<span>,</span>
+            <span>headers</span><span>:</span> new_response_headers
+        <span>}</span><span>)</span>
+    <span>}</span>
+    <span>return</span> response<span>;</span>
+<span>}</span>
+ 
+<span>addEventListener</span><span>(</span><span>'fetch'</span><span>,</span> <span>event</span> <span>=></span> <span>{</span>
+    event<span>.</span><span>respondWith</span><span>(</span><span>fetchAndApply</span><span>(</span>event<span>.</span>request<span>)</span><span>.</span><span>catch</span><span>(</span><span>err</span> <span>=></span> <span>{</span>
+      console<span>.</span><span>error</span><span>(</span>err<span>)</span><span>;</span>
+      <span>new</span> <span>Response</span><span>(</span><span>JSON</span><span>.</span><span>stringify</span><span>(</span>err<span>.</span>stack<span>)</span><span>,</span> <span>{</span>
+        <span>status</span><span>:</span> <span>500</span><span>,</span>
+        <span>headers</span><span>:</span> <span>{</span>
+          <span>'Content-Type'</span><span>:</span> <span>'application/json'</span>
+        <span>}</span>
+      <span>}</span><span>)</span><span>;</span>
+    <span>}</span><span>)</span><span>)</span><span>;</span>
+<span>}</span><span>)</span>
+ 
+ 
+<span>async</span> <span>function</span> <span>replace_response_text</span><span>(</span><span>response<span>,</span> upstream_domain<span>,</span> host_name</span><span>)</span> <span>{</span>
+    <span>let</span> text <span>=</span> <span>await</span> response<span>.</span><span>text</span><span>(</span><span>)</span>
+ 
+    <span>var</span> i<span>,</span> j<span>;</span>
+    <span>for</span> <span>(</span>i <span>in</span> replace_dict<span>)</span> <span>{</span>
+        j <span>=</span> replace_dict<span>[</span>i<span>]</span>
+        <span>if</span> <span>(</span>i <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            i <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>i <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            i <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>if</span> <span>(</span>j <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            j <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>j <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            j <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>let</span> re <span>=</span> <span>new</span> <span>RegExp</span><span>(</span>i<span>,</span> <span>'g'</span><span>)</span>
+        text <span>=</span> text<span>.</span><span>replace</span><span>(</span>re<span>,</span> j<span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> text<span>;</span>
+<span>}</span>
+ 
+<span>async</span> <span>function</span> <span>device_status</span> <span>(</span><span>user_agent_info</span><span>)</span> <span>{</span>
+    <span>var</span> agents <span>=</span> <span>[</span><span>"Android"</span><span>,</span> <span>"iPhone"</span><span>,</span> <span>"SymbianOS"</span><span>,</span> <span>"Windows Phone"</span><span>,</span> <span>"iPad"</span><span>,</span> <span>"iPod"</span><span>]</span><span>;</span>
+    <span>var</span> flag <span>=</span> <span>true</span><span>;</span>
+    <span>for</span> <span>(</span><span>var</span> v <span>=</span> <span>0</span><span>;</span> v <span>&lt;</span> agents<span>.</span>length<span>;</span> v<span>++</span><span>)</span> <span>{</span> <span>if</span> <span>(</span>user_agent_info<span>.</span><span>indexOf</span><span>(</span>agents<span>[</span>v<span>]</span><span>)</span> <span>></span> <span>0</span><span>)</span> <span>{</span>
+            flag <span>=</span> <span>false</span><span>;</span>
+            <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+    <span>return</span> flag<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="镜像网站指定目录" tabindex="-1"> 镜像网站指定目录</h2>
+<div><pre><code><span>// 你要镜像的网站.</span>
+<span>const</span> upstream <span>=</span> <span>'objectstorage.ap-seoul-1.oraclecloud.com'</span>
+ 
+<span>// 镜像网站的目录，比如你想镜像某个网站的二级目录则填写二级目录的目录名，镜像 google 用不到，默认即可.</span>
+<span>const</span> upstream_path <span>=</span> <span>'/test/'</span>
+ 
+<span>// 镜像站是否有手机访问专用网址，没有则填一样的.</span>
+<span>const</span> upstream_mobile <span>=</span> <span>'objectstorage.ap-seoul-1.oraclecloud.com'</span>
+ 
+<span>// 屏蔽国家和地区.</span>
+<span>const</span> blocked_region <span>=</span> <span>[</span><span>''</span><span>]</span>
+ 
+<span>// 屏蔽 IP 地址.</span>
+<span>const</span> blocked_ip_address <span>=</span> <span>[</span><span>'0.0.0.0'</span><span>,</span> <span>'127.0.0.1'</span><span>]</span>
+ 
+<span>// 镜像站是否开启 HTTPS.</span>
+<span>const</span> https <span>=</span> <span>true</span>
+ 
+<span>// 文本替换.填你要镜像的网站</span>
+<span>const</span> replace_dict <span>=</span> <span>{</span>
+    <span>'$upstream'</span><span>:</span> <span>'$custom_domain'</span><span>,</span>
+    <span>'//objectstorage.ap-seoul-1.oraclecloud.com'</span><span>:</span> <span>''</span>
+<span>}</span>
+ 
+<span>// 以下保持默认，不要动</span>
+<span>addEventListener</span><span>(</span><span>'fetch'</span><span>,</span> <span>event</span> <span>=></span> <span>{</span>
+    event<span>.</span><span>respondWith</span><span>(</span><span>fetchAndApply</span><span>(</span>event<span>.</span>request<span>)</span><span>)</span><span>;</span>
+<span>}</span><span>)</span>
+ 
+<span>async</span> <span>function</span> <span>fetchAndApply</span><span>(</span><span>request</span><span>)</span> <span>{</span>
+ 
+    <span>const</span> region <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-ipcountry'</span><span>)</span><span>.</span><span>toUpperCase</span><span>(</span><span>)</span><span>;</span>
+    <span>const</span> ip_address <span>=</span> request<span>.</span>headers<span>.</span><span>get</span><span>(</span><span>'cf-connecting-ip'</span><span>)</span><span>;</span>
+    <span>const</span> user_agent <span>=</span> <span>"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"</span>
+ 
+    <span>let</span> response <span>=</span> <span>null</span><span>;</span>
+    <span>let</span> url <span>=</span> <span>new</span> <span>URL</span><span>(</span>request<span>.</span>url<span>)</span><span>;</span>
+    <span>let</span> url_hostname <span>=</span> url<span>.</span>hostname<span>;</span>
+ 
+    <span>if</span> <span>(</span>https <span>==</span> <span>true</span><span>)</span> <span>{</span>
+        url<span>.</span>protocol <span>=</span> <span>'https:'</span><span>;</span>
+    <span>}</span> <span>else</span> <span>{</span>
+        url<span>.</span>protocol <span>=</span> <span>'http:'</span><span>;</span>
+    <span>}</span>
+ 
+    <span>if</span> <span>(</span><span>await</span> <span>device_status</span><span>(</span>user_agent<span>)</span><span>)</span> <span>{</span>
+        <span>var</span> upstream_domain <span>=</span> upstream<span>;</span>
+    <span>}</span> <span>else</span> <span>{</span>
+        <span>var</span> upstream_domain <span>=</span> upstream_mobile<span>;</span>
+    <span>}</span>
+ 
+    url<span>.</span>host <span>=</span> upstream_domain<span>;</span>
+    <span>if</span> <span>(</span>url<span>.</span>pathname <span>==</span> <span>'/'</span><span>)</span> <span>{</span>
+        url<span>.</span>pathname <span>=</span> upstream_path<span>;</span>
+    <span>}</span> <span>else</span> <span>{</span>
+        url<span>.</span>pathname <span>=</span> upstream_path <span>+</span> url<span>.</span>pathname<span>;</span>
+    <span>}</span>
+ 
+    <span>if</span> <span>(</span>blocked_region<span>.</span><span>includes</span><span>(</span>region<span>)</span><span>)</span> <span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: WorkersProxy is not available in your region yet.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span> <span>if</span> <span>(</span>blocked_ip_address<span>.</span><span>includes</span><span>(</span>ip_address<span>)</span><span>)</span> <span>{</span>
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span><span>'Access denied: Your IP address is blocked by WorkersProxy.'</span><span>,</span> <span>{</span>
+            <span>status</span><span>:</span> <span>403</span>
+        <span>}</span><span>)</span><span>;</span>
+    <span>}</span> <span>else</span> <span>{</span>
+        <span>let</span> method <span>=</span> request<span>.</span>method<span>;</span>
+        <span>let</span> request_headers <span>=</span> request<span>.</span>headers<span>;</span>
+        <span>let</span> new_request_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>request_headers<span>)</span><span>;</span>
+ 
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Host'</span><span>,</span> url<span>.</span>hostname<span>)</span><span>;</span>
+        new_request_headers<span>.</span><span>set</span><span>(</span><span>'Referer'</span><span>,</span> url<span>.</span>hostname<span>)</span><span>;</span>
+ 
+        <span>let</span> original_response <span>=</span> <span>await</span> <span>fetch</span><span>(</span>url<span>.</span>href<span>,</span> <span>{</span>
+            <span>method</span><span>:</span> method<span>,</span>
+            <span>headers</span><span>:</span> new_request_headers
+        <span>}</span><span>)</span>
+ 
+        <span>let</span> original_response_clone <span>=</span> original_response<span>.</span><span>clone</span><span>(</span><span>)</span><span>;</span>
+        <span>let</span> original_text <span>=</span> <span>null</span><span>;</span>
+        <span>let</span> response_headers <span>=</span> original_response<span>.</span>headers<span>;</span>
+        <span>let</span> new_response_headers <span>=</span> <span>new</span> <span>Headers</span><span>(</span>response_headers<span>)</span><span>;</span>
+        <span>let</span> status <span>=</span> original_response<span>.</span>status<span>;</span>
+ 
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-origin'</span><span>,</span> <span>'*'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>set</span><span>(</span><span>'access-control-allow-credentials'</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'content-security-policy-report-only'</span><span>)</span><span>;</span>
+        new_response_headers<span>.</span><span>delete</span><span>(</span><span>'clear-site-data'</span><span>)</span><span>;</span>
+ 
+        <span>const</span> content_type <span>=</span> new_response_headers<span>.</span><span>get</span><span>(</span><span>'content-type'</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span>content_type<span>.</span><span>includes</span><span>(</span><span>'text/html'</span><span>)</span> <span>&amp;&amp;</span> content_type<span>.</span><span>includes</span><span>(</span><span>'UTF-8'</span><span>)</span><span>)</span> <span>{</span>
+            original_text <span>=</span> <span>await</span> <span>replace_response_text</span><span>(</span>original_response_clone<span>,</span> upstream_domain<span>,</span> url_hostname<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            original_text <span>=</span> original_response_clone<span>.</span>body
+        <span>}</span>
+ 
+        response <span>=</span> <span>new</span> <span>Response</span><span>(</span>original_text<span>,</span> <span>{</span>
+            status<span>,</span>
+            <span>headers</span><span>:</span> new_response_headers
+        <span>}</span><span>)</span>
+    <span>}</span>
+    <span>return</span> response<span>;</span>
+<span>}</span>
+ 
+<span>async</span> <span>function</span> <span>replace_response_text</span><span>(</span><span>response<span>,</span> upstream_domain<span>,</span> host_name</span><span>)</span> <span>{</span>
+    <span>let</span> text <span>=</span> <span>await</span> response<span>.</span><span>text</span><span>(</span><span>)</span>
+ 
+    <span>var</span> i<span>,</span> j<span>;</span>
+    <span>for</span> <span>(</span>i <span>in</span> replace_dict<span>)</span> <span>{</span>
+        j <span>=</span> replace_dict<span>[</span>i<span>]</span>
+        <span>if</span> <span>(</span>i <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            i <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>i <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            i <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>if</span> <span>(</span>j <span>==</span> <span>'$upstream'</span><span>)</span> <span>{</span>
+            j <span>=</span> upstream_domain
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>j <span>==</span> <span>'$custom_domain'</span><span>)</span> <span>{</span>
+            j <span>=</span> host_name
+        <span>}</span>
+ 
+        <span>let</span> re <span>=</span> <span>new</span> <span>RegExp</span><span>(</span>i<span>,</span> <span>'g'</span><span>)</span>
+        text <span>=</span> text<span>.</span><span>replace</span><span>(</span>re<span>,</span> j<span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> text<span>;</span>
+<span>}</span>
+ 
+ 
+<span>async</span> <span>function</span> <span>device_status</span><span>(</span><span>user_agent_info</span><span>)</span> <span>{</span>
+    <span>var</span> agents <span>=</span> <span>[</span><span>"Android"</span><span>,</span> <span>"iPhone"</span><span>,</span> <span>"SymbianOS"</span><span>,</span> <span>"Windows Phone"</span><span>,</span> <span>"iPad"</span><span>,</span> <span>"iPod"</span><span>]</span><span>;</span>
+    <span>var</span> flag <span>=</span> <span>true</span><span>;</span>
+    <span>for</span> <span>(</span><span>var</span> v <span>=</span> <span>0</span><span>;</span> v <span>&lt;</span> agents<span>.</span>length<span>;</span> v<span>++</span><span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>user_agent_info<span>.</span><span>indexOf</span><span>(</span>agents<span>[</span>v<span>]</span><span>)</span> <span>></span> <span>0</span><span>)</span> <span>{</span>
+            flag <span>=</span> <span>false</span><span>;</span>
+            <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+    <span>return</span> flag<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="注意" tabindex="-1"> 注意：</h2>
+<p>如果出现：</p>
+<p>“需要网站所有者处理的错误:网站密钥的网域无效”</p>
+<p>Google reCAPTCHA V3.0无效. “网站所有者的错误：密钥类型无效”</p>
+<h3 id="解决方法" tabindex="-1"> 解决方法：</h3>
+<p>在代码中修改<code>new_request_headers.set('Referer'.......</code>，为对应的反代网站</p>
+<div><pre><code>new_request_headers<span>.</span><span>set</span><span>(</span><span>'Referer'</span><span>,</span> <span>'https://github.com'</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>谷歌Gmail注册显示此号码不能验证的解决办法</title>
+      <link>https://xlc520.github.io/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</link>
+      <guid>https://xlc520.github.io/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">谷歌Gmail注册显示此号码不能验证的解决办法</source>
+      <category>other</category>
+      <pubDate>Mon, 06 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="谷歌gmail注册显示此号码不能验证的解决办法" tabindex="-1"> 谷歌Gmail注册显示此号码不能验证的解决办法</h1>
+<p>谷歌账号注册中国手机号不能验证，很多同学在注册谷歌账号时经常会遇到这个问题，一直卡在电话号码验证上，是国内手机号不能通过谷歌的验证吗？</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-165365038994811.png" alt="img" loading="lazy"></p>
+<p>基本都不是号码本身引起的，换新号码往往也没用，这里介绍几个靠谱的Gmail邮箱注册教程：</p>
+<p>网上很多方法不能注册成功，说明目前使用的网络IP质量不行，需要找一个纯净的IP。</p>
+<p>什么是纯净的IP？简单的讲就是这个IP用的人越少越好。</p>
+<p>谷歌能否申请成功最关键的不是用哪个国家的手机号，而是需要一个纯净的IP，申请之前我们首先需要确认谷歌注册手机号无法进行验证两种状态。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899481.png" alt="img" loading="lazy"></p>
+<p><strong>状态①：</strong>“无法用于验证”说明手机号之前没有注册过谷歌这种比较好解决只需要按照下面的方法操作即可</p>
+<p><strong>状态②：</strong>“多次用于验证”说明手机号之前注册过谷歌或者尝试很多次,需要冷却。注册过等一个月/没有注册过等三天左右，这个状态不要再进行尝试，注册不了。</p>
+<p><strong>目前网上绝大部分解决谷歌注册手机号无法进行验证显示“此电话号码无法用于进行验证”的教程都是以下两种:</strong></p>
+<p>**方法一：**通过QQ邮箱APP注册。这种方法很简单在这里就不做过多介绍,但是不是很建议通过这种渠道注册。</p>
+<p>具体原因是:由于国内网络限制,不借助上网工具是不能访问google的,那为什么通过QQ邮箱能够访问,是因为APP自带的联网工具,但是每天通过这个APP的单个IP去注册的用户可以说是成千上万,势必多账户关联引起谷歌的特殊关照,我们接到反馈很多小伙伴注册成功几个小时就报异常了。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899482.jpeg" alt="img" loading="lazy"></p>
+<p>**方法二：**切换chrome浏览器的语言完成注册。这种方法还是有小伙伴注册不成功，经过本人实战前后加起来注册了20000+个谷歌号总结出的经验，谷歌号能否注册成功最关键不是使用什么语言，也不是使用哪个国家的手机号决定的，而是需要的是一个纯净的网络IP。</p>
+<p>下面就给大家分享一下这种方法容易被忽略的步骤。①首先需要做的是清楚浏览器的历史记录</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899483.jpeg" alt="img" loading="lazy"></p>
+<p>【重点】这里很关键容易被忽略，这里需要选择高级保证浏览器的所有缓存全部被清理干净，清理后关闭浏览器器</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899494.jpeg" alt="img" loading="lazy"></p>
+<p>②【重点】首先链接到一个使用人数较少的代理网络，在开始注册谷歌账号之前先使用IP查询工具，查询你现在所接入网络的所在国家。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899495.jpeg" alt="img" loading="lazy"></p>
+<p>③点击chrome浏览器右上角的菜单按钮→选择“设置”→高级→语言→添加日语并置顶同时移除其他语言</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899496.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899497.jpeg" alt="img" loading="lazy"></p>
+<p>【重点】如果通过查询你的IP是其他国家，就添加相应国家的语言即可。我这里的IP是日本，所以我就把浏览器设置成日语，网上的教程都是直接叫设置成英语。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899498.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899499.jpeg" alt="img" loading="lazy"></p>
+<p>④【重点】完成这个步骤以后再次清除浏览缓存，并关闭浏览器， ⑤再次打开chrome浏览器进入谷歌主页点击右上角蓝色注册按钮，依次操作即可。即可注册成功。</p>
+<p>注册几分钟就成功了。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-165365038994910.jpeg" alt="img" loading="lazy"></p>
+]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-165365038994811.png" type="image/png"/>
+    </item>
+    <item>
+      <title>新版QQ修改彩色颜色字体代码教程</title>
+      <link>https://xlc520.github.io/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html</link>
+      <guid>https://xlc520.github.io/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">新版QQ修改彩色颜色字体代码教程</source>
+      <description>Other</description>
+      <category>other</category>
+      <pubDate>Sat, 04 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="新版qq修改彩色颜色字体代码教程" tabindex="-1"> 新版QQ修改彩色颜色字体代码教程</h1>
+<p>QQ群彩色昵称，</p>
+<p>玩过的都知道，以前是可以直接设置的，但新版QQ群昵称好像不太行！效果自测！</p>
+<p>这里我就分享 <strong>两类</strong> 颜色代码吧，用的话把后面的颜色替换成自己的昵称就行了其实找一个旧版QQ，复制好改完的昵称就会在剪切板显示颜色代码</p>
+<p>q群改群昵称颜色代码合集（ <strong>需要SVIP</strong> ） 不喜勿喷，不喜勿喷，不喜勿喷！</p>
+<h2 id="文字教程" tabindex="-1"> 文字教程：</h2>
+<p>复制你需要的颜色到群昵称输入框内，然后删除文字(是删文字 不要删到代码)再打上你自己需要设置的群昵称即可！</p>
+<p>记住名称放前面代码放后面，别搞错了，搞错了就提示有非法字符！就设置不成功咯！</p>
+<h2 id="详细教程如下" tabindex="-1"> 详细教程如下:</h2>
+<p>随便找一个群，找到编辑群昵称 选择自己想修改的颜色，这里我举例红色，红色代码是&lt;&amp;ÿÿ5@&gt;红色，我们把红色二个文字删掉，直接把&lt;&amp;ÿÿ5@&gt;复制粘贴到群昵称编辑里面，点击确定，我们来看看效果如何滑稽</p>
+<h2 id="纯色昵称代码" tabindex="-1"> 纯色昵称代码：</h2>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289982.jpeg" alt="img" loading="lazy"></p>
+<div><pre><code>&lt;&amp;ÿĀĀĀ>黑色
+
+&lt;&amp;ÿÿ5@>红色
+
+&lt;&amp;ÿÿ]>粉色
+
+&lt;&amp;ÿÒUÐ>紫色
+
+&lt;&amp;ÿÇý>蓝色
+
+&lt;&amp;ÿÄW>绿色
+  
+&lt;&amp;ÿÿÏP>黄色
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="彩色昵称代码" tabindex="-1"> 彩色昵称代码</h3>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289981.jpeg" alt="img" loading="lazy"></p>
+<p>代码如下</p>
+<div><pre><code>&lt;&amp;ÿĀĀĀ>黑色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÿ5@>红色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÿ]>粉色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÒUÐ>紫色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÇý>蓝色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÄW>绿色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;&amp;ÿÿÏP>黄色
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;%ĀĀÐ>初春
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>&lt;%ĀĀÑ>冬梅
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÒ<span>></span>高级灰
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÓ<span>></span>黄昏
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÔ<span>></span>科技感
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÕ<span>></span>马卡龙
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÖ<span>></span>霓虹闪烁
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀ×<span>></span>日出
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀØ<span>></span>盛夏
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÙ<span>></span>糖果冰纷
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÚ<span>></span>晚秋
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÛ<span>></span>夜空
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÜ<span>></span>粉黛
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÝ<span>></span>朝夕
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>&lt;</span><span>%</span>ĀĀÞ<span>></span>潮流
+</code></pre><div aria-hidden="true"><div></div></div></div><h2 id="效果展示" tabindex="-1"> 效果展示</h2>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289982.png" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289983.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289984.jpeg" alt="img" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289985.jpeg" alt="img" loading="lazy"></p>
+<p>效果图来源于网络，若无意侵权，联系删除即可！</p>
+]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536501289982.jpeg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>QQ动态群聊昵称代码</title>
+      <link>https://xlc520.github.io/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html</link>
+      <guid>https://xlc520.github.io/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">QQ动态群聊昵称代码</source>
+      <category>other</category>
+      <pubDate>Thu, 02 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="qq动态群聊昵称代码" tabindex="-1"> QQ动态群聊昵称代码</h1>
+<h2 id="代码" tabindex="-1"> 代码</h2>
+<ul>
+<li>会变色钻石 <code>&lt;$ǿĀD&gt;钻石&lt;$ǿĀD&gt;</code> 效果图：</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536500405884.png" alt="img" loading="lazy"></p>
+<p>钻石</p>
+<ul>
+<li>手掌比心 <code>&lt;$ÿĀ&quot;&gt;比心&lt;$ÿĀ&quot;&gt;</code> 效果图：</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536500405881.png" alt="img" loading="lazy"></p>
+<p>比心</p>
+<ul>
+<li>滑稽 <code>&lt;$²&gt;滑稽&lt;$²&gt;</code> 效果图：</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536500405882.png" alt="img" loading="lazy"></p>
+<p>滑稽</p>
+<ul>
+<li>可爱的手掌 <code>&lt;$ÿĀ&gt;小手&lt;$ÿĀ&gt;</code> 效果图：</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536500405883.png" alt="img" loading="lazy"></p>
+<p>会动的小手</p>
+<h2 id="注意" tabindex="-1"> 注意</h2>
+<p>用代码改完群聊名称后不会立即显示，可以重新进去一次群资料即可刷新出来。</p>
+]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536500405884.png" type="image/png"/>
+    </item>
     <item>
       <title>服务器入侵排查</title>
       <link>https://xlc520.github.io/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html</link>
@@ -23823,1532 +24442,6 @@ detach vdisk
 <span>fi</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><code>bash openssl.sh</code></p>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>实用 shell 脚本</title>
-      <link>https://xlc520.github.io/linux/%E5%AE%9E%E7%94%A8%20shell%20%E8%84%9A%E6%9C%AC.html</link>
-      <guid>https://xlc520.github.io/linux/%E5%AE%9E%E7%94%A8%20shell%20%E8%84%9A%E6%9C%AC.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">实用 shell 脚本</source>
-      <description>实用 shell 脚本，建议收藏！</description>
-      <category>Linux</category>
-      <pubDate>Tue, 15 Feb 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="实用-shell-脚本" tabindex="-1"> 实用 shell 脚本</h1>
-<h2 id="_1、服务器系统配置初始化" tabindex="-1"> 1、服务器系统配置初始化</h2>
-<div><pre><code><span>#/bin/bash</span>
-<span># 安装系统性能分析工具及其他</span>
-yum <span>install</span> gcc <span>make</span> autoconf <span>vim</span> sysstat net-tools iostat iftop iotp <span>wget</span> lrzsz <span>lsof</span> <span>unzip</span> openssh-clients net-tool <span>vim</span> ntpdate -y
-<span># 设置时区并同步时间</span>
-<span>ln</span> -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-<span>if</span> <span>!</span> <span>crontab</span> -l <span>|</span><span>grep</span> ntpdate <span>&amp;></span>/dev/null <span>;</span> <span>then</span>
-    <span>(</span>echo <span>"* 1 * * * ntpdate time.windows.com >/dev/null 2>&amp;1"</span><span>;</span><span>crontab</span> -l<span>)</span> <span>|</span><span>crontab</span> 
-<span>fi</span>
- 
-<span># 禁用selinux</span>
-<span>sed</span> -i <span>'/SELINUX/{s/permissive/disabled/}'</span> /etc/selinux/config
- 
-<span># 关闭防火墙</span>
-<span>if</span> <span>egrep</span> <span>"7.[0-9]"</span> /etc/redhat-release <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    systemctl stop firewalld
-    systemctl disable firewalld
-<span>elif</span> <span>egrep</span> <span>"6.[0-9]"</span> /etc/redhat-release <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    <span>service</span> iptables stop
-    <span>chkconfig</span> iptables off
-<span>fi</span>
- 
-<span># 历史命令显示操作时间</span>
-<span>if</span> <span>!</span> <span>grep</span> HISTTIMEFORMAT /etc/bashrc<span>;</span> <span>then</span>
-    <span>echo</span> <span>'export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  `whoami` "'</span> <span>>></span> /etc/bashrc
-<span>fi</span>
- 
-<span># SSH超时时间</span>
-<span>if</span> <span>!</span> <span>grep</span> <span>"TMOUT=600"</span> /etc/profile <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    <span>echo</span> <span>"export TMOUT=600"</span> <span>>></span> /etc/profile
-<span>fi</span>
- 
-<span># 禁止root远程登录 切记给系统添加普通用户，给su到root的权限</span>
-<span>sed</span> -i <span>'s/#PermitRootLogin yes/PermitRootLogin no/'</span> /etc/ssh/sshd_config
- 
-<span># 禁止定时任务向发送邮件</span>
-<span>sed</span> -i <span>'s/^MAILTO=root/MAILTO=""/'</span> /etc/crontab 
- 
-<span># 设置最大打开文件数</span>
-<span>if</span> <span>!</span> <span>grep</span> <span>"* soft nofile 65535"</span> /etc/security/limits.conf <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-<span>cat</span> <span>>></span> /etc/security/limits.conf <span>&lt;&lt;</span> <span>EOF
-    * soft nofile 65535
-    * hard nofile 65535
-EOF</span>
-<span>fi</span>
- 
-<span># 系统内核优化</span>
-<span>cat</span> <span>>></span> /etc/sysctl.conf <span>&lt;&lt;</span> <span>EOF
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_max_tw_buckets = 20480
-net.ipv4.tcp_max_syn_backlog = 20480
-net.core.netdev_max_backlog = 262144
-net.ipv4.tcp_fin_timeout = 20  
-EOF</span>
- 
-<span># 减少SWAP使用</span>
-<span>echo</span> <span>"0"</span> <span>></span> /proc/sys/vm/swappiness
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2、批量创建多个用户并设置密码" tabindex="-1"> 2、批量创建多个用户并设置密码</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>USER_LIST</span><span>=</span><span>$@</span>
-<span>USER_FILE</span><span>=</span>./user.info
-<span>for</span> <span>USER</span> <span>in</span> <span>$USER_LIST</span><span>;</span><span>do</span>
- <span>if</span> <span>!</span> <span>id</span> <span>$USER</span> <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-  <span>PASS</span><span>=</span><span><span>$(</span><span>echo</span> <span>$RANDOM</span> <span>|</span>md5sum <span>|</span><span>cut</span> -c <span>1</span>-8<span>)</span></span>
-  <span>useradd</span> <span>$USER</span>
-  <span>echo</span> <span>$PASS</span> <span>|</span> <span>passwd</span> --stdin <span>$USER</span> <span>&amp;></span>/dev/null
-  <span>echo</span> <span>"<span>$USER</span>   <span>$PASS</span>"</span> <span>>></span> <span>$USER_FILE</span>
-  <span>echo</span> <span>"<span>$USER</span> User create successful."</span>
- <span>else</span>
-  <span>echo</span> <span>"<span>$USER</span> User already exists!"</span>
- <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_3、一键查看服务器利用率" tabindex="-1"> 3、一键查看服务器利用率</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>function</span> <span>cpu</span><span>(</span><span>)</span><span>{</span>
- 
- <span>util</span><span>=</span><span><span>$(</span><span>vmstat</span> <span>|</span> <span>awk</span> <span>'{if(NR==3)print $13+$14}'</span><span>)</span></span>
- <span>iowait</span><span>=</span><span><span>$(</span><span>vmstat</span> <span>|</span> <span>awk</span> <span>'{if(NR==3)print $16}'</span><span>)</span></span>
- <span>echo</span> <span>"CPU -使用率：<span>${util}</span>% ,等待磁盘IO相应使用率：<span>${iowait}</span>:<span>${iowait}</span>%"</span>
- 
-<span>}</span>
-<span>function</span> <span>memory</span> <span>(</span><span>)</span><span>{</span>
- 
- <span>total</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2)printf "%.1f",$2/1024}'</span><span>`</span></span>
-    <span>used</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2) printf "%.1f",($2-$NF)/1024}'</span><span>`</span></span>
-    <span>available</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2) printf "%.1f",$NF/1024}'</span><span>`</span></span>
-    <span>echo</span> <span>"内存 - 总大小: <span>${total}</span>G , 使用: <span>${used}</span>G , 剩余: <span>${available}</span>G"</span>
-<span>}</span>
-<span>disk</span><span>(</span><span>)</span><span>{</span>
- 
- <span>fs</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'/^\/dev/{print $1}'</span><span>)</span></span>
-    <span>for</span> <span>p</span> <span>in</span> <span>$fs</span><span>;</span> <span>do</span>
-        <span>mounted</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $NF}'</span><span>)</span></span>
-        <span>size</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $2}'</span><span>)</span></span>
-        <span>used</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $3}'</span><span>)</span></span>
-        <span>used_percent</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $5}'</span><span>)</span></span>
-        <span>echo</span> <span>"硬盘 - 挂载点: <span>$mounted</span> , 总大小: <span>$size</span> , 使用: <span>$used</span> , 使用率: <span>$used_percent</span>"</span>
-    <span>done</span>
- 
-<span>}</span>
-<span>function</span> <span>tcp_status</span><span>(</span><span>)</span> <span>{</span>
-    <span>summary</span><span>=</span><span><span>$(</span>ss -antp <span>|</span><span>awk</span> <span>'{status[$1]++}END{for(i in status) printf i":"status[i]" "}'</span><span>)</span></span>
-    <span>echo</span> <span>"TCP连接状态 - <span>$summary</span>"</span>
-<span>}</span>
-cpu
-memory
-disk
-tcp_status
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_4、找出占用cpu-内存过高的进程" tabindex="-1"> 4、找出占用CPU 内存过高的进程</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>echo</span> <span>"-------------------CUP占用前10排序--------------------------------"</span>
-<span>ps</span> -eo user,pid,pcpu,pmem,args --sort<span>=</span>-pcpu  <span>|</span><span>head</span> -n <span>10</span>
-<span>echo</span> <span>"-------------------内存占用前10排序--------------------------------"</span>
-<span>ps</span> -eo user,pid,pcpu,pmem,args --sort<span>=</span>-pmem  <span>|</span><span>head</span> -n <span>10</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_5、查看网卡的实时流量" tabindex="-1"> 5、查看网卡的实时流量</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>eth0</span><span>=</span><span>$1</span>
-<span>echo</span>  -e    <span>"流量进入--流量传出    "</span>
-<span>while</span> <span>true</span><span>;</span> <span>do</span>
- <span>old_in</span><span>=</span><span><span>$(</span><span>cat</span> /proc/net/dev <span>|</span><span>grep</span> $eth0 <span>|</span><span>awk</span> <span>'{print $2}'</span><span>)</span></span>
- <span>old_out</span><span>=</span><span><span>$(</span><span>cat</span> /proc/net/dev <span>|</span><span>grep</span> $eth0 <span>|</span><span>awk</span> <span>'{print $10}'</span><span>)</span></span>
- <span>sleep</span> <span>1</span>
- <span>new_in</span><span>=</span><span><span>$(</span><span>cat</span> /proc/net/dev <span>|</span><span>grep</span> $eth0 <span>|</span><span>awk</span> <span>'{print $2}'</span><span>)</span></span>
- <span>new_out</span><span>=</span><span><span>$(</span><span>cat</span> /proc/net/dev <span>|</span><span>grep</span> $eth0 <span>|</span><span>awk</span> <span>'{print $10}'</span><span>)</span></span>
- <span>in</span><span>=</span><span><span>$(</span><span>printf</span> <span>"%.1f%s"</span> "<span>$((</span><span>(</span>$new_in-$old_in<span>)</span>/1024<span>)</span></span><span>)</span><span>" "</span>KB/s<span>")
- out=<span><span>$(</span><span>printf</span> <span>"%.1f%s"</span> "<span>$((</span><span>(</span>$new_out-$old_out<span>)</span>/1024<span>)</span></span>)"</span> <span>"KB/s"</span><span>)</span>
- <span>echo</span> <span>"<span>$in</span> <span>$out</span>"</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6、监控多台服务器磁盘利用率脚本" tabindex="-1"> 6、监控多台服务器磁盘利用率脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>HOST_INFO</span><span>=</span>host.info
-<span>for</span> <span>IP</span> <span>in</span> <span><span>$(</span><span>awk</span> <span>'/^[^#]/{print $1}'</span> $HOST_INFO<span>)</span></span><span>;</span> <span>do</span>
- <span>#取出用户名和端口</span>
-    <span><span>USER</span></span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $2}'</span> $HOST_INFO<span>)</span></span>
-    <span>PORT</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $3}'</span> $HOST_INFO<span>)</span></span>
- <span>#创建临时文件，保存信息</span>
-    <span>TMP_FILE</span><span>=</span>/tmp/disk.tmp
- <span>#通过公钥登录获取主机磁盘信息</span>
-    <span>ssh</span> -p <span>$PORT</span> <span>$USER</span>@<span>$IP</span> <span>'df -h'</span> <span>></span> <span>$TMP_FILE</span>
- <span>#分析磁盘占用空间</span>
-    <span>USE_RATE_LIST</span><span>=</span><span><span>$(</span><span>awk</span> <span>'BEGIN{OFS="="}/^\/dev/{print $NF,int($5)}'</span> $TMP_FILE<span>)</span></span>
- <span>#循环磁盘列表，进行判断</span>
-    <span>for</span> <span>USE_RATE</span> <span>in</span> <span>$USE_RATE_LIST</span><span>;</span> <span>do</span>
-  <span>#取出等号（=）右边的值 挂载点名称</span>
-        <span>PART_NAME</span><span>=</span><span>${USE_RATE<span>%</span>=*}</span>  
-  <span>#取出等号（=）左边的值  磁盘利用率</span>
-        <span>USE_RATE</span><span>=</span><span>${USE_RATE<span>#</span>*=}</span>
-  <span>#进行判断</span>
-        <span>if</span> <span>[</span> <span>$USE_RATE</span> -ge <span>80</span> <span>]</span><span>;</span> <span>then</span>
-            <span>echo</span> <span>"Warning: <span>$PART_NAME</span> Partition usage <span>$USE_RATE</span>%!"</span>
-    <span>echo</span> <span>"服务器<span>$IP</span>的磁盘空间占用过高，请及时处理"</span> <span>|</span> mail -s <span>"空间不足警告"</span> 你的qq@qq.com
-  <span>else</span>
-   <span>echo</span> <span>"服务器<span>$IP</span>的<span>$PART_NAME</span>目录空间良好"</span>
-        <span>fi</span>
-    <span>done</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_7、批量检测网站是否异常并邮件通知" tabindex="-1"> 7、批量检测网站是否异常并邮件通知</h2>
-<div><pre><code><span>#!/bin/bash  </span>
-<span>URL_LIST</span><span>=</span><span>"www.baidu.com www.ctnrs.com www.der-matech.net.cn www.der-matech.com.cn www.der-matech.cn www.der-matech.top www.der-matech.org"</span>
-<span>for</span> <span>URL</span> <span>in</span> <span>$URL_LIST</span><span>;</span> <span>do</span>
-    <span>FAIL_COUNT</span><span>=</span><span>0</span>
-    <span>for</span> <span><span>((</span>i<span>=</span><span>1</span><span>;</span>i<span>&lt;=</span><span>3</span><span>;</span>i<span>++</span><span>))</span></span><span>;</span> <span>do</span>
-        <span>HTTP_CODE</span><span>=</span><span><span>$(</span><span>curl</span> -o /dev/null --connect-timeout <span>3</span> -s -w <span>"%{http_code}"</span> $URL<span>)</span></span>
-        <span>if</span> <span>[</span> <span>$HTTP_CODE</span> -eq <span>200</span> <span>]</span><span>;</span> <span>then</span>
-            <span>echo</span> <span>"<span>$URL</span> OK"</span>
-            <span>break</span>
-        <span>else</span>
-            <span>echo</span> <span>"<span>$URL</span> retry <span>$FAIL_COUNT</span>"</span>
-            <span>let</span> FAIL_COUNT++
-        <span>fi</span>
-    <span>done</span>
-    <span>if</span> <span>[</span> <span>$FAIL_COUNT</span> -eq <span>3</span> <span>]</span><span>;</span> <span>then</span>
-        <span>echo</span> <span>"Warning: <span>$URL</span> Access failure!"</span>
-  <span>echo</span> <span>"网站<span>$URL</span>坏掉，请及时处理"</span> <span>|</span> mail -s <span>"<span>$URL</span>网站高危"</span> <span>1794748404</span>@qq.com
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_8、批量主机远程执行命令脚本" tabindex="-1"> 8、批量主机远程执行命令脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>COMMAND</span><span>=</span><span>$*</span>
-<span>HOST_INFO</span><span>=</span>host.info
-<span>for</span> <span>IP</span> <span>in</span> <span><span>$(</span><span>awk</span> <span>'/^[^#]/{print $1}'</span> $HOST_INFO<span>)</span></span><span>;</span> <span>do</span>
-    <span><span>USER</span></span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $2}'</span> $HOST_INFO<span>)</span></span>
-    <span>PORT</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $3}'</span> $HOST_INFO<span>)</span></span>
-    <span>PASS</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $4}'</span> $HOST_INFO<span>)</span></span>
-    <span>expect</span> -c <span>"
-       spawn ssh -p <span>$PORT</span> <span>$USER</span>@<span>$IP</span>
-       expect {
-          <span title="\&quot;">\"</span>(yes/no)<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span>yes<span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-          <span title="\&quot;">\"</span>password:<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span><span>$PASS</span><span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-          <span title="\&quot;">\"</span><span>$USER</span>@*<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span><span>$COMMAND</span><span title="\r">\r</span> exit<span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-       }
-    "</span>
-    <span>echo</span> <span>"-------------------"</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_9、一键部署lnmp网站平台脚本" tabindex="-1"> 9、一键部署LNMP网站平台脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>NGINX_V</span><span>=</span><span>1.15</span>.6
-<span>PHP_V</span><span>=</span><span>5.6</span>.36
-<span>TMP_DIR</span><span>=</span>/tmp
- 
-<span>INSTALL_DIR</span><span>=</span>/usr/local
- 
-<span>PWD_C</span><span>=</span><span>$PWD</span>
- 
-<span>echo</span>
-<span>echo</span> -e <span>"<span title="\t">\t</span>Menu<span title="\n">\n</span>"</span>
-<span>echo</span> -e <span>"1. Install Nginx"</span>
-<span>echo</span> -e <span>"2. Install PHP"</span>
-<span>echo</span> -e <span>"3. Install MySQL"</span>
-<span>echo</span> -e <span>"4. Deploy LNMP"</span>
-<span>echo</span> -e <span>"9. Quit"</span>
- 
-<span>function</span> <span>command_status_check</span><span>(</span><span>)</span> <span>{</span>
- <span>if</span> <span>[</span> <span>$?</span> -ne <span>0</span> <span>]</span><span>;</span> <span>then</span>
-  <span>echo</span> <span>$1</span>
-  <span>exit</span>
- <span>fi</span> 
-<span>}</span>
- 
-<span>function</span> <span>install_nginx</span><span>(</span><span>)</span> <span>{</span>
-    <span>cd</span> <span>$TMP_DIR</span>
-    yum <span>install</span> -y gcc gcc-c++ <span>make</span> openssl-devel pcre-devel <span>wget</span>
-    <span>wget</span> http://nginx.org/download/nginx-<span>${NGINX_V}</span>.tar.gz
-    <span>tar</span> zxf nginx-<span>${NGINX_V}</span>.tar.gz
-    <span>cd</span> nginx-<span>${NGINX_V}</span>
-    ./configure --prefix<span>=</span><span>$INSTALL_DIR</span>/nginx <span>\</span>
-    --with-http_ssl_module <span>\</span>
-    --with-http_stub_status_module <span>\</span>
-    --with-stream
-    command_status_check <span>"Nginx - 平台环境检查失败！"</span>
-    <span>make</span> -j <span>4</span> 
-    command_status_check <span>"Nginx - 编译失败！"</span>
-    <span>make</span> <span>install</span>
-    command_status_check <span>"Nginx - 安装失败！"</span>
-    <span>mkdir</span> -p <span>$INSTALL_DIR</span>/nginx/conf/vhost
-    <span>alias</span> <span>cp</span><span>=</span>cp <span>;</span> <span>cp</span> -rf <span>$PWD_C</span>/nginx.conf <span>$INSTALL_DIR</span>/nginx/conf
-    <span>rm</span> -rf <span>$INSTALL_DIR</span>/nginx/html/*
-    <span>echo</span> <span>"ok"</span> <span>></span> <span>$INSTALL_DIR</span>/nginx/html/status.html
-    <span>echo</span> <span>'&lt;?php echo "ok"?>'</span> <span>></span> <span>$INSTALL_DIR</span>/nginx/html/status.php
-    <span>$INSTALL_DIR</span>/nginx/sbin/nginx
-    command_status_check <span>"Nginx - 启动失败！"</span>
-<span>}</span>
- 
-<span>function</span> <span>install_php</span><span>(</span><span>)</span> <span>{</span>
- <span>cd</span> <span>$TMP_DIR</span>
-    yum <span>install</span> -y gcc gcc-c++ <span>make</span> gd-devel libxml2-devel <span>\</span>
-        libcurl-devel libjpeg-devel libpng-devel openssl-devel <span>\</span>
-        libmcrypt-devel libxslt-devel libtidy-devel
-    <span>wget</span> http://docs.php.net/distributions/php-<span>${PHP_V}</span>.tar.gz
-    <span>tar</span> zxf php-<span>${PHP_V}</span>.tar.gz
-    <span>cd</span> php-<span>${PHP_V}</span>
-    ./configure --prefix<span>=</span><span>$INSTALL_DIR</span>/php <span>\</span>
-    --with-config-file-path<span>=</span><span>$INSTALL_DIR</span>/php/etc <span>\</span>
-    --enable-fpm --enable-opcache <span>\</span>
-    --with-mysql --with-mysqli --with-pdo-mysql <span>\</span>
-    --with-openssl --with-zlib --with-curl --with-gd <span>\</span>
-    --with-jpeg-dir --with-png-dir --with-freetype-dir <span>\</span>
-    --enable-mbstring --enable-hash
-    command_status_check <span>"PHP - 平台环境检查失败！"</span>
-    <span>make</span> -j <span>4</span> 
-    command_status_check <span>"PHP - 编译失败！"</span>
-    <span>make</span> <span>install</span>
-    command_status_check <span>"PHP - 安装失败！"</span>
-    <span>cp</span> php.ini-production <span>$INSTALL_DIR</span>/php/etc/php.ini
-    <span>cp</span> sapi/fpm/php-fpm.conf <span>$INSTALL_DIR</span>/php/etc/php-fpm.conf
-    <span>cp</span> sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-    <span>chmod</span> +x /etc/init.d/php-fpm
-    /etc/init.d/php-fpm start
-    command_status_check <span>"PHP - 启动失败！"</span>
-<span>}</span>
- 
-<span>read</span> -p <span>"请输入编号："</span> number
-<span>case</span> <span>$number</span> <span>in</span>
-    <span>1</span><span>)</span>
-        install_nginx<span>;</span><span>;</span>
-    <span>2</span><span>)</span>
-        install_php<span>;</span><span>;</span>
-    <span>3</span><span>)</span>
-        install_mysql<span>;</span><span>;</span>
-    <span>4</span><span>)</span>
-        install_nginx
-        install_php
-        <span>;</span><span>;</span>
-    <span>9</span><span>)</span>
-        <span>exit</span><span>;</span><span>;</span>
-<span>esac</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、监控mysql主从同步状态是否异常脚本" tabindex="-1"> 10、监控MySQL主从同步状态是否异常脚本</h2>
-<div><pre><code><span>#!/bin/bash  </span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>root
-<span>PASSWD</span><span>=</span><span>123</span>.com
-<span>IO_SQL_STATUS</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASSWD -e <span>'show slave status\G'</span> <span><span>2</span>></span>/dev/null <span>|</span><span>awk</span> <span>'/Slave_.*_Running:/{print $1$2}'</span><span>)</span></span>
-<span>for</span> <span>i</span> <span>in</span> <span>$IO_SQL_STATUS</span><span>;</span> <span>do</span>
-    <span>THREAD_STATUS_NAME</span><span>=</span><span>${i<span>%</span><span>:</span>*}</span>
-    <span>THREAD_STATUS</span><span>=</span><span>${i<span>#</span>*<span>:</span>}</span>
-    <span>if</span> <span>[</span> <span>"<span>$THREAD_STATUS</span>"</span> <span>!=</span> <span>"Yes"</span> <span>]</span><span>;</span> <span>then</span>
-        <span>echo</span> <span>"Error: MySQL Master-Slave <span>$THREAD_STATUS_NAME</span> status is <span>$THREAD_STATUS</span>!"</span> <span>|</span>mail -s <span>"Master-Slave Staus"</span> xxx@163.com
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_11、mysql数据库备份脚本" tabindex="-1"> 11、MySql数据库备份脚本</h2>
-<h6 id="分库备份" tabindex="-1"> 分库备份</h6>
-<div><pre><code>mysqldump -uroot -pxxx -B A <span>></span> A.sql
-<span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%H-%M-%S<span>)</span></span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>backup
-<span>PASS</span><span>=</span><span>123</span>.com
-<span>BACKUP_DIR</span><span>=</span>/data/db_backup
-<span>DB_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"show databases;"</span> <span><span>2</span>></span>/dev/null <span>|</span><span>egrep</span> -v <span>"Database|information_schema|mysql|performance_schema|sys"</span><span>)</span></span>
- 
-<span>for</span> <span>DB</span> <span>in</span> <span>$DB_LIST</span><span>;</span> <span>do</span>
-    <span>BACKUP_NAME</span><span>=</span><span>$BACKUP_DIR</span>/<span>${DB}</span>_<span>${DATE}</span>.sql
-    <span>if</span> <span>!</span> mysqldump -h<span>$HOST</span> -u<span>$USER</span> -p<span>$PASS</span> -B <span>$DB</span> <span>></span> <span>$BACKUP_NAME</span> <span><span>2</span>></span>/dev/null<span>;</span> <span>then</span>
-        <span>echo</span> <span>"<span>$BACKUP_NAME</span> 备份失败!"</span>
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h6 id="分表备份" tabindex="-1"> 分表备份</h6>
-<div><pre><code>mysqldump -uroot -pxxx -A t <span>></span> t.sql
-<span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%H-%M-%S<span>)</span></span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>backup
-<span>PASS</span><span>=</span><span>123</span>.com
-<span>BACKUP_DIR</span><span>=</span>/data/db_backup
-<span>DB_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"show databases;"</span> <span><span>2</span>></span>/dev/null <span>|</span><span>egrep</span> -v <span>"Database|information_schema|mysql|performance_schema|sys"</span><span>)</span></span>
- 
-<span>for</span> <span>DB</span> <span>in</span> <span>$DB_LIST</span><span>;</span> <span>do</span>
-    <span>BACKUP_DB_DIR</span><span>=</span><span>$BACKUP_DIR</span>/<span>${DB}</span>_<span>${DATE}</span>
-    <span>[</span> <span>!</span> -d <span>$BACKUP_DB_DIR</span> <span>]</span> <span>&amp;&amp;</span> <span>mkdir</span> -p <span>$BACKUP_DB_DIR</span> <span>&amp;></span>/dev/null
-    <span>TABLE_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"use <span>$DB</span>;show tables;"</span> <span><span>2</span>></span>/dev/null<span>)</span></span>
-    <span>for</span> <span>TABLE</span> <span>in</span> <span>$TABLE_LIST</span><span>;</span> <span>do</span>
-        <span>BACKUP_NAME</span><span>=</span><span>$BACKUP_DB_DIR</span>/<span>${TABLE}</span>.sql 
-        <span>if</span> <span>!</span> mysqldump -h<span>$HOST</span> -u<span>$USER</span> -p<span>$PASS</span> <span>$DB</span> <span>$TABLE</span> <span>></span> <span>$BACKUP_NAME</span> <span><span>2</span>></span>/dev/null<span>;</span> <span>then</span>
-            <span>echo</span> <span>"<span>$BACKUP_NAME</span> 备份失败!"</span>
-        <span>fi</span>
-    <span>done</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12、nginx访问日志分析" tabindex="-1"> 12、Nginx访问日志分析</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span># 日志格式: $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"</span>
-<span>LOG_FILE</span><span>=</span><span>$1</span>
-<span>echo</span> <span>"统计访问最多的10个IP"</span>
-<span>awk</span> <span>'{a[$1]++}END{print "UV:",length(a);for(v in a)print v,a[v]}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr <span>|</span><span>head</span> -10
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计时间段访问最多的IP"</span>
-<span>awk</span> <span>'$4>="[01/Dec/2018:13:20:25" &amp;&amp; $4&lt;="[27/Nov/2018:16:20:49"{a[$1]++}END{for(v in a)print v,a[v]}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr<span>|</span><span>head</span> -10
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计访问最多的10个页面"</span>
-<span>awk</span> <span>'{a[$7]++}END{print "PV:",length(a);for(v in a){if(a[v]>10)print v,a[v]}}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计访问页面状态码数量"</span>
-<span>awk</span> <span>'{a[$7" "$9]++}END{for(v in a){if(a[v]>5)print v,a[v]}}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k3 -nr
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_13、nginx访问日志自动按天-周、月-切割" tabindex="-1"> 13、Nginx访问日志自动按天（周、月）切割</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>#nginx日志目录</span>
-<span>LOG_DIR</span><span>=</span>/www/server/nginx/logs
-<span>#获取到上一天的时间</span>
-<span>YESTERDAY_TIME</span><span>=</span><span><span>$(</span><span>date</span> -d <span>"yesterday"</span> +%F<span>)</span></span>
-<span>#归档日志取时间</span>
-<span>LOG_MONTH_DIR</span><span>=</span><span>$LOG_DIR</span>/<span><span>$(</span><span>date</span> +<span>"%Y-%m"</span><span>)</span></span>
-<span>#归档日志的名称</span>
-<span>LOG_FILE_LIST</span><span>=</span><span>"access.log"</span>
- 
-<span>for</span> <span>LOG_FILE</span> <span>in</span> <span>$LOG_FILE_LIST</span><span>;</span> <span>do</span>
-    <span>[</span> <span>!</span> -d <span>$LOG_MONTH_DIR</span> <span>]</span> <span>&amp;&amp;</span> <span>mkdir</span> -p <span>$LOG_MONTH_DIR</span>
-    <span>mv</span> <span>$LOG_DIR</span>/<span>$LOG_FILE</span> <span>$LOG_MONTH_DIR</span>/<span>${LOG_FILE}</span>_<span>${YESTERDAY_TIME}</span>
-<span>done</span>
- 
-<span>kill</span> -USR1 <span><span>$(</span><span>cat</span> $LOG_DIR/nginx.pid<span>)</span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_14、自动发布java项目-tomcat" tabindex="-1"> 14、自动发布Java项目（Tomcat）</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%T<span>)</span></span>
- 
-<span>TOMCAT_NAME</span><span>=</span><span>$1</span>
-<span>TOMCAT_DIR</span><span>=</span>/usr/local/<span>$TOMCAT_NAME</span>
-<span>ROOT</span><span>=</span><span>$TOMCAT_DIR</span>/webapps/ROOT
- 
-<span>BACKUP_DIR</span><span>=</span>/data/backup
-<span>WORK_DIR</span><span>=</span>/tmp
-<span>PROJECT_NAME</span><span>=</span>tomcat-java-demo
- 
-<span># 拉取代码</span>
-<span>cd</span> <span>$WORK_DIR</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$PROJECT_NAME</span> <span>]</span><span>;</span> <span>then</span>
-   <span>git</span> clone https://github.com/lizhenliang/tomcat-java-demo
-   <span>cd</span> <span>$PROJECT_NAME</span>
-<span>else</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-   <span>git</span> pull
-<span>fi</span>
- 
-<span># 构建</span>
-mvn clean package -Dmaven.test.skip<span>=</span>true
-<span>if</span> <span>[</span> <span>$?</span> -ne <span>0</span> <span>]</span><span>;</span> <span>then</span>
-   <span>echo</span> <span>"maven build failure!"</span>
-   <span>exit</span> <span>1</span>
-<span>fi</span>
- 
-<span># 部署</span>
-<span>TOMCAT_PID</span><span>=</span><span><span>$(</span><span>ps</span> -ef <span>|</span><span>grep</span> <span>"<span>$TOMCAT_NAME</span>"</span> <span>|</span><span>egrep</span> -v <span>"grep|<span>$$</span>"</span> <span>|</span><span>awk</span> <span>'NR==1{print $2}'</span><span>)</span></span>
-<span>[</span> -n <span>"<span>$TOMCAT_PID</span>"</span> <span>]</span> <span>&amp;&amp;</span> <span>kill</span> -9 <span>$TOMCAT_PID</span>
-<span>[</span> -d <span>$ROOT</span> <span>]</span> <span>&amp;&amp;</span> <span>mv</span> <span>$ROOT</span> <span>$BACKUP_DIR</span>/<span>${TOMCAT_NAME}</span>_ROOT<span>$DATE</span>
-<span>unzip</span> <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/target/*.war -d <span>$ROOT</span>
-<span>$TOMCAT_DIR</span>/bin/startup.sh
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_15、自动发布php项目" tabindex="-1"> 15、自动发布PHP项目</h2>
-<div><pre><code><span>#!/bin/bash</span>
- 
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%T<span>)</span></span>
- 
-<span>WWWROOT</span><span>=</span>/usr/local/nginx/html/<span>$1</span>
- 
- 
-<span>BACKUP_DIR</span><span>=</span>/data/backup
-<span>WORK_DIR</span><span>=</span>/tmp
-<span>PROJECT_NAME</span><span>=</span>php-demo
- 
- 
-<span># 拉取代码</span>
-<span>cd</span> <span>$WORK_DIR</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$PROJECT_NAME</span> <span>]</span><span>;</span> <span>then</span>
-   <span>git</span> clone https://github.com/lizhenliang/php-demo
-   <span>cd</span> <span>$PROJECT_NAME</span>
-<span>else</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-   <span>git</span> pull
-<span>fi</span>
- 
- 
-<span># 部署</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$WWWROOT</span> <span>]</span><span>;</span> <span>then</span>
-   <span>mkdir</span> -p <span>$WWWROOT</span>
-   <span>rsync</span> -avz --exclude<span>=</span>.git <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/* <span>$WWWROOT</span>
-<span>else</span>
-   <span>rsync</span> -avz --exclude<span>=</span>.git <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/* <span>$WWWROOT</span>
-<span>fi</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_16、dos攻击防范-自动屏蔽攻击ip" tabindex="-1"> 16、DOS攻击防范（自动屏蔽攻击IP）</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%d/%b/%Y:%H:%M<span>)</span></span>
-<span>#nginx日志</span>
-<span>LOG_FILE</span><span>=</span>/usr/local/nginx/logs/demo2.access.log
-<span>#分析ip的访问情况</span>
-<span>ABNORMAL_IP</span><span>=</span><span><span>$(</span><span>tail</span> -n5000 $LOG_FILE <span>|</span><span>grep</span> $DATE <span>|</span><span>awk</span> <span>'{a[$1]++}END{for(i in a)if(a[i]>10)print i}'</span><span>)</span></span>
-<span>for</span> <span>IP</span> <span>in</span> <span>$ABNORMAL_IP</span><span>;</span> <span>do</span>
-    <span>if</span> <span>[</span> <span><span>$(</span>iptables -vnL <span>|</span><span>grep</span> -c <span>"<span>$IP</span>"</span><span>)</span></span> -eq <span>0</span> <span>]</span><span>;</span> <span>then</span>
-        iptables -I INPUT -s <span>$IP</span> -j DROP
-        <span>echo</span> <span>"<span><span>$(</span><span>date</span> +<span>'%F_%T'</span><span>)</span></span> <span>$IP</span>"</span> <span>>></span> /tmp/drop_ip.log
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_17、目录入侵检测与告警" tabindex="-1"> 17、目录入侵检测与告警</h2>
-<div><pre><code><span>#!/bin/bash</span>
- 
-<span>MON_DIR</span><span>=</span>/opt
-inotifywait -mqr --format %f -e create <span>$MON_DIR</span> <span>|</span><span>\</span>
-<span>while</span> <span>read</span> files<span>;</span> <span>do</span>
-   <span>#同步文件</span>
-   <span>rsync</span> -avz /opt /tmp/opt
-  <span>#检测文件是否被修改</span>
-   <span>#echo "$(date +'%F %T') create $files" | mail -s "dir monitor" xxx@163.com</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_18、dos攻击防范-自动屏蔽攻击ip" tabindex="-1"> 18、Dos攻击防范（自动屏蔽攻击IP）</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%d/%b/%Y:%H:%M<span>)</span></span>
-<span>LOG_FILE</span><span>=</span>/usr/local/nginx/logs/demo2.access.log
-<span>ABNORMAL_IP</span><span>=</span><span><span>$(</span><span>tail</span> -n5000 $LOG_FILE <span>|</span><span>grep</span> $DATE <span>|</span><span>awk</span> <span>'{a[$1]++}END{for(i in a)if(a[i]>10)print i}'</span><span>)</span></span>
-<span>for</span> <span>IP</span> <span>in</span> <span>$ABNORMAL_IP</span><span>;</span> <span>do</span>
-    <span>if</span> <span>[</span> <span><span>$(</span>iptables -vnL <span>|</span><span>grep</span> -c <span>"<span>$IP</span>"</span><span>)</span></span> -eq <span>0</span> <span>]</span><span>;</span> <span>then</span>
-        iptables -I INPUT -s <span>$IP</span> -j DROP
-        <span>echo</span> <span>"<span><span>$(</span><span>date</span> +<span>'%F_%T'</span><span>)</span></span> <span>$IP</span>"</span> <span>>></span> /tmp/drop_ip.log
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_19、linux系统发送告警脚本" tabindex="-1"> 19、Linux系统发送告警脚本</h2>
-<div><pre><code><span># yum install mailx</span>
-<span># vi /etc/mail.rc  </span>
-<span>set</span> <span>from</span><span>=</span>baojingtongzhi@163.com <span>smtp</span><span>=</span>smtp.163.com
-<span>set</span> smtp-auth-user<span>=</span>baojingtongzhi@163.com smtp-auth-password<span>=</span><span>123456</span>
-<span>set</span> smtp-auth<span>=</span>login
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_20、mysql数据库备份单循环" tabindex="-1"> 20、MySQL数据库备份单循环</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%H-%M-%S<span>)</span></span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>backup
-<span>PASS</span><span>=</span><span>123</span>.com
-<span>BACKUP_DIR</span><span>=</span>/data/db_backup
-<span>DB_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"show databases;"</span> <span><span>2</span>></span>/dev/null <span>|</span><span>egrep</span> -v <span>"Database|information_schema|mysql|performance_schema|sys"</span><span>)</span></span>
- 
-<span>for</span> <span>DB</span> <span>in</span> <span>$DB_LIST</span><span>;</span> <span>do</span>
-    <span>BACKUP_NAME</span><span>=</span><span>$BACKUP_DIR</span>/<span>${DB}</span>_<span>${DATE}</span>.sql
-    <span>if</span> <span>!</span> mysqldump -h<span>$HOST</span> -u<span>$USER</span> -p<span>$PASS</span> -B <span>$DB</span> <span>></span> <span>$BACKUP_NAME</span> <span><span>2</span>></span>/dev/null<span>;</span> <span>then</span>
-        <span>echo</span> <span>"<span>$BACKUP_NAME</span> 备份失败!"</span>
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_21、mysql数据库备份多循环" tabindex="-1"> 21、MySQL数据库备份多循环</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%H-%M-%S<span>)</span></span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>backup
-<span>PASS</span><span>=</span><span>123</span>.com
-<span>BACKUP_DIR</span><span>=</span>/data/db_backup
-<span>DB_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"show databases;"</span> <span><span>2</span>></span>/dev/null <span>|</span><span>egrep</span> -v <span>"Database|information_schema|mysql|performance_schema|sys"</span><span>)</span></span>
- 
-<span>for</span> <span>DB</span> <span>in</span> <span>$DB_LIST</span><span>;</span> <span>do</span>
-    <span>BACKUP_DB_DIR</span><span>=</span><span>$BACKUP_DIR</span>/<span>${DB}</span>_<span>${DATE}</span>
-    <span>[</span> <span>!</span> -d <span>$BACKUP_DB_DIR</span> <span>]</span> <span>&amp;&amp;</span> <span>mkdir</span> -p <span>$BACKUP_DB_DIR</span> <span>&amp;></span>/dev/null
-    <span>TABLE_LIST</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASS -s -e <span>"use <span>$DB</span>;show tables;"</span> <span><span>2</span>></span>/dev/null<span>)</span></span>
-    <span>for</span> <span>TABLE</span> <span>in</span> <span>$TABLE_LIST</span><span>;</span> <span>do</span>
-        <span>BACKUP_NAME</span><span>=</span><span>$BACKUP_DB_DIR</span>/<span>${TABLE}</span>.sql 
-        <span>if</span> <span>!</span> mysqldump -h<span>$HOST</span> -u<span>$USER</span> -p<span>$PASS</span> <span>$DB</span> <span>$TABLE</span> <span>></span> <span>$BACKUP_NAME</span> <span><span>2</span>></span>/dev/null<span>;</span> <span>then</span>
-            <span>echo</span> <span>"<span>$BACKUP_NAME</span> 备份失败!"</span>
-        <span>fi</span>
-    <span>done</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_22、nginx-访问访问日志按天切割" tabindex="-1"> 22、Nginx 访问访问日志按天切割</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>LOG_DIR</span><span>=</span>/usr/local/nginx/logs
-<span>YESTERDAY_TIME</span><span>=</span><span><span>$(</span><span>date</span> -d <span>"yesterday"</span> +%F<span>)</span></span>
-<span>LOG_MONTH_DIR</span><span>=</span><span>$LOG_DIR</span>/<span><span>$(</span><span>date</span> +<span>"%Y-%m"</span><span>)</span></span>
-<span>LOG_FILE_LIST</span><span>=</span><span>"default.access.log"</span>
- 
-<span>for</span> <span>LOG_FILE</span> <span>in</span> <span>$LOG_FILE_LIST</span><span>;</span> <span>do</span>
-    <span>[</span> <span>!</span> -d <span>$LOG_MONTH_DIR</span> <span>]</span> <span>&amp;&amp;</span> <span>mkdir</span> -p <span>$LOG_MONTH_DIR</span>
-    <span>mv</span> <span>$LOG_DIR</span>/<span>$LOG_FILE</span> <span>$LOG_MONTH_DIR</span>/<span>${LOG_FILE}</span>_<span>${YESTERDAY_TIME}</span>
-<span>done</span>
- 
-<span>kill</span> -USR1 <span><span>$(</span><span>cat</span> /var/run/nginx.pid<span>)</span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_23、nginx访问日志分析脚本" tabindex="-1"> 23、Nginx访问日志分析脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span># 日志格式: $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"</span>
-<span>LOG_FILE</span><span>=</span><span>$1</span>
-<span>echo</span> <span>"统计访问最多的10个IP"</span>
-<span>awk</span> <span>'{a[$1]++}END{print "UV:",length(a);for(v in a)print v,a[v]}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr <span>|</span><span>head</span> -10
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计时间段访问最多的IP"</span>
-<span>awk</span> <span>'$4>="[01/Dec/2018:13:20:25" &amp;&amp; $4&lt;="[27/Nov/2018:16:20:49"{a[$1]++}END{for(v in a)print v,a[v]}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr<span>|</span><span>head</span> -10
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计访问最多的10个页面"</span>
-<span>awk</span> <span>'{a[$7]++}END{print "PV:",length(a);for(v in a){if(a[v]>10)print v,a[v]}}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k2 -nr
-<span>echo</span> <span>"----------------------"</span>
- 
-<span>echo</span> <span>"统计访问页面状态码数量"</span>
-<span>awk</span> <span>'{a[$7" "$9]++}END{for(v in a){if(a[v]>5)print v,a[v]}}'</span> <span>$LOG_FILE</span> <span>|</span><span>sort</span> -k3 -nr
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_24、查看网卡实时流量脚本" tabindex="-1"> 24、查看网卡实时流量脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>NIC</span><span>=</span><span>$1</span>
-<span>echo</span> -e <span>" In ------ Out"</span>
-<span>while</span> <span>true</span><span>;</span> <span>do</span>
-    <span>OLD_IN</span><span>=</span><span><span>$(</span><span>awk</span> <span>'$0~"'</span>$NIC<span>'"{print $2}'</span> /proc/net/dev<span>)</span></span>
-    <span>OLD_OUT</span><span>=</span><span><span>$(</span><span>awk</span> <span>'$0~"'</span>$NIC<span>'"{print $10}'</span> /proc/net/dev<span>)</span></span>
-    <span>sleep</span> <span>1</span>
-    <span>NEW_IN</span><span>=</span><span><span>$(</span><span>awk</span>  <span>'$0~"'</span>$NIC<span>'"{print $2}'</span> /proc/net/dev<span>)</span></span>
-    <span>NEW_OUT</span><span>=</span><span><span>$(</span><span>awk</span> <span>'$0~"'</span>$NIC<span>'"{print $10}'</span> /proc/net/dev<span>)</span></span>
-    <span>IN</span><span>=</span><span><span>$(</span><span>printf</span> <span>"%.1f%s"</span> "<span>$((</span><span>(</span>$NEW_IN-$OLD_IN<span>)</span>/1024<span>)</span></span><span>)</span><span>" "</span>KB/s<span>")
-    OUT=<span><span>$(</span><span>printf</span> <span>"%.1f%s"</span> "<span>$((</span><span>(</span>$NEW_OUT-$OLD_OUT<span>)</span>/1024<span>)</span></span>)"</span> <span>"KB/s"</span><span>)</span>
-    <span>echo</span> <span>"<span>$IN</span> <span>$OUT</span>"</span>
-    <span>sleep</span> <span>1</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_25、服务器系统配置初始化脚本" tabindex="-1"> 25、服务器系统配置初始化脚本</h2>
-<div><pre><code><span>#/bin/bash</span>
-<span># 设置时区并同步时间</span>
-<span>ln</span> -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-<span>if</span> <span>!</span> <span>crontab</span> -l <span>|</span><span>grep</span> ntpdate <span>&amp;></span>/dev/null <span>;</span> <span>then</span>
-    <span>(</span>echo <span>"* 1 * * * ntpdate time.windows.com >/dev/null 2>&amp;1"</span><span>;</span><span>crontab</span> -l<span>)</span> <span>|</span><span>crontab</span>
-<span>fi</span>
- 
-<span># 禁用selinux</span>
-<span>sed</span> -i <span>'/SELINUX/{s/permissive/disabled/}'</span> /etc/selinux/config
- 
-<span># 关闭防火墙</span>
-<span>if</span> <span>egrep</span> <span>"7.[0-9]"</span> /etc/redhat-release <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    systemctl stop firewalld
-    systemctl disable firewalld
-<span>elif</span> <span>egrep</span> <span>"6.[0-9]"</span> /etc/redhat-release <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    <span>service</span> iptables stop
-    <span>chkconfig</span> iptables off
-<span>fi</span>
- 
-<span># 历史命令显示操作时间</span>
-<span>if</span> <span>!</span> <span>grep</span> HISTTIMEFORMAT /etc/bashrc<span>;</span> <span>then</span>
-    <span>echo</span> <span>'export HISTTIMEFORMAT="%F %T `whoami` "'</span> <span>>></span> /etc/bashrc
-<span>fi</span>
- 
-<span># SSH超时时间</span>
-<span>if</span> <span>!</span> <span>grep</span> <span>"TMOUT=600"</span> /etc/profile <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    <span>echo</span> <span>"export TMOUT=600"</span> <span>>></span> /etc/profile
-<span>fi</span>
- 
-<span># 禁止root远程登录</span>
-<span>sed</span> -i <span>'s/#PermitRootLogin yes/PermitRootLogin no/'</span> /etc/ssh/sshd_config
- 
-<span># 禁止定时任务向发送邮件</span>
-<span>sed</span> -i <span>'s/^MAILTO=root/MAILTO=""/'</span> /etc/crontab
- 
-<span># 设置最大打开文件数</span>
-<span>if</span> <span>!</span> <span>grep</span> <span>"* soft nofile 65535"</span> /etc/security/limits.conf <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-    <span>cat</span> <span>>></span> /etc/security/limits.conf <span>&lt;&lt;</span> <span>EOF
-    * soft nofile 65535
-    * hard nofile 65535
-    EOF
-fi
- 
-# 系统内核优化
-cat >> /etc/sysctl.conf &lt;&lt; EOF
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_max_tw_buckets = 20480
-net.ipv4.tcp_max_syn_backlog = 20480
-net.core.netdev_max_backlog = 262144
-net.ipv4.tcp_fin_timeout = 20  
-EOF</span>
- 
-<span># 减少SWAP使用</span>
-<span>echo</span> <span>"0"</span> <span>></span> /proc/sys/vm/swappiness
- 
-<span># 安装系统性能分析工具及其他</span>
-yum <span>install</span> gcc <span>make</span> autoconf <span>vim</span> sysstat net-tools iostat iftop iotp lrzsz -y
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_26、监控100台服务器磁盘利用率脚本" tabindex="-1"> 26、监控100台服务器磁盘利用率脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>HOST_INFO</span><span>=</span>host.info
-<span>for</span> <span>IP</span> <span>in</span> <span><span>$(</span><span>awk</span> <span>'/^[^#]/{print $1}'</span> $HOST_INFO<span>)</span></span><span>;</span> <span>do</span>
-    <span><span>USER</span></span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $2}'</span> $HOST_INFO<span>)</span></span>
-    <span>PORT</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $3}'</span> $HOST_INFO<span>)</span></span>
-    <span>TMP_FILE</span><span>=</span>/tmp/disk.tmp
-    <span>ssh</span> -p <span>$PORT</span> <span>$USER</span>@<span>$IP</span> <span>'df -h'</span> <span>></span> <span>$TMP_FILE</span>
-    <span>USE_RATE_LIST</span><span>=</span><span><span>$(</span><span>awk</span> <span>'BEGIN{OFS="="}/^\/dev/{print $NF,int($5)}'</span> $TMP_FILE<span>)</span></span>
-    <span>for</span> <span>USE_RATE</span> <span>in</span> <span>$USE_RATE_LIST</span><span>;</span> <span>do</span>
-        <span>PART_NAME</span><span>=</span><span>${USE_RATE<span>%</span>=*}</span>
-        <span>USE_RATE</span><span>=</span><span>${USE_RATE<span>#</span>*=}</span>
-        <span>if</span> <span>[</span> <span>$USE_RATE</span> -ge <span>80</span> <span>]</span><span>;</span> <span>then</span>
-            <span>echo</span> <span>"Warning: <span>$PART_NAME</span> Partition usage <span>$USE_RATE</span>%!"</span>
-        <span>fi</span>
-    <span>done</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_27、监控mysql主从同步状态是否异常脚本" tabindex="-1"> 27、监控MySQL主从同步状态是否异常脚本</h2>
-<div><pre><code><span>#!/bin/bash  </span>
-<span>HOST</span><span>=</span>localhost
-<span><span>USER</span></span><span>=</span>root
-<span>PASSWD</span><span>=</span><span>123</span>.com
-<span>IO_SQL_STATUS</span><span>=</span><span><span>$(</span>mysql -h$HOST -u<span>$USER</span> -p$PASSWD -e <span>'show slave status\G'</span> <span><span>2</span>></span>/dev/null <span>|</span><span>awk</span> <span>'/Slave_.*_Running:/{print $1$2}'</span><span>)</span></span>
-<span>for</span> <span>i</span> <span>in</span> <span>$IO_SQL_STATUS</span><span>;</span> <span>do</span>
-    <span>THREAD_STATUS_NAME</span><span>=</span><span>${i<span>%</span><span>:</span>*}</span>
-    <span>THREAD_STATUS</span><span>=</span><span>${i<span>#</span>*<span>:</span>}</span>
-    <span>if</span> <span>[</span> <span>"<span>$THREAD_STATUS</span>"</span> <span>!=</span> <span>"Yes"</span> <span>]</span><span>;</span> <span>then</span>
-        <span>echo</span> <span>"Error: MySQL Master-Slave <span>$THREAD_STATUS_NAME</span> status is <span>$THREAD_STATUS</span>!"</span> <span>|</span>mail -s <span>"Master-Slave Staus"</span> <span>[</span>url<span>=</span>mailto:xxx@163.com<span>]</span>xxx@163.com<span>[</span>/url<span>]</span>
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_28、目录文件变化监控和实时文件同步" tabindex="-1"> 28、目录文件变化监控和实时文件同步</h2>
-<div><pre><code><span>#!/bin/bash</span>
- 
-<span>MON_DIR</span><span>=</span>/opt
-inotifywait -mqr --format %f -e create <span>$MON_DIR</span> <span>|</span><span>\</span>
-<span>while</span> <span>read</span> files<span>;</span> <span>do</span>
-   <span>rsync</span> -avz /opt /tmp/opt
-   <span>#echo "$(date +'%F %T') create $files" | mail -s "dir monitor" [url=mailto:xxx@163.com]xxx@163.com[/url]</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_29、批量创建100用户并设置密码脚本" tabindex="-1"> 29、批量创建100用户并设置密码脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span>$@</span>
-<span>USER_FILE</span><span>=</span>user.txt
-<span>for</span> <span>USER</span> <span>in</span> <span>$USER_LIST</span><span>;</span> <span>do</span>
-    <span>if</span> <span>!</span> <span>id</span> <span>$USER</span> <span>&amp;></span>/dev/null<span>;</span> <span>then</span>
-        <span>PASS</span><span>=</span><span><span>$(</span><span>echo</span> <span>$RANDOM</span> <span>|</span>md5sum <span>|</span><span>cut</span> -c <span>1</span>-8<span>)</span></span>
-        <span>useradd</span> <span>$USER</span>
-        <span>echo</span> <span>$PASS</span> <span>|</span><span>passwd</span> --stdin <span>$USER</span> <span>&amp;></span>/dev/null
-        <span>echo</span> <span>"<span>$USER</span>   <span>$PASS</span>"</span> <span>>></span> <span>$USER_FILE</span>
-        <span>echo</span> <span>"<span>$USER</span> User create successful."</span>
-    <span>else</span>
-        <span>echo</span> <span>"<span>$USER</span> User already exists!"</span>
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_30、批量检测网站是否异常脚本" tabindex="-1"> 30、批量检测网站是否异常脚本</h2>
-<div><pre><code><span>#!/bin/bash  </span>
-<span>URL_LIST</span><span>=</span><span>"www.baidu.com [url=http://www.ctnrs.com]www.ctnrs.com[/url]"</span>
-<span>for</span> <span>URL</span> <span>in</span> <span>$URL_LIST</span><span>;</span> <span>do</span>
-    <span>FAIL_COUNT</span><span>=</span><span>0</span>
-    <span>for</span> <span><span>((</span>i<span>=</span><span>1</span><span>;</span>i<span>&lt;=</span><span>3</span><span>;</span>i<span>++</span><span>))</span></span><span>;</span> <span>do</span>
-        <span>HTTP_CODE</span><span>=</span><span><span>$(</span><span>curl</span> -o /dev/null --connect-timeout <span>3</span> -s -w <span>"%{http_code}"</span> $URL<span>)</span></span>
-        <span>if</span> <span>[</span> <span>$HTTP_CODE</span> -eq <span>200</span> <span>]</span><span>;</span> <span>then</span>
-            <span>echo</span> <span>"<span>$URL</span> OK"</span>
-            <span>break</span>
-        <span>else</span>
-            <span>echo</span> <span>"<span>$URL</span> retry <span>$FAIL_COUNT</span>"</span>
-            <span>let</span> FAIL_COUNT++
-        <span>fi</span>
-    <span>done</span>
-    <span>if</span> <span>[</span> <span>$FAIL_COUNT</span> -eq <span>3</span> <span>]</span><span>;</span> <span>then</span>
-        <span>echo</span> <span>"Warning: <span>$URL</span> Access failure!"</span>
-    <span>fi</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_31、批量主机远程执行命令脚本" tabindex="-1"> 31、批量主机远程执行命令脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>COMMAND</span><span>=</span><span>$*</span>
-<span>HOST_INFO</span><span>=</span>host.info
-<span>for</span> <span>IP</span> <span>in</span> <span><span>$(</span><span>awk</span> <span>'/^[^#]/{print $1}'</span> $HOST_INFO<span>)</span></span><span>;</span> <span>do</span>
-    <span><span>USER</span></span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $2}'</span> $HOST_INFO<span>)</span></span>
-    <span>PORT</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $3}'</span> $HOST_INFO<span>)</span></span>
-    <span>PASS</span><span>=</span><span><span>$(</span><span>awk</span> -v <span>ip</span><span>=</span>$IP <span>'ip==$1{print $4}'</span> $HOST_INFO<span>)</span></span>
-    <span>expect</span> -c <span>"
-       spawn ssh -p <span>$PORT</span> <span>$USER</span>@<span>$IP</span>
-       expect {
-          <span title="\&quot;">\"</span>(yes/no)<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span>yes<span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-          <span title="\&quot;">\"</span>password:<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span><span>$PASS</span><span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-          <span title="\&quot;">\"</span><span>$USER</span>@*<span title="\&quot;">\"</span> {send <span title="\&quot;">\"</span><span>$COMMAND</span><span title="\r">\r</span> exit<span title="\r">\r</span><span title="\&quot;">\"</span>; exp_continue}
-       }
-    "</span>
-    <span>echo</span> <span>"-------------------"</span>
-<span>done</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_32、一键部署lnmp网站平台脚本" tabindex="-1"> 32、一键部署LNMP网站平台脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>NGINX_V</span><span>=</span><span>1.15</span>.6
-<span>PHP_V</span><span>=</span><span>5.6</span>.36
-<span>TMP_DIR</span><span>=</span>/tmp
- 
-<span>INSTALL_DIR</span><span>=</span>/usr/local
- 
-<span>PWD_C</span><span>=</span><span>$PWD</span>
- 
-<span>echo</span>
-<span>echo</span> -e <span>"<span title="\t">\t</span>Menu<span title="\n">\n</span>"</span>
-<span>echo</span> -e <span>"1. Install Nginx"</span>
-<span>echo</span> -e <span>"2. Install PHP"</span>
-<span>echo</span> -e <span>"3. Install MySQL"</span>
-<span>echo</span> -e <span>"4. Deploy LNMP"</span>
-<span>echo</span> -e <span>"9. Quit"</span>
- 
-<span>function</span> <span>command_status_check</span><span>(</span><span>)</span> <span>{</span>
-        <span>if</span> <span>[</span> <span>$?</span> -ne <span>0</span> <span>]</span><span>;</span> <span>then</span>
-                <span>echo</span> <span>$1</span>
-                <span>exit</span>
-        <span>fi</span>
-<span>}</span>
- 
-<span>function</span> <span>install_nginx</span><span>(</span><span>)</span> <span>{</span>
-    <span>cd</span> <span>$TMP_DIR</span>
-    yum <span>install</span> -y gcc gcc-c++ <span>make</span> openssl-devel pcre-devel <span>wget</span>
-    <span>wget</span> <span>[</span>url<span>=</span>http://nginx.org/download/nginx-<span>]</span>http://nginx.org/download/nginx-<span>[</span>/url<span>]</span><span>${NGINX_V}</span>.tar.gz
-    <span>tar</span> zxf nginx-<span>${NGINX_V}</span>.tar.gz
-    <span>cd</span> nginx-<span>${NGINX_V}</span>
-    ./configure --prefix<span>=</span><span>$INSTALL_DIR</span>/nginx <span>\</span>
-    --with-http_ssl_module <span>\</span>
-    --with-http_stub_status_module <span>\</span>
-    --with-stream
-    command_status_check <span>"Nginx - 平台环境检查失败！"</span>
-    <span>make</span> -j <span>4</span> 
-    command_status_check <span>"Nginx - 编译失败！"</span>
-    <span>make</span> <span>install</span>
-    command_status_check <span>"Nginx - 安装失败！"</span>
-    <span>mkdir</span> -p <span>$INSTALL_DIR</span>/nginx/conf/vhost
-    <span>alias</span> <span>cp</span><span>=</span>cp <span>;</span> <span>cp</span> -rf <span>$PWD_C</span>/nginx.conf <span>$INSTALL_DIR</span>/nginx/conf
-    <span>rm</span> -rf <span>$INSTALL_DIR</span>/nginx/html/*
-    <span>echo</span> <span>"ok"</span> <span>></span> <span>$INSTALL_DIR</span>/nginx/html/status.html
-    <span>echo</span> <span>'&lt;?php echo "ok"?>'</span> <span>></span> <span>$INSTALL_DIR</span>/nginx/html/status.php
-    <span>$INSTALL_DIR</span>/nginx/sbin/nginx
-    command_status_check <span>"Nginx - 启动失败！"</span>
-<span>}</span>
- 
-<span>function</span> <span>install_php</span><span>(</span><span>)</span> <span>{</span>
-        <span>cd</span> <span>$TMP_DIR</span>
-    yum <span>install</span> -y gcc gcc-c++ <span>make</span> gd-devel libxml2-devel <span>\</span>
-        libcurl-devel libjpeg-devel libpng-devel openssl-devel <span>\</span>
-        libmcrypt-devel libxslt-devel libtidy-devel
-    <span>wget</span> <span>[</span>url<span>=</span>http://docs.php.net/distributions/php-<span>]</span>http://docs.php.net/distributions/php-<span>[</span>/url<span>]</span><span>${PHP_V}</span>.tar.gz
-    <span>tar</span> zxf php-<span>${PHP_V}</span>.tar.gz
-    <span>cd</span> php-<span>${PHP_V}</span>
-    ./configure --prefix<span>=</span><span>$INSTALL_DIR</span>/php <span>\</span>
-    --with-config-file-path<span>=</span><span>$INSTALL_DIR</span>/php/etc <span>\</span>
-    --enable-fpm --enable-opcache <span>\</span>
-    --with-mysql --with-mysqli --with-pdo-mysql <span>\</span>
-    --with-openssl --with-zlib --with-curl --with-gd <span>\</span>
-    --with-jpeg-dir --with-png-dir --with-freetype-dir <span>\</span>
-    --enable-mbstring --enable-hash
-    command_status_check <span>"PHP - 平台环境检查失败！"</span>
-    <span>make</span> -j <span>4</span> 
-    command_status_check <span>"PHP - 编译失败！"</span>
-    <span>make</span> <span>install</span>
-    command_status_check <span>"PHP - 安装失败！"</span>
-    <span>cp</span> php.ini-production <span>$INSTALL_DIR</span>/php/etc/php.ini
-    <span>cp</span> sapi/fpm/php-fpm.conf <span>$INSTALL_DIR</span>/php/etc/php-fpm.conf
-    <span>cp</span> sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-    <span>chmod</span> +x /etc/init.d/php-fpm
-    /etc/init.d/php-fpm start
-    command_status_check <span>"PHP - 启动失败！"</span>
-<span>}</span>
- 
-<span>read</span> -p <span>"请输入编号："</span> number
-<span>case</span> <span>$number</span> <span>in</span>
-    <span>1</span><span>)</span>
-        install_nginx<span>;</span><span>;</span>
-    <span>2</span><span>)</span>
-        install_php<span>;</span><span>;</span>
-    <span>3</span><span>)</span>
-        install_mysql<span>;</span><span>;</span>
-    <span>4</span><span>)</span>
-        install_nginx
-        install_php
-        <span>;</span><span>;</span>
-    <span>9</span><span>)</span>
-        <span>exit</span><span>;</span><span>;</span>
-<span>esac</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_33、一键查看服务器资源利用率" tabindex="-1"> 33、一键查看服务器资源利用率</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>function</span> <span>cpu</span><span>(</span><span>)</span> <span>{</span>
-    <span>NUM</span><span>=</span><span>1</span>
-    <span>while</span> <span>[</span> <span>$NUM</span> -le <span>3</span> <span>]</span><span>;</span> <span>do</span>
-        <span>util</span><span>=</span><span><span>`</span><span>vmstat</span> <span>|</span><span>awk</span> <span>'{if(NR==3)print 100-$15"%"}'</span><span>`</span></span>
-        <span>user</span><span>=</span><span><span>`</span><span>vmstat</span> <span>|</span><span>awk</span> <span>'{if(NR==3)print $13"%"}'</span><span>`</span></span>
-        <span>sys</span><span>=</span><span><span>`</span><span>vmstat</span> <span>|</span><span>awk</span> <span>'{if(NR==3)print $14"%"}'</span><span>`</span></span>
-        <span>iowait</span><span>=</span><span><span>`</span><span>vmstat</span> <span>|</span><span>awk</span> <span>'{if(NR==3)print $16"%"}'</span><span>`</span></span>
-        <span>echo</span> <span>"CPU - 使用率: <span>$util</span> , 等待磁盘IO响应使用率: <span>$iowait</span>"</span>
-        <span>let</span> NUM++
-        <span>sleep</span> <span>1</span>
-    <span>done</span>
-<span>}</span>
- 
-<span>function</span> <span>memory</span><span>(</span><span>)</span> <span>{</span>
-    <span>total</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2)printf "%.1f",$2/1024}'</span><span>`</span></span>
-    <span>used</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2) printf "%.1f",($2-$NF)/1024}'</span><span>`</span></span>
-    <span>available</span><span>=</span><span><span>`</span><span>free</span> -m <span>|</span><span>awk</span> <span>'{if(NR==2) printf "%.1f",$NF/1024}'</span><span>`</span></span>
-    <span>echo</span> <span>"内存 - 总大小: <span>${total}</span>G , 使用: <span>${used}</span>G , 剩余: <span>${available}</span>G"</span>
-<span>}</span>
- 
-<span>function</span> <span>disk</span><span>(</span><span>)</span> <span>{</span>
-    <span>fs</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'/^\/dev/{print $1}'</span><span>)</span></span>
-    <span>for</span> <span>p</span> <span>in</span> <span>$fs</span><span>;</span> <span>do</span>
-        <span>mounted</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $NF}'</span><span>)</span></span>
-        <span>size</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $2}'</span><span>)</span></span>
-        <span>used</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $3}'</span><span>)</span></span>
-        <span>used_percent</span><span>=</span><span><span>$(</span><span>df</span> -h <span>|</span><span>awk</span> <span>'$1=="'</span>$p<span>'"{print $5}'</span><span>)</span></span>
-        <span>echo</span> <span>"硬盘 - 挂载点: <span>$mounted</span> , 总大小: <span>$size</span> , 使用: <span>$used</span> , 使用率: <span>$used_percent</span>"</span>
-    <span>done</span>
-<span>}</span>
- 
-<span>function</span> <span>tcp_status</span><span>(</span><span>)</span> <span>{</span>
-    <span>summary</span><span>=</span><span><span>$(</span>ss -antp <span>|</span><span>awk</span> <span>'{status[$1]++}END{for(i in status) printf i":"status[i]" "}'</span><span>)</span></span>
-    <span>echo</span> <span>"TCP连接状态 - <span>$summary</span>"</span>
-<span>}</span>
- 
-cpu
-memory
-disk
-tcp_status
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_34、找出占用cpu-内存过高的进程脚本" tabindex="-1"> 34、找出占用CPU 内存过高的进程脚本</h2>
-<div><pre><code><span>ps</span> -eo user,pid,pcpu,pmem,args --sort<span>=</span>-pcpu  <span>|</span><span>head</span> -n <span>10</span>
- 
-<span>ps</span> -eo user,pid,pcpu,pmem,args --sort<span>=</span>-pmem  <span>|</span><span>head</span> -n <span>10</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="_35、自动发布java项目-tomcat" tabindex="-1"> 35、自动发布Java项目（Tomcat）</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%T<span>)</span></span>
- 
-<span>TOMCAT_NAME</span><span>=</span><span>$1</span>
-<span>TOMCAT_DIR</span><span>=</span>/usr/local/<span>$TOMCAT_NAME</span>
-<span>ROOT</span><span>=</span><span>$TOMCAT_DIR</span>/webapps/ROOT
- 
-<span>BACKUP_DIR</span><span>=</span>/data/backup
-<span>WORK_DIR</span><span>=</span>/tmp
-<span>PROJECT_NAME</span><span>=</span>tomcat-java-demo
- 
-<span># 拉取代码</span>
-<span>cd</span> <span>$WORK_DIR</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$PROJECT_NAME</span> <span>]</span><span>;</span> <span>then</span>
-   <span>git</span> clone <span>[</span>url<span>=</span>https://github.com/lizhenliang/tomcat-java-demo<span>]</span>https://github.com/lizhenliang/tomcat-java-demo<span>[</span>/url<span>]</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-<span>else</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-   <span>git</span> pull
-<span>fi</span>
- 
-<span># 构建</span>
-mvn clean package -Dmaven.test.skip<span>=</span>true
-<span>if</span> <span>[</span> <span>$?</span> -ne <span>0</span> <span>]</span><span>;</span> <span>then</span>
-   <span>echo</span> <span>"maven build failure!"</span>
-   <span>exit</span> <span>1</span>
-<span>fi</span>
- 
-<span># 部署</span>
-<span>TOMCAT_PID</span><span>=</span><span><span>$(</span><span>ps</span> -ef <span>|</span><span>grep</span> <span>"<span>$TOMCAT_NAME</span>"</span> <span>|</span><span>egrep</span> -v <span>"grep|<span>$$</span>"</span> <span>|</span><span>awk</span> <span>'NR==1{print $2}'</span><span>)</span></span>
-<span>[</span> -n <span>"<span>$TOMCAT_PID</span>"</span> <span>]</span> <span>&amp;&amp;</span> <span>kill</span> -9 <span>$TOMCAT_PID</span>
-<span>[</span> -d <span>$ROOT</span> <span>]</span> <span>&amp;&amp;</span> <span>mv</span> <span>$ROOT</span> <span>$BACKUP_DIR</span>/<span>${TOMCAT_NAME}</span>_ROOT<span>$DATE</span>
-<span>unzip</span> <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/target/*.war -d <span>$ROOT</span>
-<span>$TOMCAT_DIR</span>/bin/startup.sh
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_36、自动发布php项目脚本" tabindex="-1"> 36、自动发布PHP项目脚本</h2>
-<div><pre><code><span>#!/bin/bash</span>
-<span>DATE</span><span>=</span><span><span>$(</span><span>date</span> +%F_%T<span>)</span></span>
- 
-<span>WWWROOT</span><span>=</span>/usr/local/nginx/html/<span>$1</span>
- 
- 
-<span>BACKUP_DIR</span><span>=</span>/data/backup
-<span>WORK_DIR</span><span>=</span>/tmp
-<span>PROJECT_NAME</span><span>=</span>php-demo
- 
- 
-<span># 拉取代码</span>
-<span>cd</span> <span>$WORK_DIR</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$PROJECT_NAME</span> <span>]</span><span>;</span> <span>then</span>
-   <span>git</span> clone <span>[</span>url<span>=</span>https://github.com/lizhenliang/php-demo<span>]</span>https://github.com/lizhenliang/php-demo<span>[</span>/url<span>]</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-<span>else</span>
-   <span>cd</span> <span>$PROJECT_NAME</span>
-   <span>git</span> pull
-<span>fi</span>
- 
- 
-<span># 部署</span>
-<span>if</span> <span>[</span> <span>!</span> -d <span>$WWWROOT</span> <span>]</span><span>;</span> <span>then</span>
-   <span>mkdir</span> -p <span>$WWWROOT</span>
-   <span>rsync</span> -avz --exclude<span>=</span>.git <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/* <span>$WWWROOT</span>
-<span>else</span>
-   <span>rsync</span> -avz --exclude<span>=</span>.git <span>$WORK_DIR</span>/<span>$PROJECT_NAME</span>/* <span>$WWWROOT</span>
-<span>fi</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>API</title>
-      <link>https://xlc520.github.io/other/API.html</link>
-      <guid>https://xlc520.github.io/other/API.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">API</source>
-      <description>API</description>
-      <category>other</category>
-      <pubDate>Sun, 30 Jan 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="api" tabindex="-1"> API</h1>
-<h2 id="hutool" tabindex="-1"> hutool</h2>
-<p>一个小而全的 Java 工具类库，通过静态方法封装，并提供详细完整的中文文档和注释，使Java拥有函数式语言般的优雅。</p>
-<p><a href="https://hutool.cn/" target="_blank" rel="noopener noreferrer">https://hutool.cn/</a></p>
-<h2 id="apipost" tabindex="-1"> apipost</h2>
-<p><a href="https://www.apipost.cn/" target="_blank" rel="noopener noreferrer">https://www.apipost.cn/</a></p>
-<h2 id="代码转图片" tabindex="-1"> 代码转图片</h2>
-<p>该网站将代码片段转为美观的图片，可以贴到社交媒体上面。</p>
-<p><a href="https://www.codepng.app/" target="_blank" rel="noopener noreferrer">https://www.codepng.app/</a></p>
-<h2 id="将网页转成-markdown-代码" tabindex="-1"> 将网页转成 Markdown 代码</h2>
-<p><a href="https://devtool.tech/html-md" target="_blank" rel="noopener noreferrer">https://devtool.tech/html-md</a></p>
-<h2 id="spiderflow-开源爬虫平台" tabindex="-1"> SpiderFlow-开源爬虫平台</h2>
-<p>一个开源的爬虫平台，以图形化方式定义爬虫，不写代码即可完成抓取网页。</p>
-<p><a href="https://github.com/ssssssss-team/spider-flow" target="_blank" rel="noopener noreferrer">https://github.com/ssssssss-team/spider-flow</a></p>
-<h2 id="艺术二维码" tabindex="-1"> 艺术二维码</h2>
-<p><a href="https://qrbtf.com/" target="_blank" rel="noopener noreferrer">https://qrbtf.com/</a></p>
-<h2 id="图片压缩" tabindex="-1"> 图片压缩</h2>
-<p>一个批量压缩图片的网页工具，纯浏览器端压缩，不经过服务器，速度较快。</p>
-<p><a href="https://devtool.tech/tiny-image" target="_blank" rel="noopener noreferrer">https://devtool.tech/tiny-image</a></p>
-<h2 id="接口大全-免费api-收集所有免费的api" tabindex="-1"> 接口大全-免费API,收集所有免费的API</h2>
-<p><a href="http://www.free-api.com/" target="_blank" rel="noopener noreferrer">http://www.free-api.com/</a></p>
-<h1 id="其他" tabindex="-1"> 其他</h1>
-<h3 id="ico图片类api" tabindex="-1"> ICO图片类api</h3>
-<ul>
-<li>
-<p><code>ico获取:</code>https://api.ooopn.com/ico/api.php?url=https://tool.zmki.cn/</p>
-</li>
-<li>
-<p><code>ico获取api（防盗链）:</code>https://f.ydr.me/https://tool.zmki.cn/</p>
-</li>
-<li>
-<p><code>ico获取（推荐）:</code>https://ico.kucat.cn/get.php?url=https://tool.zmki.cn/</p>
-</li>
-<li>
-<p><code>ico获取:</code>http://tool.bitefu.net/ico/?url=https://tool.zmki.cn/</p>
-</li>
-<li>
-<p><code>ico获取:</code>http://tool.bitefu.net/ico/?url=https://tool.zmki.cn/&amp;type=1 [直接返回base64编码的图片信息]</p>
-</li>
-<li>
-<p><code>ico获取:</code>http://api.byi.pw/favicon/?url=https://tool.zmki.cn/</p>
-</li>
-<li>
-<p><code>fontawesome-pro-5:</code></p>
-<div><pre><code>&lt;script type="text/javascript" src="https://api.zmki.cn/fontawesomepro5/js/all.min.js">&lt;/script>&lt;link rel="https://api.zmki.cn/fontawesomepro5/css/all.min.css" type="text/css" media="all" />
-</code></pre><div aria-hidden="true"><div></div></div></div></li>
-</ul>
-<h3 id="各实用api收集分享" tabindex="-1"> 各实用API收集分享</h3>
-<ul>
-<li><a href="https://api.fczbl.vip/" target="_blank" rel="noopener noreferrer">https://api.fczbl.vip</a></li>
-<li><code>一言、毒鸡汤</code>
-https://api.fczbl.vip/hitokoto/
-https://api.eyeit.cn/jitang/jtapi.php</li>
-<li><code>访客ip信息：</code>https://ip.ntrqq.net/</li>
-<li><code>今日诗词：</code><a href="https://www.jinrishici.com/#" target="_blank" rel="noopener noreferrer">https://www.jinrishici.com/</a></li>
-</ul>
-<h3 id="短网址api" tabindex="-1"> 短网址API:</h3>
-<ul>
-<li><code>t.cn:</code> http://api.t.sina.com.cn/short_url/shorten.json?source=3271760578&amp;url_long=https://www.zmki.cn</li>
-<li><code>url.cn:</code><a href="http://sa.sogou.com/gettiny?url=https://www.zmki.cn" target="_blank" rel="noopener noreferrer"> http://sa.sogou.com/gettiny?url=https://www.zmki.cn</a></li>
-<li><code>dwz.cn：</code> https://dwz.cn/</li>
-<li><code>成品工具：</code> http://url.tool.cc/</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>Bing必应API</title>
-      <link>https://xlc520.github.io/other/Bing%E5%BF%85%E5%BA%94API.html</link>
-      <guid>https://xlc520.github.io/other/Bing%E5%BF%85%E5%BA%94API.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">Bing必应API</source>
-      <description>Bing必应壁纸API</description>
-      <category>other</category>
-      <pubDate>Fri, 18 Feb 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="bing必应api" tabindex="-1"> Bing必应API</h1>
-<p>http://xlc.pp.ua/bing-api/index.php?rand=true</p>
-<h2 id="_1" tabindex="-1"> 1</h2>
-<p>http://cn.bing.com/HPImageArchive.aspx?idx=0&amp;n=1</p>
-<div><pre><code>https://cn.bing.com/HPImageArchive.aspx?idx=0&amp;n=1
-https://cn.bing.com/HPImageArchive.aspx?format=xml&amp;cc=jp&amp;idx=0&amp;n=1
-如果我们想浏览昨天，前天的图片呢？
- 
-回到最初的网址上，http://cn.bing.com/HPImageArchive.aspx?idx=0&amp;n=1 在这里，更换 idx= 这个参数就可以了。
- 
- 如 http://cn.bing.com/HPImageArchive.aspx?idx=1&amp;n=1 将要得到昨天的图片
-http://cn.bing.com/HPImageArchive.aspx?idx=2&amp;n=1得到前天的图片
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2" tabindex="-1"> 2</h2>
-<p>https://bing.biturl.top/?resolution=1920&amp;format=image&amp;index=0&amp;mkt=zh-CN</p>
-<h3 id="_3" tabindex="-1"> 3</h3>
-<div><pre><code>1. 访问 https://api.ioliu.cn/bing/ , 返回bing每日最新背景图, 可选参数[w,h]
-2. 访问 https://api.ioliu.cn/bing/?d=n (n>=0), 返回以当日为起点第n天前的壁纸, 可选参数[w,h]
-3. 访问 https://api.ioliu.cn/bing/json/ , 返回bing每日最新壁纸的相关(介绍、图片地址等)信息(json格式), 可选参数[callback].
-4. 访问 https://api.ioliu.cn/bing/rand/ , 返回随机图片, 可选参数[w,h]
-5. 访问 https://api.ioliu.cn/bing/blur/ , 返回高斯模糊图片, 可选参数[d,w,h]
-   带[w,h]用法： https://api.ioliu.cn/bing/rand/?w=1920&amp;h=1200
-
-目前已知图片分辨率
-1920x1200   1920x1080    1366x768   1280x768    
-1024x768    800x600       800x480   768x1280  
-720x1280    640x480       480x800   400x240     
-320x240     240x320 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_4" tabindex="-1"> 4</h2>
-<p>https://www.talklee.com/api/bing/</p>
-<p>调用参数：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数代码</th>
-<th style="text-align:left">参数含义</th>
-<th style="text-align:left">可用参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">rand</td>
-<td style="text-align:left">是否随机显示最近8天内的图片</td>
-<td style="text-align:left">true or false</td>
-</tr>
-<tr>
-<td style="text-align:left">day</td>
-<td style="text-align:left">显示指定的最近图片</td>
-<td style="text-align:left">-1，0，1，2，3，4，5，6，7(0为今天，-1为昨天)</td>
-</tr>
-<tr>
-<td style="text-align:left">size</td>
-<td style="text-align:left">指定获取图片大小</td>
-<td style="text-align:left">详见下方可用分辨率</td>
-</tr>
-<tr>
-<td style="text-align:left">info</td>
-<td style="text-align:left">获取图片基础信息（json格式）</td>
-<td style="text-align:left">true or false</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>以上所有参数均非必要，默认参数为rand=false，day=0，size=1920×1080，info=false</li>
-</ul>
-<p>可用分辨率：</p>
-<ul>
-<li>1920×1080</li>
-<li>1366×768</li>
-<li>1280×768</li>
-<li>1024×768</li>
-<li>800×600</li>
-<li>800×480</li>
-<li>768×1280</li>
-<li>720×1280</li>
-<li>640×480</li>
-<li>480×800</li>
-<li>400×240</li>
-<li>320×240</li>
-<li>240×320</li>
-<li>注：中间的x为英文字母x</li>
-</ul>
-<h2 id="_5" tabindex="-1"> 5</h2>
-<h3 id="bing-pictures-interface-必应壁纸接口" tabindex="-1"> Bing Pictures Interface | 必应壁纸接口</h3>
-<blockquote>
-<p>🔨 <code>Bing 壁纸 Api</code>重装上阵啦 😄 <a href="http://bing.ioliu.cn/" target="_blank" rel="noopener noreferrer">http://bing.ioliu.cn</a></p>
-</blockquote>
-<h3 id="目前开放的壁纸接口" tabindex="-1"> 目前开放的壁纸接口：</h3>
-<ul>
-<li>
-<p><code>/v1{d,w,h,p,size,callback}</code> 返回今日的壁纸完整数据(<code>可选参数{d,w,h,p,size,callback}</code>)：</p>
-<blockquote>
-<p>若指定参数<code>{w,h}</code> ，则直接返回图片</p>
-</blockquote>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>是否必要</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>d</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>自今日起第<code>d</code>天前的数据</td>
-</tr>
-<tr>
-<td>w</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片宽度</td>
-</tr>
-<tr>
-<td>h</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片高度</td>
-</tr>
-<tr>
-<td>p</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td><code>Page 页码</code>:第x页</td>
-</tr>
-<tr>
-<td>size</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td><code>Size 条数</code>:每页条数</td>
-</tr>
-<tr>
-<td>callback</td>
-<td><code>String</code></td>
-<td>否</td>
-<td>JSONP的回调函数名</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>/v1/rand{w,h,type,callback}</code> 返回随机的壁纸(<code>可选参数{w,h,type,callback}</code>)：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>是否必要</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>w</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片宽度</td>
-</tr>
-<tr>
-<td>h</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片高度</td>
-</tr>
-<tr>
-<td>type</td>
-<td><code>String</code></td>
-<td>否</td>
-<td>返回值类型(<code>json</code>)</td>
-</tr>
-<tr>
-<td>callback</td>
-<td><code>String</code></td>
-<td>否</td>
-<td>JSONP的回调函数名</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>/v1/blur{d,w,h,r}</code> 返回高斯模糊壁纸(<code>可选参数{d,w,h,r}</code>)：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>是否必要</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>d</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>自今日起第<code>d</code>天前的数据</td>
-</tr>
-<tr>
-<td>w</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片宽度</td>
-</tr>
-<tr>
-<td>h</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>图片高度</td>
-</tr>
-<tr>
-<td>r</td>
-<td><code>Int</code></td>
-<td>否</td>
-<td>模糊半径(<code>1~50</code>)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="⚠️-高斯模糊接口目前只支持指定分辨率-w-h-的图片-具体分辨率如下" tabindex="-1"> <strong>⚠️</strong> <code>高斯模糊</code>接口目前只支持指定分辨率(<code>w,h</code>)的图片，具体分辨率如下：</h3>
-<div><pre><code>/**
- * 已知分辨率
- */
-resolutions: [
-    '1920x1200',
-    '1920x1080',
-    '1366x768',
-    '1280x768',
-    '1024x768',
-    '800x600',
-    '800x480',
-    '768x1280',
-    '720x1280',
-    '640x480',
-    '480x800',
-    '400x240',
-    '320x240',
-    '240x320'
-]
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6" tabindex="-1"> 6</h2>
-<p><a href="http://bing.getlove.cn/bingImage" target="_blank" rel="noopener noreferrer">http://bing.getlove.cn/bingImage</a></p>
-<h2 id="_7" tabindex="-1"> 7</h2>
-<ul>
-<li>https://api.7-89.cn/bing/today</li>
-<li>https://api.kdcc.cn/img/</li>
-<li>https://api.kdcc.cn/img/rand.php（随机）</li>
-<li>https://api.kdcc.cn/img/jump.php</li>
-<li>https://open.saintic.com/api/bingPic/</li>
-<li>http://47.103.144.215:2020/showtoday</li>
-<li>https://www.talklee.com/api/bing</li>
-<li>https://api.dujin.org/bing/1920.php</li>
-</ul>
-<h2 id="代码一" tabindex="-1"> 代码一</h2>
-<div><pre><code>  <span>$time</span> <span>=</span> <span>date</span><span>(</span><span>"Ymd"</span><span>,</span> <span>time</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>$log</span> <span>=</span> <span>"./log/"</span> <span>.</span> <span>$time</span> <span>.</span> <span>'.txt'</span><span>;</span>
-    <span>//判断缓存文件是否存在</span>
-    <span>if</span> <span>(</span><span>file_exists</span><span>(</span><span>$log</span><span>)</span><span>)</span> <span>{</span>
-        <span>//读取缓存</span>
-        <span>$imgurl</span> <span>=</span> <span>file_get_contents</span><span>(</span><span>$log</span><span>)</span><span>;</span>
-        <span>//跳转至图片地址</span>
-        <span>header</span><span>(</span><span>"Location: <span><span>$imgurl</span></span>"</span><span>)</span><span>;</span>
-    <span>}</span> <span>else</span> <span>{</span>
-        <span>//获取bing背景图</span>
-        <span>$str</span> <span>=</span> <span>file_get_contents</span><span>(</span><span>'http://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1'</span><span>)</span><span>;</span>
-        <span>//解析Bing官方接口Json</span>
-        <span>$data</span> <span>=</span> <span>json_decode</span><span>(</span><span>$str</span><span>,</span><span>true</span><span>)</span><span>;</span>
-        <span>//七牛CDN镜像加速</span>
-        <span>$imgurl</span> <span>=</span> <span>'http://s.cn.bing.net'</span><span>.</span><span>$data</span><span>[</span><span>'images'</span><span>]</span><span>[</span><span>0</span><span>]</span><span>[</span><span>'urlbase'</span><span>]</span><span>.</span> <span>'_1920x1080.jpg'</span><span>;</span>
-        <span>//写入TXT用作缓存</span>
-        <span>file_put_contents</span><span>(</span><span>$log</span><span>,</span> <span>$imgurl</span><span>)</span><span>;</span>
-        <span>//跳转至图片地址</span>
-        <span>header</span><span>(</span><span>"Location: <span><span>$imgurl</span></span>"</span><span>)</span><span>;</span>
-    <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="代码二" tabindex="-1"> 代码二</h2>
-<div><pre><code><span><span>&lt;?php</span>
-<span>//判断是否随机调用</span>
-<span>if</span> <span>(</span><span>$_GET</span><span>[</span><span>'rand'</span><span>]</span><span>===</span><span>'true'</span><span>)</span> <span>{</span>
-  <span>$gettime</span> <span>=</span> <span>rand</span><span>(</span><span>-</span><span>1</span><span>,</span><span>7</span><span>)</span><span>;</span>
-<span>}</span><span>else</span><span>{</span>
-<span>//若不为随机调用则判断是否指定日期</span>
-  <span>$gettimebase</span> <span>=</span> <span>$_GET</span><span>[</span><span>'day'</span><span>]</span><span>;</span>
-  <span>if</span> <span>(</span><span>empty</span><span>(</span><span>$gettimebase</span><span>)</span><span>)</span> <span>{</span>
-    <span>$gettime</span> <span>=</span> <span>0</span><span>;</span>
-  <span>}</span><span>else</span><span>{</span>
-    <span>$gettime</span> <span>=</span> <span>$gettimebase</span><span>;</span>
-  <span>}</span>
-<span>}</span>
-<span>//获取Bing Json信息</span>
-<span>$json_string</span> <span>=</span> <span>file_get_contents</span><span>(</span><span>'https://www.bing.com/HPImageArchive.aspx?format=js&amp;idx='</span><span>.</span><span>$gettime</span><span>.</span><span>'&amp;n=1'</span><span>)</span><span>;</span>
-<span>//转换为PHP数组</span>
-<span>$data</span> <span>=</span> <span>json_decode</span><span>(</span><span>$json_string</span><span>)</span><span>;</span>
-<span>//提取基础url</span>
-<span>$imgurlbase</span> <span>=</span> <span>"https://www.bing.com"</span><span>.</span><span>$data</span><span>-></span><span>{</span><span>"images"</span><span>}</span><span>[</span><span>0</span><span>]</span><span>-></span><span>{</span><span>"urlbase"</span><span>}</span><span>;</span>
-<span>//判断是否指定图片大小</span>
-<span>$imgsizebase</span> <span>=</span> <span>$_GET</span><span>[</span><span>'size'</span><span>]</span><span>;</span>
-<span>if</span> <span>(</span><span>empty</span><span>(</span><span>$imgsizebase</span><span>)</span><span>)</span><span>{</span>
-  <span>$imgsize</span> <span>=</span> <span>"1920x1080"</span><span>;</span>
-<span>}</span><span>else</span><span>{</span>
-  <span>$imgsize</span> <span>=</span> <span>$imgsizebase</span><span>;</span>
-<span>}</span>
-<span>//建立完整url</span>
-<span>$imgurl</span> <span>=</span> <span>$imgurlbase</span><span>.</span><span>"_"</span><span>.</span><span>$imgsize</span><span>.</span><span>".jpg"</span><span>;</span>
-<span>//获取其他信息</span>
-<span>$imgtime</span> <span>=</span> <span>$data</span><span>-></span><span>{</span><span>"images"</span><span>}</span><span>[</span><span>0</span><span>]</span><span>-></span><span>{</span><span>"startdate"</span><span>}</span><span>;</span>
-<span>$imgtitle</span> <span>=</span> <span>$data</span><span>-></span><span>{</span><span>"images"</span><span>}</span><span>[</span><span>0</span><span>]</span><span>-></span><span>{</span><span>"copyright"</span><span>}</span><span>;</span>
-<span>$imglink</span> <span>=</span> <span>$data</span><span>-></span><span>{</span><span>"images"</span><span>}</span><span>[</span><span>0</span><span>]</span><span>-></span><span>{</span><span>"copyrightlink"</span><span>}</span><span>;</span>
-<span>//判断是否只获取图片信息</span>
-<span>if</span> <span>(</span><span>$_GET</span><span>[</span><span>'info'</span><span>]</span><span>===</span><span>'true'</span><span>)</span> <span>{</span>
-  <span>echo</span> <span>"{title:"</span><span>.</span><span>$imgtitle</span><span>.</span><span>",url:"</span><span>.</span><span>$imgurl</span><span>.</span><span>",link:"</span><span>.</span><span>$imglink</span><span>.</span><span>",time:"</span><span>.</span><span>$imgtime</span><span>.</span><span>"}"</span><span>;</span>
-<span>}</span><span>else</span><span>{</span>
-  <span>//若不是则跳转url</span>
-  <span>header</span><span>(</span><span>"Location: <span><span>$imgurl</span></span>"</span><span>)</span><span>;</span>
-<span>}</span>
-</span></code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>Euserv</title>
-      <link>https://xlc520.github.io/other/Euserv.html</link>
-      <guid>https://xlc520.github.io/other/Euserv.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">Euserv</source>
-      <description>Euserv</description>
-      <category>other</category>
-      <pubDate>Thu, 20 Jan 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="euserv" tabindex="-1"> Euserv</h1>
-<p>EUserv是一家德国主机商，提供VPS主机、服务器等，目前该商家提供免费ipv6主机服务器，配置信息是CPU：1 Core、内存：1 GB、硬盘：10 GB HDD、带宽：1 Gbit，提供一个IPv6地址，想要IPv4地址那就付费了。虽然免费VPS主机看起来配置很好，但是用起来非常地卡。</p>
-<p>申请EUserv免费VPS主机的过程并不复杂，也不需要什么Paypal、信用卡之类的验证，但是EUserv免费VPS主机申请要人工审核，一般来说48小时内会收到回复。当然，也有申请EUserv免费VPS主机失败的，或者是EUserv免费VPS主机被删号的。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_00.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_00-680x366.png" alt="EUserv免费VPS主机申请与使用-纯IPv6 VPS主机连接管理与安装网站应用" loading="lazy"></a></p>
-<p>更多的<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机，这里还有：</p>
-<ol>
-<li><a href="https://wzfou.com/oracle-mianfei-vps/" target="_blank" rel="noopener noreferrer">Oracle甲骨文免费云主机申请使用-Oracle免费VPS测评和VPS重置密钥登录</a></li>
-<li><a href="https://wzfou.com/aws-vps-pingce/" target="_blank" rel="noopener noreferrer">AWS免费VPS主机申请使用-Amazon EC2韩国日本香港机房VPS主机评测</a></li>
-<li><a href="https://wzfou.com/devcloud-apponfly/" target="_blank" rel="noopener noreferrer">英特尔Intel DevCloud免费云服务器和AppOnFly免费试用Windows Server服务器</a></li>
-</ol>
-<h2 id="一、euserv免费vps申请" tabindex="-1"> 一、EUserv免费VPS申请</h2>
-<p>网站：</p>
-<ol>
-<li>http://www.euserv.de</li>
-<li>https://www.euserv.com/en/</li>
-</ol>
-<p>进入网站后，可以将网站的语言切换为英文，或者是直接用浏览器翻译成中文。找到导航栏的免费VPS主机申请链接。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_01.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_01-680x366.png" alt="EUserv免费VPS申请地址" loading="lazy"></a></p>
-<p>确定申请。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_02.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_02-680x366.png" alt="EUserv免费VPS提交申请" loading="lazy"></a></p>
-<p>可以看到EUserv免费VPS是免费一个月的，不过可以免费续期。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_03.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_03-680x366.png" alt="EUserv免费VPS确定申请" loading="lazy"></a></p>
-<p>在页面最下方点击结算。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_04.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_04-680x366.png" alt="EUserv免费VPS开始结算" loading="lazy"></a></p>
-<p>此时，注册一个新账号。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_05.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_05-680x366.png" alt="EUserv免费VPS注册账号" loading="lazy"></a></p>
-<p>填写你的注册信息。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_06.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_06-680x366.png" alt="EUserv免费VPS填写邮箱" loading="lazy"></a></p>
-<p>完成注册。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_07.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_07-680x366.png" alt="EUserv免费VPS完成注册" loading="lazy"></a></p>
-<p>再次登录到EUserv后台，会提示让你补充你的详细信息，主要是街道地址、编号、手机号码等，填写参考下图：</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_08.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_08-680x366.png" alt="EUserv免费VPS补充信息" loading="lazy"></a></p>
-<p>完成注册并申请VPS主机，等待审核开通。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_09.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_09-680x366.png" alt="EUserv免费VPS审核开通" loading="lazy"></a></p>
-<h2 id="二、euserv免费vps管理" tabindex="-1"> 二、EUserv免费VPS管理</h2>
-<p>EUserv免费VPS开通后，你就可以点击进入到VPS主机控制面板了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_10.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_10-680x366.png" alt="EUserv免费VPS管理" loading="lazy"></a></p>
-<p>在EUserv免费VPS控制面板中，主要有查看VPS信息、重装系统以及IPv6地址等功能。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_11.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_11-680x366.png" alt="EUserv免费VPS查看管理中心" loading="lazy"></a></p>
-<p>这是EUserv免费VPS重装系统页面。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_12.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_12-680x366.png" alt="EUserv免费VPS重装系统" loading="lazy"></a></p>
-<p>这是EUserv免费VPS查看信息页面，重装系统成功后，你就可以看到root的密码了，还有IPv6地址。</p>
-<h2 id="三、euserv免费vps连接" tabindex="-1"> 三、EUserv免费VPS连接</h2>
-<p>EUserv免费VPS只提供纯IPv6地址，所以连接管理EUserv免费VPS就是一个难题了。我们可以利用IPv6隧道来让本地的Windows系统支持访问IPv6网站。</p>
-<p>Win+R 打开 CMD 或 Windows PowerShell（管理员），输入命令：</p>
-<div><pre><code>// 设置 Teredo 服务器，默认为：win10.ipv6.microsoft.com 
-
-netsh interface teredo <span>set</span> state enterpriseclient <span>server</span><span>=</span>default 
-
-// 测试 IPv6 连接 
-
-<span>ping</span> -6 ipv6.test-ipv6.com 
-
-<span>ping</span> -6 <span>[</span><span>2001</span>:470:1:18::125<span>]</span> 
-
-// 重置 IPv6 配置 
-
-netsh interface ipv6 reset 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>**重启系统。**通过命令ipconfig /all 查看当前网络信息，看到 Teredo Tunneling Pseudo-Interface 有以 2001 开头的 IPv6 地址即可。</p>
-<p>启动 IE 浏览器，访问 http://test-ipv6.com 或 http://ipv6.test-ipv6.com，如果选项卡 “测试项目” 下面的 “不使用域名的 IPv6 测试” 显示成功，则隧道建立成功。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_17.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_17-680x366.png" alt="EUserv免费VPS测试IPv6" loading="lazy"></a></p>
-<p>如果经过上面操作后仍无法启用 IPv6，可能是 Teredo 服务器无法正常连接，也可能是 Windows 自身配置问题，可尝试以下两种方法：</p>
-<div><pre><code>// 第一种：修改 Teredo 服务器为 teredo.remlab.net 
-
-netsh interface teredo <span>set</span> state <span>server</span><span>=</span>teredo.remlab.net 
-
-// 第二种：先卸载当前 Teredo 适配器再重新启用 
-
-netsh interface Teredo <span>set</span> state disable 
-
-netsh interface Teredo <span>set</span> state <span>type</span><span>=</span>default 
-
-<span>ping</span> -6 ipv6.test-ipv6.com 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>现在你就可以开始使用客户端连接你的EUserv免费VPS了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_14.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_14-680x366.png" alt="EUserv免费VPS连接成功" loading="lazy"></a></p>
-<p>详细的操作方法请参考：<a href="https://wzfou.com/question/19085/" target="_blank" rel="noopener noreferrer">Windows 10系统利用IPv6隧道开启IPv6访问</a>。使用浏览器访问IPv6地址，类似于：http://[2a01:4f8:191:48c:2018:2019::ed]，如下图：</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_18.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_18-680x366.png" alt="EUserv免费VPS浏览器查看" loading="lazy"></a></p>
-<h2 id="四、纯ipv6的vps搭建网站" tabindex="-1"> 四、纯IPv6的VPS搭建网站</h2>
-<h3 id="_4-1-搭建web环境" tabindex="-1"> 4.1 搭建Web环境</h3>
-<p>纯IPv6的VPS安装<a href="https://wzfou.com/tag/vps-mianban/" target="_blank" rel="noopener noreferrer">VPS主机面板</a>基本上是没有什么问题，例如<a href="https://wzfou.com/tag/lnmp/" target="_blank" rel="noopener noreferrer">LNMP</a>、<a href="https://wzfou.com/oneinstack/" target="_blank" rel="noopener noreferrer">Oneinstack</a>，经过挖站否的测试都正常。可能有一些面板会出现一些莫名其妙的问题，更多的面板参考：<a href="https://wzfou.com/vps-mianban/" target="_blank" rel="noopener noreferrer">服务器控制面板榜单</a>。</p>
-<p>宝塔面板后台默认的是不支持IPv6的，我们需要手动开启：</p>
-<div><pre><code><span>\</span>#让宝塔面板监听IPv6
-
-<span>echo</span> “**True**” <span>></span> /www/server/panel/data/ipv6.pl
-
-<span>\</span>#如果发现端口无法使用，也可以直接修改端口
-
-<span>echo</span> “8888” <span>></span> /www/server/panel/data/port.pl
-
-<span>\</span>#重启面板：
-
-bt restart
-
-<span>\</span>#宝塔面板在面板设置里勾选了监听ipv6，正常情况下ipv4应该也是可以使用的，部分服务器出现问题的话会导致ipv4无法登陆。使用以下命令
-
-<span>rm</span> -f /www/server/panel/data/ipv6.pl <span>&amp;&amp;</span> /etc/init.d/bt restart
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>如果是Oneinstack或者LNMP一键安装包，搭建网站还需要修改一下Nginx的配置，让Nginx同时监听IPv4和IPv6的请求，示例如下：</p>
-<div><pre><code> listen <span>80</span><span>;</span>
-
-​    listen <span>443</span> ssl http2<span>;</span>
-
-​    listen <span>[</span>::<span>]</span>:443 ssl http2<span>;</span>
-
-​    listen <span>[</span>::<span>]</span>:80<span>;</span>
-
-​    server_name www.wzfou.com<span>;</span>
-
-​    index index.php index.html index.htm default.php default.htm default.html<span>;</span>
-
-​    root /www/wwwroot/www.wzfou.com<span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_4-2-ipv6-dns解析" tabindex="-1"> 4.2 IPv6 DNS解析</h3>
-<p>对于IPv6地址，DNS解析选择AAAA记录类型记录，记录值为IPv6地址即可。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_20.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_20-680x366.png" alt="EUserv免费VPS添加解析" loading="lazy"></a></p>
-<h3 id="_4-3-兼顾ipv4用户访问" tabindex="-1"> 4.3 兼顾IPv4用户访问</h3>
-<p>对于纯IPv6的网站，为了可以让IPv4的用户访问，我们可以接入到Cloudflare免费CDN网络，如果不想修改NS服务器为Cloudflare，可以使用Cloudflare Partner平台，例如：<a href="https://wzfou.com/cloudflare-railgun/" target="_blank" rel="noopener noreferrer">Cloudflare Partner接入管理Cloudflare CDN</a>。</p>
-<p>接入了Cloudflare后，你就可以先设置AAAA记录了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_21.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_21-680x366.png" alt="EUserv免费VPS启用CDN" loading="lazy"></a></p>
-<p>接着在<a href="https://wzfou.com/tag/cloudflare-partner/" target="_blank" rel="noopener noreferrer">Cloudflare Partner</a>接入平台会得到CNAME记录，这时你就可以到你的域名DNS管理处修改CNAME记录了。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_22.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_22-680x366.png" alt="EUserv免费VPS兼顾IPv4地址" loading="lazy"></a></p>
-<p>成功将纯IPv6的VPS主机接入到了Cloudflare的CDN网络后，不管用户是不是支持IPv6访问都可以访问你的网站了，与普通的网站没有什么 区别。</p>
-<p><a href="https://wzfou.cdn.bcebos.com/wp-content/uploads/2021/10/EUserv_23.png" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_23.png" alt="EUserv免费VPS访问成功" loading="lazy"></a></p>
-<h2 id="五、总结" tabindex="-1"> 五、总结</h2>
-<p>EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机官网打开速度很慢，需要一定耐心。实际测试EUserv免费VPS主机的性能非常地差，见：<a href="https://wzfou.com/question/97087/" target="_blank" rel="noopener noreferrer">分享euserv提供的免费ipv6小鸡</a>，至于如何在IPv6上的VPS主机跑“QQ”可以参考：<a href="https://wzfou.com/ipv6-vps/#ftoc-heading-4" target="_blank" rel="noopener noreferrer">纯IPv6的VPS安装应用</a>。</p>
-<p>关于给 EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机自动续期的方法，请参考：https://bawodu.com/euserv-renew/</p>
-<h2 id="六、用腾讯云函数给euserv德国免费vps自动续期" tabindex="-1"> 六、用腾讯云函数给EUserv德国免费VPS自动续期</h2>
-<p>使用腾讯云函数 SCF自动续期EUserv免费IPv6 VPS脚本见 https://github.com/o0oo0ooo0/EUserv_extend</p>
-<p>目的：自动获取账号内所有的VPS项目，并检测是否需要续期，需要续期会自动续期。</p>
-<h3 id="_1-打开腾讯云函数sfc" tabindex="-1"> 1. 打开腾讯云函数SFC</h3>
-<p>打开 https://console.cloud.tencent.com/scf/ 登录腾讯云，初次使用云函数SCF要授权。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<h3 id="_2-新建beautifulsoup层" tabindex="-1"> 2. 新建BeautifulSoup层</h3>
-<p>新建层 BeautifulSoup ，将 <a href="https://github.com/o0oo0ooo0/EUserv_extend/releases/download/0.1/BeautifulSoup.zip" target="_blank" rel="noopener noreferrer">BeautifulSoup.zip</a> 导入 ，添加运行环境 Python 3.6 。注意层的位置选择香港等海外地区，因为我们要续费的VPS在德国。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528787822.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>建好层后如下，后面用的上。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788023.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<h3 id="_3-新建腾讯云函数euserv-extend" tabindex="-1"> 3. 新建腾讯云函数EUserv_extend</h3>
-<p>运行环境选择 Python 3.6，创建方式选择 空白函数，内存选择 64M，执行超时时间建议为 300 s（网站在国外访问比较慢，建议部署在非大陆区域，例如HK、SG等，需要和上面创建层的位置是一样的。），将修改后的 <strong>main.py</strong> 粘贴进去。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788124.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>选择自定义创建，按下图配置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788125.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>复制https://github.com/o0oo0ooo0/EUserv_extend库中的main.py文件。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788226.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>复制粘贴到上图index.py文本，然后粘贴到刚才打开的腾讯云函数服务编辑框中，修改其中的用户名，密码。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788327.webp" alt="img" loading="lazy"></p>
-<p>USERNAME: 你的EUserv账户邮箱或Customer ID</p>
-<p>USERNAME = ‘user@gmail.com’
-USERNAME = ‘user1@gmail.com user2@gmail.com’ # 多个账号写法</p>
-<p>PASSWORD: 账户的密码</p>
-<p>PASSWORD = ‘password’
-PASSWORD = ‘password1 password2’ # 多个账号写法</p>
-<p><strong>设置通知提醒（可选操作）</strong></p>
-<p>我已Server酱的提醒为例，打开https://sct.ftqq.com后微信扫码获取sentkey， 然后填写在上面函数代码Server酱的key处。如果您不需要通知也可以不设置提醒。这步不用设置。</p>
-<div><pre><code>SCKEY = 'XX'
-</code></pre><div aria-hidden="true"><div></div></div></div><p><strong>环境配置</strong></p>
-<p>设置64M内存就够用了，300秒延时。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788328.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>其他默认就可，然后点完成。完成云函数配置。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788429.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<h3 id="_4-绑定层-beautifulsoup" tabindex="-1"> 4. 绑定层 BeautifulSoup</h3>
-<p>在 EUserv_extend⇨函数管理⇨层管理 里绑定层 BeautifulSoup。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788430.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<h3 id="_5-测试并创建时间触发" tabindex="-1"> 5. 测试并创建时间触发</h3>
-<p>点击下图的测试，或会提示config等不存在，可以忽略。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788531.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>测试没错误，就点EUserv_extend⇨触发管理⇨创建触发器触发周期⇨自定义触发周期。填入0 0 8 */7 * * *</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ngcb15-164191528788632.webp" alt="EUserv德国免费VPS自动续期" loading="lazy"></p>
-<p>每 7 天的 8 点执行，可修改成你想要的时间。</p>
-<h3 id="_6-查看运行日志" tabindex="-1"> 6. 查看运行日志</h3>
-<p>日志提示有2台VPS，说明以上成功设置了腾讯云函数SCF续期脚本。</p>
-<div><pre><code>START RequestId:ff1a66b6-27b6-4ec3-9e87-******************************正在续费第 1 个账号Starting new HTTPS connection (1): support.euserv.com:443https://support.euserv.com:443 "GET /index.iphp HTTP/1.1" 302 3218https://support.euserv.com:443 "GET /index.iphp?sess_id=71b865f50603e8b47dd4dc5ddc3c7b2e162621201071628 HTTP/1.1" 200 3218https://support.euserv.com:443 "GET /pic/logo_small.png HTTP/1.1" 200 78https://support.euserv.com:443 "POST /index.iphp HTTP/1.1" 200 12524https://support.euserv.com:443 "GET /index.iphp?sess_id=71b865f50603e8b47dd4dc5ddc3c7b2e162621201071 HTTP/1.1" 200 12562检测到第 1 个账号有 2 台VPS，正在尝试续期ServerID: 388889 does not need to be renewedServerID: 399991 does not need to be renewedChecking.......Resetting dropped connection: support.euserv.comhttps://support.euserv.com:443 "GET /index.iphp?sess_id=71b865f50603e8b47dd4dc5ddc3c7b2e162621201071 HTTP/1.1" 302 12562https://support.euserv.com:443 "GET /index.iphp HTTP/1.1" 302 3214https://support.euserv.com:443 "GET /index.iphp?sess_id=64cddbf54472cb28e449a1058fe88e3b1626261591628911 HTTP/1.1" 200 3214ALL Work Done! EnjoyStarting new HTTPS connection (1): sc.ftqq.com:443https://sc.ftqq.com:443 "POST /SCT63352TEcQdROD2yeMxg4iTf.send HTTP/1.1" 200 107Server酱 推送成功******************************Response RequestId:ff1a66b6-27b6-4ec3-9e8da57 RetMsg:nullEND RequestId:ff1a66b6-27b6-4ec3-9e87-0494da57Report RequestId:ff1a66b6-27b6-4ec3-9e87-0ea14494da57 Duration:39826ms Memory:64MB MemUsage:20.109375MB
-</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="_7-总结" tabindex="-1"> 7. 总结</h3>
-<p>至此，用腾讯云函数给EUserv德国免费VPS自动续期设置完毕。这里是利用免费腾讯云函数SCF的Python环境，定时运行续费代码，从而完成登录Euserv网站，判断是否需要续期，若需要，即执行续期动作。如果您自己有可用的VPS，甚至在Euserv免费VPS自身上定时运行corn 的续期脚本也是可用的。</p>
-<h2 id="七、euserv一键安装教程" tabindex="-1"> 七、Euserv一键安装教程</h2>
-<p>首选需要一个EUserv的免费实例，怎么注册油管上有很多教程，我这里就不多说了。</p>
-<p>用SSH登录后</p>
-<p>第一步输入</p>
-<p><code>echo -e &quot;nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6&quot; &gt; /etc/resolv.conf</code></p>
-<p>第二步安装wget、curl</p>
-<p>Centos</p>
-<p><code>yum update &amp;&amp; yum install -y wget curl</code></p>
-<p>Debian</p>
-<p><code>apt update &amp;&amp; apt install wget curl -y</code></p>
-<p>Ubuntu</p>
-<p><code>apt-get update &amp;&amp; apt-get install wget -y</code></p>
-<p>第三步安装WARP</p>
-<p><code>wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh &amp;&amp; bash menu.sh [option] [lisence]</code></p>
-<p>选为 ipv6 only 添加 ipv4</p>
-<p>选免费</p>
-<p>选IPV4优先</p>
-<p>第四步输入mack a 的一键脚本</p>
-<div><pre><code>wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" &amp;&amp; chmod 700 /root/install.sh &amp;&amp; /root/install.sh
-</code></pre><div aria-hidden="true"><div></div></div></div><p>安装过程有中文说明，很容易</p>
-<p>智能解析DNS服务，我选择N</p>
-<p>安装成功复制一下代码就OK了</p>
-]]></content:encoded>
-      <enclosure url="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_00-680x366.png" type="image/png"/>
     </item>
   </channel>
 </rss>
