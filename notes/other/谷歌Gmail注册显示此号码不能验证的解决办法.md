@@ -1,0 +1,75 @@
+---
+author: xlc520
+title: 谷歌Gmail注册显示此号码不能验证的解决办法
+description: 
+date: 2022-06-06
+category: other
+tag: 
+ - other
+ - Google
+article: true
+timeline: true
+icon: others
+password: 
+---
+
+# 谷歌Gmail注册显示此号码不能验证的解决办法
+
+谷歌账号注册中国手机号不能验证，很多同学在注册谷歌账号时经常会遇到这个问题，一直卡在电话号码验证上，是国内手机号不能通过谷歌的验证吗？
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-165365038994811.png)
+
+基本都不是号码本身引起的，换新号码往往也没用，这里介绍几个靠谱的Gmail邮箱注册教程：
+
+网上很多方法不能注册成功，说明目前使用的网络IP质量不行，需要找一个纯净的IP。
+
+什么是纯净的IP？简单的讲就是这个IP用的人越少越好。
+
+谷歌能否申请成功最关键的不是用哪个国家的手机号，而是需要一个纯净的IP，申请之前我们首先需要确认谷歌注册手机号无法进行验证两种状态。
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899481.png)
+
+**状态①：**“无法用于验证”说明手机号之前没有注册过谷歌这种比较好解决只需要按照下面的方法操作即可
+
+**状态②：**“多次用于验证”说明手机号之前注册过谷歌或者尝试很多次,需要冷却。注册过等一个月/没有注册过等三天左右，这个状态不要再进行尝试，注册不了。 
+
+**目前网上绝大部分解决谷歌注册手机号无法进行验证显示“此电话号码无法用于进行验证”的教程都是以下两种:**
+
+**方法一：**通过QQ邮箱APP注册。这种方法很简单在这里就不做过多介绍,但是不是很建议通过这种渠道注册。
+
+具体原因是:由于国内网络限制,不借助上网工具是不能访问google的,那为什么通过QQ邮箱能够访问,是因为APP自带的联网工具,但是每天通过这个APP的单个IP去注册的用户可以说是成千上万,势必多账户关联引起谷歌的特殊关照,我们接到反馈很多小伙伴注册成功几个小时就报异常了。
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899482.jpeg)
+
+**方法二：**切换chrome浏览器的语言完成注册。这种方法还是有小伙伴注册不成功，经过本人实战前后加起来注册了20000+个谷歌号总结出的经验，谷歌号能否注册成功最关键不是使用什么语言，也不是使用哪个国家的手机号决定的，而是需要的是一个纯净的网络IP。
+
+下面就给大家分享一下这种方法容易被忽略的步骤。①首先需要做的是清楚浏览器的历史记录
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899483.jpeg)
+
+【重点】这里很关键容易被忽略，这里需要选择高级保证浏览器的所有缓存全部被清理干净，清理后关闭浏览器器
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899494.jpeg)
+
+②【重点】首先链接到一个使用人数较少的代理网络，在开始注册谷歌账号之前先使用IP查询工具，查询你现在所接入网络的所在国家。
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899495.jpeg)
+
+③点击chrome浏览器右上角的菜单按钮→选择“设置”→高级→语言→添加日语并置顶同时移除其他语言
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899496.jpeg)
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899497.jpeg)
+
+【重点】如果通过查询你的IP是其他国家，就添加相应国家的语言即可。我这里的IP是日本，所以我就把浏览器设置成日语，网上的教程都是直接叫设置成英语。
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899498.jpeg)
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-16536503899499.jpeg)
+
+④【重点】完成这个步骤以后再次清除浏览缓存，并关闭浏览器， ⑤再次打开chrome浏览器进入谷歌主页点击右上角蓝色注册按钮，依次操作即可。即可注册成功。
+
+注册几分钟就成功了。
+
+![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/1620-165365038994910.jpeg)
+
