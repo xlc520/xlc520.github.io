@@ -24,7 +24,7 @@ password:
 **注意：**
 
 - 旧版本中存在漏洞
-- ![image-20220115155838758](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/image-20220115155838758.png)
+- ![image-20220115155838758](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/image-20220115155838758.png)
 
 ## 2 安装
 
@@ -34,7 +34,7 @@ password:
 
 右键进行解压，解压后的目录如下图所示：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png)
 
 接下来创建我们的数据库文件存放位置，这里我在mysql解压目录的同级目录下创建了`databases`文件夹，作为数据库存放目录
 
@@ -43,7 +43,7 @@ password:
 
 **2、创建一个名为my.ini的文件：**
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/ZmFuZ3poZW5naGVpdGk.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ZmFuZ3poZW5naGVpdGk.png)
 
  **3、修改my.ini文件：**
 
@@ -112,11 +112,11 @@ default-character-set=utf8
 
 注意：初始化完成后MySQL会给root用户创建一个默认随机密码，下图白色部分就是密码，同时在data目录下也添加了相关的配置文件，如果密码有字符辨识不了，则把date目录下的文件都删了，重新执行这一步。
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/1780812-20190829212537656-1187829463.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/1780812-20190829212537656-1187829463.png)
 
  7.执行`net start mysql`启动服务（执行`net stop mysql`关闭服务）
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/1780812-20190829212232857-537058421.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/1780812-20190829212232857-537058421.png)
 
  
 
@@ -150,14 +150,14 @@ grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
 安装过程中如果出现以下错误，是我们的电脑缺少运行时环境。
 **注：**在这里我们有出现这种情况，但为了以防万一，还是给大家说一下，这里的图片用的网图，如有侵权，请评论删图！
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200131203311761.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20200131203311761.png)
 
 解决办法：
 下载vcruntime140_1.dll，链接：https://cn.dll-files.com/vcruntime140_1.dll.html
 
-![在这里插入图片描述](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/16422331874666.png)
+![在这里插入图片描述](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/16422331874666.png)
 下载完成后，解压提取文件，将提取出来的`vcruntime140_1.dll`文件复制到我们的`C:\Windows\System32`
-![在这里插入图片描述](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/16422331874677.png)
+![在这里插入图片描述](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/16422331874677.png)
 **注意, 32位版本的`vcruntime140_1.dll`需要复制到`C:\Windows\SysWOW64`下**
 
 
@@ -182,7 +182,7 @@ MYSQL_HOME
 D:\Program Files\mysql
 ```
 
- ![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200303112518670.png)
+ ![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20200303112518670.png)
 
 点击Path，增加：
 
@@ -190,5 +190,5 @@ D:\Program Files\mysql
 %MYSQL_HOME%\bin;
 ```
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190831112741174.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20190831112741174.png)
 

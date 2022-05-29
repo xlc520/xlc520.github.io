@@ -60,13 +60,13 @@ default-character-set=utf8
 
 3.以管理员身份运行命令提示符
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428143824709-218907811.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/856176-20180428143824709-218907811.png)
 
 如果顺利会产生下面的信息：
 
 第4行的信息尤其重要，这是初始化密码，请拿笔或者截图记下，这个随机密码会很随机，随机到可能有一些符号；
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428143923105-1817069252.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/856176-20180428143923105-1817069252.png)
 
 提示：如果你关了这个窗口，或者没记住，那也没事，删掉初始化的 datadir 目录（就是解压文件夹下的data文件夹）里面的东西，不要删除data文件夹，再执行一遍初始化命令，又会重新生成的。
 
@@ -78,13 +78,13 @@ mysqld --install [服务名]
 
  5.启动服务（这时候不要去登录mysql,登录不进去的，必须要先启动）
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428144751212-1355452928.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/856176-20180428144751212-1355452928.png)
 
  
 
 6.登录mysql，当然是为了修改密码啊，那个随机密码鬼才能记得住，这时候也不要尝试用图形化管理工具（navicat for mysql）去登录，会报错的，继续往下看
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428145014478-776409826.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/856176-20180428145014478-776409826.png)
 
 这里踩坑的小朋友一般是密码输错了，或者服务没启动，一直登录不进去。
 
@@ -115,7 +115,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '密码' WITH GRANT OPTIO
 
 这里允许root用户远程的时候，如果出现如下的错误，就先去把root用的host改成%，再运行上面那句话，对于mysql用户管理这一块不熟悉的朋友们，请看我另一篇博客--mysql 用户及权限管理
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/856176-20180428150157767-1407082633.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/856176-20180428150157767-1407082633.png)
 
  
 

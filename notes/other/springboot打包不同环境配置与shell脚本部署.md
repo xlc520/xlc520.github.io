@@ -66,9 +66,9 @@ password:
 节点粗解：
 
 - id：用来指定不同环境配置文件所在的目录，如下我这里：
-  ![image](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/fe69f622e6fd659b563e79a848403dcac97db44d.png)
+  ![image](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/fe69f622e6fd659b563e79a848403dcac97db44d.png)
 - properties：该节点中的节点是可作为参数传递给其他配置文件，如我这里的package-name节点值就可以在另外的assembly.xml或者shell脚本文件中通过${package-name}获取到，如下：
-  ![image](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/fd2638a541ecddb2844197770587337bfa4bcc29.png)
+  ![image](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/fd2638a541ecddb2844197770587337bfa4bcc29.png)
 - activeByDefault：指定默认环境配置文件夹
 
 # maven-assembly-plugin打发布压缩包
@@ -207,7 +207,7 @@ password:
 
 完成上面配置后，此时我们可以通过idea上勾选切换不同环境来打zip包，如图：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309170559272-1005982868.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309170559272-1005982868.png)
 
 # 分享shenniu_publish.sh程序启动工具
 
@@ -225,7 +225,7 @@ password:
 
 如图命令格式：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309170514140-1638598831.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309170514140-1638598831.png)
 
  来看全部的shell代码：
 
@@ -394,7 +394,7 @@ password:
 
 正如上面小节说的，shell中的参数 package-name，activeProfile，boot-main 都是由mvn中profiles的properties中提供，是可变的参数，脚本代码本身不需要人工去修改，只需要变的是mvn的参数即可；其实在我们生成zip包的时候，shell中的参数就被替换了，可以看zip中shell文件内容如：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309170701655-1208411312.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309170701655-1208411312.png)
 
 # linux上使用shenniu_publish.sh启动程序
 
@@ -406,7 +406,7 @@ password:
 
 其实shell脚本中包含有解压命令，但是我在打包时放在了zip中，所以只能通过手动解压了，当然可以调整；此时进入加压目录如此：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309170918126-491643739.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309170918126-491643739.png)
 
 注：这里第一次执行./shenniu_publish.sh脚本时候，提示了错误信息；是由于我是在windows上编辑的这个脚本，其空格等和linux上不一样，所以运行会有问题，要解决可以使用vim命令在linux把该文件转成linux格式，如下命令：
 
@@ -418,14 +418,14 @@ password:
 
 执行完后，再来运行脚本./shenniu_publish.sh，此时有如下提示:
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309171107977-1319405631.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309171107977-1319405631.png)
 
 此刻我们文件是解压状态，因此只需要start命令启动程序即可：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309171127604-1971799892.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309171127604-1971799892.png)
 
 到这里shenniu_publish.sh脚本使用就完成了，只要脚本没有提示错误，基本都能启动jar服务；其他restart和stop命令也如此执行就行：
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/348819-20190309171150215-294116419.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/348819-20190309171150215-294116419.png)
 
 可以去研究下shell代码，希望该脚本能给你带来效率和好的学习思路，下面是测试用例git地址，脚本在eureka-server项目中：https://github.com/shenniubuxing3/springcloud-Finchley.SR2

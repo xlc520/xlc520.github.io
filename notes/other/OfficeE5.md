@@ -22,23 +22,23 @@ password:
 
 # 申请过程
 
-Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/dev-program](https://haoduck.com/go.html?url=https://developer.microsoft.com/zh-cn/office/dev-program)
+Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/dev-program](https://developer.microsoft.com/zh-cn/office/dev-program)
 
 打开链接就是大大的 **立即加入** 几个大字 （注：此过程也许国内网络访问并不友好）
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_01.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_01.jpg)
 
 点 **立即加入** 就弹出填写信息的界面，如果你没有登录账号，就会让你登录。
 
 填写信息正常填即可
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_02.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_02.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_03.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_03.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_04.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_04.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_05.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_05.jpg)
 
 到这里就OK了，可以订阅我们需要的 **E5** 了
 
@@ -48,17 +48,17 @@ Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/d
 
 账号是一个邮箱的形式，用户名可以随意，域需要唯一
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_06.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_06.jpg)
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_07.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_07.jpg)
 
 填好后点 **继续** 就完成了，成功订阅了E5。
 
-![【记录】申请加入 微软Office 365 E5 开发人员计划](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/officee5_08.jpg)
+![【记录】申请加入 微软Office 365 E5 开发人员计划](https://gh.xlc520.ml/xlc520/MyImage/raw/main/MdImg/officee5_08.jpg)
 
 # 管理E5订阅
 
-管理地址：[https://portal.office.com/AdminPortal/Home](https://haoduck.com/go.html?url=https://portal.office.com/AdminPortal/Home)
+管理地址：[https://portal.office.com/AdminPortal/Home](https://portal.office.com/AdminPortal/Home)
 
 需要用你后面填的开发者账号登录
 
@@ -66,7 +66,7 @@ Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/d
 
 ### 修改默认容量
 
-[https://admin.onedrive.com/?v=StorageSettings](https://haoduck.com/go.html?url=https://admin.onedrive.com/?v=StorageSettings)
+[https://admin.onedrive.com/?v=StorageSettings](https://admin.onedrive.com/?v=StorageSettings)
 
 登录后将1024G改为5120G即可
 
@@ -97,9 +97,9 @@ Office开发人员中心链接：[https://developer.microsoft.com/zh-cn/office/d
 
 # 其他
 
-OneList——简单好用的OneDrive目录浏览程序：[https://blog.haoduck.com/302.html](https://haoduck.com/go.html?url=https://blog.haoduck.com/302.html)
+OneList——简单好用的OneDrive目录浏览程序：[https://blog.haoduck.com/302.html](https://blog.haoduck.com/302.html)
 
-Demo：[https://disk.gs](https://haoduck.com/go.html?url=https://disk.gs)
+Demo：[https://disk.gs](https://disk.gs)
 
 
 
@@ -113,7 +113,7 @@ Demo：[https://disk.gs](https://haoduck.com/go.html?url=https://disk.gs)
 
 记得是用订阅下的子账号申请，也就是默认域名为`@xxxx.onmicrosoft.com`的账号。
 
-登录Azure,[https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps](https://haoduck.com/go.html?url=https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
+登录Azure,[https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
 
 注册azure应用,确保应用有以下权限:
 `files: Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All`
@@ -125,7 +125,7 @@ Demo：[https://disk.gs](https://haoduck.com/go.html?url=https://disk.gs)
 
 ## 二、安装Rclone和获取`refresh_token`
 
-Rclone官网下载地址：[https://rclone.org/downloads/](https://haoduck.com/go.html?url=https://rclone.org/downloads/)
+Rclone官网下载地址：[https://rclone.org/downloads/](https://rclone.org/downloads/)
 
 Linux下可以直接用官方一键脚本`curl https://rclone.org/install.sh | sudo bash`
 

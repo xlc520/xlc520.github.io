@@ -26,7 +26,7 @@ EUserv是一家德国主机商，提供[VPS主机](https://wzfou.com/vps/)、服
 
 申请[EUserv](https://wzfou.com/tag/euserv/)免费VPS主机的过程并不复杂，也不需要什么Paypal、信用卡之类的验证，但是EUserv免费VPS主机申请要人工审核，一般来说48小时内会收到回复。当然，也有申请EUserv[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机失败的，或者是EUserv[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机被删号的。
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_00.png)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/EUserv_00.png)
 
 更多的[免费VPS](https://wzfou.com/tag/mianfei-vps/)主机，这里还有：
 

@@ -20,7 +20,7 @@ Xshell Plus Linux连接SSH工具 v7.0.0092 特别版
 
 https://lanzoui.com/b010yn1di
 
-![Xshell](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019103708637-800x493.jpg)
+![Xshell](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/2019103708637-800x493.jpg)
 
 [Xshell](https://www.netsarang.com/zh/xshell/) 是国内比较流行的SSH软件，和其他的SSH客户端相比，Xshell更加注重用户体验的一些东西，比如其现代化的界面，多种语言包括简体中文支持，代码高亮等，对于新手非常友好。
 
@@ -34,7 +34,7 @@ https://lanzoui.com/iAZxSx022ah
 
 - 点击菜单->激活/升级->登陆/激活，即破解离线激活高级版！
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190911171724.jpg)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20190911171724.jpg)
 
 [Finalshell](http://www.hostbuf.com/) 是一款国人开发的远程连接工具，支持 Windows、Linux 和 macOS，通过界面我们可以看出这款软件非常强大，你不仅可以在远程窗口上执行命令，还可以实时监测到系统的消耗，比如CPU、内存、网络等资源的使用量
 
@@ -55,7 +55,7 @@ https://lanzoui.com/iafhqwr0fba
 
 ## MobaXterm
 
-![MobaXterm](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019101843976-800x496.jpg)
+![MobaXterm](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/2019101843976-800x496.jpg)
 
 [MobaXterm](https://mobaxterm.mobatek.net/) 是一个功能强大的SSH工具，除了支持基本的SSH终端管理外，还有非常多的增强和扩展功能
 
@@ -76,7 +76,7 @@ MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协�
 
 ## Termius
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20200101100956-1024x670.jpg)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20200101100956-1024x670.jpg)
 
 [Termius](https://termius.com/) 是一款全平台的SSH客户端，该软件最大的特点就是支持全部平台，包括Windows、Mac、Linux、iOS、Android等，有了移动设备支持，只要有网络，你可以在任何时间地点管理服务器
 
@@ -86,13 +86,13 @@ MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协�
 
 ## PuTTY
 
-![PuTTY](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019163024711-800x505.jpg)
+![PuTTY](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/2019163024711-800x505.jpg)
 
 [PuTTY](https://www.putty.org/) 是一款开源免费的SSH客户端，支持SCP，SSH，Telnet，rlogin等多种网络协议，该软件的特点非常小巧，大小只有1M左右， 而且有绿色版本下载下来就能使用，再加上其开源的特性，很多人都一直在使用PuTTY管理Linux服务器，不过由于软件是全英文的界面，而且有些东西需要学习设置，对新手来说可能并不是那么友好
 
 ## SimpleRemote
 
-![img](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20190911170438-1024x568.jpg)
+![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20190911170438-1024x568.jpg)
 
 [SimpleRemote](http://www.91fk.net/) 是一款免费开源的远程连接管理工具，软件非常的小巧，解压后只有不到3MB的大小
 
@@ -100,7 +100,7 @@ MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协�
 
 ## ZOC Terminal
 
-![ZOC Terminal](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/2019171854023-800x570.jpg)
+![ZOC Terminal](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/2019171854023-800x570.jpg)
 
 [ZOC Terminal](https://www.emtec.com/zoc/) 是一款强大的终端模拟器，其支持Windows和Mac平台，软件使用很方便，可以快速连接、也可以保存主机，支持多标签、多窗口，如果你对基础的界面不满意，还可以定制样式，包括背景、字体、颜色等，组成自己喜欢的界面，不过这款软件并没有提供免费版本，需要付费购买
 
@@ -108,7 +108,7 @@ MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协�
 
 ## JuiceSSH
 
-![Android SSH客户端 JuiceSSH](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20201202073329-1024x499.jpg)
+![Android SSH客户端 JuiceSSH](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20201202073329-1024x499.jpg)
 
 [JuiceSSH](https://juicessh.com/) 是一款Android上的免费SSH客户端，你可以用它快速连接到Linux服务器，也可以添加账号密码或密钥保存多台机器，Juice 让你在手机上就能非常方便地执行这些操作
 
@@ -124,12 +124,12 @@ MobaXterm 是一个非常好的一站式服务器管理工具，对于多种协�
 
 ## ServerCat
 
-![iOS SSH客户端 ServerCat](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20201202073517-1024x515.jpg)
+![iOS SSH客户端 ServerCat](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20201202073517-1024x515.jpg)
 
 [ServerCat](https://apps.apple.com/cn/app/servercat-linux-监控-ssh-终端/id1501532023) 是一款iOS平台上的Linux管理软件，它可以让你在iPhone上连接远程服务器，用来监视系统性能、管理Docker和执行SSH命令，软件内提供了很多监控参数，比如CPU、内存、系统负载、网速、硬盘等，并且以可视化的形式展示，你可以随时查看自己服务器的系统状态，避免因负载过高则影响产品服务
 
 ## ShellFish
 
-![iPhone和iPad上的SSH客户端 ShellFish](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/20210719141114-1024x517.jpg)
+![iPhone和iPad上的SSH客户端 ShellFish](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20210719141114-1024x517.jpg)
 
 [ShellFish](https://apps.apple.com/cn/app/secure-shellfish/id1336634154) 是一款SFTP和SSH结合的软件，支持iPhone和iPad，你可以用它来连接远程服务并管理上面的文件，它专为移动设备做了很多优化，比如你可以使用SFTP管理服务器上的文件，使用专用键盘执行命令，创建代码片段快速使用等，而且还有一个很不错的地方在于它是支持[快捷指令](https://www.v1tx.com/post/shortcuts/)的，你可以和其他APP配合使用，使用语音执行命令等

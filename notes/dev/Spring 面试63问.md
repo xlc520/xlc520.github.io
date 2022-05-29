@@ -118,7 +118,7 @@ password:
 
   上，还通过多个其他的接口扩展了 BeanFactory 的功能：
 
-  ![9c9a78edbc6b9d2f3f849cbcfd3917ae.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/9c9a78edbc6b9d2f3f849cbcfd3917ae.png)
+  ![9c9a78edbc6b9d2f3f849cbcfd3917ae.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/9c9a78edbc6b9d2f3f849cbcfd3917ae.png)
 
   - ClassPathXmlApplicationContext：默认从类路径加载配置文件
   - FileSystemXmlApplicationContext：默认从文件系统中装载配置文件
@@ -194,7 +194,7 @@ password:
 
   ### 构造器依赖注入和 Setter方法注入的区别
 
-  ![59c181416a4997b4f05d2446e3ff6f08.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/59c181416a4997b4f05d2446e3ff6f08.png)
+  ![59c181416a4997b4f05d2446e3ff6f08.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/59c181416a4997b4f05d2446e3ff6f08.png)
 
   两种依赖方式都可以使用，构造器注入和Setter方法注入。最好的解决方案是用构造器参数实现强制依赖，setter方法实现可选依赖。
 
@@ -1147,7 +1147,7 @@ password:
 
   Spring 的模型-视图-控制器（MVC）框架是围绕一个 DispatcherServlet 来设计的，这个 Servlet会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。
 
-  ![73ee5a65e7e6e8a0733e3730a486a6e8.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/73ee5a65e7e6e8a0733e3730a486a6e8.png)
+  ![73ee5a65e7e6e8a0733e3730a486a6e8.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/73ee5a65e7e6e8a0733e3730a486a6e8.png)
 
   **Http 请求到 DispatcherServlet**
 
@@ -1316,11 +1316,11 @@ password:
 
   注入表达式结果
 
-  ![0a1da82128f379c30ad8a617633e8dbe.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/0a1da82128f379c30ad8a617633e8dbe.png)
+  ![0a1da82128f379c30ad8a617633e8dbe.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/0a1da82128f379c30ad8a617633e8dbe.png)
 
   注入其它bean属性
 
-  ![73e51190ca79d307501ca874efee2e3b.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/73e51190ca79d307501ca874efee2e3b.png)
+  ![73e51190ca79d307501ca874efee2e3b.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/73e51190ca79d307501ca874efee2e3b.png)
 
   注入文件资源
 
@@ -1328,7 +1328,7 @@ password:
 
   注入网站资源
 
-  ![cdaf29b32bdc7f7835aec018fecc3f50.png](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/cdaf29b32bdc7f7835aec018fecc3f50.png)
+  ![cdaf29b32bdc7f7835aec018fecc3f50.png](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/cdaf29b32bdc7f7835aec018fecc3f50.png)
 
   注入配置文件
 

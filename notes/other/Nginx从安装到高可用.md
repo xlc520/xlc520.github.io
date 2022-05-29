@@ -80,7 +80,7 @@ mkdir /var/temp/nginx -p
 
 注：代表在命令行中换行，用于提高可读性配置命令：
 
-![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346363259473.jpg)
+![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346363259473.jpg)
 
 ##### 7、make编译&安装
 
@@ -457,7 +457,7 @@ systemctl restart keepalived.service
 
 ##### 4、实现双机主备高可用
 
-![图片](https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/640-164346363259474.webp)
+![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346363259474.webp)
 
 (1)修改备机配置
 
