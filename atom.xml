@@ -3,7 +3,7 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-29T03:39:29.509Z</updated>
+  <updated>2022-05-29T06:22:45.521Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
@@ -9335,7 +9335,7 @@ Docs.buildHtmlDocs(config); // 执行生成文档
     <title type="html">Spring 面试63问</title>
     <id>https://xlc520.github.io/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html</id>
     <link href="https://xlc520.github.io/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
+    <updated>2022-05-29T06:21:00.000Z</updated>
     <summary type="html">Spring 面试63问</summary>
     <content type="html"><![CDATA[<h1 id="spring-面试63问" tabindex="-1"> Spring 面试63问</h1>
 <ul>
@@ -9415,7 +9415,7 @@ Docs.buildHtmlDocs(config); // 执行生成文档
 <p>ApplicationContext 由 BeanFactory 派生而来，提供了更多面向实际应用的功能。</p>
 <p>ApplicationContext 继承了 HierarchicalBeanFactory 和 ListableBeanFactory 接口，在此基础</p>
 <p>上，还通过多个其他的接口扩展了 BeanFactory 的功能：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/9c9a78edbc6b9d2f3f849cbcfd3917ae.png" alt="9c9a78edbc6b9d2f3f849cbcfd3917ae.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/9c9a78edbc6b9d2f3f849cbcfd3917ae.png" alt="9c9a78edbc6b9d2f3f849cbcfd3917ae.png" loading="lazy"></p>
 <ul>
 <li>ClassPathXmlApplicationContext：默认从类路径加载配置文件</li>
 <li>FileSystemXmlApplicationContext：默认从文件系统中装载配置文件</li>
@@ -9471,7 +9471,7 @@ Docs.buildHtmlDocs(config); // 执行生成文档
 <li>Setter方法注入：Setter方法注入是容器通过调用无参构造器或无参static工厂 方法实例化bean之后，调用该bean的setter方法，即实现了基于setter的依赖注入</li>
 </ul>
 <h3 id="构造器依赖注入和-setter方法注入的区别" tabindex="-1"> 构造器依赖注入和 Setter方法注入的区别</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/59c181416a4997b4f05d2446e3ff6f08.png" alt="59c181416a4997b4f05d2446e3ff6f08.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/59c181416a4997b4f05d2446e3ff6f08.png" alt="59c181416a4997b4f05d2446e3ff6f08.png" loading="lazy"></p>
 <p>两种依赖方式都可以使用，构造器注入和Setter方法注入。最好的解决方案是用构造器参数实现强制依赖，setter方法实现可选依赖。</p>
 <h3 id="webapplication-体系架构" tabindex="-1"> WebApplication 体系架构</h3>
 <p>WebApplicationContext 是专门为 Web 应用准备的，它允许从相对于 Web 根目录的路径中装载配置文件完成初始化工作。从 WebApplicationContext 中可以获得ServletContext 的引用，整个 Web 应用上下文对象将作为属性放置到 ServletContext 中，以便 Web 应用环境可以访问 Spring 应用上下文。</p>
@@ -10349,7 +10349,7 @@ public class TransactionDemo <span>{</span>
 <h2 id="spring-mvc" tabindex="-1"> Spring MVC</h2>
 <h3 id="spring-mvc-原理" tabindex="-1"> Spring MVC 原理</h3>
 <p>Spring 的模型-视图-控制器（MVC）框架是围绕一个 DispatcherServlet 来设计的，这个 Servlet会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/73ee5a65e7e6e8a0733e3730a486a6e8.png" alt="73ee5a65e7e6e8a0733e3730a486a6e8.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/73ee5a65e7e6e8a0733e3730a486a6e8.png" alt="73ee5a65e7e6e8a0733e3730a486a6e8.png" loading="lazy"></p>
 <p><strong>Http 请求到 DispatcherServlet</strong></p>
 <p>(1) 客户端请求提交到 DispatcherServlet。</p>
 <p><strong>HandlerMapping 寻找处理器</strong></p>
@@ -10473,13 +10473,13 @@ public class TransactionDemo <span>{</span>
 <p>注入操作系统属性</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/e4803c07763e1811c00d4c7e602ce0a5.png" alt="e4803c07763e1811c00d4c7e602ce0a5.png" loading="lazy"></p>
 <p>注入表达式结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/0a1da82128f379c30ad8a617633e8dbe.png" alt="0a1da82128f379c30ad8a617633e8dbe.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/0a1da82128f379c30ad8a617633e8dbe.png" alt="0a1da82128f379c30ad8a617633e8dbe.png" loading="lazy"></p>
 <p>注入其它bean属性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/73e51190ca79d307501ca874efee2e3b.png" alt="73e51190ca79d307501ca874efee2e3b.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/73e51190ca79d307501ca874efee2e3b.png" alt="73e51190ca79d307501ca874efee2e3b.png" loading="lazy"></p>
 <p>注入文件资源</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/9bd391199c575bbc9d4f158a881c7d18.png" alt="9bd391199c575bbc9d4f158a881c7d18.png" loading="lazy"></p>
 <p>注入网站资源</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/cdaf29b32bdc7f7835aec018fecc3f50.png" alt="cdaf29b32bdc7f7835aec018fecc3f50.png" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/cdaf29b32bdc7f7835aec018fecc3f50.png" alt="cdaf29b32bdc7f7835aec018fecc3f50.png" loading="lazy"></p>
 <p>注入配置文件</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/08a820d9676736e45563568e57f708da.png" alt="08a820d9676736e45563568e57f708da.png" loading="lazy"></p>
 <p><code>@PropertySource</code> 加载配置文件(类上)，还需配置一个<code>PropertySourcesPlaceholderConfigurer</code>的bean。</p>
@@ -24612,11 +24612,11 @@ yum provides <span>ifconfig</span>
     <title type="html">Euserv</title>
     <id>https://xlc520.github.io/linux/Euserv.html</id>
     <link href="https://xlc520.github.io/linux/Euserv.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
+    <updated>2022-05-29T06:21:00.000Z</updated>
     <content type="html"><![CDATA[<h1 id="euserv" tabindex="-1"> Euserv</h1>
 <p>EUserv是一家德国主机商，提供<a href="https://wzfou.com/vps/" target="_blank" rel="noopener noreferrer">VPS主机</a>、服务器等，目前该商家提供免费ipv6主机服务器，配置信息是CPU：1 Core、内存：1 GB、硬盘：10 GB HDD、带宽：1 Gbit，提供一个IPv6地址，想要IPv4地址那就付费了。虽然<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机看起来配置很好，但是用起来非常地卡。</p>
 <p>申请<a href="https://wzfou.com/tag/euserv/" target="_blank" rel="noopener noreferrer">EUserv</a>免费VPS主机的过程并不复杂，也不需要什么Paypal、信用卡之类的验证，但是EUserv免费VPS主机申请要人工审核，一般来说48小时内会收到回复。当然，也有申请EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机失败的，或者是EUserv<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机被删号的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xlc520/MyImage/MdImg/EUserv_00.png" alt="img" loading="lazy"></p>
+<p><img src="https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/EUserv_00.png" alt="img" loading="lazy"></p>
 <p>更多的<a href="https://wzfou.com/tag/mianfei-vps/" target="_blank" rel="noopener noreferrer">免费VPS</a>主机，这里还有：</p>
 <ol>
 <li><a href="https://wzfou.com/oracle-mianfei-vps/" target="_blank" rel="noopener noreferrer">Oracle甲骨文免费云主机申请使用-Oracle免费VPS测评和VPS重置密钥登录</a></li>
