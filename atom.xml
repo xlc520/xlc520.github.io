@@ -3,14 +3,14 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-29T06:22:45.521Z</updated>
+  <updated>2022-05-29T06:35:23.888Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
+  <category term="other"/>
   <category term="algorithm"/>
   <category term="Java"/>
   <category term="Script"/>
-  <category term="other"/>
   <category term="Linux"/>
   <category term="pc"/>
   <category term="Python"/>
@@ -27,6 +27,552 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">E5 调用API续订服务：Microsoft 365 E5 Renew X</title>
+    <id>https://xlc520.github.io/other/Microsoft-365-E5-RenewX.html</id>
+    <link href="https://xlc520.github.io/other/Microsoft-365-E5-RenewX.html"/>
+    <updated>2022-05-29T06:33:39.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="e5-调用api续订服务-microsoft-365-e5-renew-x" tabindex="-1"> E5 调用API续订服务：Microsoft 365 E5 Renew X</h1>
+<p>Microsoft 365 E5 Renew X是一款网页版的E5续订服务，其依赖网页浏览器呈现支持用户多端操作，完全将E5账户API调用托管在了服务器端因此用户无需电脑也可使用。</p>
+<h2 id="microsoft-365-e5-renew-x-由来" tabindex="-1"> Microsoft 365 E5 Renew X 由来</h2>
+<p>Microsoft 365 E5 Renew X为Microsoft 365 E5 Web的升级版，相对于旧版其增强了管理功能且更容易部署，API调用内核继承于续订桌面版软件Microsoft 365 E5 Renew Plus。</p>
+<h2 id="主要功能" tabindex="-1"> 主要功能</h2>
+<h3 id="用户端" tabindex="-1"> 用户端</h3>
+<ul>
+<li><strong>两种可选的调用权限</strong>：用户未登录作为守护程序调用(需要客户端密码)、程序以登录用户身份直接调用(需要账户密码)</li>
+<li><strong>API种类齐全</strong>：41/30个可选的Microsoft Graph REST API Beta中的API(未来可能会继续添加)</li>
+<li><strong>完全随机的API调用模式</strong>：从已选定的API序列中随机抽取一个或几个进行调用（个数和API随机）</li>
+<li><strong>完全随机的API调用时间间隔</strong>：随机区段1000s-2000s固定</li>
+<li><strong>完全随机的API内容(仅部分API支持)</strong>：发送邮件的内容随机 Onedirve上传文件的内容随机</li>
+<li><strong>邮件通知服务</strong>：支持设置通知邮箱，调用异常会通过邮件通知无需反复登录查看</li>
+</ul>
+<h3 id="部署端" tabindex="-1"> 部署端</h3>
+<ul>
+<li><strong>平台兼容性</strong>：使用Asp.Net Core 作为跨平台框架增适用于 <strong>Windows|Linux|MacOS x64|x86|ARM64|ARM</strong></li>
+<li><strong>灵活部署</strong>：支持<strong>开放站点部署</strong>和<strong>私享部署</strong>，私享部署不再强制要求配置Https和OAuth</li>
+<li><strong>无需数据库</strong>：不需要后台数据库支持，前后台一体化程序</li>
+<li><strong>用户后台管理</strong>：可修改用户的E5账户数量，以及封删管理</li>
+<li><strong>系统状态监视</strong>：系统占用率一目了然，可控的站点注册通道更容易控制系统用户数量</li>
+<li><strong>自定义页面</strong>：支持自定义HTML静态页面，可设置支付宝、微信收款码</li>
+<li><strong>显示ICP备案</strong>：支持ICP备案文字显示，可在国内备案建站</li>
+<li><strong>无人值守 运行自动暂停</strong>：可自动暂停有错误率过高的账号API调用</li>
+<li><strong>无人值守 自动恢复运行</strong>：可定期自动恢复全部账号的API调用，防止因微软网络原因触发大量账号停止API调用进而导致的账号续期失败</li>
+</ul>
+<h1 id="用户端使用教程-请勿开启账号的双重验证功能" tabindex="-1"> 用户端使用教程**(请勿开启账号的双重验证功能)**</h1>
+<h2 id="可用站点" tabindex="-1"> 可用站点</h2>
+<h3 id="主站" tabindex="-1"> 主站</h3>
+<p><a href="https://e5.sundayrx.net/" target="_blank" rel="noopener noreferrer"><strong>主站：https://e5.sundayrx.net（由 SundayRX 运营）(可登录不可注册)</strong></a></p>
+<p><a href="https://ms-e5-renew.leeskyler.top:11015/" target="_blank" rel="noopener noreferrer"><strong>分站：https://ms-e5-renew.leeskyler.top:11015（由 leeskyler 运营）(已关停)</strong></a></p>
+<p><a href="https://ms-e5-renew-3.eastern.moe/" target="_blank" rel="noopener noreferrer"><strong>分站：https://ms-e5-renew-3.eastern.moe（由 leeskyler 运营）(已关停)</strong></a></p>
+<h3 id="自建共享站点" tabindex="-1"> 自建共享站点</h3>
+<p><a href="https://ew.chirmyram.com/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://ew.chirmyram.com（由 七米蓝 运营）(可登录不可注册)</strong></a></p>
+<p><a href="https://e5.hm0420.cc/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://e5.hm0420.cc（由 小冰酱 运营）</strong></a></p>
+<p><a href="https://ms-e5.hm0420.cc/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://ms-e5.hm0420.cc（由 小冰酱 运营）</strong></a></p>
+<p><a href="https://e5.xzh.gs/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://e5.xzh.gs（由 XZH 运营）</strong></a></p>
+<p><a href="https://e5.tianli0.top/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://e5.tianli0.top（由 Tinali 运营）</strong></a></p>
+<p><a href="https://renew.lrize.xyz/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://renew.lrize.xyz（由 Lrize、 运营）</strong></a></p>
+<p><a href="https://e5zh.xyz/" target="_blank" rel="noopener noreferrer"><strong>自建共享站：https://e5zh.xyz（由 z 运营）</strong></a></p>
+<h2 id="_1-注册azure应用程序" tabindex="-1"> 1 注册Azure应用程序</h2>
+<h3 id="_1-1-应用注册" tabindex="-1"> 1.1 应用注册</h3>
+<ol>
+<li><a href="https://portal.azure.com/#home" target="_blank" rel="noopener noreferrer">点击登录 Azure</a>或<a href="https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade" target="_blank" rel="noopener noreferrer">点击直接进入Azure应用注册</a>，登录账号使用申请到的Microsoft 365 E5的<strong>管理员账户</strong>（账户名类似XXXX@YYYY.onmicrosoft.com格式）。
+2.登录完成后点击右上角的“门户”按钮进入Azure管理中心，在搜索栏内输入“应用注册”，点击进入<a href="https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade" target="_blank" rel="noopener noreferrer">（若应用注册搜索不到请点击此处直接进入）</a>。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618170032256-165380585664583.png" alt="图片" loading="lazy">
+3.单击“新注册”按钮
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061817051341-165380585814786.png" alt="图片" loading="lazy">
+4.配置应用 应用名称随意写、注意可访问性选项选择最后一项、重定向URL暂时不填 、完成后点击注册
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618170801323-165380585941389.png" alt="图片" loading="lazy"></li>
+</ol>
+<h3 id="_1-2-配置应用重定向url-身份验证" tabindex="-1"> 1.2 配置应用重定向URL（身份验证）</h3>
+<p>1.先点击“概述”，然后点击“添加重定向URL”，进入重定向URL配置界面，<strong>下图中的应用程序(客户端)ID即为&quot;客户端ID&quot;</strong>。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061817121972-165380586091892.png" alt="图片" loading="lazy">
+2.点击“添加平台”，再点击“移动和桌面应用程序”，
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171501396-165380586226995.png" alt="图片" loading="lazy">
+3.继续勾选中第一个URL，最后点击底部的“配置”，该URL为“https://login.microsoftonline.com/common/oauth2/nativeclient”也可手动添加。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171651338-165380586350298.png" alt="图片" loading="lazy">
+4.配置默认客户端类型将应用程序视为公共客户端 点击切换按钮为“是” ，最后点击“保存”按钮保存。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171850779-1653805864822101.png" alt="图片" loading="lazy"></p>
+<h2 id="_2-配置应用程序的api权限-重要" tabindex="-1"> 2 配置应用程序的API权限（重要）</h2>
+<p><strong>小白提示：建议选择“委托的权限(用户登录)”该权限类型，调用API较多，操作步骤较少简单粗暴，调用成功几率高</strong></p>
+<p>注册的应用程序API权限类型有两种，其主要区别如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>权限类型</th>
+<th><strong>委托的权限(用户登录)</strong></th>
+<th><strong>应用程序权限(非用户登录)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方释义</td>
+<td>应用程序必须以登录用户身份访问API</td>
+<td>应用程序在用户未登录的情况下作为后台服务或守护程序运行</td>
+</tr>
+<tr>
+<td>需要的信息</td>
+<td>账户名称+账户密码+应用程序(客户端)ID</td>
+<td>账户名称+客户端机密+应用程序(客户端)ID</td>
+</tr>
+<tr>
+<td>功能影响</td>
+<td>程序中所有API均可调用</td>
+<td>部分API权限受限无法调用(官方限制)</td>
+</tr>
+<tr>
+<td>API权限配置</td>
+<td>可由PC版程序自动配置添加API权限</td>
+<td>必须手动配置API权限</td>
+</tr>
+<tr>
+<td>显示颜色标识</td>
+<td>蓝色</td>
+<td>深青色</td>
+</tr>
+</tbody>
+</table>
+<p><strong>以下是登录或非登录所需要的权限列表</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201102171130141.png" alt="图片" loading="lazy"></p>
+<p>最后根据所选的API权限类型在：<strong>2.1 选择“委托的权限(用户登录)”类型的API</strong>或者<strong>2.2 选择“应用程序权限(非用户登录)”类型的API</strong>中选择性阅读。</p>
+<h3 id="_2-1-选择-委托的权限-用户登录-类型的api" tabindex="-1"> 2.1 选择“委托的权限(用户登录)”类型的API</h3>
+<h4 id="手动配置api权限" tabindex="-1"> 手动配置API权限</h4>
+<p>1.点击“API权限”-“添加权限”-“Microsoft Graph”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061819283823-1653805868573106.png" alt="图片" loading="lazy">
+2.选择“委托的权限”<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172538991-1653805869901109.png" alt="图片" loading="lazy">
+3.根据编辑页面中列出的API权限需求表（注意在程序中切换为&quot;<strong>登录</strong>“）来勾选所对应的API权限，全部选择完成后点击&quot;添加权限”。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201102171303292.png" alt="图片" loading="lazy">
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172627969-1653805874862114.png" alt="图片" loading="lazy">
+添加完成的效果如图
+<strong>如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用</strong>
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201112111140479.png" alt="图片" loading="lazy"></p>
+<p>4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“委托的权限(用户登录)”全部API所需要的权限）。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201112110505347.png" alt="图片" loading="lazy"></p>
+<h3 id="_2-2-选择-应用程序权限-非用户登录-类型的api" tabindex="-1"> 2.2 选择“应用程序权限(非用户登录)”类型的API</h3>
+<h4 id="_2-2-1-手动配置api权限" tabindex="-1"> 2.2.1 手动配置API权限</h4>
+<p>1.点击“API权限”-“添加权限”-“Microsoft Graph”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061819283823-1653805879510121.png" alt="图片" loading="lazy">
+2.选择“应用程序权限”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120027971-1653805882870124.png" alt="图片" loading="lazy">
+3.根据编辑页面中列出的API权限需求表（注意在程序中切换为&quot;<strong>非登录</strong>“）来勾选所对应的API权限，全部选择完成后点击&quot;添加权限”。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201102171349129.png" alt="图片" loading="lazy">
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172627969-1653805884862127.png" alt="图片" loading="lazy">
+添加完成的效果如图
+<strong>如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用</strong>
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120623311-1653805887894132.png" alt="图片" loading="lazy">
+4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“应用程序权限(非用户登录)”全部API所需要的权限）。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120818260-1653805889622135.png" alt="图片" loading="lazy"></p>
+<h4 id="_2-2-2-创建客户端密码" tabindex="-1"> 2.2.2 创建客户端密码</h4>
+<p>1.点击“证书密码”-“新客户端密码”-“24个月”-“添加”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210609101116972-1653805890998138.png" alt="图片" loading="lazy">
+2.点击“值”该列中的“复制”（不要复制&quot;ID&quot;列中的值），并立即将该密码保存至电脑，<strong>保存的值即为“客户端密码”</strong>， 注：该值必须立即保存，退出该页面后将永远无法查看。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020120711360840.jpeg" alt="图片" loading="lazy"></p>
+<h2 id="_3-将账号api调用托管至服务" tabindex="-1"> 3 将账号API调用托管至服务</h2>
+<h5 id="创建一个新的e5子账户-可选步骤" tabindex="-1"> 创建一个新的E5子账户(可选步骤)</h5>
+<p>登入E5管理员账户进入管理员界面，创建一个新的子账户，使用这个子账户登录程序调用API。
+为什么建议这样做：Microsoft 365 E5 Renew中的部分API包含了写操作，例如邮件和Onedrive的API，这些API在随机模式下会生成大量垃圾邮件和文件（虽然单独为此设立了一个文件夹），部分人可能会对此行为非常介意，而且程序频繁的读写可能会对您正常使用账户造成影响，因此不建议使用管理员账户登录。</p>
+<h3 id="_3-1-进入网站注册并登录账户" tabindex="-1"> 3.1 进入网站注册并登录账户</h3>
+<p>从一开始的可用站点，选择站点进入（记住无论使用任何人运营网站显示内容都是基本相同的）</p>
+<p>从两种登录中任选一个，这里不建议选择GitHub登录（GitHub的第三方登录很迷经常性崩溃）</p>
+<p>第一次登录账户系统会显示注册成功，然后再登录一次即可登录进入系统
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="请添加图片描述" loading="lazy"></p>
+<h3 id="_3-2-激活您的账户" tabindex="-1"> 3.2 激活您的账户</h3>
+<p>阅读并同意用户协议，点击激活账户
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16-1653805902079145.png" alt="请添加图片描述" loading="lazy"></p>
+<h3 id="_3-3-添加一个e5账户的运行配置信息" tabindex="-1"> 3.3 添加一个E5账户的运行配置信息</h3>
+<p>在成功登录系统后，页面会自动跳转到“主页”页面，在“账户详情”页面点击“添加运行账号”按钮，前往“账户运行配置”页面
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2375b23f6de74f5e9d9ff37bca1e7dcc.png" alt="请添加图片描述" loading="lazy"></p>
+<p>在账户运行配置页面中填写账户信息，且登录调用填写账户密码、非登录调用填写客户端密码，并选择自己选定的调用方式，注意调用方式不要选错了！！！ 最后点击“添加运行账号”按钮完成配置。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/eb5d982940a340719b4b5dbd1a46420c.png" alt="请添加图片描述" loading="lazy">
+由于前后台数据同步需要时间，任何添加账户或者修改账户配置信息的操作都不会立即被后台执行。</p>
+<p>返回用户页面查看账户信息中的“配置同步状态”，如果显示为“正在运行”表明配置已经上传至后台，修改账户配置成功。
+<strong>警示：配置成功了也要定期来看看自己的账户是否在正常运行（虽然有邮件通知服务），但也建议每月查看一次账户状态！！！</strong><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/3b2651537fee45088202efd02cad6d74.png" alt="请添加图片描述" loading="lazy"></p>
+<h3 id="_3-4-设置一个通知邮箱-可选" tabindex="-1"> 3.4 设置一个通知邮箱（可选）</h3>
+<p>在任何页面下 点击右上角“用户名-账户设置”，进入个人信息设置
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/8229363a593549bbb884960e65875673.png" alt="请添加图片描述" loading="lazy">
+记住你的UID，出现任何问题请使用这个UID与你所选站点的管理员沟通
+编辑你的邮箱 并点击保存
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/fea87de6e5774a319c4b4a2e818d3341.png" alt="请添加图片描述" loading="lazy"></p>
+<h1 id="部署端-请勿使用任何cookie缓存加速服务" tabindex="-1"> 部署端**(请勿使用任何Cookie缓存加速服务)**</h1>
+<h2 id="服务下载-作为站长务必注意查看主站中-关于-页面中的程序发布时间-及时更新服务程序" tabindex="-1"> 服务下载(作为站长务必注意查看<strong>主站</strong>中“<strong>关于</strong>”页面中的<strong>程序发布时间</strong>，及时更新服务程序)</h2>
+<h3 id="传统方式" tabindex="-1"> 传统方式</h3>
+<p><a href="https://sundayrx.lanzoui.com/aW09Lsss75g" target="_blank" rel="noopener noreferrer"><strong>下载服务程序源文件（https://sundayrx.lanzoui.com/aW09Lsss75g）</strong></a></p>
+<p><a href="https://docs-1.leeskyler.top/" target="_blank" rel="noopener noreferrer"><strong>参阅 Skyler的部署帮助文档（https://docs-1.leeskyler.top）</strong></a>
+<a href="https://www.gladtbam.top/posts/37680/" target="_blank" rel="noopener noreferrer"><strong>参阅 Gladtbam的部署帮助文档 （https://www.gladtbam.top/posts/37680）</strong></a></p>
+<h3 id="docker方式" tabindex="-1"> Docker方式</h3>
+<p><a href="https://blog.csdn.net/qq_40605167/article/details/122888580" target="_blank" rel="noopener noreferrer"><strong>参阅 韩韩的Docker版部署帮助文档（https://blog.csdn.net/qq_40605167/article/details/122888580）</strong></a>
+<a href="https://www.gladtbam.top/posts/22256/" target="_blank" rel="noopener noreferrer"><strong>参阅 Gladtbam的Docker版部署帮助文档（https://www.gladtbam.top/posts/22256/）</strong></a>
+<a href="https://www.bilibili.com/read/cv16338214" target="_blank" rel="noopener noreferrer"><strong>参阅 Curious的部署帮助文档 （https://www.bilibili.com/read/cv16338214）</strong></a></p>
+<h2 id="传统方式服务部署" tabindex="-1"> 传统方式服务部署</h2>
+<h3 id="安装运行环境" tabindex="-1"> 安装运行环境</h3>
+<p><em>以下示例可能不完全包含全部操作系统，但无论是哪种系统都要安装 <strong>Asp.Net Core 3.1 SDK</strong>支持包，服务程序运行依赖于这个包也只依赖这一个包，只要成功安装了<strong>Asp.Net Core 3.1 SDK</strong>支持包，服务程序就可以正常运行！</em>
+详情请参阅<a href="https://docs.microsoft.com/zh-cn/dotnet/core/install/" target="_blank" rel="noopener noreferrer">在 Windows、Linux 和 macOS 上安装 .NET</a></p>
+<h4 id="windows" tabindex="-1"> Windows</h4>
+<p>前往https://dotnet.microsoft.com/download/dotnet/3.1下载安装<strong>最新的Asp.Net Core 3.1 SDK</strong> 安装包</p>
+<h4 id="ubuntu" tabindex="-1"> Ubuntu</h4>
+<p>详情请参阅<a href="https://docs.microsoft.com/zh-cn/dotnet/core/install/linux-ubuntu" target="_blank" rel="noopener noreferrer">在 Ubuntu 上安装 .NET SDK 或 .NET 运行时</a></p>
+<p><strong>Ubuntu 21.04</strong></p>
+<div><pre><code><span>wget</span> https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+<span>sudo</span> dpkg -i packages-microsoft-prod.deb
+<span>rm</span> packages-microsoft-prod.deb
+<span>123</span>
+<span>sudo</span> <span>apt-get</span> update<span>;</span> <span>\</span>
+  <span>sudo</span> <span>apt-get</span> <span>install</span> -y apt-transport-https <span>&amp;&amp;</span> <span>\</span>
+  <span>sudo</span> <span>apt-get</span> update <span>&amp;&amp;</span> <span>\</span>
+  <span>sudo</span> <span>apt-get</span> <span>install</span> -y aspnetcore-runtime-3.1
+<span>1234</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="centos" tabindex="-1"> CentOS</h4>
+<p>详情请参阅<a href="https://docs.microsoft.com/zh-cn/dotnet/core/install/linux-centos" target="_blank" rel="noopener noreferrer">在 CentOS 上安装 .NET SDK 或 .NET 运行时</a></p>
+<p><strong>CentOS 8</strong>
+<code>sudo dnf install dotnet-sdk-3.1</code>
+<strong>CentOS 7</strong>
+<code>sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</code>
+<code>sudo yum install dotnet-sdk-3.1</code></p>
+<h4 id="macos" tabindex="-1"> MacOS</h4>
+<p>前往https://dotnet.microsoft.com/download/dotnet/3.1下载安装<strong>最新的Asp.Net Core 3.1 SDK</strong> 安装包</p>
+<h3 id="填写配置信息" tabindex="-1"> 填写配置信息</h3>
+<p>*<strong>站点拥有开放和私用两种模式，请根据自己的部署目的来选择对应的教程来阅读！*
+*配置文件是Deploy/Config.xml 务必打开并修改默认的管理员登录密码*</strong></p>
+<h4 id="开放站点" tabindex="-1"> 开放站点</h4>
+<p><em>开放站点必须使用全链路HTTPS，即便是使用了Nginx反向代理也必须设置HTTPS为启用状态</em></p>
+<p><strong>Configuration.ShareSite.Enable</strong>设置为true</p>
+<h5 id="https-ssl证书" tabindex="-1"> HTTPS SSL证书</h5>
+<h6 id="方式1-服务程序kestrel—-https-—外部internet" tabindex="-1"> 方式1：服务程序Kestrel—(HTTPS)—外部Internet</h6>
+<p><em>准备一个PFX格式的SSL证书文件，放置在Deploy文件夹中</em></p>
+<p><strong>Configuration.HTTPS.Enable</strong>设置为true
+<strong>Configuration.HTTPS.Certificate</strong>设置为PFX文件的名称带后缀名
+<strong>Configuration.HTTPS.Password</strong>设置为PFX文件的密码</p>
+<h6 id="方式2-服务程序kestrel—-https-localhost-—nginx-iis-apache—-https-外部访问域名-—外部internet" tabindex="-1"> 方式2：服务程序Kestrel—(HTTPS localhost)—Nginx/IIS/Apache—(HTTPS 外部访问域名)—外部Internet</h6>
+<p><em>反向代理服务器部分请自行配置</em></p>
+<p>执行下列两个命令 以创建localhsot HTTPS证书 该证书时效为1年
+<code>dotnet dev-certs https --clean</code>
+<code>dotnet dev-certs https --trust</code></p>
+<p><strong>Configuration.HTTPS.Enable</strong>设置为true
+<strong>Configuration.HTTPS.Certificate</strong>设置为空（什么都不要填）
+<strong>Configuration.HTTPS.Password</strong>设置为空（什么都不要填）</p>
+<h5 id="microsoft-oauth" tabindex="-1"> Microsoft OAuth</h5>
+<h5 id="github-oauth" tabindex="-1"> Github OAuth</h5>
+<h5 id="smtp邮件服务" tabindex="-1"> SMTP邮件服务</h5>
+<p><em>准备一个可以使用SMTP服务发信的邮箱</em></p>
+<p><strong>Configuration.ShareSite.SMTP.Email</strong>设置为 发件人邮箱地址
+<strong>Configuration.ShareSite.SMTP.Password</strong>设置为 邮箱密钥
+<strong>Configuration.ShareSite.SMTP.Host</strong>设置为 发件人邮箱的SMTP服务器地址 (以Outlook为例子是smtp.office365.com)</p>
+<h4 id="私用" tabindex="-1"> 私用</h4>
+<p><em>在私用模式下不用准备任何配置信息，填写好登录密码端口即可使用！</em></p>
+<h5 id="启用https-选配" tabindex="-1"> 启用HTTPS（选配）</h5>
+<p><em>若要启用HTTPS请在下面选择一种合适的方式来实现</em></p>
+<h6 id="方式1-服务程序kestrel—-https-—外部internet-1" tabindex="-1"> 方式1：服务程序Kestrel—(HTTPS)—外部Internet</h6>
+<p><em>准备一个PFX格式的SSL证书文件，放置在Deploy文件夹中</em></p>
+<p><strong>Configuration.HTTPS.Enable</strong>设置为true
+<strong>Configuration.HTTPS.Certificate</strong>设置为PFX文件的名称带后缀名
+<strong>Configuration.HTTPS.Password</strong>设置为PFX文件的密码</p>
+<h6 id="方式2-服务程序kestrel—-http-—nginx-iis-apache—-https-外部访问域名-—外部internet" tabindex="-1"> 方式2：服务程序Kestrel—(HTTP)—Nginx/IIS/Apache—(HTTPS 外部访问域名)—外部Internet</h6>
+<p><em>反向代理服务器部分请自行配置</em></p>
+<p><strong>Configuration.HTTPS.Enable</strong>设置为false</p>
+<h3 id="启动服务程序" tabindex="-1"> 启动服务程序</h3>
+<p>在任何系统下，打开命令行定位到程序目录 运行<code>dotnet Microsoft365_E5_Renew_X.dll</code>命令即可启动</p>
+<h3 id="管理员登录" tabindex="-1"> 管理员登录</h3>
+<h4 id="非oauth后台登录-开放或私享部署皆可用" tabindex="-1"> 非OAuth后台登录（开放或私享部署皆可用）</h4>
+<p>管理员登录路由 <code>/Admin/Login</code> 默认密码在配置文件Deploy/Config.xml中更改</p>
+<h4 id="oauth认证登录-仅开放部署可用" tabindex="-1"> OAuth认证登录（仅开放部署可用）</h4>
+<h5 id="设置管理员oauth登录的oauthid" tabindex="-1"> 设置管理员OAuth登录的OAuthID</h5>
+<p>使用想要关联的OAuth账号（Microsoft/Github）在任意站点登录/注册均可看到此账号的OAuthID,记录此ID</p>
+<p>通过管理员密码登录自己的站点：管理员功能-用户列表 找到管理员账户 点击“编辑”按钮填写记录的OAuthID 保存</p>
+<p>直接在主登录页面使用与管理员账户关联的OAuth账号登录即可</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="other"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-12T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
+  <entry>
+    <title type="html">E5 调用API续订程序：Microsoft 365 E5 Renew Plus</title>
+    <id>https://xlc520.github.io/other/Microsoft-365-E5-RenewPlus.html</id>
+    <link href="https://xlc520.github.io/other/Microsoft-365-E5-RenewPlus.html"/>
+    <updated>2022-05-29T06:33:31.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="e5-调用api续订程序-microsoft-365-e5-renew-plus" tabindex="-1"> E5 调用API续订程序：Microsoft 365 E5 Renew Plus</h1>
+<h2 id="microsoft-365-e5-renew-plus的由来" tabindex="-1"> Microsoft 365 E5 Renew Plus的由来</h2>
+<p>Microsoft 365 E5 Renew Plus为Microsoft 365 E5 Renew的升级版，其功能性，易用性，美观程度上都要强于旧版。</p>
+<h2 id="主要功能" tabindex="-1"> 主要功能</h2>
+<ul>
+<li><strong>支持开机自启动后台调用</strong>：使用简单方便，无需购买服务器部署，本地应用程序即开即用</li>
+<li><strong>两种可选的调用权限</strong>：用户未登录作为守护程序调用(需要客户端密码)、程序以登录用户身份直接调用(需要账户密码)</li>
+<li><strong>自动配置API权限</strong>：登录调用的API权限支持由程序自动配置</li>
+<li><strong>API种类齐全</strong>：43个可选的Microsoft Graph REST API Beta中的API(未来可能会继续添加)</li>
+<li><strong>完全随机的API选用模式</strong>：从已选定的API序列中随机抽取一个或几个进行调用（个数和API随机）</li>
+<li><strong>完全随机的API调用顺序</strong>：每轮API的调用先后顺序随机</li>
+<li><strong>完全随机的API内容(仅部分API支持)</strong>：POST写类型的API的上传内容随机</li>
+<li><strong>完全随机的API调用时间间隔</strong>：随机区段500s-86400s自定义</li>
+<li><strong>每日工作时间自定义</strong>：在日常工作时间进行调用，适用于从不关机重启的服务器设备</li>
+<li><strong>每周工作日自定义</strong>：在每周的工作日进行调用，适用于从不关机重启的服务器设备</li>
+<li><strong>运行智能暂停</strong>：防止因持续在错误配置下运行而导致的账户封禁</li>
+<li><strong>运行配置自动保存</strong>：可保存运行配置，无需反复设置</li>
+<li><strong>无限制账号个数</strong>：理论上允许无限制个数账号后台自动调用</li>
+<li><strong>支持自定义客户端密钥</strong>：允许非登录调用使用自定义密钥</li>
+<li><strong>自定义美化界面</strong>：支持自定义背景图片（半透明度以及毛玻璃效果）、亚克力背景</li>
+</ul>
+<h2 id="主界面" tabindex="-1"> 主界面</h2>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/b23cb7e4945747fca6e88b5c36e80e08.png" alt="图片" loading="lazy"></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/185cfc81a55746eb8d915e6f0923d1ca.png" alt="图片" loading="lazy"></p>
+<h2 id="运行结果查看" tabindex="-1"> 运行结果查看</h2>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210323150719810.png" alt="图片" loading="lazy"></p>
+<h1 id="入群须知" tabindex="-1"> <strong>入群须知</strong></h1>
+<ul>
+<li><strong>使用本系列产品只是增加E5续订概率，并不能保证100%续订成功</strong></li>
+<li><strong>续订操作有些许技术门槛，且需要具备一定的自学能力</strong></li>
+<li><strong>每个人的时间都是宝贵的，遇到问题先查阅<a href="https://sundayrx.coding.net/s/78f69c8a-8620-4d53-bad2-c4b365fed1a0" target="_blank" rel="noopener noreferrer">帮助文档</a>，实在无法解决时再发起提问(<a href="https://sundayrx.coding.net/s/78f69c8a-8620-4d53-bad2-c4b365fed1a0/4" target="_blank" rel="noopener noreferrer">提问的艺术</a>)</strong></li>
+</ul>
+<h4 id="qq交流群-254058945" tabindex="-1"> <strong>QQ交流群：254058945</strong></h4>
+<h4 id="tg交流群-https-t-me-ms365e5renew" tabindex="-1"> <strong>TG交流群：https://t.me/MS365E5Renew</strong></h4>
+<h1 id="软件下载" tabindex="-1"> 软件下载</h1>
+<h3 id="受支持的操作系统及运行环境安装" tabindex="-1"> 受支持的操作系统及运行环境安装</h3>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>版本</th>
+<th>CPU架构</th>
+<th>.NET 6.0 （必选）</th>
+<th>WebView 2（可选）</th>
+<th>补丁（必选）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows Client</td>
+<td>7 SP1(<a href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/windows-7-eos-faq/windows-7-extended-security-updates-faq" target="_blank" rel="noopener noreferrer">ESU</a>) 、8.1</td>
+<td>x64</td>
+<td><a href="https://dotnet.microsoft.com/download/dotnet/6.0/runtime" target="_blank" rel="noopener noreferrer">下载.Net 6.0 Desktop</a></td>
+<td><a href="https://go.microsoft.com/fwlink/p/?LinkId=2124703" target="_blank" rel="noopener noreferrer">下载WebView 2</a></td>
+<td><a href="https://blog.simplix.info/update7/" target="_blank" rel="noopener noreferrer">下载ESU</a></td>
+</tr>
+<tr>
+<td>Windows 10 Client</td>
+<td>Version 1607+</td>
+<td>Arm64、x64</td>
+<td><a href="https://dotnet.microsoft.com/download/dotnet/6.0/runtime" target="_blank" rel="noopener noreferrer">下载.Net 6.0 Desktop</a></td>
+<td><a href="https://go.microsoft.com/fwlink/p/?LinkId=2124703" target="_blank" rel="noopener noreferrer">下载WebView 2</a></td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>Windows 11 Client</td>
+<td>无限制</td>
+<td>Arm64、x64</td>
+<td><a href="https://dotnet.microsoft.com/download/dotnet/6.0/runtime" target="_blank" rel="noopener noreferrer">下载.Net 6.0 Desktop</a></td>
+<td>不需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>Windows Server</td>
+<td>Version 2012+</td>
+<td>x64</td>
+<td><a href="https://dotnet.microsoft.com/download/dotnet/6.0/runtime" target="_blank" rel="noopener noreferrer">下载.Net 6.0 Desktop</a></td>
+<td><a href="https://go.microsoft.com/fwlink/p/?LinkId=2124703" target="_blank" rel="noopener noreferrer">下载WebView 2</a></td>
+<td>不需要</td>
+</tr>
+</tbody>
+</table>
+<h3 id="各版本下载地址-建议添加白名单运行" tabindex="-1"> 各版本下载地址（建议添加白名单运行）</h3>
+<table>
+<thead>
+<tr>
+<th>软件版本</th>
+<th>文件说明</th>
+<th>LanZou</th>
+<th>OneDrive</th>
+<th>杀软报告</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>包含框架(推荐)</strong></td>
+<td>无需额外安装运行环境，可直接运行</td>
+<td><a href="https://sundayrx.lanzouq.com/2R2AByh83333" target="_blank" rel="noopener noreferrer"><strong>下载</strong></a></td>
+<td><a href="https://sundayrx-my.sharepoint.com/:u:/g/personal/api1_sundayrx_onmicrosoft_com/EbjsV4mOxBlBoE39mBxFpqsBk51BF4y_T4Cs0OB4hV7OsQ?e=HGIlhE" target="_blank" rel="noopener noreferrer">下载</a></td>
+<td><a href="https://www.virustotal.com/gui/file/80e435ef79dbd3869e00d5515c4240237d40c598cd50519fd97184a78889512f" target="_blank" rel="noopener noreferrer">VirusTotal</a></td>
+</tr>
+<tr>
+<td>普通版本</td>
+<td>需要安装 .NET 6 Desktop Runtime x64</td>
+<td><a href="https://sundayrx.lanzoui.com/vqTrXlR5LrWjP3F" target="_blank" rel="noopener noreferrer">下载</a></td>
+<td><a href="https://sundayrx-my.sharepoint.com/:u:/g/personal/api1_sundayrx_onmicrosoft_com/EbI_I-ohJ4BCuK821xnIoz0BTUBFHPZs3whXbVW06YLPfQ?e=vPozqH" target="_blank" rel="noopener noreferrer">下载</a></td>
+<td><a href="https://www.virustotal.com/gui/file/80e435ef79dbd3869e00d5515c4240237d40c598cd50519fd97184a78889512f" target="_blank" rel="noopener noreferrer">VirusTotal</a></td>
+</tr>
+<tr>
+<td>历史版本(弃用)</td>
+<td>更兼容Windows 7，已停止更新</td>
+<td><a href="https://sundayrx.lanzouq.com/2R2AByh8333" target="_blank" rel="noopener noreferrer">下载</a></td>
+<td><a href="https://sundayrx-my.sharepoint.com/:u:/g/personal/api1_sundayrx_onmicrosoft_com/EayqKNMm9IFMgSVVcNtTWJABAnZrViM3cHrthqP6VG6c2w?e=v9Zetz" target="_blank" rel="noopener noreferrer">下载</a></td>
+<td><a href="https://www.virustotal.com/gui/file/80e435ef79dbd3869e00d5515c4240237d40c598cd50519fd97184a78889512f" target="_blank" rel="noopener noreferrer">VirusTotal</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="使用教程-请勿开启账号的双重验证功能" tabindex="-1"> 使用教程**(请勿开启账号的双重验证功能)**</h1>
+<h2 id="_0-如何导入旧版本程序中的账号信息-老用户升级用-新用户请无视" tabindex="-1"> 0 如何导入旧版本程序中的账号信息？（老用户升级用 新用户请无视）</h2>
+<h3 id="_0-1-复制旧版本程序账户信息" tabindex="-1"> 0.1 复制旧版本程序账户信息</h3>
+<p>打开旧版本程序根目录下的Account.txt文件，依照每行复制一个账号信息（不支持多行识别）。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210323143621396.png" alt="图片" loading="lazy"></p>
+<h3 id="_0-2-导入账户信息到新版本程序中" tabindex="-1"> 0.2 导入账户信息到新版本程序中</h3>
+<p>打开新版本程序点击“开始运行”-“添加账号”，在弹出的“添加账号”窗口中找到右上角的剪切板图标，点击后程序会自动识别复制的账号信息，如果复制的内容没有错误程序会自动识别调用类型并填充所有空白项，检查无误后单击“确定”按钮完成一个账号信息的导入。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210323143246326.png" alt="图片" loading="lazy"></p>
+<h2 id="_1-注册azure应用程序" tabindex="-1"> 1 注册Azure应用程序</h2>
+<h3 id="_1-1-应用注册" tabindex="-1"> 1.1 应用注册</h3>
+<ol>
+<li><a href="https://portal.azure.com/#home" target="_blank" rel="noopener noreferrer">点击登录 Azure</a>或<a href="https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade" target="_blank" rel="noopener noreferrer">点击直接进入Azure应用注册</a>，登录账号使用申请到的Microsoft 365 E5的<strong>管理员账户</strong>（账户名类似XXXX@YYYY.onmicrosoft.com格式）。
+2.登录完成后点击右上角的“门户”按钮进入Azure管理中心，在搜索栏内输入“应用注册”，点击进入<a href="https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade" target="_blank" rel="noopener noreferrer">（若应用注册搜索不到请点击此处直接进入）</a>。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618170032256.png" alt="图片" loading="lazy">
+3.单击“新注册”按钮
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061817051341.png" alt="图片" loading="lazy">
+4.配置应用 应用名称随意写、注意可访问性选项选择最后一项、重定向URL暂时不填 、完成后点击注册
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618170801323.png" alt="图片" loading="lazy"></li>
+</ol>
+<h3 id="_1-2-配置应用重定向url-身份验证" tabindex="-1"> 1.2 配置应用重定向URL（身份验证）</h3>
+<p>1.先点击“概述”，然后点击“添加重定向URL”，进入重定向URL配置界面，<strong>下图中的应用程序(客户端)ID即为&quot;客户端ID&quot;</strong>。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061817121972.png" alt="图片" loading="lazy">
+2.点击“添加平台”，再点击“移动和桌面应用程序”，
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171501396.png" alt="图片" loading="lazy">
+3.继续勾选中第一个URL，最后点击底部的“配置”，该URL为“https://login.microsoftonline.com/common/oauth2/nativeclient”也可手动添加。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171651338.png" alt="图片" loading="lazy">
+4.配置默认客户端类型将应用程序视为公共客户端 点击切换按钮为“是” ，最后点击“保存”按钮保存。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618171850779.png" alt="图片" loading="lazy"></p>
+<h2 id="_2-配置应用程序的api权限-重要" tabindex="-1"> 2 配置应用程序的API权限（重要）</h2>
+<p><strong>小白提示：建议选择“委托的权限(用户登录)”该权限类型，调用API较多，操作步骤较少简单粗暴，调用成功几率高</strong></p>
+<p>注册的应用程序API权限类型有两种，其主要区别如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>权限类型</th>
+<th><strong>委托的权限(用户登录)</strong></th>
+<th><strong>应用程序权限(非用户登录)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方释义</td>
+<td>应用程序必须以登录用户身份访问API</td>
+<td>应用程序在用户未登录的情况下作为后台服务或守护程序运行</td>
+</tr>
+<tr>
+<td>需要的信息</td>
+<td>账户名称+账户密码+应用程序(客户端)ID</td>
+<td>账户名称+客户端机密+应用程序(客户端)ID</td>
+</tr>
+<tr>
+<td>功能影响</td>
+<td>程序中所有API均可调用</td>
+<td>部分API权限受限无法调用(官方限制)</td>
+</tr>
+<tr>
+<td>API权限配置</td>
+<td>可由程序自动配置添加API权限</td>
+<td>必须手动配置API权限</td>
+</tr>
+<tr>
+<td>程序颜色标识</td>
+<td>蓝色</td>
+<td>深青色</td>
+</tr>
+</tbody>
+</table>
+<p>根据所选的API权限类型在：<strong>2.1 选择“委托的权限(用户登录)”类型的API</strong>或者<strong>2.2 选择“应用程序权限(非用户登录)”类型的API</strong>中选择性阅读。</p>
+<h3 id="_2-1-选择-委托的权限-用户登录-类型的api" tabindex="-1"> 2.1 选择“委托的权限(用户登录)”类型的API</h3>
+<h4 id="_2-1-1-使用程序自动请求配置api权限" tabindex="-1"> 2.1.1 使用程序自动请求配置API权限</h4>
+<p>1.点击“添加账号”，API调用方式选择“登陆调用”，正确填写“MS365 E5账号”和“应用程序（客户端）ID”后点击“启动自动授权”。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210308150608437.png" alt="图片" loading="lazy"></p>
+<p>2.在弹出的登陆页面中输入你的管理员账户名和密码登录（<strong>该账户必须为全局管理员账户且拥有该客户端ID的控制权限</strong>），登录成功时弹出“请求征得许可界面”，滚动到页面最底部勾选“代表组织同意”，最后点击“接受”。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200628135742984.png" alt="图片" loading="lazy">
+3.判断是否添加API权限成功：首先程序提示授权成功，其次用管理员账户登录Azure查看应用的API权限，发现所有需求的权限全部添加或可以成功调用均视为已添加成功。
+ng)
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210323142238814.png" alt="图片" loading="lazy"></p>
+<h4 id="_2-1-2-手动配置api权限" tabindex="-1"> 2.1.2 手动配置API权限</h4>
+<p>1.点击“API权限”-“添加权限”-“Microsoft Graph”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061819283823.png" alt="图片" loading="lazy">
+2.选择“委托的权限”<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172538991.png" alt="图片" loading="lazy">
+3.根据下方列出的API权限需求表来勾选所对应的API权限，全部选择完成后点击&quot;添加权限&quot;。</p>
+<p><strong>BookingsAppointment.ReadWrite.All; Calendars.Read; Contacts.Read; Directory.Read.All;
+Files.Read.All; Files.ReadWrite.All; Group.Read.All; Mail.Read; Mail.Send; MailboxSettings.Read;
+Notes.Read.All; People.Read.All; Presence.Read.All; Sites.Read.All; Tasks.ReadWrite; User.Read.All;</strong></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172627969.png" alt="图片" loading="lazy">
+添加完成的效果如图
+<strong>如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用</strong>
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201112111140479.png" alt="图片" loading="lazy">
+4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“委托的权限(用户登录)”全部API所需要的权限)。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201112110505347.png" alt="图片" loading="lazy"></p>
+<h3 id="_2-2-选择-应用程序权限-非用户登录-类型的api" tabindex="-1"> 2.2 选择“应用程序权限(非用户登录)”类型的API</h3>
+<h4 id="_2-2-1-手动配置api权限" tabindex="-1"> 2.2.1 手动配置API权限</h4>
+<p>1.点击“API权限”-“添加权限”-“Microsoft Graph”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020061819283823-165380581365141.png" alt="图片" loading="lazy">
+2.选择“应用程序权限”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120027971.png" alt="图片" loading="lazy">
+3.根据程序中列出的API权限需求表来勾选所对应的API权限，全部选择完成后点击&quot;添加权限&quot;。
+<strong>Calendars.Read; Contacts.Read; Directory.Read.All; Files.Read.All; Files.ReadWrite.All; Mail.Read;
+Mail.Send; MailboxSettings.Read; Notes.Read.All; Sites.Read.All; User.Read.All;</strong>
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200618172627969-165380581693146.png" alt="图片" loading="lazy">
+添加完成的效果如图
+<strong>如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用</strong>
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120623311.png" alt="图片" loading="lazy">
+4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“应用程序权限(非用户登录)”全部API所需要的权限）。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200801120818260.png" alt="图片" loading="lazy"></p>
+<h4 id="_2-2-2-创建客户端密码" tabindex="-1"> 2.2.2 创建客户端密码</h4>
+<p>1.点击“证书密码”-“新客户端密码”-“24个月”-“添加”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210609101116972.png" alt="图片" loading="lazy"></p>
+<p>2.点击“值”该列中的“复制”（不要复制&quot;ID&quot;列中的值），并立即将该密码保存至电脑，<strong>保存的值即为“客户端密码”</strong>， 注：该值必须立即保存，退出该页面后将永远无法查看。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020120711360840.jpeg" alt="图片" loading="lazy"></p>
+<h2 id="_3-使用程序进行api调用" tabindex="-1"> 3 使用程序进行API调用</h2>
+<h5 id="创建一个新的e5子账户-可选步骤" tabindex="-1"> 创建一个新的E5子账户(可选步骤)</h5>
+<p>登入E5管理员账户进入管理员界面，创建一个新的子账户，使用这个子账户登录程序调用API。
+为什么建议这样做：Microsoft 365 E5 Renew Plus中的部分API包含了写操作，例如Onedrive的API，这些API在随机模式下会生成大量垃圾邮件和文件（虽然单独为此设立了一个文件夹），部分人可能会对此行为非常介意，而且程序频繁的读写可能会对您正常使用账户造成影响，因此不建议使用管理员账户登录。</p>
+<h3 id="_3-1-添加一个账户" tabindex="-1"> 3.1 添加一个账户</h3>
+<p>点击“开始运行”-“添加账号”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/a4451a28afdb4b01b18f566feaf07759.png" alt="图片" loading="lazy"></p>
+<p>这里可以切换API调用方式但也需要更改对应的填写内容</p>
+<p>登录调用方式填写
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210307154000125.png" alt="图片" loading="lazy">
+非登录调用方式填写
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210307154255163.png" alt="图片" loading="lazy"></p>
+<p>最后点击确定
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/202103071542145.png" alt="图片" loading="lazy"></p>
+<h3 id="_3-2-开始运行" tabindex="-1"> 3.2 开始运行</h3>
+<p>点击“开始运行”
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/60b549fee8464ba08722d38b4cb999c0.png" alt="图片" loading="lazy"></p>
+<h1 id="写在最后面" tabindex="-1"> 写在最后面</h1>
+<h2 id="关闭e5账户登录双重验证" tabindex="-1"> 关闭E5账户登录双重验证</h2>
+<p><a href="https://account.activedirectory.windowsazure.com/UserManagement/MultifactorVerification.aspx" target="_blank" rel="noopener noreferrer">点击进入Office 365 E5账户多重身份验证管理</a>，按照下图配置即可关闭E5账户登录的双重验证。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210519091511446.png" alt="图片" loading="lazy">
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210519091736252.png" alt="图片" loading="lazy"></p>
+<h2 id="关闭azure中api调用的双重验证" tabindex="-1"> 关闭Azure中API调用的双重验证</h2>
+<p><a href="https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview" target="_blank" rel="noopener noreferrer">点击进入Azure Active Directory管理中心</a>，按照下图配置即可关闭Azure中API调用的双重验证。
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201010153543698.png" alt="图片" loading="lazy"></p>
+<h2 id="查询续订剩余天数" tabindex="-1"> 查询续订剩余天数</h2>
+<p><a href="https://developer.microsoft.com/zh-cn/microsoft-365/profile" target="_blank" rel="noopener noreferrer">点击查询续订剩余天数(使用申请E5账号的账户登录)</a></p>
+<h2 id="关于续订" tabindex="-1"> 关于续订</h2>
+<p>E5续订执行是微软统一的具有一定时间周期的续订，如果你的E5订阅剩余天数少于等于30天、并收到了未检测到开发活动的警告邮件且仪表盘显示标红文字“此订阅处于非活动状态且即将过期”，请不要慌张。根据微软客服官方说法是：“订阅只有在剩余最后1天才给续期”，然而根据众多E5账号的续订情况来统计，大部分账号是在少于30天续期的，极少欧洲人是在大于30天的时候续期。</p>
+<p>本人E5账户收到过两次未活跃警告，微软客服解释说：这种警告邮件属于系统自动发送的(邮件会在剩余第30天的时候发送)，无需理会它，至于出现文字标红文字“此订阅处于非活动状态且即将过期”，也为系统自动提示，只要保证仪表盘上的文字标注为“<strong>可续订</strong> E5的订阅”就可以了，即便是真的过期了没有续上也是可以从仪表盘申诉的。</p>
+<h3 id="仪表盘变化" tabindex="-1"> 仪表盘变化</h3>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2020082317495235.png" alt="图片" loading="lazy">
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129090340925.png" alt="图片" loading="lazy"></p>
+<h3 id="续订邮件" tabindex="-1"> 续订邮件</h3>
+<p>第一次续订
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200820125542472.jpeg" alt="图片" loading="lazy">
+第二次续订
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20201031134336350.png" alt="图片" loading="lazy"></p>
+<h3 id="警告邮件" tabindex="-1"> 警告邮件</h3>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20200820125531157.jpeg" alt="图片" loading="lazy"></p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="other"/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-12T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">快速排序</title>
     <id>https://xlc520.github.io/algorithm/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html</id>
@@ -24885,553 +25431,6 @@ html<span>=</span><span>[[Please go away~~]]</span> –警告内容<span>,</span
       <name>xlc520</name>
     </contributor>
     <published>2022-01-10T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">安装NodeJS-Maven-Mysql</title>
-    <id>https://xlc520.github.io/linux/NodeJS-Maven-Mysql.html</id>
-    <link href="https://xlc520.github.io/linux/NodeJS-Maven-Mysql.html"/>
-    <updated>2022-04-18T09:29:07.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="安装nodejs-maven-mysql" tabindex="-1"> 安装NodeJS-Maven-Mysql</h1>
-<h2 id="安装nodejs" tabindex="-1"> 安装NodeJS</h2>
-<p>litemall的管理端和用户端的前端界面是由Vue.js开发，编译这两部分的时候需要用到NodeJS环境，以下操作将安装一个NodeJS环境。</p>
-<p>1.  从淘宝镜像下载NodeJS的安装包。</p>
-<div><pre><code>wget https://npm.taobao.org/mirrors/node/v12.4.0/node-v12.4.0-linux-x64.tar.xz
-</code></pre><div aria-hidden="true"><div></div></div></div><p>2.  将下载的安装包解压到/usr/local/目录。</p>
-<div><pre><code>tar -xvf node-v12.4.0-linux-x64.tar.xz -C /usr/local/
-</code></pre><div aria-hidden="true"><div></div></div></div><p>3.  将NodeJS安装目录重命名。</p>
-<div><pre><code>mv /usr/local/node-v12.4.0-linux-x64/ /usr/local/node
-</code></pre><div aria-hidden="true"><div></div></div></div><p>4.  将NodeJS的可执行文件目录加入到系统环境变量中，并使用source命令使配置文件立即生效。</p>
-<div><pre><code>echo "export PATH=$PATH:/usr/local/node/bin" >> /etc/profile
-source /etc/profile
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>5.   安装淘宝cnpm镜像。</p>
-<div><pre><code>npm install cnpm -g --registry=https://registry.npm.taobao.org
-</code></pre><div aria-hidden="true"><div></div></div></div><p>6.  安装cross-env。</p>
-<div><pre><code>cnpm install -g cross-env
-</code></pre><div aria-hidden="true"><div></div></div></div><h2 id="安装maven" tabindex="-1"> 安装Maven</h2>
-<ol>
-<li>安装OpenJDK1.8，litemall要求JDK版本1.8以上</li>
-</ol>
-<div><pre><code>yum -y install java-1.8.0-openjdk-devel.x86_64
-</code></pre><div aria-hidden="true"><div></div></div></div><ol start="2">
-<li>下载Maven安装包。</li>
-</ol>
-<div><pre><code>wget --no-check-certificate https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-</code></pre><div aria-hidden="true"><div></div></div></div><ol start="3">
-<li>将下载的安装包解压到/usr/local/目录，并将安装目录重命名。</li>
-</ol>
-<div><pre><code>tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /usr/local/
-mv /usr/local/apache-maven-3.6.3/ /usr/local/maven
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><ol start="4">
-<li>将maven的可执行文件目录加入到系统环境变量中，并使用 source 命令使/etc/profile文件中的内容立即生效。</li>
-</ol>
-<div><pre><code>echo "export PATH=$PATH:/usr/local/maven/bin" >> /etc/profile
-source /etc/profile
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><ol start="5">
-<li>执行以下命令打开镜像仓库配置文件，添加阿里云镜像仓库配置。</li>
-</ol>
-<div><pre><code>vim /usr/local/maven/conf/settings.xml
-</code></pre><div aria-hidden="true"><div></div></div></div><p>进入Vim编辑器页面后输入 <code>:/mirrors</code>，搜索并跳转到 <code>&lt;mirrors&gt;</code>标签的位置。
-按下n键跳转到第二个没有被注释的标签位置。
-按下o键，另起一行进行编辑，粘贴以下内容。</p>
-<div><pre><code><span>&lt;</span>mirror<span>></span>
-       <span>&lt;</span>id<span>></span>nexus-aliyun<span>&lt;</span>/id<span>></span>
-       <span>&lt;</span>mirrorOf<span>></span>central<span>&lt;</span>/mirrorOf<span>></span>
-       <span>&lt;</span>name<span>></span>Nexus aliyun<span>&lt;</span>/name<span>></span>
-       <span>&lt;</span>url<span>></span>http://maven.aliyun.com/nexus/content/groups/public<span>&lt;</span>/url<span>></span>
-<span>&lt;</span>/mirror<span>></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>按下ECS退出编辑模式，输入:wq保存并退出Vim编辑器。</p>
-<p>经过自己测试，大部分是在最后一个搜索</p>
-<p>其他源：</p>
-<div><pre><code><span><span><span>&lt;</span>mirrors</span><span>></span></span>
-    <span><span><span>&lt;</span>mirror</span><span>></span></span>
-      <span><span><span>&lt;</span>id</span><span>></span></span>aliyunmaven<span><span><span>&lt;/</span>id</span><span>></span></span>
-      <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>*<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span>
-      <span><span><span>&lt;</span>name</span><span>></span></span>阿里云公共仓库<span><span><span>&lt;/</span>name</span><span>></span></span>
-      <span><span><span>&lt;</span>url</span><span>></span></span>https://maven.aliyun.com/repository/public<span><span><span>&lt;/</span>url</span><span>></span></span>
-    <span><span><span>&lt;/</span>mirror</span><span>></span></span> 
-    <span><span><span>&lt;</span>mirror</span><span>></span></span>
-      <span><span><span>&lt;</span>id</span><span>></span></span>nexus-aliyun<span><span><span>&lt;/</span>id</span><span>></span></span>
-      <span><span><span>&lt;</span>name</span><span>></span></span>Nexus aliyun<span><span><span>&lt;/</span>name</span><span>></span></span>
-      <span><span><span>&lt;</span>url</span><span>></span></span>http://maven.aliyun.com/nexus/content/groups/public/<span><span><span>&lt;/</span>url</span><span>></span></span> 
-      <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>*<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span> 
-   <span><span><span>&lt;/</span>mirror</span><span>></span></span>
-    <span><span><span>&lt;</span>mirror</span><span>></span></span>
-        <span><span><span>&lt;</span>id</span><span>></span></span>nexus-tencentyun<span><span><span>&lt;/</span>id</span><span>></span></span>
-        <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>*<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span>
-        <span><span><span>&lt;</span>name</span><span>></span></span>Nexus tencentyun<span><span><span>&lt;/</span>name</span><span>></span></span>
-        <span><span><span>&lt;</span>url</span><span>></span></span>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/<span><span><span>&lt;/</span>url</span><span>></span></span>
-    <span><span><span>&lt;/</span>mirror</span><span>></span></span> 
-    <span><span><span>&lt;</span>mirror</span><span>></span></span>
-        <span><span><span>&lt;</span>id</span><span>></span></span>huaweicloud<span><span><span>&lt;/</span>id</span><span>></span></span>
-        <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>*<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span>
-        <span><span><span>&lt;</span>name</span><span>></span></span>华为云<span><span><span>&lt;/</span>name</span><span>></span></span>
-        <span><span><span>&lt;</span>url</span><span>></span></span>https://repo.huaweicloud.com/repository/maven/<span><span><span>&lt;/</span>url</span><span>></span></span>
-    <span><span><span>&lt;/</span>mirror</span><span>></span></span>
-    <span>&lt;!-- JBoss的仓库 --></span>
-    <span><span><span>&lt;</span>mirror</span><span>></span></span> 
-      <span><span><span>&lt;</span>id</span><span>></span></span>jboss-public-repository-group<span><span><span>&lt;/</span>id</span><span>></span></span> 
-      <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>central<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span> 
-      <span><span><span>&lt;</span>name</span><span>></span></span>JBoss Public Repository Group<span><span><span>&lt;/</span>name</span><span>></span></span> 
-      <span><span><span>&lt;</span>url</span><span>></span></span>http://repository.jboss.org/nexus/content/groups/public<span><span><span>&lt;/</span>url</span><span>></span></span> 
-    <span><span><span>&lt;/</span>mirror</span><span>></span></span>
-    <span>&lt;!-- 剩下就是国外的了，maven官方运维的2号仓库 --></span>
-    <span><span><span>&lt;</span>mirror</span><span>></span></span> 
-      <span><span><span>&lt;</span>id</span><span>></span></span>repo2<span><span><span>&lt;/</span>id</span><span>></span></span> 
-      <span><span><span>&lt;</span>name</span><span>></span></span>Mirror from Maven Repo2<span><span><span>&lt;/</span>name</span><span>></span></span> 
-      <span><span><span>&lt;</span>url</span><span>></span></span>http://repo2.maven.org/maven2/<span><span><span>&lt;/</span>url</span><span>></span></span> 
-      <span><span><span>&lt;</span>mirrorOf</span><span>></span></span>central<span><span><span>&lt;/</span>mirrorOf</span><span>></span></span> 
-    <span><span><span>&lt;/</span>mirror</span><span>></span></span>
- <span><span><span>&lt;/</span>mirrors</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="安装mysql" tabindex="-1"> 安装MySQL</h2>
-<p>1.  下载安装MySQL的Yum源。</p>
-<div><pre><code>wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
-yum -y install mysql57-community-release-el7-10.noarch.rpm
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>2.  安装mysql-server。</p>
-<div><pre><code>yum -y install mysql-community-server
-</code></pre><div aria-hidden="true"><div></div></div></div><p>3.  启动mysql-server。</p>
-<div><pre><code>systemctl start mysqld.service
-</code></pre><div aria-hidden="true"><div></div></div></div><p>4.  修改默认密码。 
-a. 查询root密码。</p>
-<div><pre><code>grep "password" /var/log/mysqld.log
-</code></pre><div aria-hidden="true"><div></div></div></div><p>命令输出如下所示。
-
-b. 使用查询到的密码登录到mysql。</p>
-<div><pre><code>mysql -uroot -p
-</code></pre><div aria-hidden="true"><div></div></div></div><p>命令输出如下所示。
-
-c. 修改密码安全策略为低（只校验密码长度，至少8位）。</p>
-<div><pre><code>set global validate_password_policy=0;
-</code></pre><div aria-hidden="true"><div></div></div></div><p>d.  修改密码。</p>
-<div><pre><code>alter user root@'localhost' identified by '12345678';
-</code></pre><div aria-hidden="true"><div></div></div></div><p>e.  授予root用户远程管理权限。</p>
-<div><pre><code>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '12345678';
-</code></pre><div aria-hidden="true"><div></div></div></div><p>f.  退出MySQL命令行。</p>
-<div><pre><code>quit
-</code></pre><div aria-hidden="true"><div></div></div></div><p>初始化数据库
-参考以下步骤将商城项目的初始数据导入到数据库中。请将下面命令中的 12345678修改为您设置的数据库密码。
-1.  创建数据库和用户。</p>
-<div><pre><code>cd litemall &amp;&amp; mysql -uroot -p12345678 &lt; litemall-db/sql/litemall_schema.sql
-</code></pre><div aria-hidden="true"><div></div></div></div><p>2.  初始化数据库表结构。</p>
-<div><pre><code>mysql -uroot -p12345678 litemall &lt; litemall-db/sql/litemall_table.sql
-</code></pre><div aria-hidden="true"><div></div></div></div><p>3.  插入测试数据。</p>
-<div><pre><code>mysql -uroot -p12345678 litemall &lt; litemall-db/sql/litemall_data.sql
-</code></pre><div aria-hidden="true"><div></div></div></div>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="linux"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-01-10T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">Podman开源的容器</title>
-    <id>https://xlc520.github.io/linux/Podman%E5%BC%80%E6%BA%90%E7%9A%84%E5%AE%B9%E5%99%A8.html</id>
-    <link href="https://xlc520.github.io/linux/Podman%E5%BC%80%E6%BA%90%E7%9A%84%E5%AE%B9%E5%99%A8.html"/>
-    <updated>2022-03-20T06:45:22.000Z</updated>
-    <summary type="html">Docker 大势已去，Podman 即将崛起</summary>
-    <content type="html"><![CDATA[<p><img src="https://mmbiz.qpic.cn/mmbiz_png/GjuWRiaNxhnQ7UdGu7GkFW1JTLG84Sbke4nPJmv0419zZF8UBbuvqNQc9PscMEOQUf9Q11xX4no3LKadzfhNZoA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>来源：http://t-t.ink/0V26K</p>
-<h3 id="什么是podman" tabindex="-1"> 什么是Podman？</h3>
-<p>Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。Podman 提供与 Docker 非常相似的功能。正如前面提到的那样，它不需要在你的系统上运行任何守护进程，并且它也可以在没有 root 权限的情况下运行。</p>
-<p>Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像。Podman 提供了一个与 Docker 兼容的命令行前端来管理 Docker 镜像。</p>
-<p>Podman 官网地址：https://podman.io/</p>
-<h4 id="「podman和docker的主要区别是什么-」" tabindex="-1"> <strong>「Podman和Docker的主要区别是什么？」</strong></h4>
-<ul>
-<li>dockers在实现CRI的时候，它需要一个守护进程，其次需要以root运行，因此这也带来了安全隐患。</li>
-<li>podman不需要守护程序，也不需要root用户运行，从逻辑架构上，比docker更加合理。</li>
-<li>在docker的运行体系中，需要多个daemon才能调用到OCI的实现RunC。</li>
-<li>在容器管理的链路中，Docker Engine的实现就是dockerd</li>
-<li>daemon，它在linux中需要以root运行，dockerd调用containerd，containerd调用containerd-shim，然后才能调用runC。顾名思义shim起的作用也就是“垫片”，避免父进程退出影响容器的运训</li>
-<li>podman直接调用OCI,runtime（runC），通过common作为容器进程的管理工具，但不需要dockerd这种以root身份运行的守护进程。(<a href="http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&amp;mid=2247499357&amp;idx=1&amp;sn=77697f0fbec449d80e58cafbfb1f7eb4&amp;chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer">点击下载2021年最新阿里p7面试题</a>教程)</li>
-<li>在podman体系中，有个称之为common的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common的父则通常是1号进程。podman中的common其实相当于docker体系中的containerd-shim。</li>
-</ul>
-<p>图中所体现的事情是，podman不需要守护进程，而dorker需要守护进程。在这个图的示意中，dorcker的containerd-shim与podman的common被归在Container一层。</p>
-<h4 id="「podman的使用与docker有什么区别-」" tabindex="-1"> <strong>「Podman的使用与docker有什么区别？」</strong></h4>
-<p>podman的定位也是与docker兼容，因此在使用上面尽量靠近docker。在使用方面，可以分成两个方面来说，一是系统构建者的角度，二是使用者的角度。</p>
-<p>在系统构建者方面，用podman的默认软件，与docker的区别不大，只是在进程模型、进程关系方面有所区别。如果习惯了docker几个关联进程的调试方法，在podman中则需要适应。可以通过pstree命令查看进程的树状结构。总体来看，podman比docker要简单。由于podman比docker少了一层daemon，因此重启的机制也就不同了。</p>
-<p>在使用者方面，podman与docker的命令基本兼容，都包括容器运行时（run/start/kill/ps/inspect），本地镜像（images/rmi/build）、镜像仓库（login/pull/push）等几个方面。因此podman的命令行工具与docker类似，比如构建镜像、启停容器等。甚至可以通过alias</p>
-<p>docker=podman可以进行替换。因此，即便使用了podman，仍然可以使用docker.io作为镜像仓库，这也是兼容性最关键的部分。</p>
-<h3 id="podman常用命令" tabindex="-1"> Podman常用命令</h3>
-<h4 id="「容器」" tabindex="-1"> <strong>「容器」</strong></h4>
-<div><pre><code>podman run           创建并启动容器
-podman start         启动容器
-podman ps            查看容器
-podman stop          终止容器
-podman restart       重启容器
-podman attach        进入容器
-podman exec          进入容器
-podman export        导出容器
-podman import        导入容器快照
-podman rm            删除容器
-podman logs          查看日志
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="「镜像」" tabindex="-1"> <strong>「镜像」</strong></h4>
-<div><pre><code>podman search                检索镜像
-podman pull                  获取镜像
-podman images                列出镜像
-podman image Is              列出镜像
-podman rmi                   删除镜像
-podman image rm              删除镜像
-podman save                  导出镜像
-podman load                  导入镜像
-podmanfile                   定制镜像（三个）
-  podman build             构建镜像
-    podman run               运行镜像
-    podmanfile               常用指令（四个）
-      COPY                 复制文件
-        ADD                  高级复制
-        CMD                  容器启动命令
-        ENV                  环境变量
-        EXPOSE               暴露端口
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="「部署-podman」" tabindex="-1"> <strong>「部署 Podman」</strong></h4>
-<div><pre><code>//安装podman
-[root@localhost ~]# yum -y install podman
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="「podman-加速器」" tabindex="-1"> <strong>「Podman 加速器」</strong></h3>
-<p>版本7配置加速器</p>
-<div><pre><code>//仓库配置
-[root@localhost ~]# vim /etc/containers/registries.conf
-[registries.search]
-#registries = ["registry.access.redhat.com", "registry.redhat.io", "docker.io"]   #这个是查找，从这三个地方查找
-
-registries = ["docker.io"]    #如果只留一个，则只在一个源里查找
-[[docker.io]]
-location="j3m2itm3.mirror.aliyuncs.com"
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>版本8配置加速器</p>
-<div><pre><code>#unqualified-search-registries = ["registry.fedoraproject.org", "registry.access.redhat.com", "registry.centos.org", "docker.io"]     #直接注释掉
-unqualified-search-registries = ["docker.io"]    #添加一个docker.io
-[[registry]]
-prefix = "docker.io"
-location = "j3m2itm3.mirror.aliyuncs.com" （不用加https://  直接加地址）
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="「使用-podman」" tabindex="-1"> <strong>「使用 Podman」</strong></h3>
-<p>使用 Podman 非常的简单，Podman 的指令跟 Docker 大多数都是相同的。下面我们来看几个常用的例子：</p>
-<h4 id="运行一个容器" tabindex="-1"> 运行一个容器</h4>
-<div><pre><code>[root@localhost ~]# podman run -d --name httpd docker.io/library/httpd
-Trying to pull docker.io/library/httpd...
-Getting image source signatures
-Copying blob e5ae68f74026 done  
-Copying blob d3576f2b6317 done  
-Copying blob bc36ee1127ec done  
-Copying blob f1aa5f54b226 done  
-Copying blob aa379c0cedc2 done  
-Copying config ea28e1b82f done  
-Writing manifest to image destination
-Storing signatures
-0492e405b9ecb05e6e6be1fec0ac1a8b6ba3ff949df259b45146037b5f355035
-
-//查看镜像
-[root@localhost ~]# podman images
-REPOSITORY                  TAG      IMAGE ID       CREATED       SIZE
-docker.io/library/httpd     latest   ea28e1b82f31   11 days ago   148 MB
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="列出运行的容器" tabindex="-1"> 列出运行的容器</h4>
-<div><pre><code>[root@localhost ~]# podman ps
-CONTAINER ID  IMAGE                             COMMAND           CREATED             STATUS                 PORTS  NAMES
-0492e405b9ec  docker.io/library/httpd:latest    httpd-foreground  About a minute ago  Up About a minute ago         httpd
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>注意：如果在ps命令中添加-a，Podman 将显示所有容器。</p>
-<h4 id="检查正在运行的容器" tabindex="-1"> 检查正在运行的容器</h4>
-<p>您可以“检查”正在运行的容器的元数据和有关其自身的详细信息。我们甚至可以使用 inspect 子命令查看分配给容器的 IP 地址。由于容器以无根模式运行，因此未分配 IP 地址，并且该值将在检查的输出中列为“无”。</p>
-<div><pre><code>[root@localhost ~]# podman inspect -l | grep IPAddress\": 
-            "SecondaryIPAddresses": null, 
-            "IPAddress": "10.88.0.5",
-
-[root@localhost ~]# curl 10.88.0.5
-&lt;html>&lt;body>&lt;h1>It works!&lt;/h1>&lt;/body>&lt;/html>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>注意：-l 是最新容器的便利参数。您还可以使用容器的 ID 代替 -l。</p>
-<h4 id="查看一个运行中容器的日志" tabindex="-1"> 查看一个运行中容器的日志</h4>
-<div><pre><code>选项
-  --latest    #最近的
-  
-[root@localhost ~]# podman logs --latest
-AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.88.0.5. Set the 'ServerName' directive globally to suppress this message
-AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.88.0.5. Set the 'ServerName' directive globally to suppress this message
-[Mon Dec 13 15:17:53.690844 2021] [mpm_event:notice] [pid 1:tid 140665160166720] AH00489: Apache/2.4.51 (Unix) configured -- resuming normal operations
-[Mon Dec 13 15:17:53.690946 2021] [core:notice] [pid 1:tid 140665160166720] AH00094: Command line: 'httpd -D FOREGROUND'
-10.88.0.1 - - [13/Dec/2021:15:19:48 +0000] "GET / HTTP/1.1" 200 45
-10.88.0.1 - - [13/Dec/2021:15:20:47 +0000] "GET / HTTP/1.1" 200 45
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>查看一个运行容器中的进程资源使用情况，可以使用top观察容器中的 nginx pid</p>
-<div><pre><code>语法：
-  podman top &lt;container_id>  
-  
-[root@localhost ~]# podman top httpd
-USER       PID   PPID   %CPU    ELAPSED            TTY   TIME   COMMAND
-root       1     0      0.000   15m38.599711321s   ?     0s     httpd -DFOREGROUND 
-www-data   7     1      0.000   15m38.599783256s   ?     0s     httpd -DFOREGROUND 
-www-data   8     1      0.000   15m38.599845342s   ?     0s     httpd -DFOREGROUND 
-www-data   9     1      0.000   15m38.599880444s   ?     0s     httpd -DFOREGROUND 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="停止一个运行中的容器" tabindex="-1"> 停止一个运行中的容器</h4>
-<div><pre><code>[root@localhost ~]# podman stop --latest
-2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4
-[root@localhost ~]# podman ps
-CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h4 id="删除一个容器" tabindex="-1"> 删除一个容器</h4>
-<div><pre><code>[root@localhost ~]# podman rm --latest
-2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4
-[root@localhost ~]# podman ps -a
-CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>以上这些特性基本上都和 Docker 一样，Podman 除了兼容这些特性外，还支持了一些新的特性。</p>
-<h4 id="上传镜像" tabindex="-1"> 上传镜像</h4>
-<p>例如，如果我们想在 docker.io 上分享我们新建的 Nginx 容器镜像，这很容易。首先登录码头：</p>
-<div><pre><code>[root@localhost nginx]# tree 
-.
-├── Dockerfile
-└── files
-    └── nginx-1.20.1.tar.gz
-
-[root@localhost nginx]# cat Dockerfile 
-FROM docker.io/library/centos
-
-ENV PATH /usr/local/nginx/sbin:$PATH
-ADD files/nginx-1.20.1.tar.gz /usr/src
-RUN useradd -r -M -s /sbin/nologin nginx &amp;&amp; \
-    yum -y install pcre-devel openssl openssl-devel gd-devel gcc gcc-c++ make &amp;&amp; \
-    mkdir -p /var/log/nginx &amp;&amp; \
-    cd /usr/src/nginx-1.20.1 &amp;&amp; \
-    ./configure \
-    --prefix=/usr/local/nginx \
-    --user=nginx \
-    --group=nginx \
-    --with-debug \
-    --with-http_ssl_module \
-    --with-http_realip_module \
-    --with-http_image_filter_module \
-    --with-http_gunzip_module \
-    --with-http_gzip_static_module \
-    --with-http_stub_status_module \
-    --http-log-path=/var/log/nginx/access.log \
-    --error-log-path=/var/log/nginx/error.log &amp;&amp; \
-  make &amp;&amp; make install
-
-CMD ["nginx","-g","daemon off"]
-[root@localhost nginx]# podman build -t nginx .
-
-// 修改镜像名
- [root@localhost ~]# podman tag docker.io/library/nginx:latest docker.io/1314444/test:latest
-
-// 登录并上传镜像
-[root@localhost ~]# podman login docker.io // 需要告诉其要登录到docker仓库
-[root@localhost ~]# podman login docker.io
-Username: 1314444    #账户
-Password: ********    #密码
-Login Succeeded!
-
-[root@localhost nginx]# podman push docker.io/1314444/test:latest  //上传镜像
-Getting image source signatures
-Copying blob 38c40d6c2c85 done
-Copying blob fee76a531659 done
-Copying blob c2adabaecedb done
-Copying config 7f3589c0b8 done
-Writing manifest to image destination
-Copying config 7f3589c0b8 done
-Writing manifest to image destination
-Storing signatures
-
-
-//请注意，我们将四层推送到我们的注册表，现在可供其他人共享。快速浏览一下：
-[root@localhost ~]# podman inspect 1314444/test:nginx
-//输出：
-[
-    {
-        "Id": "7f3589c0b8849a9e1ff52ceb0fcea2390e2731db9d1a7358c2f5fad216a48263",
-        "Digest": "sha256:7822b5ba4c2eaabdd0ff3812277cfafa8a25527d1e234be028ed381a43ad5498",
-        "Repotag": [
-            "docker.io/1314444/test:nginx",
-    ......
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>总而言之，Podman 使查找、运行、构建和共享容器变得容易。</p>
-<h4 id="配置别名" tabindex="-1"> 配置别名</h4>
-<p>如果习惯了使用 Docker 命令，可以直接给 Podman 配置一个别名来实现无缝转移。你只需要在 .bashrc 下加入以下行内容即可：</p>
-<div><pre><code>[root@localhost ~]# echo "alias docker=podman" >> .bashrc
-source .bashrc
-[root@localhost ~]# alias
-alias cp='cp -i'
-alias docker='podman'
-.......
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="「用户操作」" tabindex="-1"> <strong>「用户操作」</strong></h3>
-<p>在允许没有root特权的用户运行Podman之前，管理员必须安装或构建Podman并完成以下配置</p>
-<p>cgroup V2Linux内核功能允许用户限制普通用户容器可以使用的资源，如果使用cgroupV2启用了运行Podman的Linux发行版，则可能需要更改默认的OCI运行时。某些较旧的版本runc不适用于cgroupV2，必须切换到备用OCI运行时crun。</p>
-<div><pre><code>[root@localhost ~]# yum -y install crun     //centos8系统自带
-
-[root@localhost ~]# vi /usr/share/containers/containers.conf 
-    446 # Default OCI runtime
-    447 # 
-    448 runtime = "crun"      //取消注释并将runc改为crun
-
-[root@localhost ~]# podman run -d --name web -p 80:80 docker.io/library/nginx
-c8664d2e43c872e1e5219f82d41f63048ed3a5ed4fb6259c225a14d6c243677f
-
-[root@localhost ~]# podman inspect web | grep crun
-        "OCIRuntime": "crun",
-            "crun",
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="安装slirp4netns和fuse-overlayfs" tabindex="-1"> 安装slirp4netns和fuse-overlayfs</h4>
-<p>在普通用户环境中使用Podman时，建议使用fuse-overlayfs而不是VFS文件系统，至少需要版本0.7.6。现在新版本默认就是了。</p>
-<div><pre><code>[root@localhost ~]# yum -y install slirp4netns
-
-[root@localhost ~]# yum -y install fuse-overlayfs
-[root@localhost ~]# vi /etc/containers/storage.conf
-77 mount_program = "/usr/bin/fuse-overlayfs"     //取消注释
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="etc-subuid和-etc-subgid配置" tabindex="-1"> / etc / subuid和/ etc / subgid配置</h4>
-<p>Podman要求运行它的用户在/ etc / subuid和/ etc / subgid文件中列出一系列UID,shadow-utils或newuid包提供这些文件</p>
-<div><pre><code>[root@localhost ~]# yum -y install shadow-utils
-
-可以在/ etc / subuid和/ etc / subgid查看，每个用户的值必须唯一且没有任何重叠。
-
-[root@localhost ~]# useradd zz
-[root@localhost ~]# cat /etc/subuid
-zz:100000:65536
-[root@localhost ~]# cat /etc/subgid
-zz:100000:65536
-
-// 启动非特权ping 
-[root@localhost ~]# sysctl -w "net.ipv4.ping_group_range=0 200000" //大于100000这个就表示tom可以操作podman
-net.ipv4.ping_group_range = 0 200000
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>这个文件的格式是 USERNAME:UID:RANGE中/etc/passwd或输出中列出的用户名getpwent。</p>
-<ul>
-<li>为用户分配的初始 UID。</li>
-<li>为用户分配的 UID 范围的大小。</li>
-</ul>
-<p>该usermod程序可用于为用户分配 UID 和 GID，而不是直接更新文件。</p>
-<div><pre><code>[root@localhost ~]# usermod --add-subuids 200000-201000 --add-subgids 200000-201000 hh
-grep hh /etc/subuid /etc/subgid
-/etc/subuid:hh:200000:1001
-/etc/subgid:hh:200000:1001
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h4 id="用户配置文件" tabindex="-1"> 用户配置文件</h4>
-<p>三个主要的配置文件是**「container.conf」<strong>、</strong>「storage.conf」<strong>和</strong>「registries.conf」**。用户可以根据需要修改这些文件。</p>
-<p>container.conf</p>
-<div><pre><code>// 用户配置文件
-[root@localhost ~]# cat /usr/share/containers/containers.conf
-[root@localhost ~]# cat /etc/containers/containers.conf
-[root@localhost ~]# cat ~/.config/containers/containers.conf  //优先级最高
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>如果它们以该顺序存在。每个文件都可以覆盖特定字段的前一个文件。</p>
-<p>配置storage.conf文件</p>
-<div><pre><code>1./etc/containers/storage.conf
-2.$HOME/.config/containers/storage.conf
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>在普通用户中**/etc/containers/storage.conf**的一些字段将被忽略</p>
-<div><pre><code>[root@localhost ~]#  vi /etc/containers/storage.conf
-[storage]
-
-# Default Storage Driver, Must be set for proper operation.
-driver = "overlay"    #此处改为overlay
-.......
-mount_program = "/usr/bin/fuse-overlayfs"    #取消注释
-
-[root@localhost ~]# sysctl user.max_user_namespaces=15000  #如果版本为8以下，则需要做以下操作：
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>在普通用户中这些字段默认</p>
-<div><pre><code>graphroot="$HOME/.local/share/containers/storage"
-runroot="$XDG_RUNTIME_DIR/containers"
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>registries.conf</p>
-<p>配置按此顺序读入,这些文件不是默认创建的,可以从**/usr/share/containers**「或复制文件」<strong>/etc/containers</strong>并进行修改。</p>
-<div><pre><code>1./etc/containers/registries.conf
-2./etc/containers/registries.d/*
-3.HOME/.config/containers/registries.conf
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>授权文件</p>
-<p>此文件里面写了docker账号的密码，以加密方式显示</p>
-<div><pre><code>[root@localhost ~]# podman login
-Username: 1314444
-Password: 
-Login Succeeded!
-[root@localhost ~]# cat /run/user/0/containers/auth.json 
-{
-        "auths": {
-                "registry.fedoraproject.org": {
-                        "auth": "MTMxNDQ0NDpIMjAxNy0xOA=="
-                }
-        }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>普通用户是无法看见root用户的镜像的</p>
-<div><pre><code>//root用户
-[root@localhost ~]# podman images
-REPOSITORY                  TAG      IMAGE ID       CREATED       SIZE
-docker.io/library/httpd     latest   ea28e1b82f31   11 days ago   146 MB
-
-//普通用户
-[root@localhost ~]# su - zz
-[zz@localhost ~]$ podman images
-REPOSITORY  TAG         IMAGE ID    CREATED     SIZE
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="卷" tabindex="-1"> 卷</h3>
-<ul>
-<li>容器与root用户一起运行，则root容器中的用户实际上就是主机上的用户。</li>
-<li>UID GID是在/etc/subuid和/etc/subgid等中用户映射中指定的第一个UID GID。</li>
-<li>如果普通用户的身份从主机目录挂载到容器中，并在该目录中以根用户身份创建文件，则会看到它实际上是你的用户在主机上拥有的。</li>
-</ul>
-<h4 id="使用卷" tabindex="-1"> 使用卷</h4>
-<div><pre><code>[root@localhost ~]# su - zz
-[zz@localhost ~]$ pwd
-/home/zz
-[zz@localhost ~]$ mkdir /home/zz/data
-
-[zz@localhost ~]$ podman run -it -v "$(pwd)"/data:/data docker.io/library/busybox /bin/sh
-Trying to pull docker.io/library/busybox:latest...
-Getting image source signatures
-Copying blob 3cb635b06aa2 done  
-Copying config ffe9d497c3 done  
-Writing manifest to image destination
-Storing signatures
-/ # ls
-bin   data  dev   etc   home  proc  root  run   sys   tmp   usr   var
-/ # cd data/
-/data # ls
-/data # touch 123
-/data # ls -l
-total 0
--rw-r--r--    1 root     root             0 Dec 13 00:17 123
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="在主机上查看" tabindex="-1"> 在主机上查看</h4>
-<div><pre><code>[zz@localhost ~]$ ll data/
-总用量 0
--rw-r--r-- 1 zz zz 0 12月 13 00:17 123
-
-//写入文件
-[zz@localhost ~]$ echo "hell world" >> 123
-[zz@localhost ~]$ cat 123
-hell world
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="容器里查看" tabindex="-1"> 容器里查看</h4>
-<div><pre><code>/data # cat 123
-hell world
-
-//我们可以发现在容器里面的文件的属主和属组都属于root，那么如何才能让其属于tom用户呢？下面告诉你答案
-/data # ls -l
-total 4
--rw-rw-r--    1 root     root            12 Dec 13 00:20 123
-
-//只要在运行容器的时候加上一个--userns=keep-id即可。
-[zz@localhost ~]$ podman run -it --name test -v "$(pwd)"/data:/data --userns=keep-id docker.io/library/busybox /bin/sh
-~ $ cd data/
-/data $ ls -l
-total 4
--rw-r--r--    1 zz       zz              11 Dec 13 00:21 123
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>使用普通用户映射容器端口时会报“ permission denied”的错误</p>
-<div><pre><code>[zz@localhost ~]$ podman run  -d -p 80:80 httpd
-Error: rootlessport cannot expose privileged port 80, you can add 'net.ipv4.ip_unprivileged_port_start=80' to /etc/sysctl.conf (currently 1024), or choose a larger port number (>= 1024): listen tcp 0.0.0.0:80: bind: permission denied
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>普通用户可以映射&gt;= 1024的端口</p>
-<div><pre><code>[zz@localhost ~]$ podman run  -d -p 1024:80 httpd
-58613a6bdc70d4d4f9f624583f795a62a610596d166f0873bdff8fb26aa15092
-[zz@localhost ~]$ ss -anlt
-State       Recv-Q      Send-Q           Local Address:Port           Peer Address:Port      Process      
-LISTEN      0           128                    0.0.0.0:22                  0.0.0.0:*                      
-LISTEN      0           128                          *:1024                      *:*                      
-LISTEN      0           128                       [::]:22                     [::]:* 
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>配置echo ‘net.ipv4.ip_unprivileged_port_start=80’ &gt;&gt; /etc/sysctl.conf后可以映射大于等于80的端口</p>
-<div><pre><code>[root@localhost ~]# echo  'net.ipv4.ip_unprivileged_port_start=80'  >> /etc/sysctl.conf
-[root@localhost ~]# sysctl -p
-net.ipv4.ip_unprivileged_port_start = 80
-
-[zz@localhost ~]$ podman run -d -p 80:80 httpd
-1215455a0c300d78e7bf6afaefc9873f818c6b0f26affeee4e2bc17954e72d8e
-[zz@localhost ~]$ ss -anlt
-State       Recv-Q      Send-Q           Local Address:Port           Peer Address:Port      Process      
-LISTEN      0           128                    0.0.0.0:22                  0.0.0.0:*                      
-LISTEN      0           128                          *:1024                      *:*                      
-LISTEN      0           128                          *:80                        *:*                      
-LISTEN      0           128                       [::]:22                     [::]:*  
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Linux"/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-02-28T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
