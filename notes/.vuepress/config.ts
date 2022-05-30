@@ -10,6 +10,8 @@ export default defineUserConfig({
   base: "/",
 
   head: [
+    // 解决403错误
+    ["meta", { name: "referrer", content: "no-referrer" }],
     [
       "link",
       {
