@@ -1,5 +1,7 @@
 # [xlc520.github.io](https://xlc520.github.io/)
 
+![Alt](https://repobeats.axiom.co/api/embed/73ed9c9935e88559365a8fdf99e933621916339d.svg "Repobeats analytics image")
+
 个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程、java开发及其报错解决、Python及其报错解决、环境安装及其报错解决、日常学习、文章、美文。
 
 <p align="center">
