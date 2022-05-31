@@ -3,7 +3,7 @@
   <id>https://xlc520.github.io/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-05-31T03:49:29.655Z</updated>
+  <updated>2022-05-31T13:53:46.478Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://xlc520.github.io/atom.xml"/>
   <link rel="alternate" href="https://xlc520.github.io/"/>
@@ -2098,7 +2098,7 @@ num[last]&lt;key交换元素后，转向左边部分，用num[first]与key进行
     <title type="html">牛客网-华为机试</title>
     <id>https://xlc520.github.io/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html</id>
     <link href="https://xlc520.github.io/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html"/>
-    <updated>2022-05-28T14:45:05.000Z</updated>
+    <updated>2022-05-31T13:51:34.000Z</updated>
     <summary type="html">华为笔试面试机考在线练习</summary>
     <content type="html"><![CDATA[<h1 id="牛客网-华为机试" tabindex="-1"> 牛客网-华为机试</h1>
 <h2 id="hj1-字符串最后一个单词的长度" tabindex="-1"> <strong>HJ1</strong> <strong>字符串最后一个单词的长度</strong></h2>
@@ -2440,7 +2440,1597 @@ A
         <span>}</span>   
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj8-合并表记录" tabindex="-1"> <strong>HJ8</strong> <strong>合并表记录</strong></h2>
+<h3 id="描述-5" tabindex="-1"> 描述</h3>
+<p>数据表记录包含表索引index和数值value（int范围的正整数），请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照index值升序进行输出。</p>
+<p>提示:</p>
+<p>0 &lt;= index &lt;= 11111111</p>
+<p>1 &lt;= value &lt;= 100000</p>
+<h3 id="输入描述-5" tabindex="-1"> 输入描述：</h3>
+<p>先输入键值对的个数n（1 &lt;= n &lt;= 500）
+接下来n行每行输入成对的index和value值，以空格隔开</p>
+<h3 id="输出描述-5" tabindex="-1"> 输出描述：</h3>
+<p>输出合并后的键值对（多行）</p>
+<h3 id="示例1-5" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>4
+0 1
+0 2
+1 2
+3 4
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>0 3
+1 2
+3 4
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h3 id="示例2" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>3
+0 1
+0 2
+8 9
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>0 3
+8 9
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="代码-5" tabindex="-1"> 代码：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>*</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>TreeMap</span><span><span>&lt;</span><span>Integer</span><span>,</span> <span>Integer</span><span>></span></span> map <span>=</span> <span>new</span> <span>TreeMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span> <span>// 输出结果要求有序！</span>
+       <span>while</span><span>(</span>sc<span>.</span><span>hasNextInt</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>int</span> n <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> <span>++</span>i<span>)</span><span>{</span>
+                <span>int</span> a <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+                <span>int</span> b <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+                map<span>.</span><span>put</span><span>(</span>a<span>,</span>map<span>.</span><span>getOrDefault</span><span>(</span>a<span>,</span><span>0</span><span>)</span> <span>+</span> b<span>)</span><span>;</span>
+            <span>}</span>
+       <span>}</span>
+       <span>for</span> <span>(</span><span>Integer</span> i <span>:</span> map<span>.</span><span>keySet</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+           <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i <span>+</span> <span>" "</span> <span>+</span> map<span>.</span><span>get</span><span>(</span>i<span>)</span><span>)</span><span>;</span>
+       <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+ <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span> agv<span>[</span><span>]</span><span>)</span> <span>{</span>
+      <span>Scanner</span> scanner <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+      <span>int</span> tableSize <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+      <span>Map</span><span><span>&lt;</span><span>Integer</span><span>,</span> <span>Integer</span><span>></span></span> table <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span>tableSize<span>)</span><span>;</span>
+      <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> tableSize<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+          <span>int</span> key <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+          <span>int</span> value <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+          <span>if</span> <span>(</span>table<span>.</span><span>containsKey</span><span>(</span>key<span>)</span><span>)</span> <span>{</span>
+              table<span>.</span><span>put</span><span>(</span>key<span>,</span> table<span>.</span><span>get</span><span>(</span>key<span>)</span> <span>+</span> value<span>)</span><span>;</span>
+          <span>}</span> <span>else</span> <span>{</span>
+              table<span>.</span><span>put</span><span>(</span>key<span>,</span> value<span>)</span><span>;</span>
+          <span>}</span>
+      <span>}</span>
+       <span>for</span> <span>(</span><span>Integer</span> key <span>:</span> table<span>.</span><span>keySet</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+          <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span> key <span>+</span> <span>" "</span> <span>+</span> table<span>.</span><span>get</span><span>(</span>key<span>)</span><span>)</span><span>;</span>
+      <span>}</span>
+  <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj14-字符串排序" tabindex="-1"> <strong>HJ14</strong> <strong>字符串排序</strong></h2>
+<h3 id="描述-6" tabindex="-1"> 描述</h3>
+<p>给定 n 个字符串，请对 n 个字符串按照字典序排列。</p>
+<p>数据范围： 1 \le n \le 1000 \1≤<em>n</em>≤1000 ，字符串长度满足 1 \le len \le 100 \1≤<em>l<strong>e</strong>n</em>≤100</p>
+<h3 id="输入描述-6" tabindex="-1"> 输入描述：</h3>
+<p>输入第一行为一个正整数n(1≤n≤1000),下面n行为n个字符串(字符串长度≤100),字符串中只含有大小写字母。</p>
+<h3 id="输出描述-6" tabindex="-1"> 输出描述：</h3>
+<p>数据输出n行，输出结果为按照字典序排列的字符串。</p>
+<h3 id="示例1-6" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>9
+cap
+to
+cat
+card
+two
+too
+up
+boat
+boot
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>boat
+boot
+cap
+card
+cat
+to
+too
+two
+up
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>只需要按字典排列字符串，可以调用Arrays.sort API，也可以使用PriorityQueue，还可以自己实现Comparator，三种方法测试了一下用时相差不大。</p>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>*</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>withPriorityQueue</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>// 方法一: 调用API Arrays.sort</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>withArraysAPI</span><span>(</span><span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> br <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>int</span> n <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>String</span><span>[</span><span>]</span> ss <span>=</span> <span>new</span> <span>String</span><span>[</span>n<span>]</span><span>;</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            ss<span>[</span>i<span>]</span> <span>=</span> br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        br<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+
+        <span>Arrays</span><span>.</span><span>sort</span><span>(</span>ss<span>)</span><span>;</span>
+
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>ss<span>[</span>i<span>]</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>// 方法二: 使用PriorityQueue</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>withPriorityQueue</span><span>(</span><span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> br <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>int</span> n <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>PriorityQueue</span><span><span>&lt;</span><span>String</span><span>></span></span> pq <span>=</span> <span>new</span> <span>PriorityQueue</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> s <span>=</span> <span>""</span><span>;</span>
+        <span>while</span> <span>(</span><span>(</span>s <span>=</span> br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span> <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            pq<span>.</span><span>offer</span><span>(</span>s<span>)</span><span>;</span>
+        <span>}</span>
+        br<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+
+        <span>while</span> <span>(</span><span>!</span>pq<span>.</span><span>isEmpty</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>pq<span>.</span><span>poll</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>        
+    <span>}</span>
+
+    <span>// 方法三: 使用list并自己实现Comparator, 比较能体现算法的思路</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>withComparator</span><span>(</span><span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> br <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>int</span> n <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> list <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> s <span>=</span> <span>""</span><span>;</span>
+        <span>while</span> <span>(</span><span>(</span>s <span>=</span> br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span> <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            list<span>.</span><span>add</span><span>(</span>s<span>)</span><span>;</span>
+        <span>}</span>
+        br<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+
+        list<span>.</span><span>sort</span><span>(</span><span>new</span> <span>Comparator</span><span><span>&lt;</span><span>String</span><span>></span></span><span>(</span><span>)</span> <span>{</span>
+            <span>@Override</span>
+            <span>public</span> <span>int</span> <span>compare</span><span>(</span><span>String</span> s1<span>,</span> <span>String</span> s2<span>)</span> <span>{</span>
+                <span>int</span> i <span>=</span> <span>0</span><span>;</span>
+                <span>while</span> <span>(</span>i <span>&lt;</span> s1<span>.</span><span>length</span><span>(</span><span>)</span> <span>&amp;&amp;</span> i <span>&lt;</span> s2<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                    <span>if</span> <span>(</span>s1<span>.</span><span>charAt</span><span>(</span>i<span>)</span> <span>!=</span> s2<span>.</span><span>charAt</span><span>(</span>i<span>)</span><span>)</span> <span>{</span>
+                        <span>return</span> <span>(</span>s1<span>.</span><span>charAt</span><span>(</span>i<span>)</span> <span>></span> s2<span>.</span><span>charAt</span><span>(</span>i<span>)</span><span>)</span><span>?</span> <span>1</span><span>:</span> <span>-</span><span>1</span><span>;</span>
+                    <span>}</span>
+                    i<span>++</span><span>;</span>
+                <span>}</span>
+                <span>if</span> <span>(</span>s1<span>.</span><span>length</span><span>(</span><span>)</span> <span>==</span> s2<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                    <span>return</span> <span>0</span><span>;</span>
+                <span>}</span> <span>else</span> <span>{</span>
+                    <span>return</span> <span>(</span>s1<span>.</span><span>length</span><span>(</span><span>)</span> <span>></span> s2<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span><span>?</span> <span>1</span><span>:</span> <span>-</span><span>1</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span><span>)</span><span>;</span>
+
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>list<span>.</span><span>get</span><span>(</span>i<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>  
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj20-密码验证合格程序" tabindex="-1"> <strong>HJ20</strong> <strong>密码验证合格程序</strong></h2>
+<h3 id="描述-7" tabindex="-1"> 描述</h3>
+<p>密码要求:</p>
+<p>1.长度超过8位</p>
+<p>2.包括大小写字母.数字.其它符号,以上四种至少三种</p>
+<p>3.不能有长度大于2的包含公共元素的子串重复 （注：其他符号不含空格或换行）</p>
+<p>数据范围：输入的字符串长度满足 1 \le n \le 100 \1≤<em>n</em>≤100</p>
+<h4 id="输入描述-7" tabindex="-1"> 输入描述：</h4>
+<p>一组字符串。</p>
+<h4 id="输出描述-7" tabindex="-1"> 输出描述：</h4>
+<p>如果符合要求输出：OK，否则输出NG</p>
+<h3 id="示例1-7" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>021Abc9000
+021Abc9Abc1
+021ABC9000
+021$bc9000
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>复制</p>
+<p>输出：</p>
+<div><pre><code>OK
+NG
+NG
+OK
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h3 id="题目主要信息" tabindex="-1"> 题目主要信息</h3>
+<p>1、检验输入的密码是否合格</p>
+<p>2、密码要求如下</p>
+<ul>
+<li>
+<p>长度超过8位</p>
+</li>
+<li>
+<p>密码要求:</p>
+<p>1.长度超过8位</p>
+<p>2.包括大小写字母.数字.其它符号,以上四种至少三种</p>
+<p>3.不能有长度大于2的不含公共元素的子串重复 （注：其他符号不含空格或换行）</p>
+</li>
+</ul>
+<h3 id="方法一-暴力" tabindex="-1"> 方法一：暴力</h3>
+<h4 id="具体方法" tabindex="-1"> 具体方法</h4>
+<p>按照密码的要求，依次遍历验证即可。</p>
+<p>1、首先验证长度是否大于8，不满足直接输出NG并继续 2、验证是否包含三种以上的字符 3、验证是否存在重复子串，并且长度大于等于3 这里主要给出第三步的详解，前两步的直接遍历求解即可。 第三步可以使用类似窗口的方法，因为要求最长重复子串不能大于2，所以就把窗口的大小设置为3。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/4C136CEEE2387171DC8F01C8018C819E.gif" alt="alt" loading="lazy"></p>
+<h4 id="java代码" tabindex="-1"> Java代码</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>BufferedReader</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>IOException</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>InputStreamReader</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> bf <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> s<span>;</span>
+        <span>while</span><span>(</span><span>(</span>s <span>=</span> bf<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>!=</span><span>null</span><span>)</span><span>{</span>
+            <span>//1.长度超过8位</span>
+            <span>if</span><span>(</span>s<span>.</span><span>length</span><span>(</span><span>)</span> <span>&lt;=</span> <span>8</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span>
+            <span>//2.包括大小写字母.数字.其它符号,以上四种至少三种</span>
+            <span>int</span> count<span>[</span><span>]</span> <span>=</span> <span>new</span> <span>int</span><span>[</span><span>4</span><span>]</span><span>;</span><span>//记录出现个数</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>s<span>.</span><span>length</span><span>(</span><span>)</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+                <span>if</span><span>(</span>s<span>.</span><span>charAt</span><span>(</span>i<span>)</span> <span>>=</span> <span>'A'</span><span>&amp;&amp;</span> s<span>.</span><span>charAt</span><span>(</span>i<span>)</span><span>&lt;=</span><span>'Z'</span> <span>)</span><span>{</span>
+                    count<span>[</span><span>0</span><span>]</span> <span>=</span> <span>1</span><span>;</span>
+                <span>}</span><span>else</span> <span>if</span><span>(</span>s<span>.</span><span>charAt</span><span>(</span>i<span>)</span> <span>>=</span> <span>'a'</span><span>&amp;&amp;</span> s<span>.</span><span>charAt</span><span>(</span>i<span>)</span><span>&lt;=</span><span>'z'</span> <span>)</span><span>{</span>
+                    count<span>[</span><span>1</span><span>]</span> <span>=</span> <span>1</span><span>;</span>
+                <span>}</span><span>else</span> <span>if</span><span>(</span>s<span>.</span><span>charAt</span><span>(</span>i<span>)</span> <span>>=</span> <span>'0'</span><span>&amp;&amp;</span> s<span>.</span><span>charAt</span><span>(</span>i<span>)</span><span>&lt;=</span><span>'9'</span> <span>)</span><span>{</span>
+                    count<span>[</span><span>2</span><span>]</span> <span>=</span> <span>1</span><span>;</span>
+                <span>}</span><span>else</span> <span>{</span>
+                    count<span>[</span><span>3</span><span>]</span> <span>=</span> <span>1</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>if</span><span>(</span>count<span>[</span><span>0</span><span>]</span><span>+</span>count<span>[</span><span>1</span><span>]</span><span>+</span>count<span>[</span><span>2</span><span>]</span><span>+</span>count<span>[</span><span>3</span><span>]</span><span>&lt;</span><span>3</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span>
+            <span>//3.不能有长度大于2的不含公共元素的子串重复 （注：其他符号不含空格或换行）</span>
+            <span>if</span><span>(</span><span>getString</span><span>(</span>s<span>,</span><span>0</span><span>,</span><span>3</span><span>)</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span> <span>else</span> <span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"OK"</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+    <span>//检测是否存在长度大于3的重复子串</span>
+     <span>static</span> <span>boolean</span> <span>getString</span><span>(</span><span>String</span> str<span>,</span><span>int</span> l<span>,</span><span>int</span> r<span>)</span> <span>{</span>
+         <span>if</span> <span>(</span>r <span>>=</span> str<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+             <span>return</span> <span>false</span><span>;</span>
+         <span>}</span>
+         <span>if</span> <span>(</span>str<span>.</span><span>substring</span><span>(</span>r<span>)</span><span>.</span><span>contains</span><span>(</span>str<span>.</span><span>substring</span><span>(</span>l<span>,</span> r<span>)</span><span>)</span><span>)</span> <span>{</span>
+             <span>return</span> <span>true</span><span>;</span>
+         <span>}</span> <span>else</span> <span>{</span>
+             <span>return</span> <span>getString</span><span>(</span>str<span>,</span> l <span>+</span> <span>1</span><span>,</span> r <span>+</span> <span>1</span><span>)</span><span>;</span>
+         <span>}</span>
+     <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(n2)O(n^2)<em>O</em>(<em>n</em>2)，n为单次密码长度，验证重复子串两层循环遍历字符串</li>
+<li>空间复杂度：O(1)O(1)<em>O</em>(1)，字符串s属于必要空间</li>
+</ul>
+<h3 id="方法二-正则表达式" tabindex="-1"> 方法二：正则表达式</h3>
+<h4 id="具体做法" tabindex="-1"> 具体做法</h4>
+<p>匹配小写字母、大写字母、数字、其他字符，还是匹配串中前后连续三个一样的字符，我们都可以用正则表达式。只要把正则表达式写出来即可</p>
+<h4 id="java代码-1" tabindex="-1"> Java代码</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>BufferedReader</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>IOException</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>InputStreamReader</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span>regex<span>.</span></span><span>Matcher</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span>regex<span>.</span></span><span>Pattern</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> bf <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> s<span>;</span>
+        <span>while</span> <span>(</span><span>(</span>s <span>=</span> bf<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>!=</span><span>null</span><span>)</span> <span>{</span>
+            <span>// 长度check, 相同长度超2的子串重复check</span>
+            <span>if</span> <span>(</span>s<span>.</span><span>length</span><span>(</span><span>)</span> <span>&lt;=</span> <span>8</span> <span>)</span> <span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span>
+            <span>// 大小写字母.数字.其它符号check</span>
+            <span>String</span><span>[</span><span>]</span> regexes <span>=</span> <span>{</span><span>"\\d"</span><span>,</span> <span>"[a-z]"</span><span>,</span> <span>"[A-Z]"</span><span>,</span> <span>"[^\\da-zA-Z]"</span><span>}</span><span>;</span>
+            <span>int</span> types <span>=</span> <span>0</span><span>;</span>
+            <span>for</span> <span>(</span><span>String</span> re <span>:</span> regexes<span>)</span> <span>{</span>
+                <span>Pattern</span> p <span>=</span> <span>Pattern</span><span>.</span><span>compile</span><span>(</span>re<span>)</span><span>;</span>
+                <span>Matcher</span> m <span>=</span> p<span>.</span><span>matcher</span><span>(</span>s<span>)</span><span>;</span>
+                <span>if</span> <span>(</span>m<span>.</span><span>find</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                    types <span>+=</span> <span>1</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>if</span><span>(</span>types<span>&lt;</span><span>3</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span>
+          <span>//匹配串前后连续3个字符一样的 </span>
+         <span>//public String replaceAll(String replacement)</span>
+		 <span>//替换模式与给定替换字符串相匹配的输入中存在长度大于2的不含公共元素的子串重复 删除一个重复字串长度显然变短了 这时输入NG</span>
+            <span>if</span><span>(</span>s<span>.</span><span>replaceAll</span><span>(</span><span>"(.{3,})(?=.{3,}\\1)"</span><span>,</span> <span>""</span><span>)</span><span>.</span><span>length</span><span>(</span><span>)</span> <span>&lt;</span> s<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"NG"</span><span>)</span><span>;</span>
+                <span>continue</span><span>;</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"OK"</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析-1" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(n)O(n)<em>O</em>(<em>n</em>)，正则表达式匹配复杂度为O(n)O(n)<em>O</em>(<em>n</em>)</li>
+<li>空间复杂度：O(1)O(1)<em>O</em>(1)，常数级空间，字符串s属于必要空间</li>
+</ul>
+<h2 id="hj23-删除字符串中出现次数最少的字符" tabindex="-1"> <strong>HJ23</strong> <strong>删除字符串中出现次数最少的字符</strong></h2>
+<h3 id="描述-8" tabindex="-1"> 描述</h3>
+<p>实现删除字符串中出现次数最少的字符，若出现次数最少的字符有多个，则把出现次数最少的字符都删除。输出删除这些单词后的字符串，字符串中其它字符保持原来的顺序。</p>
+<p>数据范围：输入的字符串长度满足 1 \le n \le 20 \1≤<em>n</em>≤20 ，保证输入的字符串中仅出现小写字母</p>
+<h3 id="输入描述-8" tabindex="-1"> 输入描述：</h3>
+<p>字符串只包含小写英文字母, 不考虑非法输入，输入的字符串长度小于等于20个字节。</p>
+<h3 id="输出描述-8" tabindex="-1"> 输出描述：</h3>
+<p>删除字符串中出现次数最少的字符后的字符串。</p>
+<h3 id="示例1-8" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>aabcddd
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>aaddd
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="_1-哈希表-时间o-n-空间o-1" tabindex="-1"> 1.哈希表，时间O(N)，空间O(1)</h3>
+<div><pre><code><span>public</span> <span>String</span> <span>delete</span><span>(</span><span>String</span> str<span>)</span> <span>{</span>
+        <span>// Map记录每个字母的次数</span>
+        <span>Map</span><span><span>&lt;</span><span>Character</span><span>,</span> <span>Integer</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>char</span> ch <span>:</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            map<span>.</span><span>put</span><span>(</span>ch<span>,</span> map<span>.</span><span>getOrDefault</span><span>(</span>ch<span>,</span> <span>0</span><span>)</span> <span>+</span> <span>1</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>// 快速找出最少次数</span>
+        <span>int</span> min <span>=</span> <span>Integer</span><span>.</span>MAX_VALUE<span>;</span>
+        <span>for</span> <span>(</span><span>int</span> times <span>:</span> map<span>.</span><span>values</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            min <span>=</span> <span>Math</span><span>.</span><span>min</span><span>(</span>min<span>,</span> times<span>)</span><span>;</span>
+        <span>}</span>
+        <span>StringBuilder</span> res <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>char</span> ch <span>:</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>if</span> <span>(</span>map<span>.</span><span>get</span><span>(</span>ch<span>)</span> <span>!=</span> min<span>)</span> <span>{</span>
+                res<span>.</span><span>append</span><span>(</span>ch<span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> res<span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+ 
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Main</span> solution <span>=</span> <span>new</span> <span>Main</span><span>(</span><span>)</span><span>;</span>
+        <span>Scanner</span> in <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>in<span>.</span><span>hasNextLine</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>String</span> str <span>=</span> in<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>;</span>
+            <span>String</span> res <span>=</span> solution<span>.</span><span>delete</span><span>(</span>str<span>)</span><span>;</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>res<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_2" tabindex="-1"> 2.</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Collections</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>HashMap</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Scanner</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> scanner <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>scanner<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>String</span> s <span>=</span> scanner<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>;</span>
+            <span>char</span><span>[</span><span>]</span> chars <span>=</span> s<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span>
+            <span>//统计每个字母的数量</span>
+            <span>HashMap</span><span><span>&lt;</span><span>Character</span><span>,</span> <span>Integer</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>for</span> <span>(</span><span>char</span> aChar <span>:</span> chars<span>)</span> <span>{</span>
+                map<span>.</span><span>put</span><span>(</span>aChar<span>,</span> <span>(</span>map<span>.</span><span>getOrDefault</span><span>(</span>aChar<span>,</span> <span>0</span><span>)</span> <span>+</span> <span>1</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>//找到数量最少的字符数量</span>
+            <span>Collection</span><span><span>&lt;</span><span>Integer</span><span>></span></span> values <span>=</span> map<span>.</span><span>values</span><span>(</span><span>)</span><span>;</span>
+            <span>Integer</span> min <span>=</span> <span>Collections</span><span>.</span><span>min</span><span>(</span>values<span>)</span><span>;</span>
+
+            <span>//用空字符串替换该字母</span>
+            <span>for</span> <span>(</span><span>Character</span> character <span>:</span> map<span>.</span><span>keySet</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                <span>if</span> <span>(</span>map<span>.</span><span>get</span><span>(</span>character<span>)</span> <span>==</span> min<span>)</span><span>{</span>
+                    s <span>=</span> s<span>.</span><span>replaceAll</span><span>(</span><span>String</span><span>.</span><span>valueOf</span><span>(</span>character<span>)</span><span>,</span> <span>""</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>s<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ol start="3">
+<li></li>
+</ol>
+<p>题目主要意思</p>
+<p>1、删除一个字符串中出现次数最少的字符，若多个字符出现次数一样，都删除。</p>
+<p>2、字符串需要保持原来的顺序</p>
+<p>3、字符串只包含小写字母</p>
+<p>4、多行输入输出</p>
+<h3 id="方法一-暴力法" tabindex="-1"> 方法一：暴力法</h3>
+<h4 id="具体做法-1" tabindex="-1"> 具体做法</h4>
+<ol>
+<li>直接遍历字符串，将字符串存入到数组中，将字符串转成ASCII格式的，也就是都在128个ASCII里，设置一个26大小的数组即可，因为题目里说了只包含小写字母。</li>
+<li>遍历字符串后将字符对应的ASCII的个数存入对应的数组中。</li>
+<li>遍历数组找到最小的个数</li>
+<li>遍历数组，如果当前字符出现的个数等于最小个数，则被替换掉。</li>
+</ol>
+<h4 id="java代码-2" tabindex="-1"> Java代码</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>*</span></span><span>;</span>
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>throws</span> <span>IOException</span><span>{</span>
+        <span>BufferedReader</span> bf <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> str <span>;</span>
+        <span>while</span> <span>(</span><span>(</span>str <span>=</span> bf<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span> <span>!=</span> <span>null</span> <span>&amp;&amp;</span> <span>!</span>str<span>.</span><span>equals</span><span>(</span><span>""</span><span>)</span><span>)</span> <span>{</span>
+            <span>char</span> <span>[</span><span>]</span>chars <span>=</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span>
+            <span>// 题目所给出的都是小写字母 共计26个 a~z</span>
+            <span>int</span><span>[</span><span>]</span> temp <span>=</span> <span>new</span> <span>int</span><span>[</span><span>26</span><span>]</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> chars<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>//找到当前字符在数组中的位置 比如97对应的是a的ASCII码，</span>
+                <span>int</span> index <span>=</span> chars<span>[</span>i<span>]</span> <span>-</span> <span>97</span><span>;</span>
+                temp<span>[</span>index<span>]</span> <span>=</span> temp<span>[</span>index<span>]</span> <span>+</span> <span>1</span><span>;</span>
+            <span>}</span>
+            <span>//找到次数最少的个数 </span>
+            <span>int</span> min <span>=</span> <span>Integer</span><span>.</span>MAX_VALUE<span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> <span>26</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>// 跳过</span>
+                <span>if</span> <span>(</span>temp<span>[</span>i<span>]</span> <span>!=</span> <span>0</span><span>)</span> <span>{</span>
+                    min <span>=</span> <span>Math</span><span>.</span><span>min</span><span>(</span>min<span>,</span>temp<span>[</span>i<span>]</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>// 开始删除最小 </span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> <span>26</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>if</span> <span>(</span>temp<span>[</span>i<span>]</span> <span>==</span> min<span>)</span> <span>{</span>
+                    <span>char</span> ch <span>=</span> <span>(</span><span>char</span><span>)</span> <span>(</span><span>'a'</span> <span>+</span> i<span>)</span><span>;</span>
+                    str <span>=</span> str<span>.</span><span>replace</span><span>(</span>ch <span>+</span> <span>""</span><span>,</span> <span>""</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>str<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析-2" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(n)O(n)<em>O</em>(<em>n</em>),需要遍历字符串和数组。</li>
+<li>空间复杂度：O(n)O(n)<em>O</em>(<em>n</em>),临时数组temp。</li>
+</ul>
+<h3 id="方法二-借助hashmap来存储" tabindex="-1"> 方法二：借助HashMap来存储</h3>
+<h4 id="具体做法-2" tabindex="-1"> 具体做法</h4>
+<p>遍历字符串，将字符存入HashMap中，在遍历HashMap找到最小的values，在遍历一遍HashMap把不等于最小values的记录，最后输出。</p>
+<p>举例说明：aabcddd</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/D5EF2862C00A21BBFC433ECCC33C4476.gif" alt="alt" loading="lazy"></p>
+<h4 id="java代码-3" tabindex="-1"> Java代码</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>BufferedReader</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>IOException</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>InputStreamReader</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>HashMap</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>String</span> <span>delete</span><span>(</span><span>String</span> str<span>)</span> <span>{</span>
+        <span>// Map记录每个字母的次数</span>
+        <span>HashMap</span><span><span>&lt;</span><span>Character</span><span>,</span> <span>Integer</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>char</span> ch <span>:</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>//将每个字符存入其中</span>
+            map<span>.</span><span>put</span><span>(</span>ch<span>,</span> map<span>.</span><span>getOrDefault</span><span>(</span>ch<span>,</span> <span>1</span><span>)</span> <span>+</span> <span>1</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>// 快速找出最少次数</span>
+        <span>int</span> min <span>=</span> <span>Integer</span><span>.</span>MAX_VALUE<span>;</span>
+        <span>for</span> <span>(</span><span>int</span> times <span>:</span> map<span>.</span><span>values</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            min <span>=</span> <span>Math</span><span>.</span><span>min</span><span>(</span>min<span>,</span> times<span>)</span><span>;</span>
+        <span>}</span>
+        <span>//最后输出的值</span>
+        <span>StringBuilder</span> result <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>char</span> ch <span>:</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>if</span> <span>(</span>map<span>.</span><span>get</span><span>(</span>ch<span>)</span> <span>!=</span> min<span>)</span> <span>{</span>
+                result<span>.</span><span>append</span><span>(</span>ch<span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> result<span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> bf <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> s<span>;</span>
+        <span>while</span> <span>(</span><span>(</span>s <span>=</span> bf<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>!=</span><span>null</span><span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>delete</span><span>(</span>s<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析-3" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(n),需要多次遍历字符串和Map，但都不存在嵌套遍历。</li>
+<li>空间复杂度：O(n),借助了Map存储</li>
+</ul>
+<h2 id="hj25-数据分类处理" tabindex="-1"> <strong>HJ25</strong> <strong>数据分类处理</strong></h2>
+<h3 id="描述-9" tabindex="-1"> 描述</h3>
+<p>信息社会，有海量的数据需要分析处理，比如公安局分析身份证号码、 QQ 用户、手机号码、银行帐号等信息及活动记录。</p>
+<p>采集输入大数据和分类规则，通过大数据分类处理程序，将大数据分类输出。</p>
+<p>数据范围：1 \le I,R \le 100 \1≤<em>I</em>,<em>R</em>≤100 ，输入的整数大小满足 0 \le val \le 2^{31}-1\0≤<em>v<strong>a</strong>l</em>≤231−1</p>
+<h3 id="输入描述-9" tabindex="-1"> 输入描述：</h3>
+<p>一组输入整数序列I和一组规则整数序列R，I和R序列的第一个整数为序列的个数（个数不包含第一个整数）；整数范围为0~(2^31)-1，序列个数不限</p>
+<h3 id="输出描述-9" tabindex="-1"> 输出描述：</h3>
+<p>从R依次中取出R，对I进行处理，找到满足条件的I：</p>
+<p>I整数对应的数字需要连续包含R对应的数字。比如R为23，I为231，那么I包含了R，条件满足 。</p>
+<p>按R从小到大的顺序:</p>
+<p>(1)先输出R；</p>
+<p>(2)再输出满足条件的I的个数；</p>
+<p>(3)然后输出满足条件的I在I序列中的位置索引(从0开始)；</p>
+<p>(4)最后再输出I。</p>
+<p>附加条件：</p>
+<p>(1)R需要从小到大排序。相同的R只需要输出索引小的以及满足条件的I，索引大的需要过滤掉</p>
+<p>(2)如果没有满足条件的I，对应的R不用输出</p>
+<p>(3)最后需要在输出序列的第一个整数位置记录后续整数序列的个数(不包含“个数”本身)</p>
+<p>序列I：15,123,456,786,453,46,7,5,3,665,453456,745,456,786,453,123（第一个15表明后续有15个整数）</p>
+<p>序列R：5,6,3,6,3,0（第一个5表明后续有5个整数）</p>
+<p>输出：<em>30, 3,6,0,123</em>,3,453,7,3,9,453456,13,453,14,123,6,7,1,456,2,786,4,46,8,665,9,453456,11,456,12,786</p>
+<p>说明：</p>
+<p><em>30</em>----后续有30个整数</p>
+<p><em>3</em>----从小到大排序，第一个R为0，但没有满足条件的I，不输出0，而下一个R是3</p>
+<p><em>6---</em> <em>存在6个包含3的I</em></p>
+<p><em>0---</em> <em>123所在的原序号为0</em></p>
+<p><em>123---</em> <em>123包含3，满足条件</em></p>
+<h3 id="示例1-9" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>15 123 456 786 453 46 7 5 3 665 453456 745 456 786 453 123
+5 6 3 6 3 0
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>30 3 6 0 123 3 453 7 3 9 453456 13 453 14 123 6 7 1 456 2 786 4 46 8 665 9 453456 11 456 12 786
+</code></pre><div aria-hidden="true"><div></div></div></div><p>说明：</p>
+<div><pre><code>将序列R：5,6,3,6,3,0（第一个5表明后续有5个整数）排序去重后，可得0,3,6。
+序列I没有包含0的元素。
+序列I中包含3的元素有：I[0]的值为123、I[3]的值为453、I[7]的值为3、I[9]的值为453456、I[13]的值为453、I[14]的值为123。
+序列I中包含6的元素有：I[1]的值为456、I[2]的值为786、I[4]的值为46、I[8]的值为665、I[9]的值为453456、I[11]的值为456、I[12]的值为786。
+最后按题目要求的格式进行输出即可。    
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>题目主要信息</p>
+<p>1、 一组输入整数序列I和一组规则整数序列R，I和R序列的第一个整数为序列的个数（个数不包含第一个整数）；整数范围为0~(2^31)-1，序列个数不限</p>
+<p>2、 从R依次中取出R[i]，对I进行处理，找到满足条件的I</p>
+<p>3、按R[i]从小到大的顺序:</p>
+<p>(1)先输出R[i]；</p>
+<p>(2)再输出满足条件的I的个数；</p>
+<p>(3)然后输出满足条件的I在I序列中的位置索引(从0开始)；</p>
+<p>(4)最后再输出I。</p>
+<p>4、附加条件：</p>
+<p>(1)R[i]需要从小到大排序。相同的R[i]只需要输出索引小的以及满足条件的I，索引大的需要过滤掉</p>
+<p>(2)如果没有满足条件的I，对应的R[i]不用输出</p>
+<p>(3)最后需要在输出序列的第一个整数位置记录后续整数序列的个数(不包含“个数”本身)</p>
+<h3 id="方法一-直接暴力求解" tabindex="-1"> 方法一：直接暴力求解</h3>
+<h4 id="具体方法-1" tabindex="-1"> 具体方法</h4>
+<p>遍历每个R[i]，并遍历每个I[i]是否符合要求，符合的话就记录。</p>
+<p>Java代码</p>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>*</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span><span>//数据分类处理</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>BufferedReader</span> br <span>=</span> <span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> str<span>;</span>
+        <span>while</span> <span>(</span><span>(</span>str <span>=</span> br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span> <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            <span>if</span> <span>(</span>str<span>.</span><span>equals</span><span>(</span><span>""</span><span>)</span><span>)</span> <span>continue</span><span>;</span>
+            <span>//需要过了的I</span>
+            <span>String</span><span>[</span><span>]</span> <span>I</span> <span>=</span> str<span>.</span><span>split</span><span>(</span><span>" "</span><span>)</span><span>;</span>
+            <span>// R</span>
+            <span>String</span><span>[</span><span>]</span> temp <span>=</span> br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>.</span><span>split</span><span>(</span><span>" "</span><span>)</span><span>;</span>
+            <span>long</span><span>[</span><span>]</span> <span>R</span> <span>=</span> <span>new</span> <span>long</span><span>[</span><span>Integer</span><span>.</span><span>parseInt</span><span>(</span>temp<span>[</span><span>0</span><span>]</span><span>)</span><span>]</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> <span>R</span><span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>R</span><span>[</span>i<span>]</span> <span>=</span> <span>Long</span><span>.</span><span>parseLong</span><span>(</span>temp<span>[</span>i<span>+</span><span>1</span><span>]</span><span>)</span><span>;</span>
+            <span>//先对R进行排序 然后在依次遍历</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span><span>R</span><span>)</span><span>;</span>
+            <span>//最终的结果记录 </span>
+            <span>StringBuilder</span> result <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+            <span>int</span> count <span>=</span> <span>0</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> <span>R</span><span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>//当R中的值相等的时候 只保留第一个出现的 </span>
+                <span>if</span> <span>(</span>i <span>></span> <span>0</span> <span>&amp;&amp;</span> <span>R</span><span>[</span>i<span>]</span> <span>==</span> <span>R</span><span>[</span>i<span>-</span><span>1</span><span>]</span><span>)</span> <span>continue</span><span>;</span>
+                <span>//需要进行匹配的字符 </span>
+                <span>String</span> pattern <span>=</span> <span>R</span><span>[</span>i<span>]</span> <span>+</span> <span>""</span><span>;</span>
+                <span>int</span> num <span>=</span> <span>0</span><span>;</span>
+                <span>StringBuilder</span> index <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+                <span>for</span> <span>(</span><span>int</span> j <span>=</span> <span>1</span><span>;</span> j <span>&lt;</span> <span>I</span><span>.</span>length<span>;</span> j<span>++</span><span>)</span> <span>{</span>
+                    <span>//说明出现了 找到位置</span>
+                    <span>if</span> <span>(</span><span>I</span><span>[</span>j<span>]</span><span>.</span><span>indexOf</span><span>(</span>pattern<span>)</span> <span>!=</span> <span>-</span><span>1</span><span>)</span> <span>{</span>
+                        num<span>++</span><span>;</span>
+                        index<span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>j<span>-</span><span>1</span><span>)</span><span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span><span>I</span><span>[</span>j<span>]</span><span>)</span><span>;</span>
+                    <span>}</span>
+                <span>}</span>
+                <span>//说明存在跟此时R[i]匹配的I</span>
+                <span>if</span> <span>(</span>num <span>></span> <span>0</span><span>)</span><span>{</span>
+                    result<span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span><span>R</span><span>[</span>i<span>]</span><span>)</span><span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>num<span>)</span><span>.</span><span>append</span><span>(</span>index<span>)</span><span>;</span>
+                    count <span>+=</span> num<span>*</span><span>2</span><span>+</span><span>2</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>count <span>+</span> result<span>.</span><span>toString</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析-4" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(nm+mlogm)O(nm+mlogm)<em>O</em>(<em>n**m</em>+<em>m<strong>l</strong>o<strong>g</strong>m</em>)，需要两层for循环遍历，一层遍历R一层遍历I，另外就是进行了排序的操作。</li>
+<li>空间复杂度：O(1)O(1)<em>O</em>(1) ,都是常数级别变量</li>
+</ul>
+<h3 id="方法二-借助map" tabindex="-1"> 方法二：借助Map</h3>
+<h4 id="具体做法-3" tabindex="-1"> 具体做法</h4>
+<p>在每一轮遍历I的过程中，将当前I[i]存入到Map中，并以key和value的形式，其中key是当前元素的下标，value为当前元素的值。</p>
+<p>最终在遍历Map,将结果存入到最终的result结果中。</p>
+<h4 id="java代码-4" tabindex="-1"> Java代码</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>int</span> num <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>//读取I</span>
+            <span>String</span><span>[</span><span>]</span> array <span>=</span> <span>new</span> <span>String</span><span>[</span>num<span>]</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span><span>0</span><span>;</span> i<span>&lt;</span>num<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                array<span>[</span>i<span>]</span> <span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span>sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>//读取R</span>
+            <span>int</span> rnum <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>Set</span><span><span>&lt;</span><span>Integer</span><span>></span></span> set <span>=</span> <span>new</span> <span>TreeSet</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span><span>0</span><span>;</span> i<span>&lt;</span>rnum<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                set<span>.</span><span>add</span><span>(</span>sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+
+
+            <span>StringBuilder</span> result <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+            <span>int</span> count <span>=</span> <span>0</span><span>;</span><span>//记录符合的个数</span>
+            <span>//遍历 R</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>:</span> set<span>)</span> <span>{</span>
+                <span>int</span> j <span>=</span> <span>0</span><span>;</span><span>//记录I的每个元素的index</span>
+                <span>Map</span><span><span>&lt;</span><span>Integer</span><span>,</span> <span>String</span><span>></span></span> map <span>=</span> <span>new</span> <span>TreeMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+                <span>//在I中寻找符合要求的I[i]</span>
+                <span>for</span> <span>(</span><span>String</span> str <span>:</span> array<span>)</span> <span>{</span>
+                    <span>if</span> <span>(</span>str<span>.</span><span>contains</span><span>(</span><span>String</span><span>.</span><span>valueOf</span><span>(</span>i<span>)</span><span>)</span><span>)</span><span>{</span>
+                        map<span>.</span><span>put</span><span>(</span>j<span>,</span> str<span>)</span><span>;</span>
+                    <span>}</span>
+                    j<span>++</span><span>;</span>
+                <span>}</span>
+                <span>//如果Map非空 则存入result中 </span>
+                <span>if</span> <span>(</span><span>!</span>map<span>.</span><span>isEmpty</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                    <span>if</span> <span>(</span>count <span>></span> <span>0</span><span>)</span> <span>{</span>
+                        result<span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>;</span>
+                    <span>}</span>
+                    result<span>.</span><span>append</span><span>(</span>i<span>)</span><span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>map<span>.</span><span>size</span><span>(</span><span>)</span><span>)</span><span>;</span>
+                    count <span>+=</span><span>2</span><span>;</span><span>//多两个数组 </span>
+                    <span>for</span> <span>(</span><span>Map<span>.</span>Entry</span><span><span>&lt;</span><span>Integer</span><span>,</span> <span>String</span><span>></span></span> entry <span>:</span> map<span>.</span><span>entrySet</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                        count<span>+=</span><span>2</span><span>;</span>
+                        result<span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>entry<span>.</span><span>getKey</span><span>(</span><span>)</span><span>)</span><span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>entry<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
+                    <span>}</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>if</span> <span>(</span>count <span>></span> <span>0</span><span>)</span> <span>{</span>
+                <span>StringBuilder</span> result2 <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+                result2<span>.</span><span>append</span><span>(</span>count<span>)</span><span>.</span><span>append</span><span>(</span><span>" "</span><span>)</span><span>.</span><span>append</span><span>(</span>result<span>.</span><span>toString</span><span>(</span><span>)</span><span>)</span><span>;</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>result2<span>.</span><span>toString</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="复杂度分析-5" tabindex="-1"> 复杂度分析</h4>
+<ul>
+<li>时间复杂度：O(nm+mlog2m)O(nm+mlog2m)<em>O</em>(<em>n**m</em>+<em>m<strong>l</strong>o**g</em>2<em>m</em>)，需要两层for循环遍历，一层遍历R一层遍历I，另外就是进行了排序的操作。</li>
+<li>空间复杂度：O(n)O(n)<em>O</em>(<em>n</em>)，辅助空间为哈希表的长度.</li>
+</ul>
+<h3 id="方法三" tabindex="-1"> 方法三：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>/*
+         根据题解可知：整数序列I 和 规则整数序列R
+         1、是根据R中元素到I序列中进行匹配查询并将I序列中出现的R[i]的索引(index)和I[i]的值进行记录
+         2、定义集合用于记录待查找条件R[i]和R[i]出现的次数(count),最后将第一步得到的集合放进来即可，此处也可使用StringBuffer
+         */</span>
+        <span>Scanner</span> scanner <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span><span>(</span>scanner<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>int</span> <span>In</span> <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span> <span>//整数序列I的个数</span>
+            <span>String</span><span>[</span><span>]</span> <span>I_arr</span> <span>=</span>  <span>new</span> <span>String</span><span>[</span><span>In</span><span>]</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span><span>In</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+                <span>I_arr</span><span>[</span>i<span>]</span><span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span>scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+            
+            <span>int</span> <span>Rn</span> <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//规则整数序列R的个数</span>
+            <span>Set</span><span><span>&lt;</span><span>Integer</span><span>></span></span> <span>R_set</span> <span>=</span> <span>new</span> <span>TreeSet</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span><span>//使用TreeSet进行排序和去重</span>
+            <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i<span>&lt;</span><span>Rn</span><span>;</span> i<span>++</span><span>)</span><span>{</span>
+                <span>R_set</span><span>.</span><span>add</span><span>(</span>scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+            
+            <span>List</span><span><span>&lt;</span><span>Integer</span><span>></span></span> <span>I_list</span> <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span><span>//用于存储整数序列I</span>
+            <span>List</span><span><span>&lt;</span><span>Integer</span><span>></span></span> <span>R_list</span> <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span><span>//用于存储规则整数序列R</span>
+            <span>for</span><span>(</span><span>int</span> item <span>:</span> <span>R_set</span><span>)</span><span>{</span>
+               <span>int</span> count <span>=</span> <span>0</span><span>;</span><span>//统计R中元素在I中出现的次数</span>
+               <span>for</span><span>(</span><span>int</span> i <span>=</span><span>0</span><span>;</span> i<span>&lt;</span><span>I_arr</span><span>.</span>length<span>;</span> i<span>++</span><span>)</span><span>{</span>
+                   <span>if</span><span>(</span><span>I_arr</span><span>[</span>i<span>]</span><span>.</span><span>contains</span><span>(</span><span>String</span><span>.</span><span>valueOf</span><span>(</span>item<span>)</span><span>)</span><span>)</span><span>{</span>
+                       count<span>++</span><span>;</span>
+                       <span>I_list</span><span>.</span><span>add</span><span>(</span>i<span>)</span><span>;</span>
+                       <span>I_list</span><span>.</span><span>add</span><span>(</span><span>Integer</span><span>.</span><span>valueOf</span><span>(</span><span>I_arr</span><span>[</span>i<span>]</span><span>)</span><span>)</span><span>;</span>
+                   <span>}</span>
+               <span>}</span>
+               <span>if</span><span>(</span>count<span>></span><span>0</span><span>)</span><span>{</span>
+                   <span>R_list</span><span>.</span><span>add</span><span>(</span>item<span>)</span><span>;</span>
+                   <span>R_list</span><span>.</span><span>add</span><span>(</span>count<span>)</span><span>;</span>
+                   <span>R_list</span><span>.</span><span>addAll</span><span>(</span><span>I_list</span><span>)</span><span>;</span>
+               <span>}</span>
+               <span>I_list</span><span>.</span><span>clear</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>print</span><span>(</span><span>R_list</span><span>.</span><span>size</span><span>(</span><span>)</span><span>+</span><span>" "</span><span>)</span><span>;</span>
+            <span>for</span><span>(</span><span>Integer</span> i<span>:</span><span>R_list</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>print</span><span>(</span>i<span>+</span><span>" "</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj27-查找兄弟单词" tabindex="-1"> <strong>HJ27</strong> <strong>查找兄弟单词</strong></h2>
+<h3 id="描述-10" tabindex="-1"> 描述</h3>
+<p>定义一个单词的“兄弟单词”为：交换该单词字母顺序（注：可以交换任意次），而不添加、删除、修改原有的字母就能生成的单词。</p>
+<p>兄弟单词要求和原来的单词不同。例如： ab 和 ba 是兄弟单词。 ab 和 ab 则不是兄弟单词。</p>
+<p>现在给定你 n 个单词，另外再给你一个单词 x ，让你寻找 x 的兄弟单词里，按字典序排列后的第 k 个单词是什么？</p>
+<p>注意：字典中可能有重复单词。</p>
+<p>数据范围：1 \le n \le 1000 \1≤<em>n</em>≤1000 ，输入的字符串长度满足 1 \le len(str) \le 10 \1≤<em>l<strong>e</strong>n</em>(<em>s<strong>t</strong>r</em>)≤10 ， 1 \le k &lt; n \1≤<em>k</em>&lt;<em>n</em></p>
+<h3 id="输入描述-10" tabindex="-1"> 输入描述：</h3>
+<p>输入只有一行。 先输入字典中单词的个数n，再输入n个单词作为字典单词。 然后输入一个单词x 最后后输入一个整数k</p>
+<h3 id="输出描述-10" tabindex="-1"> 输出描述：</h3>
+<p>第一行输出查找到x的兄弟单词的个数m 第二行输出查找到的按照字典顺序排序后的第k个兄弟单词，没有符合第k个的话则不用输出。</p>
+<h3 id="示例1-10" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>3 abc bca cab abc 1
+</code></pre><div aria-hidden="true"><div></div></div></div><p>复制</p>
+<p>输出：</p>
+<div><pre><code>2
+bca
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>复制</p>
+<h3 id="示例2-1" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>6 cab ad abcd cba abc bca abc 1
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>3
+bca
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>说明：</p>
+<div><pre><code>abc的兄弟单词有cab cba bca，所以输出3
+经字典序排列后，变为bca cab cba，所以第1个字典序兄弟单词为bca       
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="代码-6" tabindex="-1"> 代码：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>/**
+ * 功能描述: <span><span><span>&lt;</span>br</span><span>></span></span>
+ * @Param: 输入：
+ * 6 cab ad abcd cba abc bca abc 1
+ * 复制
+ * 输出：
+ * 3
+ * bca
+ * 复制
+ * 说明：
+ * abc的兄弟单词有cab cba bca，所以输出3
+ * 经字典序排列后，变为bca cab cba，所以第1个字典序兄弟单词为bca
+ * @Return:
+ * @Author: guokun
+ * @Date: 2021/10/13 14:18
+ */</span>
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> scanner <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>scanner<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>String</span><span>[</span><span>]</span> ss <span>=</span> scanner<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>.</span><span>split</span><span>(</span><span>" "</span><span>)</span><span>;</span>
+            <span>Integer</span> a <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>ss<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+            <span>String</span> x <span>=</span> ss<span>[</span>ss<span>.</span>length<span>-</span><span>2</span><span>]</span><span>;</span>
+            <span>Integer</span> k <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>ss<span>[</span>ss<span>.</span>length<span>-</span><span>1</span><span>]</span><span>)</span><span>;</span>
+            <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> list <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>1</span><span>;</span> i <span>&lt;=</span>a <span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>if</span> <span>(</span><span>isBrother</span><span>(</span>x<span>,</span>ss<span>[</span>i<span>]</span><span>)</span><span>)</span><span>{</span>
+                        list<span>.</span><span>add</span><span>(</span>ss<span>[</span>i<span>]</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>int</span> size <span>=</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>size<span>)</span><span>;</span>
+            <span>if</span> <span>(</span>size<span>>=</span>k<span>)</span><span>{</span>
+                <span>Collections</span><span>.</span><span>sort</span><span>(</span>list<span>)</span><span>;</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>list<span>.</span><span>get</span><span>(</span>k<span>-</span><span>1</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+        <span>public</span> <span>static</span> <span>boolean</span> <span>isBrother</span><span>(</span><span>String</span> x<span>,</span><span>String</span> y<span>)</span><span>{</span>
+            <span>if</span> <span>(</span>x<span>.</span><span>length</span><span>(</span><span>)</span><span>!=</span>y<span>.</span><span>length</span><span>(</span><span>)</span><span>||</span>y<span>.</span><span>equals</span><span>(</span>x<span>)</span><span>)</span><span>{</span>
+                <span>return</span> <span>false</span><span>;</span>
+            <span>}</span>
+            <span>char</span><span>[</span><span>]</span> s <span>=</span> x<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span>
+            <span>char</span><span>[</span><span>]</span> j<span>=</span> y<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span>s<span>)</span><span>;</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span>j<span>)</span><span>;</span>
+            <span>return</span> <span>new</span> <span>String</span><span>(</span>s<span>)</span><span>.</span><span>equals</span><span>(</span><span>new</span> <span>String</span><span>(</span>j<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>1、对n个单词升序排序</p>
+<p>2、第n个单词和 x 相等 和 长度不一致的跳过</p>
+<p>3、对第n个单词 和 x 的每个字符升序排序，并比较是否相等，如果相等则为兄弟单词。</p>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+    <span>Scanner</span> in <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+    <span>while</span><span>(</span>in<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+        <span>int</span> num <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> datas <span>=</span> <span>new</span> <span>ArrayList</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span> <span>;</span> i <span>&lt;</span> num <span>;</span> i<span>++</span><span>)</span><span>{</span>
+            datas<span>.</span><span>add</span><span>(</span>in<span>.</span><span>next</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>String</span> x <span>=</span> in<span>.</span><span>next</span><span>(</span><span>)</span><span>;</span>
+        <span>char</span><span>[</span><span>]</span> xs <span>=</span> x<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span><span>//取反</span>
+        <span>int</span> index <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+        <span>Collections</span><span>.</span><span>sort</span><span>(</span>datas<span>)</span><span>;</span>
+        <span>int</span> count <span>=</span> <span>0</span><span>;</span>
+        <span>String</span> k <span>=</span> <span>""</span><span>;</span>
+        <span>for</span><span>(</span><span>String</span> str <span>:</span> datas<span>)</span><span>{</span>
+            <span>if</span><span>(</span>x<span>.</span><span>equals</span><span>(</span>str<span>)</span> <span>||</span> x<span>.</span><span>length</span><span>(</span><span>)</span> <span>!=</span> str<span>.</span><span>length</span><span>(</span><span>)</span><span>)</span><span>{</span>
+                <span>continue</span><span>;</span> <span>//字符串一样 和 长度不一样的跳过</span>
+            <span>}</span>
+            <span>char</span><span>[</span><span>]</span> strs <span>=</span> str<span>.</span><span>toCharArray</span><span>(</span><span>)</span><span>;</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span>xs<span>)</span><span>;</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span>strs<span>)</span><span>;</span>
+            <span>if</span><span>(</span><span>!</span><span>Arrays</span><span>.</span><span>equals</span><span>(</span>strs<span>,</span>xs<span>)</span><span>)</span><span>{</span>
+                <span>continue</span><span>;</span><span>//升序排序不相等，跳过</span>
+            <span>}</span>
+            count <span>+=</span> <span>1</span><span>;</span> <span>// 满足条件的累加</span>
+            <span>if</span> <span>(</span>count <span>==</span> index<span>)</span> <span>{</span>
+                k <span>=</span> str<span>;</span><span>//第K个兄弟单词</span>
+            <span>}</span>
+        <span>}</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>count<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>k<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj28-素数伴侣" tabindex="-1"> <strong>HJ28</strong> <strong>素数伴侣</strong></h2>
+<h3 id="描述-11" tabindex="-1"> 描述</h3>
+<p>题目描述
+若两个正整数的和为素数，则这两个正整数称之为“素数伴侣”，如2和5、6和13，它们能应用于通信加密。现在密码学会请你设计一个程序，从已有的 N （ N 为偶数）个正整数中挑选出若干对组成“素数伴侣”，挑选方案多种多样，例如有4个正整数：2，5，6，13，如果将5和6分为一组中只能得到一组“素数伴侣”，而将2和5、6和13编组将得到两组“素数伴侣”，能组成“素数伴侣”最多的方案称为“最佳方案”，当然密码学会希望你寻找出“最佳方案”。</p>
+<p>输入:</p>
+<p>有一个正偶数 n ，表示待挑选的自然数的个数。后面给出 n 个具体的数字。</p>
+<p>输出:</p>
+<p>输出一个整数 K ，表示你求得的“最佳方案”组成“素数伴侣”的对数。</p>
+<p>数据范围： 1 \le n \le 100 \1≤<em>n</em>≤100 ，输入的数据大小满足 2 \le val \le 30000 \2≤<em>v<strong>a</strong>l</em>≤30000</p>
+<h3 id="输入描述-11" tabindex="-1"> 输入描述：</h3>
+<p>输入说明
+1 输入一个正偶数 n
+2 输入 n 个整数</p>
+<h3 id="输出描述-11" tabindex="-1"> 输出描述：</h3>
+<p>求得的“最佳方案”组成“素数伴侣”的对数。</p>
+<h3 id="示例1-11" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>4
+2 5 6 13
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>2
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="示例2-2" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>2
+3 6
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>0
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="题意整理。" tabindex="-1"> 题意整理。</h3>
+<ul>
+<li>输入N（N为偶数）个正整数，从其中挑选出若干对组成“素数伴侣”。</li>
+<li>问怎么挑选，可以使得“素数伴侣”的对数最多。</li>
+<li>如果两个正整数的和为素数，则这两个正整数称之为“素数伴侣”。</li>
+</ul>
+<h3 id="方法一-匈牙利算法" tabindex="-1"> 方法一（匈牙利算法）</h3>
+<h4 id="_1-解题思路" tabindex="-1"> 1.解题思路</h4>
+<ul>
+<li>首先定义两个list容器，分别存储输入整数中的奇数和偶数。</li>
+<li>然后利用匈牙利算法找到“素数伴侣”对数最多时的配对数。匈牙利算法的核心思想是先到先得，能让就让。</li>
+<li>最后输出“素数伴侣”最多时的对数。</li>
+</ul>
+<p>图解展示（匈牙利算法）：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/0AA5426578FB65FAEA9C18632CFAFCFC.jpeg" alt="alt" loading="lazy"></p>
+<p>举例说明：如图所示，首先A1和B2配对（先到先得），然后轮到A2，A2也可以和B2配对，这时候B2发现A1还可以和B4配对，所以放弃了A1，选择和A2组成伴侣（能让就让）。接着A3直接和B1配对（先到先得）。最后A4尝试与B4配对，但是这样A1就只能与B2配对，而A2就找不到伴侣了，一层层递归下来，发现不可行，所以A4不能与B4配对。</p>
+<h4 id="_2-代码实现" tabindex="-1"> 2.代码实现</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Scanner</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>ArrayList</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    
+    <span>static</span> <span>int</span> max<span>=</span><span>0</span><span>;</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>//标准输入</span>
+        <span>Scanner</span> sc<span>=</span><span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>//输入正偶数</span>
+            <span>int</span> n<span>=</span>sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>//用于记录输入的n个整数</span>
+            <span>int</span><span>[</span><span>]</span> arr<span>=</span><span>new</span> <span>int</span><span>[</span>n<span>]</span><span>;</span>
+            <span>//用于存储所有的奇数</span>
+            <span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> odds<span>=</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>//用于存储所有的偶数</span>
+            <span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> evens<span>=</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                arr<span>[</span>i<span>]</span><span>=</span>sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+                <span>//将奇数添加到odds</span>
+                <span>if</span><span>(</span>arr<span>[</span>i<span>]</span><span>%</span><span>2</span><span>==</span><span>1</span><span>)</span><span>{</span>
+                    odds<span>.</span><span>add</span><span>(</span>arr<span>[</span>i<span>]</span><span>)</span><span>;</span>
+                <span>}</span>
+                <span>//将偶数添加到evens</span>
+                <span>if</span><span>(</span>arr<span>[</span>i<span>]</span><span>%</span><span>2</span><span>==</span><span>0</span><span>)</span><span>{</span>
+                    evens<span>.</span><span>add</span><span>(</span>arr<span>[</span>i<span>]</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>//下标对应已经匹配的偶数的下标，值对应这个偶数的伴侣</span>
+            <span>int</span><span>[</span><span>]</span> matcheven<span>=</span><span>new</span> <span>int</span><span>[</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+            <span>//记录伴侣的对数</span>
+            <span>int</span> count<span>=</span><span>0</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> j<span>=</span><span>0</span><span>;</span>j<span>&lt;</span>odds<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>j<span>++</span><span>)</span><span>{</span>
+                <span>//用于标记对应的偶数是否查找过</span>
+                <span>boolean</span><span>[</span><span>]</span> v<span>=</span><span>new</span> <span>boolean</span><span>[</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+                <span>//如果匹配上，则计数加1</span>
+                <span>if</span><span>(</span><span>find</span><span>(</span>odds<span>.</span><span>get</span><span>(</span>j<span>)</span><span>,</span>matcheven<span>,</span>evens<span>,</span>v<span>)</span><span>)</span><span>{</span>
+                    count<span>++</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>count<span>)</span><span>;</span>
+        <span>}</span>   
+    <span>}</span>
+    
+    <span>//判断奇数x能否找到伴侣</span>
+    <span>private</span> <span>static</span> <span>boolean</span> <span>find</span><span>(</span><span>int</span> x<span>,</span><span>int</span><span>[</span><span>]</span> matcheven<span>,</span><span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> evens<span>,</span><span>boolean</span><span>[</span><span>]</span> v<span>)</span><span>{</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+            <span>//该位置偶数没被访问过，并且能与x组成素数伴侣</span>
+            <span>if</span><span>(</span><span>isPrime</span><span>(</span>x<span>+</span>evens<span>.</span><span>get</span><span>(</span>i<span>)</span><span>)</span><span>&amp;&amp;</span>v<span>[</span>i<span>]</span><span>==</span><span>false</span><span>)</span><span>{</span>
+                v<span>[</span>i<span>]</span><span>=</span><span>true</span><span>;</span>
+                <span>/*如果i位置偶数还没有伴侣，则与x组成伴侣，如果已经有伴侣，并且这个伴侣能重新找到新伴侣，
+                则把原来伴侣让给别人，自己与x组成伴侣*/</span>
+                <span>if</span><span>(</span>matcheven<span>[</span>i<span>]</span><span>==</span><span>0</span><span>||</span><span>find</span><span>(</span>matcheven<span>[</span>i<span>]</span><span>,</span>matcheven<span>,</span>evens<span>,</span>v<span>)</span><span>)</span><span>{</span>
+                    matcheven<span>[</span>i<span>]</span><span>=</span>x<span>;</span>
+                    <span>return</span> <span>true</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> <span>false</span><span>;</span>
+    <span>}</span>
+    <span>//判断x是否是素数</span>
+    <span>private</span> <span>static</span> <span>boolean</span> <span>isPrime</span><span>(</span><span>int</span> x<span>)</span><span>{</span>
+        <span>if</span><span>(</span>x<span>==</span><span>1</span><span>)</span> <span>return</span> <span>false</span><span>;</span>
+        <span>//如果能被2到根号x整除，则一定不是素数</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>2</span><span>;</span>i<span>&lt;=</span><span>(</span><span>int</span><span>)</span><span>Math</span><span>.</span><span>sqrt</span><span>(</span>x<span>)</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+            <span>if</span><span>(</span>x<span>%</span>i<span>==</span><span>0</span><span>)</span><span>{</span>
+                <span>return</span> <span>false</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_3-复杂度分析" tabindex="-1"> 3.复杂度分析</h4>
+<ul>
+<li>时间复杂度：假设输入的奇数的数目为p，输入的偶数的数目为q，则find函数的时间复杂度为O(q2)O(q<sup>2)*O*(*q*2)，因为循环内还嵌套了一个递归，虽然还有一个判断是否是素数的函数，但是题目中输入的数据范围在1-100之间，所以这个判断素数的函数的时间复杂度为O(1)O(1)*O*(1)。最坏情况下，奇数和偶数的数目相等，均为n/2n/2*n*/2，此时find函数的复杂度为O(n2)O(n</sup>2)<em>O</em>(<em>n</em>2)，需要对所有的奇数执行find，所以时间复杂度为O(n3)O(n^3)<em>O</em>(<em>n</em>3)。</li>
+<li>空间复杂度：需要额外大小为p和q的list容器分别存储对应的奇数和偶数，p、q均不大于n，所以空间复杂度为O(n)O(n)<em>O</em>(<em>n</em>)。</li>
+</ul>
+<h3 id="方法二-利用io流" tabindex="-1"> 方法二（利用io流）</h3>
+<h4 id="_1-解题思路-1" tabindex="-1"> 1.解题思路</h4>
+<p>思路和方法一基本一致，不同的是通过io流操作来处理输入的数据。</p>
+<h4 id="_2-代码实现-1" tabindex="-1"> 2.代码实现</h4>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>io<span>.</span></span><span>*</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>ArrayList</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    
+    <span>static</span> <span>int</span> max<span>=</span><span>0</span><span>;</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span><span>{</span>
+        <span>//io输入</span>
+        <span>BufferedReader</span> br<span>=</span><span>new</span> <span>BufferedReader</span><span>(</span><span>new</span> <span>InputStreamReader</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>)</span><span>;</span>
+        <span>String</span> s<span>;</span>
+        <span>while</span><span>(</span><span>(</span>s<span>=</span>br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>)</span><span>!=</span><span>null</span><span>)</span><span>{</span>
+            <span>//输入正偶数n</span>
+            <span>int</span> n<span>=</span><span>Integer</span><span>.</span><span>parseInt</span><span>(</span>s<span>)</span><span>;</span>
+            <span>//输入n个整数</span>
+            <span>String</span><span>[</span><span>]</span> arr<span>=</span>br<span>.</span><span>readLine</span><span>(</span><span>)</span><span>.</span><span>split</span><span>(</span><span>" "</span><span>)</span><span>;</span> 
+            <span>//用于存储所有的奇数</span>
+            <span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> odds<span>=</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>//用于存储所有的偶数</span>
+            <span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> evens<span>=</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                <span>int</span> num<span>=</span><span>Integer</span><span>.</span><span>parseInt</span><span>(</span>arr<span>[</span>i<span>]</span><span>)</span><span>;</span>
+                <span>//将奇数添加到odds</span>
+                <span>if</span><span>(</span>num<span>%</span><span>2</span><span>==</span><span>1</span><span>)</span><span>{</span>
+                    odds<span>.</span><span>add</span><span>(</span>num<span>)</span><span>;</span>
+                <span>}</span>
+                <span>//将偶数添加到evens</span>
+                <span>if</span><span>(</span>num<span>%</span><span>2</span><span>==</span><span>0</span><span>)</span><span>{</span>
+                    evens<span>.</span><span>add</span><span>(</span>num<span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>//下标对应已经匹配的偶数的下标，值对应这个偶数的伴侣</span>
+            <span>int</span><span>[</span><span>]</span> matcheven<span>=</span><span>new</span> <span>int</span><span>[</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+            <span>//记录伴侣的对数</span>
+            <span>int</span> count<span>=</span><span>0</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> j<span>=</span><span>0</span><span>;</span>j<span>&lt;</span>odds<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>j<span>++</span><span>)</span><span>{</span>
+                <span>//用于标记对应的偶数是否查找过</span>
+                <span>boolean</span><span>[</span><span>]</span> v<span>=</span><span>new</span> <span>boolean</span><span>[</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>]</span><span>;</span>
+                <span>//如果匹配上，则计数加1</span>
+                <span>if</span><span>(</span><span>find</span><span>(</span>odds<span>.</span><span>get</span><span>(</span>j<span>)</span><span>,</span>matcheven<span>,</span>evens<span>,</span>v<span>)</span><span>)</span><span>{</span>
+                    count<span>++</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>count<span>)</span><span>;</span>
+        <span>}</span>   
+    <span>}</span>
+    
+    <span>//判断奇数x能否找到伴侣</span>
+    <span>private</span> <span>static</span> <span>boolean</span> <span>find</span><span>(</span><span>int</span> x<span>,</span><span>int</span><span>[</span><span>]</span> matcheven<span>,</span><span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> evens<span>,</span><span>boolean</span><span>[</span><span>]</span> v<span>)</span><span>{</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>evens<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+            <span>//该位置偶数没被访问过，并且能与x组成素数伴侣</span>
+            <span>if</span><span>(</span><span>isPrime</span><span>(</span>x<span>+</span>evens<span>.</span><span>get</span><span>(</span>i<span>)</span><span>)</span><span>&amp;&amp;</span>v<span>[</span>i<span>]</span><span>==</span><span>false</span><span>)</span><span>{</span>
+                v<span>[</span>i<span>]</span><span>=</span><span>true</span><span>;</span>
+                <span>/*如果i位置偶数还没有伴侣，则与x组成伴侣，如果已经有伴侣，并且这个伴侣能重新找到新伴侣，
+                则把原来伴侣让给别人，自己与x组成伴侣*/</span>
+                <span>if</span><span>(</span>matcheven<span>[</span>i<span>]</span><span>==</span><span>0</span><span>||</span><span>find</span><span>(</span>matcheven<span>[</span>i<span>]</span><span>,</span>matcheven<span>,</span>evens<span>,</span>v<span>)</span><span>)</span><span>{</span>
+                    matcheven<span>[</span>i<span>]</span><span>=</span>x<span>;</span>
+                    <span>return</span> <span>true</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> <span>false</span><span>;</span>
+    <span>}</span>
+    <span>//判断x是否是素数</span>
+    <span>private</span> <span>static</span> <span>boolean</span> <span>isPrime</span><span>(</span><span>int</span> x<span>)</span><span>{</span>
+        <span>if</span><span>(</span>x<span>==</span><span>1</span><span>)</span> <span>return</span> <span>false</span><span>;</span>
+        <span>//如果能被2到根号x整除，则一定不是素数</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>2</span><span>;</span>i<span>&lt;=</span><span>(</span><span>int</span><span>)</span><span>Math</span><span>.</span><span>sqrt</span><span>(</span>x<span>)</span><span>;</span>i<span>++</span><span>)</span><span>{</span>
+            <span>if</span><span>(</span>x<span>%</span>i<span>==</span><span>0</span><span>)</span><span>{</span>
+                <span>return</span> <span>false</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_3-复杂度分析-1" tabindex="-1"> 3.复杂度分析</h4>
+<ul>
+<li>时间复杂度：假设输入的奇数的数目为p，输入的偶数的数目为q，则find函数的时间复杂度为O(q2)O(q<sup>2)*O*(*q*2)，因为循环内还嵌套了一个递归，虽然还有一个判断是否是素数的函数，但是题目中输入的数据范围在1-100之间，所以这个判断素数的函数的时间复杂度为O(1)O(1)*O*(1)。最坏情况下，奇数和偶数的数目相等，均为n/2n/2*n*/2，此时find函数的复杂度为O(n2)O(n</sup>2)<em>O</em>(<em>n</em>2)，需要对所有的奇数执行find，所以时间复杂度为O(n3)O(n^3)<em>O</em>(<em>n</em>3)。</li>
+<li>空间复杂度：需要额外大小为p和q的list容器分别存储对应的奇数和偶数，p、q均不大于n，所以空间复杂度为O(n)O(n)<em>O</em>(<em>n</em>)。</li>
+</ul>
+<h2 id="hj33-整数与ip地址间的转换" tabindex="-1"> <strong>HJ33</strong> <strong>整数与IP地址间的转换</strong></h2>
+<h3 id="描述-12" tabindex="-1"> 描述</h3>
+<p>原理：ip地址的每段可以看成是一个0-255的整数，把每段拆分成一个二进制形式组合起来，然后把这个二进制数转变成
+一个长整数。
+举例：一个ip地址为10.0.3.193
+每段数字       相对应的二进制数
+10          00001010
+0          00000000
+3          00000011
+193         11000001</p>
+<p>组合起来即为：00001010 00000000 00000011 11000001,转换为10进制数就是：167773121，即该IP地址转换后的数字就是它了。</p>
+<p>数据范围：保证输入的是合法的 IP 序列</p>
+<h3 id="输入描述-12" tabindex="-1"> 输入描述：</h3>
+<p>输入
+1 输入IP地址
+2 输入10进制型的IP地址</p>
+<h3 id="输出描述-12" tabindex="-1"> 输出描述：</h3>
+<p>输出
+1 输出转换成10进制的IP地址
+2 输出转换后的IP地址</p>
+<h3 id="示例1-12" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>10.0.3.193
+167969729
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>167773121
+10.3.3.193
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="题目主要信息-1" tabindex="-1"> 题目主要信息</h3>
+<p>1、将ip地址转化为长整数</p>
+<p>2、将长整数转换为ip地址</p>
+<h3 id="方法一-通过二进制进行转换" tabindex="-1"> 方法一:通过二进制进行转换</h3>
+<h3 id="具体方法-2" tabindex="-1"> 具体方法</h3>
+<p>在问题中有两个转换过程，一个是将ip地址转换为长整数，一个是将长整数转换为ip地址，通过题目中的转换过程进行转换。 对于ip地址转换成长整数： 1、将ip地址切割成四段数字 2、每段数字用8位2二进制数字表示 3、将四段二进制数字组合 4、将二进制数字转换成长整数 对于长整数转换成ip地址则步骤相反 1、将长整数转换成32位二进制数字 2、将32位二进制数字进行切割 3、将每段的二进制数字转换为十进制数字 4、形成ip地址</p>
+<h3 id="java代码-5" tabindex="-1"> Java代码</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Scanner</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>String</span> s <span>=</span> sc<span>.</span><span>next</span><span>(</span><span>)</span><span>;</span>
+            <span>if</span><span>(</span>s<span>.</span><span>contains</span><span>(</span><span>"."</span><span>)</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>ip2num</span><span>(</span>s<span>)</span><span>)</span><span>;</span>
+            <span>}</span><span>else</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>num2ip</span><span>(</span><span>Long</span><span>.</span><span>parseLong</span><span>(</span>s<span>)</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>long</span> <span>ip2num</span><span>(</span><span>String</span> ip<span>)</span><span>{</span>
+        <span>String</span><span>[</span><span>]</span> iip <span>=</span> ip<span>.</span><span>split</span><span>(</span><span>"\\."</span><span>)</span><span>;</span>
+        <span>StringBuilder</span> sb <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span> i<span>&lt;</span><span>4</span><span>;</span> i<span>++</span><span>)</span><span>{</span>
+            <span>int</span> num <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>iip<span>[</span>i<span>]</span><span>)</span><span>;</span>  <span>// 拆分</span>
+            <span>String</span> num2 <span>=</span> <span>Integer</span><span>.</span><span>toBinaryString</span><span>(</span>num<span>)</span><span>;</span>  <span>//转换为二进制</span>
+            <span>while</span><span>(</span>num2<span>.</span><span>length</span><span>(</span><span>)</span><span>&lt;</span><span>8</span><span>)</span><span>{</span>
+                num2 <span>=</span> <span>"0"</span> <span>+</span> num2<span>;</span>  <span>// 拼接</span>
+            <span>}</span>
+            sb<span>.</span><span>append</span><span>(</span>num2<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> <span>Long</span><span>.</span><span>parseLong</span><span>(</span>sb<span>.</span><span>toString</span><span>(</span><span>)</span><span>,</span> <span>2</span><span>)</span><span>;</span>  <span>// 转化为10进制</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>String</span> <span>num2ip</span><span>(</span><span>long</span> num<span>)</span><span>{</span>
+        <span>String</span> num2 <span>=</span> <span>Long</span><span>.</span><span>toBinaryString</span><span>(</span>num<span>)</span><span>;</span>  <span>//转换为2进制</span>
+        <span>while</span><span>(</span>num2<span>.</span><span>length</span><span>(</span><span>)</span><span>&lt;</span><span>32</span><span>)</span><span>{</span>
+            num2 <span>=</span> <span>"0"</span> <span>+</span> num2<span>;</span>
+        <span>}</span>
+        <span>String</span><span>[</span><span>]</span> ans <span>=</span> <span>new</span> <span>String</span><span>[</span><span>4</span><span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span> i<span>&lt;</span><span>4</span><span>;</span> i<span>++</span><span>)</span><span>{</span>
+            <span>String</span> s <span>=</span> num2<span>.</span><span>substring</span><span>(</span><span>8</span><span>*</span>i<span>,</span> <span>8</span><span>*</span>i<span>+</span><span>8</span><span>)</span><span>;</span>  <span>//拆分</span>
+            s <span>=</span> <span>Integer</span><span>.</span><span>toString</span><span>(</span><span>Integer</span><span>.</span><span>parseInt</span><span>(</span>s<span>,</span> <span>2</span><span>)</span><span>)</span><span>;</span>  <span>//转化为10进制</span>
+            ans<span>[</span>i<span>]</span> <span>=</span> s<span>;</span>
+        <span>}</span>
+        <span>return</span> <span>String</span><span>.</span><span>join</span><span>(</span><span>"."</span><span>,</span> ans<span>)</span><span>;</span>  <span>//拼接</span>
+    <span>}</span>
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="复杂度分析-6" tabindex="-1"> 复杂度分析</h3>
+<ul>
+<li>时间复杂度：O(1)O(1)<em>O</em>(1)，均为常数级别的转换</li>
+<li>空间复杂度：O(1)O(1)<em>O</em>(1)</li>
+</ul>
+<h3 id="方法二-直接转换-10进制和256进制" tabindex="-1"> 方法二：直接转换（10进制和256进制）</h3>
+<h3 id="具体方法-3" tabindex="-1"> 具体方法</h3>
+<p>在第一种方法中，我们通过二进制进行转换，但是仔细分析之后，我们发现，二进制在转换过程中并没有起到作用，再进行重新分析，我们可以发现，ip地址实际上是256进制下的四位数字，所以我们可以直接进行转换，将10进制转化为256进制。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/A2CB19422F49F00D316AB0AFCA62827D.png" alt="alt" loading="lazy"></p>
+<h3 id="java代码-6" tabindex="-1"> Java代码</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Scanner</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>String</span> s <span>=</span> sc<span>.</span><span>next</span><span>(</span><span>)</span><span>;</span>
+            <span>if</span><span>(</span>s<span>.</span><span>contains</span><span>(</span><span>"."</span><span>)</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>ip2num</span><span>(</span>s<span>)</span><span>)</span><span>;</span>
+            <span>}</span><span>else</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>num2ip</span><span>(</span><span>Long</span><span>.</span><span>parseLong</span><span>(</span>s<span>)</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>long</span> <span>ip2num</span><span>(</span><span>String</span> ip<span>)</span><span>{</span>
+        <span>String</span><span>[</span><span>]</span> iip <span>=</span> ip<span>.</span><span>split</span><span>(</span><span>"\\."</span><span>)</span><span>;</span>
+        <span>Long</span> ans <span>=</span> <span>(</span><span>long</span><span>)</span><span>0</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i<span>&lt;</span><span>4</span><span>;</span> i<span>++</span><span>)</span><span>{</span>
+            ans <span>=</span> ans <span>*</span> <span>256</span> <span>+</span> <span>Long</span><span>.</span><span>parseLong</span><span>(</span>iip<span>[</span>i<span>]</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> ans<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>String</span> <span>num2ip</span><span>(</span><span>long</span> num<span>)</span><span>{</span>
+        <span>String</span><span>[</span><span>]</span> ans <span>=</span> <span>new</span> <span>String</span><span>[</span><span>4</span><span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i<span>=</span><span>3</span><span>;</span> i<span>>=</span><span>0</span><span>;</span> i<span>--</span><span>)</span><span>{</span>
+            ans<span>[</span>i<span>]</span> <span>=</span> <span>Long</span><span>.</span><span>toString</span><span>(</span>num <span>%</span> <span>256</span><span>)</span><span>;</span>
+            num <span>=</span> num <span>/</span> <span>256</span><span>;</span>
+        <span>}</span>
+        <span>return</span> <span>String</span><span>.</span><span>join</span><span>(</span><span>"."</span><span>,</span> ans<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="复杂度分析-7" tabindex="-1"> 复杂度分析</h3>
+<ul>
+<li>时间复杂度：O(1)O(1)<em>O</em>(1)，均为常数级别的转换</li>
+<li>空间复杂度：O(1)O(1)<em>O</em>(1)</li>
+</ul>
+<h2 id="hj41-称砝码" tabindex="-1"> <strong>HJ41</strong> <strong>称砝码</strong></h2>
+<h3 id="描述-13" tabindex="-1"> 描述</h3>
+<p>现有n种砝码，重量互不相等，分别为 m1,m2,m3…mn ；
+每种砝码对应的数量为 x1,x2,x3...xn 。现在要用这些砝码去称物体的重量(放在同一侧)，问能称出多少种不同的重量。</p>
+<p>注：</p>
+<p>称重重量包括 0</p>
+<p>数据范围：每组输入数据满足 1 \le n \le 10 \1≤<em>n</em>≤10 ， 1 \le m_i \le 2000 \1≤<em>m**i</em>≤2000 ， 1 \le x_i \le 10 \1≤<em>x**i</em>≤10</p>
+<h3 id="输入描述-13" tabindex="-1"> 输入描述：</h3>
+<p>对于每组测试数据：
+第一行：n --- 砝码的种数(范围[1,10])
+第二行：m1 m2 m3 ... mn --- 每种砝码的重量(范围[1,2000])
+第三行：x1 x2 x3 .... xn --- 每种砝码对应的数量(范围[1,10])</p>
+<h3 id="输出描述-13" tabindex="-1"> 输出描述：</h3>
+<p>利用给定的砝码可以称出的不同的重量数</p>
+<h3 id="示例1-13" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>2
+1 2
+2 1
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>5
+</code></pre><div aria-hidden="true"><div></div></div></div><p>说明：</p>
+<div><pre><code>可以表示出0，1，2，3，4五种重量。   
+</code></pre><div aria-hidden="true"><div></div></div></div><p>hashset去重，三层循环，遍历砝码，遍历砝码个数，遍历当前set的结果</p>
+<h3 id="代码-7" tabindex="-1"> 代码：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> in <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>in<span>.</span><span>hasNextInt</span><span>(</span><span>)</span><span>)</span> <span>{</span> <span>// 注意 while 处理多个 case</span>
+            <span>HashSet</span><span><span>&lt;</span><span>Integer</span><span>></span></span> set <span>=</span> <span>new</span> <span>HashSet</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span><span>//存放所有可能的结果，不用担心重复问题</span>
+            set<span>.</span><span>add</span><span>(</span><span>0</span><span>)</span><span>;</span><span>//初始化为0</span>
+            <span>int</span> n <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//个数</span>
+            <span>int</span><span>[</span><span>]</span> w <span>=</span> <span>new</span> <span>int</span><span>[</span>n<span>]</span><span>;</span>
+            <span>int</span><span>[</span><span>]</span> nums <span>=</span> <span>new</span> <span>int</span><span>[</span>n<span>]</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                w<span>[</span>i<span>]</span> <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//砝码的重量</span>
+            <span>}</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                nums<span>[</span>i<span>]</span> <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//砝码个数</span>
+            <span>}</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span><span>//遍历砝码</span>
+                <span>ArrayList</span><span><span>&lt;</span><span>Integer</span><span>></span></span> list <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span>set<span>)</span><span>;</span><span>//取当前所有的结果</span>
+                <span>for</span><span>(</span><span>int</span> j<span>=</span><span>1</span><span>;</span>j<span>&lt;=</span>nums<span>[</span>i<span>]</span><span>;</span>j<span>++</span><span>)</span><span>{</span><span>//遍历个数</span>
+                    <span>for</span><span>(</span><span>int</span> k<span>=</span><span>0</span><span>;</span>k<span>&lt;</span>list<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>k<span>++</span><span>)</span><span>{</span>
+                        set<span>.</span><span>add</span><span>(</span>list<span>.</span><span>get</span><span>(</span>k<span>)</span> <span>+</span> w<span>[</span>i<span>]</span> <span>*</span> j<span>)</span><span>;</span>
+                    <span>}</span>
+                <span>}</span>
+            <span>}</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>set<span>.</span><span>size</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj60-查找组成一个偶数最接近的两个素数" tabindex="-1"> <strong>HJ60</strong> <strong>查找组成一个偶数最接近的两个素数</strong></h2>
+<h3 id="描述-14" tabindex="-1"> 描述</h3>
+<p>任意一个偶数（大于2）都可以由2个素数组成，组成偶数的2个素数有很多种情况，本题目要求输出组成指定偶数的两个素数差值最小的素数对。</p>
+<p>数据范围：输入的数据满足 4 \le n \le 1000 \4≤<em>n</em>≤1000</p>
+<h3 id="输入描述-14" tabindex="-1"> 输入描述：</h3>
+<p>输入一个大于2的偶数</p>
+<h3 id="输出描述-14" tabindex="-1"> 输出描述：</h3>
+<p>从小到大输出两个素数</p>
+<h3 id="示例1-14" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>20
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>7
+13
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="示例2-3" tabindex="-1"> 示例2</h2>
+<p>输入：</p>
+<div><pre><code>4
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>2
+2
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="穷举优化" tabindex="-1"> 穷举优化</h3>
+<p><strong>解题思路：</strong></p>
+<p>采取从中间向两边枚举的方式，这样贪心的控制住两素数之差距离最小的这个限制</p>
+<p><strong>算法流程</strong>：</p>
+<ul>
+<li>对于每个数字，从最接近的两个中位数开始处理判断是否素数</li>
+<li>如果两个组成偶数的数字都是素数，因为是从最接近的两个数开始枚举，因此一旦都是素数则输出并返回，得到结果</li>
+</ul>
+<p><strong>Java 版本代码如下：</strong></p>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+ 
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> scanner <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>scanner<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+        	<span>int</span> num <span>=</span> scanner<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+        	<span>solution</span><span>(</span>num<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>private</span> <span>static</span> <span>void</span> <span>solution</span><span>(</span><span>int</span> num<span>)</span> <span>{</span>
+        <span>//如num=10, 遍历:5,6,7,8</span>
+        <span>// 从最接近的两个中位数开始处理判断</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> num <span>/</span> <span>2</span><span>;</span> i <span>&lt;</span> num <span>-</span> <span>1</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>if</span><span>(</span><span>isPrime</span><span>(</span>i<span>)</span> <span>&amp;&amp;</span> <span>isPrime</span><span>(</span>num <span>-</span> i<span>)</span><span>)</span> <span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>(</span>num <span>-</span> i<span>)</span> <span>+</span> <span>"\n"</span> <span>+</span> i<span>)</span><span>;</span>
+                <span>return</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+    <span>// 判断是否素数</span>
+    <span>private</span> <span>static</span> <span>boolean</span> <span>isPrime</span><span>(</span><span>int</span> num<span>)</span> <span>{</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>2</span><span>;</span> i <span>&lt;=</span> <span>Math</span><span>.</span><span>sqrt</span><span>(</span>num<span>)</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>if</span><span>(</span>num <span>%</span> i <span>==</span> <span>0</span><span>)</span> <span>{</span>
+                <span>return</span> <span>false</span><span>;</span>
+            <span>}</span>
+        <span>}</span> 
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj68-成绩排序" tabindex="-1"> <strong>HJ68</strong> <strong>成绩排序</strong></h2>
+<h3 id="描述-15" tabindex="-1"> 描述</h3>
+<p>给定一些同学的信息（名字，成绩）序列，请你将他们的信息按照成绩从高到低或从低到高的排列,相同成绩</p>
+<p>都按先录入排列在前的规则处理。</p>
+<p>例示：
+jack   70
+peter   96
+Tom    70
+smith   67</p>
+<p>从高到低 成绩
+peter   96
+jack   70
+Tom    70
+smith   67</p>
+<p>从低到高</p>
+<p>smith   67</p>
+<p>jack   70</p>
+<p>Tom    70</p>
+<p>peter   96</p>
+<p>注：0代表从高到低，1代表从低到高</p>
+<p>数据范围：人数：1\le n \le 200\1≤<em>n</em>≤200</p>
+<p>进阶：时间复杂度：O(nlogn)*O*(<em>n<strong>l</strong>o<strong>g</strong>n</em>) ，空间复杂度：O(n)*O*(<em>n</em>)</p>
+<h3 id="输入描述-15" tabindex="-1"> 输入描述：</h3>
+<p>第一行输入要排序的人的个数n，第二行输入一个整数表示排序的方式，之后n行分别输入他们的名字和成绩，以一个空格隔开</p>
+<h3 id="输出描述-15" tabindex="-1"> 输出描述：</h3>
+<p>按照指定方式输出名字和成绩，名字和成绩之间以一个空格隔开</p>
+<h3 id="示例1-15" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>3
+0
+fang 90
+yang 50
+ning 70
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>fang 90
+ning 70
+yang 50
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h3 id="示例2-4" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>3
+1
+fang 90
+yang 50
+ning 70
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>yang 50
+ning 70
+fang 90
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><strong>算法流程</strong>：</p>
+<ul>
+<li>通过一个二维数组，每一行包括姓名编号，成绩，将输入的姓名用编号代替，第二列保存成绩</li>
+<li>自定义排序
+<ul>
+<li>倒序，按第二列的成绩降序排列,如果相等的话，返回0，顺序不变，因为默认编号是升序的，符合题意</li>
+<li>升序则 按成绩升序排序</li>
+</ul>
+</li>
+<li>最后根据已经排序后的数组，顺序输出结果</li>
+</ul>
+<h3 id="代码-8" tabindex="-1"> 代码：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>HashMap</span><span><span>&lt;</span><span>Integer</span><span>,</span><span>String</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNextLine</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>// 学生成绩数</span>
+            <span>int</span> n <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>sc<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>//1是升序，0是降序</span>
+            <span>int</span> flag <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>sc<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>// 每一行包括姓名编号，成绩</span>
+            <span>int</span><span>[</span><span>]</span><span>[</span><span>]</span> score <span>=</span> <span>new</span> <span>int</span><span>[</span>n<span>]</span><span>[</span><span>2</span><span>]</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                <span>String</span><span>[</span><span>]</span> nameAndScore <span>=</span> sc<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>.</span><span>split</span><span>(</span><span>" "</span><span>)</span><span>;</span>
+                <span>// 学生用编号代替</span>
+                score<span>[</span>i<span>]</span><span>[</span><span>0</span><span>]</span> <span>=</span> i<span>;</span>
+                score<span>[</span>i<span>]</span><span>[</span><span>1</span><span>]</span> <span>=</span> <span>Integer</span><span>.</span><span>parseInt</span><span>(</span>nameAndScore<span>[</span><span>1</span><span>]</span><span>)</span><span>;</span>
+                map<span>.</span><span>put</span><span>(</span>i<span>,</span>nameAndScore<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>// 自定义排序</span>
+            <span>Arrays</span><span>.</span><span>sort</span><span>(</span>score<span>,</span><span>(</span>o1<span>,</span>o2<span>)</span> <span>-></span><span>{</span>
+                <span>// 倒序，按第二列的成绩降序排列,如果相等的话，返回0，顺序不变，因为默认编号是升序的，符合题意</span>
+                <span>if</span><span>(</span>flag<span>==</span><span>0</span><span>)</span><span>{</span>
+                    <span>return</span> o2<span>[</span><span>1</span><span>]</span> <span>-</span> o1<span>[</span><span>1</span><span>]</span><span>;</span>
+                <span>}</span><span>else</span><span>{</span>
+                    <span>// 按成绩升序排序</span>
+                    <span>return</span> o1<span>[</span><span>1</span><span>]</span> <span>-</span> o2<span>[</span><span>1</span><span>]</span><span>;</span>
+                <span>}</span>
+            <span>}</span><span>)</span><span>;</span>
+            <span>// 根据已经排序后的数组，顺序输出结果</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>n<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>map<span>.</span><span>get</span><span>(</span>score<span>[</span>i<span>]</span><span>[</span><span>0</span><span>]</span><span>)</span> <span>+</span> <span>" "</span> <span>+</span> score<span>[</span>i<span>]</span><span>[</span><span>1</span><span>]</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj101-输入整型数组和排序标识-对其元素按照升序或降序进行排序" tabindex="-1"> <strong>HJ101</strong> <strong>输入整型数组和排序标识，对其元素按照升序或降序进行排序</strong></h2>
+<h3 id="描述-16" tabindex="-1"> 描述</h3>
+<p>输入整型数组和排序标识，对其元素按照升序或降序进行排序</p>
+<p>数据范围： 1 \le n \le 1000 \1≤<em>n</em>≤1000 ，元素大小满足 0 \le val \le 100000 \0≤<em>v<strong>a</strong>l</em>≤100000</p>
+<h3 id="输入描述-16" tabindex="-1"> 输入描述：</h3>
+<p>第一行输入数组元素个数
+第二行输入待排序的数组，每个数用空格隔开
+第三行输入一个整数0或1。0代表升序排序，1代表降序排序</p>
+<h3 id="输出描述-16" tabindex="-1"> 输出描述：</h3>
+<p>输出排好序的数字</p>
+<h3 id="示例1-16" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>8
+1 2 4 9 3 55 64 25
+0
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>1 2 3 4 9 25 55 64
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="示例2-5" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>5
+1 2 3 4 5
+1
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>输出：</p>
+<div><pre><code>5 4 3 2 1
+</code></pre><div aria-hidden="true"><div></div></div></div><blockquote>
+<p>Scanner有多次输入，且存在输入数字组成数组的情况 建议使用while(sc.hasNext()) 判断是否存在下次输入，并按业务录入数字组成数组</p>
+</blockquote>
+<blockquote>
+<p>Arrays.sort方法可以对Integer数组 按Comparator自定义比较器执行排序，注意参数o1,o2, 左-右（o1-o2）是升序排序; 右-左（o2-o1）是降序排序;</p>
+</blockquote>
+<blockquote>
+<p>题解源代码</p>
+</blockquote>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+   
+        <span>//有多次输入，且存在输入数字组成数组的情况</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>//第一行输入数组元素个数</span>
+             <span>int</span> arrCount <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>//第二行输入待排序的数组，每个数用空格隔开</span>
+            <span>Integer</span><span>[</span><span>]</span> arr <span>=</span> <span>new</span> <span>Integer</span><span>[</span>arrCount<span>]</span><span>;</span>
+            <span>//录入 arrCount 个 数字，组成数组</span>
+            <span>for</span><span>(</span><span>int</span> i<span>=</span><span>0</span><span>;</span>i<span>&lt;</span>arrCount<span>;</span>i<span>++</span><span>)</span><span>{</span>
+                arr<span>[</span>i<span>]</span> <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>//第三行输入一个整数0或1。0代表升序排序，1代表降序排序</span>
+            <span>int</span> flagSort <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            
+            <span>if</span><span>(</span>flagSort<span>==</span><span>0</span><span>)</span><span>{</span>
+                <span>Arrays</span><span>.</span><span>sort</span><span>(</span>arr<span>,</span><span>new</span> <span>Comparator</span><span><span>&lt;</span><span>Integer</span><span>></span></span><span>(</span><span>)</span><span>{</span>
+                    <span>public</span> <span>int</span> <span>compare</span><span>(</span><span>Integer</span> o1 <span>,</span><span>Integer</span> o2<span>)</span><span>{</span>
+                        <span>return</span> o1<span>-</span>o2<span>;</span>
+                    <span>}</span>
+                <span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>if</span><span>(</span>flagSort<span>==</span><span>1</span><span>)</span><span>{</span>
+                <span>Arrays</span><span>.</span><span>sort</span><span>(</span>arr<span>,</span><span>new</span> <span>Comparator</span><span><span>&lt;</span><span>Integer</span><span>></span></span><span>(</span><span>)</span><span>{</span>
+                    <span>public</span> <span>int</span> <span>compare</span><span>(</span><span>Integer</span> o1 <span>,</span><span>Integer</span> o2<span>)</span><span>{</span>
+                        <span>return</span> o2<span>-</span>o1<span>;</span>
+                    <span>}</span>
+                <span>}</span><span>)</span><span>;</span>
+            <span>}</span>
+      
+            <span>for</span><span>(</span><span>Integer</span> m <span>:</span> arr<span>)</span><span>{</span>
+                <span>System</span><span>.</span>out<span>.</span><span>print</span><span>(</span>m <span>+</span> <span>" "</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>break</span><span>;</span>
+        <span>}</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>)</span><span>;</span>
+  
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ol start="2">
+<li></li>
+</ol>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+	<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+		<span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+		<span>while</span><span>(</span>sc<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span><span>{</span>
+			<span>int</span> n <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//接收数组长度</span>
+			<span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>new</span> <span>int</span><span>[</span>n<span>]</span><span>;</span><span>//创建数组</span>
+
+			<span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span><span>//数组填入</span>
+				arr<span>[</span>i<span>]</span> <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+			<span>}</span>
+			
+			<span>int</span> flag <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span><span>//接收排序标识</span>
+			<span>Arrays</span><span>.</span><span>sort</span><span>(</span>arr<span>)</span><span>;</span><span>//数组排序</span>
+
+			<span>if</span> <span>(</span>flag <span>==</span> <span>0</span><span>)</span> <span>{</span><span>//正序输出</span>
+				<span>for</span><span>(</span><span>int</span> i <span>=</span><span>0</span><span>;</span> i <span>&lt;</span> arr<span>.</span>length<span>;</span> i<span>++</span><span>)</span><span>{</span>
+					<span>System</span><span>.</span>out<span>.</span><span>print</span><span>(</span>arr<span>[</span>i<span>]</span> <span>+</span> <span>" "</span><span>)</span><span>;</span>
+				<span>}</span> 
+			<span>}</span>
+			<span>else</span> <span>{</span><span>//逆序输出</span>
+					<span>for</span><span>(</span><span>int</span> i <span>=</span> arr<span>.</span>length <span>-</span> <span>1</span><span>;</span> i <span>>=</span> <span>0</span><span>;</span> i<span>--</span><span>)</span><span>{</span>
+						<span>System</span><span>.</span>out<span>.</span><span>print</span><span>(</span>arr<span>[</span>i<span>]</span> <span>+</span> <span>" "</span><span>)</span><span>;</span>
+					<span>}</span>
+			<span>}</span>
+		<span>}</span>
+	<span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj106-字符逆序" tabindex="-1"> <strong>HJ106</strong> <strong>字符逆序</strong></h2>
+<h3 id="描述-17" tabindex="-1"> 描述</h3>
+<p>将一个字符串str的内容颠倒过来，并输出。</p>
+<p>数据范围：1 \le len(str) \le 10000\1≤<em>l<strong>e</strong>n</em>(<em>s<strong>t</strong>r</em>)≤10000</p>
+<h3 id="输入描述-17" tabindex="-1"> 输入描述：</h3>
+<p>输入一个字符串，可以有空格</p>
+<h3 id="输出描述-17" tabindex="-1"> 输出描述：</h3>
+<p>输出逆序的字符串</p>
+<h3 id="示例1-17" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>I am a student
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>tneduts a ma I
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="示例2-6" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>nowcoder
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>redocwon
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="代码-9" tabindex="-1"> 代码：</h3>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> scan <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>String</span> input <span>=</span> scan<span>.</span><span>nextLine</span><span>(</span><span>)</span><span>;</span>
+        <span>StringBuilder</span> res <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span>input<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>res<span>.</span><span>reverse</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="hj108-求最小公倍数" tabindex="-1"> <strong>HJ108</strong> <strong>求最小公倍数</strong></h2>
+<h3 id="描述-18" tabindex="-1"> 描述</h3>
+<p>正整数A和正整数B 的最小公倍数是指 能被A和B整除的最小的正整数值，设计一个算法，求输入A和B的最小公倍数。</p>
+<p>数据范围：1 \le a,b \le 100000 \1≤<em>a</em>,<em>b</em>≤100000</p>
+<h3 id="输入描述-18" tabindex="-1"> 输入描述：</h3>
+<p>输入两个正整数A和B。</p>
+<h3 id="输出描述-18" tabindex="-1"> 输出描述：</h3>
+<p>输出A和B的最小公倍数。</p>
+<h3 id="示例1-18" tabindex="-1"> 示例1</h3>
+<p>输入：</p>
+<div><pre><code>5 7
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>35
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="示例2-7" tabindex="-1"> 示例2</h3>
+<p>输入：</p>
+<div><pre><code>2 4
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输出：</p>
+<div><pre><code>4
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="代码-10" tabindex="-1"> 代码：</h3>
+<p>a，b的最大公约数为gcd（a，b），最小公倍数的公式为：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/right}{gcd(a%2Cb)}.svg" alt="图片说明" loading="lazy">
+此题说是正数，所以绝对值无所谓了。我们可以发现题目带了‘递归’的标签，那么就用递归来实现gcd，既是面向题目编程，又方便了自己，一举两得。</p>
+<p>gcd的算法是根据Euclidean algorithm来的，拿维基百科的例子来说：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/equation.svg" alt="图片说明" loading="lazy"></p>
+<blockquote>
+<p>计算<em>a</em> = 1071和<em>b</em> = 462的最大公约数的过程如下：从1071中不断减去462直到小于462（可以减2次，即商<em>q</em>0 = 2），余数是147：</p>
+<p>1071 = 2 × 462 + 147.</p>
+<p>然后从462中不断减去147直到小于147（可以减3次，即<em>q</em>1 = 3），余数是21：</p>
+<p>462 = 3 × 147 + 21.</p>
+<p>再从147中不断减去21直到小于21（可以减7次，即<em>q</em>2 = 7），没有余数：</p>
+<p>147 = 7 × 21 + 0.</p>
+<p>此时，余数是0，所以1071和462的<strong>最大公约数</strong>是21。</p>
+</blockquote>
+<div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>*</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span><span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span><span>{</span>
+        <span>Scanner</span> sc <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span><span>(</span>sc<span>.</span><span>hasNextInt</span><span>(</span><span>)</span><span>)</span><span>{</span>
+            <span>int</span> a <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>int</span> b <span>=</span> sc<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>Math</span><span>.</span><span>min</span><span>(</span>a<span>,</span>b<span>)</span><span>;</span> i <span>></span> <span>0</span><span>;</span> i<span>--</span><span>)</span><span>{</span>
+                <span>if</span><span>(</span>a<span>%</span>i <span>==</span> <span>0</span> <span>&amp;&amp;</span> b<span>%</span>i <span>==</span> <span>0</span><span>)</span><span>{</span>
+                    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>a<span>*</span>b<span>/</span>i<span>)</span><span>;</span>
+                    <span>break</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Scanner</span></span><span>;</span>
+
+<span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>Scanner</span> in <span>=</span> <span>new</span> <span>Scanner</span><span>(</span><span>System</span><span>.</span>in<span>)</span><span>;</span>
+        <span>while</span> <span>(</span>in<span>.</span><span>hasNextInt</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+            <span>int</span> a <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>int</span> b <span>=</span> in<span>.</span><span>nextInt</span><span>(</span><span>)</span><span>;</span>
+            <span>int</span> lcm <span>=</span> a<span>*</span>b <span>/</span> <span>gcd</span><span>(</span>a<span>,</span>b<span>)</span><span>;</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>lcm<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>int</span> <span>gcd</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
+            <span>if</span> <span>(</span>b<span>==</span><span>0</span><span>)</span> <span>return</span> a<span>;</span>
+            <span>return</span> <span>gcd</span><span>(</span>b<span>,</span>a<span>%</span>b<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
     <author>
       <name>xlc520</name>
     </author>
@@ -2448,7 +4038,7 @@ A
     <contributor>
       <name>xlc520</name>
     </contributor>
-    <published>2022-05-28T00:00:00.000Z</published>
+    <published>2022-05-31T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
   <entry>
