@@ -6,6 +6,22 @@
   "description": "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
   "items": [
     {
+      "title": "以你之名，书我一生",
+      "url": "https://xlc520.github.io/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html",
+      "id": "https://xlc520.github.io/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html",
+      "content_html": "<h1 id=\"以你之名-书我一生\" tabindex=\"-1\"> 以你之名，书我一生</h1>\n<p><strong>“未曾相逢先一笑，初会便已许平生。”</strong></p>\n<p><strong>我本是一颗暗淡无光的星，坐落于银色海洋之上，直到听见了另外一个星系的回声，于是便努力的将我这颗星球为你亮起。</strong></p>\n<p><strong>我们没必要去花心思设想未来如何应对，而应该武装自己，只为了当有一天遇见的时候，能够理直气壮地说:我知道你很好，但是我也不差。</strong></p>\n<p><strong>多希望彼此是一直喜欢，一直热爱，这样我就能恒久地执着地望向你。</strong></p>\n<p><strong>后来我才知道，她并不是为我盛开的花，我只是恰好途径了她的盛放。</strong></p>\n<p><strong>浮世三千吾爱有三，日、月与卿，日为朝月为暮，卿为朝朝暮暮。</strong></p>\n<p><strong>以你之名，书我一生。酸甜苦辣，与你共享;三餐四季，与你共度。</strong></p>\n",
+      "date_published": "2022-06-16T00:00:00.000Z",
+      "date_modified": "2022-05-31T03:47:31.000Z",
+      "authors": [
+        {
+          "name": "xlc520"
+        }
+      ],
+      "tags": [
+        "article"
+      ]
+    },
+    {
       "title": "七大排序（代码+动图演示）",
       "url": "https://xlc520.github.io/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html",
       "id": "https://xlc520.github.io/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html",
@@ -1721,24 +1737,6 @@
       ],
       "tags": [
         "Git"
-      ]
-    },
-    {
-      "title": "Centos7 Minimal 安装后初始化配置",
-      "url": "https://xlc520.github.io/linux/Centos7Minimal.html",
-      "id": "https://xlc520.github.io/linux/Centos7Minimal.html",
-      "summary": "Centos7 Minimal 安装后初始化配置",
-      "content_html": "<h1 id=\"centos7-minimal-安装后初始化配置\" tabindex=\"-1\"> Centos7 Minimal 安装后初始化配置</h1>\n<p></p>\n<h2 id=\"_1-更新yum\" tabindex=\"-1\"> 1:更新yum</h2>\n<p><code>yum upgrade</code></p>\n<h2 id=\"_2-安装基础命令\" tabindex=\"-1\"> 2: 安装基础命令</h2>\n<div><pre><code>yum -y <span>install</span> vim* lrzsz  gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel\nyum -y <span>install</span> telnet net-tools\n\n安装ifconfig\nyum provides <span>ifconfig</span>\n</code></pre><div aria-hidden=\"true\"><div></div><div></div><div></div><div></div><div></div></div></div><h2 id=\"_3-设置ip\" tabindex=\"-1\"> 3: 设置IP</h2>\n<p><code>ip addr</code></p>\n<p><img src=\"http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/3.jpg\" alt=\"\" loading=\"lazy\"></p>\n<p>暂时未分配IP, 所以进行如下修改</p>\n<h3 id=\"_3-1-分配随机ip\" tabindex=\"-1\"> 3.1 分配随机IP</h3>\n<p>分配静态IP请看3.2</p>\n<div><pre><code><span>cd</span> /etc/sysconfig/network-scripts\n<span>vim</span> ifcfg-ens192\n</code></pre><div aria-hidden=\"true\"><div></div><div></div></div></div><p><img src=\"http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/1.jpg\" alt=\"\" loading=\"lazy\"></p>\n<p>将ONBOOT=no修改为ONBOOT=yes保存退出\n重启网络服务</p>\n<p><code>service network restart</code></p>\n<p>再次输入</p>\n<p><code>ip addr</code></p>\n<h3 id=\"_3-2-设置静态ip\" tabindex=\"-1\"> 3.2: 设置静态IP</h3>\n<p><img src=\"http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/2.jpg\" alt=\"\" loading=\"lazy\"></p>\n<p>设置完,重启网络\n<code>service network restart</code>\n再次输入\n<code>ip addr</code></p>\n<h3 id=\"_3-永久关闭selinux\" tabindex=\"-1\"> 3:永久关闭Selinux</h3>\n<p><code>vim /etc/sysconfig/selinux</code></p>\n<p><code>SELINUX=enforcing</code> 改为 <code>SELINUX=disabled</code>\n重启服务<code>reboot</code></p>\n",
-      "image": "http://alist.ciberviler.top/d/ecloud180/images/linux/Centos7Minimal_files/3.jpg",
-      "date_published": "2022-01-28T00:00:00.000Z",
-      "date_modified": "2022-05-21T06:23:01.000Z",
-      "authors": [
-        {
-          "name": "xlc520"
-        }
-      ],
-      "tags": [
-        "Linux"
       ]
     }
   ]
