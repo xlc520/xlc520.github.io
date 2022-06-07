@@ -17,9 +17,10 @@ password:
 
 分为两个版本，普通版和音频焦点版，根据自己需求选一个
 
-搭配[NoANR2.3(点击下载)](https://github.com/myflavor/NoANR/releases/tag/V2.3)
+搭配[NoANR(点击下载)](https://github.com/myflavor/NoANR/releases/)
 
 [Thanox3.9.9(点击下载)](https://coolstars.lanzoum.com/in97305v6ewj)
+[github](https://github.com/Tornaco/Thanox/releases)
 
 ### 普通版
 
@@ -199,7 +200,7 @@ password:
 ```json
 [
     {
-        "name": "冻结进程",
+        "name": "冻结进程(合并)",
         "description": "当应用进入后台时冻结进程",
         "priority": -1,
         "condition": "frontPkgChanged && thanos.getActivityManager().isPkgSmartStandByEnabled(from)",
@@ -218,7 +219,7 @@ password:
 ```json
 [
     {
-        "name": "解冻进程",
+        "name": "解冻进程(合并)",
         "description": "当应用进入前台时解冻进程",
         "priority": 1,
         "condition": "frontPkgChanged && thanos.getActivityManager().isPkgSmartStandByEnabled(to)",
