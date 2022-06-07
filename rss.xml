@@ -6,13 +6,13 @@
     <link>https://xlc520.github.io/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 07 Jun 2022 05:48:22 GMT</pubDate>
-    <lastBuildDate>Tue, 07 Jun 2022 05:48:22 GMT</lastBuildDate>
+    <pubDate>Tue, 07 Jun 2022 07:57:02 GMT</pubDate>
+    <lastBuildDate>Tue, 07 Jun 2022 07:57:02 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>daily</category>
     <category>article</category>
     <category>Java</category>
-    <category>daily</category>
     <category>algorithm</category>
     <category>other</category>
     <category>Script</category>
@@ -23,6 +23,183 @@
     <category>java</category>
     <category>IDEA</category>
     <category>coding</category>
+    <item>
+      <title>Thanox 碑情景模式</title>
+      <link>https://xlc520.github.io/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</link>
+      <guid>https://xlc520.github.io/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</guid>
+      <source url="https://xlc520.github.io/rss.xml">Thanox 碑情景模式</source>
+      <description>Thanox 墓碑情景模式</description>
+      <category>daily</category>
+      <pubDate>Tue, 21 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="thanox墓碑情景模式" tabindex="-1"> Thanox墓碑情景模式</h1>
+<h2 id="最终合并2022-06-06" tabindex="-1"> 最终合并2022.06.06</h2>
+<p>分为两个版本，普通版和音频焦点版，根据自己需求选一个</p>
+<p>搭配<a href="https://github.com/myflavor/NoANR/releases/tag/V2.3" target="_blank" rel="noopener noreferrer">NoANR2.3(点击下载)</a></p>
+<p><a href="https://coolstars.lanzoum.com/in97305v6ewj" target="_blank" rel="noopener noreferrer">Thanox3.9.9(点击下载)</a></p>
+<h3 id="普通版" tabindex="-1"> 普通版</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"NoActive"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"普通版-应用进入后台冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>-1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"if(thanos.getActivityManager().isPkgSmartStandByEnabled(to)){su.exe(\"kill -CONT `pgrep -f \"+ to + \"`\");su.exe(\"appops set \" +to + \" WAKE_LOCK default\")}"</span><span>,</span>
+            <span>"if(!thanos.getActivityManager().isPkgSmartStandByEnabled(from)){break}"</span><span>,</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + from + \" WAKE_LOCK ignore\");"</span><span>,</span>
+            <span>"Thread.sleep(2000);"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(from)){su.exe(\"kill -STOP `pgrep -f \"+ from +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="音频焦点版" tabindex="-1"> 音频焦点版</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"NoActive"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>" 音频焦点版-应用进入后台冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>-1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"if(thanos.getActivityManager().isPkgSmartStandByEnabled(to)){su.exe(\"kill -CONT `pgrep -f \"+ to + \"`\");su.exe(\"appops set \" +to + \" WAKE_LOCK default\")}"</span><span>,</span>
+            <span>"if(!thanos.getActivityManager().isPkgSmartStandByEnabled(from)){break}"</span><span>,</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"if(su.exe(\"dumpsys audio|grep client:|grep -v died|cut -d ' ' -f 6\").out.contains(from)){break}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + from + \" WAKE_LOCK ignore\");"</span><span>,</span>
+            <span>"Thread.sleep(2000);"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(from)){su.exe(\"kill -STOP `pgrep -f \"+ from +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"NoActive(Plus)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>" 音频焦点版-应用通知移除冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"notificationRemoved &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(pkgName)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(pkgName + \"/\")){break}}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + pkgName + \" WAKE_LOCK ignore\");"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(pkgName)){su.exe(\"kill -STOP `pgrep -f \"+ pkgName +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2022-06-05更新" tabindex="-1"> 2022.06.05更新</h2>
+<p>不再使用whiteApps全局变量，使用乖巧规则，即乖巧KEEP规则就是白名单</p>
+<h3 id="解冻-通用" tabindex="-1"> 解冻(通用)</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"解冻进程(通用)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"当应用进入前台时解冻进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(to)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"su.exe(\"kill -CONT `pgrep -f \"+ to + \"`\");"</span><span>,</span>
+            <span>"su.exe(\"appops set \" +to + \" WAKE_LOCK default\");"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>冻结有两个版本，一个普通版，一个跳过音频焦点版（获得音频焦点的应用不会被冻结，大部分音乐播放器在播放的时候都会获取音频焦点，暂停时取消焦点，部分流氓APP暂停不会取消音频焦点，由于是从shell取的值，可能部分机子会有问题？）
+全局变量whiteApps可添加白名单APP跳过墓碑仅乖巧</p>
+<h3 id="普通版-1" tabindex="-1"> 普通版</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程(AppOps)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"普通版-当应用进入后台时设置AppOps"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + from + \" WAKE_LOCK ignore\");"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"普通版-当应用进入后台时冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>2</span><span>,</span>
+        <span>"delay"</span><span>:</span> <span>2000</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(from)){su.exe(\"kill -STOP `pgrep -f \"+ from +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="跳过音频焦点版" tabindex="-1"> 跳过音频焦点版</h3>
+<p>（推荐开启乖巧模式跳过通知的应用或者设置乖巧规则）</p>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程(AppOps)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"跳过音频焦点版-当应用进入后台时设置AppOps"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"if(su.exe(\"dumpsys audio|grep client:|grep -v died|cut -d ' ' -f 6\").out.contains(from)){break}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + from + \" WAKE_LOCK ignore\");"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"跳过音频焦点版-当应用进入后台时冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>2</span><span>,</span>
+        <span>"delay"</span><span>:</span> <span>2000</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"if(su.exe(\"dumpsys audio|grep client:|grep -v died|cut -d ' ' -f 6\").out.contains(from)){break}"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(from)){su.exe(\"kill -STOP `pgrep -f \"+ from +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程(增强)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"跳过音频焦点版-当应用通知移除时冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"notificationRemoved &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(pkgName)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(pkgName + \"/\")){break}}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + pkgName + \" WAKE_LOCK ignore\");"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(pkgName)){su.exe(\"kill -STOP `pgrep -f \"+ pkgName +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="合并" tabindex="-1"> 合并</h2>
+<h3 id="合并冻结" tabindex="-1"> 合并冻结</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"当应用进入后台时冻结进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>-1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") &amp;&amp; rule.contains(from + \"/\")){break}}"</span><span>,</span>
+            <span>"su.exe(\"appops set \" + from + \" WAKE_LOCK ignore\");"</span><span>,</span>
+            <span>"Thread.sleep(2000);"</span><span>,</span>
+            <span>"if(activity.getFrontAppPackage()!=from &amp;&amp; !thanos.windowManager.hasVisibleWindows(from)){su.exe(\"kill -STOP `pgrep -f \"+ from +\"`\")};"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="合并解冻" tabindex="-1"> 合并解冻</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"解冻进程"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"当应用进入前台时解冻进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(to)"</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"su.exe(\"kill -CONT `pgrep -f \"+ to + \"`\");"</span><span>,</span>
+            <span>"su.exe(\"appops set \" +to + \" WAKE_LOCK default\");"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+    </item>
     <item>
       <title>鲁迅名言</title>
       <link>https://xlc520.github.io/article/%E9%B2%81%E8%BF%85%E5%90%8D%E8%A8%80.html</link>
@@ -28005,20 +28182,6 @@ com.miui.permcenter.privacymanager.SpecialPermissionInterceptActivity
 <p><img src="http://image.coolapk.com/feed/2022/0108/07/2064506_223ddc9c_8655_7651_953@1080x2400.jpeg.m.jpg" alt="img" loading="lazy"></p>
 ]]></content:encoded>
       <enclosure url="http://image.coolapk.com/feed/2022/0108/07/2064506_f18ce68b_8655_7643_90@324x720.gif" type="image/gif"/>
-    </item>
-    <item>
-      <title>影视软件TV-APK</title>
-      <link>https://xlc520.github.io/daily/%E5%BD%B1%E8%A7%86%E8%BD%AF%E4%BB%B6TV-APK.html</link>
-      <guid>https://xlc520.github.io/daily/%E5%BD%B1%E8%A7%86%E8%BD%AF%E4%BB%B6TV-APK.html</guid>
-      <source url="https://xlc520.github.io/rss.xml">影视软件TV-APK</source>
-      <description>影视软件TV-APK</description>
-      <category>daily</category>
-      <pubDate>Fri, 18 Mar 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="影视软件tv-apk" tabindex="-1"> 影视软件TV-APK</h1>
-<h3 id="米来影视" tabindex="-1"> 米来影视</h3>
-<p><a href="https://milaitv.cc/" target="_blank" rel="noopener noreferrer">https://milaitv.cc/</a></p>
-<p><a href="https://kanhu.lanzoux.com/b00v9k8ed" target="_blank" rel="noopener noreferrer">https://kanhu.lanzoux.com/b00v9k8ed</a></p>
-]]></content:encoded>
     </item>
   </channel>
 </rss>
