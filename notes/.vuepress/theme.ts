@@ -3,11 +3,11 @@ import navbar from "./navbar";
 import sidebar from "./sidebar";
 
 export default hopeTheme({
-  hostname: "https://xlc520.github.io",
+  hostname: "https://blog.ciberviler.top",
 
   author: {
     name: "xlc520",
-    url: "https://xlc520.github.io",
+    url: "https://github.com/xlc520",
   },
 
   iconPrefix: "iconfont icon-",
