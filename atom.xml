@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
-  <id>https://xlc520.github.io/</id>
+  <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-07T07:57:02.447Z</updated>
+  <updated>2022-06-07T08:59:56.922Z</updated>
   <generator>vuepress-plugin-feed2</generator>
-  <link rel="self" href="https://xlc520.github.io/atom.xml"/>
-  <link rel="alternate" href="https://xlc520.github.io/"/>
+  <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
+  <link rel="alternate" href="https://blog.ciberviler.top/"/>
   <category term="daily"/>
   <category term="article"/>
   <category term="Java"/>
@@ -25,15 +25,16 @@
   </contributor>
   <entry>
     <title type="html">Thanox 碑情景模式</title>
-    <id>https://xlc520.github.io/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</id>
-    <link href="https://xlc520.github.io/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html"/>
-    <updated>2022-06-07T07:55:03.000Z</updated>
+    <id>https://blog.ciberviler.top/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</id>
+    <link href="https://blog.ciberviler.top/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html"/>
+    <updated>2022-06-07T08:58:05.000Z</updated>
     <summary type="html">Thanox 墓碑情景模式</summary>
     <content type="html"><![CDATA[<h1 id="thanox墓碑情景模式" tabindex="-1"> Thanox墓碑情景模式</h1>
 <h2 id="最终合并2022-06-06" tabindex="-1"> 最终合并2022.06.06</h2>
 <p>分为两个版本，普通版和音频焦点版，根据自己需求选一个</p>
-<p>搭配<a href="https://github.com/myflavor/NoANR/releases/tag/V2.3" target="_blank" rel="noopener noreferrer">NoANR2.3(点击下载)</a></p>
-<p><a href="https://coolstars.lanzoum.com/in97305v6ewj" target="_blank" rel="noopener noreferrer">Thanox3.9.9(点击下载)</a></p>
+<p>搭配<a href="https://github.com/myflavor/NoANR/releases/" target="_blank" rel="noopener noreferrer">NoANR(点击下载)</a></p>
+<p><a href="https://coolstars.lanzoum.com/in97305v6ewj" target="_blank" rel="noopener noreferrer">Thanox3.9.9(点击下载)</a>
+<a href="https://github.com/Tornaco/Thanox/releases" target="_blank" rel="noopener noreferrer">github</a></p>
 <h3 id="普通版" tabindex="-1"> 普通版</h3>
 <div><pre><code><span>[</span>
     <span>{</span>
@@ -171,7 +172,7 @@
 <h3 id="合并冻结" tabindex="-1"> 合并冻结</h3>
 <div><pre><code><span>[</span>
     <span>{</span>
-        <span>"name"</span><span>:</span> <span>"冻结进程"</span><span>,</span>
+        <span>"name"</span><span>:</span> <span>"冻结进程(合并)"</span><span>,</span>
         <span>"description"</span><span>:</span> <span>"当应用进入后台时冻结进程"</span><span>,</span>
         <span>"priority"</span><span>:</span> <span>-1</span><span>,</span>
         <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(from)"</span><span>,</span>
@@ -186,7 +187,7 @@
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="合并解冻" tabindex="-1"> 合并解冻</h3>
 <div><pre><code><span>[</span>
     <span>{</span>
-        <span>"name"</span><span>:</span> <span>"解冻进程"</span><span>,</span>
+        <span>"name"</span><span>:</span> <span>"解冻进程(合并)"</span><span>,</span>
         <span>"description"</span><span>:</span> <span>"当应用进入前台时解冻进程"</span><span>,</span>
         <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
         <span>"condition"</span><span>:</span> <span>"frontPkgChanged &amp;&amp; thanos.getActivityManager().isPkgSmartStandByEnabled(to)"</span><span>,</span>
@@ -209,8 +210,8 @@
   </entry>
   <entry>
     <title type="html">鲁迅名言</title>
-    <id>https://xlc520.github.io/article/%E9%B2%81%E8%BF%85%E5%90%8D%E8%A8%80.html</id>
-    <link href="https://xlc520.github.io/article/%E9%B2%81%E8%BF%85%E5%90%8D%E8%A8%80.html"/>
+    <id>https://blog.ciberviler.top/article/%E9%B2%81%E8%BF%85%E5%90%8D%E8%A8%80.html</id>
+    <link href="https://blog.ciberviler.top/article/%E9%B2%81%E8%BF%85%E5%90%8D%E8%A8%80.html"/>
     <updated>2022-06-07T02:14:17.000Z</updated>
     <content type="html"><![CDATA[<h1 id="鲁迅名言" tabindex="-1"> 鲁迅名言</h1>
 <p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16545675217234.jpeg" alt="图片" loading="lazy"></p>
@@ -336,8 +337,8 @@
   </entry>
   <entry>
     <title type="html">通过Nginx来实现禁止国外IP访问网站</title>
-    <id>https://xlc520.github.io/dev/%E9%80%9A%E8%BF%87Nginx%E6%9D%A5%E5%AE%9E%E7%8E%B0%E7%A6%81%E6%AD%A2%E5%9B%BD%E5%A4%96IP%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99.html</id>
-    <link href="https://xlc520.github.io/dev/%E9%80%9A%E8%BF%87Nginx%E6%9D%A5%E5%AE%9E%E7%8E%B0%E7%A6%81%E6%AD%A2%E5%9B%BD%E5%A4%96IP%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99.html"/>
+    <id>https://blog.ciberviler.top/dev/%E9%80%9A%E8%BF%87Nginx%E6%9D%A5%E5%AE%9E%E7%8E%B0%E7%A6%81%E6%AD%A2%E5%9B%BD%E5%A4%96IP%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E9%80%9A%E8%BF%87Nginx%E6%9D%A5%E5%AE%9E%E7%8E%B0%E7%A6%81%E6%AD%A2%E5%9B%BD%E5%A4%96IP%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99.html"/>
     <updated>2022-06-03T02:53:13.000Z</updated>
     <content type="html"><![CDATA[<h1 id="通过nginx来实现禁止国外ip访问网站" tabindex="-1"> 通过Nginx来实现禁止国外IP访问网站</h1>
 <p>前言： 先来说说为啥要写这篇文章，之前小编看了下nginx 的访问日志，发现每天有好多国外的IP地址来访问我的网站，并且访问的内容基本上都是恶意的。因此 我决定 禁止国外IP 来访问我的网站</p>
@@ -472,8 +473,8 @@ nginx: configuration <span>file</span> /usr/local/nginx/conf/nginx.conf <span>te
   </entry>
   <entry>
     <title type="html">一个减少MIUI动画掉帧的方法</title>
-    <id>https://xlc520.github.io/daily/%E4%B8%80%E4%B8%AA%E5%87%8F%E5%B0%91MIUI%E5%8A%A8%E7%94%BB%E6%8E%89%E5%B8%A7%E7%9A%84%E6%96%B9%E6%B3%95.html</id>
-    <link href="https://xlc520.github.io/daily/%E4%B8%80%E4%B8%AA%E5%87%8F%E5%B0%91MIUI%E5%8A%A8%E7%94%BB%E6%8E%89%E5%B8%A7%E7%9A%84%E6%96%B9%E6%B3%95.html"/>
+    <id>https://blog.ciberviler.top/daily/%E4%B8%80%E4%B8%AA%E5%87%8F%E5%B0%91MIUI%E5%8A%A8%E7%94%BB%E6%8E%89%E5%B8%A7%E7%9A%84%E6%96%B9%E6%B3%95.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E4%B8%80%E4%B8%AA%E5%87%8F%E5%B0%91MIUI%E5%8A%A8%E7%94%BB%E6%8E%89%E5%B8%A7%E7%9A%84%E6%96%B9%E6%B3%95.html"/>
     <updated>2022-06-03T02:53:04.000Z</updated>
     <content type="html"><![CDATA[<h1 id="一个减少miui动画掉帧的方法" tabindex="-1"> 一个减少MIUI动画掉帧的方法</h1>
 <p>分享一个减少MIUI12动画掉帧的方法。</p>
@@ -495,8 +496,8 @@ nginx: configuration <span>file</span> /usr/local/nginx/conf/nginx.conf <span>te
   </entry>
   <entry>
     <title type="html">SpringCloud Gateway API接口安全设计（加密 、签名）</title>
-    <id>https://xlc520.github.io/dev/SpringCloudGatewayAPI%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1.html</id>
-    <link href="https://xlc520.github.io/dev/SpringCloudGatewayAPI%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringCloudGatewayAPI%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringCloudGatewayAPI%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1.html"/>
     <updated>2022-06-03T02:45:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="springcloud-gateway-api接口安全设计-加密-、签名" tabindex="-1"> SpringCloud Gateway API接口安全设计（加密 、签名）</h1>
 <h1 id="_1-防止数据抓包窃取" tabindex="-1"> 1 防止数据抓包窃取</h1>
@@ -1529,8 +1530,8 @@ id：<span><span><span>&lt;</span>input</span> <span>id</span><span><span>=</spa
   </entry>
   <entry>
     <title type="html">以你之名，书我一生</title>
-    <id>https://xlc520.github.io/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html</id>
-    <link href="https://xlc520.github.io/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html"/>
+    <id>https://blog.ciberviler.top/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html</id>
+    <link href="https://blog.ciberviler.top/article/%E4%BB%A5%E4%BD%A0%E4%B9%8B%E5%90%8D%EF%BC%8C%E4%B9%A6%E6%88%91%E4%B8%80%E7%94%9F.html"/>
     <updated>2022-05-31T03:47:31.000Z</updated>
     <content type="html"><![CDATA[<h1 id="以你之名-书我一生" tabindex="-1"> 以你之名，书我一生</h1>
 <p><strong>“未曾相逢先一笑，初会便已许平生。”</strong></p>
@@ -1553,8 +1554,8 @@ id：<span><span><span>&lt;</span>input</span> <span>id</span><span><span>=</spa
   </entry>
   <entry>
     <title type="html">七大排序（代码+动图演示）</title>
-    <id>https://xlc520.github.io/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html</id>
-    <link href="https://xlc520.github.io/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html"/>
+    <id>https://blog.ciberviler.top/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html</id>
+    <link href="https://blog.ciberviler.top/algorithm/%E4%B8%83%E5%A4%A7%E6%8E%92%E5%BA%8F.html"/>
     <updated>2022-05-30T04:24:37.000Z</updated>
     <content type="html"><![CDATA[<h1 id="七大排序-代码-动图演示" tabindex="-1"> 七大排序（代码+动图演示）</h1>
 <h2 id="_1-排序的概念及其运用" tabindex="-1"> 1.排序的概念及其运用</h2>
@@ -2782,8 +2783,8 @@ void TestOP()
   </entry>
   <entry>
     <title type="html">图片防盗链的破解和反破解</title>
-    <id>https://xlc520.github.io/other/%E5%9B%BE%E7%89%87%E9%98%B2%E7%9B%97%E9%93%BE%E7%9A%84%E7%A0%B4%E8%A7%A3%E5%92%8C%E5%8F%8D%E7%A0%B4%E8%A7%A3.html</id>
-    <link href="https://xlc520.github.io/other/%E5%9B%BE%E7%89%87%E9%98%B2%E7%9B%97%E9%93%BE%E7%9A%84%E7%A0%B4%E8%A7%A3%E5%92%8C%E5%8F%8D%E7%A0%B4%E8%A7%A3.html"/>
+    <id>https://blog.ciberviler.top/other/%E5%9B%BE%E7%89%87%E9%98%B2%E7%9B%97%E9%93%BE%E7%9A%84%E7%A0%B4%E8%A7%A3%E5%92%8C%E5%8F%8D%E7%A0%B4%E8%A7%A3.html</id>
+    <link href="https://blog.ciberviler.top/other/%E5%9B%BE%E7%89%87%E9%98%B2%E7%9B%97%E9%93%BE%E7%9A%84%E7%A0%B4%E8%A7%A3%E5%92%8C%E5%8F%8D%E7%A0%B4%E8%A7%A3.html"/>
     <updated>2022-05-30T04:24:29.000Z</updated>
     <content type="html"><![CDATA[<h1 id="图片防盗链的破解和反破解" tabindex="-1"> 图片防盗链的破解和反破解</h1>
 <h2 id="原理" tabindex="-1"> 原理</h2>
@@ -2875,8 +2876,8 @@ void TestOP()
   </entry>
   <entry>
     <title type="html">E5 调用API续订服务：Microsoft 365 E5 Renew X</title>
-    <id>https://xlc520.github.io/other/Microsoft-365-E5-RenewX.html</id>
-    <link href="https://xlc520.github.io/other/Microsoft-365-E5-RenewX.html"/>
+    <id>https://blog.ciberviler.top/other/Microsoft-365-E5-RenewX.html</id>
+    <link href="https://blog.ciberviler.top/other/Microsoft-365-E5-RenewX.html"/>
     <updated>2022-05-29T06:33:39.000Z</updated>
     <content type="html"><![CDATA[<h1 id="e5-调用api续订服务-microsoft-365-e5-renew-x" tabindex="-1"> E5 调用API续订服务：Microsoft 365 E5 Renew X</h1>
 <p>Microsoft 365 E5 Renew X是一款网页版的E5续订服务，其依赖网页浏览器呈现支持用户多端操作，完全将E5账户API调用托管在了服务器端因此用户无需电脑也可使用。</p>
@@ -3137,8 +3138,8 @@ void TestOP()
   </entry>
   <entry>
     <title type="html">E5 调用API续订程序：Microsoft 365 E5 Renew Plus</title>
-    <id>https://xlc520.github.io/other/Microsoft-365-E5-RenewPlus.html</id>
-    <link href="https://xlc520.github.io/other/Microsoft-365-E5-RenewPlus.html"/>
+    <id>https://blog.ciberviler.top/other/Microsoft-365-E5-RenewPlus.html</id>
+    <link href="https://blog.ciberviler.top/other/Microsoft-365-E5-RenewPlus.html"/>
     <updated>2022-05-29T06:33:31.000Z</updated>
     <content type="html"><![CDATA[<h1 id="e5-调用api续订程序-microsoft-365-e5-renew-plus" tabindex="-1"> E5 调用API续订程序：Microsoft 365 E5 Renew Plus</h1>
 <h2 id="microsoft-365-e5-renew-plus的由来" tabindex="-1"> Microsoft 365 E5 Renew Plus的由来</h2>
@@ -3421,8 +3422,8 @@ Mail.Send; MailboxSettings.Read; Notes.Read.All; Sites.Read.All; User.Read.All;<
   </entry>
   <entry>
     <title type="html">快速排序</title>
-    <id>https://xlc520.github.io/algorithm/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html</id>
-    <link href="https://xlc520.github.io/algorithm/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html"/>
+    <id>https://blog.ciberviler.top/algorithm/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html</id>
+    <link href="https://blog.ciberviler.top/algorithm/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html"/>
     <updated>2022-05-29T03:37:51.000Z</updated>
     <summary type="html">快速排序</summary>
     <content type="html"><![CDATA[<h1 id="快速排序" tabindex="-1"> 快速排序</h1>
@@ -3576,8 +3577,8 @@ num[last]&lt;key交换元素后，转向左边部分，用num[first]与key进行
   </entry>
   <entry>
     <title type="html">算法</title>
-    <id>https://xlc520.github.io/algorithm/</id>
-    <link href="https://xlc520.github.io/algorithm/"/>
+    <id>https://blog.ciberviler.top/algorithm/</id>
+    <link href="https://blog.ciberviler.top/algorithm/"/>
     <updated>2022-05-28T14:45:05.000Z</updated>
     <summary type="html">各类算法，刷题</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -3598,8 +3599,8 @@ num[last]&lt;key交换元素后，转向左边部分，用num[first]与key进行
   </entry>
   <entry>
     <title type="html">牛客网-华为机试</title>
-    <id>https://xlc520.github.io/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html</id>
-    <link href="https://xlc520.github.io/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html"/>
+    <id>https://blog.ciberviler.top/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html</id>
+    <link href="https://blog.ciberviler.top/algorithm/%E7%89%9B%E5%AE%A2%E7%BD%91-%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95.html"/>
     <updated>2022-05-31T13:51:34.000Z</updated>
     <summary type="html">华为笔试面试机考在线练习</summary>
     <content type="html"><![CDATA[<h1 id="牛客网-华为机试" tabindex="-1"> 牛客网-华为机试</h1>
@@ -5545,8 +5546,8 @@ fang 90
   </entry>
   <entry>
     <title type="html">Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据</title>
-    <id>https://xlc520.github.io/dev/Springboot%E5%88%A9%E7%94%A8ThreadPoolTaskExecutor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E7%99%BE%E4%B8%87%E7%BA%A7%E6%95%B0%E6%8D%AE.html</id>
-    <link href="https://xlc520.github.io/dev/Springboot%E5%88%A9%E7%94%A8ThreadPoolTaskExecutor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E7%99%BE%E4%B8%87%E7%BA%A7%E6%95%B0%E6%8D%AE.html"/>
+    <id>https://blog.ciberviler.top/dev/Springboot%E5%88%A9%E7%94%A8ThreadPoolTaskExecutor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E7%99%BE%E4%B8%87%E7%BA%A7%E6%95%B0%E6%8D%AE.html</id>
+    <link href="https://blog.ciberviler.top/dev/Springboot%E5%88%A9%E7%94%A8ThreadPoolTaskExecutor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E7%99%BE%E4%B8%87%E7%BA%A7%E6%95%B0%E6%8D%AE.html"/>
     <updated>2022-05-28T14:44:42.000Z</updated>
     <summary type="html">Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据</summary>
     <content type="html"><![CDATA[<h1 id="springboot利用threadpooltaskexecutor多线程批量插入百万级数据" tabindex="-1"> Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据</h1>
@@ -5674,8 +5675,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">使用CloudFlareWorkers反代网站</title>
-    <id>https://xlc520.github.io/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html</id>
-    <link href="https://xlc520.github.io/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html"/>
+    <id>https://blog.ciberviler.top/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html</id>
+    <link href="https://blog.ciberviler.top/script/%E4%BD%BF%E7%94%A8CloudFlareWorkers%E5%8F%8D%E4%BB%A3%E7%BD%91%E7%AB%99.html"/>
     <updated>2022-05-27T11:24:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="使用cloudflareworkers反代网站" tabindex="-1"> 使用CloudFlareWorkers反代网站</h1>
 <p>给出三种反代源码。</p>
@@ -6158,8 +6159,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">谷歌Gmail注册显示此号码不能验证的解决办法</title>
-    <id>https://xlc520.github.io/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</id>
-    <link href="https://xlc520.github.io/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html"/>
+    <id>https://blog.ciberviler.top/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</id>
+    <link href="https://blog.ciberviler.top/other/%E8%B0%B7%E6%AD%8CGmail%E6%B3%A8%E5%86%8C%E6%98%BE%E7%A4%BA%E6%AD%A4%E5%8F%B7%E7%A0%81%E4%B8%8D%E8%83%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html"/>
     <updated>2022-05-27T11:24:40.000Z</updated>
     <content type="html"><![CDATA[<h1 id="谷歌gmail注册显示此号码不能验证的解决办法" tabindex="-1"> 谷歌Gmail注册显示此号码不能验证的解决办法</h1>
 <p>谷歌账号注册中国手机号不能验证，很多同学在注册谷歌账号时经常会遇到这个问题，一直卡在电话号码验证上，是国内手机号不能通过谷歌的验证吗？</p>
@@ -6204,8 +6205,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">新版QQ修改彩色颜色字体代码教程</title>
-    <id>https://xlc520.github.io/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html</id>
-    <link href="https://xlc520.github.io/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html"/>
+    <id>https://blog.ciberviler.top/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html</id>
+    <link href="https://blog.ciberviler.top/other/%E6%96%B0%E7%89%88QQ%E4%BF%AE%E6%94%B9%E5%BD%A9%E8%89%B2%E9%A2%9C%E8%89%B2%E5%AD%97%E4%BD%93%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B.html"/>
     <updated>2022-05-27T11:24:33.000Z</updated>
     <summary type="html">Other</summary>
     <content type="html"><![CDATA[<h1 id="新版qq修改彩色颜色字体代码教程" tabindex="-1"> 新版QQ修改彩色颜色字体代码教程</h1>
@@ -6277,8 +6278,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">QQ动态群聊昵称代码</title>
-    <id>https://xlc520.github.io/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html</id>
-    <link href="https://xlc520.github.io/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html"/>
+    <id>https://blog.ciberviler.top/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html</id>
+    <link href="https://blog.ciberviler.top/other/QQ%E5%8A%A8%E6%80%81%E7%BE%A4%E8%81%8A%E6%98%B5%E7%A7%B0%E4%BB%A3%E7%A0%81.html"/>
     <updated>2022-05-27T11:24:25.000Z</updated>
     <content type="html"><![CDATA[<h1 id="qq动态群聊昵称代码" tabindex="-1"> QQ动态群聊昵称代码</h1>
 <h2 id="代码" tabindex="-1"> 代码</h2>
@@ -6317,8 +6318,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">服务器入侵排查</title>
-    <id>https://xlc520.github.io/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html</id>
-    <link href="https://xlc520.github.io/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html"/>
+    <id>https://blog.ciberviler.top/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html</id>
+    <link href="https://blog.ciberviler.top/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5.html"/>
     <updated>2022-05-27T07:56:31.000Z</updated>
     <content type="html"><![CDATA[<h1 id="服务器入侵排查" tabindex="-1"> 服务器入侵排查</h1>
 <h3 id="_1-入侵者可能会删除机器的日志信息" tabindex="-1"> 1.<strong>入侵者可能会删除机器的日志信息</strong></h3>
@@ -6379,8 +6380,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">搞定 SpringBoot 接口恶意刷新和暴力请求</title>
-    <id>https://xlc520.github.io/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%90%9E%E5%AE%9ASpringBoot%E6%8E%A5%E5%8F%A3%E6%81%B6%E6%84%8F%E5%88%B7%E6%96%B0%E5%92%8C%E6%9A%B4%E5%8A%9B%E8%AF%B7%E6%B1%82.html"/>
     <updated>2022-05-27T07:56:12.000Z</updated>
     <content type="html"><![CDATA[<h1 id="搞定-springboot-接口恶意刷新和暴力请求" tabindex="-1"> 搞定 SpringBoot 接口恶意刷新和暴力请求</h1>
 <p>在实际项目使用中，必须要考虑服务的安全性，当服务部署到互联网以后，就要考虑服务被恶意请求和暴力攻击的情况，下面的教程，通过<code>intercept</code>和<code>redis</code>针对<code>url+ip</code>在一定时间内访问的次数来将ip禁用，可以根据自己的需求进行相应的修改，来打打自己的目的；</p>
@@ -6580,8 +6581,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">9个很酷的CMD命令</title>
-    <id>https://xlc520.github.io/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html</id>
-    <link href="https://xlc520.github.io/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html"/>
+    <id>https://blog.ciberviler.top/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html</id>
+    <link href="https://blog.ciberviler.top/pc/9%E4%B8%AA%E5%BE%88%E9%85%B7%E7%9A%84CMD%E5%91%BD%E4%BB%A4.html"/>
     <updated>2022-05-27T07:56:04.000Z</updated>
     <content type="html"><![CDATA[<h1 id="_9个很酷的cmd命令" tabindex="-1"> 9个很酷的CMD命令</h1>
 <h2 id="ipconfig" tabindex="-1"> <strong>ipconfig</strong></h2>
@@ -6634,8 +6635,8 @@ async.executor.thread.name.prefix = async-importDB-
   </entry>
   <entry>
     <title type="html">Quartz - 任务调度框架整合使用</title>
-    <id>https://xlc520.github.io/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html</id>
-    <link href="https://xlc520.github.io/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html"/>
+    <id>https://blog.ciberviler.top/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html</id>
+    <link href="https://blog.ciberviler.top/dev/Quartz%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8.html"/>
     <updated>2022-05-26T05:05:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="quartz-任务调度框架整合使用" tabindex="-1"> Quartz - 任务调度框架整合使用</h1>
 <p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16535411548287.png" alt="图片" loading="lazy"></p>
@@ -7368,8 +7369,8 @@ scheduler<span>.</span><span>addCalendar</span><span>(</span><span>"exclude"</sp
   </entry>
   <entry>
     <title type="html">Java 命名规范</title>
-    <id>https://xlc520.github.io/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html</id>
-    <link href="https://xlc520.github.io/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html"/>
+    <id>https://blog.ciberviler.top/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html</id>
+    <link href="https://blog.ciberviler.top/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html"/>
     <updated>2022-05-26T03:43:23.000Z</updated>
     <content type="html"><![CDATA[<h1 id="java-命名规范" tabindex="-1"> Java 命名规范</h1>
 <p>在本文中，将从大到小，从外到内，总结Java编程中的命名规范。文中将会涉及到日常工作中常见的命名示例，如包命名，类命名，接口命名，方法命名，变量命名，常类命名，抽象类命名，异常类命名以及扩展类命名等。我将按照项目工程目录结构，从包，类(接口，抽象类，异常类)，方法，变量和常量的顺序展开介绍。</p>
@@ -7815,8 +7816,8 @@ public class OrderService implements IOrderService{
   </entry>
   <entry>
     <title type="html">Python 批量下载某网页的所有图片</title>
-    <id>https://xlc520.github.io/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html</id>
-    <link href="https://xlc520.github.io/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html"/>
+    <id>https://blog.ciberviler.top/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html</id>
+    <link href="https://blog.ciberviler.top/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html"/>
     <updated>2022-05-26T03:43:16.000Z</updated>
     <summary type="html">Python 批量下载某网页的所有图片</summary>
     <content type="html"><![CDATA[<h1 id="python-批量下载某网页的所有图片" tabindex="-1"> Python 批量下载某网页的所有图片</h1>
@@ -7898,8 +7899,8 @@ page_number <span>=</span> <span>4</span>
   </entry>
   <entry>
     <title type="html">短视频解析</title>
-    <id>https://xlc520.github.io/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html</id>
-    <link href="https://xlc520.github.io/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html"/>
+    <id>https://blog.ciberviler.top/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html</id>
+    <link href="https://blog.ciberviler.top/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html"/>
     <updated>2022-05-26T03:43:07.000Z</updated>
     <content type="html"><![CDATA[<h1 id="短视频解析" tabindex="-1"> 短视频解析</h1>
 <p>1.去水印视频解析： <a href="https://parse.bqrdh.com/smart" target="_blank" rel="noopener noreferrer">https://parse.bqrdh.com/smart</a></p>
@@ -7922,8 +7923,8 @@ page_number <span>=</span> <span>4</span>
   </entry>
   <entry>
     <title type="html">SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html"/>
     <updated>2022-05-24T14:53:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="springboot-引入线程池-queue缓冲队列实现高并发下单业务" tabindex="-1"> SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</h1>
 <ul>
@@ -8173,8 +8174,8 @@ public class TestController {
   </entry>
   <entry>
     <title type="html">Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查</title>
-    <id>https://xlc520.github.io/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot+MybatisPlus+ClickHouse%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html"/>
     <updated>2022-05-24T14:53:56.000Z</updated>
     <content type="html"><![CDATA[<h1 id="spring-boot-mybatis-plus-clickhouse-轻松实现增删改查" tabindex="-1"> Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查</h1>
 <h2 id="项目场景" tabindex="-1"> 项目场景：</h2>
@@ -8458,8 +8459,8 @@ public class TestController {
   </entry>
   <entry>
     <title type="html">Linux图形化管理服务器的神器：Cockpit</title>
-    <id>https://xlc520.github.io/linux/Linux%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%A5%9E%E5%99%A8Cockpit.html</id>
-    <link href="https://xlc520.github.io/linux/Linux%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%A5%9E%E5%99%A8Cockpit.html"/>
+    <id>https://blog.ciberviler.top/linux/Linux%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%A5%9E%E5%99%A8Cockpit.html</id>
+    <link href="https://blog.ciberviler.top/linux/Linux%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%A5%9E%E5%99%A8Cockpit.html"/>
     <updated>2022-05-24T08:24:51.000Z</updated>
     <content type="html"><![CDATA[<h1 id="linux图形化管理服务器的神器-cockpit" tabindex="-1"> Linux图形化管理服务器的神器：Cockpit</h1>
 <h2 id="什么是-linux-的-cockpit-项目" tabindex="-1"> <strong>什么是 Linux 的 Cockpit 项目？</strong></h2>
@@ -8601,8 +8602,8 @@ public class TestController {
   </entry>
   <entry>
     <title type="html">分布式JVM监控工具</title>
-    <id>https://xlc520.github.io/dev/%E5%88%86%E5%B8%83%E5%BC%8FJVM%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7.html</id>
-    <link href="https://xlc520.github.io/dev/%E5%88%86%E5%B8%83%E5%BC%8FJVM%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7.html"/>
+    <id>https://blog.ciberviler.top/dev/%E5%88%86%E5%B8%83%E5%BC%8FJVM%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E5%88%86%E5%B8%83%E5%BC%8FJVM%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7.html"/>
     <updated>2022-05-24T08:24:43.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分布式jvm监控工具" tabindex="-1"> 分布式JVM监控工具</h1>
 <h2 id="介绍" tabindex="-1"> 介绍</h2>
@@ -8678,8 +8679,8 @@ OK！</p>
   </entry>
   <entry>
     <title type="html">OpenSSL生成自签名证书</title>
-    <id>https://xlc520.github.io/linux/OpenSSL%E7%94%9F%E6%88%90%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6.html</id>
-    <link href="https://xlc520.github.io/linux/OpenSSL%E7%94%9F%E6%88%90%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6.html"/>
+    <id>https://blog.ciberviler.top/linux/OpenSSL%E7%94%9F%E6%88%90%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6.html</id>
+    <link href="https://blog.ciberviler.top/linux/OpenSSL%E7%94%9F%E6%88%90%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6.html"/>
     <updated>2022-05-23T02:51:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="使用openssl生成自签名证书-实现https传输" tabindex="-1"> 使用OpenSSL生成自签名证书，实现HTTPS传输</h1>
 <p><strong>导读</strong></p>
@@ -8857,8 +8858,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">SpringBoot项目中引用百度云人脸识别功能实现人脸识别登录</title>
-    <id>https://xlc520.github.io/dev/springboot%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%99%BB%E5%BD%95.html</id>
-    <link href="https://xlc520.github.io/dev/springboot%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%99%BB%E5%BD%95.html"/>
+    <id>https://blog.ciberviler.top/dev/springboot%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%99%BB%E5%BD%95.html</id>
+    <link href="https://blog.ciberviler.top/dev/springboot%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%99%BB%E5%BD%95.html"/>
     <updated>2022-05-22T14:20:33.000Z</updated>
     <content type="html"><![CDATA[<h1 id="springboot项目中引用百度云人脸识别功能实现人脸识别登录" tabindex="-1"> SpringBoot项目中引用百度云人脸识别功能实现人脸识别登录</h1>
 <p><strong>需求分析：</strong></p>
@@ -9076,8 +9077,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">Spring线程池多线程并发处理大批量数据，解决IO效率问题</title>
-    <id>https://xlc520.github.io/dev/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E5%A4%A7%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE.html</id>
-    <link href="https://xlc520.github.io/dev/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E5%A4%A7%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE.html"/>
+    <id>https://blog.ciberviler.top/dev/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E5%A4%A7%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE.html</id>
+    <link href="https://blog.ciberviler.top/dev/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E5%A4%A7%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE.html"/>
     <updated>2022-05-22T14:20:25.000Z</updated>
     <content type="html"><![CDATA[<h1 id="spring线程池多线程并发处理大批量数据-解决io效率问题" tabindex="-1"> Spring线程池多线程并发处理大批量数据，解决IO效率问题</h1>
 <p>首先，叙述一下当前面临的问题所在。当前系统通过接口调用其他系统的数据，返回的数据达到10万级，然后将这批数据插入到oracle数据库。怎样尽可能提高这一过程的效率？</p>
@@ -9370,8 +9371,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">六十多个 vscode 插件，助你打造最强编辑器</title>
-    <id>https://xlc520.github.io/dev/%E5%85%AD%E5%8D%81%E5%A4%9A%E4%B8%AAvscode%20%E6%8F%92%E4%BB%B6.html</id>
-    <link href="https://xlc520.github.io/dev/%E5%85%AD%E5%8D%81%E5%A4%9A%E4%B8%AAvscode%20%E6%8F%92%E4%BB%B6.html"/>
+    <id>https://blog.ciberviler.top/dev/%E5%85%AD%E5%8D%81%E5%A4%9A%E4%B8%AAvscode%20%E6%8F%92%E4%BB%B6.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E5%85%AD%E5%8D%81%E5%A4%9A%E4%B8%AAvscode%20%E6%8F%92%E4%BB%B6.html"/>
     <updated>2022-05-22T14:19:33.000Z</updated>
     <summary type="html">六十多个 vscode 插件，助你打造最强编辑器</summary>
     <content type="html"><![CDATA[<h1 id="六十多个-vscode-插件-助你打造最强编辑器" tabindex="-1"> 六十多个 vscode 插件，助你打造最强编辑器</h1>
@@ -9646,8 +9647,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">树的定义、树的存储结构</title>
-    <id>https://xlc520.github.io/dev/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.html"/>
     <updated>2022-05-21T09:35:16.000Z</updated>
     <summary type="html">树的定义、树的存储结构</summary>
     <content type="html"><![CDATA[<h1 id="树的定义、树的存储结构" tabindex="-1"> 树的定义、树的存储结构</h1>
@@ -9848,8 +9849,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">Java电子书笔记</title>
-    <id>https://xlc520.github.io/dev/Java%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AC%94%E8%AE%B0.html</id>
-    <link href="https://xlc520.github.io/dev/Java%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AC%94%E8%AE%B0.html"/>
+    <id>https://blog.ciberviler.top/dev/Java%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AC%94%E8%AE%B0.html</id>
+    <link href="https://blog.ciberviler.top/dev/Java%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AC%94%E8%AE%B0.html"/>
     <updated>2022-05-20T15:19:55.000Z</updated>
     <summary type="html">Java电子书笔记</summary>
     <content type="html"><![CDATA[<h1 id="java电子书笔记" tabindex="-1"> Java电子书笔记</h1>
@@ -10547,8 +10548,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">早安心语220519</title>
-    <id>https://xlc520.github.io/article/%E6%97%A9%E5%AE%89%E5%BF%83%E8%AF%AD220519.html</id>
-    <link href="https://xlc520.github.io/article/%E6%97%A9%E5%AE%89%E5%BF%83%E8%AF%AD220519.html"/>
+    <id>https://blog.ciberviler.top/article/%E6%97%A9%E5%AE%89%E5%BF%83%E8%AF%AD220519.html</id>
+    <link href="https://blog.ciberviler.top/article/%E6%97%A9%E5%AE%89%E5%BF%83%E8%AF%AD220519.html"/>
     <updated>2022-05-20T15:19:51.000Z</updated>
     <summary type="html">早安心语220519</summary>
     <content type="html"><![CDATA[<h1 id="早安心语220519" tabindex="-1"> 早安心语220519</h1>
@@ -10588,8 +10589,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">SpringBoot+WebSocket实时监控异常</title>
-    <id>https://xlc520.github.io/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot+WebSocket%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%BC%82%E5%B8%B8.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">SpringBoot+WebSocket实时监控异常</summary>
     <content type="html"><![CDATA[<h1 id="springboot-websocket实时监控异常" tabindex="-1"> SpringBoot+WebSocket实时监控异常</h1>
@@ -10865,8 +10866,8 @@ emailAddress => main administrative point of contact for the certificate
   </entry>
   <entry>
     <title type="html">Windows10使用优化方案</title>
-    <id>https://xlc520.github.io/pc/Windows10%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html</id>
-    <link href="https://xlc520.github.io/pc/Windows10%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html"/>
+    <id>https://blog.ciberviler.top/pc/Windows10%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html</id>
+    <link href="https://blog.ciberviler.top/pc/Windows10%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html"/>
     <updated>2022-05-15T12:41:37.000Z</updated>
     <summary type="html">Windows10使用优化方案</summary>
     <content type="html"><![CDATA[<h1 id="windows10使用优化方案" tabindex="-1"> Windows10使用优化方案</h1>
@@ -11102,8 +11103,8 @@ OOSU10对win10的设置修改，比Dism++更详细、更全面
   </entry>
   <entry>
     <title type="html">win10-11皆可干货分享</title>
-    <id>https://xlc520.github.io/pc/win10-11%E7%9A%86%E5%8F%AF%E5%B9%B2%E8%B4%A7%E5%88%86%E4%BA%AB.html</id>
-    <link href="https://xlc520.github.io/pc/win10-11%E7%9A%86%E5%8F%AF%E5%B9%B2%E8%B4%A7%E5%88%86%E4%BA%AB.html"/>
+    <id>https://blog.ciberviler.top/pc/win10-11%E7%9A%86%E5%8F%AF%E5%B9%B2%E8%B4%A7%E5%88%86%E4%BA%AB.html</id>
+    <link href="https://blog.ciberviler.top/pc/win10-11%E7%9A%86%E5%8F%AF%E5%B9%B2%E8%B4%A7%E5%88%86%E4%BA%AB.html"/>
     <updated>2022-05-15T12:40:26.000Z</updated>
     <summary type="html">win10-11皆可干货分享</summary>
     <content type="html"><![CDATA[<h1 id="win10-11皆可干货分享" tabindex="-1"> win10-11皆可干货分享</h1>
@@ -11303,8 +11304,8 @@ path: 47.95.218.243/index.html</p>
   </entry>
   <entry>
     <title type="html">IDEA 206个快捷键 动图演示</title>
-    <id>https://xlc520.github.io/dev/IDEA206%E4%B8%AA%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html</id>
-    <link href="https://xlc520.github.io/dev/IDEA206%E4%B8%AA%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html"/>
+    <id>https://blog.ciberviler.top/dev/IDEA206%E4%B8%AA%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html</id>
+    <link href="https://blog.ciberviler.top/dev/IDEA206%E4%B8%AA%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html"/>
     <updated>2022-05-13T15:37:31.000Z</updated>
     <summary type="html">IDEA 206个快捷键 动图演示</summary>
     <content type="html"><![CDATA[<h1 id="idea-206个快捷键-动图演示" tabindex="-1"> IDEA 206个快捷键 动图演示</h1>
@@ -11701,8 +11702,8 @@ path: 47.95.218.243/index.html</p>
   </entry>
   <entry>
     <title type="html">IntelliJ IDEA 日常使用介绍</title>
-    <id>https://xlc520.github.io/dev/IDEA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.html</id>
-    <link href="https://xlc520.github.io/dev/IDEA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.html"/>
+    <id>https://blog.ciberviler.top/dev/IDEA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.html</id>
+    <link href="https://blog.ciberviler.top/dev/IDEA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.html"/>
     <updated>2022-05-13T15:30:45.000Z</updated>
     <summary type="html">IntelliJ IDEA 日常使用介绍</summary>
     <content type="html"><![CDATA[<h1 id="intellij-idea-日常使用介绍" tabindex="-1"> IntelliJ IDEA 日常使用介绍</h1>
@@ -11851,8 +11852,8 @@ path: 47.95.218.243/index.html</p>
   </entry>
   <entry>
     <title type="html">36 张图梳理 Intellij IDEA 常用设置</title>
-    <id>https://xlc520.github.io/dev/36%E5%BC%A0%E5%9B%BE%E6%A2%B3%E7%90%86%20Intellij%20IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE.html</id>
-    <link href="https://xlc520.github.io/dev/36%E5%BC%A0%E5%9B%BE%E6%A2%B3%E7%90%86%20Intellij%20IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE.html"/>
+    <id>https://blog.ciberviler.top/dev/36%E5%BC%A0%E5%9B%BE%E6%A2%B3%E7%90%86%20Intellij%20IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE.html</id>
+    <link href="https://blog.ciberviler.top/dev/36%E5%BC%A0%E5%9B%BE%E6%A2%B3%E7%90%86%20Intellij%20IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE.html"/>
     <updated>2022-05-13T15:30:37.000Z</updated>
     <summary type="html">36 张图梳理 Intellij IDEA 常用设置</summary>
     <content type="html"><![CDATA[<h1 id="_36-张图梳理-intellij-idea-常用设置" tabindex="-1"> 36 张图梳理 Intellij IDEA 常用设置</h1>
@@ -12008,8 +12009,8 @@ system:此文件夹是IntelliJ IDEA发生什么不可预知性的错误时，比
   </entry>
   <entry>
     <title type="html">7000字+24张图，带你彻底弄懂线程池</title>
-    <id>https://xlc520.github.io/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html</id>
-    <link href="https://xlc520.github.io/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html"/>
+    <id>https://blog.ciberviler.top/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html</id>
+    <link href="https://blog.ciberviler.top/dev/7000%E5%AD%97+24%E5%BC%A0%E5%9B%BE,%E5%B8%A6%E4%BD%A0%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82%E7%BA%BF%E7%A8%8B%E6%B1%A0.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">7000字+24张图，带你彻底弄懂线程池</summary>
     <content type="html"><![CDATA[<h1 id="_7000字-24张图-带你彻底弄懂线程池" tabindex="-1"> 7000字+24张图，带你彻底弄懂线程池</h1>
@@ -12181,8 +12182,8 @@ system:此文件夹是IntelliJ IDEA发生什么不可预知性的错误时，比
   </entry>
   <entry>
     <title type="html">SpringBoot 内置工具类</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%B1%BB.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%B1%BB.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%B1%BB.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%B1%BB.html"/>
     <updated>2022-05-03T14:10:21.000Z</updated>
     <summary type="html">SpringBoot 内置工具类</summary>
     <content type="html"><![CDATA[<h1 id="springboot-内置工具类" tabindex="-1"> SpringBoot 内置工具类</h1>
@@ -12566,8 +12567,8 @@ CharSequence: length == 0
   </entry>
   <entry>
     <title type="html">Java导入导出Excel-POI</title>
-    <id>https://xlc520.github.io/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html</id>
-    <link href="https://xlc520.github.io/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html"/>
+    <id>https://blog.ciberviler.top/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html</id>
+    <link href="https://blog.ciberviler.top/dev/Java%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAExcel-POI.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Java导入导出Excel-POI</summary>
     <content type="html"><![CDATA[<h1 id="java导入导出excel-poi" tabindex="-1"> Java导入导出Excel-POI</h1>
@@ -13148,8 +13149,8 @@ lable.setString("As179");
   </entry>
   <entry>
     <title type="html">架构师图谱·微服务&amp;消息队列篇</title>
-    <id>https://xlc520.github.io/dev/%E6%9E%B6%E6%9E%84%E5%B8%88%E5%9B%BE%E8%B0%B1%C2%B7%E5%BE%AE%E6%9C%8D%E5%8A%A1&amp;%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%9E%B6%E6%9E%84%E5%B8%88%E5%9B%BE%E8%B0%B1%C2%B7%E5%BE%AE%E6%9C%8D%E5%8A%A1&amp;%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%9E%B6%E6%9E%84%E5%B8%88%E5%9B%BE%E8%B0%B1%C2%B7%E5%BE%AE%E6%9C%8D%E5%8A%A1&amp;%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%9E%B6%E6%9E%84%E5%B8%88%E5%9B%BE%E8%B0%B1%C2%B7%E5%BE%AE%E6%9C%8D%E5%8A%A1&amp;%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87.html"/>
     <updated>2022-04-28T02:37:09.000Z</updated>
     <summary type="html">架构师图谱·微服务&amp;消息队列篇</summary>
     <content type="html"><![CDATA[<h1 id="架构师图谱·微服务-消息队列篇" tabindex="-1"> 架构师图谱·微服务&amp;消息队列篇</h1>
@@ -13454,8 +13455,8 @@ lable.setString("As179");
   </entry>
   <entry>
     <title type="html">IntelliJ IDEA 快捷键大全 + 动图演示</title>
-    <id>https://xlc520.github.io/dev/IntelliJIDEA%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8+%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html</id>
-    <link href="https://xlc520.github.io/dev/IntelliJIDEA%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8+%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html"/>
+    <id>https://blog.ciberviler.top/dev/IntelliJIDEA%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8+%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html</id>
+    <link href="https://blog.ciberviler.top/dev/IntelliJIDEA%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8+%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">IntelliJ IDEA 快捷键大全 + 动图演示</summary>
     <content type="html"><![CDATA[<h1 id="intellij-idea-快捷键大全-动图演示" tabindex="-1"> IntelliJ IDEA 快捷键大全 + 动图演示</h1>
@@ -14036,8 +14037,8 @@ lable.setString("As179");
   </entry>
   <entry>
     <title type="html">JApiDocs教程</title>
-    <id>https://xlc520.github.io/dev/JApiDocs%E6%95%99%E7%A8%8B.html</id>
-    <link href="https://xlc520.github.io/dev/JApiDocs%E6%95%99%E7%A8%8B.html"/>
+    <id>https://blog.ciberviler.top/dev/JApiDocs%E6%95%99%E7%A8%8B.html</id>
+    <link href="https://blog.ciberviler.top/dev/JApiDocs%E6%95%99%E7%A8%8B.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">JApiDocs教程</summary>
     <content type="html"><![CDATA[<h1 id="japidocs教程" tabindex="-1"> JApiDocs教程</h1>
@@ -14215,8 +14216,8 @@ Docs.buildHtmlDocs(config); // 执行生成文档
   </entry>
   <entry>
     <title type="html">Java</title>
-    <id>https://xlc520.github.io/dev/</id>
-    <link href="https://xlc520.github.io/dev/"/>
+    <id>https://blog.ciberviler.top/dev/</id>
+    <link href="https://blog.ciberviler.top/dev/"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Java</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -14237,8 +14238,8 @@ Docs.buildHtmlDocs(config); // 执行生成文档
   </entry>
   <entry>
     <title type="html">Redis总结：缓存雪崩、缓存击穿、缓存穿透与缓存预热、缓存降级</title>
-    <id>https://xlc520.github.io/dev/Redis%E6%80%BB%E7%BB%93%EF%BC%9A%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F.html</id>
-    <link href="https://xlc520.github.io/dev/Redis%E6%80%BB%E7%BB%93%EF%BC%9A%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F.html"/>
+    <id>https://blog.ciberviler.top/dev/Redis%E6%80%BB%E7%BB%93%EF%BC%9A%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F.html</id>
+    <link href="https://blog.ciberviler.top/dev/Redis%E6%80%BB%E7%BB%93%EF%BC%9A%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Redis总结：缓存雪崩、缓存击穿、缓存穿透与缓存预热、缓存降级</summary>
     <content type="html"><![CDATA[<h1 id="redis总结-缓存雪崩、缓存击穿、缓存穿透与缓存预热、缓存降级" tabindex="-1"> Redis总结：缓存雪崩、缓存击穿、缓存穿透与缓存预热、缓存降级</h1>
@@ -14315,8 +14316,8 @@ Docs.buildHtmlDocs(config); // 执行生成文档
   </entry>
   <entry>
     <title type="html">Spring 面试63问</title>
-    <id>https://xlc520.github.io/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html</id>
-    <link href="https://xlc520.github.io/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html"/>
+    <id>https://blog.ciberviler.top/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html</id>
+    <link href="https://blog.ciberviler.top/dev/Spring%20%E9%9D%A2%E8%AF%9563%E9%97%AE.html"/>
     <updated>2022-05-29T06:21:00.000Z</updated>
     <summary type="html">Spring 面试63问</summary>
     <content type="html"><![CDATA[<h1 id="spring-面试63问" tabindex="-1"> Spring 面试63问</h1>
@@ -15526,8 +15527,8 @@ public class TransactionDemo <span>{</span>
   </entry>
   <entry>
     <title type="html">SpringBoot+SpringSecurity前后端分离+Jwt的权限认证</title>
-    <id>https://xlc520.github.io/dev/SpringBoot+SpringSecurity%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB+Jwt%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot+SpringSecurity%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB+Jwt%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot+SpringSecurity%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB+Jwt%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot+SpringSecurity%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB+Jwt%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">SpringBoot+SpringSecurity前后端分离+Jwt的权限认证</summary>
     <content type="html"><![CDATA[<h1 id="springboot-springsecurity前后端分离-jwt的权限认证" tabindex="-1"> SpringBoot+SpringSecurity前后端分离+Jwt的权限认证</h1>
@@ -16440,8 +16441,8 @@ public class TransactionDemo <span>{</span>
   </entry>
   <entry>
     <title type="html">SpringBoot中如何解决CORS跨域问题</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3CORS%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3CORS%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3CORS%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3CORS%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">SpringBoot中如何解决CORS跨域问题</summary>
     <content type="html"><![CDATA[<h1 id="springboot中如何解决cors跨域问题" tabindex="-1"> SpringBoot中如何解决CORS跨域问题</h1>
@@ -16574,8 +16575,8 @@ public class TransactionDemo <span>{</span>
   </entry>
   <entry>
     <title type="html">Spring Boot启动的时候默认的banner</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E5%90%AF%E5%8A%A8banner.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">Spring Boot启动的时候默认的banner是spring的字样</summary>
     <content type="html"><![CDATA[<h1 id="spring-boot启动默认的banner" tabindex="-1"> Spring Boot启动默认的banner</h1>
@@ -16715,8 +16716,8 @@ app<span>.</span><span>run</span><span>(</span>args<span>)</span><span>;</span>
   </entry>
   <entry>
     <title type="html">SpringBoot定时任务动态管理</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">SpringBoot定时任务动态管理</summary>
     <content type="html"><![CDATA[<h1 id="springboot定时任务动态管理" tabindex="-1"> SpringBoot定时任务动态管理</h1>
@@ -17319,8 +17320,8 @@ runnable.setChain(new Chain(points));
   </entry>
   <entry>
     <title type="html">SpringBoot定时任务动态管理通用解决方案</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E7%AE%A1%E7%90%86%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html"/>
     <updated>2022-05-24T14:53:38.000Z</updated>
     <content type="html"><![CDATA[<h1 id="springboot定时任务动态管理通用解决方案" tabindex="-1"> SpringBoot定时任务动态管理通用解决方案</h1>
 <h2 id="一、功能说明" tabindex="-1"> 一、功能说明</h2>
@@ -17907,8 +17908,8 @@ runnable<span>.</span><span>setChain</span><span>(</span><span>new</span> <span>
   </entry>
   <entry>
     <title type="html">Spring Boot 项目鉴权的 4 种方式</title>
-    <id>https://xlc520.github.io/dev/SpringBoot%E9%A1%B9%E7%9B%AE%E9%89%B4%E6%9D%83%E7%9A%84%204%20%E7%A7%8D%E6%96%B9%E5%BC%8F.html</id>
-    <link href="https://xlc520.github.io/dev/SpringBoot%E9%A1%B9%E7%9B%AE%E9%89%B4%E6%9D%83%E7%9A%84%204%20%E7%A7%8D%E6%96%B9%E5%BC%8F.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E9%A1%B9%E7%9B%AE%E9%89%B4%E6%9D%83%E7%9A%84%204%20%E7%A7%8D%E6%96%B9%E5%BC%8F.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E9%A1%B9%E7%9B%AE%E9%89%B4%E6%9D%83%E7%9A%84%204%20%E7%A7%8D%E6%96%B9%E5%BC%8F.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Spring Boot 项目鉴权的 4 种方式</summary>
     <content type="html"><![CDATA[<h1 id="spring-boot-项目鉴权的-4-种方式" tabindex="-1"> Spring Boot 项目鉴权的 4 种方式</h1>
@@ -18070,8 +18071,8 @@ runnable<span>.</span><span>setChain</span><span>(</span><span>new</span> <span>
   </entry>
   <entry>
     <title type="html">Spring Cloud Alibaba</title>
-    <id>https://xlc520.github.io/dev/SpringCloudAlibaba.html</id>
-    <link href="https://xlc520.github.io/dev/SpringCloudAlibaba.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringCloudAlibaba.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringCloudAlibaba.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Spring Cloud Alibaba</summary>
     <content type="html"><![CDATA[<h1 id="spring-cloud-alibaba" tabindex="-1"> Spring Cloud Alibaba</h1>
@@ -18536,8 +18537,8 @@ for (Integer val : dataSource) { // 遍历代理
   </entry>
   <entry>
     <title type="html">Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</title>
-    <id>https://xlc520.github.io/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html</id>
-    <link href="https://xlc520.github.io/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">微服务权限终极解决方案，Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</summary>
     <content type="html"><![CDATA[<h1 id="spring-cloud-gateway-oauth2-实现统一认证和鉴权" tabindex="-1"> Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</h1>
@@ -19163,8 +19164,8 @@ public class UserController{
   </entry>
   <entry>
     <title type="html">Spring Cloud 优雅下线以及灰度发布</title>
-    <id>https://xlc520.github.io/dev/SpringCloud%E4%BC%98%E9%9B%85%E4%B8%8B%E7%BA%BF%E4%BB%A5%E5%8F%8A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83.html</id>
-    <link href="https://xlc520.github.io/dev/SpringCloud%E4%BC%98%E9%9B%85%E4%B8%8B%E7%BA%BF%E4%BB%A5%E5%8F%8A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83.html"/>
+    <id>https://blog.ciberviler.top/dev/SpringCloud%E4%BC%98%E9%9B%85%E4%B8%8B%E7%BA%BF%E4%BB%A5%E5%8F%8A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringCloud%E4%BC%98%E9%9B%85%E4%B8%8B%E7%BA%BF%E4%BB%A5%E5%8F%8A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Spring Cloud 优雅下线以及灰度发布</summary>
     <content type="html"><![CDATA[<h1 id="spring-cloud-优雅下线以及灰度发布" tabindex="-1"> Spring Cloud 优雅下线以及灰度发布</h1>
@@ -19326,8 +19327,8 @@ public class UserController{
   </entry>
   <entry>
     <title type="html">fastjson 中JSONObject的常用使用方法</title>
-    <id>https://xlc520.github.io/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html</id>
-    <link href="https://xlc520.github.io/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html"/>
+    <id>https://blog.ciberviler.top/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html</id>
+    <link href="https://blog.ciberviler.top/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">fastjson 中JSONObject的常用使用方法</summary>
     <content type="html"><![CDATA[<h1 id="fastjson-中jsonobject的常用使用方法" tabindex="-1"> fastjson 中JSONObject的常用使用方法</h1>
@@ -19399,8 +19400,8 @@ public class UserController{
   </entry>
   <entry>
     <title type="html">Intellij idea高效使用教程</title>
-    <id>https://xlc520.github.io/dev/idea-tips.html</id>
-    <link href="https://xlc520.github.io/dev/idea-tips.html"/>
+    <id>https://blog.ciberviler.top/dev/idea-tips.html</id>
+    <link href="https://blog.ciberviler.top/dev/idea-tips.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <content type="html"><![CDATA[<h1 id="intellij-idea高效使用教程" tabindex="-1"> Intellij idea高效使用教程</h1>
 <h2 id="一-安装插件" tabindex="-1"> 一. 安装插件</h2>
@@ -19590,8 +19591,8 @@ RestfulTool
   </entry>
   <entry>
     <title type="html">Mybatis 建表、删表、查表语句(mysql数据库)</title>
-    <id>https://xlc520.github.io/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html</id>
-    <link href="https://xlc520.github.io/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html"/>
+    <id>https://blog.ciberviler.top/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html</id>
+    <link href="https://blog.ciberviler.top/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Mybatis 建表、删表、查表语句(mysql数据库)</summary>
     <content type="html"><![CDATA[<h1 id="mybatis-建表、删表、查表语句-mysql数据库" tabindex="-1"> Mybatis 建表、删表、查表语句(mysql数据库)</h1>
@@ -19658,8 +19659,8 @@ RestfulTool
   </entry>
   <entry>
     <title type="html">使用docker快速安装oracle</title>
-    <id>https://xlc520.github.io/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html</id>
-    <link href="https://xlc520.github.io/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html"/>
+    <id>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">使用docker快速安装oracle</summary>
     <content type="html"><![CDATA[<h1 id="使用docker快速安装oracle" tabindex="-1"> 使用docker快速安装oracle</h1>
@@ -19726,8 +19727,8 @@ conn <span>/</span><span>as</span> sysdba
   </entry>
   <entry>
     <title type="html">使用 easypoi 导出 excel 实现动态列</title>
-    <id>https://xlc520.github.io/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html</id>
-    <link href="https://xlc520.github.io/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html"/>
+    <id>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">使用 easypoi 导出 excel 实现动态列</summary>
     <content type="html"><![CDATA[<h1 id="使用-easypoi-导出-excel-实现动态列" tabindex="-1"> 使用 easypoi 导出 excel 实现动态列</h1>
@@ -20206,8 +20207,8 @@ conn <span>/</span><span>as</span> sysdba
   </entry>
   <entry>
     <title type="html">实用前端网站工具</title>
-    <id>https://xlc520.github.io/dev/%E5%AE%9E%E7%94%A8%E5%89%8D%E7%AB%AF%E7%BD%91%E7%AB%99%E5%B7%A5%E5%85%B7.html</id>
-    <link href="https://xlc520.github.io/dev/%E5%AE%9E%E7%94%A8%E5%89%8D%E7%AB%AF%E7%BD%91%E7%AB%99%E5%B7%A5%E5%85%B7.html"/>
+    <id>https://blog.ciberviler.top/dev/%E5%AE%9E%E7%94%A8%E5%89%8D%E7%AB%AF%E7%BD%91%E7%AB%99%E5%B7%A5%E5%85%B7.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E5%AE%9E%E7%94%A8%E5%89%8D%E7%AB%AF%E7%BD%91%E7%AB%99%E5%B7%A5%E5%85%B7.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">实用前端网站工具</summary>
     <content type="html"><![CDATA[<h1 id="实用前端网站工具" tabindex="-1"> 实用前端网站工具</h1>
@@ -20428,8 +20429,8 @@ conn <span>/</span><span>as</span> sysdba
   </entry>
   <entry>
     <title type="html">SpringBoot将Bean放入Spring容器中的五种方式</title>
-    <id>https://xlc520.github.io/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html</id>
-    <link href="https://xlc520.github.io/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html"/>
+    <id>https://blog.ciberviler.top/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">SpringBoot将Bean放入Spring容器中的五种方式</summary>
     <content type="html"><![CDATA[<h1 id="springboot将bean放入spring容器中的7-五-种方式" tabindex="-1"> SpringBoot将Bean放入Spring容器中的7(五)种方式</h1>
@@ -20903,8 +20904,8 @@ class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPos
   </entry>
   <entry>
     <title type="html">微服务架构统一安全认证设计与实践</title>
-    <id>https://xlc520.github.io/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html</id>
-    <link href="https://xlc520.github.io/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html"/>
+    <id>https://blog.ciberviler.top/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">微服务架构统一安全认证设计与实践</summary>
     <content type="html"><![CDATA[<h1 id="微服务架构统一安全认证设计与实践" tabindex="-1"> 微服务架构统一安全认证设计与实践</h1>
@@ -21018,8 +21019,8 @@ class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPos
   </entry>
   <entry>
     <title type="html">开发中报错异常解决</title>
-    <id>https://xlc520.github.io/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">开发中报错异常解决</summary>
     <content type="html"><![CDATA[<h1 id="开发中报错异常解决" tabindex="-1"> 开发中报错异常解决</h1>
@@ -21197,8 +21198,8 @@ vue.js官方教程里提到的</p>
   </entry>
   <entry>
     <title type="html">数据库表结构文档生成工具</title>
-    <id>https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">数据库表结构文档生成工具</summary>
     <content type="html"><![CDATA[<h1 id="数据库表结构文档生成工具" tabindex="-1"> 数据库表结构文档生成工具</h1>
@@ -21535,8 +21536,8 @@ vue.js官方教程里提到的</p>
   </entry>
   <entry>
     <title type="html">数据类型Java类型</title>
-    <id>https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html</id>
-    <link href="https://xlc520.github.io/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html"/>
+    <id>https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">Java数据类型和MySql数据类型对应表</summary>
     <content type="html"><![CDATA[<h1 id="数据类型java类型" tabindex="-1"> 数据类型Java类型</h1>
@@ -21970,8 +21971,8 @@ vue.js官方教程里提到的</p>
   </entry>
   <entry>
     <title type="html">腾讯云后端总结的面试15问</title>
-    <id>https://xlc520.github.io/dev/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%E7%9A%84%E9%9D%A2%E8%AF%9515%E9%97%AE.html</id>
-    <link href="https://xlc520.github.io/dev/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%E7%9A%84%E9%9D%A2%E8%AF%9515%E9%97%AE.html"/>
+    <id>https://blog.ciberviler.top/dev/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%E7%9A%84%E9%9D%A2%E8%AF%9515%E9%97%AE.html</id>
+    <link href="https://blog.ciberviler.top/dev/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%E7%9A%84%E9%9D%A2%E8%AF%9515%E9%97%AE.html"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">腾讯云后端总结的面试15问</summary>
     <content type="html"><![CDATA[<h1 id="腾讯云后端总结的面试15问" tabindex="-1"> 腾讯云后端总结的面试15问</h1>
@@ -22548,8 +22549,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">编码规范</title>
-    <id>https://xlc520.github.io/dev/coding-standard/</id>
-    <link href="https://xlc520.github.io/dev/coding-standard/"/>
+    <id>https://blog.ciberviler.top/dev/coding-standard/</id>
+    <link href="https://blog.ciberviler.top/dev/coding-standard/"/>
     <updated>2022-04-28T02:37:00.000Z</updated>
     <summary type="html">编码规范</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -22570,8 +22571,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">短视频网页在线去水印下载</title>
-    <id>https://xlc520.github.io/daily/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%BD%91%E9%A1%B5%E5%9C%A8%E7%BA%BF%E5%8E%BB%E6%B0%B4%E5%8D%B0%E4%B8%8B%E8%BD%BD.html</id>
-    <link href="https://xlc520.github.io/daily/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%BD%91%E9%A1%B5%E5%9C%A8%E7%BA%BF%E5%8E%BB%E6%B0%B4%E5%8D%B0%E4%B8%8B%E8%BD%BD.html"/>
+    <id>https://blog.ciberviler.top/daily/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%BD%91%E9%A1%B5%E5%9C%A8%E7%BA%BF%E5%8E%BB%E6%B0%B4%E5%8D%B0%E4%B8%8B%E8%BD%BD.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%BD%91%E9%A1%B5%E5%9C%A8%E7%BA%BF%E5%8E%BB%E6%B0%B4%E5%8D%B0%E4%B8%8B%E8%BD%BD.html"/>
     <updated>2022-04-27T01:43:40.000Z</updated>
     <summary type="html">短视频网页在线去水印下载</summary>
     <content type="html"><![CDATA[<h1 id="短视频网页在线去水印下载" tabindex="-1"> 短视频网页在线去水印下载</h1>
@@ -22601,8 +22602,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">网站-文献下载</title>
-    <id>https://xlc520.github.io/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html</id>
-    <link href="https://xlc520.github.io/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html"/>
+    <id>https://blog.ciberviler.top/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html</id>
+    <link href="https://blog.ciberviler.top/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html"/>
     <updated>2022-04-24T05:45:05.000Z</updated>
     <summary type="html">网站-文献下载</summary>
     <content type="html"><![CDATA[<h1 id="文献下载" tabindex="-1"> 文献下载</h1>
@@ -22712,8 +22713,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">人生最好的三种状态</title>
-    <id>https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E6%9C%80%E5%A5%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81.html</id>
-    <link href="https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E6%9C%80%E5%A5%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81.html"/>
+    <id>https://blog.ciberviler.top/article/%E4%BA%BA%E7%94%9F%E6%9C%80%E5%A5%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81.html</id>
+    <link href="https://blog.ciberviler.top/article/%E4%BA%BA%E7%94%9F%E6%9C%80%E5%A5%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81.html"/>
     <updated>2022-04-22T13:47:50.000Z</updated>
     <summary type="html">人生最好的三种状态</summary>
     <content type="html"><![CDATA[<h1 id="人生最好的三种状态-不期而遇-不言而喻-不药而愈" tabindex="-1"> 人生最好的三种状态：不期而遇，不言而喻，不药而愈</h1>
@@ -22758,8 +22759,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">程序员延寿指南</title>
-    <id>https://xlc520.github.io/daily/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BB%B6%E5%AF%BF%E6%8C%87%E5%8D%97.html</id>
-    <link href="https://xlc520.github.io/daily/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BB%B6%E5%AF%BF%E6%8C%87%E5%8D%97.html"/>
+    <id>https://blog.ciberviler.top/daily/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BB%B6%E5%AF%BF%E6%8C%87%E5%8D%97.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BB%B6%E5%AF%BF%E6%8C%87%E5%8D%97.html"/>
     <updated>2022-04-20T02:28:59.000Z</updated>
     <summary type="html">程序员延寿指南</summary>
     <content type="html"><![CDATA[<h1 id="程序员延寿指南" tabindex="-1"> 程序员延寿指南</h1>
@@ -23157,8 +23158,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">工程模式码(拨号键盘)</title>
-    <id>https://xlc520.github.io/daily/%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F%E7%A0%81(%E6%8B%A8%E5%8F%B7%E9%94%AE%E7%9B%98).html</id>
-    <link href="https://xlc520.github.io/daily/%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F%E7%A0%81(%E6%8B%A8%E5%8F%B7%E9%94%AE%E7%9B%98).html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F%E7%A0%81(%E6%8B%A8%E5%8F%B7%E9%94%AE%E7%9B%98).html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F%E7%A0%81(%E6%8B%A8%E5%8F%B7%E9%94%AE%E7%9B%98).html"/>
     <updated>2022-04-18T01:33:17.000Z</updated>
     <summary type="html">工程模式码(拨号键盘)</summary>
     <content type="html"><![CDATA[<h1 id="工程模式码-拨号键盘" tabindex="-1"> 工程模式码(拨号键盘)</h1>
@@ -23188,8 +23189,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">怎么从客观角度看待大学封校行为？</title>
-    <id>https://xlc520.github.io/daily/%E6%80%8E%E4%B9%88%E4%BB%8E%E5%AE%A2%E8%A7%82%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E5%A4%A7%E5%AD%A6%E5%B0%81%E6%A0%A1%E8%A1%8C%E4%B8%BA.html</id>
-    <link href="https://xlc520.github.io/daily/%E6%80%8E%E4%B9%88%E4%BB%8E%E5%AE%A2%E8%A7%82%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E5%A4%A7%E5%AD%A6%E5%B0%81%E6%A0%A1%E8%A1%8C%E4%B8%BA.html"/>
+    <id>https://blog.ciberviler.top/daily/%E6%80%8E%E4%B9%88%E4%BB%8E%E5%AE%A2%E8%A7%82%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E5%A4%A7%E5%AD%A6%E5%B0%81%E6%A0%A1%E8%A1%8C%E4%B8%BA.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E6%80%8E%E4%B9%88%E4%BB%8E%E5%AE%A2%E8%A7%82%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E5%A4%A7%E5%AD%A6%E5%B0%81%E6%A0%A1%E8%A1%8C%E4%B8%BA.html"/>
     <updated>2022-04-13T11:14:47.000Z</updated>
     <summary type="html">近日山东一专科学校因为食堂给学校施压而选择性封校与门口小商小贩发生争执。双方各执一词，争执不下，都是口口声声站在学生角度考虑（其实都为了赚学生钱），请问大家对大学封校怎么看？</summary>
     <content type="html"><![CDATA[<h1 id="怎么从客观角度看待大学封校行为" tabindex="-1"> 怎么从客观角度看待大学封校行为？</h1>
@@ -23249,8 +23250,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">世界大学</title>
-    <id>https://xlc520.github.io/daily/%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6.html</id>
-    <link href="https://xlc520.github.io/daily/%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6.html"/>
+    <id>https://blog.ciberviler.top/daily/%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6.html"/>
     <updated>2022-04-28T05:08:15.000Z</updated>
     <summary type="html">世界大学</summary>
     <content type="html"><![CDATA[<h1 id="世界大学" tabindex="-1"> 世界大学</h1>
@@ -23869,8 +23870,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">影视大全</title>
-    <id>https://xlc520.github.io/daily/%E5%BD%B1%E8%A7%86%E5%A4%A7%E5%85%A8.html</id>
-    <link href="https://xlc520.github.io/daily/%E5%BD%B1%E8%A7%86%E5%A4%A7%E5%85%A8.html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%BD%B1%E8%A7%86%E5%A4%A7%E5%85%A8.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%BD%B1%E8%A7%86%E5%A4%A7%E5%85%A8.html"/>
     <updated>2022-04-07T11:50:26.000Z</updated>
     <summary type="html">影视大全</summary>
     <content type="html"><![CDATA[<h1 id="影视大全" tabindex="-1"> 影视大全</h1>
@@ -24465,8 +24466,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">generate_204测速地址</title>
-    <id>https://xlc520.github.io/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html</id>
-    <link href="https://xlc520.github.io/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html"/>
+    <id>https://blog.ciberviler.top/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html</id>
+    <link href="https://blog.ciberviler.top/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">generate_204测速地址</summary>
     <content type="html"><![CDATA[<h1 id="generate-204-测速地址" tabindex="-1"> generate_204 测速地址</h1>
@@ -24488,8 +24489,8 @@ private static final int INTERRUPTED  = 6;
   </entry>
   <entry>
     <title type="html">提问的智慧</title>
-    <id>https://xlc520.github.io/article/How-To-Ask-Questions.html</id>
-    <link href="https://xlc520.github.io/article/How-To-Ask-Questions.html"/>
+    <id>https://blog.ciberviler.top/article/How-To-Ask-Questions.html</id>
+    <link href="https://blog.ciberviler.top/article/How-To-Ask-Questions.html"/>
     <updated>2022-03-29T10:18:05.000Z</updated>
     <summary type="html">提问的智慧，How To Ask Questions The Smart Way</summary>
     <content type="html"><![CDATA[<h1 id="提问的智慧" tabindex="-1"> 提问的智慧</h1>
@@ -24963,8 +24964,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">电脑</title>
-    <id>https://xlc520.github.io/pc/</id>
-    <link href="https://xlc520.github.io/pc/"/>
+    <id>https://blog.ciberviler.top/pc/</id>
+    <link href="https://blog.ciberviler.top/pc/"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">电脑</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -24985,8 +24986,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">电脑故障问题解决</title>
-    <id>https://xlc520.github.io/pc/%E6%96%B0%E7%89%88%E6%9C%ACEdge%E6%8F%90%E7%A4%BA%E7%94%B1%E4%BD%A0%E7%9A%84%E7%BB%84%E7%BB%87%E7%AE%A1%E7%90%86.html</id>
-    <link href="https://xlc520.github.io/pc/%E6%96%B0%E7%89%88%E6%9C%ACEdge%E6%8F%90%E7%A4%BA%E7%94%B1%E4%BD%A0%E7%9A%84%E7%BB%84%E7%BB%87%E7%AE%A1%E7%90%86.html"/>
+    <id>https://blog.ciberviler.top/pc/%E6%96%B0%E7%89%88%E6%9C%ACEdge%E6%8F%90%E7%A4%BA%E7%94%B1%E4%BD%A0%E7%9A%84%E7%BB%84%E7%BB%87%E7%AE%A1%E7%90%86.html</id>
+    <link href="https://blog.ciberviler.top/pc/%E6%96%B0%E7%89%88%E6%9C%ACEdge%E6%8F%90%E7%A4%BA%E7%94%B1%E4%BD%A0%E7%9A%84%E7%BB%84%E7%BB%87%E7%AE%A1%E7%90%86.html"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">电脑故障问题解决方法</summary>
     <content type="html"><![CDATA[<h2 id="新版本edge提示由你的组织管理-如何取消" tabindex="-1"> 新版本Edge提示由你的组织管理，如何取消 ？</h2>
@@ -25007,8 +25008,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">激活码</title>
-    <id>https://xlc520.github.io/pc/%E6%BF%80%E6%B4%BB%E7%A0%81.html</id>
-    <link href="https://xlc520.github.io/pc/%E6%BF%80%E6%B4%BB%E7%A0%81.html"/>
+    <id>https://blog.ciberviler.top/pc/%E6%BF%80%E6%B4%BB%E7%A0%81.html</id>
+    <link href="https://blog.ciberviler.top/pc/%E6%BF%80%E6%B4%BB%E7%A0%81.html"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">激活码</summary>
     <content type="html"><![CDATA[<h1 id="激活码" tabindex="-1"> 激活码</h1>
@@ -25027,8 +25028,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">一百多影视VIP视频解析接口</title>
-    <id>https://xlc520.github.io/daily/%E4%B8%80%E7%99%BE%E5%A4%9A%E5%BD%B1%E8%A7%86VIP%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3.html</id>
-    <link href="https://xlc520.github.io/daily/%E4%B8%80%E7%99%BE%E5%A4%9A%E5%BD%B1%E8%A7%86VIP%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3.html"/>
+    <id>https://blog.ciberviler.top/daily/%E4%B8%80%E7%99%BE%E5%A4%9A%E5%BD%B1%E8%A7%86VIP%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E4%B8%80%E7%99%BE%E5%A4%9A%E5%BD%B1%E8%A7%86VIP%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3.html"/>
     <updated>2022-03-28T15:14:02.000Z</updated>
     <summary type="html">一百多影视VIP视频解析接口</summary>
     <content type="html"><![CDATA[<h1 id="一百多影视vip视频解析接口" tabindex="-1"> 一百多影视VIP视频解析接口</h1>
@@ -25179,8 +25180,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">广告拦截规则整理</title>
-    <id>https://xlc520.github.io/daily/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86.html</id>
-    <link href="https://xlc520.github.io/daily/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86.html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86.html"/>
     <updated>2022-03-28T15:13:55.000Z</updated>
     <summary type="html">广告拦截规则整理</summary>
     <content type="html"><![CDATA[<h1 id="广告拦截规则整理" tabindex="-1"> 广告拦截规则整理</h1>
@@ -25210,8 +25211,8 @@ I'll be glad to translate responses, if you only use one or the other.</p>
   </entry>
   <entry>
     <title type="html">Nginx万字总结</title>
-    <id>https://xlc520.github.io/linux/Nginx%E4%B8%87%E5%AD%97%E6%80%BB%E7%BB%93.html</id>
-    <link href="https://xlc520.github.io/linux/Nginx%E4%B8%87%E5%AD%97%E6%80%BB%E7%BB%93.html"/>
+    <id>https://blog.ciberviler.top/linux/Nginx%E4%B8%87%E5%AD%97%E6%80%BB%E7%BB%93.html</id>
+    <link href="https://blog.ciberviler.top/linux/Nginx%E4%B8%87%E5%AD%97%E6%80%BB%E7%BB%93.html"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">万字总结，体系化带你全面认识 Nginx</summary>
     <content type="html"><![CDATA[<h1 id="万字总结-体系化带你全面认识-nginx" tabindex="-1"> 万字总结，体系化带你全面认识 Nginx</h1>
@@ -26493,8 +26494,8 @@ gzip_http_version <span>1.1</span><span>;</span>
   </entry>
   <entry>
     <title type="html">Linux系统总结</title>
-    <id>https://xlc520.github.io/linux/Linux%E6%80%BB%E7%BB%93.html</id>
-    <link href="https://xlc520.github.io/linux/Linux%E6%80%BB%E7%BB%93.html"/>
+    <id>https://blog.ciberviler.top/linux/Linux%E6%80%BB%E7%BB%93.html</id>
+    <link href="https://blog.ciberviler.top/linux/Linux%E6%80%BB%E7%BB%93.html"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">2万字系统总结，带你实现 Linux 命令自由</summary>
     <content type="html"><![CDATA[<h1 id="linux系统总结" tabindex="-1"> Linux系统总结</h1>
@@ -27824,8 +27825,8 @@ syntax on " 激活语法高亮
   </entry>
   <entry>
     <title type="html">Nice Article</title>
-    <id>https://xlc520.github.io/article/</id>
-    <link href="https://xlc520.github.io/article/"/>
+    <id>https://blog.ciberviler.top/article/</id>
+    <link href="https://blog.ciberviler.top/article/"/>
     <updated>2022-03-29T10:18:05.000Z</updated>
     <summary type="html">article分类</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -27846,8 +27847,8 @@ syntax on " 激活语法高亮
   </entry>
   <entry>
     <title type="html">人生三境界</title>
-    <id>https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html</id>
-    <link href="https://xlc520.github.io/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html"/>
+    <id>https://blog.ciberviler.top/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html</id>
+    <link href="https://blog.ciberviler.top/article/%E4%BA%BA%E7%94%9F%E4%B8%89%E5%A2%83%E7%95%8C.html"/>
     <updated>2022-05-21T09:03:15.000Z</updated>
     <summary type="html">人生三境界，格局决定结局，境界决定人生</summary>
     <content type="html"><![CDATA[<h1 id="人生三境界-格局决定结局-境界决定人生" tabindex="-1"> 人生三境界，格局决定结局，境界决定人生</h1>
@@ -27877,8 +27878,8 @@ syntax on " 激活语法高亮
   </entry>
   <entry>
     <title type="html">免费随机图片api</title>
-    <id>https://xlc520.github.io/other/%E5%85%8D%E8%B4%B9%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api.html</id>
-    <link href="https://xlc520.github.io/other/%E5%85%8D%E8%B4%B9%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api.html"/>
+    <id>https://blog.ciberviler.top/other/%E5%85%8D%E8%B4%B9%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api.html</id>
+    <link href="https://blog.ciberviler.top/other/%E5%85%8D%E8%B4%B9%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">免费随机图片api接口</summary>
     <content type="html"><![CDATA[<h1 id="免费随机图片api接口" tabindex="-1"> 免费随机图片api接口</h1>
@@ -28282,8 +28283,8 @@ return // return=img直接输出图片
   </entry>
   <entry>
     <title type="html">daily</title>
-    <id>https://xlc520.github.io/daily/</id>
-    <link href="https://xlc520.github.io/daily/"/>
+    <id>https://blog.ciberviler.top/daily/</id>
+    <link href="https://blog.ciberviler.top/daily/"/>
     <updated>2022-03-29T01:52:40.000Z</updated>
     <summary type="html">daily分类</summary>
     <content type="html"><![CDATA[<p align="center"> 
@@ -28304,8 +28305,8 @@ return // return=img直接输出图片
   </entry>
   <entry>
     <title type="html">Xposed edge pro入门教程</title>
-    <id>https://xlc520.github.io/daily/Xposed%20edge%20pro%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html</id>
-    <link href="https://xlc520.github.io/daily/Xposed%20edge%20pro%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html"/>
+    <id>https://blog.ciberviler.top/daily/Xposed%20edge%20pro%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html</id>
+    <link href="https://blog.ciberviler.top/daily/Xposed%20edge%20pro%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">Xposed edge pro小白入门教程详解，即学即会！</summary>
     <content type="html"><![CDATA[<h1 id="xposed-edge-pro入门教程" tabindex="-1"> Xposed edge pro入门教程</h1>
@@ -28505,8 +28506,8 @@ shell命令关闭指针：settings put system pointer_location 0</p>
   </entry>
   <entry>
     <title type="html">Xposed-edge-pro Shell命令-打开微信好友聊天界面</title>
-    <id>https://xlc520.github.io/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4-%E6%89%93%E5%BC%80%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E8%81%8A%E5%A4%A9%E7%95%8C%E9%9D%A2.html</id>
-    <link href="https://xlc520.github.io/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4-%E6%89%93%E5%BC%80%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E8%81%8A%E5%A4%A9%E7%95%8C%E9%9D%A2.html"/>
+    <id>https://blog.ciberviler.top/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4-%E6%89%93%E5%BC%80%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E8%81%8A%E5%A4%A9%E7%95%8C%E9%9D%A2.html</id>
+    <link href="https://blog.ciberviler.top/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4-%E6%89%93%E5%BC%80%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E8%81%8A%E5%A4%A9%E7%95%8C%E9%9D%A2.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">打开微信好友聊天界面</summary>
     <content type="html"><![CDATA[<h1 id="xposed-edge-pro-shell命令-打开微信好友聊天界面" tabindex="-1"> Xposed-edge-pro Shell命令-打开微信好友聊天界面</h1>
@@ -28575,8 +28576,8 @@ am start -n <a href="http://com.tencent.mm/com.tencent.mm.ui.chatting.ChattingUI
   </entry>
   <entry>
     <title type="html">Xposed-edge-pro Shell命令</title>
-    <id>https://xlc520.github.io/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4.html</id>
-    <link href="https://xlc520.github.io/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4.html"/>
+    <id>https://blog.ciberviler.top/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4.html</id>
+    <link href="https://blog.ciberviler.top/daily/Xposed-edge-pro%20Shell%E5%91%BD%E4%BB%A4.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">定时自动签到、发送消息、定时自动偷能量及刷支付宝步数、游戏定时登录做任务……【shell命令】</summary>
     <content type="html"><![CDATA[<h1 id="xposed-edge-pro-shell命令" tabindex="-1"> Xposed-edge-pro Shell命令</h1>
@@ -28655,8 +28656,8 @@ am start -n <a href="http://com.tencent.mm/com.tencent.mm.ui.chatting.ChattingUI
   </entry>
   <entry>
     <title type="html">全球各大免费电子图书馆汇集</title>
-    <id>https://xlc520.github.io/daily/%E5%85%A8%E7%90%83%E5%90%84%E5%A4%A7%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%B1%87%E9%9B%86.html</id>
-    <link href="https://xlc520.github.io/daily/%E5%85%A8%E7%90%83%E5%90%84%E5%A4%A7%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%B1%87%E9%9B%86.html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%85%A8%E7%90%83%E5%90%84%E5%A4%A7%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%B1%87%E9%9B%86.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%85%A8%E7%90%83%E5%90%84%E5%A4%A7%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%B1%87%E9%9B%86.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">全球各大免费电子图书馆汇集</summary>
     <content type="html"><![CDATA[<h1 id="全球各大免费电子图书馆汇集" tabindex="-1"> 全球各大免费电子图书馆汇集</h1>
@@ -28752,8 +28753,8 @@ am start -n <a href="http://com.tencent.mm/com.tencent.mm.ui.chatting.ChattingUI
   </entry>
   <entry>
     <title type="html">关闭微信朋友圈广告和公众号推荐流</title>
-    <id>https://xlc520.github.io/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html</id>
-    <link href="https://xlc520.github.io/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">实用！教你一招“彻底”关闭微信朋友圈广告和公众号推荐流！</summary>
     <content type="html"><![CDATA[<h1 id="关闭微信朋友圈广告和公众号推荐流" tabindex="-1"> <strong>关闭微信朋友圈广告和公众号推荐流</strong></h1>
@@ -28800,8 +28801,8 @@ am start -n <a href="http://com.tencent.mm/com.tencent.mm.ui.chatting.ChattingUI
   </entry>
   <entry>
     <title type="html">去除MIUI10秒的警告</title>
-    <id>https://xlc520.github.io/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html</id>
-    <link href="https://xlc520.github.io/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html"/>
+    <id>https://blog.ciberviler.top/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html</id>
+    <link href="https://blog.ciberviler.top/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html"/>
     <updated>2022-03-20T06:45:22.000Z</updated>
     <summary type="html">去除MIUI10秒的警告</summary>
     <content type="html"><![CDATA[<h1 id="去除miui10秒的警告" tabindex="-1"> 去除MIUI10秒的警告</h1>
