@@ -22,6 +22,8 @@ password:
 [Thanox3.9.9(点击下载)](https://coolstars.lanzoum.com/in97305v6ewj)
 [github](https://github.com/Tornaco/Thanox/releases)
 
+[Thanox3.9.9row](https://xlc.lanzouh.com/ixU2G062x56d)
+
 ### 普通版
 
 ```json
@@ -231,5 +233,84 @@ password:
 ]
 ```
 
+## 微信
+### 微信保活
+```json
+[
+    {
+        "name": "微信保活",
+        "description": "微信被杀死时，启动微信进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && pkgName==\"com.tencent.mm\"",
+        "actions": [
+            "Thread.sleep(5000);",
+            "activity.launchProcessForPackage(\"com.tencent.mm\")"
+        ]
+    }
+]
+```
+### 微信保活(自改)
+```json
+[
+    {
+        "name": "微信保活双服务(自改)",
+        "description": "微信被杀死时，启动微信进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && pkgName==\"com.tencent.mm\"",
+        "actions": [
+            "Thread.sleep(5000);",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.booter.CoreService');",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.service.ProcessService$MMProcessService');"
+        ]
+    }
+]
+```
+### 微信进程优化
+```json
+[
+    {
+        "name": "微信进程优化",
+        "description": "优化保留双进程",
+        "priority": 2,
+        "condition": "frontPkgChanged == true && from == \"com.tencent.mm\"",
+        "actions": [
+            "Thread.sleep(8000);",
+            "su.exe(\"ps -ef|grep com.tencent.mm:|grep -v :push|grep -v grep|awk '{print $2}'|xargs kill -9\")"
+        ]
+    }
+]
 
+```
 
+## QQ
+### QQ保活
+```json
+[
+    {
+        "name": "QQ保活",
+        "description": "QQ被杀死时，启动QQ进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && (pkgName == \"com.tencent.mobileqq\")",
+        "actions":
+        [
+            "Thread.sleep(5000);",
+            "su.exe('am start-foreground-service com.tencent.mobileqq/com.tencent.mobileqq.msf.service.MsfService');"
+        ]
+    }
+]
+```
+### QQ进程优化
+```json
+[
+    {
+        "name": "QQ进程优化",
+        "description": "优化保留双进程",
+        "priority": 2,
+        "condition": "frontPkgChanged == true && from == \"com.tencent.mobileqq\"",
+        "actions": [
+        "Thread.sleep(5000);",
+        "su.exe(\"ps -ef|grep com.tencent.mobileqq:|grep -v :MSF|grep -v grep|awk '{print $2}'|xargs kill -9\")"
+        ]
+    }
+]
+```
