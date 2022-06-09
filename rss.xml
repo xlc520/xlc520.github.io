@@ -6,15 +6,15 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 07 Jun 2022 08:59:56 GMT</pubDate>
-    <lastBuildDate>Tue, 07 Jun 2022 08:59:56 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Jun 2022 03:52:14 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Jun 2022 03:52:14 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>Java</category>
+    <category>other</category>
     <category>daily</category>
     <category>article</category>
-    <category>Java</category>
     <category>algorithm</category>
-    <category>other</category>
     <category>Script</category>
     <category>Linux</category>
     <category>pc</category>
@@ -23,6 +23,288 @@
     <category>java</category>
     <category>IDEA</category>
     <category>coding</category>
+    <item>
+      <title>JSP和JSTL获取服务器参数</title>
+      <link>https://blog.ciberviler.top/dev/JSP%E5%92%8CJSTL%E8%8E%B7%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0.html</link>
+      <guid>https://blog.ciberviler.top/dev/JSP%E5%92%8CJSTL%E8%8E%B7%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">JSP和JSTL获取服务器参数</source>
+      <description>JSP和JSTL获取服务器参数</description>
+      <category>Java</category>
+      <pubDate>Wed, 22 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="jsp和jstl获取服务器参数" tabindex="-1"> JSP和JSTL获取服务器参数</h1>
+<div><pre><code>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;JSP和JSTL获取服务器参数&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+JSP方式&lt;br/&gt;
+&lt;%
+
+String SERVER_NAME = request.getServerName();
+
+String SERVER_SOFTWARE = getServletContext().getServerInfo();
+
+String SERVER_PROTOCOL = request.getProtocol();
+
+Integer SERVER_PORT = request.getServerPort();
+
+String REQUEST_METHOD = request.getMethod();
+
+String PATH_INFO = request.getPathInfo();
+
+String PATH_TRANSLATED = request.getPathTranslated();
+
+String SCRIPT_NAME = request.getServletPath();
+
+String DOCUMENT_ROOT = request.getRealPath(&quot;/&quot;);
+
+String QUERY_STRING = request.getQueryString();
+
+String REMOTE_HOST = request.getRemoteHost();
+
+String REMOTE_ADDR = request.getRemoteAddr();
+
+String AUTH_TYPE = request.getAuthType();
+
+String REMOTE_USER = request.getRemoteUser();
+
+String CONTENT_TYPE = request.getContentType();
+
+Integer CONTENT_LENGTH = request.getContentLength();
+
+String HTTP_ACCEPT = request.getHeader(&quot;Accept&quot;);
+
+String HTTP_USER_AGENT = request.getHeader(&quot;User-Agent&quot;);
+
+String HTTP_REFERER = request.getHeader(&quot;Referer&quot;);
+
+HashMap infoMap = new HashMap();
+
+infoMap.put(&quot;SERVER_NAME&quot;, SERVER_NAME);
+
+infoMap.put(&quot;SERVER_SOFTWARE&quot;, SERVER_SOFTWARE);
+
+infoMap.put(&quot;SERVER_PROTOCOL&quot;, SERVER_PROTOCOL);
+
+infoMap.put(&quot;SERVER_PORT&quot;, SERVER_PORT);
+infoMap.put(&quot;REQUEST_METHOD&quot;, REQUEST_METHOD);
+
+infoMap.put(&quot;PATH_INFO&quot;, PATH_INFO);
+
+infoMap.put(&quot;PATH_TRANSLATED&quot;, PATH_TRANSLATED);
+
+infoMap.put(&quot;SCRIPT_NAME&quot;, SCRIPT_NAME);
+
+infoMap.put(&quot;DOCUMENT_ROOT&quot;, DOCUMENT_ROOT);
+
+infoMap.put(&quot;QUERY_STRING&quot;, QUERY_STRING);
+
+infoMap.put(&quot;REMOTE_HOST&quot;, REMOTE_HOST);
+
+infoMap.put(&quot;REMOTE_ADDR&quot;, REMOTE_ADDR);
+
+infoMap.put(&quot;AUTH_TYPE&quot;, AUTH_TYPE);
+
+infoMap.put(&quot;REMOTE_USER&quot;, REMOTE_USER);
+
+infoMap.put(&quot;CONTENT_TYPE&quot;, CONTENT_TYPE);
+
+infoMap.put(&quot;CONTENT_LENGTH&quot;, CONTENT_LENGTH);
+
+infoMap.put(&quot;HTTP_ACCEPT&quot;, HTTP_ACCEPT);
+
+infoMap.put(&quot;HTTP_USER_AGENT&quot;, HTTP_USER_AGENT);
+
+infoMap.put(&quot;HTTP_REFERER&quot;, HTTP_REFERER);
+
+Iterator it = infoMap.keySet().iterator();
+
+%&gt;
+
+&lt;%
+while (it.hasNext()) {
+Object o = it.next();
+%&gt;
+　　&lt;%=o%&gt;
+　　&lt;%=infoMap.get(o)%&gt;
+　　&lt;% out.println(&quot;&lt;br&gt;&quot;); }%&gt;
+&lt;br/&gt;
+
+JSTL方式&lt;br/&gt;
+${pageContext.request} |取得请求对象&lt;br&gt;
+${pageContext.session} |取得session对象&lt;br&gt;
+${pageContext.request.queryString} |取得请求的参数字符串&lt;br&gt;
+${pageContext.request.requestURL} |取得请求的URL，但不包括请求之参数字符串&lt;br&gt;
+${pageContext.request.contextPath} |服务的web application的名称&lt;br&gt;
+${pageContext.request.method} |取得HTTP的方法(GET、POST)&lt;br&gt;
+${pageContext.request.protocol} |取得使用的协议(HTTP/1.1、HTTP/1.0)&lt;br&gt;
+${pageContext.request.remoteUser} |取得用户名称&lt;br&gt;
+${pageContext.session.new} |判断session是否为新的，所谓新的session，表示刚由server产生而client尚未使用&lt;br&gt;
+${pageContext.session.id} |取得session的ID&lt;br&gt;
+
+${header[&quot;User-Agent&quot;]}|用户浏览器的版本&lt;br/&gt;
+${header[&quot;Host&quot;]}|IP&lt;br/&gt;
+${pageContext.request.remoteAddr } |取得用户的IP地址&lt;br&gt;
+${pageContext.servletContext.serverInfo}|取得主机端的服务信息&lt;br&gt;
+${pageContext.request.serverPort}|端口信息&lt;br&gt;
+${pageContext.request.serverName}|服务器名称&lt;br&gt;
+${pageContext.request.remoteHost}|客户机名称&lt;br&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>检测网络联通性&amp;generate_204服务汇总</title>
+      <link>https://blog.ciberviler.top/other/generate_204%E6%9C%8D%E5%8A%A1%E6%B1%87%E6%80%BB.html</link>
+      <guid>https://blog.ciberviler.top/other/generate_204%E6%9C%8D%E5%8A%A1%E6%B1%87%E6%80%BB.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">检测网络联通性&amp;generate_204服务汇总</source>
+      <description>检测网络联通性&amp;generate_204服务汇总</description>
+      <category>other</category>
+      <pubDate>Sat, 02 Apr 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="检测网络联通性-generate-204服务汇总" tabindex="-1"> 检测网络联通性&amp;generate_204服务汇总</h1>
+<p><a href="http://www.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.gstatic.com/generate_204</a></p>
+<p><a href="http://connect.rom.miui.com/generate_204" target="_blank" rel="noopener noreferrer">http://connect.rom.miui.com/generate_204</a></p>
+<p><a href="http://www.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.google.com/generate_204</a></p>
+<p><a href="http://cp.cloudflare.com/generate_204" target="_blank" rel="noopener noreferrer">http://cp.cloudflare.com/generate_204</a></p>
+<p><a href="http://www.qualcomm.cn/generate_204" target="_blank" rel="noopener noreferrer">http://www.qualcomm.cn/generate_204</a></p>
+<p>Google： <a href="http://www.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.gstatic.com/generate_204</a></p>
+<p><a href="http://maps.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://maps.google.com/generate_204</a></p>
+<p><a href="http://mt0.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt0.google.com/generate_204</a></p>
+<p><a href="http://mt1.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt1.google.com/generate_204</a></p>
+<p><a href="http://mt2.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt2.google.com/generate_204</a></p>
+<p><a href="http://mt3.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt3.google.com/generate_204</a></p>
+<p><a href="http://clients3.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://clients3.google.com/generate_204</a></p>
+<p>V2ex： <a href="https://www.v2ex.com/generate_204" target="_blank" rel="noopener noreferrer">https://www.v2ex.com/generate_204</a></p>
+<p>（不建议使用，因为只支持 https，不支持 http，连接相对耗费资源，对于 wifi 需要跳转认证的情况支持页不好）</p>
+<p>小米： <a href="http://connect.rom.miui.com/generate_204" target="_blank" rel="noopener noreferrer">http://connect.rom.miui.com/generate_204</a></p>
+<p>华为： <a href="http://connectivitycheck.platform.hicloud.com/generate_204" target="_blank" rel="noopener noreferrer">http://connectivitycheck.platform.hicloud.com/generate_204</a></p>
+<p>Vivo： <a href="http://wifi.vivo.com.cn/generate_204" target="_blank" rel="noopener noreferrer">http://wifi.vivo.com.cn/generate_204</a></p>
+<table>
+<thead>
+<tr>
+<th>服务提供者</th>
+<th>链接</th>
+<th>大陆体验</th>
+<th>境外体验</th>
+<th>http/https</th>
+<th>IP Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google</td>
+<td><a href="http://www.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.gstatic.com/generate_204</a></td>
+<td>5</td>
+<td>10</td>
+<td>204⁄204</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Google</td>
+<td><a href="http://www.google-analytics.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.google-analytics.com/generate_204</a></td>
+<td>6</td>
+<td>10</td>
+<td>204⁄204</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Google</td>
+<td><a href="http://www.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.google.com/generate_204</a></td>
+<td>0</td>
+<td>10</td>
+<td>204⁄204</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Google</td>
+<td><a href="http://connectivitycheck.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://connectivitycheck.gstatic.com/generate_204</a></td>
+<td>4</td>
+<td>10</td>
+<td>204⁄204</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Apple</td>
+<td><a href="http://captive.apple.com/" target="_blank" rel="noopener noreferrer">http://captive.apple.com</a></td>
+<td>3</td>
+<td>10</td>
+<td>200⁄200</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Apple</td>
+<td><a href="http://www.apple.com/library/test/success.html" target="_blank" rel="noopener noreferrer">http://www.apple.com/library/test/success.html</a></td>
+<td>7</td>
+<td>10</td>
+<td>200⁄200</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>MicroSoft</td>
+<td><a href="http://www.msftconnecttest.com/connecttest.txt" target="_blank" rel="noopener noreferrer">http://www.msftconnecttest.com/connecttest.txt</a></td>
+<td>5</td>
+<td>10</td>
+<td>200/error</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Cloudflare</td>
+<td><a href="http://cp.cloudflare.com/" target="_blank" rel="noopener noreferrer">http://cp.cloudflare.com/</a></td>
+<td>4</td>
+<td>10</td>
+<td>204⁄204</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td><a href="http://detectportal.firefox.com/success.txt" target="_blank" rel="noopener noreferrer">http://detectportal.firefox.com/success.txt</a></td>
+<td>5</td>
+<td>10</td>
+<td>200⁄200</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>V2ex</td>
+<td><a href="http://www.v2ex.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.v2ex.com/generate_204</a></td>
+<td>0</td>
+<td>10</td>
+<td>204⁄301</td>
+<td>4+6</td>
+</tr>
+<tr>
+<td>小米</td>
+<td><a href="http://connect.rom.miui.com/generate_204" target="_blank" rel="noopener noreferrer">http://connect.rom.miui.com/generate_204</a></td>
+<td>10</td>
+<td>4</td>
+<td>204⁄204</td>
+<td>4</td>
+</tr>
+<tr>
+<td>华为</td>
+<td><a href="http://connectivitycheck.platform.hicloud.com/generate_204" target="_blank" rel="noopener noreferrer">http://connectivitycheck.platform.hicloud.com/generate_204</a></td>
+<td>10</td>
+<td>5</td>
+<td>204⁄204</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Vivo</td>
+<td><a href="http://wifi.vivo.com.cn/generate_204" target="_blank" rel="noopener noreferrer">http://wifi.vivo.com.cn/generate_204</a></td>
+<td>10</td>
+<td>5</td>
+<td>204⁄204</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>以上<strong>大陆</strong>指中国大陆，<strong>境外</strong>指非中国大陆。</p>
+<p><strong>体验</strong>目前仅进行粗略测试延迟，大概率实际不符，仅作参考。</p>
+<p><strong>http/https</strong>一列表示使用指定协议进行请求，返回的状态码。部分场合对状态码要求较严格。</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>Thanox 碑情景模式</title>
       <link>https://blog.ciberviler.top/daily/Thanox%E5%A2%93%E7%A2%91%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</link>
@@ -37,6 +319,7 @@
 <p>搭配<a href="https://github.com/myflavor/NoANR/releases/" target="_blank" rel="noopener noreferrer">NoANR(点击下载)</a></p>
 <p><a href="https://coolstars.lanzoum.com/in97305v6ewj" target="_blank" rel="noopener noreferrer">Thanox3.9.9(点击下载)</a>
 <a href="https://github.com/Tornaco/Thanox/releases" target="_blank" rel="noopener noreferrer">github</a></p>
+<p><a href="https://xlc.lanzouh.com/ixU2G062x56d" target="_blank" rel="noopener noreferrer">Thanox3.9.9row</a></p>
 <h3 id="普通版" tabindex="-1"> 普通版</h3>
 <div><pre><code><span>[</span>
     <span>{</span>
@@ -196,6 +479,76 @@
         <span>"actions"</span><span>:</span> <span>[</span>
             <span>"su.exe(\"kill -CONT `pgrep -f \"+ to + \"`\");"</span><span>,</span>
             <span>"su.exe(\"appops set \" +to + \" WAKE_LOCK default\");"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="微信" tabindex="-1"> 微信</h2>
+<h3 id="微信保活" tabindex="-1"> 微信保活</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"微信保活"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"微信被杀死时，启动微信进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"pkgKilled == true &amp;&amp; pkgName==\"com.tencent.mm\""</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"Thread.sleep(5000);"</span><span>,</span>
+            <span>"activity.launchProcessForPackage(\"com.tencent.mm\")"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="微信保活-自改" tabindex="-1"> 微信保活(自改)</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"微信保活双服务(自改)"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"微信被杀死时，启动微信进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"pkgKilled == true &amp;&amp; pkgName==\"com.tencent.mm\""</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"Thread.sleep(5000);"</span><span>,</span>
+            <span>"su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.booter.CoreService');"</span><span>,</span>
+            <span>"su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.service.ProcessService$MMProcessService');"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="微信进程优化" tabindex="-1"> 微信进程优化</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"微信进程优化"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"优化保留双进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>2</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged == true &amp;&amp; from == \"com.tencent.mm\""</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+            <span>"Thread.sleep(8000);"</span><span>,</span>
+            <span>"su.exe(\"ps -ef|grep com.tencent.mm:|grep -v :push|grep -v grep|awk '{print $2}'|xargs kill -9\")"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="qq" tabindex="-1"> QQ</h2>
+<h3 id="qq保活" tabindex="-1"> QQ保活</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"QQ保活"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"QQ被杀死时，启动QQ进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"pkgKilled == true &amp;&amp; (pkgName == \"com.tencent.mobileqq\")"</span><span>,</span>
+        <span>"actions"</span><span>:</span>
+        <span>[</span>
+            <span>"Thread.sleep(5000);"</span><span>,</span>
+            <span>"su.exe('am start-foreground-service com.tencent.mobileqq/com.tencent.mobileqq.msf.service.MsfService');"</span>
+        <span>]</span>
+    <span>}</span>
+<span>]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="qq进程优化" tabindex="-1"> QQ进程优化</h3>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        <span>"name"</span><span>:</span> <span>"QQ进程优化"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"优化保留双进程"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>2</span><span>,</span>
+        <span>"condition"</span><span>:</span> <span>"frontPkgChanged == true &amp;&amp; from == \"com.tencent.mobileqq\""</span><span>,</span>
+        <span>"actions"</span><span>:</span> <span>[</span>
+        <span>"Thread.sleep(5000);"</span><span>,</span>
+        <span>"su.exe(\"ps -ef|grep com.tencent.mobileqq:|grep -v :MSF|grep -v grep|awk '{print $2}'|xargs kill -9\")"</span>
         <span>]</span>
     <span>}</span>
 <span>]</span>
@@ -23948,19 +24301,34 @@ private static final int INTERRUPTED  = 6;
 ]]></content:encoded>
     </item>
     <item>
-      <title>generate_204测速地址</title>
+      <title>检测网络联通性&amp;generate_204服务汇总</title>
       <link>https://blog.ciberviler.top/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html</link>
       <guid>https://blog.ciberviler.top/other/generate_204%E6%B5%8B%E9%80%9F%E5%9C%B0%E5%9D%80.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">generate_204测速地址</source>
-      <description>generate_204测速地址</description>
+      <source url="https://blog.ciberviler.top/rss.xml">检测网络联通性&amp;generate_204服务汇总</source>
+      <description>检测网络联通性&amp;generate_204服务汇总</description>
       <category>other</category>
       <pubDate>Sat, 02 Apr 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="generate-204-测速地址" tabindex="-1"> generate_204 测速地址</h1>
+      <content:encoded><![CDATA[<h1 id="检测网络联通性-generate-204服务汇总" tabindex="-1"> 检测网络联通性&amp;generate_204服务汇总</h1>
 <p><a href="http://www.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.gstatic.com/generate_204</a></p>
 <p><a href="http://connect.rom.miui.com/generate_204" target="_blank" rel="noopener noreferrer">http://connect.rom.miui.com/generate_204</a></p>
 <p><a href="http://www.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.google.com/generate_204</a></p>
 <p><a href="http://cp.cloudflare.com/generate_204" target="_blank" rel="noopener noreferrer">http://cp.cloudflare.com/generate_204</a></p>
 <p><a href="http://www.qualcomm.cn/generate_204" target="_blank" rel="noopener noreferrer">http://www.qualcomm.cn/generate_204</a></p>
+<blockquote>
+<p>2022年6月9日11:42:54</p>
+</blockquote>
+<p>Google： <a href="http://www.gstatic.com/generate_204" target="_blank" rel="noopener noreferrer">http://www.gstatic.com/generate_204</a></p>
+<p><a href="http://maps.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://maps.google.com/generate_204</a></p>
+<p><a href="http://mt0.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt0.google.com/generate_204</a></p>
+<p><a href="http://mt1.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt1.google.com/generate_204</a></p>
+<p><a href="http://mt2.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt2.google.com/generate_204</a></p>
+<p><a href="http://mt3.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://mt3.google.com/generate_204</a></p>
+<p><a href="http://clients3.google.com/generate_204" target="_blank" rel="noopener noreferrer">http://clients3.google.com/generate_204</a></p>
+<p>V2ex： <a href="https://www.v2ex.com/generate_204" target="_blank" rel="noopener noreferrer">https://www.v2ex.com/generate_204</a></p>
+<p>（不建议使用，因为只支持 https，不支持 http，连接相对耗费资源，对于 wifi 需要跳转认证的情况支持页不好）</p>
+<p>小米： <a href="http://connect.rom.miui.com/generate_204" target="_blank" rel="noopener noreferrer">http://connect.rom.miui.com/generate_204</a></p>
+<p>华为： <a href="http://connectivitycheck.platform.hicloud.com/generate_204" target="_blank" rel="noopener noreferrer">http://connectivitycheck.platform.hicloud.com/generate_204</a></p>
+<p>Vivo： <a href="http://wifi.vivo.com.cn/generate_204" target="_blank" rel="noopener noreferrer">http://wifi.vivo.com.cn/generate_204</a></p>
 ]]></content:encoded>
     </item>
     <item>
@@ -28123,66 +28491,6 @@ am start -n <a href="http://com.tencent.mm/com.tencent.mm.ui.chatting.ChattingUI
 <p><img src="http://image.coolapk.com/feed/2019/1201/18/308326_2c02e529_5332_115@966x8568.jpeg.m.jpg" alt="img" loading="lazy"></p>
 ]]></content:encoded>
       <enclosure url="http://image.coolapk.com/feed/2019/1201/18/308326_ce846467_5332_1143@1080x1812.jpeg.m.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>关闭微信朋友圈广告和公众号推荐流</title>
-      <link>https://blog.ciberviler.top/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html</link>
-      <guid>https://blog.ciberviler.top/daily/%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%B9%BF%E5%91%8A.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">关闭微信朋友圈广告和公众号推荐流</source>
-      <description>实用！教你一招“彻底”关闭微信朋友圈广告和公众号推荐流！</description>
-      <category>daily</category>
-      <pubDate>Mon, 14 Feb 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="关闭微信朋友圈广告和公众号推荐流" tabindex="-1"> <strong>关闭微信朋友圈广告和公众号推荐流</strong></h1>
-<p>在开始先说明一下，要使用下面介绍的调式功能，大家的手机需要有root权限，如没有的话，大家就看看就好，看看是如何操作和玩法的。</p>
-<h2 id="_1、" tabindex="-1"> 1、</h2>
-<p>准备工作：你的手机需root、下载安装创建快捷方式APP（酷安搜索就有）</p>
-<h2 id="_2、" tabindex="-1"> 2、</h2>
-<p>打开创建快捷方式APP之后，大家点击搜索框，直接搜微信，即可进入活动界面。</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_85b74667_6273_6993_713@1424x1064.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<p>微信快捷方式-搜索微信</p>
-<h2 id="_3、" tabindex="-1"> 3、</h2>
-<p>在活动界面直接搜“com.tencent.mm.plugin.brandservice.ui.timeline.BizTestUI”活动（记得点击右上角✔也显示未导出的活动）</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_9a6033c4_6273_7001_734@1440x703.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<p>com.tencent.mm.plugin.brandservice.ui.timeline.BizTestUI</p>
-<h2 id="_4、" tabindex="-1"> 4、</h2>
-<p>点击详情进入可以看到一个打开的入口。</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_74c93fe2_6273_7007_223@1440x1298.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<p>详情</p>
-<h2 id="_5、" tabindex="-1"> 5、</h2>
-<p>获取root权限后，我们点击打开即可跳转到微信的一个调试界面。</p>
-<p>调试窗口</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_ae4be29f_6273_7009_570@1440x1092.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<h3 id="广告-推荐" tabindex="-1"> 广告-推荐</h3>
-<p>在这个页面，大家应该也可以看到很多的功能，选择广告入口和推荐入口。</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_eff07a76_6273_7017_434@1440x1092.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<h3 id="广告入口-关闭广告" tabindex="-1"> 广告入口-关闭广告</h3>
-<p>点击进来大家就可看到关于广告的一些功能。选择广告入口-关闭广告。</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_cd6bdaf5_6273_7021_785@1440x2970.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<h3 id="推荐入口-关闭推荐流" tabindex="-1"> 推荐入口-关闭推荐流</h3>
-<p>选择推荐入口-关闭推荐流。</p>
-<p><img src="http://image.coolapk.com/feed/2021/1202/14/2516961_34f99214_6273_7023_485@1440x2980.jpeg.m.jpg" alt="img" loading="lazy"></p>
-<h3 id="" tabindex="-1"> </h3>
-<p>点击之后微信将会重启跳一下，亲测朋友圈广告和公众号推荐流广告都消失了！</p>
-]]></content:encoded>
-      <enclosure url="http://image.coolapk.com/feed/2021/1202/14/2516961_85b74667_6273_6993_713@1424x1064.jpeg.m.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>去除MIUI10秒的警告</title>
-      <link>https://blog.ciberviler.top/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html</link>
-      <guid>https://blog.ciberviler.top/daily/%E5%8E%BB%E9%99%A4MIUI10%E7%A7%92%E7%9A%84%E8%AD%A6%E5%91%8A.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">去除MIUI10秒的警告</source>
-      <description>去除MIUI10秒的警告</description>
-      <category>daily</category>
-      <pubDate>Thu, 17 Feb 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="去除miui10秒的警告" tabindex="-1"> 去除MIUI10秒的警告</h1>
-<p>打开Thanox，找到手机管家，选择活动管理，搜索这个活动
-com.miui.permcenter.privacymanager.SpecialPermissionInterceptActivity
-把这个活动禁用，立即生效
-以后无障碍/安装未知应用/勿扰等都不会弹出警告了</p>
-<p><img src="http://image.coolapk.com/feed/2022/0108/07/2064506_f18ce68b_8655_7643_90@324x720.gif" alt="img" loading="lazy"></p>
-<p><img src="http://image.coolapk.com/feed/2022/0108/07/2064506_223ddc9c_8655_7651_953@1080x2400.jpeg.m.jpg" alt="img" loading="lazy"></p>
-]]></content:encoded>
-      <enclosure url="http://image.coolapk.com/feed/2022/0108/07/2064506_f18ce68b_8655_7643_90@324x720.gif" type="image/gif"/>
     </item>
   </channel>
 </rss>
