@@ -3,7 +3,7 @@ author: xlc520
 title: Nice Article
 description: article分类
 date: 2022-03-20
-category: article
+category: essay
 tag: article
 article: true
 timeline: true

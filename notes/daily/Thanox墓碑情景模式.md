@@ -238,12 +238,12 @@ password:
 ```json
 [
     {
-        "name": "微信保活",
+        "name": "微信保活(包)",
         "description": "微信被杀死时，启动微信进程",
         "priority": 1,
         "condition": "pkgKilled == true && pkgName==\"com.tencent.mm\"",
         "actions": [
-            "Thread.sleep(5000);",
+            "Thread.sleep(4000);",
             "activity.launchProcessForPackage(\"com.tencent.mm\")"
         ]
     }
@@ -258,13 +258,35 @@ password:
         "priority": 1,
         "condition": "pkgKilled == true && pkgName==\"com.tencent.mm\"",
         "actions": [
-            "Thread.sleep(5000);",
+            "Thread.sleep(4000);",
             "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.booter.CoreService');",
             "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.service.ProcessService$MMProcessService');"
         ]
     }
 ]
 ```
+### 微信保活3(自改)
+```json
+[
+    {
+        "name": "微信保活多服务(自改)",
+        "description": "微信被杀死时，启动微信进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && pkgName==\"com.tencent.mm\"",
+        "actions": [
+            "Thread.sleep(4000);",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.booter.CoreService');",
+            "Thread.sleep(200);",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.service.ProcessService$MMProcessService');",
+            "Thread.sleep(200);",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.ipcinvoker.wx_extension.service.MainProcessIPCService');",
+            "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.ipcinvoker.wx_extension.service.PushProcessIPCService');"
+        ]
+    }
+]
+```
+
+
 ### 微信进程优化
 ```json
 [
@@ -293,8 +315,43 @@ password:
         "condition": "pkgKilled == true && (pkgName == \"com.tencent.mobileqq\")",
         "actions":
         [
-            "Thread.sleep(5000);",
+            "Thread.sleep(4000);",
             "su.exe('am start-foreground-service com.tencent.mobileqq/com.tencent.mobileqq.msf.service.MsfService');"
+        ]
+    }
+]
+```
+### QQ保活2
+```json
+[
+    {
+        "name": "QQ保活(包)",
+        "description": "QQ被杀死时，启动QQ进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && pkgName==\"com.tencent.mobileqq\"",
+        "actions": [
+            "Thread.sleep(4000);",
+            "activity.launchProcessForPackage(\"com.tencent.mobileqq\")"
+        ]
+    }
+]
+```
+### QQ保活3
+```json
+[
+    {
+        "name": "QQ保活多服务(自改)",
+        "description": "QQ被杀死时，启动QQ进程",
+        "priority": 1,
+        "condition": "pkgKilled == true && (pkgName == \"com.tencent.mobileqq\")",
+        "actions":
+        [
+            "Thread.sleep(4000);",
+            "activity.launchProcessForPackage(\"com.tencent.mobileqq\")",
+            "Thread.sleep(400);",
+            "su.exe('am start-foreground-service com.tencent.mobileqq/com.tencent.mobileqq.msf.service.MsfService');",
+            "Thread.sleep(400);",
+            "su.exe('am start-foreground-service com.tencent.mobileqq/com.tencent.mobileqq.msf.service.MSFAliveJobService');"
         ]
     }
 ]

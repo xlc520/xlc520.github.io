@@ -3,7 +3,7 @@ author: xlc520
 title: 提问的智慧
 description: 提问的智慧，How To Ask Questions The Smart Way
 date: 2022-03-29
-category: article
+category: essay
 tag: article
 article: true
 timeline: true

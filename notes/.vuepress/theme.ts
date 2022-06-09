@@ -36,7 +36,7 @@ export default hopeTheme({
     "/git/": "structure",
     "/daily/": "structure",
     "/pc/": "structure",
-    "/article/": "structure",
+    "/essay/": "structure",
     "/other/": "structure",
     // fallback
     "/": [
