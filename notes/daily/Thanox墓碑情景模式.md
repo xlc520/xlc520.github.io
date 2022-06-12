@@ -280,6 +280,7 @@ password:
             "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.service.ProcessService$MMProcessService');",
             "Thread.sleep(200);",
             "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.ipcinvoker.wx_extension.service.MainProcessIPCService');",
+            "Thread.sleep(200);",
             "su.exe('am start-foreground-service com.tencent.mm/com.tencent.mm.ipcinvoker.wx_extension.service.PushProcessIPCService');"
         ]
     }

@@ -12,6 +12,41 @@ password:
 ---
 # 各种软件
 
+
+## 2022年6月12日
+
+1.数据贴图工具：Snipaste：https://www.snipaste.com/
+
+2.快速抠图，一键智能抠图工具：https://www.6pian.cn/koutu.html
+
+3.文件快速整理工具：Droplt：http://www.dropitproject.com/
+
+4.文件快速查找工具，Anytxt：https://anytxt.net/
+
+5.文件分享工具，Wormhole：https://wormholesoft.com/index_cn.html
+
+6.图表快速生成工具，蚂蚁图表：https://chartcube.alipay.com/
+
+7.流氓软件卸载工具Geekuninstaller：https://geekuninstaller.com/
+
+8.开发人员用的编程小工具：Faker
+
+
+## 2022年6月10日
+
+1.Listen1 （免费无广告听歌神器，有win和macos端软件及浏览器插件）
+
+1.图像视频画质增强器 （顾名思义，画质增强）
+
+3.摸鱼 （模拟电脑更新界面）
+
+4.PPT模板大全 （有着各种各样的PPT模板，下载前点广告即可免费下载）
+
+5.闪豆视频下载器 （网络视频解析下载器）
+
+6.WinDynamicDesKtop （模拟Mac电脑中动态壁纸的软件）
+
+
 ## 电脑QQv9.5.4(28063)特别版
 https://lanzoux.com/b0dpnvapi
 - 安装使用QQ前请先自行安装齐全 Visual C++ 和 Universal C 运行库

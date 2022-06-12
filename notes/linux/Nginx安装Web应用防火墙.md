@@ -1,23 +1,14 @@
 ---
-# 这是页面的图标
-icon: page
-# 这是文章的标题
-title: Nginx安装Web应用防火墙
-# 设置作者
 author: xlc520
-# 设置写作时间
-date: 2022-01-10
-# 一个页面只能有一个分类
-category: linux
-# 一个页面可以有多个标签
-tag:
-  - Nginx
-# 设置当前文章是否在列表中置顶，此页面会在文章列表指定
-sticky: false
-# 设置当前文章是否收藏在博客主题的文章列表中。当填入数字时，数字越大，排名越靠前。
-star: true
-# 你可以自定义页脚
-# footer: 这是测试显示的页脚
+title: Nginx安装Web应用防火墙
+description: Nginx安装Web应用防火墙
+date: 2022-01-15
+category: other
+tag: other
+article: true
+timeline: true
+icon: 
+password: 
 ---
 # Nginx安装Web应用防火墙
 
@@ -130,6 +121,6 @@ ngx_lua_waf安装到此结束。
 
 ### 4. ngx_lua_waf效果图
 
-![ngx_lua_waf waf(web应用防火墙)](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15.webp)
-![ngx_lua_waf waf(web应用防火墙)](https://fastly.jsdelivr.net/gh/xlc520/MyImage@main/MdImg/ngcb15-16419157753881.webp)
+![ngx_lua_waf waf(web应用防火墙)](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ngcb15.jpg)
+![ngx_lua_waf waf(web应用防火墙)](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ngcb15-16419157753881.jpg)
 
