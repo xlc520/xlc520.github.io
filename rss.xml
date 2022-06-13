@@ -6,8 +6,8 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 12 Jun 2022 13:38:20 GMT</pubDate>
-    <lastBuildDate>Sun, 12 Jun 2022 13:38:20 GMT</lastBuildDate>
+    <pubDate>Mon, 13 Jun 2022 14:46:47 GMT</pubDate>
+    <lastBuildDate>Mon, 13 Jun 2022 14:46:47 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Java</category>
@@ -23,6 +23,161 @@
     <category>java</category>
     <category>IDEA</category>
     <category>coding</category>
+    <item>
+      <title>改造BeanUtils优雅实现List数据拷贝</title>
+      <link>https://blog.ciberviler.top/dev/%E6%94%B9%E9%80%A0BeanUtils%E4%BC%98%E9%9B%85%E5%AE%9E%E7%8E%B0List%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D.html</link>
+      <guid>https://blog.ciberviler.top/dev/%E6%94%B9%E9%80%A0BeanUtils%E4%BC%98%E9%9B%85%E5%AE%9E%E7%8E%B0List%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">改造BeanUtils优雅实现List数据拷贝</source>
+      <category>Java</category>
+      <pubDate>Mon, 27 Jun 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="改造beanutils优雅实现list数据拷贝" tabindex="-1"> 改造BeanUtils优雅实现List数据拷贝</h1>
+<p>BeanUtils.copyProperties();确实为我们做了很多事情，虽然不能完美完成深拷贝，但是对于 po、vo、dto 的拷贝已经足够用了。但是其还是有一些不够完美的地方。</p>
+<p>不足几点如下：</p>
+<p><strong>①</strong>不能拷贝 list，而拷贝 list 的情况又大量存在，因此会有许多重复代码。</p>
+<div><pre><code><span>for</span> <span>(</span><span>S</span> source <span>:</span> sources<span>)</span> <span>{</span>
+    <span>T</span> target <span>=</span> <span>new</span> <span>T</span><span>(</span><span>)</span><span>;</span>
+    <span>copyProperties</span><span>(</span>source<span>,</span> target<span>)</span><span>;</span>
+    list<span>.</span><span>add</span><span>(</span>target<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>②</strong>有一些简单的查询，仅仅需要转换一下 vo 也需要 new Vo()。</p>
+<div><pre><code><span>public</span> <span>Vo</span> <span>findById</span><span>(</span><span>Integer</span> id<span>)</span> <span>{</span>
+ <span>Vo</span> vo <span>=</span> <span>new</span> <span>Vo</span><span>(</span><span>)</span><span>;</span>
+ <span>Po</span> po <span>=</span> dao<span>.</span><span>findById</span><span>(</span>id<span>)</span><span>;</span>
+ <span>copyProperties</span><span>(</span>po<span>,</span> vo<span>)</span><span>;</span>
+ <span>return</span> vo<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>③</strong>这种拷贝方式是没有返回值的，jdk8 支持 stream() 操作之后，支持不是很友好，不方便 lambda 表达式的使用，因此我们决定通过集成 BeanUtils 类，自己造一个方便用的轮子。</p>
+<p><strong>使用</strong></p>
+<p>我们将新创建一个轮子 BeanConvertUtils，使用如下，当我们要转换 po、vo 时，只需要：</p>
+<div><pre><code><span>// 使用前</span>
+<span>public</span> <span>Vo</span> <span>findById</span><span>(</span><span>Integer</span> id<span>)</span> <span>{</span>
+ <span>Vo</span> vo <span>=</span> <span>new</span> <span>Vo</span><span>(</span><span>)</span><span>;</span>
+ <span>Po</span> po <span>=</span> dao<span>.</span><span>findById</span><span>(</span>id<span>)</span><span>;</span>
+ <span>copyProperties</span><span>(</span>po<span>,</span> vo<span>)</span><span>;</span>
+ <span>return</span> vo<span>;</span>
+<span>}</span>
+
+<span>// 使用后</span>
+<span>public</span> <span>Vo</span> <span>findById</span><span>(</span><span>Integer</span> id<span>)</span> <span>{</span>
+ <span>return</span> <span>BeanConvertUtils</span><span>.</span><span>converTo</span><span>(</span>dao<span>.</span><span>findById</span><span>(</span>id<span>)</span><span>,</span> <span>Vo</span><span>::</span><span>new</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>// 使用后，通过lambda表达式特殊处理个别字段</span>
+<span>public</span> <span>Vo</span> <span>findById</span><span>(</span><span>Integer</span> id<span>)</span> <span>{</span>
+ <span>return</span> <span>BeanConvertUtils</span><span>.</span><span>converTo</span><span>(</span>dao<span>.</span><span>findById</span><span>(</span>id<span>)</span><span>,</span> <span>Vo</span><span>::</span><span>new</span><span>,</span> 
+  <span>(</span>s<span>,</span> t<span>)</span> <span>-></span> t<span>.</span><span>setName</span><span>(</span>s<span>.</span>getName<span>)</span><span>)</span>
+ <span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当我们要拷贝 list 的时候也很简单：</p>
+<div><pre><code><span>// 使用前</span>
+<span>public</span> <span>List</span><span><span>&lt;</span><span>Vo</span><span>></span></span> <span>findAll</span><span>(</span><span>)</span> <span>{</span>
+ <span>List</span><span><span>&lt;</span><span>Vo</span><span>></span></span> vos <span>=</span> <span>new</span> <span>ArrayList</span><span>(</span><span>)</span><span>;</span>
+ <span>List</span><span><span>&lt;</span><span>Po</span><span>></span></span> pos <span>=</span> dao<span>.</span><span>findAll</span><span>(</span><span>)</span><span>;</span>
+ <span>for</span> <span>(</span><span>Po</span> po <span>:</span> <span>Pos</span><span>)</span> <span>{</span>
+     <span>Vo</span> vo <span>=</span> <span>new</span> <span>Vo</span><span>(</span><span>)</span><span>;</span>
+     <span>BeanUtis</span><span>.</span><span>copyProperties</span><span>(</span>po<span>,</span> vo<span>)</span><span>;</span>
+     vos<span>.</span><span>add</span><span>(</span>vo<span>)</span><span>;</span>
+    <span>}</span>
+ <span>return</span> vos<span>;</span>
+<span>}</span>
+
+<span>// 使用后</span>
+<span>public</span> <span>List</span><span><span>&lt;</span><span>Vo</span><span>></span></span> <span>findAll</span><span>(</span><span>)</span> <span>{</span>
+ <span>return</span> <span>BeanConvertUtils</span><span>.</span><span>converToList</span><span>(</span>dao<span>.</span><span>findAll</span><span>(</span><span>)</span><span>,</span> <span>Vo</span><span>::</span><span>new</span><span>)</span>
+<span>}</span>
+
+<span>// 同样支持自定义lambda</span>
+<span>public</span> <span>List</span><span><span>&lt;</span><span>Vo</span><span>></span></span> <span>findAll</span><span>(</span><span>)</span> <span>{</span>
+ <span>return</span> <span>BeanConvertUtils</span><span>.</span><span>converToList</span><span>(</span>dao<span>.</span><span>findAll</span><span>(</span><span>)</span><span>,</span> <span>Vo</span><span>::</span><span>new</span><span>,</span>
+  <span>(</span>s<span>,</span> t<span>)</span> <span>-></span> t<span>.</span><span>setName</span><span>(</span>s<span>.</span>getName<span>)</span><span>)</span>
+ <span>)</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="代码如下" tabindex="-1"> 代码如下：</h3>
+<div><pre><code><span>/**
+ * 转换对象工具
+ *
+ * <span>@author</span> bugpool
+ */</span>
+<span>public</span> <span>class</span> <span>BeanConvertUtils</span> <span>extends</span> <span>BeanUtils</span> <span>{</span>
+
+    <span>public</span> <span>static</span> <span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> <span>T</span> <span>convertTo</span><span>(</span><span>S</span> source<span>,</span> <span>Supplier</span><span><span>&lt;</span><span>T</span><span>></span></span> targetSupplier<span>)</span> <span>{</span>
+        <span>return</span> <span>convertTo</span><span>(</span>source<span>,</span> targetSupplier<span>,</span> <span>null</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 转换对象
+     *
+     * <span>@param</span> <span>source</span>         源对象
+     * <span>@param</span> <span>targetSupplier</span> 目标对象供应方
+     * <span>@param</span> <span>callBack</span>       回调方法
+     * <span>@param</span> <span><span>&lt;</span>S<span>></span></span>            源对象类型
+     * <span>@param</span> <span><span>&lt;</span>T<span>></span></span>            目标对象类型
+     * <span>@return</span> 目标对象
+     */</span>
+    <span>public</span> <span>static</span> <span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> <span>T</span> <span>convertTo</span><span>(</span><span>S</span> source<span>,</span> <span>Supplier</span><span><span>&lt;</span><span>T</span><span>></span></span> targetSupplier<span>,</span> <span>ConvertCallBack</span><span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> callBack<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span><span>null</span> <span>==</span> source <span>||</span> <span>null</span> <span>==</span> targetSupplier<span>)</span> <span>{</span>
+            <span>return</span> <span>null</span><span>;</span>
+        <span>}</span>
+
+        <span>T</span> target <span>=</span> targetSupplier<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>copyProperties</span><span>(</span>source<span>,</span> target<span>)</span><span>;</span>
+        <span>if</span> <span>(</span>callBack <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            callBack<span>.</span><span>callBack</span><span>(</span>source<span>,</span> target<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> target<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> <span>List</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>convertListTo</span><span>(</span><span>List</span><span><span>&lt;</span><span>S</span><span>></span></span> sources<span>,</span> <span>Supplier</span><span><span>&lt;</span><span>T</span><span>></span></span> targetSupplier<span>)</span> <span>{</span>
+        <span>return</span> <span>convertListTo</span><span>(</span>sources<span>,</span> targetSupplier<span>,</span> <span>null</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 转换对象
+     *
+     * <span>@param</span> <span>sources</span>        源对象list
+     * <span>@param</span> <span>targetSupplier</span> 目标对象供应方
+     * <span>@param</span> <span>callBack</span>       回调方法
+     * <span>@param</span> <span><span>&lt;</span>S<span>></span></span>            源对象类型
+     * <span>@param</span> <span><span>&lt;</span>T<span>></span></span>            目标对象类型
+     * <span>@return</span> 目标对象list
+     */</span>
+    <span>public</span> <span>static</span> <span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> <span>List</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>convertListTo</span><span>(</span><span>List</span><span><span>&lt;</span><span>S</span><span>></span></span> sources<span>,</span> <span>Supplier</span><span><span>&lt;</span><span>T</span><span>></span></span> targetSupplier<span>,</span> <span>ConvertCallBack</span><span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> callBack<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span><span>null</span> <span>==</span> sources <span>||</span> <span>null</span> <span>==</span> targetSupplier<span>)</span> <span>{</span>
+            <span>return</span> <span>null</span><span>;</span>
+        <span>}</span>
+
+        <span>List</span><span><span>&lt;</span><span>T</span><span>></span></span> list <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span>sources<span>.</span><span>size</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>S</span> source <span>:</span> sources<span>)</span> <span>{</span>
+            <span>T</span> target <span>=</span> targetSupplier<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+            <span>copyProperties</span><span>(</span>source<span>,</span> target<span>)</span><span>;</span>
+            <span>if</span> <span>(</span>callBack <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+                callBack<span>.</span><span>callBack</span><span>(</span>source<span>,</span> target<span>)</span><span>;</span>
+            <span>}</span>
+            list<span>.</span><span>add</span><span>(</span>target<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> list<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 回调接口
+     *
+     * <span>@param</span> <span><span>&lt;</span>S<span>></span></span> 源对象类型
+     * <span>@param</span> <span><span>&lt;</span>T<span>></span></span> 目标对象类型
+     */</span>
+    <span>@FunctionalInterface</span>
+    <span>public</span> <span>interface</span> <span>ConvertCallBack</span><span><span>&lt;</span><span>S</span><span>,</span> <span>T</span><span>></span></span> <span>{</span>
+        <span>void</span> <span>callBack</span><span>(</span><span>S</span> t<span>,</span> <span>T</span> s<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>性能</strong></p>
+<p>由于只是 BeanUtils 的一个封装，跟原来的代码性能几乎差不多，如果要说差一点也没错，毕竟多了一层函数堆栈的调用，但是基本可以忽略不计。主要的性能还是由 BeanUtils 决定。</p>
+<p><strong>提醒</strong></p>
+<p>不知道大家对这个 BeanConvertUtils 工具类感觉怎么样，自己在项目中倒是大量使用，也很方便。</p>
+<p>但是有两点要提醒：</p>
+<p>此方法依旧不能解决深层次的深拷贝问题，详细的可以 google 一下 BeanUtils 的深拷贝问题。‘</p>
+<p>如果 source 或者 targetSupplier 只要有一个为 null，本工具类不像 BeanUtils 一样抛出异常，而是返回 null，因为笔者认为调用方如果把 null 进行准换，那就是想转换为 null，为不为空应该由调用方自己负责。</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>架构师图谱之微服务&amp;消息队列</title>
       <link>https://blog.ciberviler.top/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1&amp;%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.html</link>
@@ -25665,111 +25820,6 @@ private static final int INTERRUPTED  = 6;
 <p>通用下载1：<a href="https://www.parsevideo.net/%EF%BC%88%E8%BF%99%E4%B8%AA%E6%98%AF%E9%80%9A%E7%94%A8%E7%9A%84%EF%BC%8C%E4%B8%8D%E5%85%89%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD%E6%8A%96%E9%9F%B3%E6%97%A0%E6%B0%B4%E5%8D%B0%E8%A7%86%E9%A2%91%EF%BC%8C%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD%E5%85%B6%E4%BB%96%E5%BE%88%E5%A4%9A%E7%BD%91%E7%AB%99%EF%BC%8C%E5%85%B7%E4%BD%93%E4%BB%A5%E7%BD%91%E7%AB%99%E6%98%BE%E7%A4%BA%E4%B8%BA%E5%87%86%E3%80%82%EF%BC%89" target="_blank" rel="noopener noreferrer">https://www.parsevideo.net/（这个是通用的，不光可以下载抖音无水印视频，还可以下载其他很多网站，具体以网站显示为准。）</a></p>
 <p>通用下载2：<a href="https://lab.5ime.cn/video/%EF%BC%88%E5%90%8C%E4%B8%8A%EF%BC%89" target="_blank" rel="noopener noreferrer">https://lab.5ime.cn/video/（同上）</a></p>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>网站-文献下载</title>
-      <link>https://blog.ciberviler.top/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html</link>
-      <guid>https://blog.ciberviler.top/other/%E7%BD%91%E7%AB%99%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">网站-文献下载</source>
-      <description>网站-文献下载</description>
-      <category>other</category>
-      <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="文献下载" tabindex="-1"> 文献下载</h1>
-<h2 id="文献部落" tabindex="-1"> 文献部落</h2>
-<p>**网址：**<strong><a href="http://459.org/" target="_blank" rel="noopener noreferrer">http://459.org/</a></strong></p>
-<p><strong>文献部落</strong>是一个免费下载文献的学术导航网站,汇总最新免费下载国内外文献的网站,为广大研究生提供最便捷的文献下载方法。</p>
-<p><strong>英文文献</strong>下载网站应有尽有。也提供超多<strong>中****文文献下载方法</strong>。<strong>百度学术、文库、知网</strong>等网站文献都免费下载！除此之外，广西图书馆和浙江图书馆直接注册登录即可下载文献，好用又便捷！</p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdhRtL2dKic8UvV5ibvu9EHTdHcUnrlXafZ17qdtEic8a9741zTHRFiaJoxibvMhP6dn7MICHwcVUuer3PQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>温馨提示：网站还提供了**文*<em>献*<em><strong><strong>互助微信群</strong>和</strong>导师评价网</em></em>，超级贴心哦~<img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdhRtL2dKic8UvV5ibvu9EHTdHAXSO4CnhcSwKjWial64rjflc0kgBjIb1SdxEhVRBA40GQ8NauTfUQcg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<h2 id="大木虫" tabindex="-1"> 大木虫</h2>
-<p>**网址：**<strong><a href="http://www.4243.net/" target="_blank" rel="noopener noreferrer">http://www.4243.net/</a></strong></p>
-<p>大木虫是一个<strong>学术导航</strong>，界面简洁清新，功能强大，这里收集了大量常用且好用的<strong>数据库网站、搜索引擎、镜像网站</strong>。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。</p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdhRtL2dKic8UvV5ibvu9EHTdHuD6sXAWVqJdp8rBPib9xgokTYs8AgTcdtEzn6HEh8oZQDlZznB1s00g/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<h2 id="文献小镇" tabindex="-1"> 文献小镇</h2>
-<p>**网址：**<strong><a href="http://www.sci-hub.ac.cn/" target="_blank" rel="noopener noreferrer">www.sci-hub.ac.cn/</a></strong></p>
-<p>文献小镇号称是<strong>中国版的SCI-HUB</strong>，界面同SCI-HUB一样简洁明了，可以采用<strong>URL,PMID/DOI</strong>等方式搜索下载文献。</p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdhRtL2dKic8UvV5ibvu9EHTdH0ODicNzAC6JNvpPHxzibBQN5CSgfIuOJgH1ia85m7vPka95UL7uK3IRnw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<h2 id="小鲸鱼文献" tabindex="-1"> 小鲸鱼文献</h2>
-<p>**网址：**<strong><a href="http://www.9312.net/" target="_blank" rel="noopener noreferrer">http://www.9312.net/</a></strong></p>
-<p>文献下载导航是一个<strong>学术导航</strong>，界面简洁清新，功能强大。最重要的是，手机端也可以直接访问网站，能够随时随地的查阅文献。在手机上登录此网站，直接输入DOI号就能查询文献。</p>
-<p>这里收集了大量常用且好用的<strong>数据库网站、搜索引擎、镜像网站</strong>。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<h2 id="文献神器v8-0" tabindex="-1"> 文献神器V8.0：</h2>
-<p>科研人必备的文献神器，最简单的查找方式，直接输入DOI即可下载，下方还包含丰富的国内外数据库。</p>
-<p>增添了<strong>谷歌翻译，搜狗翻译</strong>等翻译网站，还有<strong>PDF转换功能</strong>，国内外的<strong>专利，标准</strong>也可以在软件内直接查询。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>文献神器v7.0文献下载演示</p>
-<p>文献神器V8.0堪称史上<strong>最方便、简洁</strong>的文献下载软件，<strong>内存小，运行速度快，没有广告，弹窗，也不会出现闪退等现象。</strong></p>
-<p><strong>文献神器V8.0百度下载：</strong></p>
-<p><strong><a href="https://lanzoui.com/i4u2Qselgva" target="_blank" rel="noopener noreferrer">https://lanzoui.com/i4u2Qselgva</a></strong></p>
-<h2 id="柠檬文献" tabindex="-1"> 柠檬文献</h2>
-<p>**网址：**<strong><a href="http://sci-hub.fan/" target="_blank" rel="noopener noreferrer">http://sci-hub.fan/</a></strong> （请在电脑端访问）</p>
-<p>在搜索框可以<strong>切换搜索引擎</strong>，接着直接输入文献URL、PMID或者DOI号，<strong>一键下载文献</strong>。提供Sci-hub最新可用网址、百度学术、谷歌学术以及影响分子。</p>
-<p>柠檬文献界面清新，没有广告和弹窗，还能下载90%的国内外文献。</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<h2 id="龙猫学术导航" tabindex="-1"> 龙猫学术导航</h2>
-<p>**官方网址：**<strong><a href="http://www.6453.net/" target="_blank" rel="noopener noreferrer">http://www.6453.net/</a></strong></p>
-<p>龙猫学术导航提供<strong>google学术搜索</strong>入口，免费文献下载入口，让你能够快速地下载到文献。学术导航必备的<strong>SCI HUB</strong>网址、谷歌学术镜像在这里同样一样不少，还有下载英文书籍的<strong>Libgen</strong>和<strong>BookSee</strong>等网站。这里总结了某个领域的常用网站，而且很齐全。</p>
-<p>值得关注的是学科、机构、综合信息交流这一板块，这里总结了<strong>某个领域的常用网站，而且很齐全</strong>。</p>
-<p>比如生物医药中，包含了很多医学方面的网站。</p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdjPeRxlloPzgQn7DMeJVAQdn7wJ6CryU04mRMTq7TKv8wavAtTf6HLp7NbRjjtiblBWJoApIoUu5tA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<h2 id="文献下载导航" tabindex="-1"> 文献下载导航</h2>
-<p>**网址：**<strong><a href="http://489.org/" target="_blank" rel="noopener noreferrer">http://489.org/</a></strong></p>
-<p>文献下载导航是一个<strong>学术导航</strong>，界面简洁清新，功能强大。最重要的是，手机端也可以直接访问网站，能够随时随地地查阅文献。在手机上登录此网站，直接输入DOI号就能查询文献。</p>
-<p>这里收集了大量常用且好用的<strong>数据库网站、搜索引擎、镜像网站</strong>。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/v0B0BvIdBxjXNmhp2VgLPpVtXJRoTw1dd8dZ8bSyWs2QOBxqfibuwC8V0v8RHv0AXuoo6q3vMcFFoG1tI4NXiawA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<h2 id="格桑花学术导航" tabindex="-1"> 格桑花学术导航：</h2>
-<p>**网址：**<strong><a href="http://20009.net/" target="_blank" rel="noopener noreferrer">http://20009.net/</a></strong></p>
-<p>小众学术导航网站，可能大多数人都没听过，他的优势是网站**操作简单，没有广告，弹窗，**同样不会出现很多乱七八糟的东西。</p>
-<p>网站内包含国内、外最受欢迎的学术网站！SCI-HUB，谷歌学术，Wiley，EI，Nature，Jstor，Emerald，ACS，Springer，Science Direct，Elsevier，Arxiv等国外各大主流网站。</p>
-<p>由于比较小众，知道的人不是很多，所以查找文献十分流畅，基本不会出现卡顿的情况。</p>
-<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/icMU411LA1GOLbRBUR4KtGk2icozpL8x5XpYu91QicLFibicEQG1eO9HaTsnZuJmiaTAI3ibkZkydhUuv84T0fIJOLvfg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></strong></p>
-<p><strong>再给大家推荐2个免费的文献翻译网站，相信你能用的到！</strong></p>
-<h2 id="大木虫文献翻译" tabindex="-1"> 大木虫文献翻译</h2>
-<p>大木虫文献翻译，是一款免费的文献翻网站，是面向广大研究生，科研工作者开发的文献翻译网站。</p>
-<p>**网址：**<strong><a href="http://www.5628.org/" target="_blank" rel="noopener noreferrer">http://www.5628.org/</a></strong></p>
-<p>**优势：**<strong>翻译精准，无广告，永久免费</strong></p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>左侧输入欲翻译的外文文献，点击左下角【<strong>立即翻译</strong>】，右侧显示对应的翻译结果。小编对比了几款翻译工具，大木虫文献翻译结果还是比较精准的，大家可以亲自尝试！</p>
-<p>**大木虫文献翻译：**<strong><a href="http://www.5628.org/" target="_blank" rel="noopener noreferrer">http://www.5628.org/</a></strong></p>
-<h2 id="百川文献翻译" tabindex="-1"> 百川文献翻译</h2>
-<p>一款全新上线的免费翻译文献的软件，支持多种语言实时翻译，不仅能够节省宝贵的精力和时间，还能够帮助科研人员节省下一大笔翻译的费用。</p>
-<p>在线翻译，多语系多语种，<strong>翻译速度快</strong>；<strong>专业术语翻译精准</strong>，适合各专业文献；<strong>体积小</strong>，运行速度流畅，无卡顿现象；<strong>使用免费</strong>，<strong>没有广告</strong>，维护科研人的利益。</p>
-<p><strong>网址：</strong>****<a href="http://www.bcwxfy.com/%5C" target="_blank" rel="noopener noreferrer">http://www.bcwxfy.com/\</a>****</p>
-<p><em><strong>*优势：翻译精准，小体积客户端，使用便捷，永久免费*</strong></em></p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>在线翻译，多语系多语种，翻译速度快；专业术语翻译精准，适合各专业文献；体积小，运行速度流畅，无卡顿现象；使用免费，没有广告，维护科研人的利益。</p>
-<p>**百川文献翻译：**<strong><a href="http://www.bcwxfy.com/" target="_blank" rel="noopener noreferrer">http://www.bcwxfy.com/</a></strong></p>
-<p><strong>再给大家推荐1个电子书下载网站，也许你能用得到！</strong></p>
-<h2 id="小鲸鱼搜书" tabindex="-1"> 小鲸鱼搜书</h2>
-<p>小鲸鱼搜书是一个功能非常强大的电子书导航网站，也是一个非常实用的学习网站，可以帮助你搜索很多学习书籍和小说<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy">。</p>
-<p>各种格式都有，涵盖txt、mobi、epub等</p>
-<p>它聚合了多达 20 多个高质量电子书网站，并且每个网站的质量都是非常高，它的界面简洁清新，你可以直接点击左侧切换网站。</p>
-<p>**小鲸鱼搜书：**<strong><a href="http://www.9871.org" target="_blank" rel="noopener noreferrer">www.9871.org</a></strong></p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdg9AmiaibOweANBsMV8ia7Cibah9xPsygiaV4wtTwAE21EyiaUsgdA1wTYft41p3IZqfEk2exYY0VyMZQnQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdg9AmiaibOweANBsMV8ia7Cibah5NV0C2wuibribvms5GicZameIVv5GpVzyZOdXibJ8dtdVnKczv0CicgdcQA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>功能实在是太强大了！不仅仅是一个单独的搜书网站，它还集合了各大搜书网站，这里我随意搜了一本书后，直接下载就可以看了。</p>
-<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/AArk6HHMHdg9AmiaibOweANBsMV8ia7Cibah5rJ8LHicNog3GjjiclL6ym0JgllvQUDWaM2FY9z2MZOGO7fZ3JkacjBA/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy">   <img src="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdg9AmiaibOweANBsMV8ia7Cibaht2uuFYbDlGrC12YFAPlxXoibmQPZlOGnZcGdc3xVrorMibPYY2NzmibBA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>**小鲸鱼搜书：**<strong><a href="http://www.9871.org" target="_blank" rel="noopener noreferrer">www.9871.org</a></strong> <strong>一站搞定电子书下载！快来体验吧！请在电脑端访问，体验更佳！</strong></p>
-<p><strong>再给大家推荐2个免费的论文降重网站，也许你能用得到！</strong></p>
-<h4 id="一、天临论文降重助手" tabindex="-1"> <strong>一、天临论文降重助手</strong></h4>
-<p>天临论文降重助手是一个免费的论文降重工具！网站采用自然语言分析器SyntaxNet(语法分析程序)+自然语言处理(NLP)智能降重，是广大毕业生必备的论文降重工具。</p>
-<p>**天临降重网址：**<strong><a href="http://www.8795.org" target="_blank" rel="noopener noreferrer">www.8795.org</a></strong></p>
-<p><strong>使 用 方 法：</strong></p>
-<p>打开网站，复制需要降重的论文段落到网站编辑框，然后单击左下角的“<strong>开始降重</strong>”即可快速修改论文；</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/v0B0BvIdBxjIWtiaVMiaj6ljfTXiaQ7EQB5Oqlu7br20wZd42pMe3og5rBCHwbCkDJDMiavwsXibic9PbtK6qgMRtPrw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>左侧输入重复率高的论文，右侧输出降重后的文字，自己通读一遍，检查修改后的文字是否语句通顺，并稍加润色，就完成降重了！</p>
-<p>天临论文降重助手，每次可修改4000字，每天可以修改5次，基本满足降重所需！</p>
-<p><strong>二、降重神器</strong></p>
-<p>降重神器是一个免费的论文降重工具。操作简单，轻松实现降低论文重复率！</p>
-<p><strong><em>*降重神器网址：*</em>*<em><a href="http://www.9526.org" target="_blank" rel="noopener noreferrer">www.9526.org</a>*</em></strong></p>
-<p><strong>使用方法：<strong>进入降重神器官网，粘贴需要修改的论文段落到编辑框，点击【<strong>立即降重</strong>】，下面文本框会出现</strong>3种</strong>修改后的结果。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/v0B0BvIdBxjIWtiaVMiaj6ljfTXiaQ7EQB5yYjiava1RYUYB3mCWXfc4Ja0uCmBD5CQ9GpGgP2E1Gr6vxMk3faX7qA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></p>
-<p>然后选择一个润色最顺畅的即可，此刻降重完成！如果你的论文重复率很高，想快速降重，可以用上面两个网站试试！</p>
-]]></content:encoded>
-      <enclosure url="https://mmbiz.qpic.cn/sz_mmbiz_png/AArk6HHMHdhRtL2dKic8UvV5ibvu9EHTdHcUnrlXafZ17qdtEic8a9741zTHRFiaJoxibvMhP6dn7MICHwcVUuer3PQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" type="image/"/>
     </item>
   </channel>
 </rss>
