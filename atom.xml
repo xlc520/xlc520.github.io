@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T08:56:33.560Z</updated>
+  <updated>2022-06-20T09:37:28.625Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -22,6 +22,324 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">SpringBoot整合Mybatis-plus及用法2</title>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%952.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%952.html"/>
+    <updated>2022-06-20T09:35:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot整合mybatis-plus及用法2" tabindex="-1"> SpringBoot整合Mybatis-plus及用法2</h1>
+<h2 id="创建项目" tabindex="-1"> 创建项目</h2>
+<p>普通的spring-boot项目，在 <a href="https://start.spring.io" target="_blank" rel="noopener noreferrer">start.spring.io</a>或者使用idea创建都行，相关依赖如下</p>
+<p>我这版本用的springboot版本是 2.1.4</p>
+<div><pre><code><span><span><span>&lt;</span>dependencies</span><span>></span></span>
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-web<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-devtools<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+		<span><span><span>&lt;</span>scope</span><span>></span></span>runtime<span><span><span>&lt;/</span>scope</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>mysql<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>mysql-connector-java<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+		<span><span><span>&lt;</span>scope</span><span>></span></span>runtime<span><span><span>&lt;/</span>scope</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>org.projectlombok<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>lombok<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+		<span><span><span>&lt;</span>optional</span><span>></span></span>true<span><span><span>&lt;/</span>optional</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-test<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+		<span><span><span>&lt;</span>scope</span><span>></span></span>test<span><span><span>&lt;/</span>scope</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+
+	<span><span><span>&lt;</span>dependency</span><span>></span></span>
+		<span><span><span>&lt;</span>groupId</span><span>></span></span>com.baomidou<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+		<span><span><span>&lt;</span>artifactId</span><span>></span></span>mybatis-plus-boot-starter<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+		<span><span><span>&lt;</span>version</span><span>></span></span>3.1.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+	<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+<span><span><span>&lt;/</span>dependencies</span><span>></span></span>
+<span><span><span>&lt;</span>build</span><span>></span></span>
+	<span><span><span>&lt;</span>resources</span><span>></span></span>
+		<span><span><span>&lt;</span>resource</span><span>></span></span>
+			<span><span><span>&lt;</span>directory</span><span>></span></span>src/main/java<span><span><span>&lt;/</span>directory</span><span>></span></span>
+			<span><span><span>&lt;</span>includes</span><span>></span></span>
+				<span><span><span>&lt;</span>include</span><span>></span></span>**/*.xml<span><span><span>&lt;/</span>include</span><span>></span></span>
+			<span><span><span>&lt;/</span>includes</span><span>></span></span>
+			<span><span><span>&lt;</span>filtering</span><span>></span></span>true<span><span><span>&lt;/</span>filtering</span><span>></span></span>
+		<span><span><span>&lt;/</span>resource</span><span>></span></span>
+		<span><span><span>&lt;</span>resource</span><span>></span></span>
+			<span><span><span>&lt;</span>directory</span><span>></span></span>src/main/resources<span><span><span>&lt;/</span>directory</span><span>></span></span>
+		<span><span><span>&lt;/</span>resource</span><span>></span></span>
+	<span><span><span>&lt;/</span>resources</span><span>></span></span>
+<span><span><span>&lt;/</span>build</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="建表" tabindex="-1"> 建表</h2>
+<div><pre><code><span>CREATE</span> <span>TABLE</span> <span><span>`</span>topic<span>`</span></span> <span>(</span>
+  <span><span>`</span>id<span>`</span></span> <span>int</span><span>(</span><span>11</span><span>)</span> <span>NOT</span> <span>NULL</span> <span>AUTO_INCREMENT</span><span>,</span>
+  <span><span>`</span>title<span>`</span></span> <span>varchar</span><span>(</span><span>255</span><span>)</span> <span>DEFAULT</span> <span>NULL</span><span>,</span>
+  <span><span>`</span>content<span>`</span></span> <span>varchar</span><span>(</span><span>255</span><span>)</span> <span>DEFAULT</span> <span>NULL</span><span>,</span>
+  <span><span>`</span>tag<span>`</span></span> <span>varchar</span><span>(</span><span>255</span><span>)</span> <span>DEFAULT</span> <span>NULL</span><span>,</span>
+  <span><span>`</span>in_time<span>`</span></span> <span>datetime</span> <span>DEFAULT</span> <span>NULL</span><span>,</span>
+  <span>PRIMARY</span> <span>KEY</span> <span>(</span><span><span>`</span>id<span>`</span></span><span>)</span>
+<span>)</span> <span>ENGINE</span><span>=</span><span>InnoDB</span> <span>AUTO_INCREMENT</span><span>=</span><span>14</span> <span>DEFAULT</span> <span>CHARSET</span><span>=</span>utf8<span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>插入一些数据</p>
+<div><pre><code><span>INSERT</span> <span>INTO</span> <span><span>`</span>topic<span>`</span></span> <span>(</span><span><span>`</span>id<span>`</span></span><span>,</span> <span><span>`</span>title<span>`</span></span><span>,</span> <span><span>`</span>content<span>`</span></span><span>,</span> <span><span>`</span>tag<span>`</span></span><span>,</span> <span><span>`</span>in_time<span>`</span></span><span>)</span>
+<span>VALUES</span>
+	<span>(</span><span>1</span><span>,</span> <span>'title1'</span><span>,</span> <span>'content1'</span><span>,</span> <span>'tag1'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>2</span><span>,</span> <span>'title2'</span><span>,</span> <span>'content2'</span><span>,</span> <span>'tag2'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>3</span><span>,</span> <span>'title3'</span><span>,</span> <span>'content3'</span><span>,</span> <span>'tag3'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>4</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>5</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>6</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>7</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>8</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>9</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>10</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>11</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>12</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>,</span>
+	<span>(</span><span>13</span><span>,</span> <span>'title4'</span><span>,</span> <span>'content4'</span><span>,</span> <span>'tag4'</span><span>,</span> <span>'2019-04-15 09:33:35'</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="创建实体类" tabindex="-1"> 创建实体类</h2>
+<div><pre><code><span>@Data</span>
+<span>public</span> <span>class</span> <span>Topic</span> <span>{</span>
+
+  <span>@TableId</span><span>(</span>type <span>=</span> <span>IdType</span><span>.</span>AUTO<span>)</span>
+  <span>private</span> <span>Integer</span> id<span>;</span>
+
+  <span>private</span> <span>String</span> title<span>;</span>
+  <span>private</span> <span>String</span> content<span>;</span>
+  <span>private</span> <span>String</span> tag<span>;</span>
+  <span>private</span> <span>Date</span> inTime<span>;</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="创建mapper" tabindex="-1"> 创建mapper</h2>
+<div><pre><code><span>public</span> <span>interface</span> <span>TopicMapper</span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>{</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="创建service" tabindex="-1"> 创建service</h2>
+<div><pre><code><span>@Service</span>
+<span>@Transactional</span>
+<span>public</span> <span>class</span> <span>TopicService</span> <span>{</span>
+
+  <span>@Autowired</span>
+  <span>private</span> <span>TopicMapper</span> topicMapper<span>;</span>
+
+  <span>public</span> <span>List</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>list</span><span>(</span><span>)</span> <span>{</span>
+    <span>return</span> topicMapper<span>.</span><span>selectList</span><span>(</span><span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span><span>;</span>
+  <span>}</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="创建controller" tabindex="-1"> 创建controller</h2>
+<div><pre><code><span>@RestController</span>
+<span>public</span> <span>class</span> <span>TopicController</span> <span>{</span>
+
+  <span>@Autowired</span>
+  <span>private</span> <span>TopicService</span> topicService<span>;</span>
+
+  <span>@GetMapping</span><span>(</span><span>"/"</span><span>)</span>
+  <span>public</span> <span>Object</span> <span>list</span><span>(</span><span>)</span> <span>{</span>
+    <span>return</span> topicService<span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+  <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="添加包扫描" tabindex="-1"> 添加包扫描</h2>
+<p>最后在启动类 <code>MybatisPlusDemoApplication.java</code> 上加上扫描包的注解，如下</p>
+<div><pre><code><span>@SpringBootApplication</span>
+<span>@MapperScan</span><span>(</span><span>"com.example.mybatisplusdemo.mapper"</span><span>)</span>
+<span>public</span> <span>class</span> <span>MybatisPlusDemoApplication</span> <span>{</span>
+
+  <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>SpringApplication</span><span>.</span><span>run</span><span>(</span><span>MybatisPlusDemoApplication</span><span>.</span><span>class</span><span>,</span> args<span>)</span><span>;</span>
+  <span>}</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="测试" tabindex="-1"> 测试</h2>
+<div><pre><code>curl http://localhost:808/
+[{"id":1,"title":"title1","content":"content1","tag":"tag1","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":2,"title":"title2","content":"content2","tag":"tag2","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":3,"title":"title3","content":"content3","tag":"tag3","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":4,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":5,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":6,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":7,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":8,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":9,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":10,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":11,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":12,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":13,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"}]
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上面的一些用法在mybatis-plus官网上都能找到，都是基本用法，但开发项目不可能都是简单的crud，下面来说说一些高级的用法</p>
+<h2 id="xml怎么配置" tabindex="-1"> xml怎么配置</h2>
+<p>mybatis-plus里内置的crud都给封装好了，都在<code>BaseMapper</code>接口里，包括CRUD，分页，那如果我要自定义查询，返回字段不是整个实体类的字段怎么办呢？</p>
+<p>可以通过定义xml文件来查询，方法如下</p>
+<p>在<code>TopicMapper.java</code>类的包下，创建一个 <code>TopicMapper.xml</code> 文件，填上下面内容</p>
+<div><pre><code><span>&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span><span>&lt;!</span><span>DOCTYPE</span> <span>mapper</span> <span>PUBLIC</span> <span>"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span>"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span>></span></span>
+<span><span><span>&lt;</span>mapper</span> <span>namespace</span><span><span>=</span><span>"</span>com.example.mybatisplusdemo.mapper.TopicMapper<span>"</span></span><span>></span></span>
+
+  <span>&lt;!-- 映射表字段与实体类属性 --></span>
+  <span><span><span>&lt;</span>resultMap</span> <span>id</span><span><span>=</span><span>"</span>BaseResultMap<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>com.example.mybatisplusdemo.model.Topic<span>"</span></span><span>></span></span>
+      <span><span><span>&lt;</span>id</span> <span>column</span><span><span>=</span><span>"</span>id<span>"</span></span> <span>jdbcType</span><span><span>=</span><span>"</span>INTEGER<span>"</span></span> <span>property</span><span><span>=</span><span>"</span>id<span>"</span></span><span>/></span></span>
+      <span><span><span>&lt;</span>id</span> <span>column</span><span><span>=</span><span>"</span>title<span>"</span></span> <span>jdbcType</span><span><span>=</span><span>"</span>VARCHAR<span>"</span></span> <span>property</span><span><span>=</span><span>"</span>title<span>"</span></span><span>/></span></span>
+      <span><span><span>&lt;</span>id</span> <span>column</span><span><span>=</span><span>"</span>content<span>"</span></span> <span>jdbcType</span><span><span>=</span><span>"</span>VARCHAR<span>"</span></span> <span>property</span><span><span>=</span><span>"</span>content<span>"</span></span><span>/></span></span>
+      <span><span><span>&lt;</span>id</span> <span>column</span><span><span>=</span><span>"</span>tag<span>"</span></span> <span>jdbcType</span><span><span>=</span><span>"</span>VARCHAR<span>"</span></span> <span>property</span><span><span>=</span><span>"</span>tag<span>"</span></span><span>/></span></span>
+      <span><span><span>&lt;</span>id</span> <span>column</span><span><span>=</span><span>"</span>in_time<span>"</span></span> <span>jdbcType</span><span><span>=</span><span>"</span>DATE<span>"</span></span> <span>property</span><span><span>=</span><span>"</span>inTime<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;/</span>resultMap</span><span>></span></span>
+
+  <span>&lt;!-- 通用查询结果列 --></span>
+  <span><span><span>&lt;</span>sql</span> <span>id</span><span><span>=</span><span>"</span>Base_Column_List<span>"</span></span><span>></span></span>
+      id, title, content, tag, in_time
+  <span><span><span>&lt;/</span>sql</span><span>></span></span>
+
+  <span>&lt;!-- 自定义查询方法 --></span>
+
+<span><span><span>&lt;/</span>mapper</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>在这个xml文件里定义一个方法</p>
+<div><pre><code><span><span><span>&lt;</span>select</span> <span>id</span><span><span>=</span><span>"</span>selectByTitle<span>"</span></span> <span>resultMap</span><span><span>=</span><span>"</span>BaseResultMap<span>"</span></span><span>></span></span>
+  select <span><span><span>&lt;</span>include</span> <span>refid</span><span><span>=</span><span>"</span>Base_Column_List<span>"</span></span><span>/></span></span> from topic where title = '${title}'
+<span><span><span>&lt;/</span>select</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>对应的，在 <code>TopicMapper.java</code> 里也要加上相应的接口</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>TopicMapper</span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>{</span>
+  <span>Topic</span> <span>selectByTitle</span><span>(</span><span>@Param</span><span>(</span><span>"title"</span><span>)</span> <span>String</span> title<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>在service里就可以调用了，controller里再调用service里的方法，然后测试</p>
+<div><pre><code><span>curl</span> http://localhost:8080/selectByTitle?title<span>=</span>titl1
+<span>{</span><span>"id"</span>:1,<span>"title"</span><span>:</span><span>"title1"</span>,<span>"content"</span><span>:</span><span>"content1"</span>,<span>"tag"</span><span>:</span><span>"tag1"</span>,<span>"inTime"</span><span>:</span><span>"2019-04-15T05:00:00.000+0000"</span><span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>可以看到上面xml里定义方法时用到的返回类型是定义好的映射 <code>resultMap=&quot;BaseResultMap&quot;</code>和通用查询结果列 <code>&lt;include refid=&quot;Base_Column_List&quot;/&gt;</code>，那如果我想返回一个map怎么办呢？</p>
+<p>将 <code>resultMap=&quot;BaseResultMap&quot;</code> 换成 <code>resultType=&quot;map&quot;</code>，查询语句里写上要查询的字段即可</p>
+<h2 id="自定义返回结果" tabindex="-1"> 自定义返回结果</h2>
+<p>上面最后提到返回一个map，这需求也很常见，比如一个表字段有10个，我只想要5个，那这时候再去定义通用查询结果列就不太好了，两个还好，多了xml就会很乱，所以map是最适合的方式，下面来定义一个查询看下效果</p>
+<div><pre><code><span>&lt;</span><span>select</span> id<span>=</span><span>"selectTitleList"</span> resultType<span>=</span><span>"map"</span><span>></span>
+  <span>select</span> id<span>,</span> title<span>,</span> in_time <span>from</span> topic
+<span>&lt;</span><span>/</span><span>select</span><span>></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>上面定义了一个方法，返回用的是<code>map</code>，查询字段有 <code>id, title</code>，<code>BaseMapper.java</code> 里接口定义如下</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>TopicMapper</span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>{</span>
+  <span>List</span><span><span>&lt;</span><span>Map</span><span>></span></span> <span>selectTitleList</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>写好service,controller，测试</p>
+<div><pre><code>curl http://localhost:8080/selectTitleList
+[{"in_time":"2019-04-15T14:33:35.000+0000","id":1,"title":"title1"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":2,"title":"title2"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":3,"title":"title3"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":4,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":5,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":6,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":7,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":8,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":9,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":10,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":11,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":12,"title":"title4"},
+{"in_time":"2019-04-15T14:33:35.000+0000","id":13,"title":"title4"}]
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="map转驼峰" tabindex="-1"> map转驼峰</h2>
+<p>上面查询结果可以看到，返回的确实是map，没有问题，但java类中的驼峰没有转回来呀，这样就不友好了，比如前端定义好了返回结果类，本来查询列表好好的，但换成详细查询的时候，字段收不到了，找了半天原来是字段变了，又是一场撕逼</p>
+<p>mybatis我不知道有没有办法解决，但mybatis-plus人家很用心呀，一个配置就解决了这个问题</p>
+<p>创建 <code>MybatisPlusConfig.java</code> 配置类，添加上下面配置即可实现<code>map转驼峰</code>和分页功能，分页功能下面再介绍，这里就先配置上</p>
+<div><pre><code><span>@Configuration</span>
+<span>@MapperScan</span><span>(</span><span>"com.example.mybatisplusdemo.mapper"</span><span>)</span>
+<span>public</span> <span>class</span> <span>MybatisPlusConfig</span> <span>{</span>
+
+  <span>@Bean</span><span>(</span><span>"mybatisSqlSession"</span><span>)</span>
+  <span>public</span> <span>SqlSessionFactory</span> <span>sqlSessionFactory</span><span>(</span><span>@Qualifier</span><span>(</span><span>"dataSource"</span><span>)</span> <span>DataSource</span> dataSource<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+    <span>MybatisSqlSessionFactoryBean</span> sqlSessionFactory <span>=</span> <span>new</span> <span>MybatisSqlSessionFactoryBean</span><span>(</span><span>)</span><span>;</span>
+    <span>MybatisConfiguration</span> configuration <span>=</span> <span>new</span> <span>MybatisConfiguration</span><span>(</span><span>)</span><span>;</span>
+    configuration<span>.</span><span>setDefaultScriptingLanguage</span><span>(</span><span>MybatisXMLLanguageDriver</span><span>.</span><span>class</span><span>)</span><span>;</span>
+    configuration<span>.</span><span>setJdbcTypeForNull</span><span>(</span><span>JdbcType</span><span>.</span>NULL<span>)</span><span>;</span>
+    <span>//*注册Map 下划线转驼峰*</span>
+   configuration<span>.</span><span>setObjectWrapperFactory</span><span>(</span><span>new</span> <span>MybatisMapWrapperFactory</span><span>(</span><span>)</span><span>)</span><span>;</span>
+
+    <span>// 添加数据源</span>
+    sqlSessionFactory<span>.</span><span>setDataSource</span><span>(</span>dataSource<span>)</span><span>;</span>
+
+    sqlSessionFactory<span>.</span><span>setConfiguration</span><span>(</span>configuration<span>)</span><span>;</span>
+
+    <span>// 添加分页插件，这里有个坑</span>
+    <span>PaginationInterceptor</span> paginationInterceptor <span>=</span> <span>new</span> <span>PaginationInterceptor</span><span>(</span><span>)</span><span>;</span>
+    sqlSessionFactory<span>.</span><span>setPlugins</span><span>(</span><span>new</span> <span>Interceptor</span><span>[</span><span>]</span><span>{</span>paginationInterceptor<span>}</span><span>)</span><span>;</span>
+
+    <span>return</span> sqlSessionFactory<span>.</span><span>getObject</span><span>(</span><span>)</span><span>;</span>
+  <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>加上这个配置类后，Mapper扫描注解顺便也从启动类上移到这个类上配置，然后再次启动项目，测试</p>
+<div><pre><code>curl http://localhost:8080/selectTitleList
+[{"inTime":"2019-04-15T14:33:35.000+0000","id":1,"title":"title1"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":2,"title":"title2"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":3,"title":"title3"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":4,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":5,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":6,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":7,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":8,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":9,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":10,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":11,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":12,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":13,"title":"title4"}]
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>再看看结果，<code>in_time</code>已经从下划线转成驼峰 <code>inTime</code> 命名了，可喜可贺可喜可贺</p>
+<h2 id="basemapper分页" tabindex="-1"> BaseMapper分页</h2>
+<p>分页分两种，一种是BaseMapper接口内置的分页接口，直接调用即可，使用如下</p>
+<p>在service里直接调用方法</p>
+<div><pre><code><span>public</span> <span>IPage</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>selectWithPage</span><span>(</span><span>Integer</span> pageNo<span>,</span> <span>Integer</span> pageSize<span>)</span> <span>{</span>
+  <span>QueryWrapper</span><span><span>&lt;</span><span>Topic</span><span>></span></span> wrapper <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+  <span>IPage</span><span><span>&lt;</span><span>Topic</span><span>></span></span> iPage <span>=</span> <span>new</span> <span>Page</span><span><span>&lt;</span><span>></span></span><span>(</span>pageNo<span>,</span> pageSize<span>)</span><span>;</span>
+  <span>return</span> topicMapper<span>.</span><span>selectPage</span><span>(</span>iPage<span>,</span> wrapper<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>测试 <code>curl http://localhost:8080/selectWithPage?pageNo=1&amp;pageSize=5</code></p>
+<div><pre><code>{"records":[{"id":1,"title":"title1","content":"content1","tag":"tag1","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":2,"title":"title2","content":"content2","tag":"tag2","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":3,"title":"title3","content":"content3","tag":"tag3","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":4,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"},
+{"id":5,"title":"title4","content":"content4","tag":"tag4","inTime":"2019-04-15T14:33:35.000+0000"}],
+"total":13,"size":5,"current":1,"searchCount":true,"pages":3}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="自定义查询分页" tabindex="-1"> 自定义查询分页</h2>
+<p>上面说到了使用自定义查询时可以指定查询字段，然后返回map即可，那分页怎么办？</p>
+<p>mybatis-plus里有一个 <code>IPage</code> 接口，通过这个接口来封装分页信息，用法如下</p>
+<p>在xml里定义查询方法</p>
+<div><pre><code><span><span><span>&lt;</span>select</span> <span>id</span><span><span>=</span><span>"</span>selectMapWithPage<span>"</span></span> <span>resultType</span><span><span>=</span><span>"</span>map<span>"</span></span><span>></span></span>
+  select id, title, in_time from topic
+<span><span><span>&lt;/</span>select</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>在 <code>BaseMapper.java</code> 里定义接口</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>TopicMapper</span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>Topic</span><span>></span></span> <span>{</span>
+  <span>IPage</span><span><span>&lt;</span><span>Map</span><span>></span></span> <span>selectMapWithPage</span><span>(</span><span>IPage</span> iPage<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><code>TopicService.java</code> 里封装 IPage 对象然后调用接口</p>
+<div><pre><code><span>public</span> <span>IPage</span><span><span>&lt;</span><span>Map</span><span>></span></span> <span>selectMapWithPage</span><span>(</span><span>Integer</span> pageNo<span>,</span> <span>Integer</span> pageSize<span>)</span> <span>{</span>
+  <span>IPage</span><span><span>&lt;</span><span>Map</span><span>></span></span> iPage <span>=</span> <span>new</span> <span>Page</span><span><span>&lt;</span><span>></span></span><span>(</span>pageNo<span>,</span> pageSize<span>)</span><span>;</span>
+  iPage <span>=</span> topicMapper<span>.</span><span>selectMapWithPage</span><span>(</span>iPage<span>)</span><span>;</span>
+  <span>return</span> iPage<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>测试 <code>curl http://localhost:8080/selectMapWithPage?pageNo=1&amp;pageSize=5</code></p>
+<div><pre><code>{"records":[{"inTime":"2019-04-15T14:33:35.000+0000","id":1,"title":"title1"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":2,"title":"title2"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":3,"title":"title3"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":4,"title":"title4"},
+{"inTime":"2019-04-15T14:33:35.000+0000","id":5,"title":"title4"}],
+"total":13,"size":5,"current":1,"searchCount":true,"pages":3}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="注意" tabindex="-1"> 注意</h2>
+<ol>
+<li>在xml文件里写的sql语句不要在最后带上<code>;</code>，因为有些分页查询会自动拼上 <code>limit 0, 10;</code> 这样的sql语句，如果你在定义sql的时候已经加上了 <code>;</code>，调用这个查询的时候就会报错了</li>
+<li>往xml文件里的查询方法里传参数要带上 <code>@Param(&quot;&quot;)</code> 注解，这样mybatis才认，否则会报错</li>
+<li>分页中传的pageNo可以从0或者1开始，查询出的结果是一样的，这一点不像jpa里必须是从0开始才是第一页</li>
+</ol>
+<h2 id="异常" tabindex="-1"> 异常</h2>
+<p>2019-06-21更新</p>
+<p>今天创建了个项目，使用了 mybatis-plus(v3.1.1) 查询数据的时候出了个异常 <code>Error evaluating expression 'ew.sqlSegment != null and ew.sqlSegment != '' and ew.nonEmptyOfWhere</code></p>
+<p>原因好像是java的反射出的问题，devtools 也是利用java的反射来实现的热加载，mybatis-plus 里的 lambda 表达式也是用反射来找到属性的值进行sql拼接的，估计是这俩货冲突了，不过挺好奇，项目里还用到了 lombok，就没问题，这。。</p>
+<p>解决方法: 把<code>spring-boot-devtools</code>这个依赖去掉就可以了</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-07-02T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">SpringBoot整合Mybatis-plus及用法</title>
     <id>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%95.html</id>
@@ -26708,185 +27026,6 @@ class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPos
       <name>xlc520</name>
     </contributor>
     <published>2022-04-08T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">开发中报错异常解决</title>
-    <id>https://blog.ciberviler.top/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html</id>
-    <link href="https://blog.ciberviler.top/dev/%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">开发中报错异常解决</summary>
-    <content type="html"><![CDATA[<h1 id="开发中报错异常解决" tabindex="-1"> 开发中报错异常解决</h1>
-<p>2022年2月6日 开始整理开发中遇到的问题</p>
-<h2 id="vue打包部署-刷新404" tabindex="-1"> vue打包部署 刷新404</h2>
-<blockquote>
-<p>2022年3月20日22:14:21</p>
-</blockquote>
-<p><code>vue hash</code>模式下，<code>URL</code>中存在<code>'#'</code>，用<code>'history'</code>模式就能解决这个问题。但是<code>history</code>模式会出现刷新页面后，页面出现404。解决的办法是用<code>nginx</code>配置一下。
-在<code>nginx</code>的配置文件中修改</p>
-<p><strong>方法一：</strong></p>
-<div><pre><code>location <span>/</span><span>{</span>
-    root   <span>/</span>data<span>/</span>nginx<span>/</span>html<span>;</span>
-    index  index.html index.htm<span>;</span>
-    <span>if</span> <span>(</span><span>!</span><span>-</span>e <span>$request_filename</span><span>)</span> <span>{</span>
-        rewrite <span>^</span><span>/(.*) /</span>index.html last<span>;</span>
-        <span>break</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>方法二：</strong>
-vue.js官方教程里提到的</p>
-<p><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" target="_blank" rel="noopener noreferrer">https://router.vuejs.org/zh/guide/essentials/history-mode.html</a></p>
-<div><pre><code>  <span><span>server</span></span> <span>{</span>
-		<span><span>listen</span>       <span>80</span></span><span>;</span>
-        <span><span>server_name</span>  localhost</span><span>;</span>
-        
-    	<span><span>location</span> /</span> <span>{</span>
-            <span><span>root</span>   html</span><span>;</span>
-            <span># 第一种方法</span>
-            <span><span>try_files</span> <span>$uri</span> <span>$uri</span>/ /index.html</span><span>;</span>
-            <span># 第二种方法，需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span>
-            <span>#try_files $uri $uri/ @router;</span>
-            <span><span>index</span>  index.html index.htm</span><span>;</span>
-        <span>}</span>
-        <span>#对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span>
-        <span>#因此需要rewrite到index.html中，然后交给路由在处理请求资源</span>
-        <span><span>location</span> @router</span> <span>{</span>
-            <span><span>rewrite</span> ^.*$ /index.html last</span><span>;</span>
-        <span>}</span> 
-  <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>方案三</strong></p>
-<p>去掉这行代码。url上会出现带有#的地址。</p>
-<div><pre><code>mode: 'history',
-</code></pre><div aria-hidden="true"><div></div></div></div><h2 id="_1-spring-boot集成druid异常discard-long-time-none-received-connection" tabindex="-1"> 1.Spring Boot集成Druid异常discard long time none received connection.</h2>
-<blockquote>
-<p>2022年2月6日15:54:03</p>
-</blockquote>
-<h3 id="spring-boot集成druid异常" tabindex="-1"> Spring Boot集成Druid异常</h3>
-<p>在Spring Boot集成Druid项目中，发现错误日志中频繁的出现如下错误信息：</p>
-<div><pre><code>discard <span>long</span> time none received connection<span>.</span> <span>,</span> jdbcUrl <span>:</span> jdbc<span>:</span>mysql<span>:</span><span>/</span><span>/******?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;characterEncoding=UTF-8, version : 1.2.3, lastPacketReceivedIdleMillis : 172675
-</span></code></pre><div aria-hidden="true"><div></div></div></div><p>经过排查发现是Druid版本导致的异常，在1.2.2及以前版本并未出现如此异常。而在其以上版本均存在此问题，下面就来分析一下异常原因及解决方案。</p>
-<h3 id="异常分析" tabindex="-1"> 异常分析</h3>
-<p>首先上面的异常并不影响程序的正常运行，但作为程序员看到程序中不停的出现异常还是难以忍受的。所以还是要刨根问底的解决一下的。</p>
-<p>跟踪堆栈信息会发现对应的异常是从com.alibaba.druid.pool.DruidAbstractDataSource#testConnectionInternal方法中抛出的，对应的代码如下：</p>
-<div><pre><code><span>if</span> <span>(</span>valid <span>&amp;&amp;</span> isMySql<span>)</span> <span>{</span> <span>// unexcepted branch</span>
-    <span>long</span> lastPacketReceivedTimeMs <span>=</span> <span>MySqlUtils</span><span>.</span><span>getLastPacketReceivedTimeMs</span><span>(</span>conn<span>)</span><span>;</span>
-    <span>if</span> <span>(</span>lastPacketReceivedTimeMs <span>></span> <span>0</span><span>)</span> <span>{</span>
-        <span>long</span> mysqlIdleMillis <span>=</span> currentTimeMillis <span>-</span> lastPacketReceivedTimeMs<span>;</span>
-        <span>if</span> <span>(</span>lastPacketReceivedTimeMs <span>></span> <span>0</span> <span>//</span>
-                <span>&amp;&amp;</span> mysqlIdleMillis <span>>=</span> timeBetweenEvictionRunsMillis<span>)</span> <span>{</span>
-            <span>discardConnection</span><span>(</span>holder<span>)</span><span>;</span>
-            <span>String</span> errorMsg <span>=</span> <span>"discard long time none received connection. "</span>
-                    <span>+</span> <span>", jdbcUrl : "</span> <span>+</span> jdbcUrl
-                    <span>+</span> <span>", jdbcUrl : "</span> <span>+</span> jdbcUrl
-                    <span>+</span> <span>", lastPacketReceivedIdleMillis : "</span> <span>+</span> mysqlIdleMillis<span>;</span>
-            LOG<span>.</span><span>error</span><span>(</span>errorMsg<span>)</span><span>;</span>
-            <span>return</span> <span>false</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上述代码中，MySqlUtils.getLastPacketReceivedTimeMs(conn) 是获取上一次使用的时间，mysqlIdleMillis 就是计算出来空闲的时间，timeBetweenEvictionRunsMillis 是常量60秒。如果连接空闲了60秒以上，那就discardConnection(holder) 丢弃这个旧连接并顺带打印了一个日志LOG.warn(errorMsg)。</p>
-<h3 id="原理追踪" tabindex="-1"> 原理追踪</h3>
-<p>在上述代码中，我们看到进入该业务逻辑是有前提条件的，也就是valid和isMySql变量同时为true。isMySql为true是必须的，我们使用的本身就是<a href="https://cloud.tencent.com/product/cdb?from=10680" target="_blank" rel="noopener noreferrer">Mysql</a><a href="https://cloud.tencent.com/solution/database?from=10680" target="_blank" rel="noopener noreferrer">数据库</a>。那么是否可以让valid为false呢？这样不就不会进入该业务处理了吗？</p>
-<p>来看看valid的来源，还是在该方法的上面：</p>
-<div><pre><code><span>boolean</span> valid <span>=</span> validConnectionChecker<span>.</span><span>isValidConnection</span><span>(</span>conn<span>,</span> validationQuery<span>,</span> validationQueryTimeout<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><p>我们找到validConnectionChecker的Mysql实现子类MySqlValidConnectionChecker，该类中对isValidConnection的实现如下：</p>
-<div><pre><code><span>public</span> <span>boolean</span> <span>isValidConnection</span><span>(</span><span>Connection</span> conn<span>,</span> <span>String</span> validateQuery<span>,</span> <span>int</span> validationQueryTimeout<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
-    <span>if</span> <span>(</span>conn<span>.</span><span>isClosed</span><span>(</span><span>)</span><span>)</span> <span>{</span>
-        <span>return</span> <span>false</span><span>;</span>
-    <span>}</span>
-
-    <span>if</span> <span>(</span>usePingMethod<span>)</span> <span>{</span>
-        <span>if</span> <span>(</span>conn <span>instanceof</span> <span>DruidPooledConnection</span><span>)</span> <span>{</span>
-            conn <span>=</span> <span>(</span><span>(</span><span>DruidPooledConnection</span><span>)</span> conn<span>)</span><span>.</span><span>getConnection</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-
-        <span>if</span> <span>(</span>conn <span>instanceof</span> <span>ConnectionProxy</span><span>)</span> <span>{</span>
-            conn <span>=</span> <span>(</span><span>(</span><span>ConnectionProxy</span><span>)</span> conn<span>)</span><span>.</span><span>getRawObject</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-
-        <span>if</span> <span>(</span>clazz<span>.</span><span>isAssignableFrom</span><span>(</span>conn<span>.</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
-            <span>if</span> <span>(</span>validationQueryTimeout <span>&lt;=</span> <span>0</span><span>)</span> <span>{</span>
-                validationQueryTimeout <span>=</span> DEFAULT_VALIDATION_QUERY_TIMEOUT<span>;</span>
-            <span>}</span>
-
-            <span>try</span> <span>{</span>
-                ping<span>.</span><span>invoke</span><span>(</span>conn<span>,</span> <span>true</span><span>,</span> validationQueryTimeout <span>*</span> <span>1000</span><span>)</span><span>;</span>
-            <span>}</span> <span>catch</span> <span>(</span><span>InvocationTargetException</span> e<span>)</span> <span>{</span>
-                <span>Throwable</span> cause <span>=</span> e<span>.</span><span>getCause</span><span>(</span><span>)</span><span>;</span>
-                <span>if</span> <span>(</span>cause <span>instanceof</span> <span>SQLException</span><span>)</span> <span>{</span>
-                    <span>throw</span> <span>(</span><span>SQLException</span><span>)</span> cause<span>;</span>
-                <span>}</span>
-                <span>throw</span> e<span>;</span>
-            <span>}</span>
-            <span>return</span> <span>true</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-
-    <span>String</span> query <span>=</span> validateQuery<span>;</span>
-    <span>if</span> <span>(</span>validateQuery <span>==</span> <span>null</span> <span>||</span> validateQuery<span>.</span><span>isEmpty</span><span>(</span><span>)</span><span>)</span> <span>{</span>
-        query <span>=</span> DEFAULT_VALIDATION_QUERY<span>;</span>
-    <span>}</span>
-
-    <span>Statement</span> stmt <span>=</span> <span>null</span><span>;</span>
-    <span>ResultSet</span> rs <span>=</span> <span>null</span><span>;</span>
-    <span>try</span> <span>{</span>
-        stmt <span>=</span> conn<span>.</span><span>createStatement</span><span>(</span><span>)</span><span>;</span>
-        <span>if</span> <span>(</span>validationQueryTimeout <span>></span> <span>0</span><span>)</span> <span>{</span>
-            stmt<span>.</span><span>setQueryTimeout</span><span>(</span>validationQueryTimeout<span>)</span><span>;</span>
-        <span>}</span>
-        rs <span>=</span> stmt<span>.</span><span>executeQuery</span><span>(</span>query<span>)</span><span>;</span>
-        <span>return</span> <span>true</span><span>;</span>
-    <span>}</span> <span>finally</span> <span>{</span>
-        <span>JdbcUtils</span><span>.</span><span>close</span><span>(</span>rs<span>)</span><span>;</span>
-        <span>JdbcUtils</span><span>.</span><span>close</span><span>(</span>stmt<span>)</span><span>;</span>
-    <span>}</span>
-
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>我们可以看到上述方法中有三个返回的地方：第一个连接已关闭；第二个使用ping的形式进行检查；第三，使用select 1的方式进行检查。而使用ping的形式检查时，无论是否抛异常都会返回true。这里我们禁用该模式即可。</p>
-<p>进入ping的业务逻辑主要靠变量usePingMethod来判断，追踪代码会发现在这里进行的设置：</p>
-<div><pre><code><span>public</span> <span>void</span> <span>configFromProperties</span><span>(</span><span>Properties</span> properties<span>)</span> <span>{</span>
-    <span>String</span> property <span>=</span> properties<span>.</span><span>getProperty</span><span>(</span><span>"druid.mysql.usePingMethod"</span><span>)</span><span>;</span>
-    <span>if</span> <span>(</span><span>"true"</span><span>.</span><span>equals</span><span>(</span>property<span>)</span><span>)</span> <span>{</span>
-        <span>setUsePingMethod</span><span>(</span><span>true</span><span>)</span><span>;</span>
-    <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>"false"</span><span>.</span><span>equals</span><span>(</span>property<span>)</span><span>)</span> <span>{</span>
-        <span>setUsePingMethod</span><span>(</span><span>false</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>那么，也就是说，当我们把系统属性druid.mysql.usePingMethod设置为false即可禁用该功能。</p>
-<h3 id="禁用ping-method" tabindex="-1"> 禁用Ping Method</h3>
-<p>找到了问题的根源，那么剩下的就是如何禁用了，通常有三种形式。</p>
-<p>第一，在启动程序时在运行参数中增加：-Ddruid.mysql.usePingMethod=false。</p>
-<p>第二，在Spring Boot项目中，可在启动类中添加如下静态代码快：</p>
-<div><pre><code><span>static</span> <span>{</span>
-    <span>System</span><span>.</span><span>setProperty</span><span>(</span><span>"druid.mysql.usePingMethod"</span><span>,</span><span>"false"</span><span>)</span><span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>第三，类文件配置。在项目的DruidConfig类中新增加：</p>
-<div><pre><code><span>/*
-* 解决druid 日志报错：discard long time none received connection:xxx
-* */</span>
-<span>@PostConstruct</span>
-<span>public</span> <span>void</span> <span>setProperties</span><span>(</span><span>)</span><span>{</span>
-    <span>System</span><span>.</span><span>setProperty</span><span>(</span><span>"druid.mysql.usePingMethod"</span><span>,</span><span>"false"</span><span>)</span><span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>至此，已可以成功关闭该功能，异常信息再也不会出现了。</p>
-<h3 id="为什么要清空空闲60秒以上的连接" tabindex="-1"> 为什么要清空空闲60秒以上的连接</h3>
-<p>猜测，阿里给数据库设置的数据库空闲等待时间是60秒，mysql数据库到了空闲等待时间将关闭空闲的连接，以提升数据库服务器的处理能力。</p>
-<p>MySQL的默认空闲等待时间是8小时，就是「wait_timeout」的配置值。如果数据库主动关闭了空闲的连接，而连接池并不知道，还在使用这个连接，就会产生异常。</p>
-<h2 id="_2-数据库语句错误" tabindex="-1"> 2.数据库语句错误</h2>
-<p>1.limit放在where后面</p>
-<p>正确：</p>
-<div><pre><code><span>select</span> <span>*</span> <span>from</span> <span>table</span> <span>where</span> <span>delete</span><span>=</span><span>1</span> <span>limit</span> <span>1</span><span>,</span><span>5</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><p>错误：</p>
-<div><pre><code><span>select</span> <span>*</span> <span>from</span> <span>table</span> <span>limit</span> <span>1</span><span>,</span><span>5</span> <span>where</span> <span>delete</span><span>=</span><span>1</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div>]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-02-20T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
