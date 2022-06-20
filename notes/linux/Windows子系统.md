@@ -97,7 +97,7 @@ deb-src http://mirrors.163.com/ubuntu/ wily-backports main restricted universe m
 
 选择一个源添加到文件最前面或直接替换掉原文件。保存后运行
 
-```
+```shell
 sudo apt-get update
 ```
 
@@ -107,7 +107,7 @@ sudo apt-get update
 
 wsl2已经完整使用了linux内核此种方式与之前在vmware虚拟机安装docker类似，依次执行如下命令：
 
-```
+```shell
 $ curl -fsSL https://get.docker.com -o get-docker.sh$ sudo sh get-docker.sh
 ```
 
@@ -115,7 +115,7 @@ $ curl -fsSL https://get.docker.com -o get-docker.sh$ sudo sh get-docker.sh
 
 因为wsl2已经完整使用了linux内核了，此种方式和先前在linux虚拟机安装docker类似，步骤如下：
 
-```powershell
+```shell
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo service docker start
@@ -125,7 +125,7 @@ sudo service docker start
 
 最后一个步骤，启动Docker daemon。但是此处有一个问题，WSL2经过测试无法使用systemctl命令（此问题已经解决），因此我们使用service命令启动Docker daemon进程。命令如下所示：
 
-```
+```shell
 sudo service docker start
 * Starting Docker: docker
 ```
@@ -133,11 +133,11 @@ sudo service docker start
 **注意:**在我安装完毕docker后,docker pull以及run都会出现异常 Error response from daemon: Get https://registry-1.docker.io/v2/library/redis/manifests/latest: remote error: tls: bad record MAC 此时只需要修改docker镜像下载地址为国内镜像即可 必须修改 daemon.json ,docker pull register方式无效!!!
 修改daemon.json操作命令如下:
 
-````
+````shell
 vim /etc/docker/daemon.json
 ````
 
-```shell
+```json
 {
 	"registry-mirrors":[
         "https://docker.mirrors.ustc.edu.cn",
@@ -154,7 +154,7 @@ vim /etc/docker/daemon.json
 
 检查docker安装正常
 
-```sh
+```shell
 # 检查dockerd进程启动
 service docker status
 ps aux|grep docker
