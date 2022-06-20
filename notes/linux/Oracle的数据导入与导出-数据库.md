@@ -57,9 +57,105 @@ Developer 工具导入导出，不能用文本编辑器查看。
 
 ### 3 方式
 
+#### **如果是docker 先登录：**
+
+进入镜像进行配置
+
+```shell
+docker exec -it oracle11 bash
+```
+
+```shell
+sqlplus /nolog
+```
+
+发现没有该命令，所以切换root用户。
+
+```shell
+su root 
+```
+
+输入密码：helowin
+
+编辑profile文件配置ORACLE环境变量
+
+打开：vi /etc/profile ，在文件最后写上下面内容：
+
+```shell
+export ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_2
+export ORACLE_SID=helowin
+export PATH=$ORACLE_HOME/bin:$PATH
+```
+
+保存后执行`source /etc/profile` 加载环境变量；
+
+创建软连接
+
+```shell
+ln -s $ORACLE_HOME/bin/sqlplus /usr/bin
+```
+
+切换到oracle 用户
+
+```shell
+su - oracle
+```
+
+登录sqlplus并修改sys、system用户密码
+
+```sql
+sqlplus /nolog   --登录
+conn /as sysdba  --
+alter user system identified by system;--修改system用户账号密码；
+alter user sys identified by system;--修改sys用户账号密码；
+create user test identified by test; -- 创建内部管理员账号密码；
+grant connect,resource,dba to yan_test; --将dba权限授权给内部管理员账号和密码；
+ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED; --修改密码规则策略为密码永不过期；（会出现坑，后面讲解）
+alter system set processes=1000 scope=spfile; --修改数据库最大连接数据；
+```
+
+修改以上信息后，需要重新启动数据库；
+
+```shell
+conn /as sysdba
+shutdown immediate; --关闭数据库
+startup; --启动数据库
+exit：退出软链接
+```
+
+#### 命令格式
+
+exp|imp 用 户 名 / 密 码 @ 连 接 地 址 : 端 口 / 服 务 名 file= 路 径 / 文 件 名 .dmp
+
+full=y|tabels(tablename,tablename...)|owner(username1,username2,username3)
+
+exp:导出命令，导出时必写。
+
+imp:导入命令，导入时必写,每次操作，二者只能选择一个执行。
+
+username:导出数据的用户名，必写;
+
+password:导出数据的密码，必写;
+
+@:地址符号，必写;
+
+SERVICENAME:Oracle 的服务名，必写;
+
+1521:端口号，1521 是默认的可以不写,非默认要写;
+
+file="文件名.dmp" : 文件存放路径地址，必写;
+
+full=y :表示全库导出。可以不写，则默认为 no,则只导出用户下的对象;
+
+tables:表示只导出哪些表;
+
+owner:导出该用户下对象;
+
+full|tables|owner:只能使用一种;
+
 #### ***1、传统方法：***
 
-***dmp文件的导出***
+**dmp文件的导出**
 
 首先,我们先了解dmp文件的导出
 
@@ -91,7 +187,7 @@ exp system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
 
 3: 将数据库中的表T_USER,T_ROLE导出
 
-　ystem为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以
+　system为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以
 
 ```sql
 exp JYZGCX/JYZGCX@Oracle file = d:datanewsmgnt.dmp tables = (T_USER,T_ROLE)
@@ -111,7 +207,7 @@ exp zop/zop@orcl file= D:\zop_bak.dmp owner=zop log=D:\zop_ba.log
 
 
 
-***dmp文件的导入***　
+**dmp文件的导入**　
 
 步骤如下: 
 
@@ -198,7 +294,7 @@ imp test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" 
 
 
 
-####  ***2、数据泵方法：***
+####  2、数据泵方法：
 
 创建directory:
 
@@ -334,7 +430,7 @@ impdp system/manager
 directory=testdata1 dumpfile=expdp.dmp schemas=system table_exists_action;
 ```
 
-#### ***3、PLSQL方法：***
+#### 3、PLSQL方法：
 
  登录plsql工具，所使用用户为源数据库有导出权限（exp_full_database,dba等）的用户。
 
