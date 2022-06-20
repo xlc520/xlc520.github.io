@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T02:23:06.022Z</updated>
+  <updated>2022-06-20T03:41:31.946Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -185,7 +185,7 @@ aai.appendLoopOnAppenders(e);
     <title type="html">Oracle的数据 导入与导出-数据库</title>
     <id>https://blog.ciberviler.top/linux/Oracle%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93.html</id>
     <link href="https://blog.ciberviler.top/linux/Oracle%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93.html"/>
-    <updated>2022-06-20T02:16:47.000Z</updated>
+    <updated>2022-06-20T03:39:20.000Z</updated>
     <content type="html"><![CDATA[<h1 id="oracle的数据-导入与导出-数据库" tabindex="-1"> Oracle的数据 导入与导出-数据库</h1>
 <h2 id="_1-数据库导入导出需要注意" tabindex="-1"> 1 数据库导入导出需要注意</h2>
 <p>1.目标数据库要与源数据库有着名称相同的表空间。</p>
@@ -209,8 +209,54 @@ aai.appendLoopOnAppenders(e);
 <p>Pde 格式：.pde 格式的文件，.pde 为 PL/SQL Developer 自有的文件格式，只能用 PL/SQL</p>
 <p>Developer 工具导入导出，不能用文本编辑器查看。</p>
 <h3 id="_3-方式" tabindex="-1"> 3 方式</h3>
+<h4 id="如果是docker-先登录" tabindex="-1"> <strong>如果是docker 先登录：</strong></h4>
+<p>进入镜像进行配置</p>
+<div><pre><code><span>docker</span> <span>exec</span> -it oracle11 <span>bash</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code>sqlplus /nolog
+</code></pre><div aria-hidden="true"><div></div></div></div><p>发现没有该命令，所以切换root用户。</p>
+<div><pre><code><span>su</span> root 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输入密码：helowin</p>
+<p>编辑profile文件配置ORACLE环境变量</p>
+<p>打开：vi /etc/profile ，在文件最后写上下面内容：</p>
+<div><pre><code><span>export</span> <span>ORACLE_HOME</span><span>=</span>/home/oracle/app/oracle/product/11.2.0/dbhome_2
+<span>export</span> <span>ORACLE_SID</span><span>=</span>helowin
+<span>export</span> <span><span>PATH</span></span><span>=</span><span>$ORACLE_HOME</span>/bin:<span>$PATH</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>保存后执行<code>source /etc/profile</code> 加载环境变量；</p>
+<p>创建软连接</p>
+<div><pre><code><span>ln</span> -s <span>$ORACLE_HOME</span>/bin/sqlplus /usr/bin
+</code></pre><div aria-hidden="true"><div></div></div></div><p>切换到oracle 用户</p>
+<div><pre><code><span>su</span> - oracle
+</code></pre><div aria-hidden="true"><div></div></div></div><p>登录sqlplus并修改sys、system用户密码</p>
+<div><pre><code>sqlplus <span>/</span>nolog   <span>--登录</span>
+conn <span>/</span><span>as</span> sysdba  <span>--</span>
+<span>alter</span> <span>user</span> system identified <span>by</span> system<span>;</span><span>--修改system用户账号密码；</span>
+<span>alter</span> <span>user</span> sys identified <span>by</span> system<span>;</span><span>--修改sys用户账号密码；</span>
+<span>create</span> <span>user</span> test identified <span>by</span> test<span>;</span> <span>-- 创建内部管理员账号密码；</span>
+<span>grant</span> <span>connect</span><span>,</span>resource<span>,</span>dba <span>to</span> yan_test<span>;</span> <span>--将dba权限授权给内部管理员账号和密码；</span>
+<span>ALTER</span> PROFILE <span>DEFAULT</span> <span>LIMIT</span> PASSWORD_LIFE_TIME UNLIMITED<span>;</span> <span>--修改密码规则策略为密码永不过期；（会出现坑，后面讲解）</span>
+<span>alter</span> system <span>set</span> processes<span>=</span><span>1000</span> scope<span>=</span>spfile<span>;</span> <span>--修改数据库最大连接数据；</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>修改以上信息后，需要重新启动数据库；</p>
+<div><pre><code>conn /as sysdba
+<span>shutdown</span> immediate<span>;</span> --关闭数据库
+startup<span>;</span> --启动数据库
+exit：退出软链接
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h4 id="命令格式" tabindex="-1"> 命令格式</h4>
+<p>exp|imp 用 户 名 / 密 码 @ 连 接 地 址 : 端 口 / 服 务 名 file= 路 径 / 文 件 名 .dmp</p>
+<p>full=y|tabels(tablename,tablename...)|owner(username1,username2,username3)</p>
+<p>exp:导出命令，导出时必写。</p>
+<p>imp:导入命令，导入时必写,每次操作，二者只能选择一个执行。</p>
+<p>username:导出数据的用户名，必写;</p>
+<p>password:导出数据的密码，必写;</p>
+<p>@:地址符号，必写;</p>
+<p>SERVICENAME:Oracle 的服务名，必写;</p>
+<p>1521:端口号，1521 是默认的可以不写,非默认要写;</p>
+<p>file=&quot;文件名.dmp&quot; : 文件存放路径地址，必写;</p>
+<p>full=y :表示全库导出。可以不写，则默认为 no,则只导出用户下的对象;</p>
+<p>tables:表示只导出哪些表;</p>
+<p>owner:导出该用户下对象;</p>
+<p>full|tables|owner:只能使用一种;</p>
 <h4 id="_1、传统方法" tabindex="-1"> <em><strong>1、传统方法：</strong></em></h4>
-<p><em><strong>dmp文件的导出</strong></em></p>
+<p><strong>dmp文件的导出</strong></p>
 <p>首先,我们先了解dmp文件的导出</p>
 <p>dmp文件导出一般用的比较多的是三种,分别是: 导出整个数据库实例的所有数据,导出指定用户的所有的表,导出指定表.</p>
 <p>我们以自己的数据库为例,假设我们的数据库的实例为&quot;Oracle&quot;</p>
@@ -222,7 +268,7 @@ aai.appendLoopOnAppenders(e);
 </code></pre><div aria-hidden="true"><div></div></div></div><p>2: 将数据库中RFD用户与,JYZGCX用户的表导出</p>
 <div><pre><code>exp system<span>/</span>manager<span>@ORACLE</span> <span>file</span><span>=</span>d:daochu<span>.</span>dmp owner<span>=</span><span>(</span>RFD<span>,</span>JYZGCX<span>)</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><p>3: 将数据库中的表T_USER,T_ROLE导出</p>
-<p>ystem为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以</p>
+<p>system为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以</p>
 <div><pre><code>exp JYZGCX<span>/</span>JYZGCX<span>@Oracle</span> <span>file</span> <span>=</span> d:datanewsmgnt<span>.</span>dmp <span>tables</span> <span>=</span> <span>(</span>T_USER<span>,</span>T_ROLE<span>)</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>--备份某几张表  ！！！！</span>
 exp smsc<span>/</span>smsc <span>file</span><span>=</span><span>/</span><span>data</span><span>/</span>oracle_bak<span>/</span>dmp<span>/</span>bakup0209_2<span>.</span>dmp <span>tables</span><span>=</span>\<span>(</span>send_msg_his<span>,</span>send_msg<span>,</span>recv_msg_his<span>,</span>recv_msg\<span>)</span>
@@ -233,7 +279,7 @@ exp smsc<span>/</span>smsc <span>file</span><span>=</span><span>/</span><span>da
 exp cop<span>/</span>cop<span>@133.96.84.39</span>:<span>1521</span><span>/</span>coprule <span>file</span><span>=</span><span>/</span>home<span>/</span>oracle<span>/</span>cop_20160902<span>.</span>dmp owner<span>=</span>cop log<span>=</span><span>/</span>home<span>/</span>oracle<span>/</span>cop<span>.</span>log
 <span>--本机上</span>
 exp zop<span>/</span>zop<span>@orcl</span> <span>file</span><span>=</span> D:\zop_bak<span>.</span>dmp owner<span>=</span>zop log<span>=</span>D:\zop_ba<span>.</span>log
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><em><strong>dmp文件的导入</strong></em></p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>dmp文件的导入</strong></p>
 <p>步骤如下:</p>
 <p>机器环境是windows7,其实也无所谓,命令行不都是样的么</p>
 <p>\1. 打开&quot;开始&quot; ---&gt;输入cmd,打开cmd命令窗口,输入: sqlplus/as sysdba; 然后使用conn / as sysdba;这样就可以以超级管理员的最高权限登录,当然这决定于init.ora文件中的数据库初始化参数.</p>
@@ -283,7 +329,7 @@ imp system<span>/</span>manager<span>@TEST</span> <span>file</span><span>=</span
 注意：
 操作者要有足够的权限，权限不够它会提示。
 数据库时可以连上的。可以用tnsping TEST 来获得数据库TEST能否连上。
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2、数据泵方法" tabindex="-1"> <em><strong>2、数据泵方法：</strong></em></h4>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2、数据泵方法" tabindex="-1"> 2、数据泵方法：</h4>
 <p>创建directory:</p>
 <div><pre><code>expdp<span>(</span>impdp<span>)</span> username<span>/</span>password<span>@SERVICENAME</span>:<span>1521</span> 
 schemas<span>=</span>username <span>dumpfile</span><span>=</span>file1<span>.</span>dmp logfile<span>=</span>file1<span>.</span>log 
@@ -341,7 +387,7 @@ directory<span>=</span>testdata1 <span>dumpfile</span><span>=</span>expdp<span>.
 </code></pre><div aria-hidden="true"><div></div></div></div><p>5)追加数据</p>
 <div><pre><code>impdp system<span>/</span>manager 
 directory<span>=</span>testdata1 <span>dumpfile</span><span>=</span>expdp<span>.</span>dmp schemas<span>=</span>system table_exists_action<span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h4 id="_3、plsql方法" tabindex="-1"> <em><strong>3、PLSQL方法：</strong></em></h4>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h4 id="_3、plsql方法" tabindex="-1"> 3、PLSQL方法：</h4>
 <p>登录plsql工具，所使用用户为源数据库有导出权限（exp_full_database,dba等）的用户。</p>
 <p>1.导出建表语句（包括存储结构）</p>
 <p>导出步骤tools -&gt;export user object，选择要导出的对象，导出.sql格式文件并等待导出完成，如 下图：</p>
