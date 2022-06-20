@@ -3,12 +3,12 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T02:18:42.339Z</updated>
+  <updated>2022-06-20T02:23:06.022Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
-  <category term="Linux"/>
   <category term="Java"/>
+  <category term="Linux"/>
   <category term="other"/>
   <category term="essay"/>
   <category term="daily"/>
@@ -22,6 +22,165 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">Logback 配置文件优化</title>
+    <id>https://blog.ciberviler.top/dev/Logback%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%98%E5%8C%96.html</id>
+    <link href="https://blog.ciberviler.top/dev/Logback%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%98%E5%8C%96.html"/>
+    <updated>2022-06-20T02:20:38.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="logback-配置文件优化" tabindex="-1"> Logback 配置文件优化</h1>
+<p><strong>01、通过阅读本篇文章将了解到</strong></p>
+<ul>
+<li>1.日志输出到文件并根据<code>LEVEL</code>级别将日志分类保存到不同文件</li>
+<li>2.通过异步输出日志减少磁盘<code>IO</code>提高性能</li>
+<li>3.异步输出日志的原理</li>
+</ul>
+<h3 id="_02、配置文件logback-spring-xml" tabindex="-1"> 02、配置文件logback-spring.xml</h3>
+<p><code>SpringBoot</code>工程自带<code>logback</code>和<code>slf4j</code>的依赖，所以重点放在编写配置文件上，需要引入什么依赖，日志依赖冲突统统都不需要我们管了。<code>logback</code>框架会默认加载<code>classpath</code>下命名为<code>logback-spring</code>或<code>logback</code>的配置文件。将所有日志都存储在一个文件中文件大小也随着应用的运行越来越大并且不好排查问题，正确的做法应该是将<code>error</code>日志和其他日志分开，并且不同级别的日志根据时间段进行记录存储。</p>
+<div><pre><code><span>&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span><span><span>&lt;</span>configuration</span><span>></span></span>
+    <span><span><span>&lt;</span>property</span> <span>resource</span><span><span>=</span><span>"</span>logback.properties<span>"</span></span><span>/></span></span>
+    <span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>CONSOLE-LOG<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.core.ConsoleAppender<span>"</span></span><span>></span></span>
+        <span><span><span>&lt;</span>layout</span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.classic.PatternLayout<span>"</span></span><span>></span></span>
+            <span><span><span>&lt;</span>pattern</span><span>></span></span>[%d{yyyy-MM-dd' 'HH:mm:ss.sss}] [%C] [%t] [%L] [%-5p] %m%n<span><span><span>&lt;/</span>pattern</span><span>></span></span>
+        <span><span><span>&lt;/</span>layout</span><span>></span></span>
+    <span><span><span>&lt;/</span>appender</span><span>></span></span>
+    <span>&lt;!--获取比info级别高(包括info级别)但除error级别的日志--></span>
+    <span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>INFO-LOG<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.core.rolling.RollingFileAppender<span>"</span></span><span>></span></span>
+        <span><span><span>&lt;</span>filter</span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.classic.filter.LevelFilter<span>"</span></span><span>></span></span>
+            <span><span><span>&lt;</span>level</span><span>></span></span>ERROR<span><span><span>&lt;/</span>level</span><span>></span></span>
+            <span><span><span>&lt;</span>onMatch</span><span>></span></span>DENY<span><span><span>&lt;/</span>onMatch</span><span>></span></span>
+            <span><span><span>&lt;</span>onMismatch</span><span>></span></span>ACCEPT<span><span><span>&lt;/</span>onMismatch</span><span>></span></span>
+        <span><span><span>&lt;/</span>filter</span><span>></span></span>
+        <span><span><span>&lt;</span>encoder</span><span>></span></span>
+            <span><span><span>&lt;</span>pattern</span><span>></span></span>[%d{yyyy-MM-dd' 'HH:mm:ss.sss}] [%C] [%t] [%L] [%-5p] %m%n<span><span><span>&lt;/</span>pattern</span><span>></span></span>
+        <span><span><span>&lt;/</span>encoder</span><span>></span></span>
+
+        <span>&lt;!--滚动策略--></span>
+        <span><span><span>&lt;</span>rollingPolicy</span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span>"</span></span><span>></span></span>
+            <span>&lt;!--路径--></span>
+            <span><span><span>&lt;</span>fileNamePattern</span><span>></span></span>${LOG_INFO_HOME}//%d.log<span><span><span>&lt;/</span>fileNamePattern</span><span>></span></span>
+            <span><span><span>&lt;</span>maxHistory</span><span>></span></span>30<span><span><span>&lt;/</span>maxHistory</span><span>></span></span>
+        <span><span><span>&lt;/</span>rollingPolicy</span><span>></span></span>
+    <span><span><span>&lt;/</span>appender</span><span>></span></span>
+    <span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>ERROR-LOG<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.core.rolling.RollingFileAppender<span>"</span></span><span>></span></span>
+        <span><span><span>&lt;</span>filter</span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.classic.filter.ThresholdFilter<span>"</span></span><span>></span></span>
+            <span><span><span>&lt;</span>level</span><span>></span></span>ERROR<span><span><span>&lt;/</span>level</span><span>></span></span>
+        <span><span><span>&lt;/</span>filter</span><span>></span></span>
+        <span><span><span>&lt;</span>encoder</span><span>></span></span>
+            <span><span><span>&lt;</span>pattern</span><span>></span></span>[%d{yyyy-MM-dd' 'HH:mm:ss.sss}] [%C] [%t] [%L] [%-5p] %m%n<span><span><span>&lt;/</span>pattern</span><span>></span></span>
+        <span><span><span>&lt;/</span>encoder</span><span>></span></span>
+        <span>&lt;!--滚动策略--></span>
+        <span><span><span>&lt;</span>rollingPolicy</span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span>"</span></span><span>></span></span>
+            <span>&lt;!--路径--></span>
+            <span><span><span>&lt;</span>fileNamePattern</span><span>></span></span>${LOG_ERROR_HOME}//%d.log<span><span><span>&lt;/</span>fileNamePattern</span><span>></span></span>
+            <span><span><span>&lt;</span>maxHistory</span><span>></span></span>30<span><span><span>&lt;/</span>maxHistory</span><span>></span></span>
+        <span><span><span>&lt;/</span>rollingPolicy</span><span>></span></span>
+    <span><span><span>&lt;/</span>appender</span><span>></span></span>
+
+    <span><span><span>&lt;</span>root</span> <span>level</span><span><span>=</span><span>"</span>info<span>"</span></span><span>></span></span>
+        <span><span><span>&lt;</span>appender-ref</span> <span>ref</span><span><span>=</span><span>"</span>CONSOLE-LOG<span>"</span></span> <span>/></span></span>
+        <span><span><span>&lt;</span>appender-ref</span> <span>ref</span><span><span>=</span><span>"</span>INFO-LOG<span>"</span></span> <span>/></span></span>
+        <span><span><span>&lt;</span>appender-ref</span> <span>ref</span><span><span>=</span><span>"</span>ERROR-LOG<span>"</span></span> <span>/></span></span>
+    <span><span><span>&lt;/</span>root</span><span>></span></span>
+<span><span><span>&lt;/</span>configuration</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>部分标签说明</p>
+<p><code>&lt;root&gt;</code>标签，必填标签，用来指定最基础的日志输出级别</p>
+<ul>
+<li><code>&lt;appender-ref&gt;</code>标签，添加<code>append</code></li>
+</ul>
+<p><code>&lt;append&gt;</code>标签，通过使用该标签指定日志的收集策略</p>
+<ul>
+<li><code>name</code>属性指定<code>appender</code>命名</li>
+<li><code>class</code>属性指定输出策略，通常有两种，控制台输出和文件输出，文件输出就是将日志进行一个持久化。<code>ConsoleAppender</code>将日志输出到控制台</li>
+</ul>
+<p><code>&lt;filter&gt;</code>标签，通过使用该标签指定过滤策略</p>
+<ul>
+<li><code>&lt;level&gt;</code>标签指定过滤的类型</li>
+</ul>
+<p><code>&lt;encoder&gt;</code>标签，使用该标签下的<code>&lt;pattern&gt;</code>标签指定日志输出格式。</p>
+<p><code>&lt;rollingPolicy&gt;</code>标签指定收集策略，比如基于时间进行收集</p>
+<ul>
+<li><code>&lt;fileNamePattern&gt;</code>标签指定生成日志保存地址 通过这样配置已经实现了分类分天手机日志的目标了</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16556915204025.jpeg" alt="图片" loading="lazy"></p>
+<h3 id="_03、logback-高级特性异步输出日志" tabindex="-1"> 03、logback 高级特性异步输出日志</h3>
+<p>之前的日志配置方式是基于同步的，每次日志输出到文件都会进行一次磁盘IO。采用异步写日志的方式而不让此次写日志发生磁盘IO，阻塞线程从而造成不必要的性能损耗。异步输出日志的方式很简单，添加一个基于异步写日志的<code>appender</code>，并指向原先配置的<code>appender</code>即可</p>
+<div><pre><code> <span>&lt;!-- 异步输出 --></span>
+    <span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>ASYNC-INFO<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.classic.AsyncAppender<span>"</span></span><span>></span></span>
+        <span>&lt;!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 --></span>
+        <span><span><span>&lt;</span>discardingThreshold</span><span>></span></span>0<span><span><span>&lt;/</span>discardingThreshold</span><span>></span></span>
+        <span>&lt;!-- 更改默认的队列的深度,该值会影响性能.默认值为256 --></span>
+        <span><span><span>&lt;</span>queueSize</span><span>></span></span>256<span><span><span>&lt;/</span>queueSize</span><span>></span></span>
+        <span>&lt;!-- 添加附加的appender,最多只能添加一个 --></span>
+        <span><span><span>&lt;</span>appender-ref</span> <span>ref</span><span><span>=</span><span>"</span>INFO-LOG<span>"</span></span><span>/></span></span>
+    <span><span><span>&lt;/</span>appender</span><span>></span></span>
+
+    <span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>ASYNC-ERROR<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>ch.qos.logback.classic.AsyncAppender<span>"</span></span><span>></span></span>
+        <span>&lt;!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 --></span>
+        <span><span><span>&lt;</span>discardingThreshold</span><span>></span></span>0<span><span><span>&lt;/</span>discardingThreshold</span><span>></span></span>
+        <span>&lt;!-- 更改默认的队列的深度,该值会影响性能.默认值为256 --></span>
+        <span><span><span>&lt;</span>queueSize</span><span>></span></span>256<span><span><span>&lt;/</span>queueSize</span><span>></span></span>
+        <span>&lt;!-- 添加附加的appender,最多只能添加一个 --></span>
+        <span><span><span>&lt;</span>appender-ref</span> <span>ref</span><span><span>=</span><span>"</span>ERROR-LOG<span>"</span></span><span>/></span></span>
+    <span><span><span>&lt;/</span>appender</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_04、异步输出日志性能测试" tabindex="-1"> 04、异步输出日志性能测试</h3>
+<p>既然能提高性能的话，必须进行一次测试比对，同步和异步输出日志性能到底能提升多少倍？</p>
+<h3 id="_05、服务器硬件" tabindex="-1"> 05、服务器硬件</h3>
+<ul>
+<li><code>CPU</code> 六核</li>
+<li>内存 8G</li>
+</ul>
+<h3 id="_06、测试工具" tabindex="-1"> 06、测试工具</h3>
+<ul>
+<li>Apache Jmeter</li>
+</ul>
+<h3 id="_07、同步输出日志" tabindex="-1"> 07、同步输出日志</h3>
+<ul>
+<li>线程数：100</li>
+<li><code>Ramp-Up Loop</code>(可以理解为启动线程所用时间) ：0 可以理解为100个线程同时启用</li>
+<li>测试结果</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16556915204021.png" alt="图片" loading="lazy"></p>
+<p>重点关注指标 Throughput【TPS】 吞吐量：系统在单位时间内处理请求的数量，在同步输出日志中 TPS 为 44.2/sec</p>
+<h3 id="_08、异步输出日志" tabindex="-1"> 08、异步输出日志</h3>
+<ul>
+<li>线程数 100</li>
+<li><code>Ramp-Up Loop</code>：0</li>
+<li>测试结果</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16556915204022.png" alt="图片" loading="lazy"></p>
+<p>TPS 为 497.5/sec ， 性能提升了10多倍！！！</p>
+<h3 id="_09、异步日志输出原理" tabindex="-1"> 09、异步日志输出原理</h3>
+<p>从<code>logback</code>框架下的<code>Logger.info</code>方法开始追踪。一路的方法调用路径如下图所示：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16556915204023.png" alt="图片" loading="lazy"></p>
+<p>异步输出日志中最关键的就是配置文件中<code>ch.qos.logback.classic``AsyncAppenderBase``append</code></p>
+<div><pre><code>//来自阿里大佬的《LeetCode刷题答案》pdf新鲜出炉
+//年末面试必备！大家可以关注公众号TJ君，回复LeetCode领取。
+
+protected void append(E eventObject) {
+        if(!this.isQueueBelowDiscardingThreshold() || !this.isDiscardable(eventObject)) {
+            this.preprocess(eventObject);
+            this.put(eventObject);
+        }
+    }
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>通过队列情况判断是否需要丢弃日志，不丢弃的话将它放到阻塞队列中，通过查看代码，这个阻塞队列为<code>ArrayBlockingQueueu</code>，默认大小为256，可以通过配置文件进行修改。<code>Logger.info(...)</code>到<code>append(...)</code>就结束了，只做了将日志塞入到阻塞队列的事，然后继续执行<code>Logger.info(...)</code>下面的语句了。在<code>AsyncAppenderBase</code>类中定义了一个<code>Worker</code>线程，<code>run</code>方法中的关键部分代码如下:</p>
+<div><pre><code>E e = parent.blockingQueue.take();
+aai.appendLoopOnAppenders(e);
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>从阻塞队列中取出一个日志，并调用<code>AppenderAttachableImpl</code>类中的<code>appendLoopOnAppenders</code>方法维护一个<code>Append</code>列表。<code>Worker</code>线程中调用方法过程主要如下图：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16556915204024.png" alt="图片" loading="lazy"></p>
+<p>最主要的两个方法就是<code>encode``write``encode</code></p>
+<p>来源：<a href="https://juejin.cn/post/6844903909920604174" target="_blank" rel="noopener noreferrer">https://juejin.cn/post/6844903909920604174</a></p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-06-30T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">Oracle的数据 导入与导出-数据库</title>
     <id>https://blog.ciberviler.top/linux/Oracle%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93.html</id>
@@ -26391,441 +26550,6 @@ vue.js官方教程里提到的</p>
       <name>xlc520</name>
     </contributor>
     <published>2022-04-05T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">数据类型Java类型</title>
-    <id>https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html</id>
-    <link href="https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BJava%E7%B1%BB%E5%9E%8B.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">Java数据类型和MySql数据类型对应表</summary>
-    <content type="html"><![CDATA[<h1 id="数据类型java类型" tabindex="-1"> 数据类型Java类型</h1>
-<p>java mysql 数据类型对照</p>
-<table>
-<thead>
-<tr>
-<th><strong>类型名称</strong></th>
-<th><strong>显示长度</strong></th>
-<th><strong>数据库类型</strong></th>
-<th><strong>JAVA类型</strong></th>
-<th><strong>JDBC类型索引(int)</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>VARCHAR</strong></td>
-<td><strong>L+N</strong></td>
-<td><strong>VARCHAR</strong></td>
-<td><strong>java.lang.String</strong></td>
-<td><strong>12</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>CHAR</strong></td>
-<td><strong>N</strong></td>
-<td><strong>CHAR</strong></td>
-<td><strong>java.lang.String</strong></td>
-<td><strong>1</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>BLOB</strong></td>
-<td><strong>L+N</strong></td>
-<td><strong>BLOB</strong></td>
-<td><strong>java.lang.byte[]</strong></td>
-<td><strong>-4</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>TEXT</strong></td>
-<td><strong>65535</strong></td>
-<td><strong>VARCHAR</strong></td>
-<td><strong>java.lang.String</strong></td>
-<td><strong>-1</strong></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>INTEGER</strong></td>
-<td><strong>4</strong></td>
-<td><strong>INTEGER UNSIGNED</strong></td>
-<td><strong>java.lang.Long</strong></td>
-<td><strong>4</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>TINYINT</strong></td>
-<td><strong>3</strong></td>
-<td><strong>TINYINT UNSIGNED</strong></td>
-<td><strong>java.lang.Integer</strong></td>
-<td><strong>-6</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>SMALLINT</strong></td>
-<td><strong>5</strong></td>
-<td><strong>SMALLINT UNSIGNED</strong></td>
-<td><strong>java.lang.Integer</strong></td>
-<td><strong>5</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>MEDIUMINT</strong></td>
-<td><strong>8</strong></td>
-<td><strong>MEDIUMINT UNSIGNED</strong></td>
-<td><strong>java.lang.Integer</strong></td>
-<td><strong>4</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>BIT</strong></td>
-<td><strong>1</strong></td>
-<td><strong>BIT</strong></td>
-<td><strong>java.lang.Boolean</strong></td>
-<td><strong>-7</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>BIGINT</strong></td>
-<td><strong>20</strong></td>
-<td><strong>BIGINT UNSIGNED</strong></td>
-<td><strong>java.math.BigInteger</strong></td>
-<td><strong>-5</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>FLOAT</strong></td>
-<td><strong>4+8</strong></td>
-<td><strong>FLOAT</strong></td>
-<td><strong>java.lang.Float</strong></td>
-<td><strong>7</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>DOUBLE</strong></td>
-<td><strong>22</strong></td>
-<td><strong>DOUBLE</strong></td>
-<td><strong>java.lang.Double</strong></td>
-<td><strong>8</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>DECIMAL</strong></td>
-<td><strong>11</strong></td>
-<td><strong>DECIMAL</strong></td>
-<td><strong>java.math.BigDecimal</strong></td>
-<td><strong>3</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>BOOLEAN</strong></td>
-<td><strong>1</strong></td>
-<td><strong>同TINYINT</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>ID</strong></td>
-<td><strong>11</strong></td>
-<td><strong>PK (INTEGER UNSIGNED)</strong></td>
-<td><strong>java.lang.Long</strong></td>
-<td><strong>4</strong></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>DATE</strong></td>
-<td><strong>10</strong></td>
-<td><strong>DATE</strong></td>
-<td><strong>java.sql.Date</strong></td>
-<td><strong>91</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>TIME</strong></td>
-<td><strong>8</strong></td>
-<td><strong>TIME</strong></td>
-<td><strong>java.sql.Time</strong></td>
-<td><strong>92</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>DATETIME</strong></td>
-<td><strong>19</strong></td>
-<td><strong>DATETIME</strong></td>
-<td><strong>java.sql.Timestamp</strong></td>
-<td><strong>93</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>TIMESTAMP</strong></td>
-<td><strong>19</strong></td>
-<td><strong>TIMESTAMP</strong></td>
-<td><strong>java.sql.Timestamp</strong></td>
-<td><strong>93</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>YEAR</strong></td>
-<td><strong>4</strong></td>
-<td><strong>YEAR</strong></td>
-<td><strong>java.sql.Date</strong></td>
-<td><strong>91</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>对于bolb，一般用于对图片的数据库存储，原理是把图片打成二进制，然后进行的一种存储方式，在java中对应byte［］数组。</p>
-<p>对于boolen类型，在mysql数据库中，个人认为用int类型代替较好，对bit操作不是很方便，尤其是在具有web页面开发的项目中，表示0/1，对应java类型的Integer较好。</p>
-<p>decimal列的声明语法是decimal(m,d)。</p>
-<p>在mysql5.1中，参数的取值范围：
-1、M是数字的最大数（精度）。其范围为1～65（在较旧的MySQL版本中，允许的范围是1～254）。
-2、D是小数点右侧数字的数目（标度）。其范围是0～30，但不得超过M。
-说明：float占4个字节，double占8个字节，decimail(M,D)占M+2个字节。
-如DECIMAL(5, 2) 的最大值为9 9 9 9 . 9 9，因为有7 个字节可用。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">SQL数据类型</th>
-<th style="text-align:left">JDBC类型代码</th>
-<th style="text-align:left">标准的Java类型</th>
-<th style="text-align:left">Oracle扩展的Java类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">1.标准的JDBC类型:</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>CHAR</code></td>
-<td style="text-align:left"><code>java.sql.Types.CHAR</code></td>
-<td style="text-align:left"><code>java.lang.String</code></td>
-<td style="text-align:left"><code>oracle.sql.CHAR</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>VARCHAR2</code></td>
-<td style="text-align:left"><code>java.sql.Types.VARCHAR</code></td>
-<td style="text-align:left"><code>java.lang.String</code></td>
-<td style="text-align:left"><code>oracle.sql.CHAR</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>LONG</code></td>
-<td style="text-align:left"><code>java.sql.Types.LONGVARCHAR</code></td>
-<td style="text-align:left"><code>java.lang.String</code></td>
-<td style="text-align:left"><code>oracle.sql.CHAR</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.NUMERIC</code></td>
-<td style="text-align:left"><code>java.math.BigDecimal</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.DECIMAL</code></td>
-<td style="text-align:left"><code>java.math.BigDecimal</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.BIT</code></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.TINYINT</code></td>
-<td style="text-align:left"><code>byte</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.SMALLINT</code></td>
-<td style="text-align:left"><code>short</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.INTEGER</code></td>
-<td style="text-align:left"><code>int</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.BIGINT</code></td>
-<td style="text-align:left"><code>long</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.REAL</code></td>
-<td style="text-align:left"><code>float</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.FLOAT</code></td>
-<td style="text-align:left"><code>double</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>NUMBER</code></td>
-<td style="text-align:left"><code>java.sql.Types.DOUBLE</code></td>
-<td style="text-align:left"><code>double</code></td>
-<td style="text-align:left"><code>oracle.sql.NUMBER</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>RAW</code></td>
-<td style="text-align:left"><code>java.sql.Types.BINARY</code></td>
-<td style="text-align:left"><code>byte[]</code></td>
-<td style="text-align:left"><code>oracle.sql.RAW</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>RAW</code></td>
-<td style="text-align:left"><code>java.sql.Types.VARBINARY</code></td>
-<td style="text-align:left"><code>byte[]</code></td>
-<td style="text-align:left"><code>oracle.sql.RAW</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>LONGRAW</code></td>
-<td style="text-align:left"><code>java.sql.Types.LONGVARBINARY</code></td>
-<td style="text-align:left"><code>byte[]</code></td>
-<td style="text-align:left"><code>oracle.sql.RAW</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>DATE</code></td>
-<td style="text-align:left"><code>java.sql.Types.DATE</code></td>
-<td style="text-align:left"><code>java.sql.Date</code></td>
-<td style="text-align:left"><code>oracle.sql.DATE</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>DATE</code></td>
-<td style="text-align:left"><code>java.sql.Types.TIME</code></td>
-<td style="text-align:left"><code>java.sql.Time</code></td>
-<td style="text-align:left"><code>oracle.sql.DATE</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>TIMESTAMP</code></td>
-<td style="text-align:left"><code>java.sql.Types.TIMESTAMP</code></td>
-<td style="text-align:left"><code>javal.sql.Timestamp</code></td>
-<td style="text-align:left"><code>oracle.sql.TIMESTAMP</code></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">2.标准的JDBC类型:</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>BLOB</code></td>
-<td style="text-align:left"><code>java.sql.Types.BLOB</code></td>
-<td style="text-align:left"><code>java.sql.Blob</code></td>
-<td style="text-align:left"><code>oracle.sql.BLOB</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>CLOB</code></td>
-<td style="text-align:left"><code>java.sql.Types.CLOB</code></td>
-<td style="text-align:left"><code>java.sql.Clob</code></td>
-<td style="text-align:left"><code>oracle.sql.CLOB</code></td>
-</tr>
-<tr>
-<td style="text-align:left">用户定义的对象</td>
-<td style="text-align:left"><code>java.sql.Types.STRUCT</code></td>
-<td style="text-align:left"><code>java.sql.Struct</code></td>
-<td style="text-align:left"><code>oracle.sql.STRUCT</code></td>
-</tr>
-<tr>
-<td style="text-align:left">用户定义的参考</td>
-<td style="text-align:left"><code>java.sql.Types.REF</code></td>
-<td style="text-align:left"><code>java.sql.Ref</code></td>
-<td style="text-align:left"><code>oracle.sql.REF</code></td>
-</tr>
-<tr>
-<td style="text-align:left">用户定义的集合</td>
-<td style="text-align:left"><code>java.sql.Types.ARRAY</code></td>
-<td style="text-align:left"><code>java.sql.Array</code></td>
-<td style="text-align:left"><code>oracle.sql.ARRAY</code></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">Oracle扩展:</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>BFILE</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.BFILE</code></td>
-<td style="text-align:left">N/A</td>
-<td style="text-align:left"><code>oracle.sql.BFILE</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>ROWID</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.ROWID</code></td>
-<td style="text-align:left">N/A</td>
-<td style="text-align:left"><code>oracle.sql.ROWID</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>REF CURSOR</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.CURSOR</code></td>
-<td style="text-align:left"><code>java.sql.ResultSet</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleResultSet</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>TIMESTAMP</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.TIMESTAMP</code></td>
-<td style="text-align:left"><code>java.sql.Timestamp</code></td>
-<td style="text-align:left"><code>oracle.sql.TIMESTAMP</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>TIMESTAMP WITH TIME ZONE</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.TIMESTAMPTZ</code></td>
-<td style="text-align:left"><code>java.sql.Timestamp</code></td>
-<td style="text-align:left"><code>oracle.sql.TIMESTAMPTZ</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>TIMESTAMP WITH LOCAL TIME ZONE</code></td>
-<td style="text-align:left"><code>oracle.jdbc.OracleTypes.TIMESTAMPLTZ</code></td>
-<td style="text-align:left"><code>java.sql.Timestamp</code></td>
-<td style="text-align:left"><code>oracle.sql.TIMESTAMPLTZ</code></td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-03-03T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
