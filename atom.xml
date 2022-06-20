@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T03:41:31.946Z</updated>
+  <updated>2022-06-20T08:56:33.560Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -22,6 +22,635 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">SpringBoot整合Mybatis-plus及用法</title>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%95.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%95.html"/>
+    <updated>2022-06-20T08:54:02.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot整合mybatis-plus及用法" tabindex="-1"> SpringBoot整合Mybatis-plus及用法</h1>
+<h2 id="一、mybatis-plus简介" tabindex="-1"> 一、mybatis-plus简介：</h2>
+<p>Mybatis-Plus（简称MP）是一个 Mybatis 的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提高效率而生。这是官方给的定义，关于mybatis-plus的更多介绍及特性，可以参考mybatis-plus官网。那么它是怎么增强的呢？其实就是它已经封装好了一些crud方法，我们不需要再写xml了，直接调用这些方法就行，就类似于JPA。并且3.X系列支持lambda语法,让我在写条件构造的时候少了很多的&quot;魔法值&quot;,从代码结构上更简洁了.</p>
+<h2 id="二、springboot整合mybatis-plus案例" tabindex="-1"> 二、springboot整合mybatis-plus案例</h2>
+<p>pom.xml配置</p>
+<div><pre><code><span><span><span>&lt;</span>dependencies</span><span>></span></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span>&lt;!--springboot程序测试依赖，如果是自动创建项目默认添加--></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-test<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+      <span><span><span>&lt;</span>scope</span><span>></span></span>test<span><span><span>&lt;/</span>scope</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>org.projectlombok<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>lombok<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+      <span><span><span>&lt;</span>version</span><span>></span></span>1.16.10<span><span><span>&lt;/</span>version</span><span>></span></span>
+      <span><span><span>&lt;</span>scope</span><span>></span></span>provided<span><span><span>&lt;/</span>scope</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span>&lt;!-- 包含spirng Mvc ,tomcat的包包含requestMapping restController 等注解 --></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>org.springframework.boot<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>spring-boot-starter-web<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>com.alibaba<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>druid-spring-boot-starter<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+      <span><span><span>&lt;</span>version</span><span>></span></span>1.1.10<span><span><span>&lt;/</span>version</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>mysql<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>mysql-connector-java<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span>&lt;!-- druid依赖 --></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>com.alibaba<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>druid<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+      <span><span><span>&lt;</span>version</span><span>></span></span>1.1.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+    <span>&lt;!-- mybatisPlus 核心库 --></span>
+    <span><span><span>&lt;</span>dependency</span><span>></span></span>
+      <span><span><span>&lt;</span>groupId</span><span>></span></span>com.baomidou<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+      <span><span><span>&lt;</span>artifactId</span><span>></span></span>mybatis-plus-boot-starter<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+      <span><span><span>&lt;</span>version</span><span>></span></span>3.1.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+    <span><span><span>&lt;/</span>dependency</span><span>></span></span>
+  <span><span><span>&lt;/</span>dependencies</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>application.yml配置</p>
+<div><pre><code><span>server</span><span>:</span>
+  <span>port</span><span>:</span> <span>10100</span>   <span>#  配置启动端口号</span>
+ 
+<span>mybatis</span><span>:</span>
+  <span>config-location</span><span>:</span> classpath<span>:</span>mybatis.cfg.xml    <span>#  mybatis主配置文件所在路径</span>
+  <span>type-aliases-package</span><span>:</span> com.demo.drools.entity  <span>#  定义所有操作类的别名所在包</span>
+  <span>mapper-locations</span><span>:</span>                                     <span>#  所有的mapper映射文件</span>
+    <span>-</span> classpath<span>:</span>mapper/<span>*.xml</span>
+ 
+ 
+<span>spring</span><span>:</span> <span>#springboot的配置</span>
+  <span>datasource</span><span>:</span> <span>#定义数据源</span>
+    <span>#127.0.0.1为本机测试的ip，3306是mysql的端口号。serverTimezone是定义时区，照抄就好，mysql高版本需要定义这些东西</span>
+    <span>#useSSL也是某些高版本mysql需要问有没有用SSL连接</span>
+    <span>url</span><span>:</span> jdbc<span>:</span>mysql<span>:</span>//127.0.0.1<span>:</span>3306/test<span>?</span>serverTimezone=GMT%2B8<span>&amp;useSSL=FALSE</span>
+    <span>username</span><span>:</span> root  <span>#数据库用户名，root为管理员</span>
+    <span>password</span><span>:</span> <span>123456</span> <span>#该数据库用户的密码</span>
+    <span># 使用druid数据源</span>
+    <span>type</span><span>:</span> com.alibaba.druid.pool.DruidDataSource
+ 
+<span># mybatis-plus相关配置</span>
+<span>mybatis-plus</span><span>:</span>
+  <span># xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）</span>
+  <span>mapper-locations</span><span>:</span> classpath<span>:</span>mapper/<span>*.xml</span>
+  <span># 以下配置均有默认值,可以不设置</span>
+  <span>global-config</span><span>:</span>
+    <span>db-config</span><span>:</span>
+      <span>#主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";</span>
+      <span>id-type</span><span>:</span> auto
+      <span>#字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"</span>
+      <span>field-strategy</span><span>:</span> NOT_EMPTY
+      <span>#数据库类型</span>
+      <span>db-type</span><span>:</span> MYSQL
+  <span>configuration</span><span>:</span>
+    <span># 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射</span>
+    <span>map-underscore-to-camel-case</span><span>:</span> <span>true</span>
+    <span># 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段</span>
+    <span>call-setters-on-nulls</span><span>:</span> <span>true</span>
+    <span># 这个配置会将执行的sql打印出来，在开发或测试的时候可以用</span>
+    <span>log-impl</span><span>:</span> org.apache.ibatis.logging.stdout.StdOutImpl
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>用户信息实体</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>annotation<span>.</span></span><span>IdType</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>annotation<span>.</span></span><span>TableId</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>annotation<span>.</span></span><span>TableName</span></span><span>;</span>
+<span>import</span> <span><span>lombok<span>.</span></span><span>Data</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:14
+ */</span>
+<span>@Data</span>
+<span>@TableName</span><span>(</span><span>"user_info"</span><span>)</span><span>//@TableName中的值对应着表名</span>
+<span>public</span> <span>class</span> <span>UserInfoEntity</span> <span>{</span>
+    <span>/**
+     * 主键
+     * @TableId中可以决定主键的类型,不写会采取默认值,默认值可以在yml中配置
+     * AUTO: 数据库ID自增
+     * INPUT: 用户输入ID
+     * ID_WORKER: 全局唯一ID，Long类型的主键
+     * ID_WORKER_STR: 字符串全局唯一ID
+     * UUID: 全局唯一ID，UUID类型的主键
+     * NONE: 该类型为未设置主键类型
+     */</span>
+    <span>@TableId</span><span>(</span>type <span>=</span> <span>IdType</span><span>.</span>AUTO<span>)</span>
+    <span>private</span> <span>Long</span> id<span>;</span>
+    <span>/**
+     * 姓名
+     */</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+    <span>/**
+     * 年龄
+     */</span>
+    <span>private</span> <span>Integer</span> age<span>;</span>
+    <span>/**
+     * 技能
+     */</span>
+    <span>private</span> <span>String</span> skill<span>;</span>
+    <span>/**
+     * 评价
+     */</span>
+    <span>private</span> <span>String</span> evaluate<span>;</span>
+    <span>/**
+     * 分数
+     */</span>
+    <span>private</span> <span>Long</span> fraction<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>config类-1(推荐)</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>xlc<span>.</span>springmybatisdemo<span>.</span>config</span><span>;</span>
+
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>annotation<span>.</span></span><span>DbType</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span></span><span>MybatisPlusInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span>inner<span>.</span></span><span>BlockAttackInnerInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span>inner<span>.</span></span><span>OptimisticLockerInnerInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span>inner<span>.</span></span><span>PaginationInnerInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>context<span>.</span>annotation<span>.</span></span><span>Bean</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>context<span>.</span>annotation<span>.</span></span><span>Configuration</span></span><span>;</span>
+
+<span>/**
+ * <span>@author</span> xlc
+ * <span>@createTime</span> 2022/6/20 14:39
+ * <span>@description</span>
+ * @Version 1.0
+ */</span>
+<span>@Configuration</span>
+<span>public</span> <span>class</span> <span>MybatisPlusConfig</span> <span>{</span>
+
+    <span>/**
+     * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false 避免缓存出现问题(该属性会在旧插件移除后一同移除)
+     */</span>
+    <span>@Bean</span>
+    <span>public</span> <span>MybatisPlusInterceptor</span> <span>mybatisPlusInterceptor</span><span>(</span><span>)</span> <span>{</span>
+        <span>MybatisPlusInterceptor</span> interceptor <span>=</span> <span>new</span> <span>MybatisPlusInterceptor</span><span>(</span><span>)</span><span>;</span>
+        <span>// 分页插件</span>
+        interceptor<span>.</span><span>addInnerInterceptor</span><span>(</span><span>new</span> <span>PaginationInnerInterceptor</span><span>(</span><span>DbType</span><span>.</span>MYSQL<span>)</span><span>)</span><span>;</span>
+        <span>// 乐观锁插件</span>
+        interceptor<span>.</span><span>addInnerInterceptor</span><span>(</span><span>new</span> <span>OptimisticLockerInnerInterceptor</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>// 防全表更新与删除插件</span>
+        interceptor<span>.</span><span>addInnerInterceptor</span><span>(</span><span>new</span> <span>BlockAttackInnerInterceptor</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> interceptor<span>;</span>
+    <span>}</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>config类-2</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>config</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span></span><span>PaginationInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span></span><span>PerformanceInterceptor</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>context<span>.</span>annotation<span>.</span></span><span>Bean</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:14
+ */</span>
+<span>public</span> <span>class</span> <span>MybatisPlusConfig</span> <span>{</span>
+    <span>/**
+     * mybatis-plus SQL执行效率插件【生产环境可以关闭】
+     */</span>
+    <span>@Bean</span>
+    <span>public</span> <span>PerformanceInterceptor</span> <span>performanceInterceptor</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>PerformanceInterceptor</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 分页插件
+     */</span>
+    <span>@Bean</span>
+    <span>public</span> <span>PaginationInterceptor</span> <span>paginationInterceptor</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>PaginationInterceptor</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>spring boot启动类</p>
+<div><pre><code><span>package</span> <span>com<span>.</span>demo<span>.</span>drools</span><span>;</span>
+ 
+<span>import</span> <span><span>org<span>.</span>mybatis<span>.</span>spring<span>.</span>annotation<span>.</span></span><span>MapperScan</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>boot<span>.</span></span><span>SpringApplication</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>boot<span>.</span>autoconfigure<span>.</span></span><span>SpringBootApplication</span></span><span>;</span>
+ 
+<span>/**
+ * <span>@author</span> 于嘉琪
+ */</span>
+<span>@SpringBootApplication</span>
+<span>//@MapperScan和dao层添加@Mapper注解意思一样</span>
+<span>@MapperScan</span><span>(</span>basePackages <span>=</span> <span>"com.demo.drools.dao"</span><span>)</span>
+<span>public</span> <span>class</span> <span>DroolsApplication</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>SpringApplication</span><span>.</span><span>run</span><span>(</span><span>DroolsApplication</span><span>.</span><span>class</span><span>,</span> args<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>dao层</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>dao</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>mapper<span>.</span></span><span>BaseMapper</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>IPage</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity<span>.</span></span><span>UserInfoEntity</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>annotations<span>.</span></span><span>Mapper</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>apache<span>.</span>ibatis<span>.</span>annotations<span>.</span></span><span>Param</span></span><span>;</span>
+ 
+<span>/**
+ * 用户信息DAO
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:16
+ */</span>
+<span>@Mapper</span>
+<span>public</span> <span>interface</span> <span>UserInfoDao</span> <span>extends</span> <span>BaseMapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>{</span>
+   
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>service层</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>service</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>IPage</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>service<span>.</span></span><span>IService</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity<span>.</span></span><span>UserInfoEntity</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:17
+ */</span>
+<span>public</span> <span>interface</span> <span>UserInfoService</span> <span>extends</span> <span>IService</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>{</span>
+    
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>serviceImpl实现类层</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>service<span>.</span>impl</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>IPage</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>service<span>.</span>impl<span>.</span></span><span>ServiceImpl</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>dao<span>.</span></span><span>UserInfoDao</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity<span>.</span></span><span>UserInfoEntity</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>service<span>.</span></span><span>UserInfoService</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>stereotype<span>.</span></span><span>Service</span></span><span>;</span>
+ 
+<span>import</span> <span><span>javax<span>.</span>annotation<span>.</span></span><span>Resource</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:18
+ */</span>
+<span>@Service</span>
+<span>public</span> <span>class</span> <span>UserInfoSerivceImpl</span> <span>extends</span> <span>ServiceImpl</span><span><span>&lt;</span><span>UserInfoDao</span><span>,</span> <span>UserInfoEntity</span><span>></span></span> <span>implements</span> <span>UserInfoService</span> <span>{</span>
+    
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>controller控制层</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>controller</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>IPage</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span>pagination<span>.</span></span><span>Page</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity<span>.</span></span><span>UserInfoEntity</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>service<span>.</span></span><span>UserInfoService</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>beans<span>.</span>factory<span>.</span>annotation<span>.</span></span><span>Autowired</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>web<span>.</span>bind<span>.</span>annotation<span>.</span></span><span>RequestMapping</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>web<span>.</span>bind<span>.</span>annotation<span>.</span></span><span>RestController</span></span><span>;</span>
+ 
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>ArrayList</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Collection</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>HashMap</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>List</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Map</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:20
+ */</span>
+<span>@RestController</span>
+<span>@RequestMapping</span><span>(</span><span>"/userInfo"</span><span>)</span>
+<span>public</span> <span>class</span> <span>UserInfoController</span> <span>{</span>
+    <span>@Autowired</span>
+    <span>private</span> <span>UserInfoService</span> userInfoService<span>;</span>
+    
+    <span>/**
+     * 根据ID获取用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:34
+     * @Param  userId  用户ID
+     * @Return UserInfoEntity 用户实体
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getInfo"</span><span>)</span>
+    <span>public</span> <span>UserInfoEntity</span> <span>getInfo</span><span>(</span><span>String</span> userId<span>)</span><span>{</span>
+        <span>UserInfoEntity</span> userInfoEntity <span>=</span> userInfoService<span>.</span><span>getById</span><span>(</span>userId<span>)</span><span>;</span>
+        <span>return</span> userInfoEntity<span>;</span>
+    <span>}</span>
+    <span>/**
+     * 查询全部信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:35
+     * @Param  userId  用户ID
+     * @Return List<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 用户实体集合
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getList"</span><span>)</span>
+    <span>public</span> <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>getList</span><span>(</span><span>)</span><span>{</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList <span>=</span> userInfoService<span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> userInfoEntityList<span>;</span>
+    <span>}</span>
+    <span>/**
+     * 分页查询全部数据
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:37
+     * @Return IPage<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 分页数据
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getInfoListPage"</span><span>)</span>
+    <span>public</span> <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>getInfoListPage</span><span>(</span><span>)</span><span>{</span>
+        <span>//需要在Config配置类中配置分页插件</span>
+        <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page <span>=</span> <span>new</span> <span>Page</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        page<span>.</span><span>setCurrent</span><span>(</span><span>5</span><span>)</span><span>;</span> <span>//当前页</span>
+        page<span>.</span><span>setSize</span><span>(</span><span>1</span><span>)</span><span>;</span>    <span>//每页条数</span>
+        page <span>=</span> userInfoService<span>.</span><span>page</span><span>(</span>page<span>)</span><span>;</span>
+        <span>return</span> page<span>;</span>
+    <span>}</span>
+    <span>/**
+     * 根据指定字段查询用户信息集合
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:39
+     * @Return Collection<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 用户实体集合
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getListMap"</span><span>)</span>
+    <span>public</span> <span>Collection</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>getListMap</span><span>(</span><span>)</span><span>{</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>//kay是字段名 value是字段值</span>
+        map<span>.</span><span>put</span><span>(</span><span>"age"</span><span>,</span><span>20</span><span>)</span><span>;</span>
+        <span>Collection</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList <span>=</span> userInfoService<span>.</span><span>listByMap</span><span>(</span>map<span>)</span><span>;</span>
+        <span>return</span> userInfoEntityList<span>;</span>
+    <span>}</span>
+    <span>/**
+     * 新增用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:40
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/saveInfo"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>saveInfo</span><span>(</span><span>)</span><span>{</span>
+        <span>UserInfoEntity</span> userInfoEntity <span>=</span> <span>new</span> <span>UserInfoEntity</span><span>(</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setName</span><span>(</span><span>"小龙"</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setSkill</span><span>(</span><span>"JAVA"</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setAge</span><span>(</span><span>18</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setFraction</span><span>(</span><span>59L</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setEvaluate</span><span>(</span><span>"该学生是一个在改BUG的码农"</span><span>)</span><span>;</span>
+        userInfoService<span>.</span><span>save</span><span>(</span>userInfoEntity<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 批量新增用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:42
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/saveInfoList"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>saveInfoList</span><span>(</span><span>)</span><span>{</span>
+        <span>//创建对象</span>
+        <span>UserInfoEntity</span> sans <span>=</span> <span>new</span> <span>UserInfoEntity</span><span>(</span><span>)</span><span>;</span>
+        sans<span>.</span><span>setName</span><span>(</span><span>"Sans"</span><span>)</span><span>;</span>
+        sans<span>.</span><span>setSkill</span><span>(</span><span>"睡觉"</span><span>)</span><span>;</span>
+        sans<span>.</span><span>setAge</span><span>(</span><span>18</span><span>)</span><span>;</span>
+        sans<span>.</span><span>setFraction</span><span>(</span><span>60L</span><span>)</span><span>;</span>
+        sans<span>.</span><span>setEvaluate</span><span>(</span><span>"Sans是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子"</span><span>)</span><span>;</span>
+        <span>UserInfoEntity</span> papyrus <span>=</span> <span>new</span> <span>UserInfoEntity</span><span>(</span><span>)</span><span>;</span>
+        papyrus<span>.</span><span>setName</span><span>(</span><span>"papyrus"</span><span>)</span><span>;</span>
+        papyrus<span>.</span><span>setSkill</span><span>(</span><span>"JAVA"</span><span>)</span><span>;</span>
+        papyrus<span>.</span><span>setAge</span><span>(</span><span>18</span><span>)</span><span>;</span>
+        papyrus<span>.</span><span>setFraction</span><span>(</span><span>58L</span><span>)</span><span>;</span>
+        papyrus<span>.</span><span>setEvaluate</span><span>(</span><span>"Papyrus是一个讲话大声、个性张扬的骷髅，给人自信、有魅力的骷髅小瘦子"</span><span>)</span><span>;</span>
+        <span>//批量保存</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> list <span>=</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        list<span>.</span><span>add</span><span>(</span>sans<span>)</span><span>;</span>
+        list<span>.</span><span>add</span><span>(</span>papyrus<span>)</span><span>;</span>
+        userInfoService<span>.</span><span>saveBatch</span><span>(</span>list<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 更新用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:47
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/updateInfo"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>updateInfo</span><span>(</span><span>)</span><span>{</span>
+        <span>//根据实体中的ID去更新,其他字段如果值为null则不会更新该字段,参考yml配置文件</span>
+        <span>UserInfoEntity</span> userInfoEntity <span>=</span> <span>new</span> <span>UserInfoEntity</span><span>(</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setId</span><span>(</span><span>1L</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setAge</span><span>(</span><span>19</span><span>)</span><span>;</span>
+        userInfoService<span>.</span><span>updateById</span><span>(</span>userInfoEntity<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 新增或者更新用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:50
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/saveOrUpdateInfo"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>saveOrUpdate</span><span>(</span><span>)</span><span>{</span>
+        <span>//传入的实体类userInfoEntity中ID为null就会新增(ID自增)</span>
+        <span>//实体类ID值存在,如果数据库存在ID就会更新,如果不存在就会新增</span>
+        <span>UserInfoEntity</span> userInfoEntity <span>=</span> <span>new</span> <span>UserInfoEntity</span><span>(</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setId</span><span>(</span><span>1L</span><span>)</span><span>;</span>
+        userInfoEntity<span>.</span><span>setAge</span><span>(</span><span>20</span><span>)</span><span>;</span>
+        userInfoService<span>.</span><span>saveOrUpdate</span><span>(</span>userInfoEntity<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 根据ID删除用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:52
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/deleteInfo"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>deleteInfo</span><span>(</span><span>String</span> userId<span>)</span><span>{</span>
+        userInfoService<span>.</span><span>removeById</span><span>(</span>userId<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 根据ID批量删除用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:55
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/deleteInfoList"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>deleteInfoList</span><span>(</span><span>)</span><span>{</span>
+        <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> userIdlist <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        userIdlist<span>.</span><span>add</span><span>(</span><span>"12"</span><span>)</span><span>;</span>
+        userIdlist<span>.</span><span>add</span><span>(</span><span>"13"</span><span>)</span><span>;</span>
+        userInfoService<span>.</span><span>removeByIds</span><span>(</span>userIdlist<span>)</span><span>;</span>
+    <span>}</span>
+    <span>/**
+     * 根据指定字段删除用户信息
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:57
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/deleteInfoMap"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>deleteInfoMap</span><span>(</span><span>)</span><span>{</span>
+        <span>//kay是字段名 value是字段值</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"skill"</span><span>,</span><span>"删除"</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"fraction"</span><span>,</span><span>10L</span><span>)</span><span>;</span>
+        userInfoService<span>.</span><span>removeByMap</span><span>(</span>map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>controller层用到<a href="https://so.csdn.net/so/search?q=lambda&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">lambda</a>语法</p>
+<div><pre><code> 
+<span>package</span> <span>com<span>.</span>demo<span>.</span>drools<span>.</span>controller</span><span>;</span>
+ 
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>conditions<span>.</span>query<span>.</span></span><span>QueryWrapper</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>core<span>.</span>metadata<span>.</span></span><span>IPage</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>baomidou<span>.</span>mybatisplus<span>.</span>extension<span>.</span>plugins<span>.</span>pagination<span>.</span></span><span>Page</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>entity<span>.</span></span><span>UserInfoEntity</span></span><span>;</span>
+<span>import</span> <span><span>com<span>.</span>demo<span>.</span>drools<span>.</span>service<span>.</span></span><span>UserInfoService</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>beans<span>.</span>factory<span>.</span>annotation<span>.</span></span><span>Autowired</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>web<span>.</span>bind<span>.</span>annotation<span>.</span></span><span>RequestMapping</span></span><span>;</span>
+ 
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>HashMap</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>List</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Map</span></span><span>;</span>
+ 
+<span>/**
+ * TODO your comment
+ *
+ * <span>@author</span> xlc
+ * <span>@date</span> 2022/6/20 19:28
+ */</span>
+<span>public</span> <span>class</span> <span>UserInfoPlusController</span> <span>{</span>
+    <span>@Autowired</span>
+    <span>private</span> <span>UserInfoService</span> userInfoService<span>;</span>
+    
+    <span>/**
+     * MP扩展演示
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 16:37
+     * @Return Map<span><span><span>&lt;</span>String,Object</span><span>></span></span> 返回数据
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getInfoListPlus"</span><span>)</span>
+    <span>public</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> <span>getInfoListPage</span><span>(</span><span>)</span><span>{</span>
+        <span>//初始化返回类</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> result <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>//查询年龄等于18岁的学生</span>
+        <span>//等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE age = 18</span>
+        <span>QueryWrapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> queryWrapper1 <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        queryWrapper1<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>eq</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getAge</span><span>,</span><span>18</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList1 <span>=</span> userInfoService<span>.</span><span>list</span><span>(</span>queryWrapper1<span>)</span><span>;</span>
+        result<span>.</span><span>put</span><span>(</span><span>"studentAge18"</span><span>,</span>userInfoEntityList1<span>)</span><span>;</span>
+        <span>//查询年龄大于5岁的学生且小于等于18岁的学生</span>
+        <span>//等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE age > 5 AND age &lt;= 18</span>
+        <span>QueryWrapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> queryWrapper2 <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        queryWrapper2<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>gt</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getAge</span><span>,</span><span>5</span><span>)</span><span>;</span>
+        queryWrapper2<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>le</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getAge</span><span>,</span><span>18</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList2 <span>=</span> userInfoService<span>.</span><span>list</span><span>(</span>queryWrapper2<span>)</span><span>;</span>
+        result<span>.</span><span>put</span><span>(</span><span>"studentAge5"</span><span>,</span>userInfoEntityList2<span>)</span><span>;</span>
+        <span>//模糊查询技能字段带有"画"的数据,并按照年龄降序</span>
+        <span>//等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE skill LIKE '%画%' ORDER BY age DESC</span>
+        <span>QueryWrapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> queryWrapper3 <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        queryWrapper3<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>like</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getSkill</span><span>,</span><span>"画"</span><span>)</span><span>;</span>
+        queryWrapper3<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>orderByDesc</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getAge</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList3 <span>=</span> userInfoService<span>.</span><span>list</span><span>(</span>queryWrapper3<span>)</span><span>;</span>
+        result<span>.</span><span>put</span><span>(</span><span>"studentAgeSkill"</span><span>,</span>userInfoEntityList3<span>)</span><span>;</span>
+        <span>//模糊查询名字带有"小"或者年龄大于18的学生</span>
+        <span>//等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE name LIKE '%小%' OR age > 18</span>
+        <span>QueryWrapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> queryWrapper4 <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        queryWrapper4<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>like</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getName</span><span>,</span><span>"小"</span><span>)</span><span>;</span>
+        queryWrapper4<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>or</span><span>(</span><span>)</span><span>.</span><span>gt</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getAge</span><span>,</span><span>18</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> userInfoEntityList4 <span>=</span> userInfoService<span>.</span><span>list</span><span>(</span>queryWrapper4<span>)</span><span>;</span>
+        result<span>.</span><span>put</span><span>(</span><span>"studentOr"</span><span>,</span>userInfoEntityList4<span>)</span><span>;</span>
+        <span>//查询评价不为null的学生,并且分页</span>
+        <span>//等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE evaluate IS NOT NULL LIMIT 0,5</span>
+        <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page <span>=</span> <span>new</span> <span>Page</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        page<span>.</span><span>setCurrent</span><span>(</span><span>1</span><span>)</span><span>;</span>
+        page<span>.</span><span>setSize</span><span>(</span><span>5</span><span>)</span><span>;</span>
+        <span>QueryWrapper</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> queryWrapper5 <span>=</span> <span>new</span> <span>QueryWrapper</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        queryWrapper5<span>.</span><span>lambda</span><span>(</span><span>)</span><span>.</span><span>isNotNull</span><span>(</span><span>UserInfoEntity</span><span>::</span><span>getEvaluate</span><span>)</span><span>;</span>
+        page <span>=</span> userInfoService<span>.</span><span>page</span><span>(</span>page<span>,</span>queryWrapper5<span>)</span><span>;</span>
+        result<span>.</span><span>put</span><span>(</span><span>"studentPage"</span><span>,</span>page<span>)</span><span>;</span>
+        <span>return</span> result<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data <a href="https://so.csdn.net/so/search?q=jpa&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">jpa</a>框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的</p>
+<p>mybatis-plus只是mybatis的增强版，它不影响mybatis的使用，我们可以写我们自定的方法以及sql，接下来我们看一个小案例</p>
+<p>dao层新增方法</p>
+<div><pre><code><span>/**
+     * 查询大于该分数的学生
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 14:28
+     * @Param  page  分页参数
+     * @Param  fraction  分数
+     * @Return IPage<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 分页数据
+     */</span>
+    <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>selectUserInfoByGtFraction</span><span>(</span>
+            <span>@Param</span><span>(</span>value <span>=</span> <span>"page"</span><span>)</span> <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page<span>,</span>
+            <span>@Param</span><span>(</span>value <span>=</span> <span>"fraction"</span><span>)</span><span>Long</span> fraction<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>service新增方法</p>
+<div><pre><code><span>/**
+     * 查询大于该分数的学生
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 14:27
+     * @Param  page  分页参数
+     * @Param  fraction  分数
+     * @Return IPage<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 分页数据
+     */</span>
+    <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>selectUserInfoByGtFraction</span><span>(</span><span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page<span>,</span><span>Long</span> fraction<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>serviceImpl层新增方法</p>
+<div><pre><code><span>/**
+     * 查询大于该分数的学生
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 14:27
+     * @Param  page  分页参数
+     * @Param  fraction  分数
+     * @Return IPage<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 分页数据
+     */</span>
+    <span>@Override</span>
+    <span>public</span> <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>selectUserInfoByGtFraction</span><span>(</span><span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page<span>,</span> <span>Long</span> fraction<span>)</span> <span>{</span>
+        <span>return</span> userInfoDao<span>.</span><span>selectUserInfoByGtFraction</span><span>(</span>page<span>,</span>fraction<span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>controller层新增方法</p>
+<div><pre><code> <span>/**
+     * MP自定义SQL
+     * <span>@author</span> xlc
+     * @CreateTime 2022/20 14:37
+     * @Return IPage<span><span><span>&lt;</span>UserInfoEntity</span><span>></span></span> 分页数据
+     */</span>
+    <span>@RequestMapping</span><span>(</span><span>"/getInfoListSQL"</span><span>)</span>
+    <span>public</span> <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> <span>getInfoListSQL</span><span>(</span><span>)</span><span>{</span>
+        <span>//查询大于60分以上的学生,并且分页</span>
+        <span>IPage</span><span><span>&lt;</span><span>UserInfoEntity</span><span>></span></span> page <span>=</span> <span>new</span> <span>Page</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        page<span>.</span><span>setCurrent</span><span>(</span><span>1</span><span>)</span><span>;</span>
+        page<span>.</span><span>setSize</span><span>(</span><span>5</span><span>)</span><span>;</span>
+        page <span>=</span> userInfoService<span>.</span><span>selectUserInfoByGtFraction</span><span>(</span>page<span>,</span><span>60L</span><span>)</span><span>;</span>
+        <span>return</span> page<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>配置我们的mybatis的xml</p>
+<div><pre><code><span>&lt;</span>?xml <span>version</span><span>=</span><span>"1.0"</span> <span>encoding</span><span>=</span><span>"UTF-8"</span> ?<span>></span>
+<span>&lt;</span><span>!</span>DOCTYPE mapper PUBLIC <span>"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span>"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span> <span>></span>
+<span>&lt;</span>mapper <span>namespace</span><span>=</span><span>"com.demo.drools.dao.UserInfoDao"</span><span>></span>
+  <span>&lt;</span>select <span>id</span><span>=</span><span>"selectUserInfoByGtFraction"</span> <span>resultType</span><span>=</span><span>"com.demo.drools.entity.UserInfoEntity"</span><span>></span>
+    SELECT * FROM user_info WHERE fraction <span>></span> <span>#{fraction}</span>
+    <span>&lt;</span>/select<span>></span>
+<span>&lt;</span>/mapper<span>></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>以上配置就是我们的mybatis用法。</p>
+<h2 id="mybatis-plus强大的条件构造器querywrapper、updatewrapper" tabindex="-1"> mybatis plus强大的条件构造器queryWrapper、updateWrapper</h2>
+<p>1.<strong>QueryWrapper</strong>： Entity 对象封装操作类
+2.<strong>UpdateWrapper</strong> ： Update 条件封装，用于Entity对象更新操作
+3.条件构造器使用中的各个方法格式和说明</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220620164733512.png" alt="image-20220620164733512" loading="lazy"></p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-07-01T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">Logback 配置文件优化</title>
     <id>https://blog.ciberviler.top/dev/Logback%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%98%E5%8C%96.html</id>
@@ -26258,344 +26887,6 @@ vue.js官方教程里提到的</p>
       <name>xlc520</name>
     </contributor>
     <published>2022-02-20T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">数据库表结构文档生成工具</title>
-    <id>https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html</id>
-    <link href="https://blog.ciberviler.top/dev/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.html"/>
-    <updated>2022-05-21T09:03:15.000Z</updated>
-    <summary type="html">数据库表结构文档生成工具</summary>
-    <content type="html"><![CDATA[<h1 id="数据库表结构文档生成工具" tabindex="-1"> 数据库表结构文档生成工具</h1>
-<h2 id="特点" tabindex="-1"> 特点</h2>
-<ul>
-<li>
-<p>简洁、轻量、设计良好</p>
-</li>
-<li>
-<p>多数据库支持</p>
-</li>
-<li>
-<p>多种格式文档</p>
-</li>
-<li>
-<p>灵活扩展</p>
-</li>
-<li>
-<p>支持自定义模板</p>
-</li>
-</ul>
-<h2 id="数据库支持" tabindex="-1"> 数据库支持</h2>
-<ul>
-<li><input type="checkbox" id="task-item-0" checked="checked" disabled="disabled"><label for="task-item-0"> MySQL</label></li>
-<li><input type="checkbox" id="task-item-1" checked="checked" disabled="disabled"><label for="task-item-1"> MariaDB</label></li>
-<li><input type="checkbox" id="task-item-2" checked="checked" disabled="disabled"><label for="task-item-2"> TIDB</label></li>
-<li><input type="checkbox" id="task-item-3" checked="checked" disabled="disabled"><label for="task-item-3"> Oracle</label></li>
-<li><input type="checkbox" id="task-item-4" checked="checked" disabled="disabled"><label for="task-item-4"> SqlServer</label></li>
-<li><input type="checkbox" id="task-item-5" checked="checked" disabled="disabled"><label for="task-item-5"> PostgreSQL</label></li>
-<li><input type="checkbox" id="task-item-6" checked="checked" disabled="disabled"><label for="task-item-6"> Cache DB（2016）</label></li>
-<li><input type="checkbox" id="task-item-7" disabled="disabled"><label for="task-item-7"> H2 （开发中）</label></li>
-<li><input type="checkbox" id="task-item-8" disabled="disabled"><label for="task-item-8"> DB2  （开发中）</label></li>
-<li><input type="checkbox" id="task-item-9" disabled="disabled"><label for="task-item-9"> HSQL  （开发中）</label></li>
-<li><input type="checkbox" id="task-item-10" disabled="disabled"><label for="task-item-10"> SQLite（开发中）</label></li>
-<li><input type="checkbox" id="task-item-11" disabled="disabled"><label for="task-item-11"> 瀚高（开发中）</label></li>
-<li><input type="checkbox" id="task-item-12" disabled="disabled"><label for="task-item-12"> 达梦 （开发中）</label></li>
-<li><input type="checkbox" id="task-item-13" disabled="disabled"><label for="task-item-13"> 虚谷  （开发中）</label></li>
-<li><input type="checkbox" id="task-item-14" disabled="disabled"><label for="task-item-14"> 人大金仓（开发中）</label></li>
-</ul>
-<h2 id="文档生成支持" tabindex="-1"> 文档生成支持</h2>
-<ul>
-<li><input type="checkbox" id="task-item-15" checked="checked" disabled="disabled"><label for="task-item-15"> html</label></li>
-<li><input type="checkbox" id="task-item-16" checked="checked" disabled="disabled"><label for="task-item-16"> word</label></li>
-<li><input type="checkbox" id="task-item-17" checked="checked" disabled="disabled"><label for="task-item-17"> markdown</label></li>
-</ul>
-<h2 id="文档截图" tabindex="-1"> 文档截图</h2>
-<ul>
-<li><strong>html</strong></li>
-</ul>
-<p align="center">
-   <img alt="HTML" src="https://images.gitee.com/uploads/images/2020/0622/161414_74cd0b68_1407605.png">
-</p>
-<p align="center">
-   <img alt="screw-logo" src="https://images.gitee.com/uploads/images/2020/0622/161723_6da58c41_1407605.png">
-</p>
-<ul>
-<li><strong>word</strong></li>
-</ul>
-<p align="center">
-   <img alt="word" src="https://images.gitee.com/uploads/images/2020/0625/200946_1dc0717f_1407605.png">
-</p>
-<ul>
-<li><strong>markdwon</strong></li>
-</ul>
-<p align="center">
-   <img alt="markdwon" src="https://images.gitee.com/uploads/images/2020/0625/214749_7b15d8bd_1407605.png">
-</p>
-<p align="center">
-   <img alt="markdwon" src="https://images.gitee.com/uploads/images/2020/0625/215006_3601e135_1407605.png">
-</p>
-<h2 id="使用方式" tabindex="-1"> 使用方式</h2>
-<h3 id="普通方式" tabindex="-1"> 普通方式</h3>
-<ul>
-<li><strong>引入依赖</strong></li>
-</ul>
-<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
-    <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.smallbun.screw<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-    <span><span><span>&lt;</span>artifactId</span><span>></span></span>screw-core<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-    <span><span><span>&lt;</span>version</span><span>></span></span>${lastVersion}<span><span><span>&lt;/</span>version</span><span>></span></span>
- <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li><strong>编写代码</strong></li>
-</ul>
-<div><pre><code><span>/**
- * 文档生成
- */</span>
-<span>void</span> <span>documentGeneration</span><span>(</span><span>)</span> <span>{</span>
-   <span>//数据源</span>
-   <span>HikariConfig</span> hikariConfig <span>=</span> <span>new</span> <span>HikariConfig</span><span>(</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setDriverClassName</span><span>(</span><span>"com.mysql.cj.jdbc.Driver"</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setJdbcUrl</span><span>(</span><span>"jdbc:mysql://127.0.0.1:3306/database"</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setUsername</span><span>(</span><span>"root"</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setPassword</span><span>(</span><span>"password"</span><span>)</span><span>;</span>
-   <span>//设置可以获取tables remarks信息</span>
-   hikariConfig<span>.</span><span>addDataSourceProperty</span><span>(</span><span>"useInformationSchema"</span><span>,</span> <span>"true"</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setMinimumIdle</span><span>(</span><span>2</span><span>)</span><span>;</span>
-   hikariConfig<span>.</span><span>setMaximumPoolSize</span><span>(</span><span>5</span><span>)</span><span>;</span>
-   <span>DataSource</span> dataSource <span>=</span> <span>new</span> <span>HikariDataSource</span><span>(</span>hikariConfig<span>)</span><span>;</span>
-   <span>//生成配置</span>
-   <span>EngineConfig</span> engineConfig <span>=</span> <span>EngineConfig</span><span>.</span><span>builder</span><span>(</span><span>)</span>
-         <span>//生成文件路径</span>
-         <span>.</span><span>fileOutputDir</span><span>(</span>fileOutputDir<span>)</span>
-         <span>//打开目录</span>
-         <span>.</span><span>openOutputDir</span><span>(</span><span>true</span><span>)</span>
-         <span>//文件类型</span>
-         <span>.</span><span>fileType</span><span>(</span><span>EngineFileType</span><span>.</span>HTML<span>)</span>
-         <span>//生成模板实现</span>
-         <span>.</span><span>produceType</span><span>(</span><span>EngineTemplateType</span><span>.</span>freemarker<span>)</span>
-         <span>//自定义文件名称</span>
-         <span>.</span><span>fileName</span><span>(</span><span>"自定义文件名称"</span><span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
-
-   <span>//忽略表</span>
-   <span>ArrayList</span><span><span>&lt;</span><span>String</span><span>></span></span> ignoreTableName <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-   ignoreTableName<span>.</span><span>add</span><span>(</span><span>"test_user"</span><span>)</span><span>;</span>
-   ignoreTableName<span>.</span><span>add</span><span>(</span><span>"test_group"</span><span>)</span><span>;</span>
-   <span>//忽略表前缀</span>
-   <span>ArrayList</span><span><span>&lt;</span><span>String</span><span>></span></span> ignorePrefix <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-   ignorePrefix<span>.</span><span>add</span><span>(</span><span>"test_"</span><span>)</span><span>;</span>
-   <span>//忽略表后缀    </span>
-   <span>ArrayList</span><span><span>&lt;</span><span>String</span><span>></span></span> ignoreSuffix <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-   ignoreSuffix<span>.</span><span>add</span><span>(</span><span>"_test"</span><span>)</span><span>;</span>
-   <span>ProcessConfig</span> processConfig <span>=</span> <span>ProcessConfig</span><span>.</span><span>builder</span><span>(</span><span>)</span>
-         <span>//指定生成逻辑、当存在指定表、指定表前缀、指定表后缀时，将生成指定表，其余表不生成、并跳过忽略表配置	</span>
-		 <span>//根据名称指定表生成</span>
-		 <span>.</span><span>designatedTableName</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span>
-		 <span>//根据表前缀生成</span>
-		 <span>.</span><span>designatedTablePrefix</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span>
-		 <span>//根据表后缀生成	</span>
-		 <span>.</span><span>designatedTableSuffix</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span>
-         <span>//忽略表名</span>
-         <span>.</span><span>ignoreTableName</span><span>(</span>ignoreTableName<span>)</span>
-         <span>//忽略表前缀</span>
-         <span>.</span><span>ignoreTablePrefix</span><span>(</span>ignorePrefix<span>)</span>
-         <span>//忽略表后缀</span>
-         <span>.</span><span>ignoreTableSuffix</span><span>(</span>ignoreSuffix<span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
-   <span>//配置</span>
-   <span>Configuration</span> config <span>=</span> <span>Configuration</span><span>.</span><span>builder</span><span>(</span><span>)</span>
-         <span>//版本</span>
-         <span>.</span><span>version</span><span>(</span><span>"1.0.0"</span><span>)</span>
-         <span>//描述</span>
-         <span>.</span><span>description</span><span>(</span><span>"数据库设计文档生成"</span><span>)</span>
-         <span>//数据源</span>
-         <span>.</span><span>dataSource</span><span>(</span>dataSource<span>)</span>
-         <span>//生成配置</span>
-         <span>.</span><span>engineConfig</span><span>(</span>engineConfig<span>)</span>
-         <span>//生成配置</span>
-         <span>.</span><span>produceConfig</span><span>(</span>processConfig<span>)</span>
-         <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
-   <span>//执行生成</span>
-   <span>new</span> <span>DocumentationExecute</span><span>(</span>config<span>)</span><span>.</span><span>execute</span><span>(</span><span>)</span><span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="maven-插件" tabindex="-1"> Maven 插件</h3>
-<div><pre><code><span><span><span>&lt;</span>build</span><span>></span></span>
-    <span><span><span>&lt;</span>plugins</span><span>></span></span>
-        <span><span><span>&lt;</span>plugin</span><span>></span></span>
-            <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.smallbun.screw<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-            <span><span><span>&lt;</span>artifactId</span><span>></span></span>screw-maven-plugin<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-            <span><span><span>&lt;</span>version</span><span>></span></span>${lastVersion}<span><span><span>&lt;/</span>version</span><span>></span></span>
-            <span><span><span>&lt;</span>dependencies</span><span>></span></span>
-                <span>&lt;!-- HikariCP --></span>
-                <span><span><span>&lt;</span>dependency</span><span>></span></span>
-                    <span><span><span>&lt;</span>groupId</span><span>></span></span>com.zaxxer<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-                    <span><span><span>&lt;</span>artifactId</span><span>></span></span>HikariCP<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-                    <span><span><span>&lt;</span>version</span><span>></span></span>3.4.5<span><span><span>&lt;/</span>version</span><span>></span></span>
-                <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-                <span>&lt;!--mysql driver--></span>
-                <span><span><span>&lt;</span>dependency</span><span>></span></span>
-                    <span><span><span>&lt;</span>groupId</span><span>></span></span>mysql<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-                    <span><span><span>&lt;</span>artifactId</span><span>></span></span>mysql-connector-java<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-                    <span><span><span>&lt;</span>version</span><span>></span></span>8.0.20<span><span><span>&lt;/</span>version</span><span>></span></span>
-                <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-            <span><span><span>&lt;/</span>dependencies</span><span>></span></span>
-            <span><span><span>&lt;</span>configuration</span><span>></span></span>
-                <span>&lt;!--username--></span>
-                <span><span><span>&lt;</span>username</span><span>></span></span>root<span><span><span>&lt;/</span>username</span><span>></span></span>
-                <span>&lt;!--password--></span>
-                <span><span><span>&lt;</span>password</span><span>></span></span>password<span><span><span>&lt;/</span>password</span><span>></span></span>
-                <span>&lt;!--driver--></span>
-                <span><span><span>&lt;</span>driverClassName</span><span>></span></span>com.mysql.cj.jdbc.Driver<span><span><span>&lt;/</span>driverClassName</span><span>></span></span>
-                <span>&lt;!--jdbc url--></span>
-                <span><span><span>&lt;</span>jdbcUrl</span><span>></span></span>jdbc:mysql://127.0.0.1:3306/xxxx<span><span><span>&lt;/</span>jdbcUrl</span><span>></span></span>
-                <span>&lt;!--生成文件类型--></span>
-                <span><span><span>&lt;</span>fileType</span><span>></span></span>HTML<span><span><span>&lt;/</span>fileType</span><span>></span></span>
-                <span>&lt;!--打开文件输出目录--></span>
-                <span><span><span>&lt;</span>openOutputDir</span><span>></span></span>false<span><span><span>&lt;/</span>openOutputDir</span><span>></span></span>
-                <span>&lt;!--生成模板--></span>
-                <span><span><span>&lt;</span>produceType</span><span>></span></span>freemarker<span><span><span>&lt;/</span>produceType</span><span>></span></span>
-                <span>&lt;!--文档名称 为空时:将采用[数据库名称-描述-版本号]作为文档名称--></span>
-                <span><span><span>&lt;</span>fileName</span><span>></span></span>测试文档名称<span><span><span>&lt;/</span>fileName</span><span>></span></span>
-                <span>&lt;!--描述--></span>
-                <span><span><span>&lt;</span>description</span><span>></span></span>数据库文档生成<span><span><span>&lt;/</span>description</span><span>></span></span>
-                <span>&lt;!--版本--></span>
-                <span><span><span>&lt;</span>version</span><span>></span></span>${project.version}<span><span><span>&lt;/</span>version</span><span>></span></span>
-                <span>&lt;!--标题--></span>
-                <span><span><span>&lt;</span>title</span><span>></span></span>数据库文档<span><span><span>&lt;/</span>title</span><span>></span></span>
-            <span><span><span>&lt;/</span>configuration</span><span>></span></span>
-            <span><span><span>&lt;</span>executions</span><span>></span></span>
-                <span><span><span>&lt;</span>execution</span><span>></span></span>
-                    <span><span><span>&lt;</span>phase</span><span>></span></span>compile<span><span><span>&lt;/</span>phase</span><span>></span></span>
-                    <span><span><span>&lt;</span>goals</span><span>></span></span>
-                        <span><span><span>&lt;</span>goal</span><span>></span></span>run<span><span><span>&lt;/</span>goal</span><span>></span></span>
-                    <span><span><span>&lt;/</span>goals</span><span>></span></span>
-                <span><span><span>&lt;/</span>execution</span><span>></span></span>
-            <span><span><span>&lt;/</span>executions</span><span>></span></span>
-        <span><span><span>&lt;/</span>plugin</span><span>></span></span>
-    <span><span><span>&lt;/</span>plugins</span><span>></span></span>
-<span><span><span>&lt;/</span>build</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="使用文章" tabindex="-1"> 使用文章</h3>
-<ul>
-<li>
-<p><a href="https://my.oschina.net/mdxlcj/blog/4341399" target="_blank" rel="noopener noreferrer">SpringBoot整合screw生成数据库文档</a></p>
-</li>
-<li>
-<p><a href="https://mp.weixin.qq.com/s/Bo_U5_cl82hfQ6GmRs2vtA" target="_blank" rel="noopener noreferrer">还在手动整理数据库文档？试试这个工具</a></p>
-</li>
-<li>
-<p><a href="https://mp.weixin.qq.com/s/nPwFV7DN8Ogg54_crLlP3g" target="_blank" rel="noopener noreferrer">实用！一键生成数据库文档，堪称数据库界的Swagger</a></p>
-</li>
-</ul>
-<h3 id="使用视频" tabindex="-1"> 使用视频</h3>
-<ul>
-<li>
-<p><a href="https://www.bilibili.com/video/av456302504/" target="_blank" rel="noopener noreferrer">使用screw数据库文档生成工具快速生成数据库文档</a></p>
-</li>
-<li>
-<p><a href="https://mp.weixin.qq.com/s/rUde6XSGSG0jKuy0Wgf1Mw" target="_blank" rel="noopener noreferrer">微人事一键生成数据库文档！炫！</a></p>
-</li>
-</ul>
-<h2 id="扩展模块" tabindex="-1"> 扩展模块</h2>
-<h3 id="pojo生成功能" tabindex="-1"> pojo生成功能</h3>
-<h4 id="功能简介" tabindex="-1"> 功能简介</h4>
-<p>  pojo生成功能是基于screw延伸出的扩展模块,目前处于初步开发的状态。在日常的开发中,经过需求分析、建模之后,往往会先在数据库中建表,其次在进行代码的开发。那么pojo生成功能在这个阶段就可以帮助大家节省一些重复劳动了。使用pojo生成功能可以直接根据数据库生成对应的java pojo对象。这样后续的修改，开发都会很方便。</p>
-<h4 id="数据库支持-1" tabindex="-1"> 数据库支持</h4>
-<ul>
-<li><input type="checkbox" id="task-item-18" checked="checked" disabled="disabled"><label for="task-item-18"> MySQL</label></li>
-</ul>
-<h4 id="使用方式-1" tabindex="-1"> 使用方式</h4>
-<ul>
-<li><strong>引入依赖</strong></li>
-</ul>
-<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
-    <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.smallbun.screw<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-    <span><span><span>&lt;</span>artifactId</span><span>></span></span>screw-extension<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-    <span><span><span>&lt;</span>version</span><span>></span></span>${lastVersion}<span><span><span>&lt;/</span>version</span><span>></span></span>
- <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li><strong>编写代码</strong></li>
-</ul>
-<div><pre><code><span>/**
- * pojo生成
- */</span>
-<span>void</span> <span>pojoGeneration</span><span>(</span><span>)</span> <span>{</span>
-    <span>//数据源</span>
-    <span>HikariConfig</span> hikariConfig <span>=</span> <span>new</span> <span>HikariConfig</span><span>(</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setDriverClassName</span><span>(</span><span>"com.mysql.cj.jdbc.Driver"</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setJdbcUrl</span><span>(</span><span>"jdbc:mysql://127.0.0.1:3306/screw"</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setUsername</span><span>(</span><span>"screw"</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setPassword</span><span>(</span><span>"screw"</span><span>)</span><span>;</span>
-    <span>//设置可以获取tables remarks信息</span>
-    hikariConfig<span>.</span><span>addDataSourceProperty</span><span>(</span><span>"useInformationSchema"</span><span>,</span> <span>"true"</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setMinimumIdle</span><span>(</span><span>2</span><span>)</span><span>;</span>
-    hikariConfig<span>.</span><span>setMaximumPoolSize</span><span>(</span><span>5</span><span>)</span><span>;</span>
-    <span>DataSource</span> dataSource <span>=</span> <span>new</span> <span>HikariDataSource</span><span>(</span>hikariConfig<span>)</span><span>;</span>
-
-    <span>ProcessConfig</span> processConfig <span>=</span> <span>ProcessConfig</span><span>.</span><span>builder</span><span>(</span><span>)</span>
-        <span>//指定生成逻辑、当存在指定表、指定表前缀、指定表后缀时，将生成指定表，其余表不生成、并跳过忽略表配置</span>
-        <span>//根据名称指定表生成</span>
-        <span>.</span><span>designatedTableName</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span>
-        <span>//根据表前缀生成</span>
-        <span>.</span><span>designatedTablePrefix</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span>
-        <span>//根据表后缀生成</span>
-        <span>.</span><span>designatedTableSuffix</span><span>(</span><span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
-
-    <span>//设置生成pojo相关配置</span>
-    <span>PojoConfiguration</span> config <span>=</span> <span>new</span> <span>PojoConfiguration</span><span>(</span><span>)</span><span>;</span>
-    <span>//设置文件存放路径</span>
-    config<span>.</span><span>setPath</span><span>(</span><span>"/cn/smallbun/screw/"</span><span>)</span><span>;</span>
-    <span>//设置包名</span>
-    config<span>.</span><span>setPackageName</span><span>(</span><span>"cn.smallbun.screw"</span><span>)</span><span>;</span>
-    <span>//设置是否使用lombok</span>
-    config<span>.</span><span>setUseLombok</span><span>(</span><span>false</span><span>)</span><span>;</span>
-    <span>//设置数据源</span>
-    config<span>.</span><span>setDataSource</span><span>(</span>dataSource<span>)</span><span>;</span>
-    <span>//设置命名策略</span>
-    config<span>.</span><span>setNameStrategy</span><span>(</span><span>new</span> <span>HumpNameStrategy</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>//设置表过滤逻辑</span>
-    config<span>.</span><span>setProcessConfig</span><span>(</span>processConfig<span>)</span><span>;</span>
-    <span>//执行生成</span>
-    <span>new</span> <span>PojoExecute</span><span>(</span>config<span>)</span><span>.</span><span>execute</span><span>(</span><span>)</span><span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="常见问题" tabindex="-1"> 常见问题</h2>
-<ul>
-<li>
-<p>生成后文档乱码？</p>
-<p>MySQL：URL加入<code>?characterEncoding=UTF-8</code>。</p>
-</li>
-<li>
-<p>Caused by: java.lang.NoSuchFieldError: VERSION_2_3_30？</p>
-<p>检查项目<code>freemarker</code>依赖，这是由于版本过低造成的，升级版本为<code>2.3.30</code>即可。</p>
-</li>
-<li>
-<p>java.lang.AbstractMethodError: oracle.jdbc.driver.T4CConnection.getSchema()Ljava/lang/String;</p>
-<p>这是因为oracle驱动版本过低造成的，删除或屏蔽目前驱动版本，驱动添加升级为以下版本：</p>
-<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
-   <span><span><span>&lt;</span>groupId</span><span>></span></span>com.oracle.ojdbc<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-   <span><span><span>&lt;</span>artifactId</span><span>></span></span>ojdbc8<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-   <span><span><span>&lt;</span>version</span><span>></span></span>19.3.0.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-<span><span><span>&lt;</span>dependency</span><span>></span></span>
-   <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.easyproject<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-   <span><span><span>&lt;</span>artifactId</span><span>></span></span>orai18n<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-   <span><span><span>&lt;</span>version</span><span>></span></span>12.1.0.2.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></li>
-<li>
-<p>MySQL数据库表和列字段有说明、生成文档没有说明？</p>
-<p>URL链接加入<code>useInformationSchema=true</code>即可。</p>
-</li>
-<li>
-<p>java.lang.AbstractMethodError: com.mysql.jdbc.JDBC4Connection.getSchema()Ljava/lang/String;</p>
-<p>这是因为mysql驱动版本过低造成的，升级mysql驱动版本为最新即可。</p>
-</li>
-</ul>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-04-05T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
