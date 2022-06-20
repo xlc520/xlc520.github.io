@@ -97,6 +97,20 @@ exp system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
 exp JYZGCX/JYZGCX@Oracle file = d:datanewsmgnt.dmp tables = (T_USER,T_ROLE)
 ```
 
+```sql
+--备份某几张表  ！！！！
+exp smsc/smsc file=/data/oracle_bak/dmp/bakup0209_2.dmp tables=\(send_msg_his,send_msg,recv_msg_his,recv_msg\)
+--备份整个数据库 ！！！！
+--方式1
+exp smsc/smsc file=/data/oracle_bak/dmp/bakupsmmc0209_2.dmp full=y
+--方式2
+exp cop/cop@133.96.84.39:1521/coprule file=/home/oracle/cop_20160902.dmp owner=cop log=/home/oracle/cop.log
+--本机上
+exp zop/zop@orcl file= D:\zop_bak.dmp owner=zop log=D:\zop_ba.log
+```
+
+
+
 ***dmp文件的导入***　
 
 步骤如下: 
@@ -167,7 +181,22 @@ imp test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" 
 
 以上就是oracle数据库导出和导入dmp文件的两种方法.　　　
 
- 
+ ```sql
+ --数据的导入
+ --1 将D:\daochu.dmp 中的数据导入 TEST数据库中。
+  imp system/manager@TEST file=d:\daochu.dmp
+  imp aichannel/aichannel@TEST full=y file=d:\datanewsmgnt.dmp ignore=y
+ --上面可能有点问题，因为有的表已经存在，然后它就报错，对该表就不进行导入。
+ -- 在后面加上 ignore=y 就可以了。
+ --2 将d:daochu.dmp中的表table1 导入
+ imp system/manager@TEST file=d:\daochu.dmp tables=(table1)
+ --基本上上面的导入导出够用了。不少情况要先是将表彻底删除，然后导入。
+ 注意：
+ 操作者要有足够的权限，权限不够它会提示。
+ 数据库时可以连上的。可以用tnsping TEST 来获得数据库TEST能否连上。
+ ```
+
+
 
 ####  ***2、数据泵方法：***
 
