@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T01:40:36.233Z</updated>
+  <updated>2022-06-20T02:18:42.339Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -26,7 +26,7 @@
     <title type="html">Oracle的数据 导入与导出-数据库</title>
     <id>https://blog.ciberviler.top/linux/Oracle%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93.html</id>
     <link href="https://blog.ciberviler.top/linux/Oracle%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93.html"/>
-    <updated>2022-06-20T01:37:07.000Z</updated>
+    <updated>2022-06-20T02:16:47.000Z</updated>
     <content type="html"><![CDATA[<h1 id="oracle的数据-导入与导出-数据库" tabindex="-1"> Oracle的数据 导入与导出-数据库</h1>
 <h2 id="_1-数据库导入导出需要注意" tabindex="-1"> 1 数据库导入导出需要注意</h2>
 <p>1.目标数据库要与源数据库有着名称相同的表空间。</p>
@@ -65,7 +65,16 @@
 </code></pre><div aria-hidden="true"><div></div></div></div><p>3: 将数据库中的表T_USER,T_ROLE导出</p>
 <p>ystem为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以</p>
 <div><pre><code>exp JYZGCX<span>/</span>JYZGCX<span>@Oracle</span> <span>file</span> <span>=</span> d:datanewsmgnt<span>.</span>dmp <span>tables</span> <span>=</span> <span>(</span>T_USER<span>,</span>T_ROLE<span>)</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><p><em><strong>dmp文件的导入</strong></em></p>
+</code></pre><div aria-hidden="true"><div></div></div></div><div><pre><code><span>--备份某几张表  ！！！！</span>
+exp smsc<span>/</span>smsc <span>file</span><span>=</span><span>/</span><span>data</span><span>/</span>oracle_bak<span>/</span>dmp<span>/</span>bakup0209_2<span>.</span>dmp <span>tables</span><span>=</span>\<span>(</span>send_msg_his<span>,</span>send_msg<span>,</span>recv_msg_his<span>,</span>recv_msg\<span>)</span>
+<span>--备份整个数据库 ！！！！</span>
+<span>--方式1</span>
+exp smsc<span>/</span>smsc <span>file</span><span>=</span><span>/</span><span>data</span><span>/</span>oracle_bak<span>/</span>dmp<span>/</span>bakupsmmc0209_2<span>.</span>dmp <span>full</span><span>=</span>y
+<span>--方式2</span>
+exp cop<span>/</span>cop<span>@133.96.84.39</span>:<span>1521</span><span>/</span>coprule <span>file</span><span>=</span><span>/</span>home<span>/</span>oracle<span>/</span>cop_20160902<span>.</span>dmp owner<span>=</span>cop log<span>=</span><span>/</span>home<span>/</span>oracle<span>/</span>cop<span>.</span>log
+<span>--本机上</span>
+exp zop<span>/</span>zop<span>@orcl</span> <span>file</span><span>=</span> D:\zop_bak<span>.</span>dmp owner<span>=</span>zop log<span>=</span>D:\zop_ba<span>.</span>log
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><em><strong>dmp文件的导入</strong></em></p>
 <p>步骤如下:</p>
 <p>机器环境是windows7,其实也无所谓,命令行不都是样的么</p>
 <p>\1. 打开&quot;开始&quot; ---&gt;输入cmd,打开cmd命令窗口,输入: sqlplus/as sysdba; 然后使用conn / as sysdba;这样就可以以超级管理员的最高权限登录,当然这决定于init.ora文件中的数据库初始化参数.</p>
@@ -103,7 +112,19 @@ extend management <span>local</span><span>;</span>
 <p>file: 后面是你的dmp的文件路径</p>
 <p>full=y : 全部导入</p>
 <p>以上就是oracle数据库导出和导入dmp文件的两种方法.</p>
-<h4 id="_2、数据泵方法" tabindex="-1"> <em><strong>2、数据泵方法：</strong></em></h4>
+<div><pre><code><span>--数据的导入</span>
+<span>--1 将D:\daochu.dmp 中的数据导入 TEST数据库中。</span>
+ imp system<span>/</span>manager<span>@TEST</span> <span>file</span><span>=</span>d:\daochu<span>.</span>dmp
+ imp aichannel<span>/</span>aichannel<span>@TEST</span> <span>full</span><span>=</span>y <span>file</span><span>=</span>d:\datanewsmgnt<span>.</span>dmp <span>ignore</span><span>=</span>y
+<span>--上面可能有点问题，因为有的表已经存在，然后它就报错，对该表就不进行导入。</span>
+<span>-- 在后面加上 ignore=y 就可以了。</span>
+<span>--2 将d:daochu.dmp中的表table1 导入</span>
+imp system<span>/</span>manager<span>@TEST</span> <span>file</span><span>=</span>d:\daochu<span>.</span>dmp <span>tables</span><span>=</span><span>(</span>table1<span>)</span>
+<span>--基本上上面的导入导出够用了。不少情况要先是将表彻底删除，然后导入。</span>
+注意：
+操作者要有足够的权限，权限不够它会提示。
+数据库时可以连上的。可以用tnsping TEST 来获得数据库TEST能否连上。
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2、数据泵方法" tabindex="-1"> <em><strong>2、数据泵方法：</strong></em></h4>
 <p>创建directory:</p>
 <div><pre><code>expdp<span>(</span>impdp<span>)</span> username<span>/</span>password<span>@SERVICENAME</span>:<span>1521</span> 
 schemas<span>=</span>username <span>dumpfile</span><span>=</span>file1<span>.</span>dmp logfile<span>=</span>file1<span>.</span>log 
