@@ -396,16 +396,19 @@ public Map test2(@MatrixVariable("low") String low,
 
 请求地址如果为：http://localhost:9999/car/2/owner/zhangsan?age=18&inters=basketball&inters=football
 
-**@PathVariable("id")** Integer id: 获取路径中{id}
-**@PathVariable("username")** String name： 获取路径中{username}
-**@PathVariable** Map<String, String> pv： 获取路径中所有的路径变量
-**@RequestHeader("User-Agent")** String userAgent： 获取请求头中userAgent
-**@RequestHeader** Map<String, String> header： 获取请求头中所有参数
-**@RequestParam("age")** Integer age： 获取请求参数中"age"
-**@RequestParam("inters")** List<String> inters： 获取请求参数中"inters"
-**@RequestParam** Map<String, String> params： 获取所有的请求参数
-**@CookieValue("_ga")** String _ga： 获取cookie中_ga的值
-**@CookieValue("_ga")** Cookie cookie) ： 获取cookie
+```java
+@PathVariable("id") Integer id: 获取路径中{id}
+@PathVariable("username") String name： 获取路径中{username}
+@PathVariable Map<String, String> pv： 获取路径中所有的路径变量
+@RequestHeader("User-Agent") String userAgent： 获取请求头中userAgent
+@RequestHeader Map<String, String> header： 获取请求头中所有参数
+@RequestParam("age") Integer age： 获取请求参数中"age"
+@RequestParam("inters") List<String> inters： 获取请求参数中"inters"
+@RequestParam Map<String, String> params： 获取所有的请求参数
+@CookieValue("_ga") String _ga： 获取cookie中_ga的值
+@CookieValue("_ga") Cookie cookie) ： 获取cookie
+```
+
 
 ```java
 import javax.servlet.http.Cookie;
