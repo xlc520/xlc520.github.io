@@ -3,16 +3,16 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-20T09:37:28.625Z</updated>
+  <updated>2022-06-22T10:43:11.468Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
+  <category term="algorithm"/>
   <category term="Java"/>
   <category term="Linux"/>
   <category term="other"/>
   <category term="essay"/>
   <category term="daily"/>
-  <category term="algorithm"/>
   <category term="Script"/>
   <category term="pc"/>
   <category term="Python"/>
@@ -22,6 +22,995 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">快速回忆十大排序</title>
+    <id>https://blog.ciberviler.top/algorithm/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F.html</id>
+    <link href="https://blog.ciberviler.top/algorithm/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F.html"/>
+    <updated>2022-06-22T09:31:48.000Z</updated>
+    <summary type="html">【Java数据结构与算法】快速回忆十大排序 + 使用插入排序、归并排序、快速排序对链表进行排序</summary>
+    <content type="html"><![CDATA[<h1 id="快速回忆十大排序" tabindex="-1"> 快速回忆十大排序</h1>
+<h2 id="java中arrays-sort" tabindex="-1"> Java中Arrays.sort()</h2>
+<p>通过查看Arrays.sort() 的源码， 可以发现 Arrays.sort() 并不是简单的使用快排，而是根据要排序的长度选择不同的排序。
+简单总结：</p>
+<table>
+<thead>
+<tr>
+<th>区间长度</th>
+<th>所使用的排序算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小于47</td>
+<td>插入排序</td>
+</tr>
+<tr>
+<td>大于47小于286</td>
+<td>快排排序</td>
+</tr>
+<tr>
+<td>大于286，数据基本有序</td>
+<td>归并排序</td>
+</tr>
+<tr>
+<td>大于286，数据基本无序</td>
+<td>快速排序</td>
+</tr>
+</tbody>
+</table>
+<p>进行快排时会计算5个元素如果有相同元素就进行传统<a href="https://so.csdn.net/so/search?q=%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">快速排序</a>，如果没有相同的就进行双轴快速排序。</p>
+<blockquote>
+<p>插入排序、归并排序、快速排序连源码都在用可见其重要性。</p>
+</blockquote>
+<h2 id="经典十大排序" tabindex="-1"> 经典十大排序</h2>
+<table>
+<thead>
+<tr>
+<th>排序算法</th>
+<th>平均时间复杂度</th>
+<th>最好情况</th>
+<th>最坏情况</th>
+<th>空间复杂度</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td>O(n2)</td>
+<td>O(n)</td>
+<td>O(n2)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>O(n2)</td>
+<td>O(n2)</td>
+<td>O(n2)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>O(n2)</td>
+<td>O(n)</td>
+<td>O(n2)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>O(n log n)</td>
+<td>O(n log2 n)</td>
+<td>O(n log2 n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n2)</td>
+<td>O(log n)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>计数排序</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>桶数排序</td>
+<td>O(n+k)</td>
+<td>O(n2)</td>
+<td>O(n)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>基数排序</td>
+<td>O(n*k)</td>
+<td>O(n*k)</td>
+<td>O(n*k)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table>
+<p>不稳定是指排序过程中会把原本有序区间破化成无序的</p>
+<h2 id="排序测试力扣题目" tabindex="-1"> 排序测试力扣题目</h2>
+<p>力扣 912.排序数组，地址： <a href="https://leetcode.cn/problems/sort-an-array/" target="_blank" rel="noopener noreferrer">https://leetcode.cn/problems/sort-an-array/</a>
+除了冒泡、插入会超时以外，其他排序方式都可以通过。</p>
+<h2 id="_1-冒泡排序" tabindex="-1"> 1. 冒泡排序</h2>
+<p>这应该是大家接触最早的排序。数就像水里的泡泡一样，泡泡从大到小一个个冒出来。
+数组形式： [无序区间] [有序区间] ，在无序区间一直比较并交换把最大的冒到有序区间前。
+两层for循环，一层循环将一个最大的数放到最后。
+<strong>动图演示</strong>：
+<img src="https://img-blog.csdnimg.cn/763fdaf26170499aa9e1fc4637b43f1f.gif" alt="图片" loading="lazy">
+<strong>Java代码</strong></p>
+<div><pre><code>        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> nums<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>for</span><span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j  <span>&lt;</span> nums<span>.</span>length <span>-</span> <span>1</span> <span>-</span> i<span>;</span> j<span>++</span><span>)</span> <span>{</span>
+                <span>if</span><span>(</span>nums<span>[</span>j<span>]</span> <span>></span> nums<span>[</span>j <span>+</span> <span>1</span><span>]</span><span>)</span> <span>{</span>
+                    <span>//交换</span>
+                    <span>int</span> tem <span>=</span> nums<span>[</span>j<span>]</span><span>;</span>
+                    nums<span>[</span>j<span>]</span> <span>=</span> nums<span>[</span>j <span>+</span> <span>1</span><span>]</span><span>;</span>
+                    nums<span>[</span>j  <span>+</span> <span>1</span><span>]</span> <span>=</span> tem<span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2-选择排序" tabindex="-1"> 2. 选择排序</h2>
+<p>插入排序总结一句话就是挑最小的放前面，比较的次数多但是交换的次数少
+数组形式： [有序区间] [无序区间] ，在无序区间挑一个最小的数跟在有序区间后面。
+两层for循环，一层循环用来找到最小的数。
+<strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172753245.png" alt="image-20220622172753245" loading="lazy">
+<strong>Java代码</strong>：</p>
+<div><pre><code>        <span>int</span> minIndex <span>=</span> <span>0</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> nums<span>.</span>length <span>-</span> <span>1</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            minIndex <span>=</span> i<span>;</span>
+            <span>for</span><span>(</span><span>int</span> j <span>=</span> i <span>+</span> <span>1</span><span>;</span> j <span>&lt;</span> nums<span>.</span>length<span>;</span> j<span>++</span><span>)</span> <span>{</span>
+               <span>if</span><span>(</span>nums<span>[</span>j<span>]</span> <span>&lt;</span> nums<span>[</span>minIndex<span>]</span><span>)</span> <span>{</span>
+                   minIndex <span>=</span> j<span>;</span>
+               <span>}</span>
+           <span>}</span>
+           <span>//找到最小数的索引，交换</span>
+           <span>int</span> tem <span>=</span> nums<span>[</span>i<span>]</span><span>;</span>
+           nums<span>[</span>i<span>]</span> <span>=</span> nums<span>[</span>minIndex<span>]</span><span>;</span>
+           nums<span>[</span>minIndex<span>]</span> <span>=</span> tem<span>;</span>
+        <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_3-插入排序" tabindex="-1"> 3. 插入排序</h2>
+<p>插入排序总结：拿到一个元素就去找他该在的位置插入进去
+数组形式： [有序区间] [无序区间] ，在无序区间拿第一个元素插入到有序区其应该在的位置
+从右往左，放第一个比他小的后面，且从右往左遍历过程中把数组右移。</p>
+<p><strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172810846.png" alt="image-20220622172810846" loading="lazy">
+<strong>Java代码</strong>：</p>
+<div><pre><code>        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>1</span><span>;</span> i <span>&lt;</span> nums<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>int</span> index <span>=</span> i <span>-</span> <span>1</span><span>;</span>
+            <span>int</span> tem <span>=</span> nums<span>[</span>i<span>]</span><span>;</span>
+            <span>while</span><span>(</span>index <span>>=</span> <span>0</span> <span>&amp;&amp;</span> nums<span>[</span>index<span>]</span> <span>></span> tem<span>)</span> <span>{</span>
+                nums<span>[</span>index <span>+</span> <span>1</span><span>]</span> <span>=</span> nums<span>[</span>index<span>]</span><span>;</span> <span>//右移</span>
+                index<span>--</span><span>;</span>
+            <span>}</span>
+            nums<span>[</span>index <span>+</span> <span>1</span><span>]</span> <span>=</span> tem<span>;</span> <span>//把无序部分第一个数插入到有序部分的这里</span>
+        <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_4-希尔排序" tabindex="-1"> 4. 希尔排序</h2>
+<p>希尔排序是当时最早突破 O(n2)的排序，是插入排序的改进版本。 插入排序主要在于右移是O(n)
+希尔排序的思想是引入一个增量，先两两插入排序，再四四插入排序，最终整体插入排序，这样前面处理完，后面插入移动次数会变少。
+每一轮按照事先决定的间隔进行插入排序，间隔依次缩小最后为1。
+<strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172822763.png" alt="image-20220622172822763" loading="lazy">
+如果看不懂这个动图，可以先看看这个教程，再回头看这个动图。<a href="https://www.runoob.com/data-structures/shell-sort.html" target="_blank" rel="noopener noreferrer">https://www.runoob.com/data-structures/shell-sort.html</a>
+<strong>Java代码</strong>：</p>
+<div><pre><code>        <span>for</span><span>(</span><span>int</span> gap <span>=</span> nums<span>.</span>length <span>/</span> <span>2</span><span>;</span> gap <span>></span> <span>0</span><span>;</span> gap <span>/=</span> <span>2</span><span>)</span> <span>{</span>
+            <span>//对每组进行插入排序。 这里和动图不太一样，并不是一组一组进行的，而是各组交叉进行的</span>
+            <span>for</span><span>(</span><span>int</span> i <span>=</span> gap<span>;</span> i <span>&lt;</span> nums<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                <span>int</span> tem <span>=</span> nums<span>[</span>i<span>]</span><span>;</span>
+                <span>int</span> index <span>=</span> i<span>;</span>
+                <span>while</span><span>(</span>index <span>>=</span> gap <span>&amp;&amp;</span> nums<span>[</span>index <span>-</span> gap<span>]</span> <span>></span> tem<span>)</span> <span>{</span>
+                    <span>//按分组的位置右移</span>
+                    nums<span>[</span>index<span>]</span> <span>=</span> nums<span>[</span>index <span>-</span> gap<span>]</span><span>;</span>
+                    index <span>-=</span> gap<span>;</span>
+                <span>}</span>
+                nums<span>[</span>index<span>]</span> <span>=</span> tem<span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> nums<span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_5-归并排序" tabindex="-1"> 5. 归并排序</h2>
+<p>希尔排序是分治法的一个典型应用，将已有序的子序列合并，得到完全有序的序列；</p>
+<p><strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172858688.png" alt="image-20220622172858688" loading="lazy">
+<strong>更直观的图片演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/27888728650c447f85415a003218a727.png" alt="图片" loading="lazy"></p>
+<p><strong>Java代码</strong>：</p>
+<div><pre><code>    <span>int</span><span>[</span><span>]</span> tem<span>;</span>
+    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        tem <span>=</span> <span>new</span> <span>int</span><span>[</span>nums<span>.</span>length<span>]</span><span>;</span>
+        <span>mergeSort</span><span>(</span>nums<span>,</span> <span>0</span><span>,</span> nums<span>.</span>length <span>-</span> <span>1</span><span>)</span><span>;</span>
+        <span>return</span> nums<span>;</span>
+    <span>}</span>
+
+    <span>void</span> <span>mergeSort</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>,</span> <span>int</span> l<span>,</span> <span>int</span> r<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>l <span>>=</span> r<span>)</span> <span>return</span><span>;</span>
+        <span>int</span> mid <span>=</span> <span>(</span>l <span>+</span> r<span>)</span> <span>/</span> <span>2</span><span>;</span>
+        <span>//分</span>
+        <span>mergeSort</span><span>(</span>nums<span>,</span> l<span>,</span> mid<span>)</span><span>;</span>
+        <span>mergeSort</span><span>(</span>nums<span>,</span> mid <span>+</span> <span>1</span><span>,</span> r<span>)</span><span>;</span>
+        
+        <span>//治(归并)</span>
+        <span>int</span> i <span>=</span> l<span>,</span> j <span>=</span> mid <span>+</span> <span>1</span><span>;</span>
+        <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+        <span>while</span><span>(</span>i <span>&lt;=</span> mid <span>&amp;&amp;</span> j <span>&lt;=</span> r<span>)</span> <span>{</span>
+            <span>if</span><span>(</span>nums<span>[</span>i<span>]</span> <span>&lt;=</span> nums<span>[</span>j<span>]</span><span>)</span> <span>{</span>
+                tem<span>[</span>index<span>++</span><span>]</span> <span>=</span> nums<span>[</span>i<span>++</span><span>]</span><span>;</span>
+            <span>}</span><span>else</span> <span>{</span>
+                tem<span>[</span>index<span>++</span><span>]</span> <span>=</span> nums<span>[</span>j<span>++</span><span>]</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>while</span><span>(</span>i <span>&lt;=</span> mid<span>)</span> tem<span>[</span>index<span>++</span><span>]</span> <span>=</span> nums<span>[</span>i<span>++</span><span>]</span><span>;</span>
+        <span>while</span><span>(</span>j <span>&lt;=</span> r<span>)</span> tem<span>[</span>index<span>++</span><span>]</span> <span>=</span> nums<span>[</span>j<span>++</span><span>]</span><span>;</span>
+
+        <span>//把归并完成的这部分赋值回给原始数组</span>
+        <span>for</span><span>(</span><span>int</span> k <span>=</span> <span>0</span><span>;</span> k <span>&lt;</span> r <span>-</span> l <span>+</span> <span>1</span><span>;</span> k<span>++</span><span>)</span> <span>{</span>
+            nums<span>[</span>k <span>+</span> l<span>]</span> <span>=</span> tem<span>[</span>k<span>]</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6-快速排序" tabindex="-1"> 6. 快速排序</h2>
+<p>通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，
+然后再分别对这两部分记录继续进行排序，以达到整个序列有序。
+数组形式： [小数] [基准元素] [大数]，在区间中随机挑选一个元素作为基准，小于基准元素的放基准之前，大于基准的放基准之后。
+然后再对小数和大数区间做快排</p>
+<p>整个流程就是找到基准点应该放置的位置。</p>
+<p><strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172923616.png" alt="image-20220622172923616" loading="lazy"></p>
+<p><strong>Java代码</strong>：</p>
+<div><pre><code>    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span> <span>0</span><span>,</span> nums<span>.</span>length <span>-</span> <span>1</span><span>)</span><span>;</span>
+        <span>return</span> nums<span>;</span>
+
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>quickSort</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>,</span> <span>int</span> left<span>,</span> <span>int</span> right<span>)</span> <span>{</span>
+        <span>//顺序选取基准值</span>
+        <span>if</span><span>(</span>left <span>>=</span> right<span>)</span> <span>return</span><span>;</span>
+        <span>int</span> first <span>=</span> left<span>,</span> key <span>=</span> nums<span>[</span>first<span>]</span><span>,</span> end <span>=</span> right<span>;</span>
+        <span>while</span> <span>(</span>first <span>&lt;</span> end<span>)</span> <span>{</span>
+            <span>//先看右边的， 比基准大就不管</span>
+            <span>while</span> <span>(</span>first <span>&lt;</span> end <span>&amp;&amp;</span> nums<span>[</span>end<span>]</span> <span>>=</span> key<span>)</span> <span>{</span>
+                end<span>--</span><span>;</span>
+            <span>}</span>
+            <span>//右边end指向的这个值小于分界值， 交换.</span>
+            nums<span>[</span>first<span>]</span> <span>=</span> nums<span>[</span>end<span>]</span><span>;</span>
+
+            <span>//然后走左边</span>
+            <span>while</span> <span>(</span>first <span>&lt;</span> end <span>&amp;&amp;</span> nums<span>[</span>first<span>]</span> <span>&lt;=</span> key<span>)</span> <span>{</span>
+                <span>++</span>first<span>;</span>
+            <span>}</span>
+            <span>//如果first指针指向的值大于分界值key, 交换</span>
+            nums<span>[</span>end<span>]</span> <span>=</span> nums<span>[</span>first<span>]</span><span>;</span>
+        <span>}</span>
+        <span>// 左右指针相同， 基准值该在这个位置，使得基准值左右两边是比他小和比他大的数</span>
+        nums<span>[</span>first<span>]</span> <span>=</span> key<span>;</span>
+        <span>//递归， 对左右两边再进行上面操作</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span> left<span>,</span> first <span>-</span> <span>1</span><span>)</span><span>;</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span>first <span>+</span> <span>1</span><span>,</span> right<span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>如果遇到数组是 9 8 7 6 5 4 3 2 1， 再从左往右顺序选取基准值的话，每次都得移动 n 个， 算法时间复杂度退回到O(n2)。
+所以最好是随机选取基准，或者提前打乱数组，数组越乱，快排越快
+<strong>随机选取基准值，快排代码</strong>：</p>
+<div><pre><code>    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span> <span>0</span><span>,</span> nums<span>.</span>length <span>-</span> <span>1</span><span>)</span><span>;</span>
+        <span>return</span> nums<span>;</span>
+
+    <span>}</span>
+    <span>public</span> <span>void</span> <span>quickSort</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>,</span> <span>int</span> left<span>,</span> <span>int</span> right<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>left <span>>=</span> right<span>)</span> <span>return</span><span>;</span>
+        <span>//随机选取基准值</span>
+        <span>int</span> index <span>=</span> left <span>+</span> <span>(</span><span>int</span><span>)</span><span>(</span><span>Math</span><span>.</span><span>random</span><span>(</span><span>)</span> <span>*</span> <span>(</span>right <span>-</span> left <span>+</span> <span>1</span><span>)</span><span>)</span><span>;</span>
+        <span>int</span> key <span>=</span> nums<span>[</span>index<span>]</span><span>;</span>
+        <span>int</span> first <span>=</span> left<span>,</span> end <span>=</span> right<span>;</span>
+        nums<span>[</span>index<span>]</span> <span>=</span> nums<span>[</span>first<span>]</span><span>;</span>
+        nums<span>[</span>first<span>]</span> <span>=</span> key<span>;</span>
+        
+        <span>while</span> <span>(</span>first <span>&lt;</span> end<span>)</span> <span>{</span>
+            <span>//先看右边的， 比基准大就不管</span>
+            <span>while</span> <span>(</span>first <span>&lt;</span> end <span>&amp;&amp;</span> nums<span>[</span>end<span>]</span> <span>>=</span> key<span>)</span> <span>{</span>
+                end<span>--</span><span>;</span>
+            <span>}</span>
+            <span>//右边end指向的这个值小于分界值， 交换.</span>
+            nums<span>[</span>first<span>]</span> <span>=</span> nums<span>[</span>end<span>]</span><span>;</span>
+
+            <span>//然后走左边</span>
+            <span>while</span> <span>(</span>first <span>&lt;</span> end <span>&amp;&amp;</span> nums<span>[</span>first<span>]</span> <span>&lt;=</span> key<span>)</span> <span>{</span>
+                <span>++</span>first<span>;</span>
+            <span>}</span>
+            <span>//如果first指针指向的值大于分界值key, 交换</span>
+            nums<span>[</span>end<span>]</span> <span>=</span> nums<span>[</span>first<span>]</span><span>;</span>
+        <span>}</span>
+        <span>// 左右指针相同， 基准值该在这个位置，使得基准值左右两边是比他小和比他大的数</span>
+        nums<span>[</span>first<span>]</span> <span>=</span> key<span>;</span>
+
+        <span>//递归， 对左右两边再进行上面操作</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span> left<span>,</span> first <span>-</span> <span>1</span><span>)</span><span>;</span>
+        <span>quickSort</span><span>(</span>nums<span>,</span>first <span>+</span> <span>1</span><span>,</span> right<span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_7-堆排序" tabindex="-1"> 7. 堆排序</h2>
+<p>利用小顶堆。</p>
+<blockquote>
+<p>待补充</p>
+</blockquote>
+<h2 id="_8-计数排序" tabindex="-1"> 8. 计数排序</h2>
+<p>记录索引位置数的个数，利用索引本身就有序进行排序。
+有一个缺点就是得事先知道数据得范围，范围多大就得开多大数组。
+<strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/543d76445825431bb4e3fad91c11b673.gif" alt="图片" loading="lazy">
+<strong>Java代码</strong>：</p>
+<div><pre><code>    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        <span>int</span><span>[</span><span>]</span> dic <span>=</span> <span>new</span> <span>int</span><span>[</span><span>100001</span><span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> nums<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            dic<span>[</span>nums<span>[</span>i<span>]</span> <span>+</span> <span>50000</span><span>]</span><span>++</span><span>;</span>
+        <span>}</span>
+        <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> dic<span>.</span>length<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>for</span><span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j <span>&lt;</span> dic<span>[</span>i<span>]</span><span>;</span> j<span>++</span><span>)</span> <span>{</span>
+                nums<span>[</span>index<span>++</span><span>]</span> <span>=</span> i <span>-</span> <span>50000</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> nums<span>;</span>
+    <span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_9-桶排序" tabindex="-1"> 9. 桶排序</h2>
+<p>桶排序是计数排序的升级版， 计数排序是一对一的映射，而桶排序是一对多的映射，把数据分到不同的桶里的元素用其他排序方式排序。
+<strong>动图演示</strong>：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220622172938902.png" alt="image-20220622172938902" loading="lazy">
+<strong>Java代码</strong>：</p>
+<div><pre><code>    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        <span>int</span> n <span>=</span> nums<span>.</span>length<span>;</span>
+        <span>int</span> max <span>=</span> nums<span>[</span><span>0</span><span>]</span><span>,</span> min <span>=</span> nums<span>[</span><span>0</span><span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>if</span><span>(</span>nums<span>[</span>i<span>]</span> <span>></span> max<span>)</span> max <span>=</span> nums<span>[</span>i<span>]</span><span>;</span>
+            <span>if</span><span>(</span>nums<span>[</span>i<span>]</span> <span>&lt;</span> min<span>)</span> min <span>=</span> nums<span>[</span>i<span>]</span><span>;</span>
+        <span>}</span>
+        <span>int</span> diff <span>=</span> max <span>-</span> min<span>;</span>
+        <span>//设n个桶</span>
+        <span>List</span><span><span>&lt;</span><span>Integer</span><span>></span></span><span>[</span><span>]</span> buket <span>=</span> <span>new</span> <span>List</span><span>[</span>n<span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            buket<span>[</span>i<span>]</span> <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>//每个桶的范围，防止为0</span>
+        <span>int</span> section <span>=</span> diff <span>/</span> n <span>+</span> <span>1</span><span>;</span> 
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>int</span> id <span>=</span> <span>(</span>nums<span>[</span>i<span>]</span> <span>-</span> min<span>)</span> <span>/</span> section <span>-</span> <span>1</span><span>;</span> <span>// -1防止等于 n</span>
+            <span>if</span><span>(</span>id <span>&lt;</span> <span>0</span><span>)</span> id <span>=</span> <span>0</span><span>;</span>
+            buket<span>[</span>id<span>]</span><span>.</span><span>add</span><span>(</span>nums<span>[</span>i<span>]</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>//桶内排序</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>Collections</span><span>.</span><span>sort</span><span>(</span>buket<span>[</span>i<span>]</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>//返回排序数组</span>
+        <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> n<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>for</span><span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j <span>&lt;</span> buket<span>[</span>i<span>]</span><span>.</span><span>size</span><span>(</span><span>)</span><span>;</span> j<span>++</span><span>)</span> <span>{</span>
+                nums<span>[</span>index<span>++</span><span>]</span> <span>=</span> buket<span>[</span>i<span>]</span><span>.</span><span>get</span><span>(</span>j<span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> nums<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10-基数排序" tabindex="-1"> 10. 基数排序</h2>
+<p>基数排序是桶排序的扩展， 思想是把整数按每位不同放入不同的桶里，按每位进行比较。
+比如 32，34，16， 5 排序， 先按个位数排序 32，34，5，16， 再按十位排序5，16，32，34就完事了
+【因为之前按个位排序时把 32放在了34前面，所以再进行十位排序时，按顺序来32自然在34前面】
+<strong>动图演示</strong>：
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/caddb1ae0bfa4189bf084bf520aad160.gif" alt="图片" loading="lazy">
+<strong>Java代码</strong>：</p>
+<div><pre><code>    <span>public</span> <span>int</span><span>[</span><span>]</span> <span>sortArray</span><span>(</span><span>int</span><span>[</span><span>]</span> nums<span>)</span> <span>{</span>
+        <span>List</span><span><span>&lt;</span><span>Integer</span><span>></span></span><span>[</span><span>]</span> buket <span>=</span> <span>new</span> <span>List</span><span>[</span><span>10</span><span>]</span><span>;</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> <span>10</span><span>;</span> i<span>++</span><span>)</span> buket<span>[</span>i<span>]</span> <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>// 把负数全部转化成正数处理</span>
+        <span>int</span> max <span>=</span> nums<span>[</span><span>0</span><span>]</span> <span>+</span> <span>50000</span><span>;</span>
+        <span>//得到最大的数</span>
+        <span>for</span><span>(</span><span>int</span> t <span>:</span> nums<span>)</span> <span>if</span><span>(</span>t <span>+</span> <span>50000</span> <span>></span> max<span>)</span> max <span>=</span> t <span>+</span> <span>50000</span><span>;</span>
+        
+        <span>//从个位到最高位</span>
+        <span>int</span> len <span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span>max<span>)</span><span>.</span><span>length</span><span>(</span><span>)</span><span>;</span> <span>//最高位位数</span>
+        <span>for</span><span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> len<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            <span>//入桶</span>
+            <span>for</span><span>(</span><span>int</span> t <span>:</span> nums<span>)</span> <span>{</span>
+                buket<span>[</span><span>(</span><span>(</span>t <span>+</span> <span>50000</span><span>)</span> <span>/</span> <span>(</span><span>int</span><span>)</span><span>Math</span><span>.</span><span>pow</span><span>(</span><span>10</span><span>,</span> i<span>)</span><span>)</span> <span>%</span> <span>10</span><span>]</span><span>.</span><span>add</span><span>(</span>t <span>+</span> <span>50000</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>//出桶</span>
+            <span>int</span> index <span>=</span> <span>0</span><span>;</span>
+            <span>for</span><span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j <span>&lt;</span> <span>10</span><span>;</span> j<span>++</span><span>)</span> <span>{</span>
+                <span>for</span><span>(</span><span>int</span> k <span>=</span> <span>0</span><span>;</span> k <span>&lt;</span> buket<span>[</span>j<span>]</span><span>.</span><span>size</span><span>(</span><span>)</span><span>;</span> k<span>++</span><span>)</span> <span>{</span>
+                    nums<span>[</span>index<span>++</span><span>]</span> <span>=</span> buket<span>[</span>j<span>]</span><span>.</span><span>get</span><span>(</span>k<span>)</span> <span>-</span> <span>50000</span><span>;</span>
+                <span>}</span>
+                buket<span>[</span>j<span>]</span><span>.</span><span>clear</span><span>(</span><span>)</span><span>;</span> <span>//清空桶</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> nums<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="对链表进行排序" tabindex="-1"> 对链表进行排序</h2>
+<p>如果你掌握了 插入排序、快速排序、归并排序的精髓，那么试试这三种方法对链表进行排序吧
+狂刷三道力扣中等题：
+<a href="https://leetcode.cn/problems/insertion-sort-list/" target="_blank" rel="noopener noreferrer">力扣 147. 对链表进行插入排序</a>
+<a href="https://leetcode.cn/problems/sort-list/" target="_blank" rel="noopener noreferrer">力扣 148. 排序链表</a>
+<a href="https://leetcode.cn/problems/7WHec2/" target="_blank" rel="noopener noreferrer">力扣 剑指 Offer II 077. 链表排序</a></p>
+<h2 id="_1-插入排序o-n2" tabindex="-1"> 1. 插入排序O(n2)</h2>
+<p>插入排序： 【有序】【无序】 无序部分找最小值放有序后头</p>
+<p>直接上Java代码：</p>
+<div><pre><code>    <span>public</span> <span>ListNode</span> <span>insertionSortList</span><span>(</span><span>ListNode</span> head<span>)</span> <span>{</span>
+        <span>//由于链表只能从前往后遍历，所以只能从前往后遍历找插入位置</span>
+        <span>//没有元素或者只有一个元素直接返回</span>
+        <span>if</span><span>(</span>head <span>==</span> <span>null</span> <span>||</span> head<span>.</span>next <span>==</span> <span>null</span><span>)</span> <span>return</span> head<span>;</span>
+        <span>ListNode</span> dump <span>=</span> <span>new</span> <span>ListNode</span><span>(</span><span>)</span><span>;</span>
+        dump<span>.</span>next <span>=</span> head<span>;</span>
+        <span>ListNode</span> lastNode <span>=</span> head<span>;</span><span>//有序节点的最后一个节点</span>
+        <span>ListNode</span> cur <span>=</span> head<span>.</span>next<span>;</span>
+        <span>while</span><span>(</span>cur <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            <span>if</span><span>(</span>cur<span>.</span>val <span>>=</span> lastNode<span>.</span>val<span>)</span> <span>{</span>
+                <span>//直接往后走</span>
+                lastNode <span>=</span> lastNode<span>.</span>next<span>;</span>
+            <span>}</span><span>else</span> <span>{</span>
+                <span>ListNode</span> pre <span>=</span> dump<span>;</span>
+                <span>while</span><span>(</span>pre<span>.</span>next<span>.</span>val <span>&lt;</span> cur<span>.</span>val<span>)</span> <span>{</span>
+                   pre <span>=</span> pre<span>.</span>next<span>;</span>
+                <span>}</span>
+                <span>//lastNode 不变，但是lastNode下一个数被插入前面了，</span>
+                lastNode<span>.</span>next <span>=</span> cur<span>.</span>next<span>;</span>
+                cur<span>.</span>next <span>=</span> pre<span>.</span>next<span>;</span>
+                pre<span>.</span>next <span>=</span> cur<span>;</span>
+            <span>}</span>
+            cur <span>=</span> lastNode<span>.</span>next<span>;</span>
+        <span>}</span>
+        lastNode<span>.</span>next <span>=</span> <span>null</span><span>;</span>
+        <span>return</span> dump<span>.</span>next<span>;</span>
+    <span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2-快速排序o-n-log-n" tabindex="-1"> 2.快速排序O(n log n)</h2>
+<p>快速排序： 【小数】【基准元素】【大数】，所有小数移动到基准元素左边，大数移动到基准元素右边</p>
+<p>直接上Java代码： 对于<a href="https://leetcode.cn/problems/sort-list/" target="_blank" rel="noopener noreferrer">力扣 148. 排序链表</a>，快排超时了。</p>
+<div><pre><code>    <span>public</span> <span>ListNode</span> <span>sortList</span><span>(</span><span>ListNode</span> head<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>head <span>==</span> <span>null</span> <span>||</span> head<span>.</span>next <span>==</span> <span>null</span><span>)</span> <span>return</span> head<span>;</span>
+        <span>ListNode</span> dump <span>=</span> <span>new</span> <span>ListNode</span><span>(</span><span>)</span><span>;</span>
+        dump<span>.</span>next <span>=</span> head<span>;</span>
+        <span>return</span> <span>quickSort</span><span>(</span>dump<span>,</span> <span>null</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>ListNode</span> <span>quickSort</span><span>(</span><span>ListNode</span> headPre<span>,</span> <span>ListNode</span> end<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>headPre <span>==</span> end <span>||</span> headPre<span>.</span>next <span>==</span> end <span>||</span> headPre<span>.</span>next<span>.</span>next <span>==</span> end<span>)</span> <span>return</span> headPre<span>;</span>
+        <span>//将小于基准值的节点存在这个临时链表中</span>
+        <span>ListNode</span> temDump <span>=</span> <span>new</span> <span>ListNode</span><span>(</span><span>)</span><span>;</span>
+        <span>ListNode</span> tp <span>=</span> temDump<span>;</span>
+        <span>//key 为基准节点，基准节点左边是比他小的，右边是比他大的</span>
+        <span>ListNode</span> key <span>=</span> headPre<span>.</span>next<span>,</span> lp <span>=</span> headPre<span>;</span>
+        <span>while</span><span>(</span>lp<span>.</span>next <span>!=</span> end<span>)</span> <span>{</span>
+            <span>if</span><span>(</span>lp<span>.</span>next<span>.</span>val <span>&lt;</span> key<span>.</span>val<span>)</span> <span>{</span>
+            <span>//节点值小于基准节点，就把这个节点放到左边</span>
+                tp<span>.</span>next <span>=</span> lp<span>.</span>next<span>;</span>
+                tp <span>=</span> tp<span>.</span>next<span>;</span>
+                lp<span>.</span>next <span>=</span> lp<span>.</span>next<span>.</span>next<span>;</span>
+            <span>}</span><span>else</span> <span>{</span>
+                lp <span>=</span> lp<span>.</span>next<span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>//合并大小两个链表</span>
+        tp<span>.</span>next <span>=</span> key<span>;</span>
+        <span>//整个链表用headPre连回来</span>
+        headPre<span>.</span>next <span>=</span> temDump<span>.</span>next<span>;</span> <span>// 链表插回原链表（如果不做这一步，处理右半部分的时候就断了）</span>
+        <span>quickSort</span><span>(</span>headPre<span>,</span> key<span>)</span><span>;</span>
+        <span>quickSort</span><span>(</span>key<span>,</span> end<span>)</span><span>;</span>
+
+        <span>return</span> headPre<span>.</span>next<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2-归并排序o-n-log-n" tabindex="-1"> 2.归并排序O(n log n)</h2>
+<p>链表排序最好就是用归并排序， 链表的归并排序不需要额外空间
+归并，分治</p>
+<p>归并排序需要不断的把链表分为两段，分为两段的方法可以用快慢指针，快指针溢出走两步，慢指针一次走一步，快指针走到头慢指针指向中间节点。</p>
+<p>直接上Java代码：</p>
+<div><pre><code><span>class</span> <span>Solution</span> <span>{</span>
+    <span>public</span> <span>ListNode</span> <span>sortList</span><span>(</span><span>ListNode</span> head<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>head <span>==</span> <span>null</span> <span>||</span> head<span>.</span>next <span>==</span> <span>null</span><span>)</span> <span>return</span> head<span>;</span>
+        <span>return</span> <span>mergeSort</span><span>(</span>head<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>ListNode</span> <span>mergeSort</span><span>(</span><span>ListNode</span> head<span>)</span> <span>{</span>
+        <span>if</span><span>(</span>head<span>.</span>next <span>==</span> <span>null</span><span>)</span> <span>return</span> head<span>;</span>
+        <span>// 分</span>
+        <span>//找中间节点</span>
+        <span>ListNode</span> fast <span>=</span> head<span>,</span> slow <span>=</span> head<span>,</span> pre <span>=</span> <span>null</span><span>;</span><span>//pre 是slow节点的前一个节点</span>
+        <span>while</span><span>(</span>fast <span>!=</span> <span>null</span> <span>&amp;&amp;</span> fast<span>.</span>next <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            fast <span>=</span> fast<span>.</span>next<span>.</span>next<span>;</span>
+            pre <span>=</span> slow<span>;</span>
+            slow <span>=</span> slow<span>.</span>next<span>;</span>
+        <span>}</span>
+        pre<span>.</span>next <span>=</span> <span>null</span><span>;</span> <span>//断链， 现在head只有一半链表, slow 是另一半链表</span>
+        <span>ListNode</span> left <span>=</span> <span>mergeSort</span><span>(</span>head<span>)</span><span>;</span> <span>// 继续把head这一半进行分半</span>
+        <span>ListNode</span> right <span>=</span> <span>mergeSort</span><span>(</span>slow<span>)</span><span>;</span> <span>//继续把slow这一半进行分半</span>
+
+        <span>//治</span>
+        <span>//left、 right都是从最小（一个节点）回溯到最长（一半）</span>
+        <span>//合并left、right</span>
+        <span>ListNode</span> dump <span>=</span> <span>new</span> <span>ListNode</span><span>(</span><span>)</span><span>;</span>
+        <span>ListNode</span> cur <span>=</span> dump<span>;</span>
+        <span>while</span><span>(</span>left <span>!=</span> <span>null</span> <span>&amp;&amp;</span> right <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            <span>if</span><span>(</span>left<span>.</span>val <span>&lt;=</span> right<span>.</span>val<span>)</span> <span>{</span>
+                cur<span>.</span>next <span>=</span> left<span>;</span>
+                left <span>=</span> left<span>.</span>next<span>;</span>
+                cur <span>=</span> cur<span>.</span>next<span>;</span>
+            <span>}</span><span>else</span> <span>{</span>
+                cur<span>.</span>next <span>=</span> right<span>;</span>
+                right <span>=</span> right<span>.</span>next<span>;</span>
+                cur <span>=</span> cur<span>.</span>next<span>;</span>
+            <span>}</span>
+        <span>}</span>
+        <span>if</span><span>(</span>left <span>!=</span> <span>null</span><span>)</span> cur<span>.</span>next <span>=</span> left<span>;</span>
+        <span>if</span><span>(</span>right <span>!=</span> <span>null</span><span>)</span> cur<span>.</span>next <span>=</span> right<span>;</span>
+        <span>return</span> dump<span>.</span>next<span>;</span>
+    <span>}</span>
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="algorithm" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-07-03T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
+  <entry>
+    <title type="html">SpringBoot中Rest的使用和请求参数注解</title>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E4%B8%ADRest%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E4%B8%ADRest%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3.html"/>
+    <updated>2022-06-22T10:40:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot中rest的使用和请求参数注解" tabindex="-1"> SpringBoot中Rest的使用和请求参数注解</h1>
+<h2 id="rest的使用和原理" tabindex="-1"> Rest的使用和原理</h2>
+<p>Rest风格支持（使用HTTP请求方式动词来表示对资源的操作）
+• 以前：/getUser 获取用户 /deleteUser 删除用户 /editUser 修改用户 /saveUser 保存用户
+• 现在： /user GET-获取用户 DELETE-删除用户 PUT-修改用户 POST-保存用户。
+看下面的一个例子，这是一个表单：</p>
+<div><pre><code><span><span>&lt;!</span><span>DOCTYPE</span> <span>html</span><span>></span></span>
+<span><span><span>&lt;</span>html</span> <span>lang</span><span><span>=</span><span>"</span>en<span>"</span></span><span>></span></span>
+<span><span><span>&lt;</span>head</span><span>></span></span>
+    <span><span><span>&lt;</span>meta</span> <span>charset</span><span><span>=</span><span>"</span>UTF-8<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>title</span><span>></span></span>hah<span><span><span>&lt;/</span>title</span><span>></span></span>
+<span><span><span>&lt;/</span>head</span><span>></span></span>
+<span><span><span>&lt;</span>body</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>get<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>get<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>post<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;/</span>body</span><span>></span></span>
+<span><span><span>&lt;/</span>html</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>处理上述表单提交的controller。但是我们以put方式和delete方式提交表单时，发现返回的都是GET-张三，不支持put和delete请求。</p>
+<div><pre><code><span>@RestController</span>
+<span>public</span> <span>class</span> <span>UserController</span> <span>{</span>
+
+    <span>@RequestMapping</span><span>(</span>value <span>=</span> <span>"/user"</span><span>,</span>method <span>=</span> <span>RequestMethod</span><span>.</span>GET<span>)</span>
+    <span>public</span> <span>String</span> <span>getUser</span><span>(</span><span>)</span><span>{</span>
+        <span>return</span> <span>"GET-张三"</span><span>;</span>
+    <span>}</span>
+
+    <span>@RequestMapping</span><span>(</span>value <span>=</span> <span>"/user"</span><span>,</span>method <span>=</span> <span>RequestMethod</span><span>.</span>POST<span>)</span>
+    <span>public</span> <span>String</span> <span>saveUser</span><span>(</span><span>)</span><span>{</span>
+        <span>return</span> <span>"POST-张三"</span><span>;</span>
+    <span>}</span>
+
+
+    <span>@RequestMapping</span><span>(</span>value <span>=</span> <span>"/user"</span><span>,</span>method <span>=</span> <span>RequestMethod</span><span>.</span>PUT<span>)</span>
+    <span>public</span> <span>String</span> <span>putUser</span><span>(</span><span>)</span><span>{</span>
+        <span>return</span> <span>"PUT-张三"</span><span>;</span>
+    <span>}</span>
+
+    <span>@RequestMapping</span><span>(</span>value <span>=</span> <span>"/user"</span><span>,</span>method <span>=</span> <span>RequestMethod</span><span>.</span>DELETE<span>)</span>
+    <span>public</span> <span>String</span> <span>deleteUser</span><span>(</span><span>)</span><span>{</span>
+        <span>return</span> <span>"DELETE-张三"</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>在<strong>WebMvcAutoConfiguration</strong>中<strong>hiddenHttpMethodFilter</strong>方法，返回一个<strong>filter</strong>-&gt;<strong>OrderedHiddenHttpMethodFilter</strong>。<strong>OrderedHiddenHttpMethodFilter</strong>继承自<strong>HiddenHttpMethodFilter</strong>。@ConditionalOnMissingBean({HiddenHttpMethodFilter.class})需要之前<strong>HiddenHttpMethodFilter</strong>没有被注入，并且 @ConditionalOnProperty(prefix = &quot;spring.mvc.hiddenmethod.filter&quot;, name = {&quot;enabled&quot;})要求spring.mvc.hiddenmethod.filter.enabled=true.</p>
+<div><pre><code><span>@Bean</span>
+    <span>@ConditionalOnMissingBean</span><span>(</span><span>{</span><span>HiddenHttpMethodFilter</span><span>.</span><span>class</span><span>}</span><span>)</span>
+    <span>@ConditionalOnProperty</span><span>(</span>
+        prefix <span>=</span> <span>"spring.mvc.hiddenmethod.filter"</span><span>,</span>
+        name <span>=</span> <span>{</span><span>"enabled"</span><span>}</span>
+    <span>)</span>
+    <span>public</span> <span>OrderedHiddenHttpMethodFilter</span> <span>hiddenHttpMethodFilter</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>OrderedHiddenHttpMethodFilter</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>public</span> <span>class</span> <span>OrderedHiddenHttpMethodFilter</span> <span>extends</span> <span>HiddenHttpMethodFilter</span> <span>implements</span> <span>OrderedFilter</span> <span>{</span>
+
+   <span>/**
+    * The default order is high to ensure the filter is applied before Spring Security.
+    */</span>
+   <span>public</span> <span>static</span> <span>final</span> <span>int</span> DEFAULT_ORDER <span>=</span> REQUEST_WRAPPER_FILTER_MAX_ORDER <span>-</span> <span>10000</span><span>;</span>
+
+   <span>private</span> <span>int</span> order <span>=</span> DEFAULT_ORDER<span>;</span>
+
+   <span>@Override</span>
+   <span>public</span> <span>int</span> <span>getOrder</span><span>(</span><span>)</span> <span>{</span>
+      <span>return</span> <span>this</span><span>.</span>order<span>;</span>
+   <span>}</span>
+   <span>public</span> <span>void</span> <span>setOrder</span><span>(</span><span>int</span> order<span>)</span> <span>{</span>
+      <span>this</span><span>.</span>order <span>=</span> order<span>;</span>
+   <span>}</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>HiddenHttpMethodFilter</strong>中有个<strong>DEFAULT_METHOD_PARAM</strong>字段&quot;<strong>_method</strong>&quot;。所以我们在提交表单时也要提交一个&quot;<strong>_method</strong>&quot;参数。并且spring.mvc.hiddenmethod.filter.enabled=true.</p>
+<div><pre><code><span>public</span> <span>class</span> <span>HiddenHttpMethodFilter</span> <span>extends</span> <span>OncePerRequestFilter</span> <span>{</span>
+
+   <span>private</span> <span>static</span> <span>final</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> ALLOWED_METHODS <span>=</span>
+         <span>Collections</span><span>.</span><span>unmodifiableList</span><span>(</span><span>Arrays</span><span>.</span><span>asList</span><span>(</span><span>HttpMethod</span><span>.</span>PUT<span>.</span><span>name</span><span>(</span><span>)</span><span>,</span>
+               <span>HttpMethod</span><span>.</span>DELETE<span>.</span><span>name</span><span>(</span><span>)</span><span>,</span> <span>HttpMethod</span><span>.</span>PATCH<span>.</span><span>name</span><span>(</span><span>)</span><span>)</span><span>)</span><span>;</span>
+
+   <span>public</span> <span>static</span> <span>final</span> <span>String</span> DEFAULT_METHOD_PARAM <span>=</span> <span>"_method"</span><span>;</span>
+
+   <span>private</span> <span>String</span> methodParam <span>=</span> DEFAULT_METHOD_PARAM<span>;</span>
+   <span>public</span> <span>void</span> <span>setMethodParam</span><span>(</span><span>String</span> methodParam<span>)</span> <span>{</span>
+      <span>Assert</span><span>.</span><span>hasText</span><span>(</span>methodParam<span>,</span> <span>"'methodParam' must not be empty"</span><span>)</span><span>;</span>
+      <span>this</span><span>.</span>methodParam <span>=</span> methodParam<span>;</span>
+   <span>}</span>
+
+   <span>@Override</span>
+   <span>protected</span> <span>void</span> <span>doFilterInternal</span><span>(</span><span>HttpServletRequest</span> request<span>,</span> <span>HttpServletResponse</span> response<span>,</span> <span>FilterChain</span> filterChain<span>)</span>
+         <span>throws</span> <span>ServletException</span><span>,</span> <span>IOException</span> <span>{</span>
+      <span>HttpServletRequest</span> requestToUse <span>=</span> request<span>;</span>
+      <span>if</span> <span>(</span><span>"POST"</span><span>.</span><span>equals</span><span>(</span>request<span>.</span><span>getMethod</span><span>(</span><span>)</span><span>)</span> <span>&amp;&amp;</span> request<span>.</span><span>getAttribute</span><span>(</span><span>WebUtils</span><span>.</span>ERROR_EXCEPTION_ATTRIBUTE<span>)</span> <span>==</span> <span>null</span><span>)</span> <span>{</span>
+         <span>String</span> paramValue <span>=</span> request<span>.</span><span>getParameter</span><span>(</span><span>this</span><span>.</span>methodParam<span>)</span><span>;</span>
+         <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>hasLength</span><span>(</span>paramValue<span>)</span><span>)</span> <span>{</span>
+            <span>String</span> method <span>=</span> paramValue<span>.</span><span>toUpperCase</span><span>(</span><span>Locale</span><span>.</span>ENGLISH<span>)</span><span>;</span>
+            <span>if</span> <span>(</span>ALLOWED_METHODS<span>.</span><span>contains</span><span>(</span>method<span>)</span><span>)</span> <span>{</span>
+               requestToUse <span>=</span> <span>new</span> <span>HttpMethodRequestWrapper</span><span>(</span>request<span>,</span> method<span>)</span><span>;</span>
+            <span>}</span>
+         <span>}</span>
+      <span>}</span>
+      filterChain<span>.</span><span>doFilter</span><span>(</span>requestToUse<span>,</span> response<span>)</span><span>;</span>
+   <span>}</span>
+
+   <span>private</span> <span>static</span> <span>class</span> <span>HttpMethodRequestWrapper</span> <span>extends</span> <span>HttpServletRequestWrapper</span> <span>{</span>
+
+      <span>private</span> <span>final</span> <span>String</span> method<span>;</span>
+
+      <span>public</span> <span>HttpMethodRequestWrapper</span><span>(</span><span>HttpServletRequest</span> request<span>,</span> <span>String</span> method<span>)</span> <span>{</span>
+         <span>super</span><span>(</span>request<span>)</span><span>;</span>
+         <span>this</span><span>.</span>method <span>=</span> method<span>;</span>
+      <span>}</span>
+
+      <span>@Override</span>
+      <span>public</span> <span>String</span> <span>getMethod</span><span>(</span><span>)</span> <span>{</span>
+         <span>return</span> <span>this</span><span>.</span>method<span>;</span>
+      <span>}</span>
+   <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>因此修改表单如下：</p>
+<div><pre><code><span><span>&lt;!</span><span>DOCTYPE</span> <span>html</span><span>></span></span>
+<span><span><span>&lt;</span>html</span> <span>lang</span><span><span>=</span><span>"</span>en<span>"</span></span><span>></span></span>
+<span><span><span>&lt;</span>head</span><span>></span></span>
+    <span><span><span>&lt;</span>meta</span> <span>charset</span><span><span>=</span><span>"</span>UTF-8<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>title</span><span>></span></span>hah<span><span><span>&lt;/</span>title</span><span>></span></span>
+<span><span><span>&lt;/</span>head</span><span>></span></span>
+<span><span><span>&lt;</span>body</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>get<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>get<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>post<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_method<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_method<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+
+<span><span><span>&lt;/</span>body</span><span>></span></span>
+<span><span><span>&lt;/</span>html</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>配置yaml:</p>
+<div><pre><code><span>spring</span><span>:</span>
+  <span>mvc</span><span>:</span>
+    <span>hiddenmethod</span><span>:</span>
+      <span>filter</span><span>:</span>
+        <span>enabled</span><span>:</span> <span>true</span> <span>#开启页面表单的Rest功能</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>修改表单，配置yaml之后，再点击delete 和put就可以发送delete 和put请求了。</strong></p>
+<h3 id="rest原理" tabindex="-1"> Rest原理</h3>
+<p>表单提交要使用REST的时候：</p>
+<ul>
+<li>表单提交会带上**_method=PUT**</li>
+<li><strong>请求过来被</strong>HiddenHttpMethodFilter拦截</li>
+<li>1.如果请求正常，并且是POST（if (&quot;POST&quot;.equals(request.getMethod()) &amp;&amp; request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == null) ）则获取**_method**的值</li>
+<li>
+<ul>
+<li>2.获取到**_method<strong>的值，如果是</strong>ALLOWED_METHODS<strong>里的方法（<strong>PUT</strong>.<strong>DELETE</strong>.<strong>PATCH</strong>）则将方法传给包装模式类</strong>requesWrapper**，requesWrapper只改变了请求方式。</li>
+</ul>
+</li>
+</ul>
+<p><strong>原生request（post），包装模式requesWrapper重写了getMethod方法，返回的是传入的值。</strong>
+<strong>过滤器链放行的时候用wrapper。以后的方法调用getMethod是调用requesWrapper的。</strong></p>
+<div><pre><code><span>@Override</span>
+<span>protected</span> <span>void</span> <span>doFilterInternal</span><span>(</span><span>HttpServletRequest</span> request<span>,</span> <span>HttpServletResponse</span> response<span>,</span> <span>FilterChain</span> filterChain<span>)</span>
+      <span>throws</span> <span>ServletException</span><span>,</span> <span>IOException</span> <span>{</span>
+
+   <span>HttpServletRequest</span> requestToUse <span>=</span> request<span>;</span>
+
+   <span>if</span> <span>(</span><span>"POST"</span><span>.</span><span>equals</span><span>(</span>request<span>.</span><span>getMethod</span><span>(</span><span>)</span><span>)</span> <span>&amp;&amp;</span> request<span>.</span><span>getAttribute</span><span>(</span><span>WebUtils</span><span>.</span>ERROR_EXCEPTION_ATTRIBUTE<span>)</span> <span>==</span> <span>null</span><span>)</span> <span>{</span>
+      <span>// paramValue拿到的是_method</span>
+       <span>String</span> paramValue <span>=</span> request<span>.</span><span>getParameter</span><span>(</span><span>this</span><span>.</span>methodParam<span>)</span><span>;</span>
+      <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>hasLength</span><span>(</span>paramValue<span>)</span><span>)</span> <span>{</span>
+         <span>String</span> method <span>=</span> paramValue<span>.</span><span>toUpperCase</span><span>(</span><span>Locale</span><span>.</span>ENGLISH<span>)</span><span>;</span>
+         <span>if</span> <span>(</span>ALLOWED_METHODS<span>.</span><span>contains</span><span>(</span>method<span>)</span><span>)</span> <span>{</span>
+            requestToUse <span>=</span> <span>new</span> <span>HttpMethodRequestWrapper</span><span>(</span>request<span>,</span> method<span>)</span><span>;</span>
+         <span>}</span>
+      <span>}</span>
+   <span>}</span>
+
+   filterChain<span>.</span><span>doFilter</span><span>(</span>requestToUse<span>,</span> response<span>)</span><span>;</span>
+<span>}</span>
+<span>private</span> <span>static</span> <span>final</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> ALLOWED_METHODS <span>=</span>
+      <span>Collections</span><span>.</span><span>unmodifiableList</span><span>(</span><span>Arrays</span><span>.</span><span>asList</span><span>(</span><span>HttpMethod</span><span>.</span>PUT<span>.</span><span>name</span><span>(</span><span>)</span><span>,</span>
+            <span>HttpMethod</span><span>.</span>DELETE<span>.</span><span>name</span><span>(</span><span>)</span><span>,</span> <span>HttpMethod</span><span>.</span>PATCH<span>.</span><span>name</span><span>(</span><span>)</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>requesWrapper:</strong></p>
+<div><pre><code><span>private</span> <span>static</span> <span>class</span> <span>HttpMethodRequestWrapper</span> <span>extends</span> <span>HttpServletRequestWrapper</span> <span>{</span>
+
+		<span>private</span> <span>final</span> <span>String</span> method<span>;</span>
+
+		<span>public</span> <span>HttpMethodRequestWrapper</span><span>(</span><span>HttpServletRequest</span> request<span>,</span> <span>String</span> method<span>)</span> <span>{</span>
+			<span>super</span><span>(</span>request<span>)</span><span>;</span>
+			<span>this</span><span>.</span>method <span>=</span> method<span>;</span>
+		<span>}</span>
+
+		<span>@Override</span>
+		<span>public</span> <span>String</span> <span>getMethod</span><span>(</span><span>)</span> <span>{</span>
+			<span>return</span> <span>this</span><span>.</span>method<span>;</span>
+		<span>}</span>
+	<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="将-method改成其他名字" tabindex="-1"> 将_method改成其他名字</h3>
+<p>将**_method<strong>改成了</strong>_m**,此时因为程序中无法获取**_m**，所以我们表单中点击<strong>delete</strong>依然是<strong>post</strong>,因此我们需要再更改表单即可。</p>
+<div><pre><code><span>//自定义filter</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>context<span>.</span>annotation<span>.</span></span><span>Bean</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>context<span>.</span>annotation<span>.</span></span><span>Configuration</span></span><span>;</span>
+<span>import</span> <span><span>org<span>.</span>springframework<span>.</span>web<span>.</span>filter<span>.</span></span><span>HiddenHttpMethodFilter</span></span><span>;</span>
+
+<span>@Configuration</span><span>(</span>proxyBeanMethods <span>=</span> <span>false</span><span>)</span>
+<span>public</span> <span>class</span> <span>RestConfig</span> <span>{</span>
+
+    <span>@Bean</span>
+    <span>public</span> <span>HiddenHttpMethodFilter</span> <span>hiddenHttpMethodFilter</span><span>(</span><span>)</span><span>{</span>
+        <span>HiddenHttpMethodFilter</span> methodFilter <span>=</span> <span>new</span> <span>HiddenHttpMethodFilter</span><span>(</span><span>)</span><span>;</span>
+        methodFilter<span>.</span><span>setMethodParam</span><span>(</span><span>"_m"</span><span>)</span><span>;</span>
+        <span>return</span> methodFilter<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>修改form表单，添加_m：</strong></p>
+<div><pre><code><span><span>&lt;!</span><span>DOCTYPE</span> <span>html</span><span>></span></span>
+<span><span><span>&lt;</span>html</span> <span>lang</span><span><span>=</span><span>"</span>en<span>"</span></span><span>></span></span>
+<span><span><span>&lt;</span>head</span><span>></span></span>
+    <span><span><span>&lt;</span>meta</span> <span>charset</span><span><span>=</span><span>"</span>UTF-8<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>title</span><span>></span></span>hah<span><span><span>&lt;/</span>title</span><span>></span></span>
+<span><span><span>&lt;/</span>head</span><span>></span></span>
+<span><span><span>&lt;</span>body</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>get<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>get<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>post<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_method<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_m<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>put<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+<span><span><span>&lt;</span>form</span> <span>action</span><span><span>=</span><span>"</span>/user<span>"</span></span> <span>method</span><span><span>=</span><span>"</span>post<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_method<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>name</span><span><span>=</span><span>"</span>_m<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>hidden<span>"</span></span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>input</span> <span>value</span><span><span>=</span><span>"</span>delete<span>"</span></span> <span>type</span><span><span>=</span><span>"</span>submit<span>"</span></span><span>></span></span>
+<span><span><span>&lt;/</span>form</span><span>></span></span>
+
+<span><span><span>&lt;/</span>body</span><span>></span></span>
+<span><span><span>&lt;/</span>html</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="rest使用客户端工具" tabindex="-1"> Rest使用客户端工具</h3>
+<ul>
+<li>**如PostMan直接发送Put、delete等方式请求，无需Filter。**表单只能用get,post请求。</li>
+</ul>
+<h2 id="请求处理-参数注解" tabindex="-1"> 请求处理----参数注解</h2>
+<p><strong>@PathVariable、@RequestHeader、@ModelAttribute、@RequestParam、@MatrixVariable、@CookieValue、@RequestBody</strong></p>
+<h4 id="参数注解作用" tabindex="-1"> 参数注解作用</h4>
+<h5 id="pathvariable" tabindex="-1"> <strong>@PathVariable</strong></h5>
+<p>作用：<code>@PathVariable</code>是spring3.0的一个新功能：接收请求路径中占位符的值，将URL中占位符参数<code>{xxx}</code>绑定到处理器类的方法形参中<code>@PathVariable(“xxx“)</code>，上如果有多个占位符，形参列表需要定义多个参数，不是很方便，可以直接定义一个map集合<code>@PathVariable Map&lt;String,String&gt; kv</code>，会自动映射多个参数；</p>
+<h5 id="requestparam" tabindex="-1"> @RequestParam</h5>
+<p>@RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上</p>
+<div><pre><code><span>@RequestParam</span><span>(</span>value<span>=</span>”参数名”<span>,</span>required<span>=</span>”<span>true</span><span>/</span><span>false</span>”<span>,</span>defaultValue<span>=</span>””<span>)</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><ul>
+<li><code>value</code>：请求中传入参数的名称，即前端传过来时定义的参数名。如果不设置value值，则前端定义的参数名必须和后端接口参数名相同</li>
+<li><code>required</code>：该参数是否为必传项。默认是true，表示请求中一定要传入对应的参数，否则会报404错误；如果设置为false，当请求中没有此参数，将会默认为null。而对于基本数据类型的变量，则必须有值，这时会抛出空指针异常。如果允许空值，则接口中变量需要使用包装类来声明。</li>
+<li><code>defaultValue</code>：参数的默认值，如果请求中没有同名的参数时，该变量默认为此值。</li>
+</ul>
+<h5 id="requestbody" tabindex="-1"> @RequestBody</h5>
+<p>作用：@RequestBody主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)</p>
+<ul>
+<li>GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交</li>
+<li>在后端的同一个接收方法里，@RequestBody与@RequestParam()可以同时使用，@RequestBody最多只能有一个，而@RequestParam()可以有多个</li>
+<li>如果参数时放在请求体application/json传入后台的话，那么后台要用@RequestBody才能接收到</li>
+<li>如果不是放在请求体中的话，那么后台接收前台传过来的参数时，要用@RequestParam来接收，或者形参前 什么也不写也能接收</li>
+</ul>
+<h5 id="cookievalue" tabindex="-1"> <strong>@CookieValue</strong></h5>
+<p>同请求头类似，可以获取cookie属性，也可以将获取到的属性封装为cookie对象</p>
+<h5 id="requestattribute" tabindex="-1"> <strong>@RequestAttribute</strong></h5>
+<p>获取请求域中的信息</p>
+<div><pre><code><span>@Controller</span>
+<span>public</span> <span>class</span> <span>GoController</span> <span>{</span>
+    <span>@GetMapping</span><span>(</span><span>"/goto"</span><span>)</span>
+    <span>public</span> <span>String</span> <span>goPage</span><span>(</span><span>HttpServletRequest</span> request<span>)</span><span>{</span>
+        request<span>.</span><span>setAttribute</span><span>(</span><span>"msg"</span><span>,</span><span>"成功"</span><span>)</span><span>;</span>
+        request<span>.</span><span>setAttribute</span><span>(</span><span>"code"</span><span>,</span><span>"200"</span><span>)</span><span>;</span>
+        <span>return</span> <span>"forward:/success"</span><span>;</span>
+    <span>}</span>
+    <span>@ResponseBody</span>
+    <span>@GetMapping</span><span>(</span><span>"/success"</span><span>)</span>
+    <span>public</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> <span>getmap</span><span>(</span><span>@RequestAttribute</span><span>(</span><span>"msg"</span><span>)</span> <span>String</span> msg<span>,</span>
+                                     <span>@RequestAttribute</span><span>(</span><span>"code"</span><span>)</span> <span>String</span> code<span>)</span><span>{</span>
+        <span>HashMap</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"msg"</span><span>,</span>msg<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"code"</span><span>,</span>code<span>)</span><span>;</span>
+        <span>return</span> map<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="matrixvariable" tabindex="-1"> <strong>@MatrixVariable</strong></h5>
+<p>读取矩阵变量，矩阵变量语法如下，每一个变量之间用分号隔开</p>
+<p>语法： 请求路径：/cars/sell;low=34;brand=byd,audi,yd</p>
+<div><pre><code><span>//cars/sell;low=34;brand=byd,audi,yd</span>
+<span>@GetMapping</span><span>(</span><span>"/car/{path}"</span><span>)</span>
+<span>public</span> <span>Map</span> <span>test2</span><span>(</span><span>@MatrixVariable</span><span>(</span><span>"low"</span><span>)</span> <span>String</span> low<span>,</span>
+                 <span>@MatrixVariable</span><span>(</span><span>"brand"</span><span>)</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> brand<span>,</span>
+                 <span>@PathVariable</span><span>(</span><span>"path"</span><span>)</span> <span>String</span> path<span>)</span><span>{</span>
+    <span>HashMap</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+    map<span>.</span><span>put</span><span>(</span><span>"low"</span><span>,</span>low<span>)</span><span>;</span>
+    map<span>.</span><span>put</span><span>(</span><span>"brand"</span><span>,</span>brand<span>)</span><span>;</span>
+    map<span>.</span><span>put</span><span>(</span><span>"path"</span><span>,</span>path<span>)</span><span>;</span>
+    <span>return</span> map<span>;</span>
+<span>}</span>
+<span>//{"path":"sell","low":34,"brand":["byd","audi","yd"]}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="示例" tabindex="-1"> 示例：</h4>
+<p>请求地址如果为：<a href="http://localhost:9999/car/2/owner/zhangsan?age=18&amp;inters=basketball&amp;inters=football" target="_blank" rel="noopener noreferrer">http://localhost:9999/car/2/owner/zhangsan?age=18&amp;inters=basketball&amp;inters=football</a></p>
+<div><pre><code><span>@PathVariable</span><span>(</span><span>"id"</span><span>)</span> <span>Integer</span> id<span>:</span> 获取路径中<span>{</span>id<span>}</span>
+<span>@PathVariable</span><span>(</span><span>"username"</span><span>)</span> <span>String</span> name： 获取路径中<span>{</span>username<span>}</span>
+<span>@PathVariable</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> pv： 获取路径中所有的路径变量
+<span>@RequestHeader</span><span>(</span><span>"User-Agent"</span><span>)</span> <span>String</span> userAgent： 获取请求头中userAgent
+<span>@RequestHeader</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> header： 获取请求头中所有参数
+<span>@RequestParam</span><span>(</span><span>"age"</span><span>)</span> <span>Integer</span> age： 获取请求参数中<span>"age"</span>
+<span>@RequestParam</span><span>(</span><span>"inters"</span><span>)</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> inters： 获取请求参数中<span>"inters"</span>
+<span>@RequestParam</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> params： 获取所有的请求参数
+<span>@CookieValue</span><span>(</span><span>"_ga"</span><span>)</span> <span>String</span> _ga： 获取cookie中_ga的值
+<span>@CookieValue</span><span>(</span><span>"_ga"</span><span>)</span> <span>Cookie</span> cookie<span>)</span> ： 获取cookie
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>import</span> <span><span>javax<span>.</span>servlet<span>.</span>http<span>.</span></span><span>Cookie</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>HashMap</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>List</span></span><span>;</span>
+<span>import</span> <span><span>java<span>.</span>util<span>.</span></span><span>Map</span></span><span>;</span>
+
+<span>@RestController</span>
+<span>public</span> <span>class</span> <span>ParameterTestController</span> <span>{</span>
+
+
+    <span>//  http://localhost:9999/car/2/owner/zhangsan?age=18&amp;inters=basketball&amp;inters=football</span>
+    <span>@GetMapping</span><span>(</span><span>"/car/{id}/owner/{username}"</span><span>)</span>
+    <span>public</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> <span>getCar</span><span>(</span><span>@PathVariable</span><span>(</span><span>"id"</span><span>)</span> <span>Integer</span> id<span>,</span>
+                                      <span>@PathVariable</span><span>(</span><span>"username"</span><span>)</span> <span>String</span> name<span>,</span>
+                                      <span>@PathVariable</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> pv<span>,</span>
+                                      <span>@RequestHeader</span><span>(</span><span>"User-Agent"</span><span>)</span> <span>String</span> userAgent<span>,</span>
+                                      <span>@RequestHeader</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> header<span>,</span>
+                                      <span>@RequestParam</span><span>(</span><span>"age"</span><span>)</span> <span>Integer</span> age<span>,</span>
+                                      <span>@RequestParam</span><span>(</span><span>"inters"</span><span>)</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> inters<span>,</span>
+                                      <span>@RequestParam</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>String</span><span>></span></span> params<span>,</span>
+                                      <span>@CookieValue</span><span>(</span><span>"_ga"</span><span>)</span> <span>String</span> _ga<span>,</span>
+                                      <span>@CookieValue</span><span>(</span><span>"_ga"</span><span>)</span> <span>Cookie</span> cookie<span>)</span> <span>{</span>
+
+
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+
+        map<span>.</span><span>put</span><span>(</span><span>"id"</span><span>,</span> id<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"name"</span><span>,</span> name<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"pv"</span><span>,</span> pv<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"userAgent"</span><span>,</span> userAgent<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"headers"</span><span>,</span> header<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"age"</span><span>,</span> age<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"inters"</span><span>,</span> inters<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"params"</span><span>,</span> params<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"_ga"</span><span>,</span> _ga<span>)</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>cookie<span>.</span><span>getName</span><span>(</span><span>)</span> <span>+</span> <span>"===>"</span> <span>+</span> cookie<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> map<span>;</span>
+    <span>}</span>
+
+
+    <span>@PostMapping</span><span>(</span><span>"/save"</span><span>)</span>
+    <span>public</span> <span>Map</span> <span>postMethod</span><span>(</span><span>@RequestBody</span> <span>String</span> content<span>)</span> <span>{</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"content"</span><span>,</span> content<span>)</span><span>;</span>
+        <span>return</span> map<span>;</span>
+    <span>}</span>
+
+
+    <span>//1、语法： 请求路径：/cars/sell;low=34;brand=byd,audi,yd</span>
+    <span>//2、SpringBoot默认是禁用了矩阵变量的功能</span>
+    <span>//      手动开启：原理。对于路径的处理。UrlPathHelper进行解析。</span>
+    <span>//              removeSemicolonContent（移除分号内容）支持矩阵变量的</span>
+    <span>//3、矩阵变量必须有url路径变量才能被解析</span>
+    <span>@GetMapping</span><span>(</span><span>"/cars/{path}"</span><span>)</span>
+    <span>public</span> <span>Map</span> <span>carsSell</span><span>(</span><span>@MatrixVariable</span><span>(</span><span>"low"</span><span>)</span> <span>Integer</span> low<span>,</span>
+                        <span>@MatrixVariable</span><span>(</span><span>"brand"</span><span>)</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> brand<span>,</span>
+                        <span>@PathVariable</span><span>(</span><span>"path"</span><span>)</span> <span>String</span> path<span>)</span> <span>{</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+
+        map<span>.</span><span>put</span><span>(</span><span>"low"</span><span>,</span> low<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"brand"</span><span>,</span> brand<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"path"</span><span>,</span> path<span>)</span><span>;</span>
+        <span>return</span> map<span>;</span>
+    <span>}</span>
+
+    <span>// /boss/1;age=20/2;age=10</span>
+
+    <span>@GetMapping</span><span>(</span><span>"/boss/{bossId}/{empId}"</span><span>)</span>
+    <span>public</span> <span>Map</span> <span>boss</span><span>(</span><span>@MatrixVariable</span><span>(</span>value <span>=</span> <span>"age"</span><span>,</span> pathVar <span>=</span> <span>"bossId"</span><span>)</span> <span>Integer</span> bossAge<span>,</span>
+                    <span>@MatrixVariable</span><span>(</span>value <span>=</span> <span>"age"</span><span>,</span> pathVar <span>=</span> <span>"empId"</span><span>)</span> <span>Integer</span> empAge<span>)</span> <span>{</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+
+        map<span>.</span><span>put</span><span>(</span><span>"bossAge"</span><span>,</span> bossAge<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"empAge"</span><span>,</span> empAge<span>)</span><span>;</span>
+        <span>return</span> map<span>;</span>
+
+    <span>}</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-07-02T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">SpringBoot整合Mybatis-plus及用法2</title>
     <id>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88Mybatis-plus%E5%8F%8A%E7%94%A8%E6%B3%952.html</id>
@@ -26436,596 +27425,6 @@ conn <span>/</span><span>as</span> sysdba
       <name>xlc520</name>
     </contributor>
     <published>2022-04-16T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">SpringBoot将Bean放入Spring容器中的五种方式</title>
-    <id>https://blog.ciberviler.top/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html</id>
-    <link href="https://blog.ciberviler.top/dev/%E5%B0%86Bean%E6%94%BE%E5%85%A5Spring%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%847%E7%A7%8D%E6%96%B9%E5%BC%8F.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">SpringBoot将Bean放入Spring容器中的五种方式</summary>
-    <content type="html"><![CDATA[<h1 id="springboot将bean放入spring容器中的7-五-种方式" tabindex="-1"> SpringBoot将Bean放入Spring容器中的7(五)种方式</h1>
-<h2 id="更新-2022年3月23日11-25-11" tabindex="-1"> 更新：2022年3月23日11:25:11</h2>
-<h2 id="背景" tabindex="-1"> 背景</h2>
-<p>我们谈到Spring的时候一定会提到IOC容器、DI依赖注入，Spring通过将一个个类标注为Bean的方法注入到IOC容器中，达到了控制反转的效果。那么我们刚开始接触Bean的时候，一定是使用xml文件，一个一个的注入，就例如下面这样。</p>
-<div><pre><code> &lt;bean id="bean" />
-</code></pre><div aria-hidden="true"><div></div></div></div><p>我们的项目一般很大的话，就需要成千上百个Bean去使用，这样写起来就很繁琐。那么Spring就帮我们实现了一种通过注解来实现注入的方法。只需要在你需要注入的类前面加上相应的注解，Spring就会帮助我们扫描到他们去实现注入。</p>
-<blockquote>
-<p>xml扫描包的方式</p>
-</blockquote>
-<div><pre><code> &lt;context:component-scan base-package="com.company.beandemo"/>
-</code></pre><div aria-hidden="true"><div></div></div></div><h2 id="通过注解注入的一般形式" tabindex="-1"> 通过注解注入的一般形式</h2>
-<p>一般情况下，注入Bean有一个最直白，最易懂的方式去实现注入，下面废话先不多说，先贴代码。</p>
-<hr>
-<ul>
-<li>Bean类</li>
-</ul>
-<div><pre><code> public class MyBean{
- }
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><ul>
-<li>Configuration类</li>
-</ul>
-<div><pre><code> //创建一个class配置文件
- @Configuration
- public class MyConfiguration{
-  //将一个Bean交由Spring进行管理
-        @Bean
-        public MyBean myBean(){
-            return new MyBean();
-        }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>Test类</li>
-</ul>
-<p>与xml有一点不同，这里在Test中，实例化的不再是ClassPathXmlApplicationContext，而是获取的AnnotationConfigApplicationContext实例。</p>
-<div><pre><code> ApplicationContext context = new AnnotationConfigApplicationContext(MyConfiguration.class);
- MyBean myBean = cotext.getBean("myBean",MyBean.class);
- System.out.println("myBean = " + myBean);
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><hr>
-<p>上面的代码中MyBean也就是我们需要Spring去管理的一个Bean，他只是一个简单的类。而MyConfiguration中，我们首先用@Configuration注解去标记了该类，这样标明该类是一个Spring的一个配置类，在加载配置的时候会去加载他。</p>
-<p>在MyConfiguration中我们可以看到有一个方法返回的是一个MyBean的实例，并且该方法上标注着@Bean的注解，标明这是一个注入Bean的方法，会将下面的返回的Bean注入IOC。</p>
-<blockquote>
-<p>基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。</p>
-<p>项目地址：<a href="https://github.com/YunaiV/onemall" target="_blank" rel="noopener noreferrer">https://github.com/YunaiV/onemall</a></p>
-</blockquote>
-<h2 id="通过构造方法注入bean" tabindex="-1"> 通过构造方法注入Bean</h2>
-<p>我们在生成一个Bean实例的时候，可以使用Bean的构造方法将Bean实现注入。直接看代码</p>
-<hr>
-<ul>
-<li>Bean类</li>
-</ul>
-<div><pre><code> @Component
- public class MyBeanConstructor {
-
-     private AnotherBean anotherBeanConstructor;
-
-     @Autowired
-     public MyBeanConstructor(AnotherBean anotherBeanConstructor){
-         this.anotherBeanConstructor = anotherBeanConstructor;
-     }
-
-     @Override
-     public String toString() {
-         return "MyBean{" +
-             "anotherBeanConstructor=" + anotherBeanConstructor +
-             '}';
-     }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>AnotherBean类</li>
-</ul>
-<div><pre><code> @Component(value="Bean的id，默认为类名小驼峰")
- public class AnotherBean {
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><ul>
-<li>Configuration类</li>
-</ul>
-<div><pre><code> @Configuration
- @ComponentScan("com.company.annotationbean")
- public class MyConfiguration{
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><hr>
-<p>这里我们可以发现，和一般方式注入的代码不一样了，我们来看看新的注解都是什么意思：</p>
-<ul>
-<li>@AutoWired</li>
-</ul>
-<p>简单粗暴，直接翻译过来的意思就是自动装配🔧，还不理解为什么叫自动装配🔧？看了下一个注解的解释你就知道了。若是在这里注入的时候指定一个Bean的id就要使用@Qualifier注解</p>
-<ul>
-<li>@Component（默认单例模式）</li>
-</ul>
-<p>什么？？这翻译过来是零件，怎么感觉像是修汽车？？是的，Spring管理Bean的方法就是修汽车的方式。我们在需要将一个类变成一个Bean被Spring可以注入的时候加上注解零件@Conmonent，那么我们就可以在加载Bean的时候把他像零件一样装配🔧到这个IOC汽车上了</p>
-<p>在这里我们还有几个其他的注解也可以实现这个功能，也就是细化的@Component：</p>
-<ul>
-<li>@Controller 标注在Controller层</li>
-<li>@Service 标注在Service层</li>
-<li>@Repository 标注在dao层</li>
-</ul>
-<p>还是翻译，零件扫描，我们去看看括号里的“零件仓库”里面，哪些“零件”（类）需要被装载，Spring就会去扫描这个包，将里面所有标注了@Component的类进行注入。</p>
-<p>这里的通过构造方法进行注入就很好理解了，我们在装配MyBean这个零件的时候，突然发现他必须在AnotherBean的基础上才能安装到IOC里面，那么我们就在每次装配MyBean的时候自动装配🔧一个AnotherBean进去。举个🌰吧：</p>
-<p>还是以汽车为例，我们在踩油门出发之前，是不是必须发车？？这里的AutoWired的内容就像发车，你不发车，这个油门你踩断都没有用，他都不会走。</p>
-<h2 id="通过set方法注入bean" tabindex="-1"> 通过set方法注入Bean</h2>
-<p>我们可以在一个属性的set方法中去将Bean实现注入，看代码吧</p>
-<hr>
-<ul>
-<li>MyBean类</li>
-</ul>
-<div><pre><code> @Component
- public class MyBeanSet {
-
-     private AnotherBean anotherBeanSet;
-
-     @Autowired
-     public void setAnotherBeanSet(AnotherBean anotherBeanSet) {
-         this.anotherBeanSet = anotherBeanSet;
-     }
-
-     @Override
-     public String toString() {
-         return "MyBeanSet{" +
-             "anotherBeanSet=" + anotherBeanSet +
-             '}';
-     }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>Configuration类 和 Test类</li>
-</ul>
-<p>同上一个，就不贴了</p>
-<hr>
-<p>这里我们发现在setter方法上我们有一个@AutoWired,与上面不同的是，我们不会在实例化该类时就自动装配🔧这个对象，而是在显式调用setter的时候去装配。</p>
-<h2 id="通过属性去注入bean" tabindex="-1"> 通过属性去注入Bean</h2>
-<p>我们前面两种注入的方式诸如时间不同，并且代码较多，若是通过属性，即就是</p>
-<div><pre><code> @Component
- public class MyBeanProperty {
-
-     @Autowired
-     private AnotherBean anotherBeanProperty;
-
-     @Override
-     public String toString() {
-         return "MyBeanProperty{" +
-             "anotherBeanProperty=" + anotherBeanProperty +
-             '}';
-     }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>这里我们可以看到我们这个类中需要使用AnotherBean这个实例对象，我们可以通过@AutoWired去自动装配它。</p>
-<blockquote>
-<p>对于有些小伙伴问私有属性，Spring怎么去加载它到IOC的？推荐去看看反射</p>
-</blockquote>
-<h2 id="通过list注入bean" tabindex="-1"> 通过List注入Bean</h2>
-<ul>
-<li>MyBeanList类</li>
-</ul>
-<div><pre><code> @Component
- public class MyBeanList {
-
-     private List&lt;String> stringList;
-
-     @Autowired
-     public void setStringList(List&lt;String> stringList) {
-         this.stringList = stringList;
-     }
-
-     public List&lt;String> getStringList() {
-         return stringList;
-     }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>MyConfiguration类</li>
-</ul>
-<div><pre><code> @Configuration
- @ComponentScan("annoBean.annotationbean")
- public class MyConfiguration {
-
-     @Bean
-     public List&lt;String> stringList(){
-        List&lt;String> stringList = new ArrayList&lt;String>();
-         stringList.add("List-1");
-         stringList.add("List-2");
-         return stringList;
-     }
- }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>这里我们将MyBeanList进行了注入，对List中的元素会逐一注入。下面介绍另一种方式注入List</p>
-<ul>
-<li>MyConfiguration类</li>
-</ul>
-<div><pre><code> @Bean
-    //通过该注解设定Bean注入的优先级，不一定连续数字
-    @Order(34)
-    public String string1(){
-        return "String-1";
-    }
-
-    @Bean
-    @Order(14)
-    public String string2(){
-        return "String-2";
-    }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>注入与List中泛型一样的类型，会自动去匹配类型，及时这里没有任何List的感觉，只是String的类型，但他会去通过List的Bean的方式去注入。</p>
-<blockquote>
-<p>第二种方式的优先级高于第一种，当两个都存在的时候，若要强制去使用第一种方式，则要去指定Bean的id即可</p>
-</blockquote>
-<h2 id="通过map去注入bean" tabindex="-1"> 通过Map去注入Bean</h2>
-<div><pre><code> @Component
- public class MyBeanMap {
-
-     private Map&lt;String,Integer> integerMap;
-
-     public Map&lt;String, Integer> getIntegerMap() {
-         return integerMap;
-     }
-
-     @Autowired
-     public void setIntegerMap(Map&lt;String, Integer> integerMap) {
-         this.integerMap = integerMap;
-     }
- }
-
- @Bean
-    public Map&lt;String,Integer> integerMap(){
-        Map&lt;String,Integer> integerMap = new HashMap&lt;String, Integer>();
-        integerMap.put("map-1",1);
-        integerMap.put("map-2",2);
-        return integerMap;
-    }
-
-    @Bean
-    public Integer integer1(){
-        return 1;
-    }
-
-    @Bean
-    public Integer integer2(){
-        return 2;
-    }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>同样这里也具有两种方式去注入Map类型Bean，且第二种的优先值高于第一种</p>
-<p>以上就是Bean通过注解注入的几种方式，大家可以对比着xml注入的方式去看。</p>
-<h2 id="_2022-02-12" tabindex="-1"> 2022-02-12</h2>
-<h2 id="_1、-configuration-bean" tabindex="-1"> 1、@Configuration + @Bean</h2>
-<p>这种方式其实，在上一篇文章已经介绍过了，也是我们最常用的一种方式，@Configuration用来声明一个配置类，然后使用 @Bean 注解，用于声明一个bean，将其加入到Spring容器中。具体代码如下:</p>
-<div><pre><code>@Configuration
-public class MyConfiguration {
-    @Bean
-    public Person person() {
-        Person person = new Person();
-        person.setName("spring");
-        return person;
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2、-componet-componentscan" tabindex="-1"> 2、@Componet + @ComponentScan</h2>
-<p>这种方式也是我们用的比较多的方式，@Componet中文译为组件，放在类名上面，然后@ComponentScan放置在我们的配置类上，然后可以指定一个路径，进行扫描带有@Componet注解的bean，然后加至容器中。具体代码如下:</p>
-<div><pre><code>@Component
-public class Person {
-    private String name;
-
-    public String getName() {
-     
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                '}';
-    }
-}
-
-@ComponentScan(basePackages = "com.springboot.initbean.*")
-public class Demo1 {
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>结果输出:</p>
-<div><pre><code>Person{name='null'}
-</code></pre><div aria-hidden="true"><div></div></div></div><p>表示成功将Person放置在了IOC容器中。</p>
-<h2 id="_3、-import注解导入" tabindex="-1"> 3、@Import注解导入</h2>
-<p>前两种方式，大家用的可能比较多，也是平时开发中必须要知道的，@Import注解用的可能不是特别多了，但是也是非常重要的，在进行Spring扩展时经常会用到，它经常搭配自定义注解进行使用，然后往容器中导入一个配置文件。关于@Import注解，我会多介绍一点，它有四种使用方式。这是@Import注解的源码，表示只能放置在类上。</p>
-<div><pre><code>@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Import {
-
-    /**
-   * 用于导入一个class文件
-     * {@link Configuration @Configuration}, {@link ImportSelector},
-     * {@link ImportBeanDefinitionRegistrar}, or regular component classes to import.
-     */
-
-    Class&lt;?>[] value();
-
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_3-1-import直接导入类" tabindex="-1"> 3.1 @Import直接导入类</h3>
-<p>代码示例如下:</p>
-<div><pre><code>public class Person {
-    private String name;
-
-    public String getName() {
-     
-        return name;
-    }
-     
-    public void setName(String name) {
-        this.name = name;
-    }
-     
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                '}';
-    }
-}
-/**
-* 直接使用@Import导入person类，然后尝试从applicationContext中取，成功拿到
-**/
-@Import(Person.class)
-public class Demo1 {
-
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上述代码直接使用@Import导入了一个类，然后自动的就被放置在IOC容器中了。注意 我们的Person类上 就不需要任何的注解了，直接导入即可。</p>
-<h3 id="_3-2-import-importselector" tabindex="-1"> 3.2 @Import + ImportSelector</h3>
-<p>其实在@Import注解的源码中，说的已经很清楚了，感兴趣的可以看下，我们实现一个ImportSelector的接口，然后实现其中的方法，进行导入。</p>
-<p>代码如下:</p>
-<div><pre><code>@Import(MyImportSelector.class)
-public class Demo1 {
-
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-
-class MyImportSelector implements ImportSelector {
-    @Override
-    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        return new String[]{"com.springboot.pojo.Person"};
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>我自定义了一个 MyImportSelector 实现了 ImportSelector 接口，重写selectImports 方法，然后将我们要导入的类的全限定名写在里面即可，实现起来也是非常简单。</p>
-<h3 id="_3-3-import-importbeandefinitionregistrar" tabindex="-1"> 3.3 @Import + ImportBeanDefinitionRegistrar</h3>
-<p>这种方式也需要我们实现 ImportBeanDefinitionRegistrar 接口中的方法，具体代码如下:</p>
-<div><pre><code>@Import(MyImportBeanDefinitionRegistrar.class)
-public class Demo1 {
-
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-
-class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
-
-    @Override
-    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        // 构建一个beanDefinition, 关于beanDefinition我后续会介绍，可以简单理解为bean的定义.
-        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.rootBeanDefinition(Person.class).getBeanDefinition();
-        // 将beanDefinition注册到Ioc容器中.
-        registry.registerBeanDefinition("person", beanDefinition);
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上述实现其实和Import的第二种方式差不多，都需要去实现接口，然后进行导入。接触到了一个新的概念，BeanDefinition，可以简单理解为bean的定义(bean的元数据)，也是需要放在IOC容器中进行管理的，先有bean的元数据，applicationContext再根据bean的元数据去创建Bean。</p>
-<h3 id="_3-4-import-deferredimportselector" tabindex="-1"> 3.4 @Import + DeferredImportSelector</h3>
-<p>这种方式也需要我们进行实现接口，其实它和@Import的第二种方式差不多，DeferredImportSelector 它是 ImportSelector 的子接口，所以实现的方法和第二种无异。只是Spring的处理方式不同，它和Spring Boot中的自动导入配置文件 延迟导入有关，非常重要。使用方式如下:</p>
-<div><pre><code>@Import(MyDeferredImportSelector.class)
-public class Demo1 {
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-class MyDeferredImportSelector implements DeferredImportSelector {
-    @Override
-    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        // 也是直接将Person的全限定名放进去
-        return new String[]{Person.class.getName()};
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>关于@Import注解的使用方式，大概就以上三种，当然它还可以搭配@Configuration注解使用，用于导入一个配置类。</p>
-<h2 id="_4、使用factorybean接口" tabindex="-1"> 4、使用FactoryBean接口</h2>
-<p>FactoryBean接口和BeanFactory千万不要弄混了，从名字其实可以大概的区分开，FactoryBean, 后缀为bean，那么它其实就是一个bean, BeanFactory，顾名思义 bean工厂，它是IOC容器的顶级接口，这俩接口都很重要。代码示例:</p>
-<div><pre><code>@Configuration
-public class Demo1 {
-    @Bean
-    public PersonFactoryBean personFactoryBean() {
-        return new PersonFactoryBean();
-    }
-
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Demo1.class);
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-
-class PersonFactoryBean implements FactoryBean&lt;Person> {
-
-    /**
-     *  直接new出来Person进行返回.
-     */
-    @Override
-    public Person getObject() throws Exception {
-        return new Person();
-    }
-    /**
-     *  指定返回bean的类型.
-     */
-    @Override
-    public Class&lt;?> getObjectType() {
-        return Person.class;
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上述代码，我使用@Configuration + @Bean的方式将 PersonFactoryBean 加入到容器中，注意，我没有向容器中注入 Person, 而是直接注入的 PersonFactoryBean 然后从容器中拿Person这个类型的bean,成功运行。</p>
-<h2 id="_5、使用-beandefinitionregistrypostprocessor" tabindex="-1"> 5、使用 BeanDefinitionRegistryPostProcessor</h2>
-<p>其实这种方式也是利用到了 BeanDefinitionRegistry，在Spring容器启动的时候会执行 BeanDefinitionRegistryPostProcessor 的 postProcessBeanDefinitionRegistry 方法，大概意思就是等beanDefinition加载完毕之后，对beanDefinition进行后置处理，可以在此进行调整IOC容器中的beanDefinition，从而干扰到后面进行初始化bean。</p>
-<p>具体代码如下:</p>
-<div><pre><code>public class Demo1 {
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        MyBeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor = new MyBeanDefinitionRegistryPostProcessor();
-        applicationContext.addBeanFactoryPostProcessor(beanDefinitionRegistryPostProcessor);
-        applicationContext.refresh();
-        Person bean = applicationContext.getBean(Person.class);
-        System.out.println(bean);
-    }
-}
-
-class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
-
-    @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.rootBeanDefinition(Person.class).getBeanDefinition();
-        registry.registerBeanDefinition("person", beanDefinition);
-    }
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-     
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上述代码中，我们手动向beanDefinitionRegistry中注册了person的BeanDefinition。最终成功将person加入到applicationContext中，上述的几种方式的具体原理，我后面会进行介绍。</p>
-<h2 id="小结" tabindex="-1"> 小结</h2>
-<p>向spring容器中加入bean的几种方式.</p>
-<p>@Configuration + @Bean</p>
-<p>@ComponentScan + @Component</p>
-<p>@Import 配合接口进行导入</p>
-<p>使用FactoryBean。</p>
-<p>实现BeanDefinitionRegistryPostProcessor进行后置处理。</p>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-02-12T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">微服务架构统一安全认证设计与实践</title>
-    <id>https://blog.ciberviler.top/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html</id>
-    <link href="https://blog.ciberviler.top/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%9F%E4%B8%80%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">微服务架构统一安全认证设计与实践</summary>
-    <content type="html"><![CDATA[<h1 id="微服务架构统一安全认证设计与实践" tabindex="-1"> 微服务架构统一安全认证设计与实践</h1>
-<h2 id="名词定义" tabindex="-1"> 名词定义</h2>
-<blockquote>
-<ul>
-<li>Third-party application：第三方应用程序，本文中又称&quot;客户端&quot;（client）。</li>
-<li>HTTP service：HTTP服务提供商，本文中简称&quot;服务提供商&quot;。</li>
-<li>Resource Owner：资源所有者，本文中又称&quot;用户&quot;（user）,即登录用户。</li>
-<li>User Agent：用户代理，本文中就是指浏览器。</li>
-<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。</li>
-<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。</li>
-</ul>
-</blockquote>
-<h2 id="研发背景" tabindex="-1"> 研发背景</h2>
-<p>当企业应用系统逐渐增多后，每个系统单独管理各自的用户数据容易形成信息孤岛，分散的用户管理模式阻碍了企业应用向平台化演进。当企业的互联网业务发展到一定规模，构建统一的标准化账户管理体系将是必不可少的，因为它是企业互联网云平台的重要基础设施，能够为平台带来统一的帐号管理、身份认证、用户授权等基础能力，为企业带来诸如跨系统单点登录、第三方授权登录等基础能力，为构建开放平台和业务生态提供了必要条件。</p>
-<p>单体应用体系下，应用是一个整体，一般针对所有的请求都会进行权限校验。请求一般会通过一个权限的拦截器进行权限的校验，在登录时将用户信息缓存到 session 中，后续访问则从缓存中获取用户信息。</p>
-<p>随着 Restful API、微服务的兴起，基于 Token 的认证现在已经越来越普遍。Token 和 Session ID 不同，并非只是一个 key。Token 一般会包含用户的相关信息，通过验证 Token 就可以完成身份校验。</p>
-<blockquote>
-<p>基于 Token 认证的优势如下：</p>
-</blockquote>
-<ol>
-<li>服务端无状态：Token 机制在服务端不需要存储 session 信息，因为 Token 自身包含了所有用户的相关信息。</li>
-<li>性能较好，因为在验证 Token 时不用再去访问数据库或者远程服务进行权限校验，自然可以提升不少性能。</li>
-<li>支持移动设备,支持跨程序调用，Cookie 是不允许垮域访问的，而 Token 则不存在这个问题。</li>
-</ol>
-<h2 id="研发目标" tabindex="-1"> 研发目标</h2>
-<blockquote>
-<p>通过标准安全认证流程，异构系统或跨服务间能够灵活地实现指定功能部件或服务的集成、统一的安全认证。</p>
-</blockquote>
-<ul>
-<li>基于 Token 认证的一个典型流程如下：</li>
-</ul>
-<ol>
-<li>用户输入登录信息（或者调用 Token 接口，传入用户信息），发送到身份认证服务进行认证（身份认证服务可以和服务端在一起，也可以分离，看微服务拆分情况了）。</li>
-<li>身份验证服务验证登录信息是否正确，返回接口（一般接口中会包含用户基础信息、权限范围、有效时间等信息），客户端存储接口，可以存储在 Session 或者数据库中。</li>
-<li>客户端将 Token 放在 HTTP 请求头中，发起相关 API 调用。</li>
-<li>被调用的微服务，验证 Token 权限。</li>
-<li>服务端返回相关资源和数据。</li>
-</ol>
-<h3 id="安全认证功能点" tabindex="-1"> 安全认证功能点</h3>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ecc54fb04d3e43e4834ddafb43d5703a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<ol>
-<li>获取凭证, 第三方应用客户端使用客户端编码/安全码、资源所有者用户名/密码等证件信息从授权服务器上获取Access Token资源访问凭证。</li>
-<li>登录授权，客户端携带Access Token凭证访问服务器资源，资源服务器验证Token、第三方应用凭证信息、资源所有者User合法性，通过Token读取资源所有者身份信息(user) 加载资源所有者的权限项执行登录。</li>
-<li>访问鉴权，第三方应用客户端访问服务端资源，系统验证访问者Access Token合法性、权限信息，验证凭证（Access Token）正确，此时资源服务器就会返回资源信息。</li>
-<li>凭证续约，Access token访问凭证过期需要进行凭证续约，刷新Token凭证有效期。</li>
-</ol>
-<h2 id="技术选型分析" tabindex="-1"> 技术选型分析</h2>
-<blockquote>
-<ol>
-<li>系统授权采用OAuth2开放式授权标准密码模式。</li>
-<li>Token采用JWT标准。</li>
-</ol>
-</blockquote>
-<h3 id="_1-oauth开放授权" tabindex="-1"> 1. OAuth开放授权</h3>
-<p>OAuth（Open Authorization，开放授权）是为用户资源的授权定义了一个安全、开放及简单的标准，第三方无需知道用户的账号及密码，就可获取到用户的授权信息。</p>
-<p>主要的四种授权方式：</p>
-<ul>
-<li>授权码模式（authorization code）用在客户端与服务端应用之间授权码。</li>
-<li>简化模式（implicit）用在移动app或者web app(这些app是在用户的设备上的，如在手机上调起微信来进行认证授权)。不通过第三方应用程序的服务器，直接在浏览器中向认证服务器申请令牌，跳过了&quot;授权码&quot;这个步骤，因此得名。所有步骤在浏览器中完成，令牌对访问者是可见的，且客户端不需要认证。</li>
-<li>密码模式（resource owner password credentials）应用直接都是受信任的(都是由一家公司开发的)密码模式中，用户向客户端提供自己的用户名和密码。客户端使用这些信息，向&quot;服务商提供商&quot;索要授权。在这种模式中，用户必须把自己的密码给客户端，但是客户端不得储存密码。</li>
-<li>客户端模式（client credentials）用在应用API访问客户端模式（Client Credentials Grant）指客户端以自己的名义，而不是以用户的名义，向&quot;服务提供商&quot;进行认证。严格地说，客户端模式并不属于OAuth框架所要解决的问题。在这种模式中，用户直接向客户端注册，客户端以自己的名义要求&quot;服务提供商&quot;提供服务，其实不存在授权问题。</li>
-</ul>
-<h3 id="_2-json-web-token-jwt" tabindex="-1"> 2. Json web token (JWT)</h3>
-<p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
-<h2 id="认证流程逻辑" tabindex="-1"> 认证流程逻辑</h2>
-<h3 id="_1-系统授权" tabindex="-1"> 1. 系统授权</h3>
-<blockquote>
-<p>第三方应用客户端使用客户端编码/安全码、资源所有者用户名/密码等证件信息从授权服务器上获取Access Token资源访问凭证。</p>
-</blockquote>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ea530be187b47bb9d7a0d511d42db00~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"> 系统授权颁发给客户应用Access Token <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a507ea017d34445f9a0ab0783e3ec159~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<h3 id="_2-系统鉴权" tabindex="-1"> 2. 系统鉴权</h3>
-<blockquote>
-<p>客户端携带Access Token凭证访问服务器资源，资源服务器验证Token、第三方应用、资源所有者User合法性，通过Token读取资源所有者身份信息(user) 加载资源所有者的权限执行登录。</p>
-</blockquote>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/788d357d31144b69bd1793e623fe1004~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<blockquote>
-<p>系统验证访问者Access Token合法性、权限信息，验证凭证（Access Token）正确，此时资源服务器就会返回资源信息。</p>
-</blockquote>
-<h3 id="_3-凭证续约" tabindex="-1"> 3. 凭证续约</h3>
-<blockquote>
-<p>Access token访问凭证过期需要进行凭证续约，刷新Token凭证有效期。</p>
-</blockquote>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/58d905e0a5814997b63bb3afd65d0c2f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<h2 id="接口设计" tabindex="-1"> 接口设计</h2>
-<h3 id="_1-授权凭证" tabindex="-1"> 1. 授权凭证</h3>
-<blockquote>
-<p>获取授权凭证，校验客户端身份信息、校验资源所有者身份信息，下发Token凭证。</p>
-</blockquote>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80dcd5ae585f4c22979a1ead93bdb762~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<blockquote>
-<p>客户端编码/安全码需要第三方应用到系统注册审核通过后生成。</p>
-</blockquote>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7a2bd4d9dc544810b83752ff33600327~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9903bc421d7440158f33bf3a219b99df~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-<h3 id="_2-授权凭证续约" tabindex="-1"> 2. 授权凭证续约</h3>
-<blockquote>
-<p>获取续约授权凭证，校验客户端身份信息、校验RefreshToken凭证，下发Token凭证。</p>
-</blockquote>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f8ca2a8146649c5b350f4d5b42299c1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd197891eb284a119e992c389d412ca4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/130844cf15c842619e1e2e21a355a970~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" loading="lazy"></p>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-04-08T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
