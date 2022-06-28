@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: Thanox 碑情景模式
+title: Thanox 墓碑情景模式
 description: Thanox 墓碑情景模式
 date: 2022-06-21
 category: daily
