@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.48" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d2025;
+      }
+
+      html,
+      body {
+        background-color: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.querySelector("html").setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="stylesheet" href="/assets/style.dba37af2.css">
+    <link rel="modulepreload" href="/assets/app.d1bf4022.js"><link rel="modulepreload" href="/assets/Thanox情景模式.html.fefcb3c4.js"><link rel="modulepreload" href="/assets/plugin-vue_export-helper.21dcd24c.js"><link rel="modulepreload" href="/assets/Thanox情景模式.html.5b170d76.js">
+  </head>
+  <body>
+    <div id="app"><!----></div>
+    <script type="module" src="/assets/app.d1bf4022.js" defer></script>
+  </body>
+</html>
