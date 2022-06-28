@@ -141,15 +141,28 @@ export default hopeTheme({
     // },
 
     mdEnhance: {
-      enableAll: true,
-      // gfm: true,//是否支持完整的 GFM 语法
-      // codegroup: true,//是否启用代码组
-      // align: true,//是否启用自定义对齐格式支持
-      // sup: true,//是否启用上角标格式支持
-      // sub: true,//是否启用下角标格式支持
-      // footnote: true,//是否启用脚注格式支持
-      // lazyLoad: true,//是否使用原生方式懒加载页面图片
-      // mark: true,//是否启用标记格式支持
+      // enableAll: true,
+      gfm: true,//是否支持完整的 GFM 语法
+      container: true, // 是否启用自定义容器支持
+      linkCheck:"dev",  //  是否启用链接检查。
+      vpre: false,  // 是否启用 v-pre 容器
+      tabs: true,  //是否启用选项卡。
+      codetabs: true,  //是否启用代码组。
+      align: true,  // 是否启用自定义对齐格式支持。
+      sup: true,  // 是否启用上角标格式支持。
+      sub: true,  // 是否启用下角标格式支持。
+      footnote: true,  // 是否启用脚注格式支持。
+      lazyLoad: false,  // 是否使用原生方式懒加载页面图片。
+      mark: true,  // 是否启用标记格式支持。
+      imageMark: true,  // 是否启用图片标注支持
+      tasklist: false,  // 是否启用任务列表格式支持。
+      tex: false,  // 是否启用 TeX\TeXT EX 语法支持。
+      flowchart: true,  // 是否启用流程图支持。
+      mermaid: false,  // 是否启用 Mermaid 支持
+      //stylize: false,  // 类型: StylizeOptions | false
+      //demo
+      delay: 500,  // 操作页面 DOM 的延时，单位 ms。默认值: 500
+      // 是否启用幻灯片支持。
       presentation: {
         plugins: ["highlight", "math", "search", "notes", "zoom"],
       },
