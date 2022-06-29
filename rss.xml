@@ -6,13 +6,13 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 28 Jun 2022 07:41:38 GMT</pubDate>
-    <lastBuildDate>Tue, 28 Jun 2022 07:41:38 GMT</lastBuildDate>
+    <pubDate>Wed, 29 Jun 2022 05:54:53 GMT</pubDate>
+    <lastBuildDate>Wed, 29 Jun 2022 05:54:53 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>Java</category>
     <category>daily</category>
     <category>algorithm</category>
-    <category>Java</category>
     <category>Linux</category>
     <category>other</category>
     <category>essay</category>
@@ -22,6 +22,311 @@
     <category>Tools</category>
     <category>java</category>
     <category>IDEA</category>
+    <item>
+      <title>Spring Boot 整合流程引擎 Flowable</title>
+      <link>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8EFlowable.html</link>
+      <guid>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8EFlowable.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">Spring Boot 整合流程引擎 Flowable</source>
+      <category>Java</category>
+      <pubDate>Mon, 04 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="spring-boot-整合流程引擎-flowable" tabindex="-1"> Spring Boot 整合流程引擎 Flowable</h1>
+<p>流程引擎，也算是一个比较常见的工具了，我们在日常的很多开发中都会用到，当然用的最多的就是 OA 系统了，但是在一些非 OA 系统中，我们也会涉及到，比如一个 CRM 中，可能会有合同管理的需求，合同的审批，也是需要流程引擎的。</p>
+<p>所以今天我们来简单聊聊流程引擎，顺便写一个简单的例子，小伙伴们一起来感受下流程引擎到底是个啥。</p>
+<h2 id="_1-流程引擎介绍" tabindex="-1"> 1. 流程引擎介绍</h2>
+<p>Flowable 是一个使用 Java 编写的轻量级业务流程引擎。Flowable 流程引擎可用于部署 BPMN2.0 流程定义（用于定义流程的行业 XML 标准），创建这些流程定义的流程实例，进行查询，访问运行中或历史的流程实例与相关数据，等等。</p>
+<p>Java 领域另一个流程引擎是 Activiti，不过我觉得这两个东西，只要你会使用其中一个，另一个就不在话下。</p>
+<p>咱就不废话了，上代码吧。</p>
+<h2 id="_2-创建项目" tabindex="-1"> 2. 创建项目</h2>
+<p>首先我们创建一个 Spring Boot 项目，引入 Web、和 MySQL 驱动两个依赖，如下图：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013239_62852db7da56536801.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_mysql"></p>
+<p>项目创建成功之后，我们引入 flowable 依赖，如下：</p>
+<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>groupId</span><span>></span></span>org.flowable<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+    <span><span><span>&lt;</span>artifactId</span><span>></span></span>flowable-spring-boot-starter<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;</span>version</span><span>></span></span>6.7.2<span><span><span>&lt;/</span>version</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>这个会帮我们做一些自动化配置，默认情况下，所以位于 resources/processes 的流程都会被自动部署。</p>
+<p>接下来我们在 application.yaml 中配置一下数据库连接信息，当项目启动的时候会自动初始化数据库，将来流程引擎运行时候的数据会被自动持久化到数据库中。</p>
+<div><pre><code><span>spring</span><span>:</span>
+  <span>datasource</span><span>:</span>
+    <span>username</span><span>:</span> root
+    <span>password</span><span>:</span> <span>123</span>
+    <span>url</span><span>:</span> jdbc<span>:</span>mysql<span>:</span>///flowable<span>?</span>serverTimezone=Asia/Shanghai<span>&amp;useSSL=false&amp;nullCatalogMeansCurrent=true</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>好啦，配置完成后，我们就可以启动项目了。项目启动成功之后，flowable 数据库中就会自动创建如下这些表，将来流程引擎相关的数据都会自动保存到这些表中。</p>
+<p>默认的表比较多，截图只是其中一部分。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013239_62852db80079472215.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_02"></p>
+<h2 id="_3-画流程图" tabindex="-1"> 3. 画流程图</h2>
+<p>画流程图算是比较有挑战的一个步骤了，也是流程引擎使用的关键。官方提供了一些流程引擎绘制工具，这个我就不说了，感兴趣的小伙伴可以自行去体验；IDEA 也自带了一个流程可视化的工具，但是特别难用，我这里也就 不说了。</p>
+<p>这里说一下我常用的 IDEA 插件 <strong>Flowable BPMN visualizer</strong>，如下图：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db81d94797834.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_流程图_03"></p>
+<p>插件怎么安装就不用我教了吧，小伙伴们自行安装即可。</p>
+<p>装好插件之后，我们在 resources 目录下新建 processes 目录，这个目录下的流程文件将来会被自动部署。</p>
+<p>接下来我们在 processes 目录下，新建一个 BPMN 文件（插件装好了就有这个选项了），如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db84066473563.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_流程图_04"></p>
+<p>我们来画个请假的流程，就叫做 ask_for_leave.bpmn20.xml，注意最后面的 <code>.bpmn20.xml</code> 是固定后缀。</p>
+<p>文件创建出来之后，右键单击，选择 View BPMN(Flowable) Diagram,就打开了可视化页面了，我们就可以来绘制自己的流程图了。</p>
+<p>我的请假流程画出来是这样：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db8574fe29098.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_05"></p>
+<p>员工发起一个请假流程，首先是组长审核，组长审核通过了，就进入到经理审核，经理审核通过了，这个流程就结束了，如果组长审核未通过或者经理审核未通过，则流程给员工发送一个请假失败的通知，流程结束。</p>
+<p>我们来看下这个流程对应的 XML 文件，一些流程细节会在 XML 文件中体现出来，如下：</p>
+<div><pre><code><span><span><span>&lt;</span>process</span> <span>id</span><span><span>=</span><span>"</span>ask_for_leave<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>ask_for_leave<span>"</span></span> <span>isExecutable</span><span><span>=</span><span>"</span>true<span>"</span></span><span>></span></span>
+  <span><span><span>&lt;</span>userTask</span> <span>id</span><span><span>=</span><span>"</span>leaveTask<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>请假<span>"</span></span> <span><span>flowable:</span>assignee</span><span><span>=</span><span>"</span>#{leaveTask}<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>userTask</span> <span>id</span><span><span>=</span><span>"</span>zuzhangTask<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>组长审核<span>"</span></span> <span><span>flowable:</span>assignee</span><span><span>=</span><span>"</span>#{zuzhangTask}<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>userTask</span> <span>id</span><span><span>=</span><span>"</span>managerTask<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>经理审核<span>"</span></span> <span><span>flowable:</span>assignee</span><span><span>=</span><span>"</span>#{managerTask}<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>exclusiveGateway</span> <span>id</span><span><span>=</span><span>"</span>managerJudgeTask<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>exclusiveGateway</span> <span>id</span><span><span>=</span><span>"</span>zuzhangJudeTask<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>endEvent</span> <span>id</span><span><span>=</span><span>"</span>endLeave<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>结束<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>startEvent</span> <span>id</span><span><span>=</span><span>"</span>startLeave<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>开始<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>flowStart<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>startLeave<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>leaveTask<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>modeFlow<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>leaveTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>zuzhangTask<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>zuzhang_go<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>zuzhangJudeTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>managerTask<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>通过<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>conditionExpression</span> <span><span>xsi:</span>type</span><span><span>=</span><span>"</span>tFormalExpression<span>"</span></span><span>></span></span><span>&lt;![CDATA[${checkResult=='通过'}]]]]]]><![CDATA[><![CDATA[></span><span><span><span>&lt;/</span>conditionExpression</span><span>></span></span>
+  <span><span><span>&lt;/</span>sequenceFlow</span><span>></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>zuzhang_reject<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>zuzhangJudeTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>sendMail<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>拒绝<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>conditionExpression</span> <span><span>xsi:</span>type</span><span><span>=</span><span>"</span>tFormalExpression<span>"</span></span><span>></span></span><span>&lt;![CDATA[${checkResult=='拒绝'}]]]]><![CDATA[></span><span><span><span>&lt;/</span>conditionExpression</span><span>></span></span>
+  <span><span><span>&lt;/</span>sequenceFlow</span><span>></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>jugdeFlow<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>managerTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>managerJudgeTask<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>flowEnd<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>通过<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>managerJudgeTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>endLeave<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>conditionExpression</span> <span><span>xsi:</span>type</span><span><span>=</span><span>"</span>tFormalExpression<span>"</span></span><span>></span></span><span>&lt;![CDATA[${checkResult=='通过'}]]]]><![CDATA[></span><span><span><span>&lt;/</span>conditionExpression</span><span>></span></span>
+  <span><span><span>&lt;/</span>sequenceFlow</span><span>></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>rejectFlow<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>拒绝<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>managerJudgeTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>sendMail<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>conditionExpression</span> <span><span>xsi:</span>type</span><span><span>=</span><span>"</span>tFormalExpression<span>"</span></span><span>></span></span><span>&lt;![CDATA[${checkResult=='拒绝'}]]]]><![CDATA[></span><span><span><span>&lt;/</span>conditionExpression</span><span>></span></span>
+  <span><span><span>&lt;/</span>sequenceFlow</span><span>></span></span>
+  <span><span><span>&lt;</span>serviceTask</span> <span>id</span><span><span>=</span><span>"</span>sendMail<span>"</span></span> <span><span>flowable:</span>exclusive</span><span><span>=</span><span>"</span>true<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>发送失败提示<span>"</span></span> <span>isForCompensation</span><span><span>=</span><span>"</span>true<span>"</span></span> <span><span>flowable:</span>class</span><span><span>=</span><span>"</span>org.javaboy.flowable.AskForLeaveFail<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>endFlow<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>sendMail<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>askForLeaveFail<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>endEvent</span> <span>id</span><span><span>=</span><span>"</span>askForLeaveFail<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>请假失败<span>"</span></span><span>/></span></span>
+  <span><span><span>&lt;</span>sequenceFlow</span> <span>id</span><span><span>=</span><span>"</span>zuzhangTask_zuzhangJudeTask<span>"</span></span> <span>sourceRef</span><span><span>=</span><span>"</span>zuzhangTask<span>"</span></span> <span>targetRef</span><span><span>=</span><span>"</span>zuzhangJudeTask<span>"</span></span><span>/></span></span>
+<span><span><span>&lt;/</span>process</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>结合 XML 文件我来和大家解释一下这里涉及到的 Flowable 中的组件，我们来看下：</p>
+<ul>
+<li><code>&lt;process&gt;</code> ： 表示一个完整的工作流程。</li>
+<li><code>&lt;startEvent&gt;</code> ： 工作流中起点位置，也就是图中的绿色按钮。</li>
+<li><code>&lt;endEvent&gt;</code> ： 工作流中结束位置，也就是图中的红色按钮。</li>
+<li><code>&lt;userTask&gt;</code> ： 代表一个任务审核节点（组长、经理等角色），这个节点上有一个<code>flowable:assignee</code> 属性，这表示这个节点该由谁来处理，将来在 Java 代码中调用的时候，我们需要指定对应的处理人的 ID 或者其他唯一标记。</li>
+<li><code>&lt;serviceTask&gt;</code>：这是服务任务，在具体的实现中，这个任务可以做任何事情。</li>
+<li><code>&lt;exclusiveGateway&gt;</code> ： 逻辑判断节点，相当于流程图中的菱形框。</li>
+<li><code>&lt;sequenceFlow&gt;</code> ：链接各个节点的线条，sourceRef 属性表示线的起始节点，targetRef 属性表示线指向的节点，我们图中的线条都属于这种。</li>
+</ul>
+<p>流程图这块松哥和大家稍微说一下，咋一看这个图挺复杂很难画，但是实际上只要你认认真真去捋一捋这里边的各个属性，基本上很快就明白到底是怎么一回事，我也相信各位小伙伴都有这样的悟性。</p>
+<h2 id="_4-开发接口" tabindex="-1"> 4. 开发接口</h2>
+<p>接下来我们写几个接口，来体验一把流程引擎。</p>
+<p>在正式体验之前，我们先来熟悉几个类，这几个类我们一会写代码会用到。</p>
+<h3 id="_4-1-java-类梳理" tabindex="-1"> 4.1 Java 类梳理</h3>
+<ul>
+<li>ProcessDefinition</li>
+</ul>
+<p>这个最好理解，就是流程的定义，也就相当于规范，每个 ProcessDefinition 都会有一个 id。</p>
+<ul>
+<li>ProcessInstance</li>
+</ul>
+<p>这个就是流程的一个实例。简单来说，ProcessDefinition 相当于是类，而 ProcessInstance 则相当于是根据类 new 出来的对象。</p>
+<ul>
+<li>Activity</li>
+</ul>
+<p>Activity 是流程标准规范 BPMN2.0 里面的规范，流程中的每一个步骤都是一个 Activity。</p>
+<ul>
+<li>Execution</li>
+</ul>
+<p>Execution 的含义是流程的执行线路，通过 Execution 可以获得当前 ProcessInstance 当前执行到哪个 Activity了。</p>
+<ul>
+<li>Task</li>
+</ul>
+<p>Task 就是当前要做的工作。</p>
+<p>实际上这里涉及到的东西比较多，不过我们今天先整一个简单的例子，所以上面这些知识点暂时够用了。</p>
+<h3 id="_4-2-查看流程图" tabindex="-1"> 4.2 查看流程图</h3>
+<p>在正式开始之前，我们先准备一个接口，用来查看流程图的实时执行情况，这样方便我们查看流程到底执行到哪一步了。</p>
+<p>具体的代码如下：</p>
+<div><pre><code><span>@RestController</span>
+<span>public</span> <span>class</span> <span>HelloController</span> <span>{</span>
+
+    <span>@Autowired</span>
+    <span>RuntimeService</span> runtimeService<span>;</span>
+
+    <span>@Autowired</span>
+    <span>TaskService</span> taskService<span>;</span>
+
+    <span>@Autowired</span>
+    <span>RepositoryService</span> repositoryService<span>;</span>
+
+    <span>@Autowired</span>
+    <span>ProcessEngine</span> processEngine<span>;</span>
+
+    <span>@GetMapping</span><span>(</span><span>"/pic"</span><span>)</span>
+    <span>public</span> <span>void</span> <span>showPic</span><span>(</span><span>HttpServletResponse</span> resp<span>,</span> <span>String</span> processId<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>
+        <span>ProcessInstance</span> pi <span>=</span> runtimeService<span>.</span><span>createProcessInstanceQuery</span><span>(</span><span>)</span><span>.</span><span>processInstanceId</span><span>(</span>processId<span>)</span><span>.</span><span>singleResult</span><span>(</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span>pi <span>==</span> <span>null</span><span>)</span> <span>{</span>
+            <span>return</span><span>;</span>
+        <span>}</span>
+        <span>List</span><span><span>&lt;</span><span>Execution</span><span>></span></span> executions <span>=</span> runtimeService
+                <span>.</span><span>createExecutionQuery</span><span>(</span><span>)</span>
+                <span>.</span><span>processInstanceId</span><span>(</span>processId<span>)</span>
+                <span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+
+        <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> activityIds <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> flows <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Execution</span> exe <span>:</span> executions<span>)</span> <span>{</span>
+            <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> ids <span>=</span> runtimeService<span>.</span><span>getActiveActivityIds</span><span>(</span>exe<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            activityIds<span>.</span><span>addAll</span><span>(</span>ids<span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>/**
+         * 生成流程图
+         */</span>
+        <span>BpmnModel</span> bpmnModel <span>=</span> repositoryService<span>.</span><span>getBpmnModel</span><span>(</span>pi<span>.</span><span>getProcessDefinitionId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>ProcessEngineConfiguration</span> engconf <span>=</span> processEngine<span>.</span><span>getProcessEngineConfiguration</span><span>(</span><span>)</span><span>;</span>
+        <span>ProcessDiagramGenerator</span> diagramGenerator <span>=</span> engconf<span>.</span><span>getProcessDiagramGenerator</span><span>(</span><span>)</span><span>;</span>
+        <span>InputStream</span> in <span>=</span> diagramGenerator<span>.</span><span>generateDiagram</span><span>(</span>bpmnModel<span>,</span> <span>"png"</span><span>,</span> activityIds<span>,</span> flows<span>,</span> engconf<span>.</span><span>getActivityFontName</span><span>(</span><span>)</span><span>,</span> engconf<span>.</span><span>getLabelFontName</span><span>(</span><span>)</span><span>,</span> engconf<span>.</span><span>getAnnotationFontName</span><span>(</span><span>)</span><span>,</span> engconf<span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>1.0</span><span>,</span> <span>false</span><span>)</span><span>;</span>
+        <span>OutputStream</span> out <span>=</span> <span>null</span><span>;</span>
+        <span>byte</span><span>[</span><span>]</span> buf <span>=</span> <span>new</span> <span>byte</span><span>[</span><span>1024</span><span>]</span><span>;</span>
+        <span>int</span> legth <span>=</span> <span>0</span><span>;</span>
+        <span>try</span> <span>{</span>
+            out <span>=</span> resp<span>.</span><span>getOutputStream</span><span>(</span><span>)</span><span>;</span>
+            <span>while</span> <span>(</span><span>(</span>legth <span>=</span> in<span>.</span><span>read</span><span>(</span>buf<span>)</span><span>)</span> <span>!=</span> <span>-</span><span>1</span><span>)</span> <span>{</span>
+                out<span>.</span><span>write</span><span>(</span>buf<span>,</span> <span>0</span><span>,</span> legth<span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span> <span>finally</span> <span>{</span>
+            <span>if</span> <span>(</span>in <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+                in<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>if</span> <span>(</span>out <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+                out<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>这就一个工具，没啥好说的，一会大家看完后面的代码，再回过头来看这个接口，很多地方就都懂了。</p>
+<h3 id="_4-3-开启一个流程" tabindex="-1"> 4.3 开启一个流程</h3>
+<p>为了方便，接下来的代码我们都在单元测试中完成。</p>
+<p>首先我们来开启一个流程，代码如下：</p>
+<div><pre><code><span>String</span> staffId <span>=</span> <span>"1000"</span><span>;</span>
+<span>/**
+ * 开启一个流程
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>askForLeave</span><span>(</span><span>)</span> <span>{</span>
+    <span>HashMap</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+    map<span>.</span><span>put</span><span>(</span><span>"leaveTask"</span><span>,</span> staffId<span>)</span><span>;</span>
+    <span>ProcessInstance</span> processInstance <span>=</span> runtimeService<span>.</span><span>startProcessInstanceByKey</span><span>(</span><span>"ask_for_leave"</span><span>,</span> map<span>)</span><span>;</span>
+    runtimeService<span>.</span><span>setVariable</span><span>(</span>processInstance<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> <span>"name"</span><span>,</span> <span>"javaboy"</span><span>)</span><span>;</span>
+    runtimeService<span>.</span><span>setVariable</span><span>(</span>processInstance<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> <span>"reason"</span><span>,</span> <span>"休息一下"</span><span>)</span><span>;</span>
+    runtimeService<span>.</span><span>setVariable</span><span>(</span>processInstance<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> <span>"days"</span><span>,</span> <span>10</span><span>)</span><span>;</span>
+    logger<span>.</span><span>info</span><span>(</span><span>"创建请假流程 processId：{}"</span><span>,</span> processInstance<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>首先由员工发起一个请假流程，map 中存放的 leaveTask 是我们在 XML 流程文件中提前定义好的，提前定义好当前这个任务创建之后，该由谁来处理，这里我们是假设由工号为 1000 的员工来发起这样一个请假流程。同时，我们还设置了一些额外信息。ask_for_leave 是我们在 XML 文件中定义的一个 process 的名称。</p>
+<p>好啦，现在我们执行这个单元测试方法，执行完成后，控制台会打印出当前这个流程的 id，我们拿着这个 id 去访问 4.2 小节的接口，结果如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db86702137091.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_java_06"></p>
+<p>可以看到，请假用红色的框框起来了，说明当前流程走到了这一步。</p>
+<h3 id="_4-4-将请求提交给组长" tabindex="-1"> 4.4 将请求提交给组长</h3>
+<p>接下来，我们就需要将这个请假流程向后推进一步，将请假事务提交给组长，代码如下：</p>
+<div><pre><code><span>String</span> zuzhangId <span>=</span> <span>"90"</span><span>;</span>
+<span>/**
+ * 提交给组长审批
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>submitToZuzhang</span><span>(</span><span>)</span> <span>{</span>
+    <span>//员工查找到自己的任务，然后提交给组长审批</span>
+    <span>List</span><span><span>&lt;</span><span>Task</span><span>></span></span> list <span>=</span> taskService<span>.</span><span>createTaskQuery</span><span>(</span><span>)</span><span>.</span><span>taskAssignee</span><span>(</span>staffId<span>)</span><span>.</span><span>orderByTaskId</span><span>(</span><span>)</span><span>.</span><span>desc</span><span>(</span><span>)</span><span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>Task</span> task <span>:</span> list<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"任务 ID：{}；任务处理人：{}；任务是否挂起：{}"</span><span>,</span> task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>getAssignee</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>isSuspended</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>//提交给组长的时候，需要指定组长的 id</span>
+        map<span>.</span><span>put</span><span>(</span><span>"zuzhangTask"</span><span>,</span> zuzhangId<span>)</span><span>;</span>
+        taskService<span>.</span><span>complete</span><span>(</span>task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>首先我们利用 staffId 查找到当前员工的 id，进而找到当前员工需要执行的任务，遍历这个任务，调用 taskService.complete 方法将任务提交给组长，注意在 map 中指定组长的 id。</p>
+<p>提交完成后，我们再去看流程图片，如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db8757ea39709.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_mysql_07"></p>
+<p>可以看到，流程图走到组长审批了。</p>
+<h3 id="_4-5-组长审批" tabindex="-1"> 4.5 组长审批</h3>
+<p>组长现在有两种选择，同意或者拒绝，同意的代码如下：</p>
+<div><pre><code><span>/**
+ * 组长审批-批准
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>zuZhangApprove</span><span>(</span><span>)</span> <span>{</span>
+    <span>List</span><span><span>&lt;</span><span>Task</span><span>></span></span> list <span>=</span> taskService<span>.</span><span>createTaskQuery</span><span>(</span><span>)</span><span>.</span><span>taskAssignee</span><span>(</span>zuzhangId<span>)</span><span>.</span><span>orderByTaskId</span><span>(</span><span>)</span><span>.</span><span>desc</span><span>(</span><span>)</span><span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>Task</span> task <span>:</span> list<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"组长 {} 在审批 {} 任务"</span><span>,</span> task<span>.</span><span>getAssignee</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>//组长审批的时候，如果是同意，需要指定经理的 id</span>
+        map<span>.</span><span>put</span><span>(</span><span>"managerTask"</span><span>,</span> managerId<span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"checkResult"</span><span>,</span> <span>"通过"</span><span>)</span><span>;</span>
+        taskService<span>.</span><span>complete</span><span>(</span>task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>通过组长的 id 查询组长的任务，同意的话，需要指定经理，也就是这个流程下一步该由谁来处理。</p>
+<p>拒绝的代码如下：</p>
+<div><pre><code><span>/**
+ * 组长审批-拒绝
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>zuZhangReject</span><span>(</span><span>)</span> <span>{</span>
+    <span>List</span><span><span>&lt;</span><span>Task</span><span>></span></span> list <span>=</span> taskService<span>.</span><span>createTaskQuery</span><span>(</span><span>)</span><span>.</span><span>taskAssignee</span><span>(</span>zuzhangId<span>)</span><span>.</span><span>orderByTaskId</span><span>(</span><span>)</span><span>.</span><span>desc</span><span>(</span><span>)</span><span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>Task</span> task <span>:</span> list<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"组长 {} 在审批 {} 任务"</span><span>,</span> task<span>.</span><span>getAssignee</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>//组长审批的时候，如果是拒绝，就不需要指定经理的 id</span>
+        map<span>.</span><span>put</span><span>(</span><span>"checkResult"</span><span>,</span> <span>"拒绝"</span><span>)</span><span>;</span>
+        taskService<span>.</span><span>complete</span><span>(</span>task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>拒绝的话，就没那么多事了，直接设置 checkResult 为拒绝即可。</p>
+<p>假设这里执行了同意，那么流程图如下：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db88301484841.png" alt="Spring Boot 整合流程引擎 Flowable，so easy_spring boot_08"></p>
+<h3 id="_4-6-经理审批" tabindex="-1"> 4.6 经理审批</h3>
+<p>经理审批和组长审批差不多，只不过经理这里是最后一步了，不需要再指定下一位处理人了，同意的代码如下：</p>
+<div><pre><code><span>/**
+ * 经理审批自己的任务-批准
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>managerApprove</span><span>(</span><span>)</span> <span>{</span>
+    <span>List</span><span><span>&lt;</span><span>Task</span><span>></span></span> list <span>=</span> taskService<span>.</span><span>createTaskQuery</span><span>(</span><span>)</span><span>.</span><span>taskAssignee</span><span>(</span>managerId<span>)</span><span>.</span><span>orderByTaskId</span><span>(</span><span>)</span><span>.</span><span>desc</span><span>(</span><span>)</span><span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>Task</span> task <span>:</span> list<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"经理 {} 在审批 {} 任务"</span><span>,</span> task<span>.</span><span>getAssignee</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"checkResult"</span><span>,</span> <span>"通过"</span><span>)</span><span>;</span>
+        taskService<span>.</span><span>complete</span><span>(</span>task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>拒绝代码如下：</p>
+<div><pre><code><span>/**
+ * 经理审批自己的任务-拒绝
+ */</span>
+<span>@Test</span>
+<span>void</span> <span>managerReject</span><span>(</span><span>)</span> <span>{</span>
+    <span>List</span><span><span>&lt;</span><span>Task</span><span>></span></span> list <span>=</span> taskService<span>.</span><span>createTaskQuery</span><span>(</span><span>)</span><span>.</span><span>taskAssignee</span><span>(</span>managerId<span>)</span><span>.</span><span>orderByTaskId</span><span>(</span><span>)</span><span>.</span><span>desc</span><span>(</span><span>)</span><span>.</span><span>list</span><span>(</span><span>)</span><span>;</span>
+    <span>for</span> <span>(</span><span>Task</span> task <span>:</span> list<span>)</span> <span>{</span>
+        logger<span>.</span><span>info</span><span>(</span><span>"经理 {} 在审批 {} 任务"</span><span>,</span> task<span>.</span><span>getAssignee</span><span>(</span><span>)</span><span>,</span> task<span>.</span><span>getId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> map <span>=</span> <span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        map<span>.</span><span>put</span><span>(</span><span>"checkResult"</span><span>,</span> <span>"拒绝"</span><span>)</span><span>;</span>
+        taskService<span>.</span><span>complete</span><span>(</span>task<span>.</span><span>getId</span><span>(</span><span>)</span><span>,</span> map<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_4-7-拒绝流程" tabindex="-1"> 4.7 拒绝流程</h3>
+<p>如果组长拒绝了或者经理拒绝了，我们也有相应的处理方案，首先在 XML 流程文件定义时，如下：</p>
+<div><pre><code><span><span><span>&lt;</span>serviceTask</span> <span>id</span><span><span>=</span><span>"</span>sendMail<span>"</span></span> <span><span>flowable:</span>exclusive</span><span><span>=</span><span>"</span>true<span>"</span></span> <span>name</span><span><span>=</span><span>"</span>发送失败提示<span>"</span></span> <span>isForCompensation</span><span><span>=</span><span>"</span>true<span>"</span></span> <span><span>flowable:</span>class</span><span><span>=</span><span>"</span>org.javaboy.flowable.AskForLeaveFail<span>"</span></span><span>/></span></span>1.
+</code></pre><div aria-hidden="true"><div></div></div></div><p>如果请假被拒绝，会进入到这个 serviceTask，serviceTask 对应的处理类是 org.javaboy.flowable.AskForLeaveFail，该类的代码如下：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>AskForLeaveFail</span> <span>implements</span> <span>JavaDelegate</span> <span>{</span>
+    <span>@Override</span>
+    <span>public</span> <span>void</span> <span>execute</span><span>(</span><span>DelegateExecution</span> execution<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"请假失败。。。"</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>也就是请假失败会进入到这个方法中，现在我们就可以在这个方法中该干嘛干嘛了。</p>
+<h2 id="启动报错解决" tabindex="-1"> 启动报错解决</h2>
+<h3 id="flowable启动自动建表失败table-mes-design-test-act-ge-property-doesn-t-exist" tabindex="-1"> flowable启动自动建表失败Table ‘mes_design_test.act_ge_property‘ doesn‘t exist</h3>
+<div><pre><code><span>--</span><span>-</span> <span>[</span>           main<span>]</span> <span><span>o<span>.</span>f<span>.</span>c<span>.</span>e<span>.</span>impl<span>.</span>db<span>.</span></span>CommonDbSchemaManager</span>    <span>:</span> <span>Could</span> not get property from table ACT_GE_PROPERTY
+ 
+<span><span>java<span>.</span>sql<span>.</span></span>SQLSyntaxErrorException</span><span>:</span> <span>Table</span> 'mes_design_test<span>.</span>act_ge_property<span>' doesn'</span>t exist
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><strong>解决</strong></p>
+<p>我的数据库是MySQL8。</p>
+<p>​    经过查询和尝试，原因是：在这个数据库里面，已经有一个数据库里面有activiti的这些表了，它检索的时候全库检索查到它了，所以flowable不去建表了，但是我们指定的这个schema里卖弄还是空的，所以它报了找不到表。</p>
+<p>​    解决方法：mysql的链接上加上参数如下，让本schema成为默认的schema。</p>
+<div><pre><code><span>&amp;</span>nullCatalogMeansCurrent<span>=</span><span>true</span>
+</code></pre><div aria-hidden="true"><div></div></div></div>]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013239_62852db7da56536801.png" type="image/png"/>
+    </item>
     <item>
       <title>Thanox 情景模式</title>
       <link>https://blog.ciberviler.top/daily/Thanox%E6%83%85%E6%99%AF%E6%A8%A1%E5%BC%8F.html</link>
@@ -26387,480 +26692,6 @@ conn <span>/</span><span>as</span> sysdba
 <div><pre><code><span>docker</span> restart oracle11g
 </code></pre><div aria-hidden="true"><div></div></div></div><p>现在可以用<code>system</code>用户连接,密码:<code>system</code></p>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>使用 easypoi 导出 excel 实现动态列</title>
-      <link>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html</link>
-      <guid>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8easypoi%E5%AF%BC%E5%87%BAexcel%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%88%97.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">使用 easypoi 导出 excel 实现动态列</source>
-      <description>使用 easypoi 导出 excel 实现动态列</description>
-      <category>Java</category>
-      <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="使用-easypoi-导出-excel-实现动态列" tabindex="-1"> 使用 easypoi 导出 excel 实现动态列</h1>
-<h3 id="说明" tabindex="-1"> 说明</h3>
-<ul>
-<li>使用的是easypoi进行导出</li>
-<li>行头是动态生成</li>
-<li>依据key进行列匹配，进行数据填充</li>
-<li>第一列进行纵向动态合并</li>
-</ul>
-<h3 id="工具依赖" tabindex="-1"> 工具依赖</h3>
-<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
-    <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.afterturn<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-   <span><span><span>&lt;</span>artifactId</span><span>></span></span>easypoi-base<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-   <span><span><span>&lt;</span>version</span><span>></span></span>3.2.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-<span><span><span>&lt;</span>dependency</span><span>></span></span>
-    <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.afterturn<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-   <span><span><span>&lt;</span>artifactId</span><span>></span></span>easypoi-annotation<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-   <span><span><span>&lt;</span>version</span><span>></span></span>3.2.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-<span><span><span>&lt;</span>dependency</span><span>></span></span>
-    <span><span><span>&lt;</span>groupId</span><span>></span></span>cn.afterturn<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-   <span><span><span>&lt;</span>artifactId</span><span>></span></span>easypoi-web<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-   <span><span><span>&lt;</span>version</span><span>></span></span>3.2.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="实现效果" tabindex="-1"> 实现效果</h3>
-<p>变更前样式</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4csic7r2ZwEQBWEnsC0k4Aaq6alNV28H5Gl7iaAo7NIxRn5liayjQTxCyuA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
-<p>变更后样式</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4cAUvrUmnGPYnulOgLpRflnhMsedEKSolpnsNMZicckf5ne7WITAIOZsA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
-<h3 id="代码解析" tabindex="-1"> 代码解析</h3>
-<h5 id="动态生成列头" tabindex="-1"> 动态生成列头</h5>
-<div><pre><code>  <span>private</span> <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> <span>dynamicNewAddExcel</span><span>(</span><span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo<span>)</span> <span>{</span>
-   <span>//表头的集合，用于添加表头</span>
-    <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> entityList <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-
- <span>//ExcelExportEntity构造参数【第一个是列名头的统计字段,第二个是需要指定的一个key在填充数据的时候是需要根据这个key进行填充值,第三个参数是列宽】</span>
-    <span>ExcelExportEntity</span> platformXh <span>=</span> <span>new</span> <span>ExcelExportEntity</span><span>(</span><span>"统计字段1"</span><span>,</span> <span>"statisKey1"</span><span>,</span> <span>30</span><span>)</span><span>;</span>
-    <span>//列的合并(纵向列的同名称会进行合并,效果见上图的平台名称的变化)</span>
-    platformXh<span>.</span><span>setMergeVertical</span><span>(</span><span>true</span><span>)</span><span>;</span>
-    entityList<span>.</span><span>add</span><span>(</span>platformXh<span>)</span><span>;</span>
-
-    <span>ExcelExportEntity</span> statisDateXh <span>=</span> <span>new</span> <span>ExcelExportEntity</span><span>(</span><span>"统计字段2"</span><span>,</span> <span>"statisKey2"</span><span>,</span> <span>30</span><span>)</span><span>;</span>
-    entityList<span>.</span><span>add</span><span>(</span>statisDateXh<span>)</span><span>;</span>
-
-    <span>//参数信息--[用于动态拼接列头]</span>
-    <span>final</span> <span>Iterator</span><span><span>&lt;</span><span>String</span><span>></span></span> iterator <span>=</span> paramInfo<span>.</span><span>keySet</span><span>(</span><span>)</span><span>.</span><span>iterator</span><span>(</span><span>)</span><span>;</span>
-    <span>while</span> <span>(</span>iterator<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span> <span>{</span>
-      <span>final</span> <span>String</span> paramKeyStr <span>=</span> iterator<span>.</span><span>next</span><span>(</span><span>)</span><span>;</span>
-      <span>final</span> <span>String</span> paramNameStr <span>=</span> paramInfo<span>.</span><span>get</span><span>(</span>paramKeyStr<span>)</span><span>.</span><span>getDataName</span><span>(</span><span>)</span><span>;</span>
-      <span>//列头由参数汉字名称,参数key为列key</span>
-      entityList<span>.</span><span>add</span><span>(</span><span>new</span> <span>ExcelExportEntity</span><span>(</span>paramNameStr<span>,</span> paramKeyStr<span>,</span> <span>30</span><span>)</span><span>)</span><span>;</span>
-    <span>}</span>
-    <span>return</span> entityList<span>;</span>
-  <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="动态填充数据" tabindex="-1"> 动态填充数据</h5>
-<div><pre><code><span>private</span> <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> <span>dynamicListDataByKey</span><span>(</span><span>List</span><span><span>&lt;</span><span>PlatformIncomeRespDTO</span><span>></span></span> statisData<span>)</span> <span>{</span>
-    <span>//参数类型</span>
-    <span>final</span> <span>Set</span><span><span>&lt;</span><span>String</span><span>></span></span> statisParamKey <span>=</span> statisData<span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>.</span><span>getParamInfo</span><span>(</span><span>)</span><span>.</span><span>keySet</span><span>(</span><span>)</span><span>;</span>
-    <span>final</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> statisDate <span>=</span> statisData<span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>.</span><span>getStatisDate</span><span>(</span><span>)</span><span>;</span>
-    <span>final</span> <span>int</span> platformNum <span>=</span> statisData<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>
-
-    <span>//最终的数据</span>
-    <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> datas <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-    <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> platformNum<span>;</span> i<span>++</span><span>)</span> <span>{</span>
-      <span>for</span> <span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j <span>&lt;</span> statisDate<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span> j<span>++</span><span>)</span> <span>{</span>
-        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> hashMap <span>=</span> <span>new</span> <span>LinkedHashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>10</span><span>)</span><span>;</span>
-        <span>//这个是依据key进行数据的填充,(根据前面填写的statisKey1进行填充数据)</span>
-        hashMap<span>.</span><span>put</span><span>(</span><span>"statisKey1"</span><span>,</span> statisData<span>.</span><span>get</span><span>(</span>i<span>)</span><span>.</span><span>getPlatformNickName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>String</span> statisDateStr <span>=</span> statisDate<span>.</span><span>get</span><span>(</span>j<span>)</span><span>;</span>
-         <span>//这个是依据key进行数据的填充,(根据前面填写的statisKey2进行填充数据)</span>
-        hashMap<span>.</span><span>put</span><span>(</span><span>"statisKey2"</span><span>,</span> statisDateStr<span>)</span><span>;</span>
-        <span>//参数的验证</span>
-        <span>for</span> <span>(</span><span>String</span> paramKey <span>:</span> statisParamKey<span>)</span> <span>{</span>
-          <span>for</span> <span>(</span><span>BiPlatformStatisRespDTO</span> paramData <span>:</span> statisData<span>.</span><span>get</span><span>(</span>i<span>)</span><span>.</span><span>getStatisData</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span>j<span>)</span><span>)</span> <span>{</span>
-            <span>if</span> <span>(</span>paramKey<span>.</span><span>equals</span><span>(</span>paramData<span>.</span><span>getParamKey</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
-              hashMap<span>.</span><span>put</span><span>(</span>paramData<span>.</span><span>getParamKey</span><span>(</span><span>)</span><span>,</span> paramData<span>.</span><span>getValue</span><span>(</span><span>)</span> <span>+</span> <span>"("</span> <span>+</span> paramData<span>.</span><span>getRateValue</span><span>(</span><span>)</span> <span>+</span> <span>")"</span><span>)</span><span>;</span>
-            <span>}</span>
-          <span>}</span>
-        <span>}</span>
-        datas<span>.</span><span>add</span><span>(</span>hashMap<span>)</span><span>;</span>
-      <span>}</span>
-    <span>}</span>
-    <span>return</span> datas<span>;</span>
-  <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="excel的导出" tabindex="-1"> excel的导出</h5>
-<div><pre><code><span>//statisData就是我们查询出来的数据</span>
-<span>public</span> <span>void</span> <span>downloadPlatformIncomeContrast</span><span>(</span><span>List</span><span><span>&lt;</span><span>PlatformIncomeRespDTO</span><span>></span></span> statisData<span>,</span> <span>HttpServletResponse</span> response<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span><span>CollectionUtils</span><span>.</span><span>isEmpty</span><span>(</span>statisData<span>)</span><span>)</span> <span>{</span>
-      <span>return</span><span>;</span>
-    <span>}</span>
-    <span>//获取参数信息</span>
-    <span>final</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo <span>=</span> statisData<span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>.</span><span>getParamInfo</span><span>(</span><span>)</span><span>;</span>
-
-    <span>//拼装列头</span>
-    <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> colList <span>=</span> <span>this</span><span>.</span><span>dynamicNewAddExcel</span><span>(</span>paramInfo<span>)</span><span>;</span>
-
-    <span>//数据拼装</span>
-    <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> list <span>=</span> <span>this</span><span>.</span><span>dynamicListDataByKey</span><span>(</span>statisData<span>)</span><span>;</span>
-    <span>final</span> <span>String</span> xlsFileName <span>=</span> <span>DateHelper</span><span>.</span><span>getNowString</span><span>(</span><span>FormatUnit</span><span>.</span>yyyyMMddHHmmss<span>,</span> <span>true</span><span>)</span> <span>+</span> <span>".xls"</span><span>;</span>
-    <span>final</span> <span>Workbook</span> workbook <span>=</span> <span>ExcelExportUtil</span><span>.</span><span>exportExcel</span><span>(</span><span>new</span> <span>ExportParams</span><span>(</span><span>)</span><span>,</span> colList<span>,</span> list<span>)</span><span>;</span>
-
-    <span>//动态合并纵列[mergeMap key列索引(从0开始),value依赖的列,没有传空,startRow 开始行(从零开始)]</span>
-    <span>//Map&lt;Integer, int[]> mer = new HashMap&lt;>();</span>
-    <span>//mer.put(0, new int[]{});</span>
-    <span>//PoiMergeCellUtil.mergeCells(workbook.getSheetAt(0), mer, 1);</span>
-    <span>EasypoiUtil</span><span>.</span><span>downLoadExcel</span><span>(</span>xlsFileName<span>,</span> response<span>,</span> workbook<span>)</span><span>;</span>
-  <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>EasypoiUtil工具类</p>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>downLoadExcel</span><span>(</span><span>String</span> fileName<span>,</span> <span>HttpServletResponse</span> response<span>,</span> <span>Workbook</span> workbook<span>)</span> <span>{</span>
-    <span>try</span> <span>{</span>
-      response<span>.</span><span>setCharacterEncoding</span><span>(</span><span>"UTF-8"</span><span>)</span><span>;</span>
-      response<span>.</span><span>setHeader</span><span>(</span><span>"content-Type"</span><span>,</span> <span>"application/vnd.ms-excel"</span><span>)</span><span>;</span>
-      response<span>.</span><span>setHeader</span><span>(</span><span>"Content-Disposition"</span><span>,</span>
-          <span>"attachment;filename="</span> <span>+</span> <span>URLEncoder</span><span>.</span><span>encode</span><span>(</span>fileName<span>,</span> <span>"UTF-8"</span><span>)</span><span>)</span><span>;</span>
-      workbook<span>.</span><span>write</span><span>(</span>response<span>.</span><span>getOutputStream</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>}</span> <span>catch</span> <span>(</span><span>IOException</span> e<span>)</span> <span>{</span>
-      <span>throw</span> <span>new</span> <span>RuntimeException</span><span>(</span>e<span>.</span><span>getMessage</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>}</span>
-  <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>PlatformIncomeRespDTO</p>
-<div><pre><code><span>@Data</span>
-<span>@NoArgsConstructor</span>
-<span>@AllArgsConstructor</span>
-<span>public</span> <span>class</span> <span>PlatformIncomeRespDTO</span> <span>implements</span> <span>Serializable</span> <span>{</span>
-
-  <span>private</span> <span>static</span> <span>final</span> <span>long</span> serialVersionUID <span>=</span> <span>1100499105160261425L</span><span>;</span>
-
-
-  <span>/**
-   * 平台别名
-   */</span>
-  <span>private</span> <span>String</span> platformNickName<span>;</span>
-
-  <span>/*统计时间*/</span>
-  <span>private</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> statisDate<span>;</span>
-
-  <span>/*查询参数信息--[用户收入来源统计导出使用]*/</span>
-  <span>private</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo<span>;</span>
-
-
-  <span>/*统计数据*/</span>
-  <span>private</span> <span>List</span><span><span>&lt;</span><span>List</span><span>&lt;</span><span>BiPlatformStatisRespDTO</span><span>></span><span>></span></span> statisData<span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>PlatformStatisParamRespData</p>
-<div><pre><code><span>@Data</span>
-<span>@NoArgsConstructor</span>
-<span>@AllArgsConstructor</span>
-<span>public</span> <span>class</span> <span>PlatformStatisParamRespData</span> <span>implements</span> <span>Serializable</span> <span>{</span>
-
-  <span>private</span> <span>static</span> <span>final</span> <span>long</span> serialVersionUID <span>=</span> <span>4263523446154995471L</span><span>;</span>
-
-  <span>/**
-   * 参数名称
-   */</span>
-  <span>private</span> <span>String</span> dataName<span>;</span>
-
-  <span>/**
-   * 参数key
-   */</span>
-  <span>private</span> <span>String</span> dateKey<span>;</span>
-
-  <span>/**
-   * 参数描述
-   */</span>
-  <span>private</span> <span>String</span> dateDesc<span>;</span>
-
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>BiPlatformStatisRespDTO</p>
-<div><pre><code><span>@Data</span>
-<span>@AllArgsConstructor</span>
-<span>public</span> <span>class</span> <span>BiPlatformStatisRespDTO</span> <span>implements</span> <span>Serializable</span> <span>{</span>
-
-  <span>private</span> <span>static</span> <span>final</span> <span>long</span> serialVersionUID <span>=</span> <span>6070471415344415351L</span><span>;</span>
-
-  <span>@Excel</span><span>(</span>name <span>=</span> <span>"统计字段"</span><span>,</span> orderNum <span>=</span> <span>"1"</span><span>)</span>
-  <span>private</span> <span>String</span> param<span>;</span>
-
-  <span>/**
-   * 参数的key
-   */</span>
-  <span>private</span> <span>String</span> paramKey<span>;</span>
-
-  <span>/**
-   * 参数描述
-   */</span>
-  <span>private</span> <span>String</span> paramDesc<span>;</span>
-
-  <span>private</span> <span>String</span> startDate<span>;</span>
-
-  <span>private</span> <span>String</span> endDate<span>;</span>
-
-  <span>@Excel</span><span>(</span>name <span>=</span> <span>"统计数据"</span><span>,</span> orderNum <span>=</span> <span>"2"</span><span>)</span>
-  <span>private</span> <span>String</span> value<span>;</span>
-
-  <span>private</span> <span>String</span> rateValue<span>;</span>
-
-  <span>private</span> <span>Long</span> id<span>;</span>
-
-  <span>private</span> <span>Integer</span> riseOrFall<span>;</span>
-
-  <span>public</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>String</span> startDate<span>,</span> <span>String</span> paramKey<span>,</span> <span>String</span> value<span>)</span> <span>{</span>
-    <span>this</span><span>.</span>paramKey <span>=</span> paramKey<span>;</span>
-    <span>this</span><span>.</span>startDate <span>=</span> startDate<span>;</span>
-    <span>this</span><span>.</span>value <span>=</span> value<span>;</span>
-  <span>}</span>
-
-  <span>public</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>)</span> <span>{</span>
-  <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="测试用例" tabindex="-1"> 测试用例</h3>
-<h5 id="测试特殊说明" tabindex="-1"> 测试特殊说明</h5>
-<p>导出的结果有个控制,是在拼装的时候没有填充此数据,不影响整体效果。</p>
-<h5 id="测试结果示例" tabindex="-1"> 测试结果示例</h5>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4cOoQzAXu4ZIlniaJ4ustt2RUfYS3yu0MCGtgeCBicX0StNMH5x36MXnDQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
-<h5 id="测试数据json示例" tabindex="-1"> 测试数据json示例</h5>
-<div><pre><code><span>[</span>
-    <span>{</span>
-        <span>"paramInfo"</span><span>:</span> <span>{</span>
-            <span>"userCount"</span><span>:</span> <span>{</span>
-                <span>"dataName"</span><span>:</span> <span>"用户数"</span><span>,</span> 
-                <span>"dateDesc"</span><span>:</span> <span>"用户信息"</span><span>,</span> 
-                <span>"dateKey"</span><span>:</span> <span>"userCount"</span>
-            <span>}</span><span>,</span> 
-            <span>"friendsCount"</span><span>:</span> <span>{</span>
-                <span>"dataName"</span><span>:</span> <span>"好友数"</span><span>,</span> 
-                <span>"dateDesc"</span><span>:</span> <span>"好友信息"</span><span>,</span> 
-                <span>"dateKey"</span><span>:</span> <span>"friendsCount"</span>
-            <span>}</span>
-        <span>}</span><span>,</span> 
-        <span>"platformNickName"</span><span>:</span> <span>"aaa"</span><span>,</span> 
-        <span>"statisData"</span><span>:</span> <span>[</span>
-            <span>[</span>
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"userCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-26"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"100"</span>
-                <span>}</span><span>,</span> 
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"friendsCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-26"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"200"</span>
-                <span>}</span>
-            <span>]</span><span>,</span> 
-            <span>[</span>
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"userCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-27"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"300"</span>
-                <span>}</span><span>,</span> 
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"friendsCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-27"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"400"</span>
-                <span>}</span>
-            <span>]</span>
-        <span>]</span><span>,</span> 
-        <span>"statisDate"</span><span>:</span> <span>[</span>
-            <span>"2019-12-26"</span><span>,</span> 
-            <span>"2019-12-27"</span>
-        <span>]</span>
-    <span>}</span><span>,</span> 
-    <span>{</span>
-        <span>"paramInfo"</span><span>:</span> <span>{</span>
-            <span>"userCount"</span><span>:</span> <span>{</span>
-                <span>"dataName"</span><span>:</span> <span>"用户数"</span><span>,</span> 
-                <span>"dateDesc"</span><span>:</span> <span>"用户信息"</span><span>,</span> 
-                <span>"dateKey"</span><span>:</span> <span>"userCount"</span>
-            <span>}</span><span>,</span> 
-            <span>"friendsCount"</span><span>:</span> <span>{</span>
-                <span>"dataName"</span><span>:</span> <span>"好友数"</span><span>,</span> 
-                <span>"dateDesc"</span><span>:</span> <span>"好友信息"</span><span>,</span> 
-                <span>"dateKey"</span><span>:</span> <span>"friendsCount"</span>
-            <span>}</span>
-        <span>}</span><span>,</span> 
-        <span>"platformNickName"</span><span>:</span> <span>"bbb"</span><span>,</span> 
-        <span>"statisData"</span><span>:</span> <span>[</span>
-            <span>[</span>
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"userCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-26"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"500"</span>
-                <span>}</span><span>,</span> 
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"friendsCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-26"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"600"</span>
-                <span>}</span>
-            <span>]</span><span>,</span> 
-            <span>[</span>
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"userCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-27"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"700"</span>
-                <span>}</span><span>,</span> 
-                <span>{</span>
-                    <span>"paramKey"</span><span>:</span> <span>"friendsCount"</span><span>,</span> 
-                    <span>"startDate"</span><span>:</span> <span>"2019-12-27"</span><span>,</span> 
-                    <span>"value"</span><span>:</span> <span>"800"</span>
-                <span>}</span>
-            <span>]</span>
-        <span>]</span><span>,</span> 
-        <span>"statisDate"</span><span>:</span> <span>[</span>
-            <span>"2019-12-26"</span><span>,</span> 
-            <span>"2019-12-27"</span>
-        <span>]</span>
-    <span>}</span>
-<span>]</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="测试用例代码" tabindex="-1"> 测试用例代码</h5>
-<div><pre><code><span>public</span> <span>class</span> <span>Simple</span> <span>{</span>
-
-  <span>/**
-   * @Description: 拼接表头
-   * @Param: paramInfo :表头信息
-   * <span>@return</span>: java.util.List<span><span><span>&lt;</span>cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity</span><span>></span></span>
-   * @Author: peikunkun
-   * @Date: 2019/12/26 0026 上午 10:42
-   */</span>
-  <span>private</span> <span>static</span> <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> <span>dynamicNewAddExcel</span><span>(</span><span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo<span>)</span> <span>{</span>
-    <span>//表头的集合，用于添加表头</span>
-    <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> entityList <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-
-    <span>//ExcelExportEntity构造参数【第一个是列名头的统计字段,第二个是需要指定的一个key在填充数据的时候是需要根据这个key进行填充值,第三个参数是列宽】</span>
-    <span>ExcelExportEntity</span> platformXh <span>=</span> <span>new</span> <span>ExcelExportEntity</span><span>(</span><span>"统计字段1"</span><span>,</span> <span>"statisKey1"</span><span>,</span> <span>30</span><span>)</span><span>;</span>
-    <span>//列的合并(纵向列的同名称会进行合并,效果见上图的平台名称的变化)</span>
-    platformXh<span>.</span><span>setMergeVertical</span><span>(</span><span>true</span><span>)</span><span>;</span>
-    entityList<span>.</span><span>add</span><span>(</span>platformXh<span>)</span><span>;</span>
-
-    <span>ExcelExportEntity</span> statisDateXh <span>=</span> <span>new</span> <span>ExcelExportEntity</span><span>(</span><span>"统计字段2"</span><span>,</span> <span>"statisKey2"</span><span>,</span> <span>30</span><span>)</span><span>;</span>
-    entityList<span>.</span><span>add</span><span>(</span>statisDateXh<span>)</span><span>;</span>
-
-    <span>//参数信息--[用于动态拼接列头]</span>
-    <span>final</span> <span>Iterator</span><span><span>&lt;</span><span>String</span><span>></span></span> iterator <span>=</span> paramInfo<span>.</span><span>keySet</span><span>(</span><span>)</span><span>.</span><span>iterator</span><span>(</span><span>)</span><span>;</span>
-    <span>while</span> <span>(</span>iterator<span>.</span><span>hasNext</span><span>(</span><span>)</span><span>)</span> <span>{</span>
-      <span>final</span> <span>String</span> paramKeyStr <span>=</span> iterator<span>.</span><span>next</span><span>(</span><span>)</span><span>;</span>
-      <span>final</span> <span>String</span> paramNameStr <span>=</span> paramInfo<span>.</span><span>get</span><span>(</span>paramKeyStr<span>)</span><span>.</span><span>getDataName</span><span>(</span><span>)</span><span>;</span>
-      <span>//列头由参数汉字名称,参数key为列key</span>
-      entityList<span>.</span><span>add</span><span>(</span><span>new</span> <span>ExcelExportEntity</span><span>(</span>paramNameStr<span>,</span> paramKeyStr<span>,</span> <span>30</span><span>)</span><span>)</span><span>;</span>
-    <span>}</span>
-    <span>return</span> entityList<span>;</span>
-  <span>}</span>
-
-
-  <span>/**
-   * @Description: 拼接数据
-   * @Param: statisData :拼接数据
-   * @Author: peikunkun
-   * @Date: 2019/12/26 0026 上午 10:42
-   */</span>
-  <span>private</span> <span>static</span> <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> <span>dynamicListDataByKey</span><span>(</span><span>List</span><span><span>&lt;</span><span>PlatformIncomeRespDTO</span><span>></span></span> statisData<span>)</span> <span>{</span>
-    <span>//参数类型</span>
-    <span>final</span> <span>Set</span><span><span>&lt;</span><span>String</span><span>></span></span> statisParamKey <span>=</span> statisData<span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>.</span><span>getParamInfo</span><span>(</span><span>)</span><span>.</span><span>keySet</span><span>(</span><span>)</span><span>;</span>
-    <span>final</span> <span>List</span><span><span>&lt;</span><span>String</span><span>></span></span> statisDate <span>=</span> statisData<span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>.</span><span>getStatisDate</span><span>(</span><span>)</span><span>;</span>
-    <span>final</span> <span>int</span> platformNum <span>=</span> statisData<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>
-
-    <span>//最终的数据</span>
-    <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> datas <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-    <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> platformNum<span>;</span> i<span>++</span><span>)</span> <span>{</span>
-      <span>for</span> <span>(</span><span>int</span> j <span>=</span> <span>0</span><span>;</span> j <span>&lt;</span> statisDate<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span> j<span>++</span><span>)</span> <span>{</span>
-        <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> hashMap <span>=</span> <span>new</span> <span>LinkedHashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>10</span><span>)</span><span>;</span>
-        <span>//这个是依据key进行数据的填充,(根据前面填写的statisKey1进行填充数据)</span>
-        hashMap<span>.</span><span>put</span><span>(</span><span>"statisKey1"</span><span>,</span> statisData<span>.</span><span>get</span><span>(</span>i<span>)</span><span>.</span><span>getPlatformNickName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>String</span> statisDateStr <span>=</span> statisDate<span>.</span><span>get</span><span>(</span>j<span>)</span><span>;</span>
-        <span>//这个是依据key进行数据的填充,(根据前面填写的statisKey2进行填充  数据)</span>
-        hashMap<span>.</span><span>put</span><span>(</span><span>"statisKey2"</span><span>,</span> statisDateStr<span>)</span><span>;</span>
-        <span>//参数的验证</span>
-        <span>for</span> <span>(</span><span>String</span> paramKey <span>:</span> statisParamKey<span>)</span> <span>{</span>
-          <span>for</span> <span>(</span><span>BiPlatformStatisRespDTO</span> paramData <span>:</span> statisData<span>.</span><span>get</span><span>(</span>i<span>)</span><span>.</span><span>getStatisData</span><span>(</span><span>)</span><span>.</span><span>get</span><span>(</span>j<span>)</span><span>)</span> <span>{</span>
-            <span>if</span> <span>(</span>paramKey<span>.</span><span>equals</span><span>(</span>paramData<span>.</span><span>getParamKey</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
-              hashMap<span>.</span><span>put</span><span>(</span>paramData<span>.</span><span>getParamKey</span><span>(</span><span>)</span><span>,</span> paramData<span>.</span><span>getValue</span><span>(</span><span>)</span> <span>+</span> <span>"("</span> <span>+</span> paramData<span>.</span><span>getRateValue</span><span>(</span><span>)</span> <span>+</span> <span>")"</span><span>)</span><span>;</span>
-            <span>}</span>
-          <span>}</span>
-        <span>}</span>
-        datas<span>.</span><span>add</span><span>(</span>hashMap<span>)</span><span>;</span>
-      <span>}</span>
-    <span>}</span>
-    <span>return</span> datas<span>;</span>
-  <span>}</span>
-
-
-  <span>@Test</span>
-  <span>public</span> <span>void</span> <span>Administrator_84_20191226095523</span><span>(</span><span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"欢迎使用单元测试方法【Administrator_84()_20191226095523】"</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"此方法测试描述：【】"</span><span>)</span><span>;</span>
-    <span>//拼装第一个数据---------------------------------------------------------------------</span>
-    <span>final</span> <span>PlatformIncomeRespDTO</span> platformIncomeRespDTO1 <span>=</span> <span>new</span> <span>PlatformIncomeRespDTO</span><span>(</span><span>)</span><span>;</span>
-    platformIncomeRespDTO1<span>.</span><span>setPlatformNickName</span><span>(</span><span>"aaa"</span><span>)</span><span>;</span>
-    <span>//拼装时间维度</span>
-    platformIncomeRespDTO1<span>.</span><span>setStatisDate</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"2019-12-27"</span><span>)</span><span>)</span><span>;</span>
-    <span>//拼装头信息</span>
-    <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo1<span>=</span><span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-    paramInfo1<span>.</span><span>put</span><span>(</span><span>"userCount"</span><span>,</span> <span>new</span> <span>PlatformStatisParamRespData</span><span>(</span><span>"用户数"</span><span>,</span><span>"userCount"</span><span>,</span><span>"用户信息"</span><span>)</span><span>)</span><span>;</span>
-    paramInfo1<span>.</span><span>put</span><span>(</span><span>"friendsCount"</span><span>,</span> <span>new</span> <span>PlatformStatisParamRespData</span><span>(</span><span>"好友数"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"好友信息"</span><span>)</span><span>)</span><span>;</span>
-    platformIncomeRespDTO1<span>.</span><span>setParamInfo</span><span>(</span>paramInfo1<span>)</span><span>;</span>
-    <span>//拼装数据</span>
-    <span>final</span> <span>ArrayList</span><span><span>&lt;</span><span>List</span><span>&lt;</span><span>BiPlatformStatisRespDTO</span><span>></span><span>></span></span> data1 <span>=</span> <span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>)</span><span>;</span>
-    data1<span>.</span><span>add</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"userCount"</span><span>,</span><span>"100"</span><span>)</span><span>,</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"200"</span><span>)</span><span>)</span><span>)</span><span>;</span>
-    data1<span>.</span><span>add</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-27"</span><span>,</span><span>"userCount"</span><span>,</span><span>"300"</span><span>)</span><span>,</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-27"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"400"</span><span>)</span><span>)</span><span>)</span><span>;</span>
-    platformIncomeRespDTO1<span>.</span><span>setStatisData</span><span>(</span>data1<span>)</span><span>;</span>
-
-
-    <span>//拼装第二个数据---------------------------------------------------------------------</span>
-    <span>final</span> <span>PlatformIncomeRespDTO</span> platformIncomeRespDTO2 <span>=</span> <span>new</span> <span>PlatformIncomeRespDTO</span><span>(</span><span>)</span><span>;</span>
-    platformIncomeRespDTO2<span>.</span><span>setPlatformNickName</span><span>(</span><span>"bbb"</span><span>)</span><span>;</span>
-    <span>//拼装时间维度</span>
-    platformIncomeRespDTO2<span>.</span><span>setStatisDate</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"2019-12-27"</span><span>)</span><span>)</span><span>;</span>
-    <span>//拼装头信息</span>
-    <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span> <span>PlatformStatisParamRespData</span><span>></span></span> paramInfo2<span>=</span><span>new</span> <span>HashMap</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
-    paramInfo2<span>.</span><span>put</span><span>(</span><span>"userCount"</span><span>,</span> <span>new</span> <span>PlatformStatisParamRespData</span><span>(</span><span>"用户数"</span><span>,</span><span>"userCount"</span><span>,</span><span>"用户信息"</span><span>)</span><span>)</span><span>;</span>
-    paramInfo2<span>.</span><span>put</span><span>(</span><span>"friendsCount"</span><span>,</span> <span>new</span> <span>PlatformStatisParamRespData</span><span>(</span><span>"好友数"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"好友信息"</span><span>)</span><span>)</span><span>;</span>
-    platformIncomeRespDTO2<span>.</span><span>setParamInfo</span><span>(</span>paramInfo2<span>)</span><span>;</span>
-
-    <span>//拼装数据</span>
-    <span>final</span> <span>ArrayList</span><span><span>&lt;</span><span>List</span><span>&lt;</span><span>BiPlatformStatisRespDTO</span><span>></span><span>></span></span> data2 <span>=</span> <span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>)</span><span>;</span>
-    data2<span>.</span><span>add</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"userCount"</span><span>,</span><span>"500"</span><span>)</span><span>,</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-26"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"600"</span><span>)</span><span>)</span><span>)</span><span>;</span>
-    data2<span>.</span><span>add</span><span>(</span><span>Lists</span><span>.</span><span>newArrayList</span><span>(</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-27"</span><span>,</span><span>"userCount"</span><span>,</span><span>"700"</span><span>)</span><span>,</span><span>new</span> <span>BiPlatformStatisRespDTO</span><span>(</span><span>"2019-12-27"</span><span>,</span><span>"friendsCount"</span><span>,</span><span>"800"</span><span>)</span><span>)</span><span>)</span><span>;</span>
-    platformIncomeRespDTO2<span>.</span><span>setStatisData</span><span>(</span>data2<span>)</span><span>;</span>
-
-    <span>final</span> <span>ArrayList</span><span><span>&lt;</span><span>PlatformIncomeRespDTO</span><span>></span></span> platformIncomeRespDTOS <span>=</span> <span>Lists</span><span>.</span><span>newArrayList</span><span>(</span>platformIncomeRespDTO1<span>,</span> platformIncomeRespDTO2<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>JSONObject</span><span>.</span><span>toJSONString</span><span>(</span>platformIncomeRespDTOS<span>)</span><span>)</span><span>;</span>
-
-    <span>//拼装列头</span>
-    <span>List</span><span><span>&lt;</span><span>ExcelExportEntity</span><span>></span></span> colList <span>=</span> <span>dynamicNewAddExcel</span><span>(</span>paramInfo2<span>)</span><span>;</span>
-
-    <span>//数据拼装</span>
-    <span>List</span><span><span>&lt;</span><span>Map</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> list <span>=</span> <span>dynamicListDataByKey</span><span>(</span>platformIncomeRespDTOS<span>)</span><span>;</span>
-
-    <span>//文件名称</span>
-    <span>final</span> <span>Workbook</span> workbook <span>=</span> <span>ExcelExportUtil</span><span>.</span><span>exportExcel</span><span>(</span><span>new</span> <span>ExportParams</span><span>(</span><span>)</span><span>,</span> colList<span>,</span> list<span>)</span><span>;</span>
-
-    <span>//此功能与【拼装列头】中的 platformXh.setMergeVertical(true);功能效果一样,可直接使用 platformXh.setMergeVertical(true);进行纵向合并</span>
-    <span>//动态合并纵列[mergeMap key列索引(从0开始),value依赖的列,没有传空,startRow 开始行(从零开始)]</span>
-    <span>//Map&lt;Integer, int[]> mer = new HashMap&lt;>();</span>
-    <span>//mer.put(0, new int[]{});</span>
-    <span>//PoiMergeCellUtil.mergeCells(workbook.getSheetAt(0), mer, 1);</span>
-
-    <span>final</span> <span>FileOutputStream</span> fileOutputStream <span>=</span> <span>new</span> <span>FileOutputStream</span><span>(</span><span>"C:\\Users\\Administrator\\Desktop\\1.xls"</span><span>)</span><span>;</span>
-    <span>//导出excel</span>
-    <span>downLoadExcel</span><span>(</span><span>null</span><span>,</span> fileOutputStream<span>,</span> workbook<span>)</span><span>;</span>
-  <span>}</span>
-
-
-
-
-  <span>/**
-   * @Description: 下载文件
-   * @Param: fileName
-   * @Param outputStream
-   * @Param workbook
-   * <span>@return</span>: void
-   * @Author: peikunkun
-   * @Date: 2019/12/26 0026 上午 10:44
-   */</span>
-  <span>public</span> <span>static</span> <span>void</span> <span>downLoadExcel</span><span>(</span><span>String</span> fileName<span>,</span> <span>FileOutputStream</span> outputStream<span>,</span> <span>Workbook</span> workbook<span>)</span>
-      <span>throws</span> <span>IOException</span> <span>{</span>
-    <span>try</span> <span>{</span>
-      workbook<span>.</span><span>write</span><span>(</span>outputStream<span>)</span><span>;</span>
-    <span>}</span> <span>catch</span> <span>(</span><span>IOException</span> e<span>)</span> <span>{</span>
-      <span>throw</span> <span>new</span> <span>RuntimeException</span><span>(</span>e<span>.</span><span>getMessage</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>}</span> <span>finally</span> <span>{</span>
-      outputStream<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
-  <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-      <enclosure url="https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4csic7r2ZwEQBWEnsC0k4Aaq6alNV28H5Gl7iaAo7NIxRn5liayjQTxCyuA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" type="image/"/>
     </item>
   </channel>
 </rss>
