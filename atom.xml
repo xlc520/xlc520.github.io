@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-06-30T03:47:56.783Z</updated>
+  <updated>2022-06-30T06:36:02.245Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -21,6 +21,104 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">JRebel热部署的使用</title>
+    <id>https://blog.ciberviler.top/dev/JRebel%E7%83%AD%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BD%BF%E7%94%A8.html</id>
+    <link href="https://blog.ciberviler.top/dev/JRebel%E7%83%AD%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BD%BF%E7%94%A8.html"/>
+    <updated>2022-06-30T06:33:43.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="jrebel热部署的使用" tabindex="-1"> JRebel热部署的使用</h1>
+<p>对比图：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/feabc010fbd0a0467f3bcb155faede3b-16565707073351.png" alt="JRebel热部署的使用"></p>
+<p>IDEA在这里配置了自动编译：</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/c2dc072b4fb156f0ee8da0c3dd86abb5-16565707098543.png" alt="JRebel热部署的使用"></p>
+<p>所以当你的代码有变化时，JRebel会自动重新加载最新的代码，所以不用你手动重新编译</p>
+<h2 id="注意事项" tabindex="-1"> <strong>注意事项：</strong></h2>
+<p>c盘下的用户名一定不能为中文名称，否则会一直提示路径错误</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210318093831211.png" alt="注意事项"></p>
+<h2 id="_1、安装jrebel插件" tabindex="-1"> 1、安装jrebel插件</h2>
+<p>File–》Settings—》plugins----》marketplace----》搜索jrebel</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210318095405727.png" alt="JRebel热部署的使用"></p>
+<p>安装成功后会重启idea，出现下面的图片</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2021031809551542.png" alt="JRebel热部署的使用"></p>
+<h2 id="_2、配置jrebel插件" tabindex="-1"> 2、配置jrebel插件</h2>
+<h3 id="_2-1激活jrebel" tabindex="-1"> 2.1激活jrebel</h3>
+<p>先获取GUID</p>
+<ul>
+<li>第一种</li>
+</ul>
+<p>这里感谢薯条大佬搭建的激活服务器，直接访问<a href="https://jrebel.qekang.com" target="_blank" rel="noopener noreferrer">https://jrebel.qekang.com</a>，复制界面上展示的激活链接，填充到激活页面，然后随便填写一个邮箱名即可完成激活。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/715c5a15e09cf6bf8bc357073a697464.png" alt="JRebel热部署的使用"></p>
+<div><pre><code>https://jrebel.qekang.com/xxxx
+</code></pre><div aria-hidden="true"><div></div></div></div><ul>
+<li>第二种</li>
+</ul>
+<p>在线生成GUID地址 （<a href="https://www.guidgen.com/" target="_blank" rel="noopener noreferrer"><strong>https://www.guidgen.com/</strong></a>）， PS：如果失效刷新GUID替换就可以！</p>
+<p>输入url：<code>https://jrebel.qekang.com/GUID</code>(其中的GUID是2.1生成的，邮箱自己随意填写)</p>
+<p>之前点击蓝色字体会出现这个窗口，将上面获取到的GUID根据图片提示输入进去</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210318094513359.png" alt="JRebel热部署的使用"></p>
+<p>如果没有出现下面提示，请确定自己的网络通畅，然后再次点击激活，如果还不行，更改guid</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2021031809480460.png" alt="JRebel热部署的使用"></p>
+<ul>
+<li>继续点击我同意【I agree】</li>
+</ul>
+<h2 id="_3、jrebel-配置" tabindex="-1"> 3、JRebel 配置</h2>
+<h3 id="_3、1-将工作模式改成离线工作" tabindex="-1"> 3、1 将工作模式改成离线工作，！！！！</h3>
+<p>不修改成离线工作，你的jrebel会一直报错，当然某些小伙伴的是没有问题</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210318100401836.png" alt="JRebel热部署的使用"></p>
+<ul>
+<li>你的右上角会有两个绿色的小图标，这个就是jrebel启动</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210318100852670.png" alt="JRebel热部署的使用"></p>
+<h2 id="_4、使用jrebel" tabindex="-1"> 4、使用jreBel</h2>
+<h3 id="_4、1-进行项目热部署" tabindex="-1"> 4、1 进行项目热部署</h3>
+<ul>
+<li>
+<p>左下角有一个JreBel，点击在打开的窗口，选择你所需要进行热部署的项目。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603103938126.png" alt="JRebel热部署的使用"></p>
+</li>
+<li>
+<p>勾选后会生成一个rebel.xml文件，此文件可以忽略</p>
+</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603104004373.png" alt="JRebel热部署的使用"></p>
+<h3 id="_4、3-更改后使用ctrl-f9实现不重启服务器部署项目" tabindex="-1"> 4、3 更改后使用ctrl+f9实现不重启服务器部署项目</h3>
+<ul>
+<li>或者点击小锤子也是
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603104217131.png" alt="JRebel热部署的使用"></li>
+</ul>
+<h3 id="_4、4-录制快捷键" tabindex="-1"> 4、4 录制快捷键</h3>
+<ul>
+<li>原有的保存操作不方便一只手操作，设置新的快捷键方便操作
+-edit—&gt;macros—&gt;start macro recording
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2021060310490611.png" alt="JRebel热部署的使用"></li>
+<li>右下角会出现一个提示
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603104826766.png" alt="JRebel热部署的使用"></li>
+<li>然后点击ctrl+F9，此时右下角会有提示，点击红色停止
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603105037206.png" alt="JRebel热部署的使用"></li>
+<li>会弹出一个窗口，在窗口中输入build</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603105130362.png" alt="JRebel热部署的使用"></p>
+<ul>
+<li>打开设置，找到kaymap</li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210603105243414.png" alt="JRebel热部署的使用"></p>
+<ul>
+<li>右击选择第一个，在弹出的窗口输入你想使用的快捷键，<code>ctrl+s</code> 已经被使用，建议使用<code>alt+z</code>或者<code>alt+s</code></li>
+</ul>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/2021060310541226.png" alt="JRebel热部署的使用"></p>
+<h3 id="警告" tabindex="-1"> 警告！！！</h3>
+<p>JreBel不适用于resources包下面的文件，修改此包下面的必须重启，否则不生效。</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-07-07T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">15000 字的 SQL 语句大全</title>
     <id>https://blog.ciberviler.top/dev/15000%E5%AD%97%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%A4%A7%E5%85%A8.html</id>
@@ -28074,79 +28172,6 @@ public class UserController{
 <p>在金丝雀部署中，常常按照用户量设置路由权重，例如 90% 的用户维持使用老版本，10% 的用户尝鲜新版本。不同版本应用共存，经常与 A/B 测试一起使用，用于测试选择多种方案。</p>
 <p>金丝雀部署比较典型的例子，就是我们在使用某个应用的时候，该应用邀请我们进行“内测”或者“新版本体验”，如果我们同意了，那么我们就成了金丝雀。</p>
 ]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-04-10T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">fastjson 中JSONObject的常用使用方法</title>
-    <id>https://blog.ciberviler.top/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html</id>
-    <link href="https://blog.ciberviler.top/dev/fastjson%E4%B8%ADJSONObject%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html"/>
-    <updated>2022-04-28T02:37:00.000Z</updated>
-    <summary type="html">fastjson 中JSONObject的常用使用方法</summary>
-    <content type="html"><![CDATA[<h1 id="fastjson-中jsonobject的常用使用方法" tabindex="-1"> fastjson 中JSONObject的常用使用方法</h1>
-<h3 id="_1、导入需要的jar包" tabindex="-1"> 1、导入需要的jar包</h3>
-<div><pre><code>		<span><span><span>&lt;</span>dependency</span><span>></span></span>
-            <span><span><span>&lt;</span>groupId</span><span>></span></span>net.oschina.zcx7878<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-            <span><span><span>&lt;</span>artifactId</span><span>></span></span>fastdfs-client-java<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-            <span><span><span>&lt;</span>version</span><span>></span></span>1.27.0.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-        <span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>2、常用的方法如下：</p>
-<div><pre><code><span>public</span> <span>class</span> <span>Test</span> <span>{</span>
-    <span>@org.junit.jupiter.api.Test</span>
-    <span>void</span> <span>test</span><span>(</span><span>)</span>  <span>{</span>
-        <span>JSONObject</span> jsonObject <span>=</span> <span>new</span> <span>JSONObject</span><span>(</span><span>)</span><span>;</span>
-        jsonObject<span>.</span><span>put</span><span>(</span><span>"name"</span><span>,</span><span>"yangjuan"</span><span>)</span><span>;</span>
-        jsonObject<span>.</span><span>put</span><span>(</span><span>"age"</span><span>,</span><span>23</span><span>)</span><span>;</span>
-        jsonObject<span>.</span><span>put</span><span>(</span><span>"gender"</span><span>,</span><span>"女"</span><span>)</span><span>;</span>
-        jsonObject<span>.</span><span>put</span><span>(</span><span>"score"</span><span>,</span><span>false</span><span>)</span><span>;</span>
-
-        <span>//1 get()获取值</span>
-        <span>final</span> <span>Object</span> age <span>=</span> jsonObject<span>.</span><span>get</span><span>(</span><span>"age"</span><span>)</span><span>;</span>
-        <span>final</span> <span>String</span> age1 <span>=</span> jsonObject<span>.</span><span>getString</span><span>(</span><span>"age"</span><span>)</span>
-        <span>//2 containsKey()判断jsonObject 是否含有key</span>
-        <span>final</span> <span>boolean</span> name <span>=</span> jsonObject<span>.</span><span>containsKey</span><span>(</span><span>"name"</span><span>)</span><span>;</span>
-        <span>//3 isEmpty()判断jsonObject是否为空</span>
-        <span>final</span> <span>boolean</span> name1 <span>=</span> jsonObject<span>.</span><span>isEmpty</span><span>(</span><span>)</span><span>;</span>
-        <span>//4 remove() 移除对应的key 和value</span>
-        <span>final</span> <span>Object</span> score <span>=</span> jsonObject<span>.</span><span>remove</span><span>(</span><span>"score"</span><span>)</span><span>;</span>
-        <span>//5 containsValue()判断是否含有该值</span>
-        <span>final</span> <span>boolean</span> b <span>=</span> jsonObject<span>.</span><span>containsValue</span><span>(</span><span>23</span><span>)</span><span>;</span>
-        <span>//6 size() 判断键值对得数量</span>
-        <span>final</span> <span>int</span> size <span>=</span> jsonObject<span>.</span><span>size</span><span>(</span><span>)</span><span>;</span>
-        <span>//7 移除一个键值对</span>
-        <span>final</span> <span>Object</span> age2 <span>=</span> jsonObject<span>.</span><span>remove</span><span>(</span><span>"age"</span><span>)</span><span>;</span>
-        <span>//由于JSONObject是一个map，它还具有map特有的两个方法：</span>
-        <span>//.8  Set&lt;String> keySet() ：获取JSONObject中的key，并将其放入Set集合中</span>
-        <span>final</span> <span>Set</span><span><span>&lt;</span><span>String</span><span>></span></span> keySet <span>=</span> jsonObject<span>.</span><span>keySet</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>String</span> s1 <span>:</span> keySet<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>s1<span>)</span><span>;</span>
-        <span>}</span>
-        <span>//9.Set&lt;Map.Entry&lt;String, Object>> entrySet()：在循环遍历时使用，取得是键和值的映射关系，Entry就是Map接口中的内部接口</span>
-        <span>final</span> <span>Set</span><span><span>&lt;</span><span>Map<span>.</span>Entry</span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span><span>></span></span> entries <span>=</span> jsonObject<span>.</span><span>entrySet</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Map<span>.</span>Entry</span><span><span>&lt;</span><span>String</span><span>,</span> <span>Object</span><span>></span></span> entry <span>:</span> entries<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>entry<span>.</span><span>getKey</span><span>(</span><span>)</span><span>+</span><span>"==="</span><span>+</span>entry<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>//10 JsonObject转string  toString()  toJSONString()</span>
-        <span>final</span> <span>String</span> s1 <span>=</span> jsonObject<span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
-        <span>final</span> <span>String</span> s3 <span>=</span> jsonObject<span>.</span><span>toJSONString</span><span>(</span><span>)</span><span>;</span>
-        <span>//11 JsonObject 转Map</span>
-        <span>final</span> <span>Map</span><span><span>&lt;</span><span>String</span><span>,</span><span>Object</span><span>></span></span> parse <span>=</span> <span>(</span><span>Map</span><span>)</span> <span>JSONObject</span><span>.</span><span>parse</span><span>(</span>s1<span>)</span><span>;</span>
-        parse<span>.</span><span>entrySet</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Map<span>.</span>Entry</span> m <span>:</span>parse<span>.</span><span>entrySet</span><span>(</span><span>)</span><span>)</span><span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>m<span>.</span><span>getKey</span><span>(</span><span>)</span><span>+</span><span>"===="</span><span>+</span>m<span>.</span><span>getValue</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>s3<span>)</span><span>;</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>s1<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
     <author>
       <name>xlc520</name>
     </author>
