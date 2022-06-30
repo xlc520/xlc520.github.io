@@ -6,8 +6,8 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 29 Jun 2022 05:54:53 GMT</pubDate>
-    <lastBuildDate>Wed, 29 Jun 2022 05:54:53 GMT</lastBuildDate>
+    <pubDate>Thu, 30 Jun 2022 03:47:56 GMT</pubDate>
+    <lastBuildDate>Thu, 30 Jun 2022 03:47:56 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Java</category>
@@ -21,7 +21,1143 @@
     <category>Python</category>
     <category>Tools</category>
     <category>java</category>
-    <category>IDEA</category>
+    <item>
+      <title>15000 字的 SQL 语句大全</title>
+      <link>https://blog.ciberviler.top/dev/15000%E5%AD%97%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%A4%A7%E5%85%A8.html</link>
+      <guid>https://blog.ciberviler.top/dev/15000%E5%AD%97%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%A4%A7%E5%85%A8.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">15000 字的 SQL 语句大全</source>
+      <category>Java</category>
+      <pubDate>Thu, 07 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="_15000-字的-sql-语句大全" tabindex="-1"> 15000 字的 SQL 语句大全</h1>
+<p><strong>一、基础</strong></p>
+<p><strong>1、说明：创建数据库</strong></p>
+<p>CREATE DATABASE database-name</p>
+<p><strong>2</strong>**、说明：删除数据库**</p>
+<p><strong>d</strong>rop database dbname</p>
+<p><strong>3、说明：备份sql server</strong></p>
+<div><pre><code><span>--- 创建 备份数据的 device</span>
+<span>USE</span> master
+<span>EXEC</span> sp_addumpdevice <span>'disk'</span><span>,</span> <span>'testBack'</span><span>,</span> <span>'c:\mssql7backup\MyNwind_1.dat'</span>
+<span>--- 开始 备份</span>
+<span>BACKUP</span> <span>DATABASE</span> pubs <span>TO</span> testBack 
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>4、说明：创建新表</strong></p>
+<p>create table tabname(col1 type1 [not null] [primary key],col2 type2 [not null],..)</p>
+<p><strong>根据已有的表创建新表：</strong></p>
+<p>**A：<strong>create table tab_new like tab_old (使用旧表创建新表)
+<strong>B</strong></strong>：**create table tab_new as select col1,col2… from tab_old definition only</p>
+<p><strong>5、说明：删除新表</strong></p>
+<p>drop table tabname</p>
+<p><strong>6、说明：增加一个列</strong></p>
+<p>Alter table tabname add column col type</p>
+<p><strong>注</strong>：列增加后将不能删除。DB2中列加上后数据类型也不能改变，唯一能改变的是增加varchar类型的长度。</p>
+<p><strong>7、说明：添加主键</strong>：Alter table tabname add primary key(col)
+说明：删除主键：Alter table tabname drop primary key(col)</p>
+<p><strong>8、说明：创建索引</strong>：create [unique] index idxname on tabname(col….)</p>
+<p>删除索引：drop index idxname**
+**</p>
+<p>注：索引是不可更改的，想更改必须删除重新建。</p>
+<p><strong>9</strong>**、说明：创建视图**：create view viewname as select statement</p>
+<p><strong>删除视图</strong>：drop view viewname</p>
+<p><strong>10</strong>**、说明：几个简单的基本的sql语句**</p>
+<p>**选择：**select * from table1 where 范围
+**插入：**insert into table1(field1,field2) values(value1,value2)
+<strong>删除：<strong>delete from table1 where 范围</strong>更新</strong>：update table1 set field1=value1 where 范围
+<strong>查找</strong>：select * from table1 where field1 like ’%value1%’ ---like的语法很精妙，查资料!
+<strong>排序</strong>：select * from table1 order by field1,field2 [desc]
+<strong>总数</strong>：select count as totalcount from table1
+<strong>求和</strong>：select sum(field1) as sumvalue from table1
+<strong>平均</strong>：select avg(field1) as avgvalue from table1
+<strong>最大</strong>：select max(field1) as maxvalue from table1
+<strong>最小</strong>：select min(field1) as minvalue from table1</p>
+<p><strong>11、说明：几个高级查询运算词</strong></p>
+<p><strong>A：UNION 运算符</strong></p>
+<p>UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。</p>
+<p><strong>B：EXCEPT 运算符</strong></p>
+<p><strong>EXCEPT</strong>运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。**
+**</p>
+<p><strong>C：INTERSECT 运算符</strong></p>
+<p><strong>INTERSECT</strong>运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 <strong>ALL</strong>随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
+**注：**使用运算词的几个查询结果行必须是一致的。</p>
+<p><strong>12</strong>**、说明：使用外连接**</p>
+<p>A、<strong>left （outer） join</strong>：</p>
+<p>左外连接（左连接）：结果集几包括连接表的匹配行，也包括左连接表的所有行。</p>
+<p>SQL: select a.a, a.b, a.c, b.c, b.d, b.f from a LEFT OUT JOIN b ON a.a = b.c</p>
+<p><strong>B：right （outer） join:</strong></p>
+<p>右外连接(右连接)：结果集既包括连接表的匹配连接行，也包括右连接表的所有行。</p>
+<p><strong>C：full/cross （outer） join</strong>：</p>
+<p>全外连接：不仅包括符号连接表的匹配行，还包括两个连接表中的所有记录。</p>
+<p><strong>12</strong>**、分组:Group by:
+**</p>
+<p>一张表，一旦分组 完成后，查询后只能得到组相关的信息。</p>
+<p><strong>组相关的信息：</strong>（统计信息） count,sum,max,min,avg <strong>分组的标准)</strong></p>
+<p><strong>在SQLServer中分组时：不能以text,ntext,image类型的字段作为分组依据</strong></p>
+<p><strong>在selecte统计函数中的字段，不能和普通的字段放在一起；</strong></p>
+<p><strong>13、对数据库进行操作：</strong></p>
+<p>**
+**</p>
+<p><strong>分离数据库</strong>： <strong>sp_detach_db;</strong></p>
+<p><strong>附加数据库</strong>：<strong>sp_attach_db</strong> 后接表明，附加需要完整的路径名</p>
+<p>**14.**<strong>如何修改数据库的名称:</strong></p>
+<p>sp_renamedb 'old_name', 'new_name'</p>
+<p>对了，我把 MySQL 相关的文章整理成了 PDF，有需要的关注微信公众号 Java后端，回复 666 下载。</p>
+<p><strong>二、提升</strong></p>
+<p>**1、说明：复制表(只复制结构,源表名：a 新表名：b) (Access可用)
+**</p>
+<p>**法一：**select * into b from a where 1&lt;&gt;1（仅用于SQlServer）</p>
+<p>**法二：**select top 0 * into b from a
+**
+**</p>
+<p>**2、说明：拷贝表(拷贝数据,源表名：a 目标表名：b) (Access可用)
+**</p>
+<p>insert into b(a, b, c) select d,e,f from b;</p>
+<p>**3、说明：跨数据库之间表的拷贝(具体数据使用绝对路径) (Access可用)
+**</p>
+<p>insert into b(a, b, c) select d,e,f from b in ‘具体数据库’ where 条件
+例子：..from b in '&quot;&amp;Server.MapPath(&quot;.&quot;)&amp;&quot;\data.mdb&quot; &amp;&quot;' where..</p>
+<p>**4、说明：子查询(表名1：a 表名2：b)
+**</p>
+<p>select a,b,c from a where a IN (select d from b ) 或者: select a,b,c from a where a IN (1,2,3)</p>
+<p>**5、说明：显示文章、提交人和最后回复时间
+**</p>
+<p>select a.title,a.username,b.adddate from table a,(select max(adddate) adddate from table where table.title=a.title) b</p>
+<p>**6、说明：外连接查询(表名1：a 表名2：b)
+**</p>
+<p>select a.a, a.b, a.c, b.c, b.d, b.f from a LEFT OUT JOIN b ON a.a = b.c</p>
+<p>**7、说明：在线视图查询(表名1：a )
+**select * from (SELECT a,b,c FROM a) T where t.a &gt; 1;</p>
+<p>**8、说明：between的用法,between限制查询数据范围时包括了边界值,not between不包括
+**</p>
+<p>select * from table1 where time between time1 and time2
+select a,b,c, from table1 where a not between 数值1 and 数值2</p>
+<p>**9、说明：in 的使用方法
+**</p>
+<p>select * from table1 where a [not] in (‘值1’,’值2’,’值4’,’值6’)</p>
+<p>**10、说明：两张关联表，删除主表中已经在副表中没有的信息
+**</p>
+<p>delete from table1 where not exists ( select * from table2 where table1.field1=table2.field1 )</p>
+<p>**11、说明：四表联查问题：
+**</p>
+<p>select * from a left inner join b on a.a=b.b right inner join c on a.a=c.c inner join d on a.a=d.d where .....</p>
+<p>**12、说明：日程安排提前五分钟提醒
+**</p>
+<p>SQL: select * from 日程安排 where datediff('minute',f开始时间,getdate())&gt;5</p>
+<p><strong>13</strong>**、说明：一条****sql** <strong>语句搞定数据库分页</strong></p>
+<p>select top 10 b.* from (select top 20 主键字段,排序字段 from 表名 order by 排序字段 desc) a,表名 b where b.主键字段 = a.主键字段 order by a.排序字段</p>
+<p>**
+**</p>
+<p>**具体实现：**关于数据库分页：</p>
+<div><pre><code><span>declare</span> <span>@start</span> <span>int</span><span>,</span><span>@end</span> <span>int</span>
+  <span>@sql</span>  nvarchar<span>(</span><span>600</span><span>)</span>
+  <span>set</span> <span>@sql</span><span>=</span>’<span>select</span> <span>top</span>’<span>+</span>str<span>(</span><span>@end</span><span>-</span><span>@start</span><span>+</span><span>1</span><span>)</span><span>+</span>’<span>+</span><span>from</span> T <span>where</span> rid <span>not</span> <span>in</span><span>(</span><span>select</span> <span>top</span>’<span>+</span>str<span>(</span><span>@str</span><span>-</span><span>1</span><span>)</span><span>+</span>’Rid <span>from</span> T <span>where</span> Rid<span>></span><span>-</span><span>1</span><span>)</span>’
+  <span>exec</span> sp_executesql <span>@sql</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>**注意：**在top后不能直接跟一个变量，所以在实际应用中只有这样的进行特殊的处理。Rid为一个标识列，如果top后还有具体的字段，这样做是非常有好处的。因为这样可以避免 top的字段如果是逻辑索引的，查询的结果后实际表中的不一致（逻辑索引中的数据有可能和数据表中的不一致，而查询时如果处在索引则首先查询索引）</p>
+<p>**14、说明：前10条记录
+**</p>
+<p>select top 10 * form table1 where 范围</p>
+<p>**15、说明：<strong>选择在每一组b值相同的数据中对应的a最大的记录的所有信息(类似这样的用法可以用于论坛每月排行榜,每月热销产品分析,按科目成绩排名,等等.)</strong>
+**</p>
+<p>select a,b,c from tablename ta where a=(select max(a) from tablename tb where tb.b=ta.b)</p>
+<p>**16、说明：<strong>包括所有在 TableA中但不在 TableB和TableC中的行并消除所有重复行而派生出一个结果表</strong>
+**</p>
+<p>(select a from tableA ) except (select a from tableB) except (select a from tableC)</p>
+<p>**17、说明：随机取出10条数据
+**</p>
+<p>select top 10 * from tablename order by newid()</p>
+<p>**18、说明：随机选择记录
+**</p>
+<p>select newid()</p>
+<p>**19、说明：删除重复记录
+**</p>
+<p><strong>1)</strong> delete from tablename where id not in (select max(id) from tablename group by col1,col2,...)</p>
+<p><strong>2)</strong> select distinct * into temp from tablename
+delete from tablename
+insert into tablename select * from temp
+**
+**</p>
+<p>**评价：**这种操作牵连大量的数据的移动，这种做法不适合大容量但数据操作3),例如：在一个外部表中导入数据，由于某些原因第一次只导入了一部分，但很难判断具体位置，这样只有在下一次全部导入，这样也就产生好多重复的字段，怎样删除重复字段</p>
+<div><pre><code><span>alter</span> <span>table</span> tablename
+<span>--添加一个自增列</span>
+<span>add</span>  column_b <span>int</span> <span>identity</span><span>(</span><span>1</span><span>,</span><span>1</span><span>)</span>
+ <span>delete</span> <span>from</span> tablename <span>where</span> column_b <span>not</span> <span>in</span><span>(</span>
+<span>select</span> <span>max</span><span>(</span>column_b<span>)</span> <span>from</span> tablename <span>group</span> <span>by</span> column1<span>,</span>column2<span>,</span><span>.</span><span>.</span><span>.</span><span>)</span>
+<span>alter</span> <span>table</span> tablename <span>drop</span> <span>column</span> column_b
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>**20、说明：列出数据库里所有的表名
+**</p>
+<p>select name from sysobjects where type='U' // U代表用户</p>
+<p>**21、说明：列出表里的所有的列名
+**</p>
+<p>select name from syscolumns where id=object_id('TableName')</p>
+<p>**22、说明：<strong>列示type、vender、pcs字段，以type字段排列，case可以方便地实现多重选择，类似select 中的case。</strong>
+**</p>
+<p>select type,sum(case vender when 'A' then pcs else 0 end),sum(case vender when 'C' then pcs else 0 end),sum(case vender when 'B' then pcs else 0 end) FROM tablename group by type
+**
+**</p>
+<p>**显示结果：
+type vender pcs
+**电脑 A 1
+电脑 A 1
+光盘 B 2
+光盘 A 2
+手机 B 3
+手机 C 3</p>
+<p><strong>23、说明：初始化表table1</strong></p>
+<p>TRUNCATE TABLE table1</p>
+<p>**24、说明：选择从10到15的记录
+**</p>
+<p>select top 5 * from (select top 15 * from table order by id asc) table_别名 order by id desc</p>
+<p><strong>三、技巧</strong></p>
+<p><strong>1、1=1，1=2的使用，在SQL语句组合时用的较多</strong></p>
+<p><strong>“where 1=1” 是表示选择全部  “where 1=2”全部不选，</strong>
+如：</p>
+<div><pre><code><span>if</span> <span>@strWhere</span> <span>!=</span><span>''</span> 
+<span>begin</span>
+<span>set</span> <span>@strSQL</span> <span>=</span> <span>'select count(*) as Total from ['</span> <span>+</span> <span>@tblName</span> <span>+</span> <span>'] where '</span> <span>+</span> <span>@strWhere</span>
+<span>end</span>
+<span>else</span> 
+<span>begin</span>
+<span>set</span> <span>@strSQL</span> <span>=</span> <span>'select count(*) as Total from ['</span> <span>+</span> <span>@tblName</span> <span>+</span> <span>']'</span> 
+<span>end</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>我们可以直接写成</strong></p>
+<p>set @strSQL = 'select count(*) as Total from [' + @tblName + '] where 1=1 安定 '+ @strWhere</p>
+<p>**
+**</p>
+<p><strong>2、收缩数据库</strong></p>
+<p>**
+**--重建索引
+DBCC REINDEX
+DBCC INDEXDEFRAG
+--收缩数据和日志
+DBCC SHRINKDB
+DBCC SHRINKFILE</p>
+<p><strong>3、压缩数据库</strong></p>
+<p>**
+**dbcc shrinkdatabase(dbname)</p>
+<p><strong>4、转移数据库给新用户以已存在用户权限</strong></p>
+<p>**
+**exec sp_change_users_login 'update_one','newname','oldname'
+go</p>
+<p>**5、检查备份集
+**RESTORE VERIFYONLY from disk='E:\dvbbs.bak'</p>
+<p><strong>6、修复数据库</strong></p>
+<div><pre><code><span>ALTER</span> <span>DATABASE</span> <span>[</span>dvbbs<span>]</span> <span>SET</span> SINGLE_USER
+GO
+<span>DBCC</span> CHECKDB<span>(</span><span>'dvbbs'</span><span>,</span>repair_allow_data_loss<span>)</span> <span>WITH</span> TABLOCK
+GO
+<span>ALTER</span> <span>DATABASE</span> <span>[</span>dvbbs<span>]</span> <span>SET</span> MULTI_USER
+GO
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>7、日志清除</strong></p>
+<div><pre><code><span>SET</span> NOCOUNT <span>ON</span>
+<span>DECLARE</span> <span>@LogicalFileName</span> sysname<span>,</span>
+ <span>@MaxMinutes</span> <span>INT</span><span>,</span>
+ <span>@NewSize</span> <span>INT</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>USE</span> tablename <span>-- 要操作的数据库名</span>
+<span>SELECT</span> <span>@LogicalFileName</span> <span>=</span> <span>'tablename_log'</span><span>,</span> <span>-- 日志文件名</span>
+<span>@MaxMinutes</span> <span>=</span> <span>10</span><span>,</span> <span>-- Limit on time allowed to wrap log.</span>
+ <span>@NewSize</span> <span>=</span> <span>1</span> <span>-- 你想设定的日志文件的大小(M)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><div><pre><code>Setup <span>/</span> initialize
+<span>DECLARE</span> <span>@OriginalSize</span> <span>int</span>
+<span>SELECT</span> <span>@OriginalSize</span> <span>=</span> size 
+ <span>FROM</span> sysfiles
+ <span>WHERE</span> name <span>=</span> <span>@LogicalFileName</span>
+<span>SELECT</span> <span>'Original Size of '</span> <span>+</span> db_name<span>(</span><span>)</span> <span>+</span> <span>' LOG is '</span> <span>+</span> 
+ <span>CONVERT</span><span>(</span><span>VARCHAR</span><span>(</span><span>30</span><span>)</span><span>,</span><span>@OriginalSize</span><span>)</span> <span>+</span> <span>' 8K pages or '</span> <span>+</span> 
+ <span>CONVERT</span><span>(</span><span>VARCHAR</span><span>(</span><span>30</span><span>)</span><span>,</span><span>(</span><span>@OriginalSize</span><span>*</span><span>8</span><span>/</span><span>1024</span><span>)</span><span>)</span> <span>+</span> <span>'MB'</span>
+ <span>FROM</span> sysfiles
+ <span>WHERE</span> name <span>=</span> <span>@LogicalFileName</span>
+<span>CREATE</span> <span>TABLE</span> DummyTrans
+ <span>(</span>DummyColumn <span>char</span> <span>(</span><span>8000</span><span>)</span> <span>not</span> <span>null</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>DECLARE</span> <span>@Counter</span>  <span>INT</span><span>,</span>
+ <span>@StartTime</span> <span>DATETIME</span><span>,</span>
+ <span>@TruncLog</span>  <span>VARCHAR</span><span>(</span><span>255</span><span>)</span>
+<span>SELECT</span> <span>@StartTime</span> <span>=</span> GETDATE<span>(</span><span>)</span><span>,</span>
+ <span>@TruncLog</span> <span>=</span> <span>'BACKUP LOG '</span> <span>+</span> db_name<span>(</span><span>)</span> <span>+</span> <span>' WITH TRUNCATE_ONLY'</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>DBCC</span> SHRINKFILE <span>(</span><span>@LogicalFileName</span><span>,</span> <span>@NewSize</span><span>)</span>
+<span>EXEC</span> <span>(</span><span>@TruncLog</span><span>)</span>
+<span>-- Wrap the log if necessary.</span>
+<span>WHILE</span> <span>@MaxMinutes</span> <span>></span> DATEDIFF <span>(</span>mi<span>,</span> <span>@StartTime</span><span>,</span> GETDATE<span>(</span><span>)</span><span>)</span> <span>-- time has not expired</span>
+ <span>AND</span> <span>@OriginalSize</span> <span>=</span> <span>(</span><span>SELECT</span> size <span>FROM</span> sysfiles <span>WHERE</span> name <span>=</span> <span>@LogicalFileName</span><span>)</span> 
+ <span>AND</span> <span>(</span><span>@OriginalSize</span> <span>*</span> <span>8</span> <span>/</span><span>1024</span><span>)</span> <span>></span> <span>@NewSize</span> 
+ <span>BEGIN</span> <span>-- Outer loop.</span>
+<span>SELECT</span> <span>@Counter</span> <span>=</span> <span>0</span>
+ <span>WHILE</span>  <span>(</span><span>(</span><span>@Counter</span> <span>&lt;</span> <span>@OriginalSize</span> <span>/</span> <span>16</span><span>)</span> <span>AND</span> <span>(</span><span>@Counter</span> <span>&lt;</span> <span>50000</span><span>)</span><span>)</span>
+ <span>BEGIN</span> <span>-- update</span>
+ <span>INSERT</span> DummyTrans <span>VALUES</span> <span>(</span><span>'Fill Log'</span><span>)</span> <span>DELETE</span> DummyTrans
+ <span>SELECT</span> <span>@Counter</span> <span>=</span> <span>@Counter</span> <span>+</span> <span>1</span>
+ <span>END</span>
+ <span>EXEC</span> <span>(</span><span>@TruncLog</span><span>)</span> 
+ <span>END</span>
+<span>SELECT</span> <span>'Final Size of '</span> <span>+</span> db_name<span>(</span><span>)</span> <span>+</span> <span>' LOG is '</span> <span>+</span>
+ <span>CONVERT</span><span>(</span><span>VARCHAR</span><span>(</span><span>30</span><span>)</span><span>,</span>size<span>)</span> <span>+</span> <span>' 8K pages or '</span> <span>+</span> 
+ <span>CONVERT</span><span>(</span><span>VARCHAR</span><span>(</span><span>30</span><span>)</span><span>,</span><span>(</span>size<span>*</span><span>8</span><span>/</span><span>1024</span><span>)</span><span>)</span> <span>+</span> <span>'MB'</span>
+ <span>FROM</span> sysfiles 
+ <span>WHERE</span> name <span>=</span> <span>@LogicalFileName</span>
+<span>DROP</span> <span>TABLE</span> DummyTrans
+<span>SET</span> NOCOUNT <span>OFF</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>8、说明：更改某个表</strong></p>
+<p>**
+**exec sp_changeobjectowner 'tablename','dbo'</p>
+<p><strong>9、存储更改全部表</strong></p>
+<div><pre><code><span>CREATE</span> <span>PROCEDURE</span> dbo<span>.</span>User_ChangeObjectOwnerBatch
+<span>@OldOwner</span> <span>as</span> NVARCHAR<span>(</span><span>128</span><span>)</span><span>,</span>
+<span>@NewOwner</span> <span>as</span> NVARCHAR<span>(</span><span>128</span><span>)</span>
+<span>AS</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>DECLARE</span> <span>@Name</span>  <span>as</span> NVARCHAR<span>(</span><span>128</span><span>)</span>
+<span>DECLARE</span> <span>@Owner</span>  <span>as</span> NVARCHAR<span>(</span><span>128</span><span>)</span>
+<span>DECLARE</span> <span>@OwnerName</span>  <span>as</span> NVARCHAR<span>(</span><span>128</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><div><pre><code><span>DECLARE</span> curObject <span>CURSOR</span> <span>FOR</span> 
+<span>select</span> <span>'Name'</span>  <span>=</span> name<span>,</span>
+  <span>'Owner'</span>  <span>=</span> user_name<span>(</span>uid<span>)</span>
+<span>from</span> sysobjects
+<span>where</span> user_name<span>(</span>uid<span>)</span><span>=</span><span>@OldOwner</span>
+<span>order</span> <span>by</span> name
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>OPEN</span>  curObject
+<span>FETCH</span> <span>NEXT</span> <span>FROM</span> curObject <span>INTO</span> <span>@Name</span><span>,</span> <span>@Owner</span>
+<span>WHILE</span><span>(</span>@<span>@FETCH_STATUS</span><span>=</span><span>0</span><span>)</span>
+<span>BEGIN</span>   
+<span>if</span> <span>@Owner</span><span>=</span><span>@OldOwner</span> 
+<span>begin</span>
+  <span>set</span> <span>@OwnerName</span> <span>=</span> <span>@OldOwner</span> <span>+</span> <span>'.'</span> <span>+</span> rtrim<span>(</span><span>@Name</span><span>)</span>
+  <span>exec</span> sp_changeobjectowner <span>@OwnerName</span><span>,</span> <span>@NewOwner</span>
+<span>end</span>
+<span>-- select @name,@NewOwner,@OldOwner</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>FETCH</span> <span>NEXT</span> <span>FROM</span> curObject <span>INTO</span> <span>@Name</span><span>,</span> <span>@Owner</span>
+<span>END</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><div><pre><code><span>close</span> curObject
+<span>deallocate</span> curObject
+GO
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><strong>10、SQL SERVER中直接循环写入数据</strong></p>
+<p>**
+**declare @i int
+set @i=1
+while @i&lt;30
+begin
+insert into test (userid) values(@i)
+set @i=@i+1
+end
+**
+**</p>
+<p><strong>案例</strong>**：**</p>
+<p>**
+**有如下表，要求就裱中所有沒有及格的成績，在每次增長0.1的基礎上，使他們剛好及格:</p>
+<div><pre><code>Name   scor
+Zhangshan 80
+Lishi 59
+Wangwu 50
+Songquan 69
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>while((select</strong> <strong>min</strong>**(score) from tb_table)&lt;<strong><strong>60</strong></strong>)**</p>
+<p><strong>begin</strong></p>
+<p><strong>update tb_table set score</strong> **=****score***<strong>1.01</strong></p>
+<p><strong>where score</strong>**&lt;60**</p>
+<p><strong>if (select</strong> <strong>min</strong>**(score) from tb_table)****&gt;60**</p>
+<p><strong>break</strong></p>
+<p><strong>else</strong></p>
+<p><strong>continue</strong></p>
+<p><strong>end</strong></p>
+<p><strong>数据开发-经典</strong></p>
+<p><strong>1.按姓氏笔画排序:</strong></p>
+<p>**
+**</p>
+<p>Select * From TableName Order By CustomerName Collate Chinese_PRC_Stroke_ci_as //从少到多</p>
+<p><strong>2.数据库加密:</strong></p>
+<p>select encrypt('原始密码')
+select pwdencrypt('原始密码')
+select pwdcompare('原始密码','加密后密码') = 1--相同；否则不相同 encrypt('原始密码')
+select pwdencrypt('原始密码')
+select pwdcompare('原始密码','加密后密码') = 1--相同；否则不相同</p>
+<p><strong>3.取回表中字段:</strong></p>
+<p>declare @list varchar(1000),
+@sql nvarchar(1000)
+select @list=@list+','+<a href="http://b.name" target="_blank" rel="noopener noreferrer">b.name</a> from sysobjects a,syscolumns b where <a href="http://a.id=b.id" target="_blank" rel="noopener noreferrer">a.id=b.id</a> and a.name='表A'
+set @sql='select '+right(@list,len(@list)-1)+' from 表A'
+exec (@sql)</p>
+<p><strong>4.查看硬盘分区:</strong></p>
+<p><strong>EXEC master..xp_fixeddrives</strong></p>
+<p><strong>5.比较A,B表是否相等:</strong></p>
+<h1 id="if-select-checksum-agg-binary-checksum-from-a" tabindex="-1"> if (select checksum_agg(binary_checksum(*)) from A)</h1>
+<p>(select checksum_agg(binary_checksum(*)) from B)
+print '相等'
+else
+print '不相等'</p>
+<p><strong>6.杀掉所有的事件探察器进程:</strong></p>
+<p>DECLARE hcforeach CURSOR GLOBAL FOR SELECT 'kill '+RTRIM(spid) FROM master.dbo.sysprocesses
+WHERE program_name IN('SQL profiler',N'SQL 事件探查器')
+EXEC sp_msforeach_worker '?'</p>
+<p><strong>7.<strong><strong>记录搜索</strong></strong>:</strong></p>
+<p>**
+**</p>
+<p><strong>开头到<strong><strong>N</strong></strong>条记录</strong>Select Top N * From 表</p>
+<p>-------------------------------
+**N<strong><strong>到</strong></strong>M<strong><strong>条记录</strong></strong>(<strong><strong>要有主索引</strong></strong>ID)
+**Select Top M-N * From 表 Where ID in (Select Top M ID From 表) Order by ID  Desc
+----------------------------------
+<strong>N****到结尾记录</strong>Select Top N * From 表 Order by ID Desc
+<strong>案例<strong><strong>例如1：一张表有一万多条记录，表的第一个字段 RecID 是自增长字段， 写一个SQL语句， 找出表的第</strong></strong>31<strong><strong>到第</strong></strong>40****个记录。</strong></p>
+<p>select top 10 recid from A where recid not in(select top 30 recid from A)</p>
+<p>分析：如果这样写会产生某些问题，如果recid在表中存在逻辑索引。</p>
+<p>select top 10 recid from A where……是从索引中查找，而后面的select top 30 recid from A则在数据表中查找，这样由于索引中的顺序有可能和数据表中的不一致，这样就导致查询到的不是本来的欲得到的数据。</p>
+<p><strong>解决方案</strong></p>
+<p>**1，**<strong>用order by</strong> select top 30 recid from A order by ricid <strong>如果该字段不是自增长，就会出现问题</strong></p>
+<p>**2，****在那个子查询中也加条件：**select top 30 recid from A where recid&gt;-1</p>
+<p><strong>例2</strong>**：查询表中的最后以条记录，并不知道这个表共有多少数据,**<strong>以及表结构。
+set @s = 'select top 1 * from T  where pid not in (select top ' + str(@count-1) + ' pid from T)'</strong></p>
+<p><strong>print @s   exec sp_executesql @s</strong></p>
+<p><strong>9：获取当前数据库中的所有用户表</strong></p>
+<p>**
+**</p>
+<p>select Name from sysobjects where xtype='u' and status&gt;=0</p>
+<p><strong>10：获取某一个表的所有字段</strong></p>
+<p>**
+**select name from syscolumns where id=object_id('表名')</p>
+<p>select name from syscolumns where id in (select id from sysobjects where type = 'u' and name = '表名')</p>
+<p>两种方式的效果相同</p>
+<p><strong>11：查看与某一个表相关的视图、存储过程、函数</strong></p>
+<p>select a.* from sysobjects a, syscomments b where <a href="http://a.id" target="_blank" rel="noopener noreferrer">a.id</a> = <a href="http://b.id" target="_blank" rel="noopener noreferrer">b.id</a> and b.text like '%表名%'</p>
+<p><strong>12：查看当前数据库中所有存储过程</strong></p>
+<p>**
+**select name as 存储过程名称 from sysobjects where xtype='P'</p>
+<p><strong>13：查询用户创建的所有数据库</strong></p>
+<p>select * from master..sysdatabases D where sid not in(select sid from master..syslogins where name='sa')
+或者
+select dbid, name AS DB_NAME from master..sysdatabases where sid &lt;&gt; 0x01</p>
+<p><strong>14：查询某一个表的字段和数据类型</strong></p>
+<p>**
+**select column_name,data_type from information_schema.columns
+where table_name = '表名'</p>
+<p><strong>15</strong>**：不同服务器数据库之间的数据操作**</p>
+<p>**
+**</p>
+<div><pre><code><span>--创建链接服务器</span>
+
+<span>exec</span> sp_addlinkedserver <span>'ITSV '</span><span>,</span> <span>' '</span><span>,</span> <span>'SQLOLEDB '</span><span>,</span> <span>'远程服务器名或ip地址 '</span>
+
+<span>exec</span> sp_addlinkedsrvlogin <span>'ITSV '</span><span>,</span> <span>'false '</span><span>,</span><span>null</span><span>,</span> <span>'用户名 '</span><span>,</span> <span>'密码 '</span>
+
+<span>--查询示例</span>
+
+<span>select</span> <span>*</span> <span>from</span> ITSV<span>.</span>数据库名<span>.</span>dbo<span>.</span>表名
+
+<span>--导入示例</span>
+
+<span>select</span> <span>*</span> <span>into</span> 表 <span>from</span> ITSV<span>.</span>数据库名<span>.</span>dbo<span>.</span>表名
+
+<span>--以后不再使用时删除链接服务器</span>
+
+<span>exec</span> sp_dropserver <span>'ITSV '</span><span>,</span> <span>'droplogins '</span>
+
+<span>--连接远程/局域网数据(openrowset/openquery/opendatasource)</span>
+
+<span>--1、openrowset</span>
+
+<span>--查询示例</span>
+
+<span>select</span> <span>*</span> <span>from</span> <span>openrowset</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'sql服务器名 '</span><span>;</span> <span>'用户名 '</span><span>;</span> <span>'密码 '</span><span>,</span>数据库名<span>.</span>dbo<span>.</span>表名<span>)</span>
+
+<span>--生成本地表</span>
+
+<span>select</span> <span>*</span> <span>into</span> 表 <span>from</span> <span>openrowset</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'sql服务器名 '</span><span>;</span> <span>'用户名 '</span><span>;</span> <span>'密码 '</span><span>,</span>数据库名<span>.</span>dbo<span>.</span>表名<span>)</span>
+
+<span>--把本地表导入远程表</span>
+
+<span>insert</span> <span>openrowset</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'sql服务器名 '</span><span>;</span> <span>'用户名 '</span><span>;</span> <span>'密码 '</span><span>,</span>数据库名<span>.</span>dbo<span>.</span>表名<span>)</span>
+
+<span>select</span> <span>*</span><span>from</span> 本地表
+
+<span>--更新本地表</span>
+
+<span>update</span> b
+
+<span>set</span> b<span>.</span>列A<span>=</span>a<span>.</span>列A
+
+ <span>from</span> <span>openrowset</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'sql服务器名 '</span><span>;</span> <span>'用户名 '</span><span>;</span> <span>'密码 '</span><span>,</span>数据库名<span>.</span>dbo<span>.</span>表名<span>)</span><span>as</span> a <span>inner</span> <span>join</span> 本地表 b
+
+<span>on</span> a<span>.</span>column1<span>=</span>b<span>.</span>column1
+
+<span>--openquery用法需要创建一个连接</span>
+
+<span>--首先创建一个连接创建链接服务器</span>
+
+<span>exec</span> sp_addlinkedserver <span>'ITSV '</span><span>,</span> <span>' '</span><span>,</span> <span>'SQLOLEDB '</span><span>,</span> <span>'远程服务器名或ip地址 '</span>
+
+<span>--查询</span>
+
+<span>select</span> <span>*</span> <span>FROM</span> <span>openquery</span><span>(</span>ITSV<span>,</span> <span>'SELECT * FROM 数据库.dbo.表名 '</span><span>)</span>
+
+<span>--把本地表导入远程表</span>
+
+<span>insert</span> <span>openquery</span><span>(</span>ITSV<span>,</span> <span>'SELECT * FROM 数据库.dbo.表名 '</span><span>)</span>
+
+<span>select</span> <span>*</span> <span>from</span> 本地表
+
+<span>--更新本地表</span>
+
+<span>update</span> b <span>set</span> b<span>.</span>列B<span>=</span>a<span>.</span>列B <span>FROM</span> <span>openquery</span><span>(</span>ITSV<span>,</span> <span>'SELECT * FROM 数据库.dbo.表名 '</span><span>)</span> <span>as</span> a <span>inner</span> <span>join</span> 本地表 b <span>on</span> a<span>.</span>列A<span>=</span>b<span>.</span>列A
+
+<span>--3、opendatasource/openrowset</span>
+
+<span>SELECT</span>   <span>*</span> <span>FROM</span>   <span>opendatasource</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'Data Source=ip/ServerName;User ID=登陆名;Password=密码 '</span> <span>)</span><span>.</span>test<span>.</span>dbo<span>.</span>roy_ta
+
+<span>--把本地表导入远程表</span>
+
+<span>insert</span> <span>opendatasource</span><span>(</span> <span>'SQLOLEDB '</span><span>,</span> <span>'Data Source=ip/ServerName;User ID=登陆名;Password=密码 '</span><span>)</span><span>.</span>数据库<span>.</span>dbo<span>.</span>表名
+
+<span>select</span> <span>*</span> <span>from</span> 本地表
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>SQL Server基本函数</strong></p>
+<p>SQL Server基本函数</p>
+<p><strong>1.字符串函数</strong> 长度与分析用</p>
+<p><strong>1,datalength</strong>(Char_expr) 返回字符串包含字符数,但不包含后面的空格</p>
+<p><strong>2,substring</strong>(expression,start,length) 取子串，字符串的下标是从“1”，start为起始位置，length为字符串长度，实际应用中以len(expression)取得其长度</p>
+<p><strong>3,right</strong>(char_expr,int_expr) 返回字符串右边第int_expr个字符，还用<strong>left</strong>于之相反**
+**</p>
+<p><strong>4,isnull(</strong> <em>check</em>**_**<em>expression</em> <strong>,</strong> <em>replacement_value</em> **)**如果check_expression為空，則返回replacement_value的值，不為空，就返回check_expression字符操作类</p>
+<p><strong>5,Sp_addtype</strong>自定義數據類型
+例如：<code>EXEC sp_addtype birthday, datetime, 'NULL'</code></p>
+<div><pre><code><span>6</span><span>,</span><span>set</span> nocount {<span>on</span><span>|</span><span>off</span>}
+使返回的结果中不包含有关受 Transact<span>-</span><span>SQL</span> 语句影响的行数的信息。如果存储过程中包含的一些语句并不返回许多实际的数据，则该设置由于大量减少了网络流量，因此可显著提高性能。<span>SET</span> NOCOUNT 设置是在执行或运行时设置，而不是在分析时设置。
+<span>SET</span> NOCOUNT 为 <span>ON</span> 时，不返回计数（表示受 Transact<span>-</span><span>SQL</span> 语句影响的行数）。
+<span>SET</span> NOCOUNT 为 <span>OFF</span> 时，返回计数
+常识
+ 
+在<span>SQL</span>查询中：<span>from</span>后最多可以跟多少张表或视图：<span>256</span>
+在<span>SQL</span>语句中出现 <span>Order</span> <span>by</span><span>,</span>查询时，先排序，后取
+在<span>SQL</span>中，一个字段的最大容量是<span>8000</span>，而对于nvarchar<span>(</span><span>4000</span><span>)</span><span>,</span>由于nvarchar是Unicode码。 
+       
+SQLServer2000同步复制技术实现步骤
+一、 预备工作
+<span>1.</span>发布服务器<span>,</span>订阅服务器都创建一个同名的windows用户<span>,</span>并设置相同的密码<span>,</span>做为发布快照文件夹的有效访问用户
+<span>--管理工具</span>
+<span>--计算机管理</span>
+<span>--用户和组</span>
+<span>--右键用户</span>
+<span>--新建用户</span>
+<span>--建立一个隶属于administrator组的登陆windows的用户（SynUser）</span>
+<span>2.</span>在发布服务器上<span>,</span>新建一个共享目录<span>,</span>做为发布的快照文件的存放目录<span>,</span>操作:
+我的电脑<span>--D:\ 新建一个目录,名为: PUB</span>
+<span>--右键这个新建的目录</span>
+<span>--属性--共享</span>
+<span>--选择"共享该文件夹"</span>
+<span>--通过"权限"按纽来设置具体的用户权限,保证第一步中创建的用户(SynUser) 具有对该文件夹的所有权限</span>
+<span>--确定</span>
+<span>3.</span>设置<span>SQL</span>代理<span>(</span>SQLSERVERAGENT<span>)</span>服务的启动用户<span>(</span>发布<span>/</span>订阅服务器均做此设置<span>)</span>
+开始<span>--程序--管理工具--服务</span>
+<span>--右键SQLSERVERAGENT</span>
+<span>--属性--登陆--选择"此账户"</span>
+<span>--输入或者选择第一步中创建的windows登录用户名（SynUser）</span>
+<span>--"密码"中输入该用户的密码</span>
+<span>4.</span>设置<span>SQL</span> Server身份验证模式<span>,</span>解决连接时的权限问题<span>(</span>发布<span>/</span>订阅服务器均做此设置<span>)</span>
+企业管理器
+<span>--右键SQL实例--属性</span>
+<span>--安全性--身份验证</span>
+<span>--选择"SQL Server 和 Windows"</span>
+<span>--确定</span>
+<span>5.</span>在发布服务器和订阅服务器上互相注册
+企业管理器
+<span>--右键SQL Server组</span>
+<span>--新建SQL Server注册...</span>
+<span>--下一步--可用的服务器中,输入你要注册的远程服务器名 --添加</span>
+<span>--下一步--连接使用,选择第二个"SQL Server身份验证"</span>
+<span>--下一步--输入用户名和密码（SynUser）</span>
+<span>--下一步--选择SQL Server组,也可以创建一个新组</span>
+<span>--下一步--完成</span>
+<span>6.</span>对于只能用IP<span>,</span>不能用计算机名的<span>,</span>为其注册服务器别名（此步在实施中没用到）
+ <span>(</span>在连接端配置<span>,</span>比如<span>,</span>在订阅服务器上配置的话<span>,</span>服务器名称中输入的是发布服务器的IP<span>)</span>
+开始<span>--程序--Microsoft SQL Server--客户端网络实用工具</span>
+<span>--别名--添加</span>
+<span>--网络库选择"tcp/ip"--服务器别名输入SQL服务器名</span>
+<span>--连接参数--服务器名称中输入SQL服务器ip地址</span>
+<span>--如果你修改了SQL的端口,取消选择"动态决定端口",并输入对应的端口号</span>
+二、 正式配置
+<span>1</span>、配置发布服务器
+打开企业管理器，在发布服务器（B、C、D）上执行以下步骤:
+<span>(</span><span>1</span><span>)</span> 从<span>[</span>工具<span>]</span>下拉菜单的<span>[</span>复制<span>]</span>子菜单中选择<span>[</span>配置发布、订阅服务器和分发<span>]</span>出现配置发布和分发向导
+<span>(</span><span>2</span><span>)</span> <span>[</span>下一步<span>]</span> 选择分发服务器 可以选择把发布服务器自己作为分发服务器或者其他<span>sql</span>的服务器（选择自己）
+<span>(</span><span>3</span><span>)</span> <span>[</span>下一步<span>]</span> 设置快照文件夹
+采用默认\\servername\Pub
+<span>(</span><span>4</span><span>)</span> <span>[</span>下一步<span>]</span> 自定义配置
+可以选择:是<span>,</span>让我设置分发数据库属性启用发布服务器或设置发布设置
+否<span>,</span>使用下列默认设置（推荐）
+<span>(</span><span>5</span><span>)</span> <span>[</span>下一步<span>]</span> 设置分发数据库名称和位置 采用默认值
+<span>(</span><span>6</span><span>)</span> <span>[</span>下一步<span>]</span> 启用发布服务器 选择作为发布的服务器
+<span>(</span><span>7</span><span>)</span> <span>[</span>下一步<span>]</span> 选择需要发布的数据库和发布类型
+<span>(</span><span>8</span><span>)</span> <span>[</span>下一步<span>]</span> 选择注册订阅服务器
+<span>(</span><span>9</span><span>)</span> <span>[</span>下一步<span>]</span> 完成配置
+<span>2</span>、创建出版物
+发布服务器B、C、D上
+<span>(</span><span>1</span><span>)</span>从<span>[</span>工具<span>]</span>菜单的<span>[</span>复制<span>]</span>子菜单中选择<span>[</span>创建和管理发布<span>]</span>命令
+<span>(</span><span>2</span><span>)</span>选择要创建出版物的数据库，然后单击<span>[</span>创建发布<span>]</span>
+<span>(</span><span>3</span><span>)</span>在<span>[</span>创建发布向导<span>]</span>的提示对话框中单击<span>[</span>下一步<span>]</span>系统就会弹出一个对话框。对话框上的内容是复制的三个类型。我们现在选第一个也就是默认的快照发布<span>(</span>其他两个大家可以去看看帮助<span>)</span>
+<span>(</span><span>4</span><span>)</span>单击<span>[</span>下一步<span>]</span>系统要求指定可以订阅该发布的数据库服务器类型<span>,</span>
+SQLSERVER允许在不同的数据库如 orACLE或ACCESS之间进行数据复制。
+但是在这里我们选择运行<span>"SQL SERVER 2000"</span>的数据库服务器
+<span>(</span><span>5</span><span>)</span>单击<span>[</span>下一步<span>]</span>系统就弹出一个定义文章的对话框也就是选择要出版的表
+注意: 如果前面选择了事务发布 则再这一步中只能选择带有主键的表
+<span>(</span><span>6</span><span>)</span>选择发布名称和描述
+<span>(</span><span>7</span><span>)</span>自定义发布属性 向导提供的选择:
+是 我将自定义数据筛选<span>,</span>启用匿名订阅和或其他自定义属性
+否 根据指定方式创建发布 （建议采用自定义的方式）
+<span>(</span><span>8</span><span>)</span><span>[</span>下一步<span>]</span> 选择筛选发布的方式
+<span>(</span><span>9</span><span>)</span><span>[</span>下一步<span>]</span> 可以选择是否允许匿名订阅
+<span>1</span><span>)</span>如果选择署名订阅<span>,</span>则需要在发布服务器上添加订阅服务器
+方法: <span>[</span>工具<span>]</span><span>-</span><span>></span><span>[</span>复制<span>]</span><span>-</span><span>></span><span>[</span>配置发布、订阅服务器和分发的属性<span>]</span><span>-</span><span>></span><span>[</span>订阅服务器<span>]</span> 中添加
+否则在订阅服务器上请求订阅时会出现的提示:改发布不允许匿名订阅
+如果仍然需要匿名订阅则用以下解决办法
+<span>[</span>企业管理器<span>]</span><span>-</span><span>></span><span>[</span>复制<span>]</span><span>-</span><span>></span><span>[</span>发布内容<span>]</span><span>-</span><span>></span><span>[</span>属性<span>]</span><span>-</span><span>></span><span>[</span>订阅选项<span>]</span> 选择允许匿名请求订阅
+<span>2</span><span>)</span>如果选择匿名订阅<span>,</span>则配置订阅服务器时不会出现以上提示
+<span>(</span><span>10</span><span>)</span><span>[</span>下一步<span>]</span> 设置快照 代理程序调度
+<span>(</span><span>11</span><span>)</span><span>[</span>下一步<span>]</span> 完成配置
+当完成出版物的创建后创建出版物的数据库也就变成了一个共享数据库
+有数据
+srv1<span>.</span>库名<span>.</span><span>.</span>author有字段:id<span>,</span>name<span>,</span>phone<span>,</span>
+srv2<span>.</span>库名<span>.</span><span>.</span>author有字段:id<span>,</span>name<span>,</span>telphone<span>,</span>adress
+ 
+要求：
+srv1<span>.</span>库名<span>.</span><span>.</span>author增加记录则srv1<span>.</span>库名<span>.</span><span>.</span>author记录增加
+srv1<span>.</span>库名<span>.</span><span>.</span>author的phone字段更新，则srv1<span>.</span>库名<span>.</span><span>.</span>author对应字段telphone更新
+<span>--*/</span>
+ 
+<span>--大致的处理步骤</span>
+<span>--1.在 srv1 上创建连接服务器,以便在 srv1 中操作 srv2,实现同步</span>
+<span>exec</span> sp_addlinkedserver <span>'srv2'</span><span>,</span><span>''</span><span>,</span><span>'SQLOLEDB'</span><span>,</span><span>'srv2的sql实例名或ip'</span>
+<span>exec</span> sp_addlinkedsrvlogin <span>'srv2'</span><span>,</span><span>'false'</span><span>,</span><span>null</span><span>,</span><span>'用户名'</span><span>,</span><span>'密码'</span>
+go
+<span>--2.在 srv1 和 srv2 这两台电脑中,启动 msdtc(分布式事务处理服务),并且设置为自动启动</span>
+。我的电脑<span>--控制面板--管理工具--服务--右键 Distributed Transaction Coordinator--属性--启动--并将启动类型设置为自动启动</span>
+go
+  
+<span>--然后创建一个作业定时调用上面的同步处理存储过程就行了</span>
+ 
+企业管理器
+<span>--管理</span>
+<span>--SQL Server代理</span>
+<span>--右键作业</span>
+<span>--新建作业</span>
+<span>--"常规"项中输入作业名称</span>
+<span>--"步骤"项</span>
+<span>--新建</span>
+<span>--"步骤名"中输入步骤名</span>
+<span>--"类型"中选择"Transact-SQL 脚本(TSQL)"</span>
+<span>--"数据库"选择执行命令的数据库</span>
+<span>--"命令"中输入要执行的语句: exec p_process</span>
+<span>--确定</span>
+<span>--"调度"项</span>
+<span>--新建调度</span>
+<span>--"名称"中输入调度名称</span>
+<span>--"调度类型"中选择你的作业执行安排</span>
+<span>--如果选择"反复出现"</span>
+<span>--点"更改"来设置你的时间安排</span>
+ 
+然后将<span>SQL</span> Agent服务启动<span>,</span>并设置为自动启动<span>,</span>否则你的作业不会被执行
+ 
+设置方法:
+我的电脑<span>--控制面板--管理工具--服务--右键 SQLSERVERAGENT--属性--启动类型--选择"自动启动"--确定. </span>
+<span>--3.实现同步处理的方法2,定时同步</span>
+<span>--在srv1中创建如下的同步处理存储过程</span>
+<span>create</span> <span>proc</span> p_process <span>as</span>
+
+<span>--更新修改过的数据</span>
+
+<span>update</span> b <span>set</span> name<span>=</span>i<span>.</span>name<span>,</span>telphone<span>=</span>i<span>.</span>telphone
+
+<span>from</span> srv2<span>.</span>库名<span>.</span>dbo<span>.</span>author b<span>,</span>author i
+
+<span>where</span> b<span>.</span>id<span>=</span>i<span>.</span>id <span>and</span>
+
+<span>(</span>b<span>.</span>name <span>&lt;></span> i<span>.</span>name <span>or</span> b<span>.</span>telphone <span>&lt;></span> i<span>.</span>telphone<span>)</span>
+
+<span>--插入新增的数据</span>
+
+<span>insert</span> srv2<span>.</span>库名<span>.</span>dbo<span>.</span>author<span>(</span>id<span>,</span>name<span>,</span>telphone<span>)</span>
+
+<span>select</span> id<span>,</span>name<span>,</span>telphone <span>from</span> author i
+
+<span>where</span> <span>not</span> <span>exists</span><span>(</span>
+
+<span>select</span> <span>*</span> <span>from</span> srv2<span>.</span>库名<span>.</span>dbo<span>.</span>author <span>where</span> id<span>=</span>i<span>.</span>id<span>)</span>
+
+
+<span>--删除已经删除的数据(如果需要的话)</span>
+
+<span>delete</span> b
+
+<span>from</span> srv2<span>.</span>库名<span>.</span>dbo<span>.</span>author b
+
+<span>where</span> <span>not</span> <span>exists</span><span>(</span><span>select</span> <span>*</span> <span>from</span> author <span>where</span> id<span>=</span>b<span>.</span>id<span>)</span>
+
+go
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>SpringBoot 接口数据加解密实战</title>
+      <link>https://blog.ciberviler.top/dev/SpringBoot%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%AE%9E%E6%88%98.html</link>
+      <guid>https://blog.ciberviler.top/dev/SpringBoot%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%AE%9E%E6%88%98.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">SpringBoot 接口数据加解密实战</source>
+      <category>Java</category>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="springboot-接口数据加解密实战" tabindex="-1"> SpringBoot 接口数据加解密实战</h1>
+<p>需求解析：</p>
+<ol>
+<li>服务端、客户端和H5统一拦截加解密，网上有成熟方案，也可以按其他服务中实现的加解密流程来搞；</li>
+<li>使用AES放松加密，考虑到H5端存储密钥安全性相对来说会低一些，故分针对H5和安卓、IOS分配两套密钥；</li>
+<li>本次涉及客户端和服务端的整体改造，经讨论，新接口统一加 /secret/ 前缀来区分</li>
+</ol>
+<p>按本次需求来简单还原问题，定义两个对象，后面用得着，</p>
+<p>用户类：</p>
+<div><pre><code><span>@Data</span>
+<span>public</span> <span>class</span> <span>User</span> <span>{</span>
+    <span>private</span> <span>Integer</span> id<span>;</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+    <span>private</span> <span>UserType</span> userType <span>=</span> <span>UserType</span><span>.</span>COMMON<span>;</span>
+    <span>@JsonFormat</span><span>(</span>pattern <span>=</span> <span>"yyyy-MM-dd HH:mm:ss"</span><span>)</span>
+    <span>private</span> <span>LocalDateTime</span> registerTime<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>用户类型枚举类：</p>
+<div><pre><code><span>@Getter</span>
+<span>@JsonFormat</span><span>(</span>shape <span>=</span> <span>JsonFormat<span>.</span>Shape</span><span>.</span>OBJECT<span>)</span>
+<span>public</span> <span>enum</span> <span>UserType</span> <span>{</span>
+    <span>VIP</span><span>(</span><span>"VIP用户"</span><span>)</span><span>,</span>
+    <span>COMMON</span><span>(</span><span>"普通用户"</span><span>)</span><span>;</span>
+    <span>private</span> <span>String</span> code<span>;</span>
+    <span>private</span> <span>String</span> type<span>;</span>
+
+    <span>UserType</span><span>(</span><span>String</span> type<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>code <span>=</span> <span>name</span><span>(</span><span>)</span><span>;</span>
+        <span>this</span><span>.</span>type <span>=</span> type<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>构造一个简单的用户列表查询示例：</p>
+<div><pre><code><span>@RestController</span>
+<span>@RequestMapping</span><span>(</span>value <span>=</span> <span>{</span><span>"/user"</span><span>,</span> <span>"/secret/user"</span><span>}</span><span>)</span>
+<span>public</span> <span>class</span> <span>UserController</span> <span>{</span>
+    <span>@RequestMapping</span><span>(</span><span>"/list"</span><span>)</span>
+    <span>ResponseEntity</span><span><span>&lt;</span><span>List</span><span>&lt;</span><span>User</span><span>></span><span>></span></span> <span>listUser</span><span>(</span><span>)</span> <span>{</span>
+        <span>List</span><span><span>&lt;</span><span>User</span><span>></span></span> users <span>=</span> <span>new</span> <span>ArrayList</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>User</span> u <span>=</span> <span>new</span> <span>User</span><span>(</span><span>)</span><span>;</span>
+        u<span>.</span><span>setId</span><span>(</span><span>1</span><span>)</span><span>;</span>
+        u<span>.</span><span>setName</span><span>(</span><span>"boyka"</span><span>)</span><span>;</span>
+        u<span>.</span><span>setRegisterTime</span><span>(</span><span>LocalDateTime</span><span>.</span><span>now</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        u<span>.</span><span>setUserType</span><span>(</span><span>UserType</span><span>.</span>COMMON<span>)</span><span>;</span>
+        users<span>.</span><span>add</span><span>(</span>u<span>)</span><span>;</span>
+        <span>ResponseEntity</span><span><span>&lt;</span><span>List</span><span>&lt;</span><span>User</span><span>></span><span>></span></span> response <span>=</span> <span>new</span> <span>ResponseEntity</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+        response<span>.</span><span>setCode</span><span>(</span><span>200</span><span>)</span><span>;</span>
+        response<span>.</span><span>setData</span><span>(</span>users<span>)</span><span>;</span>
+        response<span>.</span><span>setMsg</span><span>(</span><span>"用户列表查询成功"</span><span>)</span><span>;</span>
+        <span>return</span> response<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>调用：localhost:8080/user/list</p>
+<p>查询结果如下，没毛病：</p>
+<div><pre><code><span>{</span>
+	<span>"code"</span><span>:</span> <span>200</span><span>,</span>
+	<span>"data"</span><span>:</span> <span>[</span><span>{</span>
+		<span>"id"</span><span>:</span> <span>1</span><span>,</span>
+		<span>"name"</span><span>:</span> <span>"boyka"</span><span>,</span>
+		<span>"userType"</span><span>:</span> <span>{</span>
+			<span>"code"</span><span>:</span> <span>"COMMON"</span><span>,</span>
+			<span>"type"</span><span>:</span> <span>"普通用户"</span>
+		<span>}</span><span>,</span>
+		<span>"registerTime"</span><span>:</span> <span>"2022-03-24 23:58:39"</span>
+	<span>}</span><span>]</span><span>,</span>
+	<span>"msg"</span><span>:</span> <span>"用户列表查询成功"</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>目前主要是利用ControllerAdvice来对请求和响应体进行拦截，主要定义SecretRequestAdvice对请求进行加密和SecretResponseAdvice对响应进行加密(实际情况会稍微复杂一点，项目中又GET类型请求，自定义了一个Filter进行不同的请求解密处理)。</p>
+<p>好了，网上的ControllerAdvice使用示例非常多，我这把两个核心方法给大家展示看看，相信大佬们一看就晓得了，不需多言。上代码：</p>
+<p>SecretRequestAdvice请求解密：</p>
+<div><pre><code><span>/**
+ * <span>@description</span>:
+ * <span>@author</span>: boykaff
+ * <span>@date</span>: 2022-03-25-0025
+ */</span>
+<span>@ControllerAdvice</span>
+<span>@Order</span><span>(</span><span>Ordered</span><span>.</span>HIGHEST_PRECEDENCE<span>)</span>
+<span>@Slf4j</span>
+<span>public</span> <span>class</span> <span>SecretRequestAdvice</span> <span>extends</span> <span>RequestBodyAdviceAdapter</span> <span>{</span>
+    <span>@Override</span>
+    <span>public</span> <span>boolean</span> <span>supports</span><span>(</span><span>MethodParameter</span> methodParameter<span>,</span> <span>Type</span> type<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>HttpMessageConverter</span><span>&lt;</span><span>?</span><span>></span><span>></span></span> aClass<span>)</span> <span>{</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>HttpInputMessage</span> <span>beforeBodyRead</span><span>(</span><span>HttpInputMessage</span> inputMessage<span>,</span> <span>MethodParameter</span> parameter<span>,</span> <span>Type</span> targetType<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>HttpMessageConverter</span><span>&lt;</span><span>?</span><span>></span><span>></span></span> converterType<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>//如果支持加密消息，进行消息解密。</span>
+        <span>String</span> httpBody<span>;</span>
+        <span>if</span> <span>(</span><span>Boolean</span><span>.</span>TRUE<span>.</span><span>equals</span><span>(</span><span>SecretFilter</span><span>.</span>secretThreadLocal<span>.</span><span>get</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
+            httpBody <span>=</span> <span>decryptBody</span><span>(</span>inputMessage<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            httpBody <span>=</span> <span>StreamUtils</span><span>.</span><span>copyToString</span><span>(</span>inputMessage<span>.</span><span>getBody</span><span>(</span><span>)</span><span>,</span> <span>Charset</span><span>.</span><span>defaultCharset</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>//返回处理后的消息体给messageConvert</span>
+        <span>return</span> <span>new</span> <span>SecretHttpMessage</span><span>(</span><span>new</span> <span>ByteArrayInputStream</span><span>(</span>httpBody<span>.</span><span>getBytes</span><span>(</span><span>)</span><span>)</span><span>,</span> inputMessage<span>.</span><span>getHeaders</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 解密消息体
+     *
+     * <span>@param</span> <span>inputMessage</span> 消息体
+     * <span>@return</span> 明文
+     */</span>
+    <span>private</span> <span>String</span> <span>decryptBody</span><span>(</span><span>HttpInputMessage</span> inputMessage<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>InputStream</span> encryptStream <span>=</span> inputMessage<span>.</span><span>getBody</span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> requestBody <span>=</span> <span>StreamUtils</span><span>.</span><span>copyToString</span><span>(</span>encryptStream<span>,</span> <span>Charset</span><span>.</span><span>defaultCharset</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>// 验签过程</span>
+        <span>HttpHeaders</span> headers <span>=</span> inputMessage<span>.</span><span>getHeaders</span><span>(</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>CollectionUtils</span><span>.</span><span>isEmpty</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"clientType"</span><span>)</span><span>)</span>
+                <span>||</span> <span>CollectionUtils</span><span>.</span><span>isEmpty</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"timestamp"</span><span>)</span><span>)</span>
+                <span>||</span> <span>CollectionUtils</span><span>.</span><span>isEmpty</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"salt"</span><span>)</span><span>)</span>
+                <span>||</span> <span>CollectionUtils</span><span>.</span><span>isEmpty</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"signature"</span><span>)</span><span>)</span><span>)</span> <span>{</span>
+            <span>throw</span> <span>new</span> <span>ResultException</span><span>(</span>SECRET_API_ERROR<span>,</span> <span>"请求解密参数错误，clientType、timestamp、salt、signature等参数传递是否正确传递"</span><span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>String</span> timestamp <span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span><span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"timestamp"</span><span>)</span><span>)</span><span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>)</span><span>;</span>
+        <span>String</span> salt <span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span><span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"salt"</span><span>)</span><span>)</span><span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>)</span><span>;</span>
+        <span>String</span> signature <span>=</span> <span>String</span><span>.</span><span>valueOf</span><span>(</span><span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>headers<span>.</span><span>get</span><span>(</span><span>"signature"</span><span>)</span><span>)</span><span>.</span><span>get</span><span>(</span><span>0</span><span>)</span><span>)</span><span>;</span>
+        <span>String</span> privateKey <span>=</span> <span>SecretFilter</span><span>.</span>clientPrivateKeyThreadLocal<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>ReqSecret</span> reqSecret <span>=</span> JSON<span>.</span><span>parseObject</span><span>(</span>requestBody<span>,</span> <span>ReqSecret</span><span>.</span><span>class</span><span>)</span><span>;</span>
+        <span>String</span> data <span>=</span> reqSecret<span>.</span><span>getData</span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> newSignature <span>=</span> <span>""</span><span>;</span>
+        <span>if</span> <span>(</span><span>!</span><span>StringUtils</span><span>.</span><span>isEmpty</span><span>(</span>privateKey<span>)</span><span>)</span> <span>{</span>
+            newSignature <span>=</span> <span>Md5Utils</span><span>.</span><span>genSignature</span><span>(</span>timestamp <span>+</span> salt <span>+</span> data <span>+</span> privateKey<span>)</span><span>;</span>
+        <span>}</span>
+        <span>if</span> <span>(</span><span>!</span>newSignature<span>.</span><span>equals</span><span>(</span>signature<span>)</span><span>)</span> <span>{</span>
+            <span>// 验签失败</span>
+            <span>throw</span> <span>new</span> <span>ResultException</span><span>(</span>SECRET_API_ERROR<span>,</span> <span>"验签失败，请确认加密方式是否正确"</span><span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>try</span> <span>{</span>
+            <span>String</span> decrypt <span>=</span> <span>EncryptUtils</span><span>.</span><span>aesDecrypt</span><span>(</span>data<span>,</span> privateKey<span>)</span><span>;</span>
+            <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>isEmpty</span><span>(</span>decrypt<span>)</span><span>)</span> <span>{</span>
+                decrypt <span>=</span> <span>"{}"</span><span>;</span>
+            <span>}</span>
+            <span>return</span> decrypt<span>;</span>
+        <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
+            log<span>.</span><span>error</span><span>(</span><span>"error: "</span><span>,</span> e<span>)</span><span>;</span>
+        <span>}</span>
+        <span>throw</span> <span>new</span> <span>ResultException</span><span>(</span>SECRET_API_ERROR<span>,</span> <span>"解密失败"</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>SecretResponseAdvice响应加密：</p>
+<div><pre><code><span>@ControllerAdvice</span>
+<span>public</span> <span>class</span> <span>SecretResponseAdvice</span> <span>implements</span> <span>ResponseBodyAdvice</span> <span>{</span>
+    <span>private</span> <span>Logger</span> logger <span>=</span> <span>LoggerFactory</span><span>.</span><span>getLogger</span><span>(</span><span>SecretResponseAdvice</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>boolean</span> <span>supports</span><span>(</span><span>MethodParameter</span> methodParameter<span>,</span> <span>Class</span> aClass<span>)</span> <span>{</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>Object</span> <span>beforeBodyWrite</span><span>(</span><span>Object</span> o<span>,</span> <span>MethodParameter</span> methodParameter<span>,</span> <span>MediaType</span> mediaType<span>,</span> <span>Class</span> aClass<span>,</span> <span>ServerHttpRequest</span> serverHttpRequest<span>,</span> <span>ServerHttpResponse</span> serverHttpResponse<span>)</span> <span>{</span>
+        <span>// 判断是否需要加密</span>
+        <span>Boolean</span> respSecret <span>=</span> <span>SecretFilter</span><span>.</span>secretThreadLocal<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>String</span> secretKey <span>=</span> <span>SecretFilter</span><span>.</span>clientPrivateKeyThreadLocal<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>// 清理本地缓存</span>
+        <span>SecretFilter</span><span>.</span>secretThreadLocal<span>.</span><span>remove</span><span>(</span><span>)</span><span>;</span>
+        <span>SecretFilter</span><span>.</span>clientPrivateKeyThreadLocal<span>.</span><span>remove</span><span>(</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>null</span> <span>!=</span> respSecret <span>&amp;&amp;</span> respSecret<span>)</span> <span>{</span>
+            <span>if</span> <span>(</span>o <span>instanceof</span> <span>ResponseBasic</span><span>)</span> <span>{</span>
+                <span>// 外层加密级异常</span>
+                <span>if</span> <span>(</span>SECRET_API_ERROR <span>==</span> <span>(</span><span>(</span><span>ResponseBasic</span><span>)</span> o<span>)</span><span>.</span><span>getCode</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                    <span>return</span> <span>SecretResponseBasic</span><span>.</span><span>fail</span><span>(</span><span>(</span><span>(</span><span>ResponseBasic</span><span>)</span> o<span>)</span><span>.</span><span>getCode</span><span>(</span><span>)</span><span>,</span> <span>(</span><span>(</span><span>ResponseBasic</span><span>)</span> o<span>)</span><span>.</span><span>getData</span><span>(</span><span>)</span><span>,</span> <span>(</span><span>(</span><span>ResponseBasic</span><span>)</span> o<span>)</span><span>.</span><span>getMsg</span><span>(</span><span>)</span><span>)</span><span>;</span>
+                <span>}</span>
+                <span>// 业务逻辑</span>
+                <span>try</span> <span>{</span>
+                    <span>String</span> data <span>=</span> <span>EncryptUtils</span><span>.</span><span>aesEncrypt</span><span>(</span>JSON<span>.</span><span>toJSONString</span><span>(</span>o<span>)</span><span>,</span> secretKey<span>)</span><span>;</span>
+                    <span>// 增加签名</span>
+                    <span>long</span> timestamp <span>=</span> <span>System</span><span>.</span><span>currentTimeMillis</span><span>(</span><span>)</span> <span>/</span> <span>1000</span><span>;</span>
+                    <span>int</span> salt <span>=</span> <span>EncryptUtils</span><span>.</span><span>genSalt</span><span>(</span><span>)</span><span>;</span>
+                    <span>String</span> dataNew <span>=</span> timestamp <span>+</span> <span>""</span> <span>+</span> salt <span>+</span> <span>""</span> <span>+</span> data <span>+</span> secretKey<span>;</span>
+                    <span>String</span> newSignature <span>=</span> <span>Md5Utils</span><span>.</span><span>genSignature</span><span>(</span>dataNew<span>)</span><span>;</span>
+                    <span>return</span> <span>SecretResponseBasic</span><span>.</span><span>success</span><span>(</span>data<span>,</span> timestamp<span>,</span> salt<span>,</span> newSignature<span>)</span><span>;</span>
+                <span>}</span> <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span> <span>{</span>
+                    logger<span>.</span><span>error</span><span>(</span><span>"beforeBodyWrite error:"</span><span>,</span> e<span>)</span><span>;</span>
+                    <span>return</span> <span>SecretResponseBasic</span><span>.</span><span>fail</span><span>(</span>SECRET_API_ERROR<span>,</span> <span>""</span><span>,</span> <span>"服务端处理结果数据异常"</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+        <span>}</span>
+        <span>return</span> o<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>OK， 代码Demo撸好了，试运行一波：</p>
+<div><pre><code>请求方法：
+localhost<span>:</span><span>8080</span>/secret/user/list
+
+header<span>:</span>
+Content-Type<span>:</span>application/json
+signature<span>:</span>55efb04a83ca083dd1e6003cde127c45
+timestamp<span>:</span><span>1648308048</span>
+salt<span>:</span><span>123456</span>
+clientType<span>:</span>ANDORID
+
+body体<span>:</span>
+<span>// 原始请求体</span>
+<span>{</span>
+	<span>"page"</span><span>:</span> <span>1</span><span>,</span>
+	<span>"size"</span><span>:</span> <span>10</span>
+<span>}</span>
+<span>// 加密后的请求体</span>
+<span>{</span>
+	<span>"data"</span><span>:</span> <span>"1ZBecdnDuMocxAiW9UtBrJzlvVbueP9K0MsIxQccmU3OPG92oRinVm0GxBwdlXXJ"</span>
+<span>}</span>
+
+<span>// 加密响应体：</span>
+<span>{</span>
+    <span>"data"</span><span>:</span> <span>"fxHYvnIE54eAXDbErdrDryEsIYNvsOOkyEKYB1iBcre/QU1wMowHE2BNX/je6OP3NlsCtAeDqcp7J1N332el8q2FokixLvdxAPyW5Un9JiT0LQ3MB8p+nN23pTSIvh9VS92lCA8KULWg2nViSFL5X1VwKrF0K/dcVVZnpw5h227UywP6ezSHjHdA+Q0eKZFGTEv3IzNXWqq/otx5fl1gKQ=="</span><span>,</span>
+    <span>"code"</span><span>:</span> <span>200</span><span>,</span>
+    <span>"signature"</span><span>:</span> <span>"aa61f19da0eb5d99f13c145a40a7746b"</span><span>,</span>
+    <span>"msg"</span><span>:</span> <span>""</span><span>,</span>
+    <span>"timestamp"</span><span>:</span> <span>1648480034</span><span>,</span>
+    <span>"salt"</span><span>:</span> <span>632648</span>
+<span>}</span>
+
+<span>// 解密后的响应体：</span>
+<span>{</span>
+	<span>"code"</span><span>:</span> <span>200</span><span>,</span>
+	<span>"data"</span><span>:</span> <span>[</span><span>{</span>
+		<span>"id"</span><span>:</span> <span>1</span><span>,</span>
+		<span>"name"</span><span>:</span> <span>"boyka"</span><span>,</span>
+		<span>"registerTime"</span><span>:</span> <span>"2022-03-27T00:19:43.699"</span><span>,</span>
+		<span>"userType"</span><span>:</span> <span>"COMMON"</span>
+	<span>}</span><span>]</span><span>,</span>
+	<span>"msg"</span><span>:</span> <span>"用户列表查询成功"</span><span>,</span>
+	<span>"salt"</span><span>:</span> <span>0</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>OK，客户端请求加密-》发起请求-》服务端解密-》业务处理-》服务端响应加密-》客户端解密展示，看起来没啥问题，实际是头天下午花了2小时碰需求，差不多花1小时写好demo测试，然后对所有接口统一进行了处理，整体一下午赶脚应该行了吧，告诉H5和安卓端同学明儿上午联调（不小的大家到这个时候发现猫腻没有，当时确实疏忽了，翻了大车......）</p>
+<p>次日，安卓端反馈，你这个加解密有问题，解密后的数据格式和之前不一样，仔细一看，擦，这个userType和registerTime是不对劲，开始思考：这个能是哪儿的问题呢？1s之后，初步定位，应该是响应体的JSON.toJSONString的问题：</p>
+<div><pre><code>String data = EncryptUtils.aesEncrypt(JSON.toJSONString(o)),
+</code></pre><div aria-hidden="true"><div></div></div></div><p>Debug断点调试，果然，是JSON.toJSONString(o)这一步骤转换出了问题，那JSON转换时是不是有高级属性可以配置生成想要的序列化格式呢？FastJson在序列化时提供重载方法，找到其中一个&quot;SerializerFeature&quot;参数可以琢磨一下，这个参数是可以对序列化进行配置的，它提供了很多配置类型，其中感觉这几个比较沾边：</p>
+<div><pre><code>WriteEnumUsingToString,
+WriteEnumUsingName,
+UseISO8601DateFormat
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>对枚举类型来说，默认是使用的WriteEnumUsingName(枚举的Name)， 另一种WriteEnumUsingToString是重新toString方法，理论上可以转换成想要的样子，即这个样子：</p>
+<div><pre><code><span>@Getter</span>
+<span>@JsonFormat</span><span>(</span>shape <span>=</span> <span>JsonFormat<span>.</span>Shape</span><span>.</span>OBJECT<span>)</span>
+<span>public</span> <span>enum</span> <span>UserType</span> <span>{</span>
+    <span>VIP</span><span>(</span><span>"VIP用户"</span><span>)</span><span>,</span>
+    <span>COMMON</span><span>(</span><span>"普通用户"</span><span>)</span><span>;</span>
+    <span>private</span> <span>String</span> code<span>;</span>
+    <span>private</span> <span>String</span> type<span>;</span>
+
+    <span>UserType</span><span>(</span><span>String</span> type<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>code <span>=</span> <span>name</span><span>(</span><span>)</span><span>;</span>
+        <span>this</span><span>.</span>type <span>=</span> type<span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>String</span> <span>toString</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>"{"</span> <span>+</span>
+                <span>"\"code\":\""</span> <span>+</span> <span>name</span><span>(</span><span>)</span> <span>+</span> <span>'\"'</span> <span>+</span>
+                <span>", \"type\":\""</span> <span>+</span> type <span>+</span> <span>'\"'</span> <span>+</span>
+                <span>'}'</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>结果转换出来的数据是字符串类型&quot;{&quot;code&quot;:&quot;COMMON&quot;, &quot;type&quot;:&quot;普通用户&quot;}&quot;，这个方法好像行不通，还有什么好办法呢？思前想后，看文章开始定义的User和UserType类，标记数据序列化格式@JsonFormat，再突然想起之前看到过的一些文章，SpringMVC底层默认是使用Jackson进行序列化的，那好了，就用Jacksong实施呗，将SecretResponseAdvice中的序列化方法替换一下：</p>
+<div><pre><code> <span>String</span> data <span>=</span> <span>EncryptUtils</span><span>.</span><span>aesEncrypt</span><span>(</span>JSON<span>.</span><span>toJSONString</span><span>(</span>o<span>)</span><span>,</span> secretKey<span>)</span><span>;</span>
+ 换为：
+ <span>String</span> data <span>=</span><span>EncryptUtils</span><span>.</span><span>aesEncrypt</span><span>(</span><span>new</span> <span>ObjectMapper</span><span>(</span><span>)</span><span>.</span><span>writeValueAsString</span><span>(</span>o<span>)</span><span>,</span> secretKey<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>重新运行一波，走起：</p>
+<div><pre><code><span>{</span>
+	<span>"code"</span><span>:</span> <span>200</span><span>,</span>
+	<span>"data"</span><span>:</span> <span>[</span><span>{</span>
+		<span>"id"</span><span>:</span> <span>1</span><span>,</span>
+		<span>"name"</span><span>:</span> <span>"boyka"</span><span>,</span>
+		<span>"userType"</span><span>:</span> <span>{</span>
+			<span>"code"</span><span>:</span> <span>"COMMON"</span><span>,</span>
+			<span>"type"</span><span>:</span> <span>"普通用户"</span>
+		<span>}</span><span>,</span>
+		<span>"registerTime"</span><span>:</span> <span>{</span>
+			<span>"month"</span><span>:</span> <span>"MARCH"</span><span>,</span>
+			<span>"year"</span><span>:</span> <span>2022</span><span>,</span>
+			<span>"dayOfMonth"</span><span>:</span> <span>29</span><span>,</span>
+			<span>"dayOfWeek"</span><span>:</span> <span>"TUESDAY"</span><span>,</span>
+			<span>"dayOfYear"</span><span>:</span> <span>88</span><span>,</span>
+			<span>"monthValue"</span><span>:</span> <span>3</span><span>,</span>
+			<span>"hour"</span><span>:</span> <span>22</span><span>,</span>
+			<span>"minute"</span><span>:</span> <span>30</span><span>,</span>
+			<span>"nano"</span><span>:</span> <span>453000000</span><span>,</span>
+			<span>"second"</span><span>:</span> <span>36</span><span>,</span>
+			<span>"chronology"</span><span>:</span> <span>{</span>
+				<span>"id"</span><span>:</span> <span>"ISO"</span><span>,</span>
+				<span>"calendarType"</span><span>:</span> <span>"iso8601"</span>
+			<span>}</span>
+		<span>}</span>
+	<span>}</span><span>]</span><span>,</span>
+	<span>"msg"</span><span>:</span> <span>"用户列表查询成功"</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>解密后的userType枚举类型和非加密版本一样了，舒服了，== 好像还不对，registerTime怎么变成这个样子了？原本是&quot;2022-03-24 23:58:39&quot;这种格式的，<a href="https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fyzeng%2Fp%2F11522411.html" target="_blank" rel="noopener noreferrer">Jackson之LocalDateTime转换，无需改实体类</a>这篇文章讲到了这个问题，并提出了一种解决方案，不过用在我们目前这个需求里面，就是有损改装了啊，不太可取，遂去Jackson官网上查找一下相关文档，当然Jackson也提供了ObjectMapper的序列化配置，重新再初始化配置ObjectMpper对象：</p>
+<div><pre><code><span>String</span> DATE_TIME_FORMATTER <span>=</span> <span>"yyyy-MM-dd HH:mm:ss"</span><span>;</span>
+<span>ObjectMapper</span> objectMapper <span>=</span> <span>new</span> <span>Jackson2ObjectMapperBuilder</span><span>(</span><span>)</span>
+                            <span>.</span><span>findModulesViaServiceLoader</span><span>(</span><span>true</span><span>)</span>
+                            <span>.</span><span>serializerByType</span><span>(</span><span>LocalDateTime</span><span>.</span><span>class</span><span>,</span> <span>new</span> <span>LocalDateTimeSerializer</span><span>(</span>
+                                    <span>DateTimeFormatter</span><span>.</span><span>ofPattern</span><span>(</span>DATE_TIME_FORMATTER<span>)</span><span>)</span><span>)</span>
+                            <span>.</span><span>deserializerByType</span><span>(</span><span>LocalDateTime</span><span>.</span><span>class</span><span>,</span> <span>new</span> <span>LocalDateTimeDeserializer</span><span>(</span>
+                                    <span>DateTimeFormatter</span><span>.</span><span>ofPattern</span><span>(</span>DATE_TIME_FORMATTER<span>)</span><span>)</span><span>)</span>
+                            <span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>转换结果：</p>
+<div><pre><code><span>{</span>
+	<span>"code"</span><span>:</span> <span>200</span><span>,</span>
+	<span>"data"</span><span>:</span> <span>[</span><span>{</span>
+		<span>"id"</span><span>:</span> <span>1</span><span>,</span>
+		<span>"name"</span><span>:</span> <span>"boyka"</span><span>,</span>
+		<span>"userType"</span><span>:</span> <span>{</span>
+			<span>"code"</span><span>:</span> <span>"COMMON"</span><span>,</span>
+			<span>"type"</span><span>:</span> <span>"普通用户"</span>
+		<span>}</span><span>,</span>
+		<span>"registerTime"</span><span>:</span> <span>"2022-03-29 22:57:33"</span>
+	<span>}</span><span>]</span><span>,</span>
+	<span>"msg"</span><span>:</span> <span>"用户列表查询成功"</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>OK，和非加密版的终于一致了，完了吗？感觉还是可能存在些什么问题，首先业务代码的时间序列化需求不一样，有&quot;yyyy-MM-dd hh:mm:ss&quot;的，也有&quot;yyyy-MM-dd&quot;的，还可能其他配置思考不到位的，导致和之前非加密版返回数据不一致的问题，到时候联调测出来了也麻烦，有没有一劳永逸的办法呢？同事一句话点亮我，看一下spring框架自身是怎么序列化的，照着配置应该就行嘛，好像有点道理，不从0开始分析源码了，敢兴趣的朋友可以看看这篇文章源码分析<a href="https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fjava-chen-hao%2Fp%2F11187914.html" target="_blank" rel="noopener noreferrer">Spring MVC源码(三) ----- @RequestBody和@ResponseBody原理解析</a>，感觉写可以。</p>
+<p>跟着执行链路，找到具体的响应序列化，重点就是RequestResponseBodyMethodProcessor，</p>
+<div><pre><code><span>protected</span> <span><span>&lt;</span><span>T</span><span>></span></span> <span>void</span> <span>writeWithMessageConverters</span><span>(</span><span>@Nullable</span> <span>T</span> value<span>,</span> <span>MethodParameter</span> returnType<span>,</span> <span>ServletServerHttpRequest</span> inputMessage<span>,</span> <span>ServletServerHttpResponse</span> outputMessage<span>)</span> <span>throws</span> <span>IOException</span><span>,</span> <span>HttpMediaTypeNotAcceptableException</span><span>,</span> <span>HttpMessageNotWritableException</span> <span>{</span>
+        <span>// 获取响应的拦截器链并执行beforeBodyWrite方法，也就是执行了我们自定义的SecretResponseAdvice中的beforeBodyWrite啦</span>
+		body <span>=</span> <span>this</span><span>.</span><span>getAdvice</span><span>(</span><span>)</span><span>.</span><span>beforeBodyWrite</span><span>(</span>body<span>,</span> returnType<span>,</span> selectedMediaType<span>,</span> converter<span>.</span><span>getClass</span><span>(</span><span>)</span><span>,</span> inputMessage<span>,</span> outputMessage<span>)</span><span>;</span>
+		<span>if</span> <span>(</span>body <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+		    <span>// 执行响应体序列化工作</span>
+			<span>if</span> <span>(</span>genericConverter <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+				genericConverter<span>.</span><span>write</span><span>(</span>body<span>,</span> <span>(</span><span>Type</span><span>)</span>targetType<span>,</span> selectedMediaType<span>,</span> outputMessage<span>)</span><span>;</span>
+			<span>}</span> <span>else</span> <span>{</span>
+				converter<span>.</span><span>write</span><span>(</span>body<span>,</span> selectedMediaType<span>,</span> outputMessage<span>)</span><span>;</span>
+			<span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>进而通过实例化的AbstractJackson2HttpMessageConverter对象找到执行序列化的核心方法</p>
+<div><pre><code><span>-></span> <span>AbstractGenericHttpMessageConverter</span><span>:</span>
+	
+	<span>public</span> <span>final</span> <span>void</span> <span>write</span><span>(</span><span>T</span> t<span>,</span> <span>@Nullable</span> <span>Type</span> type<span>,</span> <span>@Nullable</span> <span>MediaType</span> contentType<span>,</span> <span>HttpOutputMessage</span> outputMessage<span>)</span> <span>throws</span> <span>IOException</span><span>,</span> <span>HttpMessageNotWritableException</span> <span>{</span>
+        <span>.</span><span>.</span><span>.</span>
+		<span>this</span><span>.</span><span>writeInternal</span><span>(</span>t<span>,</span> type<span>,</span> outputMessage<span>)</span><span>;</span>
+		outputMessage<span>.</span><span>getBody</span><span>(</span><span>)</span><span>.</span><span>flush</span><span>(</span><span>)</span><span>;</span>
+     
+    <span>}</span>
+	<span>-></span> 找到<span>Jackson</span>序列化 <span>AbstractJackson2HttpMessageConverter</span><span>:</span>
+	<span>// 从spring容器中获取并设置的ObjectMapper实例</span>
+	<span>protected</span> <span>ObjectMapper</span> objectMapper<span>;</span>
+	
+	<span>protected</span> <span>void</span> <span>writeInternal</span><span>(</span><span>Object</span> object<span>,</span> <span>@Nullable</span> <span>Type</span> type<span>,</span> <span>HttpOutputMessage</span> outputMessage<span>)</span> <span>throws</span> <span>IOException</span><span>,</span> <span>HttpMessageNotWritableException</span> <span>{</span>
+        <span>MediaType</span> contentType <span>=</span> outputMessage<span>.</span><span>getHeaders</span><span>(</span><span>)</span><span>.</span><span>getContentType</span><span>(</span><span>)</span><span>;</span>
+        <span>JsonEncoding</span> encoding <span>=</span> <span>this</span><span>.</span><span>getJsonEncoding</span><span>(</span>contentType<span>)</span><span>;</span>
+        <span>JsonGenerator</span> generator <span>=</span> <span>this</span><span>.</span>objectMapper<span>.</span><span>getFactory</span><span>(</span><span>)</span><span>.</span><span>createGenerator</span><span>(</span>outputMessage<span>.</span><span>getBody</span><span>(</span><span>)</span><span>,</span> encoding<span>)</span><span>;</span>
+
+		<span>this</span><span>.</span><span>writePrefix</span><span>(</span>generator<span>,</span> object<span>)</span><span>;</span>
+		<span>Object</span> value <span>=</span> object<span>;</span>
+		<span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> serializationView <span>=</span> <span>null</span><span>;</span>
+		<span>FilterProvider</span> filters <span>=</span> <span>null</span><span>;</span>
+		<span>JavaType</span> javaType <span>=</span> <span>null</span><span>;</span>
+		<span>if</span> <span>(</span>object <span>instanceof</span> <span>MappingJacksonValue</span><span>)</span> <span>{</span>
+			<span>MappingJacksonValue</span> container <span>=</span> <span>(</span><span>MappingJacksonValue</span><span>)</span>object<span>;</span>
+			value <span>=</span> container<span>.</span><span>getValue</span><span>(</span><span>)</span><span>;</span>
+			serializationView <span>=</span> container<span>.</span><span>getSerializationView</span><span>(</span><span>)</span><span>;</span>
+			filters <span>=</span> container<span>.</span><span>getFilters</span><span>(</span><span>)</span><span>;</span>
+		<span>}</span>
+
+		<span>if</span> <span>(</span>type <span>!=</span> <span>null</span> <span>&amp;&amp;</span> <span>TypeUtils</span><span>.</span><span>isAssignable</span><span>(</span>type<span>,</span> value<span>.</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span>
+			javaType <span>=</span> <span>this</span><span>.</span><span>getJavaType</span><span>(</span>type<span>,</span> <span>(</span><span>Class</span><span>)</span><span>null</span><span>)</span><span>;</span>
+		<span>}</span>
+
+		<span>ObjectWriter</span> objectWriter <span>=</span> serializationView <span>!=</span> <span>null</span> <span>?</span> <span>this</span><span>.</span>objectMapper<span>.</span><span>writerWithView</span><span>(</span>serializationView<span>)</span> <span>:</span> <span>this</span><span>.</span>objectMapper<span>.</span><span>writer</span><span>(</span><span>)</span><span>;</span>
+		<span>if</span> <span>(</span>filters <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+			objectWriter <span>=</span> objectWriter<span>.</span><span>with</span><span>(</span>filters<span>)</span><span>;</span>
+		<span>}</span>
+
+		<span>if</span> <span>(</span>javaType <span>!=</span> <span>null</span> <span>&amp;&amp;</span> javaType<span>.</span><span>isContainerType</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+			objectWriter <span>=</span> objectWriter<span>.</span><span>forType</span><span>(</span>javaType<span>)</span><span>;</span>
+		<span>}</span>
+
+		<span>SerializationConfig</span> config <span>=</span> objectWriter<span>.</span><span>getConfig</span><span>(</span><span>)</span><span>;</span>
+		<span>if</span> <span>(</span>contentType <span>!=</span> <span>null</span> <span>&amp;&amp;</span> contentType<span>.</span><span>isCompatibleWith</span><span>(</span><span>MediaType</span><span>.</span>TEXT_EVENT_STREAM<span>)</span> <span>&amp;&amp;</span> config<span>.</span><span>isEnabled</span><span>(</span><span>SerializationFeature</span><span>.</span>INDENT_OUTPUT<span>)</span><span>)</span> <span>{</span>
+			objectWriter <span>=</span> objectWriter<span>.</span><span>with</span><span>(</span><span>this</span><span>.</span>ssePrettyPrinter<span>)</span><span>;</span>
+		<span>}</span>
+        <span>// 重点进行序列化</span>
+		objectWriter<span>.</span><span>writeValue</span><span>(</span>generator<span>,</span> value<span>)</span><span>;</span>
+		<span>this</span><span>.</span><span>writeSuffix</span><span>(</span>generator<span>,</span> object<span>)</span><span>;</span>
+		generator<span>.</span><span>flush</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>那么，可以看出SpringMVC在进行响应序列化的时候是从容器中获取的ObjectMapper实例对象，并会根据不同的默认配置条件进行序列化，那处理方法就简单了，我也可以从Spring容器拿数据进行序列化啊。SecretResponseAdvice进行如下进一步改造：</p>
+<div><pre><code><span>@ControllerAdvice</span>
+<span>public</span> <span>class</span> <span>SecretResponseAdvice</span> <span>implements</span> <span>ResponseBodyAdvice</span> <span>{</span>
+
+    <span>@Autowired</span>
+    <span>private</span> <span>ObjectMapper</span> objectMapper<span>;</span>
+     
+      <span>@Override</span>
+    <span>public</span> <span>Object</span> <span>beforeBodyWrite</span><span>(</span><span>.</span><span>.</span><span>.</span><span>.</span><span>)</span> <span>{</span>
+        <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+        <span>String</span> dataStr <span>=</span>objectMapper<span>.</span><span>writeValueAsString</span><span>(</span>o<span>)</span><span>;</span>
+        <span>String</span> data <span>=</span> <span>EncryptUtils</span><span>.</span><span>aesEncrypt</span><span>(</span>dataStr<span>,</span> secretKey<span>)</span><span>;</span>
+        <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+    <span>}</span>
+ <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>经测试，响应数据和非加密版万全一致啦，还有GET部分的请求加密，以及后面加解密惨遭跨域问题，后面有空再和大家聊聊。</p>
+<p><a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fboykait%2Fencrypt-demo" target="_blank" rel="noopener noreferrer">git的demo地址</a></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>VUE下拉列表动态切换(人人组件)</title>
+      <link>https://blog.ciberviler.top/dev/VUE%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2.html</link>
+      <guid>https://blog.ciberviler.top/dev/VUE%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">VUE下拉列表动态切换(人人组件)</source>
+      <category>Java</category>
+      <pubDate>Tue, 05 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="vue下拉列表动态切换-人人组件" tabindex="-1"> VUE下拉列表动态切换(人人组件)</h1>
+<h2 id="方法一" tabindex="-1"> 方法一</h2>
+<p>vue前端</p>
+<div><pre><code> <span><span><span>&lt;</span>el-form-item</span> <span>label</span><span><span>=</span><span>"</span>大类<span>"</span></span> <span>prop</span><span><span>=</span><span>"</span>busiLines<span>"</span></span><span>></span></span>
+     <span><span><span>&lt;</span>ren-select</span> <span>v-model</span><span><span>=</span><span>"</span>dataForm.busiLines<span>"</span></span> <span>dict-type</span><span><span>=</span><span>"</span>PIG_BUSI_LINES<span>"</span></span> <span>@change</span><span><span>=</span><span>"</span>selectchange<span>"</span></span> <span>placeholder</span><span><span>=</span><span>"</span>大类<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>ren-select</span><span>></span></span>
+<span><span><span>&lt;/</span>el-form-item</span><span>></span></span>
+<span><span><span>&lt;</span>el-form-item</span> <span>label</span><span><span>=</span><span>"</span>细分<span>"</span></span> <span>prop</span><span><span>=</span><span>"</span>busiDtiLines<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>el-select</span> <span>v-model</span><span><span>=</span><span>"</span>dataForm.busiDtiLines<span>"</span></span> <span>placeholder</span><span><span>=</span><span>"</span>细分<span>"</span></span> <span>clearable</span><span>></span></span>
+        <span><span><span>&lt;</span>el-option</span> <span>:label</span><span><span>=</span><span>"</span>data.dictLabel<span>"</span></span> <span>v-for</span><span><span>=</span><span>"</span>data in dataList<span>"</span></span> <span>:key</span><span><span>=</span><span>"</span>data.dictValue<span>"</span></span> <span>:value</span><span><span>=</span><span>"</span>data.dictValue<span>"</span></span><span>></span></span>{{ data.dictLabel }}<span><span><span>&lt;/</span>el-option</span><span>></span></span>
+    <span><span><span>&lt;/</span>el-select</span><span>></span></span>
+<span><span><span>&lt;/</span>el-form-item</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>setup或者data中添加</p>
+<div><pre><code>busi_dict:"",
+dataList:[] as any[], // 属性需要做类型断言处理,
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>methods中添加方法：</p>
+<div><pre><code><span>selectchange</span><span>(</span>value<span>)</span><span>{</span>
+      <span>//console.log(value)</span>
+      <span>switch</span><span>(</span>value<span>)</span><span>{</span>
+        <span>case</span> <span>"1"</span><span>:</span> <span>this</span><span>.</span>dataList<span>=</span><span>getDictDataList</span><span>(</span><span>this</span><span>.</span>$store<span>.</span>state<span>.</span>dicts<span>,</span> <span>"BUSI_DTI_LINES_FIN"</span><span>)</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"2"</span><span>:</span> <span>this</span><span>.</span>dataList<span>=</span><span>getDictDataList</span><span>(</span><span>this</span><span>.</span>$store<span>.</span>state<span>.</span>dicts<span>,</span> <span>"BUSI_DTI_LINES_NONFIN"</span><span>)</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"3"</span><span>:</span> <span>this</span><span>.</span>dataList<span>=</span><span>getDictDataList</span><span>(</span><span>this</span><span>.</span>$store<span>.</span>state<span>.</span>dicts<span>,</span> <span>"BUSI_DTI_LINES_RE"</span><span>)</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"4"</span><span>:</span> <span>this</span><span>.</span>dataList<span>=</span><span>getDictDataList</span><span>(</span><span>this</span><span>.</span>$store<span>.</span>state<span>.</span>dicts<span>,</span> <span>"BUSI_DTI_LINES_GUAR"</span><span>)</span><span>;</span><span>break</span><span>;</span>
+        <span>default</span><span>:</span><span>break</span><span>;</span>
+      <span>}</span><span>;</span>
+    <span>}</span><span>,</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="方法二" tabindex="-1"> 方法二</h2>
+<p>ren-select组件中添加watch</p>
+<div><pre><code>watch<span>:</span> <span>{</span>
+    <span>//开始监听返回该对象属性值计算属性</span>
+    dictType<span>:</span> <span>{</span>
+      deep<span>:</span> <span>true</span><span>,</span>
+      <span>handler</span><span>(</span>newVal<span>,</span> oldVal<span>)</span> <span>{</span>
+        <span>console</span><span>.</span><span>info</span><span>(</span><span>'[oldVal:'</span> <span>+</span> oldVal <span>+</span> <span>'] [newVal:'</span> <span>+</span> newVal <span>+</span> <span>']'</span><span>)</span>
+        <span>this</span><span>.</span>dataList <span>=</span> <span>getDictDataList</span><span>(</span><span>this</span><span>.</span>store<span>.</span>state<span>.</span>dicts<span>,</span> newVal<span>)</span>
+
+        <span>console</span><span>.</span><span>info</span><span>(</span><span>this</span><span>.</span>dataList<span>)</span>
+      <span>}</span><span>,</span>
+    <span>}</span><span>,</span>
+<span>}</span><span>,</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>vue前端</p>
+<div><pre><code><span><span><span>&lt;</span>el-form-item</span> <span>label</span><span><span>=</span><span>"</span>大类<span>"</span></span> <span>prop</span><span><span>=</span><span>"</span>busiLines<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>ren-select</span> <span>v-model</span><span><span>=</span><span>"</span>dataForm.busiLines<span>"</span></span> <span>dict-type</span><span><span>=</span><span>"</span>PIG_BUSI_LINES<span>"</span></span> <span>@change</span><span><span>=</span><span>"</span>selectchange<span>"</span></span> <span>placeholder</span><span><span>=</span><span>"</span>大类<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>ren-select</span><span>></span></span>
+<span><span><span>&lt;/</span>el-form-item</span><span>></span></span>
+<span><span><span>&lt;</span>el-form-item</span> <span>label</span><span><span>=</span><span>"</span>细分<span>"</span></span> <span>prop</span><span><span>=</span><span>"</span>busiDtiLines<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>ren-select</span> <span>v-model</span><span><span>=</span><span>"</span>dataForm.busiDtiLines<span>"</span></span> <span>:dict-type</span><span><span>=</span><span>"</span>busi_dict<span>"</span></span> <span>placeholder</span><span><span>=</span><span>"</span>细分<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>ren-select</span><span>></span></span>
+<span><span><span>&lt;/</span>el-form-item</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>methods中添加方法：</p>
+<div><pre><code><span>selectchange</span><span>(</span>value<span>)</span><span>{</span>
+    <span>switch</span><span>(</span>value<span>)</span><span>{</span>
+        <span>case</span> <span>"1"</span><span>:</span> <span>this</span><span>.</span>busi_dict <span>=</span> <span>"BUSI_DTI_LINES_FIN"</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"2"</span><span>:</span> <span>this</span><span>.</span>busi_dict <span>=</span> <span>"BUSI_DTI_LINES_NONFIN"</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"3"</span><span>:</span> <span>this</span><span>.</span>busi_dict <span>=</span> <span>"BUSI_DTI_LINES_RE"</span><span>;</span><span>break</span><span>;</span>
+        <span>case</span> <span>"4"</span><span>:</span> <span>this</span><span>.</span>busi_dict <span>=</span> <span>"BUSI_DTI_LINES_GUAR"</span><span>;</span><span>break</span><span>;</span>
+        <span>default</span><span>:</span><span>break</span><span>;</span>
+    <span>}</span><span>;</span>
+<span>}</span><span>,</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="注意" tabindex="-1"> 注意：</h2>
+<p>如果下拉列表用字典，打开时会显示字典值的key，所以可以加一个钩子</p>
+<div><pre><code><span>updated</span><span>(</span><span>)</span><span>{</span>
+    <span>this</span><span>.</span><span>selectchange</span><span>(</span><span>this</span><span>.</span>dataForm<span>.</span>busiLines<span>)</span><span>;</span>
+  <span>}</span><span>,</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div>]]></content:encoded>
+    </item>
     <item>
       <title>Spring Boot 整合流程引擎 Flowable</title>
       <link>https://blog.ciberviler.top/dev/SpringBoot%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8EFlowable.html</link>
@@ -26385,313 +27521,6 @@ public class UserController{
     <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>Intellij idea高效使用教程</title>
-      <link>https://blog.ciberviler.top/dev/idea-tips.html</link>
-      <guid>https://blog.ciberviler.top/dev/idea-tips.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">Intellij idea高效使用教程</source>
-      <category>IDEA</category>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="intellij-idea高效使用教程" tabindex="-1"> Intellij idea高效使用教程</h1>
-<h2 id="一-安装插件" tabindex="-1"> 一. 安装插件</h2>
-<p><strong>1. Codota 代码智能提示插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/14502291ea3f4cafa4dbbf7bd4ffbf55?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>只要打出首字母就能联想出一整条语句，这也太智能了，还显示了每条语句使用频率。</p>
-<p>原因是它学习了我的项目代码，总结出了我的代码偏好。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5354d75dcd344f4abe2117323e245b82?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>如果让它再加上机器学习，人工智能写代码的时代还会远吗？</strong></p>
-<p><strong>2. Key Promoter X 快捷键提示插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c0b8ae097f8241c98c8c883854ef1d7b?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>每次都会在右下角弹窗提示，帮助我们快速熟悉快捷键。</p>
-<p><strong>3. CodeGlance 显示代码缩略图插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8a693ad0e1e544cf91bcd25bf8217e72?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>当代码很多的时候，方便查看，很有用。</p>
-<p><strong>4. Lombok 简化臃肿代码插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7cb0a353d5fa439f8c4ff49fb53d5b0b?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>实体类中的get/set/构造/toString/hashCode等方法，都不需要我们再手动写了</p>
-<p><strong>5. Alibaba Java Coding Guidelines 阿里巴巴代码规范检查插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4cbd3d17c85e4140b6ea2392974ecaf6?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>会按照阿里Java开发手册上规范帮我们检查代码，然后对代码做不同颜色展示，鼠标放上去，会看到提示内容，帮助我们写出更规范的代码。</p>
-<p><strong>6. CamelCase 驼峰命名和下划线命名转换</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bb6a30de074641a38d8289af714123e7?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>这几种风格的命名方式，用快捷键 ⇧ + ⌥ + U / Shift + Alt + U可以进行快速转换，当我们需要修改大量变量名称的时候很方便。</p>
-<p><strong>7. MybatisX 高效操作Mybatis插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/14bf2f1911224f8d9d20350e968221e0?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>8. SonarLint 代码质量检查插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8f18920331484d05b2996c6551fb19ae?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>提示我不要用System.out输出，要用logger输出，诸如此类，帮助我们提升代码质量。</p>
-<p><strong>9. Save Actions 格式化代码插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bb840418a8294bec9ecbb62e413cc76e?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>可以帮忙我们优化包导入，自动给没有修改的变量添加final修饰符，调用方法的时候自动添加this关键字等，使我们的代码更规范统一。</p>
-<p><strong>10. CheckStyle 代码风格检查插件</strong></p>
-<p>功能跟Alibaba Java Coding Guidelines类似</p>
-<p><strong>11. Grep Console 自定义控制台输出格式插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6ad33ab81cc7487c88e25d8b7fc8d8a2?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>12. MetricsReloaded 代码复杂度检查插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/71cd828d24e3452db4f3294adeea57cf?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>13. Statistic 代码统计插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b1079d0eb9d344a88b825b158a27a3b6?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>14. Translation 翻译插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/9f0f1abfd35f430e979a1d755e883f68?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>15. Rainbow Brackets 彩虹括号插件</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1c110caa286045a88484e408cf4c390c?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>成对儿的括号显示相同的颜色，有了这个插件，我的近视都好了。</p>
-<h2 id="二-自定义创建live-template-快速写代码" tabindex="-1"> 二. 自定义创建live template，快速写代码</h2>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ca34ebf0555e4167a6a1b22df79521c5?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>只要输入<strong>apr</strong>，就能自动提示，并且生成<strong>Autowired</strong>语句了。可以根据自己的代码习惯，自定义一些代码模板，帮助我们快速写代码。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/dbdf776104314095b737a7de041dd17f?from=pc" alt="Intellij idea高效使用教程"></p>
-<h2 id="三-修改全局配置-提升工作效率" tabindex="-1"> 三. 修改全局配置，提升工作效率</h2>
-<p><strong>1. 优化导包配置</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f49864dd31814de885c68910fdef6c01?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>2. 取消tab页单行显示</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/98ee419d6c7041308bbabe701acbfbe8?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5ca9b27a61054b18835cef4a1b8a43b2?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>多行显示更多的文件，方便查看。</p>
-<p><strong>3. 双斜杠注释改成紧跟代码头</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/47220322c3b140528fdc3e1aa9f4eb4b?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/46278e2e7eeb45278e8780143687a5d1?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>4. 选中复制整行</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/216d2ea622b54612abc9be4e4fd9546c?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ec7fe392117c4b33952ad37ffd27229c?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>原本只会复制你选中的代码，改完配置后，就能复制整行，无论你是否完全选中。</p>
-<p><strong>5. 取消匹配大小写</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d0251cc8baae4b3f8e7fa2f0aac37b39?from=pc" alt="Intellij idea高效使用教程"></p>
-<p>取消勾选后，输入小写 <strong>s</strong>，也能提示出 <strong>String</strong></p>
-<p><strong>6. 优化版本控制的目录颜色展示</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/70c159e0ad25498aaaee36474acfa3cb?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>7. 创建文件时，自动生成作者和时间信息</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6f8a411ee60046d1b09a7705131c97c3?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>8 . 显示行号和方法分割线</strong></p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a050ad86c09e4195aa49759185ce5be2?from=pc" alt="Intellij idea高效使用教程"></p>
-<p><strong>你还知道哪些关于Intelij idea高效操作或插件，一起在评论区分享吧！</strong></p>
-<h2 id="idea必备20款插件" tabindex="-1"> IDEA必备20款插件</h2>
-<p>以下插件已经为大家下载打包了，如果IDEA版本不一致的话，部分插件可能无法安装，可以根据我提供的地址自行下载相应插件：
-插件打包下载地址：<a href="https://www.lanzouw.com/iV3XKwvq2de" target="_blank" rel="noopener noreferrer">https://www.lanzouw.com/iV3XKwvq2de</a></p>
-<h3 id="leetcode-editor" tabindex="-1"> Leetcode Editor</h3>
-<p>这是一个上班摸鱼神器，也是一个可以在IDEA中刷算法题目的插件，有很多题目供我们学习，
-表面在写代码，其实是在刷题。每道题都有很详细的解题思路
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/12132-leetcode-editor</a></p>
-<h3 id="jrebel" tabindex="-1"> Jrebel</h3>
-<p>这个插件真的是强烈推荐，有时候改一点点代码都要重启才能生效，很浪费时间。
-有了这个插件，修改代码之后不需要重启也能生效。尤其跟别的同事联调的时候特别爽！
-热部署插件，这个插件是收费的，但是可以免费激活，
-访问这个<a href="https://www.guidgen.xn--comGUID-7t3kgmi98e7f1a111cny1a" target="_blank" rel="noopener noreferrer">https://www.guidgen.com网址生成一个GUID</a>,然后将生成的ID，拼接到下面的URL中，粘贴到激活界面就可以啦
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel-for-intellij" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel-for-intellij</a>
-<a href="https://jrebel.qekang.com/%E4%BD%A0%E7%94%9F%E6%88%90%E7%9A%84ID" target="_blank" rel="noopener noreferrer">https://jrebel.qekang.com/你生成的ID</a></p>
-<h3 id="background-image-plus" tabindex="-1"> Background Image Plus</h3>
-<p>一个设置背景图片的插件，有时候纯黑或者纯白看腻的话，可以使用这个插件自定义背景图片。
-也支持动态的更换壁纸
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/8502-background-image-plus" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/8502-background-image-plus</a></p>
-<h3 id="codota" tabindex="-1"> Codota</h3>
-<p>IDEA的自动补全功能已经很强大了，但是这个插件的自动补全功能更加强大，这是一个基于AI技术，学习了大量的开源项目，智能提示更加的可靠
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7638-codota-ai-autocomplete-for-java-and-javascript" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7638-codota-ai-autocomplete-for-java-and-javascript</a>
-有绿色图标的就是codota自动提示的代码</p>
-<p>还有个更强的功能是，它可以从github、stackoverflow上快速的找到你想要的相关代码</p>
-<h3 id="easycode" tabindex="-1"> EasyCode</h3>
-<p>这个插件真的特别强大，它可以通过数据库表自动的生成实体类、Controller、Dao、Service、mapper，简单而且强大。
-通过IDEA内置的数据库，在对应的表中右键选择easy code- generate Code，然后选择路径，勾选想要生成的代码就可以啦
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/10954-easy-code" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/10954-easy-code</a></p>
-<h3 id="translation" tabindex="-1"> Translation</h3>
-<p>这是翻译插件，阅读源码有不认识的英文，或者编写变量时，不知道英文怎么写的时候可以直接进行翻译
-在菜单栏上也可以直接进行翻译，不用再去打开一些在线翻译网站了
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/8579-translation" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/8579-translation</a></p>
-<h3 id="key-promoter-x" tabindex="-1"> Key Promoter X</h3>
-<p>一个可以让你慢慢脱离鼠标操作的插件，在IDEA中操作时，他会将对应的快捷键，进行提示。
-并且右侧会有一个列表，将你近期使用的功能进行展示，对于高频操作我们可以使用快捷键，这样可以提升效率
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/9792-key-promoter-x" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/9792-key-promoter-x</a></p>
-<h3 id="maven-helper" tabindex="-1"> Maven Helper</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7179-maven-helper" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7179-maven-helper</a>
-安装之后，在pom文件中会多出一个Dependcy Analyzer选项卡</p>
-<p>Conflicts：显示冲突依赖
-All Dependencies as List：以列表形式显示依赖
-All Dependencies as Tree：以树的形式显示依赖
-遇到冲突的依赖，可以点击右键，跳到源文件或者直接选择Exclude 排除这个依赖</p>
-<h3 id="alibaba-java-coding-guidelines" tabindex="-1"> Alibaba Java Coding Guidelines</h3>
-<p>阿里巴巴开发的一款插件，可以扫描代码中可能存在的问题
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/10046-alibaba-java-coding-guidelines" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/10046-alibaba-java-coding-guidelines</a></p>
-<p>将不符合规约的代码按 Blocker/Critical/Major(崩溃/严重/重要 ) 三个等级显示在下方，双击可以定位至代码处，右侧窗口还有针对代码的批量修复功能。</p>
-<h3 id="codeglance" tabindex="-1"> CodeGlance</h3>
-<p>用过sublime的同学对这个功能一定很熟悉，它是一个迷你缩放图插件
-当代码过长的时候可以使用这个插件，相比如下拉框，这个插件更加的直观和方便
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7275-codeglance" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7275-codeglance</a></p>
-<h3 id="gsonformat" tabindex="-1"> GsonFormat</h3>
-<p>这是一个将Json字符串自动转换成实体类的插件
-安装完插件之后，在实体类中使用快捷键 'alt+insert'，mac是‘control + 回车’选择GsonFormat
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7654-gsonformat" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7654-gsonformat</a></p>
-<h3 id="javadoc" tabindex="-1"> JavaDoc</h3>
-<p>这是一个快速生成文档注释的插件
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7157-javadoc" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7157-javadoc</a>
-windows上可以通过alt + insert 快捷键，mac是control+回车
-可以快速生成注释模板</p>
-<h3 id="ignore" tabindex="-1"> ignore</h3>
-<p>我们在使用git提交项目的时候，有时候会把 .idea 文件提交上去，
-这个文件只是一些历史记录，版本信息。完全不用提交。
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7495--ignore" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7495--ignore</a>
-这个时候可以使用ignore这个插件，去配置
-在 File- new - .ignore File· 中选择 gitignore File(Git)
-选择Example user template，右侧面板表示要忽略的文件，点击Generate</p>
-<h3 id="rainbow-brackets" tabindex="-1"> Rainbow Brackets</h3>
-<p>这个插件主要是让我们代码中的括号变成彩虹颜色的括号，除了好看还可以帮我们分清括号，防止错乱
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/10080-rainbow-brackets" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/10080-rainbow-brackets</a></p>
-<h3 id="acejump" tabindex="-1"> AceJump</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/7086-acejump" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/7086-acejump</a>
-这是一个快速光标跳转的插件，可以很大的减少我们使用鼠标的频率
-可以查看他的激活快捷键 比如我的是ctrl + 分号，</p>
-<p>激活之后，输入你想跳转的字符，比如O键，那么当前界面的O都会打上标签，再输入相应的字母跳转到对应的位置</p>
-<p>按向上的键，可以行选定，方法跟上面的一致。
-按左右键，是选择开头和结尾
-RestfulTool
-这是一个接口测试工具，
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/14280-restfultool" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/14280-restfultool</a>
-安装成功之后在右侧会有一个RestfulTool的选项卡，点击之后会显示出当前项目的所有请求地址
-并且支持各种各样的请求类型</p>
-<h3 id="material-theme-ui" tabindex="-1"> Material Theme UI</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/8006-material-theme-ui" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/8006-material-theme-ui</a>
-这是一款不错的主题插件，颜值非常的高，安装之后重启即可生效
-可以在设置中，对一些细节，比如调整字体、大小、行间距等</p>
-<h3 id="generateallsetter" tabindex="-1"> GenerateAllSetter</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/9360-generateallsetter/versions" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/9360-generateallsetter/versions</a>
-这个插件可以快速的对实体类生成set代码，这样就不用我们一个一个的去手动set了
-使用方法也非常简单，当我们new一个对象的时候，在对象上使用快简介&quot;alt + 回车&quot;
-选择Generate all setter with default value就可以自动生成所有set方法啦</p>
-<h3 id="statistic" tabindex="-1"> Statistic</h3>
-<p>一款分析项目代码的工具，按照扩展名列出清单，统计代码数量和行数
-点击具体的类别，比如Java，可以统计总行数，有效代码行数，注释行数，以及有效代码比重
-插件下载地址：<a href="https://plugins.jetbrains.com/plugin/4509-statistic" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/4509-statistic</a></p>
-<h3 id="free-mybatis-plugin" tabindex="-1"> Free MyBatis plugin</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/8321-free-mybatis-plugin" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/8321-free-mybatis-plugin</a>
-在使用mybatis时，它可以通过mapper接口中的方法，直接跳转到mapper.xml文件中，
-同样也可以从mapper.xml跳转到mapper接口中
-非常实用！</p>
-<h3 id="stop-coding" tabindex="-1"> Stop Coding</h3>
-<p>插件下载地址：<a href="https://plugins.jetbrains.com/plugin/15740-stopcoding" target="_blank" rel="noopener noreferrer">https://plugins.jetbrains.com/plugin/15740-stopcoding</a>
-最后推荐大家一下防沉迷代码的插件，如果你也经常沉迷于写代码,忘了起身休息喝水,那么试试这个插件吧</p>
-<p>当写代码到设定的时间时,它会弹出下框进行提醒,当然,这个框是关不掉的.只有你休息了足够的时间它才会自动关闭.</p>
-]]></content:encoded>
-      <enclosure url="https://p3.toutiaoimg.com/origin/pgc-image/14502291ea3f4cafa4dbbf7bd4ffbf55?from=pc" type="image/"/>
-    </item>
-    <item>
-      <title>Mybatis 建表、删表、查表语句(mysql数据库)</title>
-      <link>https://blog.ciberviler.top/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html</link>
-      <guid>https://blog.ciberviler.top/dev/mybatis%20%E5%BB%BA%E8%A1%A8%E3%80%81%E5%88%A0%E8%A1%A8%E3%80%81%E6%9F%A5%E8%A1%A8%E8%AF%AD%E5%8F%A5(mysql%E6%95%B0%E6%8D%AE%E5%BA%93).html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">Mybatis 建表、删表、查表语句(mysql数据库)</source>
-      <description>Mybatis 建表、删表、查表语句(mysql数据库)</description>
-      <category>Java</category>
-      <pubDate>Sun, 03 Apr 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="mybatis-建表、删表、查表语句-mysql数据库" tabindex="-1"> Mybatis 建表、删表、查表语句(mysql数据库)</h1>
-<div><pre><code><span>&lt;?xml version="1.0" encoding="UTF-8" ?></span>
-<span><span>&lt;!</span><span>DOCTYPE</span> <span>mapper</span> <span>PUBLIC</span> <span>"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span>"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span> <span>></span></span>
-<span><span><span>&lt;</span>mapper</span> <span>namespace</span><span><span>=</span><span>"</span>com.crsc.sys.rabbitmq.dao.mysql.DBTableInitMapper<span>"</span></span> <span>></span></span>
- 
-  <span><span><span>&lt;</span>update</span> <span>id</span><span><span>=</span><span>"</span>createTodomessageTable<span>"</span></span> <span>parameterType</span><span><span>=</span><span>"</span>String<span>"</span></span><span>></span></span>  
-	  CREATE TABLE todomessage (
-		  id int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-		  moduleID varchar(255) DEFAULT NULL COMMENT '模块ID',
-		  authCode varchar(255) DEFAULT NULL COMMENT '授权码',
-		  itemid varchar(100) DEFAULT NULL COMMENT '待办事项ID',
-		  statecode varchar(255) DEFAULT '0' COMMENT '任务状态  0待办  1 已办',
-		  statePush varchar(4) DEFAULT '0' COMMENT '推送状态 0 未推送  1 已推送',
-		  ssolink varchar(255) DEFAULT NULL COMMENT '明细链接',
-		  userno varchar(200) DEFAULT NULL COMMENT '所属人员ID',
-		  level varchar(255) DEFAULT NULL COMMENT '重要等级',
-		  content varchar(255) DEFAULT NULL COMMENT '待办事项内容',
-		  datetime datetime DEFAULT NULL COMMENT '生成时间',
-		  nodename varchar(255) DEFAULT NULL COMMENT '审批节点',
-		  extParameters varchar(500) DEFAULT NULL COMMENT '扩展参数',
-		  updatetime datetime DEFAULT NULL COMMENT '修改时间',
-		  uid varchar(64) DEFAULT NULL COMMENT 'UUID',
-		  taskid varchar(255) DEFAULT NULL,
-		  pushtime datetime DEFAULT NULL COMMENT '推送时间',
-		  PROC_INST_ID varchar(64) DEFAULT NULL COMMENT '运行实例id',
-		  PROC_DEF_ID varchar(64) DEFAULT NULL COMMENT '流程定义id',
-		  version int(11) NOT NULL DEFAULT '0' COMMENT '乐观锁',
-		  systemKey varchar(255) NOT NULL COMMENT '数据所属系统的key标识',
-		  sourcebacaklog varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '发送oa代办数据',
-		  sourcefinished varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '发送oa已办数据',
-		  backlogtime datetime DEFAULT NULL COMMENT '代办时间',
-		  finishedtime datetime DEFAULT NULL COMMENT '已办时间',
-		  backlogflag varchar(255) DEFAULT NULL COMMENT '代办标识',
-		  finishedflag varchar(255) DEFAULT NULL COMMENT '已办标识',
-		  sourcedel varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '发送删除oa代办数据',
-		  delbacklogtime datetime DEFAULT NULL COMMENT '删除代办发送oa时间',
-		  delflag varchar(255) DEFAULT NULL COMMENT '删除代办标识',
-		  formName varchar(255) DEFAULT NULL COMMENT '流程名称',
-		  PRIMARY KEY (id) USING BTREE
-	) ENGINE=InnoDB AUTO_INCREMENT=1637 DEFAULT CHARSET=utf8                 
-  <span><span><span>&lt;/</span>update</span><span>></span></span> 
-  
-  <span><span><span>&lt;</span>update</span> <span>id</span><span><span>=</span><span>"</span>dropTodomessageTable<span>"</span></span><span>></span></span>  
-    drop table todomessage     
-  <span><span><span>&lt;/</span>update</span><span>></span></span>
-  
-  <span><span><span>&lt;</span>select</span> <span>id</span><span><span>=</span><span>"</span>selectTodoMessage<span>"</span></span> <span>resultType</span><span><span>=</span><span>"</span>java.lang.Integer<span>"</span></span><span>></span></span>
-  	SELECT COUNT(1) FROM information_schema.tables where table_name ='todomessage'
-  <span><span><span>&lt;/</span>select</span><span>></span></span>
-  
-<span><span><span>&lt;/</span>mapper</span><span>></span></span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>使用docker快速安装oracle</title>
-      <link>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html</link>
-      <guid>https://blog.ciberviler.top/dev/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85oracle.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">使用docker快速安装oracle</source>
-      <description>使用docker快速安装oracle</description>
-      <category>Java</category>
-      <pubDate>Wed, 02 Mar 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="使用docker快速安装oracle" tabindex="-1"> 使用docker快速安装oracle</h1>
-<p>1.拉取镜像:</p>
-<div><pre><code><span>docker</span> pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
-</code></pre><div aria-hidden="true"><div></div></div></div><p>2.创建容器</p>
-<div><pre><code><span>docker</span> run -d -p <span>1521</span>:1521 --name oracle11g registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
-</code></pre><div aria-hidden="true"><div></div></div></div><p>3.进入镜像配置</p>
-<div><pre><code><span>docker</span> <span>exec</span> -it oracle11g <span>bash</span>
-
-<span>su</span> root<span>;</span>
-
-密码:helowin
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>编辑环境变量:</p>
-<div><pre><code><span>vi</span> /etc/profile
-<span>export</span> <span>ORACLE_HOME</span><span>=</span>/home/oracle/app/oracle/product/11.2.0/dbhome_2
-<span>export</span> <span>ORACLE_SID</span><span>=</span>helowin
-<span>export</span> <span><span>PATH</span></span><span>=</span><span>$ORACLE_HOME</span>/bin:<span>$PATH</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>创建软连接</p>
-<div><pre><code><span>ln</span> -s <span>$ORACLE_HOME</span>/bin/sqlplus /usr/bin
-
-<span>source</span> /etc/profile
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>切换到oracle 用户</p>
-<p><code>su - oracle</code></p>
-<p>登录sqlplus并修改sys、system用户密码</p>
-<ul>
-<li>登录sqlplus</li>
-</ul>
-<div><pre><code>sqlplus <span>/</span>nolog
-
-conn <span>/</span><span>as</span> sysdba
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><ul>
-<li>接着更改用户密码</li>
-</ul>
-<div><pre><code><span>alter</span> <span>user</span> system identified <span>by</span> system<span>;</span>
-
-<span>alter</span> <span>user</span> sys identified <span>by</span> sys<span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><ul>
-<li>设置密码永不过期</li>
-</ul>
-<div><pre><code><span>ALTER</span> PROFILE <span>DEFAULT</span> <span>LIMIT</span> PASSWORD_LIFE_TIME UNLIMITED<span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><ul>
-<li>
-<p>scott用户的开启</p>
-<p>SCOTT 是 ORACLE 内部的一个实例用户，下面有 emp、dept 等实例表，这些表和表间的关系演示了关系型数据库的一些基本原理。</p>
-</li>
-</ul>
-<div><pre><code><span>alter</span> <span>user</span> scott account <span>unlock</span><span>;</span>
-<span>alter</span> <span>user</span> scott identified <span>by</span> abc<span>;</span>
-<span>commit</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>4.重启容器后就可以直接用了</p>
-<div><pre><code><span>docker</span> restart oracle11g
-</code></pre><div aria-hidden="true"><div></div></div></div><p>现在可以用<code>system</code>用户连接,密码:<code>system</code></p>
-]]></content:encoded>
     </item>
   </channel>
 </rss>
