@@ -6,14 +6,14 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 01 Jul 2022 03:37:35 GMT</pubDate>
-    <lastBuildDate>Fri, 01 Jul 2022 03:37:35 GMT</lastBuildDate>
+    <pubDate>Fri, 01 Jul 2022 08:50:30 GMT</pubDate>
+    <lastBuildDate>Fri, 01 Jul 2022 08:50:30 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Java</category>
+    <category>Linux</category>
     <category>daily</category>
     <category>algorithm</category>
-    <category>Linux</category>
     <category>other</category>
     <category>essay</category>
     <category>Script</category>
@@ -21,6 +21,411 @@
     <category>Python</category>
     <category>Tools</category>
     <category>java</category>
+    <item>
+      <title>Optional非空判断</title>
+      <link>https://blog.ciberviler.top/dev/Optional%E9%9D%9E%E7%A9%BA%E5%88%A4%E6%96%AD.html</link>
+      <guid>https://blog.ciberviler.top/dev/Optional%E9%9D%9E%E7%A9%BA%E5%88%A4%E6%96%AD.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">Optional非空判断</source>
+      <category>Java</category>
+      <pubDate>Mon, 11 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="optional非空判断" tabindex="-1"> Optional非空判断</h1>
+<h2 id="_1-前言" tabindex="-1"> 1.前言</h2>
+<p>相信不少小伙伴已经被java的NPE(Null Pointer Exception)所谓的空指针异常搞的头昏脑涨, 有大佬说过“防止 NPE，是程序员的基本修养。”但是修养归修养，也是我们程序员最头疼的问题之一，那么我们今天就要尽可能的利用Java8的新特性 Optional来尽量简化代码同时高效处理NPE（Null Pointer Exception 空指针异常）</p>
+<h3 id="_2-认识optional并使用" tabindex="-1"> 2.认识Optional并使用</h3>
+<p>简单来说，Opitonal类就是Java提供的为了解决大家平时判断对象是否为空用 会用 null!=obj 这样的方式存在的判断，从而令人头疼导致NPE（Null Pointer Exception 空指针异常），同时Optional的存在可以让代码更加简单，可读性跟高，代码写起来更高效.</p>
+<div><pre><code>   常规判断：
+        <span>//对象 人</span>
+        <span>//属性有 name，age</span>
+        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+       <span>if</span> <span>(</span><span>null</span><span>==</span>person<span>)</span><span>{</span>
+            <span>return</span> <span>"person为null"</span><span>;</span>
+        <span>}</span>
+        <span>return</span> person<span>;</span>
+   使用<span>Optional</span>：
+        <span>//对象 人</span>
+        <span>//属性有 name，age</span>
+        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>orElse</span><span>(</span><span>"person为null"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>测试展示类Person代码(如果有朋友不明白可以看一下这个)：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+    <span>private</span> <span>Integer</span> age<span>;</span>
+
+    <span>public</span> <span>Person</span><span>(</span><span>String</span> name<span>,</span> <span>Integer</span> age<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>name <span>=</span> name<span>;</span>
+        <span>this</span><span>.</span>age <span>=</span> age<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>Person</span><span>(</span><span>)</span> <span>{</span>
+    <span>}</span>
+
+    <span>public</span> <span>String</span> <span>getName</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> name<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>setName</span><span>(</span><span>String</span> name<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>name <span>=</span> name<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>Integer</span> <span>getAge</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> age<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>setAge</span><span>(</span><span>Integer</span> age<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>age <span>=</span> age<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>下面，我们就高效的学习一下神奇的Optional类！</p>
+<h4 id="_2-1-optional对象创建" tabindex="-1"> 2.1 Optional对象创建</h4>
+<p>首先我们先打开Optional的内部,去一探究竟 <strong>先把几个创建Optional对象的方法提取出来</strong></p>
+<div><pre><code><span>public</span> <span>final</span> <span>class</span> <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>{</span>
+   <span>private</span> <span>static</span> <span>final</span> <span>Optional</span><span><span>&lt;</span><span>?</span><span>></span></span> EMPTY <span>=</span> <span>new</span> <span>Optional</span><span><span>&lt;</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+   <span>private</span> <span>final</span> <span>T</span> value<span>;</span>
+   <span>//我们可以看到两个构造方格都是private 私有的</span>
+   <span>//说明 我们没办法在外面去new出来Optional对象</span>
+   <span>private</span> <span>Optional</span><span>(</span><span>)</span> <span>{</span>
+        <span>this</span><span>.</span>value <span>=</span> <span>null</span><span>;</span>
+    <span>}</span>
+   <span>private</span> <span>Optional</span><span>(</span><span>T</span> value<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>value <span>=</span> <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>value<span>)</span><span>;</span>
+    <span>}</span>
+    <span>//这个静态方法大致 是创建出一个包装值为空的一个对象因为没有任何参数赋值</span>
+   <span>public</span> <span>static</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>empty</span><span>(</span><span>)</span> <span>{</span>
+        <span>@SuppressWarnings</span><span>(</span><span>"unchecked"</span><span>)</span>
+        <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> t <span>=</span> <span>(</span><span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span><span>)</span> EMPTY<span>;</span>
+        <span>return</span> t<span>;</span>
+    <span>}</span>
+    <span>//这个静态方法大致 是创建出一个包装值非空的一个对象 因为做了赋值</span>
+   <span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span> <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>of</span><span>(</span><span>T</span> value<span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>Optional</span><span><span>&lt;</span><span>></span></span><span>(</span>value<span>)</span><span>;</span>
+    <span>}</span>
+    <span>//这个静态方法大致是 如果参数value为空，则创建空对象，如果不为空，则创建有参对象</span>
+   <span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span> <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>ofNullable</span><span>(</span><span>T</span> value<span>)</span> <span>{</span>
+        <span>return</span> value <span>==</span> <span>null</span> <span>?</span> <span>empty</span><span>(</span><span>)</span> <span>:</span> <span>of</span><span>(</span>value<span>)</span><span>;</span>
+    <span>}</span>
+ <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>再做一个简单的实例展示 与上面对应</p>
+<div><pre><code>        <span>// 1、创建一个包装对象值为空的Optional对象</span>
+        <span>Optional</span><span><span>&lt;</span><span>String</span><span>></span></span> optEmpty <span>=</span> <span>Optional</span><span>.</span><span>empty</span><span>(</span><span>)</span><span>;</span>
+        <span>// 2、创建包装对象值非空的Optional对象</span>
+        <span>Optional</span><span><span>&lt;</span><span>String</span><span>></span></span> optOf <span>=</span> <span>Optional</span><span>.</span><span>of</span><span>(</span><span>"optional"</span><span>)</span><span>;</span>
+        <span>// 3、创建包装对象值允许为空也可以不为空的Optional对象</span>
+        <span>Optional</span><span><span>&lt;</span><span>String</span><span>></span></span> optOfNullable1 <span>=</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span><span>null</span><span>)</span><span>;</span>
+        <span>Optional</span><span><span>&lt;</span><span>String</span><span>></span></span> optOfNullable2 <span>=</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span><span>"optional"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>我们关于创建Optional对象的内部方法大致分析完毕 接下来也正式的进入Optional的学习与使用中</p>
+<h4 id="_2-2-optional-get-方法-返回对象的值" tabindex="-1"> 2.2 Optional.get()方法(返回对象的值)</h4>
+<p><strong>get()方法是返回一个option的实例值</strong> 源码：</p>
+<div><pre><code>    <span>public</span> <span>T</span> <span>get</span><span>(</span><span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>value <span>==</span> <span>null</span><span>)</span> <span>{</span>
+            <span>throw</span> <span>new</span> <span>NoSuchElementException</span><span>(</span><span>"No value present"</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> value<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>也就是如果value不为空则做返回，如果为空则抛出异常 &quot;No value present&quot;</strong> 简单实例展示</p>
+<div><pre><code>        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-3-optional-ispresent-方法-判读是否为空" tabindex="-1"> 2.3 Optional.isPresent()方法(判读是否为空)</h4>
+<p><strong>isPresent()方法就是会返回一个boolean类型值，如果对象不为空则为真，如果为空则false</strong> 源码:</p>
+<div><pre><code> <span>public</span> <span>boolean</span> <span>isPresent</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> value <span>!=</span> <span>null</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>简单的实例展示:</p>
+<div><pre><code>        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>isPresent</span><span>(</span><span>)</span><span>)</span><span>{</span>
+        <span>//写不为空的逻辑</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"不为空"</span><span>)</span><span>;</span>
+        <span>}</span><span>else</span><span>{</span>
+         <span>//写为空的逻辑</span>
+         <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"为空"</span><span>)</span><span>;</span>
+        <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2-4-optional-ifpresent-方法-判读是否为空并返回函数" tabindex="-1"> 2.4 Optional.ifPresent()方法(判读是否为空并返回函数)</h4>
+<p><strong>这个意思是如果对象非空，则运行函数体</strong> 源码:</p>
+<div><pre><code>  <span>public</span> <span>void</span> <span>ifPresent</span><span>(</span><span>Consumer</span><span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span></span> consumer<span>)</span> <span>{</span>
+        <span>//如果value不为空，则运行accept方法体</span>
+        <span>if</span> <span>(</span>value <span>!=</span> <span>null</span><span>)</span>
+            consumer<span>.</span><span>accept</span><span>(</span>value<span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>看实例：</p>
+<div><pre><code>        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>ifPresent</span><span>(</span>p <span>-></span> <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"年龄"</span><span>+</span>p<span>.</span><span>getAge</span><span>(</span><span>)</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><strong>如果对象不为空，则会打印这个年龄</strong>，因为内部已经做了NPE（非空判断），所以就不用担心空指针异常了</p>
+<h4 id="_2-5-optional-filter-方法-过滤对象" tabindex="-1"> 2.5 Optional.filter()方法(过滤对象)</h4>
+<p><strong>filter()方法大致意思是，接受一个对象，然后对他进行条件过滤，如果条件符合则返回Optional对象本身，如果不符合则返回空Optional</strong> 源码：</p>
+<div><pre><code>    <span>public</span> <span>Optional</span><span><span>&lt;</span><span>T</span><span>></span></span> <span>filter</span><span>(</span><span>Predicate</span><span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span></span> predicate<span>)</span> <span>{</span>
+        <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>predicate<span>)</span><span>;</span>
+        <span>//如果为空直接返回this</span>
+        <span>if</span> <span>(</span><span>!</span><span>isPresent</span><span>(</span><span>)</span><span>)</span>
+            <span>return</span> <span>this</span><span>;</span>
+        <span>else</span>
+        <span>//判断返回本身还是空Optional</span>
+            <span>return</span> predicate<span>.</span><span>test</span><span>(</span>value<span>)</span> <span>?</span> <span>this</span> <span>:</span> <span>empty</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>简单实例：</p>
+<div><pre><code>        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>filter</span><span>(</span>p <span>-></span> p<span>.</span><span>getAge</span><span>(</span><span>)</span><span>></span><span>50</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-6-optional-map-方法-对象进行二次包装" tabindex="-1"> 2.6 Optional.map()方法(对象进行二次包装)</h4>
+<p><strong>map()方法将对应Funcation函数式接口中的对象，进行二次运算，封装成新的对象然后返回在Optional中</strong> 源码：</p>
+<div><pre><code> <span>public</span><span><span>&lt;</span><span>U</span><span>></span></span> <span>Optional</span><span><span>&lt;</span><span>U</span><span>></span></span> <span>map</span><span>(</span><span>Function</span><span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>,</span> <span>?</span> <span>extends</span> <span>U</span><span>></span></span> mapper<span>)</span> <span>{</span>
+        <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>mapper<span>)</span><span>;</span>
+        <span>//如果为空返回自己</span>
+        <span>if</span> <span>(</span><span>!</span><span>isPresent</span><span>(</span><span>)</span><span>)</span>
+            <span>return</span> <span>empty</span><span>(</span><span>)</span><span>;</span>
+        <span>else</span> <span>{</span>
+        <span>//否则返回用方法修饰过的Optional</span>
+            <span>return</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>mapper<span>.</span><span>apply</span><span>(</span>value<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>实例展示：</p>
+<div><pre><code>        <span>Person</span> person1<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>String</span> optName <span>=</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>map</span><span>(</span>p <span>-></span> person<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>.</span><span>orElse</span><span>(</span><span>"name为空"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-7-optional-flatmap-方法-optional对象进行二次包装" tabindex="-1"> 2.7 Optional.flatMap()方法(Optional对象进行二次包装)</h4>
+<p><strong>map()方法将对应Optional&lt; Funcation &gt;函数式接口中的对象，进行二次运算，封装成新的对象然后返回在Optional中</strong> 源码:</p>
+<div><pre><code>    <span>public</span><span><span>&lt;</span><span>U</span><span>></span></span> <span>Optional</span><span><span>&lt;</span><span>U</span><span>></span></span> <span>flatMap</span><span>(</span><span>Function</span><span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>,</span> <span>Optional</span><span>&lt;</span><span>U</span><span>></span><span>></span></span> mapper<span>)</span> <span>{</span>
+        <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>mapper<span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>!</span><span>isPresent</span><span>(</span><span>)</span><span>)</span>
+            <span>return</span> <span>empty</span><span>(</span><span>)</span><span>;</span>
+        <span>else</span> <span>{</span>
+            <span>return</span> <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>mapper<span>.</span><span>apply</span><span>(</span>value<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>实例：</p>
+<div><pre><code>        <span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>Optional</span><span><span>&lt;</span><span>Object</span><span>></span></span> optName <span>=</span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>map</span><span>(</span>p <span>-></span> <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>p<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>.</span><span>orElse</span><span>(</span><span>"name为空"</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-8-optional-orelse-方法-为空返回对象" tabindex="-1"> 2.8 Optional.orElse()方法(为空返回对象)</h4>
+<p><strong>常用方法之一，这个方法意思是如果包装对象为空的话，就执行orElse方法里的value，如果非空，则返回写入对象</strong> 源码:</p>
+<div><pre><code>    <span>public</span> <span>T</span> <span>orElse</span><span>(</span><span>T</span> other<span>)</span> <span>{</span>
+    <span>//如果非空，返回value，如果为空，返回other</span>
+        <span>return</span> value <span>!=</span> <span>null</span> <span>?</span> value <span>:</span> other<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>实例：</p>
+<div><pre><code>        <span>Person</span> person1<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+        person<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>orElse</span><span>(</span><span>new</span> <span>Person</span><span>(</span><span>"小明"</span><span>,</span> <span>2</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-9-optional-orelseget-方法-为空返回supplier对象" tabindex="-1"> 2.9 Optional.orElseGet()方法(为空返回Supplier对象)</h4>
+<p><strong>这个与orElse很相似，入参不一样，入参为Supplier对象，为空返回传入对象的.get()方法，如果非空则返回当前对象</strong> 源码:</p>
+<div><pre><code>    <span>public</span> <span>T</span> <span>orElseGet</span><span>(</span><span>Supplier</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>T</span><span>></span></span> other<span>)</span> <span>{</span>
+        <span>return</span> value <span>!=</span> <span>null</span> <span>?</span> value <span>:</span> other<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>实例：</p>
+<div><pre><code>         <span>Optional</span><span><span>&lt;</span><span>Supplier</span><span>&lt;</span><span>Person</span><span>></span><span>></span></span> sup<span>=</span><span>Optional</span><span>.</span><span>ofNullable</span><span>(</span><span>Person</span><span>::</span><span>new</span><span>)</span><span>;</span>
+        <span>//调用get()方法，此时才会调用对象的构造方法，即获得到真正对象</span>
+         <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>orElseGet</span><span>(</span>sup<span>.</span><span>get</span><span>(</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p><strong>说真的对于Supplier对象我也懵逼了一下，去网上简单查阅才得知 Supplier也是创建对象的一种方式,简单来说，Suppiler是一个接口，是类似Spring的懒加载，声明之后并不会占用内存，只有执行了get()方法之后，才会调用构造方法创建出对象 创建对象的语法的话就是<code>Supplier&lt;Person&gt; supPerson= Person::new;</code></strong> 需要使用时<code>supPerson.get()</code>即可</p>
+<h4 id="_2-10-optional-orelsethrow-方法-为空返回异常" tabindex="-1"> 2.10 Optional.orElseThrow()方法(为空返回异常)</h4>
+<p><strong>这个我个人在实战中也经常用到这个方法，方法作用的话就是如果为空，就抛出你定义的异常，如果不为空返回当前对象，在实战中所有异常肯定是要处理好的，为了代码的可读性</strong> 源码：</p>
+<div><pre><code>    <span>public</span> <span><span>&lt;</span><span>X</span> <span>extends</span> <span>Throwable</span><span>></span></span> <span>T</span> <span>orElseThrow</span><span>(</span><span>Supplier</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>X</span><span>></span></span> exceptionSupplier<span>)</span> <span>throws</span> <span>X</span> <span>{</span>
+        <span>if</span> <span>(</span>value <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            <span>return</span> value<span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>throw</span> exceptionSupplier<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>实例： 这个就贴实战源码了</p>
+<div><pre><code><span>//简单的一个查询</span>
+        <span>Member</span> member <span>=</span> memberService<span>.</span><span>selectByPhone</span><span>(</span>request<span>.</span><span>getPhone</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>member<span>)</span><span>.</span><span>orElseThrow</span><span>(</span><span>(</span><span>)</span> <span>-></span> <span>new</span> <span>ServiceException</span><span>(</span><span>"没有查询的相关数据"</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="_2-11-相似方法进行对比分析" tabindex="-1"> 2.11 相似方法进行对比分析</h4>
+<p>可能小伙伴看到这，没用用过的话会觉得orElse()和orElseGet()还有orElseThrow()很相似，map()和flatMap()好相似 哈哈哈不用着急，都是从这一步过来的，我再给大家总结一下不同方法的异同点 <strong>orElse()和orElseGet()和orElseThrow()的异同点</strong></p>
+<blockquote>
+<p>方法效果类似，如果对象不为空，则返回对象，如果为空，则返回方法体中的对应参数，所以可以看出这三个方法体中参数是不一样的 orElse（T 对象） orElseGet（Supplier &lt; T &gt;对象） orElseThrow（异常）</p>
+</blockquote>
+<p><strong>map()和orElseGet的异同点</strong></p>
+<blockquote>
+<p>方法效果类似，对方法参数进行二次包装，并返回,入参不同 map（function函数） flatmap（Optional&lt; function &gt;函数）</p>
+</blockquote>
+<p>具体要怎么用，要根据业务场景以及代码规范来定义，下面可以简单看一下我在实战中怎用使用神奇的Optional</p>
+<h2 id="_3-实战场景再现" tabindex="-1"> 3.实战场景再现</h2>
+<p>场景1： 在service层中 查询一个对象，返回之后判断是否为空并做处理</p>
+<div><pre><code>        <span>//查询一个对象</span>
+        <span>Member</span> member <span>=</span> memberService<span>.</span><span>selectByIdNo</span><span>(</span>request<span>.</span><span>getCertificateNo</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>//使用ofNullable加orElseThrow做判断和操作</span>
+        <span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>member<span>)</span><span>.</span><span>orElseThrow</span><span>(</span><span>(</span><span>)</span> <span>-></span> <span>new</span> <span>ServiceException</span><span>(</span><span>"没有查询的相关数据"</span><span>)</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>场景2： 我们可以在dao接口层中定义返回值时就加上Optional 例如： 我使用的是jpa，其他也同理</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>LocationRepository</span> <span>extends</span> <span>JpaRepository</span><span><span>&lt;</span><span>Location</span><span>,</span> <span>String</span><span>></span></span> <span>{</span>
+<span>Optional</span><span><span>&lt;</span><span>Location</span><span>></span></span> <span>findLocationById</span><span>(</span><span>String</span> id<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>然在是Service中</p>
+<div><pre><code><span>public</span> <span>TerminalVO</span> <span>findById</span><span>(</span><span>String</span> id<span>)</span> <span>{</span>
+<span>//这个方法在dao层也是用了Optional包装了</span>
+        <span>Optional</span><span><span>&lt;</span><span>Terminal</span><span>></span></span> terminalOptional <span>=</span> terminalRepository<span>.</span><span>findById</span><span>(</span>id<span>)</span><span>;</span>
+        <span>//直接使用isPresent()判断是否为空</span>
+        <span>if</span> <span>(</span>terminalOptional<span>.</span><span>isPresent</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+        <span>//使用get()方法获取对象值</span>
+            <span>Terminal</span> terminal <span>=</span> terminalOptional<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+            <span>//在实战中，我们已经免去了用set去赋值的繁琐，直接用BeanCopy去赋值</span>
+            <span>TerminalVO</span> terminalVO <span>=</span> <span>BeanCopyUtils</span><span>.</span><span>copyBean</span><span>(</span>terminal<span>,</span> <span>TerminalVO</span><span>.</span><span>class</span><span>)</span><span>;</span>
+            <span>//调用dao层方法返回包装后的对象</span>
+            <span>Optional</span><span><span>&lt;</span><span>Location</span><span>></span></span> location <span>=</span> locationRepository<span>.</span><span>findLocationById</span><span>(</span>terminal<span>.</span><span>getLocationId</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>if</span> <span>(</span>location<span>.</span><span>isPresent</span><span>(</span><span>)</span><span>)</span> <span>{</span>
+                terminalVO<span>.</span><span>setFullName</span><span>(</span>location<span>.</span><span>get</span><span>(</span><span>)</span><span>.</span><span>getFullName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>return</span> terminalVO<span>;</span>
+        <span>}</span>
+        <span>//不要忘记抛出异常</span>
+        <span>throw</span> <span>new</span> <span>ServiceException</span><span>(</span><span>"该终端不存在"</span><span>)</span><span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>实战场景还有很多，包括return时可以判断是否返回当前值还是跳转到另一个方法体中，什么的还有很多，如果大家没有经验的小伙伴还想进行学习，可以评论一下我会回复大家</strong></p>
+<h2 id="_4-optional使用注意事项" tabindex="-1"> 4.Optional使用注意事项</h2>
+<p><strong>Optional真么好用，真的可以完全替代if判断吗？</strong> 我想这肯定是大家使用完之后Optional之后可能会产生的想法，<strong>答案是否定的</strong> 举一个最简单的栗子： 例子1： 如果我只想判断对象的某一个变量是否为空并且做出判断呢？</p>
+<div><pre><code><span>Person</span> person<span>=</span><span>new</span> <span>Person</span><span>(</span><span>)</span><span>;</span>
+person<span>.</span><span>setName</span><span>(</span><span>""</span><span>)</span><span>;</span>
+persion<span>.</span><span>setAge</span><span>(</span><span>2</span><span>)</span><span>;</span>
+<span>//普通判断</span>
+<span>if</span><span>(</span><span>StringUtils</span><span>.</span><span>isNotBlank</span><span>(</span>person<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>)</span><span>{</span>
+  <span>//名称不为空执行代码块</span>
+<span>}</span>
+<span>//使用Optional做判断</span>
+<span>Optional</span><span>.</span><span>ofNullable</span><span>(</span>person<span>)</span><span>.</span><span>map</span><span>(</span>p <span>-></span> p<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>.</span><span>orElse</span><span>(</span><span>"name为空"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>我觉得这个例子就能很好的说明这个问题，<strong>只是一个很简单判断，如果用了Optional我们还需要考虑包装值，考虑代码书写，考虑方法调用，虽然只有一行，但是可读性并不好，如果别的程序员去读，我觉得肯定没有if看的明显</strong></p>
+<h2 id="_5-jdk1-9对optional优化" tabindex="-1"> 5.jdk1.9对Optional优化</h2>
+<p>首先增加了三个方法: <strong>or()、ifPresentOrElse() 和 stream()。</strong> <strong>or()</strong> 与orElse等方法相似，如果对象不为空返回对象，如果为空则返回or()方法中预设的值。 <strong>ifPresentOrElse()</strong> 方法有两个参数：一个 Consumer 和一个 Runnable。如果对象不为空，会执行 Consumer 的动作，否则运行 Runnable。相比ifPresent（）多了OrElse判断。 **stream()**将Optional转换成stream，如果有值就返回包含值的stream，如果没值，就返回空的stream。</p>
+<p>因为这个jdk1.9的Optional具体我没有测试，同时也发现有蛮好的文章已经也能让大家明白jdk1.9的option的优化,我就不深入去说了。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>服务器运行数据查看工具</title>
+      <link>https://blog.ciberviler.top/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7.html</link>
+      <guid>https://blog.ciberviler.top/linux/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">服务器运行数据查看工具</source>
+      <category>Linux</category>
+      <pubDate>Sun, 10 Jul 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="服务器运行数据查看工具" tabindex="-1"> 服务器运行数据查看工具</h1>
+<p>我们开发的软件服务需要在服务器上运行，所以服务器性能代表了软件的性能上限，因此服务器性能调优是个十分重要的环节，然而大部分同学对服务器性能调优关注的较少，今天从3个部分对服务器性能调优进行介绍，分别是：服务器配置选择，服务器负载分析，服务器内核参数调优。</p>
+<h2 id="服务器配置选择" tabindex="-1"> <strong>服务器配置选择</strong></h2>
+<p>服务器一般是由CPU、内存、磁盘和网卡组成，因此选择服务器配置就是选择CPU核数、内存大小、磁盘大小及类型、网络带宽。但是，服务器配置的选择是很难标准化的，也就是说很难推断出“一台需要达到1000TPS的后端服务器”的配置应该是什么样的。因为软件的最终运行性能与软件的实现方式是紧密相关的，即使是同一个后端应用程序中的两个接口，由于具体功能的差别，性能也会有所差别。</p>
+<p>因此，服务器配置的选择应该基于具体的测试结果。一开始可以选用配置较低的服务器做调优和测试，并以该服务器的测试结果作为选择服务器的依据。</p>
+<p>以一个订单业务为例，经过测试后，一台配置为4核 CPU 、16GB内存、10Mbps带宽、50GB机械磁盘的服务器的测试结果为：支持50并发量和300TPS吞吐量（增大并发量后会出现超时报错）。而在压力测试过程中， CPU 的使用率接近75%，内存使用率在 50％以下，带宽使用率在50％以下，除去日志以外无磁盘操作。</p>
+<p>因此可以认为，一台配置为4核 CPU ( CPU 使用率需要在75％以下）、8GB内存（内存使用率可以接近100%)、 5Mbps 带宽（带宽使用率可以接近100%）的服务器，可以满足订单接口支持50并发量、300TPS吞吐量的压力。</p>
+<p>如果需要达到200并发数、2400TPS吞吐量的目标的话，则需要8台配置为4核 CPU 、8GB内存、5Mbps带宽的服务器，或者1台配置为32核 CPU 、64GB内存、40Mbps带宽的服务器。当然，最终的服务器配置还是需要通过测试来验证。</p>
+<blockquote>
+<p>注意：在以上订单接口的例子中，后端服务器和数据库等服务器需要一起调试，避免后端服务器性能过剩，而数据库等服务器性能不足的情况发生。另外，以上选择服务器配置的方法不一定适用于所有场景，请斟酌参考。</p>
+</blockquote>
+<h2 id="服务器负载分析" tabindex="-1"> <strong>服务器负载分析</strong></h2>
+<p>在性能调优时，需要先对服务器负载进行分析，通常而言，我们主要分析CPU使用率、内存使用率、磁盘I/O，服务器负载和带宽使用情况。</p>
+<h3 id="cpu使用率" tabindex="-1"> CPU使用率</h3>
+<p>CPU使用率反应的是CPU的忙碌情况。当CPU达到100%时，部分进程会进入等待状态，CPU暂时不会对其进行处理。<strong>在实际情况下，为了应对一下突发性的请求压力，服务器CPU使用率一般需要在75%以下。如果一台服务器的CPU使用率多次高于75%，这时候就考虑增加新的服务器。</strong></p>
+<p>监控CPU使用率我推荐大家使用<strong>htop</strong>工具，可以非常直观看到CPU使用率、内存使用率、及负载等信息。</p>
+<h4 id="使用htop查看cpu负载" tabindex="-1"> 使用htop查看CPU负载</h4>
+<p>首先我们需要安装htop，以centos为例，安装命令如下：</p>
+<div><pre><code>yum <span>install</span> <span>htop</span> -y
+</code></pre><div aria-hidden="true"><div></div></div></div><p>安装完成后我们就可以通过<code>htop</code>命令观察CPU负载了</p>
+<div><pre><code><span>htop</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><p>输入<code>htop</code>命令后我们可以很直观的看到CPU负载情况，该命令的CPU使用率会以多个核作为单位进行显示。操作系统机会自动分配多个核的负载，当所有核的CPU使用率都超过75%时才能认为服务器的CPU使用率已经超过75%。</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003660.png" alt="服务器运行数据查看工具">cpu负载</p>
+<p>如上图所示，这是一个4核CPU服务器，在截图的时候其中3核CPU使用率都超过了75%，再观察一会发现所有CPU的使用率都在85%左右徘徊，说明CPU负载很高了，需要考虑增加新的服务器。</p>
+<h3 id="内存使用率" tabindex="-1"> 内存使用率</h3>
+<p>内存使用率反应的是内存的使用情况。内存用于存放程序的代码及数据，一般分为物理内存和虚拟内存，其中物理内存指的是服务器的内存，而虚拟内存指的是硬盘的一块空间。当物理内存使用率达到100%时将会使用虚拟内存。需要注意的是，虚拟内存的读写速度远远低于物理内存，如果程序被放在了虚拟内存执行，那么程序的执行效率会变得很低。</p>
+<p><strong>一般而言，服务器的物理内存应该保持在80%以下，虚拟内存使用率保持在0%。</strong></p>
+<p>服务器内存使用情况还是可以通过hop工具进行查看</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003661.png" alt="服务器运行数据查看工具">内存使用率</p>
+<p>上面显示了服务器的内存使用情况：总内存16G，使用了10G左右，内存使用率62%，可以继续使用，同时关闭了Swap虚拟内存。</p>
+<p>在下<code>MEM%</code>栏中显示了单个进程的内存使用率。</p>
+<h3 id="磁盘i-o" tabindex="-1"> 磁盘I/O</h3>
+<p>磁盘I/O指的是磁盘的读写，在软件系统中，日志、文件操作、数据库操作都会造成磁盘读写压力，其中又以数据库操作为甚，在高并发情况下往往数据库会首先成为系统的瓶颈。</p>
+<p>磁盘监控我推荐大家使用iostat工具，可以很方便查看磁盘的使用情况。</p>
+<h4 id="使用iostat查看磁盘i-o" tabindex="-1"> 使用iostat查看磁盘I/O</h4>
+<p>首先我们需要安装<code>iostat</code>，以centos为例，安装命令如下：</p>
+<div><pre><code>yum <span>install</span> sysstat -y
+</code></pre><div aria-hidden="true"><div></div></div></div><p>安装完成后我们就可以通过<code>iostat</code>命令磁盘使用情况了。</p>
+<div><pre><code><span># 查看磁盘总体读写情况， 1代表每1秒读取一次数据</span>
+iostat -x <span>1</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003662.png" alt="服务器运行数据查看工具">磁盘IO</p>
+<p>输入<code>iostat</code>命令后，磁盘总体读写情况如上所示。磁盘负载主要关注2个指标：<code>%idle</code>，<code>%util</code></p>
+<ul>
+<li><code>%idle</code>:表示CPU<strong>除去等待磁盘I/O以外</strong>的空闲时间百分比，这个指标应该要保证在70%以上</li>
+<li><code>%util</code>:该设备用于I/O操作的时间百分比，这个指标需要保证在70%以下，当到达100%时表示已经满负载。为了降低磁盘负载，可以采用性能更高的磁盘（OSD，PCIE）或者降低磁盘的操作频率（异步写、合并写）</li>
+</ul>
+<h3 id="平均负载" tabindex="-1"> 平均负载</h3>
+<p>平均负载指的是单位时间内平均的活跃进程数，是一个表示服务器负载的指标。一般情况下需要保证平均负载的值小于当前服务器的CPU核数。</p>
+<p>同样的，查看服务器平均负载我们也可以使用<code>htop</code>命令</p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003663.png" alt="服务器运行数据查看工具">在这里我们主要关注<code>Load average</code>指标，上图有3个数字，分别代表1分钟，5分钟，15分钟的平均负载。</p>
+<p>一般情况下服务器的平均负载需要小于当前服务器的CPU核数，为了应对突发状况，服务器的平均负载应该在75%即3 以下，很显然，上图这台服务器平均负载超过了75%，需要考虑提升性能了。</p>
+<h3 id="网络使用情况" tabindex="-1"> 网络使用情况</h3>
+<p>网络使用情况也是监控的重要指标。当带宽不足时会大大增加请求的响应时间。为了防止突发性并发压力，应该保证服务器的带宽使用率在80%以上。这里需要注意的是，物理网卡限制了服务器所能使用的最大宽带。</p>
+<p>查看网络使用情况我推荐使用<code>nload</code>工具。</p>
+<h4 id="使用nload查看网络" tabindex="-1"> 使用nload查看网络</h4>
+<p>首先需要安装nload，以centos为例</p>
+<div><pre><code>yum <span>install</span> nload -y
+</code></pre><div aria-hidden="true"><div></div></div></div><p>安装完成后我们直接运行<code>nload</code></p>
+<div><pre><code>nload
+</code></pre><div aria-hidden="true"><div></div></div></div><p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003664.png" alt="服务器运行数据查看工具"></p>
+<p>输入<code>nload</code>命令后，网络使用情况如上图所示。其中，网络使用情况分为流入网卡的数据与流出网卡的数据。流入网卡的对应下行带宽的网速，流出网卡的数据对应上行带宽的网速。如果 “当前网速” 持续接近 “最大网速” 时，代表带宽使用率已经接近100%。</p>
+<p>指标说明：</p>
+<ul>
+<li>Curr：当前网速</li>
+<li>Avg：平均网速</li>
+<li>Min：最小网速</li>
+<li>Max：最大网速</li>
+<li>Ttl：总流量</li>
+</ul>
+<h2 id="服务器内核参数调优" tabindex="-1"> <strong>服务器内核参数调优</strong></h2>
+<p>光有强大的物理性能是不够的，还需要对内核参数进行调优，这样才能在高并发压力下充分体现服务器应有的性能。当然，并不是所有的服务器都需要做高并发性能调优，一般来说，只需要对要处理高并发请求的服务器进行内核参数调优即可，常见的包括：前端服务器，后端服务器，数据库服务器。</p>
+<p>服务器常见的调优参数主要有两个：单个进程最大打开文件数 和 TCP相关设置。</p>
+<h3 id="单个进程最大打开文件数" tabindex="-1"> 单个进程最大打开文件数</h3>
+<p>修改单个文件最大打开文件数，只需要编辑<code>/etc/security/limits.conf</code>文件，在文件末尾加上以下四句</p>
+<div><pre><code>* soft	nofile	<span>65535</span>
+* hard	nofile	<span>65535</span>
+* soft	nproc	<span>65535</span>
+* hard	nproc	<span>65535</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>其中<code>*</code> 代表所有用户，65536代表修改的值，重启后生效。</p>
+<h3 id="tcp相关设置" tabindex="-1"> TCP相关设置</h3>
+<p>修改TCP相关参数，可以优化TCP高并发通信，编辑<code>/etc/sysctl.conf</code>文件，添加以下内容</p>
+<div><pre><code><span># 为防止洪水攻击，高并发系统需要将此项关闭</span>
+net.ipv4.tcp_syncookies <span>=</span> <span>0</span>
+
+<span># 开启TCP连接重用，允许处理TIME-WAIT状态的连接重新用于新的TCP连接</span>
+net.ipv4.tcp_tw_reuse <span>=</span> <span>1</span>
+
+<span># 开启快速回收TCP连接中处于TIME-WAIT状态的连接</span>
+net.ipv4.tcp_tw_recycle <span>=</span> <span>1</span>
+
+＃修改超时时间（ s <span>)</span>，该值表示如果连接由本端关闭，则连接处于 FIN-WAIT-2状态的时间为 
+net.ipv4.tcp_fin_timeout <span>=</span> <span>30</span>
+
+＃当 keepalive（长连接）启用的时候，TCP发送 keepalive 消息（探测包）的时间间隔（ s <span>)</span>,默认为2个小时
+net.ipv4.tcp_keepalive_time <span>=</span><span>1200</span>
+
+＃服务器对外连接的端口范围，影响该服务器与其他服务器的连接数
+net.ipv4.ip_local_port_range <span>=</span><span>102465535</span>
+
+<span>#SYN队列的长度，可以容纳更多等待连接的网络连接数，默认为1024 </span>
+net.ipv4.tcp_max_syn_backlog <span>=</span> <span>65535</span>
+
+＃保持 TIME_WAIT 状态连接的最大数量，如果超过此值，TIME_WAIT 将立刻被清除并打印警告信息，默认为180000
+net.ipv4.tcp_max_tw_buckets <span>=</span><span>5000</span>
+
+＃每个网络接口接收数据包的速率比内核处理这些包的速率快时，允许送到队列的数据包的最大数目
+net.core.netdev_max_backlog <span>=</span><span>65535</span>
+
+<span># TCP最大连接数</span>
+net.core.somaxconn <span>=</span> <span>65535</span>
+
+＃预留用于接收缓冲的内存默认值（字节） 
+net.core.rmem_default <span>=</span> <span>8388608</span>
+
+＃预留用于接收缓冲的内存最大值（字节） 
+net.core.rmem_max <span>=</span> <span>16777216</span>
+
+＃预留用于发送缓冲的内存默认值（字节） 
+net.core.wmem_default <span>=</span> <span>8388608</span>
+
+＃预留用于发送缓冲的内存最大值（字节） 
+net.core.wmem_maX <span>=</span> <span>16777216</span>
+
+＃避免时间戳异常
+net.ipv4.tcp_timestamps <span>=</span> <span>0</span>
+
+＃系统中最多有多少个 TCP 套接字不被关联到任何一个用户文件句柄上，如果超过这个数字，连接将即刻被复位并打印警告信息，这个限制仅仅是为了防止简单的DoS 攻击
+net.ipv4.tcp_max_orphans <span>=</span><span>3276800</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16566648003660.png" type="image/png"/>
+    </item>
     <item>
       <title>Vue 子组件与父组件传值</title>
       <link>https://blog.ciberviler.top/dev/Vue%E5%AD%90%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC.html</link>
@@ -26406,1087 +26811,6 @@ runnable<span>.</span><span>setChain</span><span>(</span><span>new</span> <span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="小结" tabindex="-1"> <strong>小结</strong></h2>
 <p>四种实现方式都有其适合的场 景，那么它们之间的调用顺序如何呢？Filter 是 Servlet 实现的，自然是最先被调用，后续被调用的是 Interceptor 被拦截了自然不需要后续再进行处理，然后是 参数解析器，最后才是切面的切点。</p>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>Spring Cloud Alibaba</title>
-      <link>https://blog.ciberviler.top/dev/SpringCloudAlibaba.html</link>
-      <guid>https://blog.ciberviler.top/dev/SpringCloudAlibaba.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">Spring Cloud Alibaba</source>
-      <description>Spring Cloud Alibaba</description>
-      <category>Java</category>
-      <pubDate>Wed, 23 Mar 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="spring-cloud-alibaba" tabindex="-1"> Spring Cloud Alibaba</h1>
-<p>互联网时代，面对复杂业务，讲究 <strong>分而治之</strong> 。将一个大的单体系统拆分为若干个微服务，保证每个系统的职责单一，可以垂直深度扩展。</p>
-<p>但是一个个独立的微服务像一座座孤岛，如何将他们串联起来，才能发挥最大价值。</p>
-<p>这时，我们就要提微服务的生态圈。</p>
-<p>那么微服务生态圈都有哪些模块？他们的作用分别是什么？</p>
-<ul>
-<li><strong>服务的注册、发现</strong> 。生产者启动时，会将自己的信息注册上报，这样调用方只需连接注册中心，根据一定的负载算法，就可以与服务提供方建立连接，从而实现应用间的解耦。</li>
-<li><strong>服务调用</strong> 。通过多种协议（如：HTTP等）实现目标服务的真正调用。</li>
-<li><strong>负载均衡</strong> 。主要是提供多种负载算法，满足不同业务场景下的集群多实例的选择机制</li>
-<li><strong>服务的稳定性</strong> 。提供了服务熔断、限流、降级</li>
-<li><strong>分布式配置中心</strong> 。应用的配置项统一管理，修改后能动态生效</li>
-<li><strong>消息队列</strong> 。非核心逻辑从同步流程抽离，解耦，异步化处理，缩短RT时间</li>
-<li><strong>网关</strong> 。将一些通用的处理逻辑，如：限流、鉴权、黑白名单、灰度等抽取到一个单独的、前置化系统统一处理。</li>
-<li><strong>监控</strong> 。监控系统的健康状况</li>
-<li><strong>分布式链路追踪</strong> 。查看接口的调用链路，为性能优化、排查问题提供输入</li>
-<li><strong>自动化部署</strong> 。持续集成，快速部署应用。</li>
-</ul>
-<p>围绕这些功能模块，<code>Spring Cloud Alibaba</code> 为我们提供了微服务化开发的一站式解决方案，我们只需要少量的<code>Spring 注解</code> 和 <code>yaml配置</code>，便可以快速构建出一套微服务系统。真的是创业者的福音。</p>
-<p><strong>那么这套生态规范都提供了哪些技术框架呢？</strong></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_png/JdLkEI9sZfcnIibRHg3zekuCwaBZ682Ed569me3GrnFXKSzwtXrK5TYty5wbJawc6gTicYYf4ru6tyOiaRjo0atyA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<h2 id="一、spring-boot-服务基座" tabindex="-1"> 一、Spring Boot（服务基座）</h2>
-<p>Spring Boot 是Spring框架的扩展，提供更加 <code>丰富的注解</code>，根据 <strong>约定胜于配置</strong> 原则，与市场主流的开源框架打通， 设计了 <code>Starter</code> 和 <code>AutoConfiguration</code> 机制，简化配置流程，通过简单的jar包引入，快速具备组件集成能力。大大提高了程序员的开发效率。</p>
-<p><strong>特点：</strong></p>
-<ul>
-<li>提供了丰富的注解，不要在XML文件中定义各种繁琐的bean配置</li>
-<li>内嵌 Web容器，如：Tomcat（默认）、Jetty、Undertow</li>
-<li>集成了主流开源框架，根据项目依赖自动配置</li>
-</ul>
-<h2 id="二、nacos-注册中心、分布式配置中心" tabindex="-1"> 二、Nacos（注册中心、分布式配置中心）</h2>
-<p>Nacos 是阿里巴巴的开源的项目，全称 Naming Configuration Service ，专注于服务发现和配置管理领域。</p>
-<p>Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。功能齐全，可以替换之前的 <code>Spring Cloud Netflix Eureka</code>、<code>Spring Cloud Config</code>、<code>Spring Cloud Bus</code>，野心巨大。</p>
-<p>客户端语言方面目前支持 Java，go 、python、 C# 和 C++等主流语言</p>
-<blockquote>
-<p>开源地址：<a href="https://github.com/alibaba/nacos" target="_blank" rel="noopener noreferrer">https://github.com/alibaba/nacos</a></p>
-</blockquote>
-<p>Nacos 有一个控制台，可以帮助用户管理服务，监控服务状态、应用的配置管理。</p>
-<p><strong>集群化部署：</strong></p>
-<p>由于 <code>Nacos</code> 是单节点，无论做为<code>注册中心</code>还是<code>分布式配置中心</code>，一旦服务器挂了，作为底层服务引发的麻烦还是非常大的。如何保证其高可用？</p>
-<p>Nacos 官方提供的集群部署架构图：</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/JdLkEI9sZfcNjELl9JONS1pzqOYUYGk20h88dyic0yWNBCTViaHHpGoTZPU81NzZtkjllGSia4GKJo3HlN3cOpLBg/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<blockquote>
-<p><a href="https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html" target="_blank" rel="noopener noreferrer">https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html</a></p>
-</blockquote>
-<p>在nacos的解压目录<code>nacos/conf</code>目录下，有配置文件<code>cluster.conf</code>，每行配置成 ip:port。（一般配置3个或3个以上节点）</p>
-<div><pre><code>> 基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。
->
-> 项目地址：&lt;https://github.com/YunaiV/onemall>
-
-# ip:port
-200.8.9.16:8848
-200.8.9.17:8848
-200.8.9.18:8848
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>这样保证客户端只需要写一次，由 Leader节点将数据同步到其他节点，保证各个节点的数据一致性</strong></p>
-<p>对于上层的SLB，我们可以采用 <code>Nginx</code> 或者 <code>OpenResty</code>，在 upstream 模块里配置 Nacos 的集群IP 地址列表，实现负载均衡功能。</p>
-<p>另外，借助Nginx的心跳检测，当某台 Nacos 服务挂掉后，SLB 会自动屏蔽，将流量切换到其他 Nacos 实例。</p>
-<p>当然 <code>OpenResty</code> 也可能成为单点故障，为了保证高可用，我们需要借助 <code>Keepalived</code></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/JdLkEI9sZfcNjELl9JONS1pzqOYUYGk2DtUicibtvDVlkz8N7EhaqdpBMjvjLESPg7XWdEyJKFHiaIiavcaSX3lGicg/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<p>客户端请求 VIP，然后请求打到了 OpenResty，由 OpenResty 转发给具体的某个 Nacos 节点。</p>
-<blockquote>
-<p>OpenResty 只有一个节点提供服务，另一个暂停状态，如果 master 节点宕机，那 backup 接替继续工作。从而解决了单点故障问题。</p>
-</blockquote>
-<p>Keepalived 作为一种高性能的服务器高可用或热备解决方案，用来防止服务器单点故障的发生。市面资料很多，下文链接是《Keepalived+Nginx部署方案》具体操作步骤</p>
-<blockquote>
-<p><a href="https://help.fanruan.com/finereport/doc-view-2905.html" target="_blank" rel="noopener noreferrer">https://help.fanruan.com/finereport/doc-view-2905.html</a></p>
-</blockquote>
-<h2 id="三、resttemplate-ribbon-远程调用" tabindex="-1"> 三、RestTemplate + Ribbon （远程调用）</h2>
-<p>Spring Cloud Ribbon 基于 Netflix Ribbon 封装的负载均衡框架。内部集成了多种负载算法，如：随机、轮询等。</p>
-<p>与注册中心打通，能自动获取服务提供者的地址列表。结合自身的负载算法，选择一个目标实例发起服务调用。</p>
-<blockquote>
-<p>Ribbon 也提供了扩展接口，支持自定义负载均衡算法。</p>
-</blockquote>
-<div><pre><code>public class CustomRule extends AbstractLoadBalancerRule {
-    private AtomicInteger count = new AtomicInteger(0);
-    @Override
-    public Server choose(Object key) { 
-        return choose(getLoadBalancer(), key);
-    }
-
-    private Server choose(ILoadBalancer loadBalancer, Object key) {
-        List&lt;Server> allServers = loadBalancer.getAllServers(); 
-        int requestNumber = count.incrementAndGet(); 
-        if (requestNumber >= Integer.MAX_VALUE) { 
-            count = new AtomicInteger(0); 
-        }
-        if (null != allServers) {
-            int size = allServers.size();
-            if (size > 0) {
-                int index = requestNumber % size;                 
-                Server server = allServers.get(index);
-                if (null == server || !server.isAlive()) { 
-                    return null;
-                }
-                return server;
-            }
-        }
-        return null;
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>缺点：</strong></p>
-<p>调用方每次发起远程服务调用时，都需要填写<code>远程目标地址</code>，还要配置各种参数，非常麻烦，不是很方便</p>
-<div><pre><code>// 注册到Nacos的应用名称
-private final String SERVER_URL = "http://nacos-provider-demo"; 
-@Resource
-private RestTemplate restTemplate;
-
-@RequestMapping("/hello") 
-public String hello() {
- // 远程服务调用
-   return restTemplate.getForObject(SERVER_URL + "/hello", String.class);
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="四、openfeign-远程调用" tabindex="-1"> 四、OpenFeign（远程调用）</h2>
-<p>RestTemplate + Ribbon 每次发起远程服务调用时，都需要填写<code>远程目标地址</code>，还要配置各种参数，非常麻烦。</p>
-<p>Feign 是一个轻量级的 Restful HTTP 客户端，<strong>内嵌了 Ribbon 作为客户端的负载均衡</strong> 。面向接口编程，使用时只需要定义一个接口并加上<code>@FeignClient</code>注解，非常方便。</p>
-<p>OpenFeign 是 <code>Feign</code> 的增强版。对 Feign 进一步封装，支持 Spring MVC 的标准注解和HttpMessageConverts</p>
-<p><strong>依赖包：</strong></p>
-<div><pre><code>&lt;dependency>
-    &lt;groupId>org.springframework.cloud&lt;/groupId>
-    &lt;artifactId>spring-cloud-starter-openfeign&lt;/artifactId>
-&lt;/dependency>
-@FeignClient(value = "${provider.name}") 
-public interface OrderService {
-
- // 调用服务提供者的 /create_order 接口
- @RequestMapping(value = "/create_order",method = RequestMethod.GET) 
- public String createOrder();
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>其中，<code>@FeignClient(value = &quot;${provider.name}&quot;)</code> 定义了服务提供方的工程名，底层自动打通了注册中心，会拿到 <code>artifactId</code> 对应的IP列表，根据一定的负载均衡算法，可以将请求打到目标服务器上。</p>
-<p>OpenFeign 默认等待接口返回数据的时间是 1 秒，超过这个时间就会报错。如果想调整这个时间，可以修改配置项 <code>feign.client.config.default.readTimeout</code></p>
-<h2 id="五、dubbo-spring-cloud-远程调用" tabindex="-1"> 五、Dubbo Spring Cloud（远程调用）</h2>
-<p><code>RestTemplate + Ribbon</code> 和 <code>OpenFeign</code> 都是基于HTTP协议调用远程接口。而 <code>Dubbo Spring Cloud</code> 是基于 TCP 协议来调用远程接口。相比 HTTP 的大量的请求头，TCP 更轻量级。</p>
-<p>Dubbo Spring Cloud = Spring Cloud  + Dubbo</p>
-<p><strong>特性：</strong></p>
-<ul>
-<li>支持多种注册中心，用于服务的注册、发现</li>
-<li>内置多种负载均衡策略</li>
-<li>服务粒度是<code>面向接口</code>，支持 TCP 轻量级协议</li>
-<li>容易扩展，采用 微内核 + 插件 的设计原则，扩展点更强</li>
-</ul>
-<p><strong>依赖包：</strong></p>
-<div><pre><code>&lt;dependency>
-    &lt;groupId>com.alibaba.cloud&lt;/groupId>
-    &lt;artifactId>spring-cloud-starter-dubbo&lt;/artifactId>
-&lt;/dependency>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>注意：虽然是将 Dubbo 集成到了 Spring Cloud，增加了一些 <code>注解</code> 和 <code>yaml</code> 配置项，开发更方便，但大部分调用玩法还是遵守 Dubbo 框架那一套。</p>
-<p><strong>几个重要的配置项：</strong></p>
-<ul>
-<li>dubbo.scan.base-packages  # dubbo 服务扫描基准包，上报注册服务</li>
-<li><a href="http://dubbo.protocol.name" target="_blank" rel="noopener noreferrer">dubbo.protocol.name</a>: dubbo  # 支持的协议</li>
-<li>dubbo.protocol.port: -1  # dubbo 协议端口（ -1 表示自增端口，从 20880 开始）</li>
-<li>dubbo.registry.address  # 注册中心地址</li>
-</ul>
-<h2 id="六、spring-cloud-gateway-网关" tabindex="-1"> 六、Spring Cloud Gateway（网关）</h2>
-<p>分布式时代，一个复杂的系统被拆分为若干个微服务系统，每个系统都配置独立的域名肯定不合适。为了解决这个问题，网关便诞生了。</p>
-<p>网关充当反向代理的角色，作为流量的第一入口，承载了很多基础的、公共的模块功能，如：流控、鉴权、监控、路由转发等。</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/JdLkEI9sZfcNjELl9JONS1pzqOYUYGk2e23rADQPAAvyk2mfvzoA2hcuU61S1n1ict2Yb64JQ0Mp6oT1MxJUI7Q/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<p>Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区停止了维护。官方后来推出了 Spring Cloud Gateway，<strong>其底层是基于 WebFlux 框架</strong> ，而WebFlux框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。</p>
-<p><strong>核心组件：</strong></p>
-<p>1、路由。</p>
-<p>内部主要是负责转发规则。</p>
-<p>2、断言（Predicate）</p>
-<p>如果返回为true，当前路由才有效，才会路由到具体的服务。官方提供了很多<code>内置路由断言</code>，如果满足不了你的诉求，也可以<code>自定义路由断言工厂</code>。</p>
-<p>所有的路由断言工厂都是继承自 <code>AbstractRoutePredicateFactory</code>，自定义类的命名也有固定规则，<code>“配置名”+RoutePredicateFactory</code>。这样，在yaml配置时，只需要写<code>前面定义的配置名</code>即可。</p>
-<p>3、过滤器（Filter）</p>
-<p>主要是请求、响应之间增加一些自定义的逻辑。按作用范围分为：全局和局部。全局是作用于所有的路由；而局部只是作用于某一个路由。</p>
-<p>跟上面的断言类似，除了官方提供的过滤器，也支持自定义。</p>
-<p><strong>局部过滤器</strong> ：继承自 <code>AbstractGatewayFilterFactory</code>，自定义类的命名也有固定规则，<code>“配置名”+GatewayFilterFactory</code>。这样，在yaml配置时，只需要写<code>前面定义的配置名</code>即可。</p>
-<p><strong>全局过滤器</strong> ：实现<code>GlobalFilter</code>,<code>Ordered</code> 两个接口，实现逻辑跟上面的局部过滤器类似。这里就不展开了。其中的 <code>Ordered</code> 接口主要是负责优先级，数值越小，优先级越高。</p>
-<p><strong>依赖包：</strong></p>
-<div><pre><code>&lt;dependency>
- &lt;groupId>org.springframework.cloud&lt;/groupId>
- &lt;artifactId>spring-cloud-starter-gateway&lt;/artifactId>
-&lt;/dependency>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p><strong>yaml 的配置示例：</strong></p>
-<div><pre><code>spring:
-  cloud:
-    gateway:
-      routes:  #路由，可配置多个
-        - id: user_route  # 路由id 唯一即可，默认是UUID
-          uri: lb://user-server-sample # 匹配成功后提供的服务的地址
-          order: 1 # 路由优先级，数值越小优先级越高，默认0
-          predicates:
-            - Path=/user/**  # 断言，路径匹配进行路由
-         #  - User=0, 1000   # 自定义路由断言工厂  只允许查询id为0 - 1000之间的用户
-         #  - Method=POST    # 表示需要POST方式请求
-         #  - Query=id, \d+  # 参数名id，正则表达式为\d+（一个或多个数字）
-          filters:
-            - AddRequestHeader=X-Request-token, 12345678  #为原始请求加上请求头及值
-           
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当然，服务提供方的地址可能经常变化，为了动态感知，我们引入 Nacos 注册中心，用于服务的注册、发现，统一管理服务的IP地址。网关路由转发时，只需从 Nacos 动态获取即可。</p>
-<h2 id="七、sentinel-熔断、限流、降级" tabindex="-1"> 七、Sentinel（熔断、限流、降级）</h2>
-<p>Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，比 <code>Hystrix</code>支持的范围更广。</p>
-<p>集成简单，只需要少量配置，即可快速接入，支持如：gRPC、Dubbo、Spring Cloud 等</p>
-<p><strong>同类竞品框架：</strong></p>
-<ul>
-<li>Hystrix 框架已经停止维护；</li>
-<li>Resilience4j 一种轻量级容错库，专为 Java 8 和函数式编程而设计。通过装饰器的方式，以使用断路器，速率限制器，重试或隔板来增强任何功能接口，lambda 表达式或方法引用。</li>
-</ul>
-<p><strong>流控规则：</strong></p>
-<p>页面元素介绍：</p>
-<ul>
-<li>
-<p>资源名：唯一即可</p>
-</li>
-<li>
-<p>针对来源：对调用者限流，填写应用名称（Spring.application.name的值），只针对某个服务限流</p>
-</li>
-<li>
-<p>阈值类型</p>
-</li>
-<li>
-<ul>
-<li>QPS：每秒接收的请求数</li>
-<li>线程数：能使用的业务线程数</li>
-</ul>
-</li>
-<li>
-<p>流控模式</p>
-</li>
-<li>
-<ul>
-<li>直接：达到条件后，直接执行某个流控效果</li>
-<li>关联：如果访问关联接口B达到了阈值，则让接口A返回失败</li>
-<li>链路：记录从入口资源的流量，达到条件也只限流入口资源</li>
-</ul>
-</li>
-<li>
-<p>流控效果</p>
-</li>
-<li>
-<ul>
-<li>快速失败：直接返回失败结果</li>
-<li>Warm Up：预热，开始有一个缓冲期，初始值 = 阈值/ codeFactor(默认 3)，然后慢慢达到设置的阈值</li>
-<li>排队等待：让请求以均匀的速度通过，如果请求超过阈值就等待，如果等待超时则返回失败</li>
-</ul>
-</li>
-</ul>
-<p><strong>降级规则：</strong></p>
-<ul>
-<li>RT</li>
-<li>异常数</li>
-<li>异常比例</li>
-</ul>
-<p><strong>系统规则：</strong></p>
-<p>流控规则和降级规则是针对某个资源来说的，而系统规则是针对整个应用的，粒度更大，当前所有的接口服务都会应用这个系统规则。</p>
-<p><strong>授权规则：</strong></p>
-<p>根据调用方判断调用的接口资源是否被允许，如：黑名单、白名单机制</p>
-<p><strong>热点规则：</strong></p>
-<p>将粒度进一步细化，可以针对方法的参数做规则控制，为每个参数设置单独的阈值，也可以多个参数组合。从而实现单个方法的热点流量，按业务需求进一步控制。</p>
-<p><strong>@SentinelResource注解</strong></p>
-<p><code>@SentinelResource</code> 注解可以根据实际情况定制化功能，跟 <code>Hystrix</code> 的 <code>@HystrixCommand</code> 注解功能类似。达到阈值后，系统的默认提示是一段英文，很不友好，所以我们要<code>自定义兜底方法</code>。</p>
-<div><pre><code>// 资源名称为handle1 
-@RequestMapping("/handle1")
-@SentinelResource(value = "handle1", blockHandler = "blockHandlerTestHandler")
-public String handle1(String params) { 
-    // 业务逻辑处理
-    return "success";
-}
-
-// 接口方法 handle1 的 兜底方法
-public String blockHandlerTestHandler(String params, BlockException blockException) {
-    return "兜底返回";
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>注意：<code>@SentinelResource</code>注解中，除了<code>blockHandler</code>字段外，还有<code>fallback</code>字段</p>
-<ul>
-<li><code>blockHandler</code>：主观层面，如果被限流，则调用该方法，进行兜底处理</li>
-<li><code>fallback</code>：对业务的异常兜底，比如，执行过程中抛了各种<code>Exception</code>，则调用该方法，进行兜底处理</li>
-</ul>
-<p>通过上面两层兜底，可以让<code>Sentinel</code> 框架更加人性化，体验更好。</p>
-<p><strong>集群流控：</strong></p>
-<p>单机限流很容易做，但是互联网很多应用都是集群部署，毕竟其下游还挂载着 mysql、或者其他微服务，为了防止对下游的大流量冲击，采用集群流控。防止单机的流量不均匀， 理想下 QPS = 单机阈值 * 节点数</p>
-<h2 id="八、seata-分布式事务" tabindex="-1"> 八、Seata（分布式事务）</h2>
-<p>事务的原子性和持久性可以确保在一个事务内，更新多条数据，要么都成功，要么都失败。在一个系统内部，我们可以使用数据库事务来保证数据一致性。那如果一笔交易，涉及到跨多个系统、多个数据库的时候，用单一的数据库事务就没办法解决了，此时需要引入分布式事务</p>
-<p>Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，默认 AT 模式 ，为用户打造一站式的分布式解决方案。</p>
-<p><strong>优点：</strong></p>
-<ul>
-<li>对业务无侵入：即减少技术架构上的微服务化所带来的分布式事务问题对业务的侵入</li>
-<li>高性能：减少分布式事务解决方案所带来的性能消耗</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/JdLkEI9sZfcNjELl9JONS1pzqOYUYGk2oRMj65VXYd9WwlWjKgaCpMxcymONrY9FRhHPrHdLGdMiczvFk0kSW3g/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<p><strong>Seata有3个基本组成部分</strong> ：</p>
-<ul>
-<li>事务管理器（TM）：定义全局事务的范围：开始全局事务，提交或回滚全局事务。</li>
-<li>事务协调器（TC）：维护全局事务和分支事务的状态，驱动全局提交或回滚。</li>
-<li>资源管理器（RM）：管理正在处理的分支事务的资源，与TC对话以注册分支事务并报告分支事务的状态，并驱动分支事务的提交或回滚。</li>
-</ul>
-<p><strong>运行流程</strong> ：</p>
-<ul>
-<li>TM 向 TC 申请开启一个全局事务，全局事务创建成功并生成一个全局唯一的 XID</li>
-<li>XID 在微服务调用链路的上下文中传播</li>
-<li>RM 向 TC 注册分支事务，TC 返回分支事务ID ，并将其纳入 XID 对应全局事务的管辖</li>
-<li>RM 执行本地业务表操作，并记录 <code>undo_log</code> 日志，提交本地事务</li>
-<li>当所有的 RM 都执行完后，TM 向 TC 发起针对 XID 的全局提交或回滚决议</li>
-<li>TC 调度 XID 下管辖的全部分支事务完成提交或回滚请求。如果提交，删除 <code>undo_log</code> 日志就可以了。如果是回滚，根据 <code>undo_log</code> 表记录逆向回滚本地事务，把数据还原，最后再删除 <code>undo_log</code> 日志。</li>
-</ul>
-<p><strong>关于 Seata 之前写过很多文章，这里就不展开了，感兴趣可以看看</strong></p>
-<ul>
-<li>业务无侵入框架Seata， 解决分布式事务问题</li>
-<li>深度剖析 Seata TCC 模式【图解 + 源码分析】</li>
-<li>七种分布式事务的解决方案，一次讲给你听</li>
-</ul>
-<h2 id="九、spring-cloud-stream-异步消息" tabindex="-1"> 九、Spring Cloud Stream （异步消息）</h2>
-<p>Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底层消息中间件的差异。支持的MQ 框架有 <code>RabbitMQ</code>、<code>Kafka</code>、<code>RocketMQ</code> 等</p>
-<p><strong>常用注解：</strong></p>
-<ul>
-<li>@Input：标记为输入信道，消费消息</li>
-<li>@Output：标记为输出信道，生产消息</li>
-<li>@StreamListener：监听某个队列，接收消息，处理自身的业务逻辑</li>
-<li>@EnableBinding：绑定通道</li>
-</ul>
-<p><strong>依赖包：</strong></p>
-<div><pre><code>&lt;dependency>
- &lt;groupId>com.alibaba.cloud&lt;/groupId>
- &lt;artifactId>spring-cloud-starter-stream-rocketmq&lt;/artifactId>
-&lt;/dependency>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p><strong>绑定通道：</strong></p>
-<div><pre><code>@SpringBootApplication
-@EnableBinding({CustomSource.class})
-public class StreamProduceApplication {
- public static void main(String[] args) {
-  SpringApplication.run(StreamProduceApplication.class, args);
- }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>定义输出信道：</strong></p>
-<div><pre><code>public interface CustomSource {
-    @Output("output1")
-    MessageChannel output1();
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p><strong>yaml 配置：</strong></p>
-<div><pre><code>spring:
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 127.0.0.1:9876 # rocketMq服务地址
-        bindings:
-          output1:
-            producer:
-              transactional: true    # 事务
-              group: myTxProducerGroup    # 事务分组
-      bindings:
-        output1:
-          destination: test-transaction-topic # 主题
-          content-type: application/json # 数据类型
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>发送消息：</strong></p>
-<div><pre><code>@Service
-public class SendMessageService {
-    @Resource
-    private CustomSource customSource;
-
-    public String sendMessage() { //发送简单字符串消息的方法
-        String message = "字符串测试消息";
-        // 发送消息
-  customSource.output1().send(MessageBuilder.withPayload(message).build());         
-  return "发送成功！";
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="十、skywalking-分布式链路追踪" tabindex="-1"> 十、SkyWalking（分布式链路追踪）</h2>
-<p>SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云原生架构、容器（Docker、k8s、Mesos）而设计。通过探针收集应用的指标，进行分布式链路追踪，<strong>感知服务间的调用链路关系</strong> 。</p>
-<p><strong>特性：</strong></p>
-<ul>
-<li>支持告警</li>
-<li>采用探针技术，<strong>代码零侵入</strong></li>
-<li>轻量高效，不需要大数据平台</li>
-<li>多个语言自动探针。包括 Java，.NET Core 和 Node.JS。</li>
-<li>强大的可视化后台</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&amp;mid=2247487551&amp;idx=1&amp;sn=18f64ba49f3f0f9d8be9d1fdef8857d9&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/JdLkEI9sZfcNjELl9JONS1pzqOYUYGk2GjvyxMk3ppK66BNu1YwicfKe1g7M8wZ752KjvJiaY3ybyXAe779qicwxA/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></a></p>
-<ul>
-<li>上部分 Agent ：负责从应用中，收集链路信息，发送给 SkyWalking OAP 服务器。目前支持 SkyWalking、Zikpin、Jaeger 等提供的 Tracing 数据信息。而我们目前采用的是，SkyWalking Agent 收集 SkyWalking Tracing 数据，传递给服务器。</li>
-<li>下部分 SkyWalking OAP ：负责接收 Agent 发送的 Tracing 数据信息，然后进行分析(Analysis Core) ，存储到外部存储器( Storage )，最终提供查询( Query )功能。</li>
-<li>右部分 Storage ：Tracing 数据存储。目前支持 ES、MySQL、Sharding Sphere、TiDB、H2 多种存储器。<strong>而我们目前采用的是 ES</strong> ，主要考虑是 SkyWalking 开发团队自己的生产环境采用 ES 为主。</li>
-<li>左部分 SkyWalking UI ：负责提供控台，查看链路等等。</li>
-</ul>
-<p>SkyWalking 部署起来还是很简单的，apache官网直接下载并解压即可。</p>
-<blockquote>
-<p><a href="https://skywalking.apache.org/" target="_blank" rel="noopener noreferrer">https://skywalking.apache.org/</a></p>
-</blockquote>
-<p>SkyWalking 快速入门手册：</p>
-<blockquote>
-<p><a href="https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/" target="_blank" rel="noopener noreferrer">https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/</a></p>
-</blockquote>
-<h2 id="十一、xxl-job-分布式任务调度" tabindex="-1"> 十一、XXL-JOB（分布式任务调度）</h2>
-<p>关于定时任务，相信大家都不陌生。但是单节点的定时任务有很多不足：</p>
-<ul>
-<li>不支持集群，如果同时部署多个节点，会竞争数据，造成数据重复</li>
-<li>如果是单节点，宕机后，任务无法自动感知、重启</li>
-<li>不支持任务失败重试</li>
-<li>不支持执行时间的动态调整</li>
-<li>无报警机制</li>
-<li>无任务数据统计功能</li>
-<li>不支持数据分片</li>
-</ul>
-<p>无论是集群化，还是周边的生态建设，都不完备。而 XXL-JOB，可以完美解决这些问题。</p>
-<p>XXL-JOB 是一款分布式任务调度框架，依赖的组件少（仅依赖 Java 和 MySQL），开箱即用。并提供了可视化界面，统计任务数据，动态修改任务执行时间，内置邮件报警，支持任务分片和任务失败重试。</p>
-<p><strong>核心模块：</strong></p>
-<p>1、调度中心</p>
-<p>本身不执行业务逻辑，只负责向执行器发送调度命令。</p>
-<p>2、执行器</p>
-<p>接收调度中心的请求，并执行业务逻辑。</p>
-<p><strong>依赖包：</strong></p>
-<div><pre><code>&lt;dependency>
- &lt;groupId>com.xuxueli&lt;/groupId>
- &lt;artifactId>xxl-job-core&lt;/artifactId>
- &lt;version>2.2.0&lt;/version>
-&lt;/dependency>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>yaml 配置：</strong></p>
-<div><pre><code>server:
-  port: 8082  #程序端口
-xxl:
-  job:
-    admin:
-      addresses: http://127.0.0.1:8002/xxl-job-admin  # 调度中心地址，多个用逗号分开
-    accessToken:  # 调度中心和执行器通信的token，如果设置，两边要一样
-    executor:
-      appname: xxl-job-executor-sample  #执行器名称
-      address:   # 执行器地址，默认使用xxl.job.executor.address配置项，如果为空，则使用xxl.job.executor.ip + xxl.job.executor.port
-      ip:   # 执行器IP
-      port: 9989  #执行器端口，与调度中心通信的端口
-      logpath: D:/work/Spring-Cloud-Alibaba/sample/logs # 日志保存路径
-      logretentiondays: 30 # 日志保留天数
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>XxlJobSpringExecutor 初始化：</strong></p>
-<div><pre><code>@Bean
-public XxlJobSpringExecutor xxlJobExecutor() { // XXL-JOB执行器初始化
-    XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-    xxlJobSpringExecutor.setAdminAddresses(adminAddresses);
-    xxlJobSpringExecutor.setAppname(appname);
-    xxlJobSpringExecutor.setAddress(address);
-    xxlJobSpringExecutor.setIp(ip);
-    xxlJobSpringExecutor.setPort(port);
-    xxlJobSpringExecutor.setAccessToken(accessToken);
-    xxlJobSpringExecutor.setLogPath(logPath);
-    xxlJobSpringExecutor.setLogRetentionDays(logRetentionDays);
-    return xxlJobSpringExecutor;
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>我们可以采用 <code>BEAN</code> 模式， 使用 <code>@XxlJob</code> 注解描述代码。优点：适用于一些复杂的业务场景。</p>
-<p>也可以采用 <code>GLUE</code> 模式，将 <code>执行代码</code> 托管到调度中心在线维护。优点：简单快捷，不需要单独的业务工程。</p>
-<p>如果要处理的数据量较大时，我们可以采用<code>分片</code>处理机制，将任务均摊到每个节点，从而减轻单个节点的压力。</p>
-<div><pre><code>shardingVO.getIndex() # 当前执行器的分片序号（从0开始）
-shardingVO.getTotal() # 总分片数，执行器集群的数量
-
-# dataSource 待处理的所有原始数据
-for (Integer val : dataSource) { // 遍历代理
-    if (val % shardingVO.getTotal() == shardingVO.getIndex()) { // 取余
-        //TODO 归属于当前分片处理
-    } 
-}  
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>XXL-JOB 快速入门手册：</p>
-<blockquote>
-<p><a href="https://www.xuxueli.com/xxl-job/" target="_blank" rel="noopener noreferrer">https://www.xuxueli.com/xxl-job/</a></p>
-</blockquote>
-]]></content:encoded>
-      <enclosure url="https://mmbiz.qpic.cn/mmbiz_png/JdLkEI9sZfcnIibRHg3zekuCwaBZ682Ed569me3GrnFXKSzwtXrK5TYty5wbJawc6gTicYYf4ru6tyOiaRjo0atyA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" type="image/"/>
-    </item>
-    <item>
-      <title>Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</title>
-      <link>https://blog.ciberviler.top/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html</link>
-      <guid>https://blog.ciberviler.top/dev/SpringCloudGateway+Oauth2%E5%AE%9E%E7%8E%B0%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E5%92%8C%E9%89%B4%E6%9D%83.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</source>
-      <description>微服务权限终极解决方案，Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</description>
-      <category>Java</category>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="spring-cloud-gateway-oauth2-实现统一认证和鉴权" tabindex="-1"> Spring Cloud Gateway + Oauth2 实现统一认证和鉴权</h1>
-<h2 id="摘要" tabindex="-1"> 摘要</h2>
-<p>最近发现了一个很好的微服务权限解决方案，可以通过认证服务进行统一认证，然后通过网关来统一校验认证和鉴权。此方案为目前最新方案，仅支持Spring Boot 2.2.0、Spring Cloud Hoxton 以上版本，本文将详细介绍该方案的实现，希望对大家有所帮助！</p>
-<h2 id="前置知识" tabindex="-1"> 前置知识</h2>
-<blockquote>
-<p>我们将采用Nacos作为注册中心，Gateway作为网关，使用<code>nimbus-jose-jwt</code>JWT库操作JWT令牌</p>
-</blockquote>
-<h2 id="应用架构" tabindex="-1"> 应用架构</h2>
-<blockquote>
-<p>我们理想的解决方案应该是这样的，认证服务负责认证，网关负责校验认证和鉴权，其他API服务负责处理自己的业务逻辑。安全相关的逻辑只存在于认证服务和网关服务中，其他服务只是单纯地提供服务而没有任何安全相关逻辑。</p>
-</blockquote>
-<p>相关服务划分：</p>
-<ul>
-<li>micro-oauth2-gateway：网关服务，负责请求转发和鉴权功能，整合Spring Security+Oauth2；</li>
-<li>micro-oauth2-auth：Oauth2认证服务，负责对登录用户进行认证，整合Spring Security+Oauth2；</li>
-<li>micro-oauth2-api：受保护的API服务，用户鉴权通过后可以访问该服务，不整合Spring Security+Oauth2。</li>
-</ul>
-<h2 id="方案实现" tabindex="-1"> 方案实现</h2>
-<blockquote>
-<p>下面介绍下这套解决方案的具体实现，依次搭建认证服务、网关服务和API服务。</p>
-</blockquote>
-<h3 id="micro-oauth2-auth" tabindex="-1"> micro-oauth2-auth</h3>
-<blockquote>
-<p>我们首先来搭建认证服务，它将作为Oauth2的认证服务使用，并且网关服务的鉴权功能也需要依赖它。</p>
-</blockquote>
-<ul>
-<li>在<code>pom.xml</code>中添加相关依赖，主要是Spring Security、Oauth2、JWT、Redis相关依赖；</li>
-</ul>
-<div><pre><code>&lt;dependencies>
-    &lt;dependency>
-        &lt;groupId>org.springframework.boot&lt;/groupId>
-        &lt;artifactId>spring-boot-starter-web&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.boot&lt;/groupId>
-        &lt;artifactId>spring-boot-starter-security&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.cloud&lt;/groupId>
-        &lt;artifactId>spring-cloud-starter-oauth2&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>com.nimbusds&lt;/groupId>
-        &lt;artifactId>nimbus-jose-jwt&lt;/artifactId>
-        &lt;version>8.16&lt;/version>
-    &lt;/dependency>
-    &lt;!-- redis -->
-    &lt;dependency>
-        &lt;groupId>org.springframework.boot&lt;/groupId>
-        &lt;artifactId>spring-boot-starter-data-redis&lt;/artifactId>
-    &lt;/dependency>
-&lt;/dependencies>
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>在<code>application.yml</code>中添加相关配置，主要是Nacos和Redis相关配置；</li>
-</ul>
-<div><pre><code>server:
-  port: 9401
-spring:
-  profiles:
-    active: dev
-  application:
-    name: micro-oauth2-auth
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-  redis:
-    database: 0
-    port: 6379
-    host: localhost
-    password: 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>使用<code>keytool</code>生成RSA证书<code>jwt.jks</code>，复制到<code>resource</code>目录下，在JDK的<code>bin</code>目录下使用如下命令即可；</li>
-</ul>
-<div><pre><code>keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><ul>
-<li>创建<code>UserServiceImpl</code>类实现Spring Security的<code>UserDetailsService</code>接口，用于加载用户信息；</li>
-</ul>
-<div><pre><code>/**
- * 用户管理业务类
- * Created by macro on 2020/6/19.
- */
-@Service
-public class UserServiceImpl implements UserDetailsService {
-
-    private List&lt;UserDTO> userList;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @PostConstruct
-    public void initData() {
-        String password = passwordEncoder.encode("123456");
-        userList = new ArrayList&lt;>();
-        userList.add(new UserDTO(1L,"macro", password,1, CollUtil.toList("ADMIN")));
-        userList.add(new UserDTO(2L,"andy", password,1, CollUtil.toList("TEST")));
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List&lt;UserDTO> findUserList = userList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
-        if (CollUtil.isEmpty(findUserList)) {
-            throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);
-        }
-        SecurityUser securityUser = new SecurityUser(findUserList.get(0));
-        if (!securityUser.isEnabled()) {
-            throw new DisabledException(MessageConstant.ACCOUNT_DISABLED);
-        } else if (!securityUser.isAccountNonLocked()) {
-            throw new LockedException(MessageConstant.ACCOUNT_LOCKED);
-        } else if (!securityUser.isAccountNonExpired()) {
-            throw new AccountExpiredException(MessageConstant.ACCOUNT_EXPIRED);
-        } else if (!securityUser.isCredentialsNonExpired()) {
-            throw new CredentialsExpiredException(MessageConstant.CREDENTIALS_EXPIRED);
-        }
-        return securityUser;
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>添加认证服务相关配置<code>Oauth2ServerConfig</code>，需要配置加载用户信息的服务<code>UserServiceImpl</code>及RSA的钥匙对<code>KeyPair</code>；</li>
-</ul>
-<div><pre><code>/**
- * 认证服务器配置
- * Created by macro on 2020/6/19.
- */
-@AllArgsConstructor
-@Configuration
-@EnableAuthorizationServer
-public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
-
-    private final PasswordEncoder passwordEncoder;
-    private final UserServiceImpl userDetailsService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenEnhancer jwtTokenEnhancer;
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client-app")
-                .secret(passwordEncoder.encode("123456"))
-                .scopes("all")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
-                .refreshTokenValiditySeconds(86400);
-    }
-
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-        List&lt;TokenEnhancer> delegates = new ArrayList&lt;>();
-        delegates.add(jwtTokenEnhancer); 
-        delegates.add(accessTokenConverter());
-        enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService) //配置加载用户信息的服务
-                .accessTokenConverter(accessTokenConverter())
-                .tokenEnhancer(enhancerChain);
-    }
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients();
-    }
-
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setKeyPair(keyPair());
-        return jwtAccessTokenConverter;
-    }
-
-    @Bean
-    public KeyPair keyPair() {
-        //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
-        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>如果你想往JWT中添加自定义信息的话，比如说<code>登录用户的ID</code>，可以自己实现<code>TokenEnhancer</code>接口；</li>
-</ul>
-<div><pre><code>/**
- * JWT内容增强器
- * Created by macro on 2020/6/19.
- */
-@Component
-public class JwtTokenEnhancer implements TokenEnhancer {
-    @Override
-    public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        Map&lt;String, Object> info = new HashMap&lt;>();
-        //把用户ID设置到JWT中
-        info.put("id", securityUser.getId());
-        ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
-        return accessToken;
-    }
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>由于我们的网关服务需要RSA的公钥来验证签名是否合法，所以认证服务需要有个接口把公钥暴露出来；</li>
-</ul>
-<div><pre><code>/**
- * 获取RSA公钥接口
- * Created by macro on 2020/6/19.
- */
-@RestController
-public class KeyPairController {
-
-    @Autowired
-    private KeyPair keyPair;
-
-    @GetMapping("/rsa/publicKey")
-    public Map&lt;String, Object> getKey() {
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAKey key = new RSAKey.Builder(publicKey).build();
-        return new JWKSet(key).toJSONObject();
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>不要忘了还需要配置Spring Security，允许获取公钥接口的访问；</li>
-</ul>
-<div><pre><code>/**
- * SpringSecurity配置
- * Created by macro on 2020/6/19.
- */
-@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .antMatchers("/rsa/publicKey").permitAll()
-                .anyRequest().authenticated();
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>创建一个资源服务<code>ResourceServiceImpl</code>，初始化的时候把资源与角色匹配关系缓存到Redis中，方便网关服务进行鉴权的时候获取。</li>
-</ul>
-<div><pre><code>/**
- * 资源与角色匹配关系管理业务类
- * Created by macro on 2020/6/19.
- */
-@Service
-public class ResourceServiceImpl {
-
-    private Map&lt;String, List&lt;String>> resourceRolesMap;
-    @Autowired
-    private RedisTemplate&lt;String,Object> redisTemplate;
-
-    @PostConstruct
-    public void initData() {
-        resourceRolesMap = new TreeMap&lt;>();
-        resourceRolesMap.put("/api/hello", CollUtil.toList("ADMIN"));
-        resourceRolesMap.put("/api/user/currentUser", CollUtil.toList("ADMIN", "TEST"));
-        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
-    }
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="micro-oauth2-gateway" tabindex="-1"> micro-oauth2-gateway</h3>
-<blockquote>
-<p>接下来我们就可以搭建网关服务了，它将作为Oauth2的资源服务、客户端服务使用，对访问微服务的请求进行统一的校验认证和鉴权操作。</p>
-</blockquote>
-<ul>
-<li>在<code>pom.xml</code>中添加相关依赖，主要是Gateway、Oauth2和JWT相关依赖；</li>
-</ul>
-<div><pre><code>&lt;dependencies>
-    &lt;dependency>
-        &lt;groupId>org.springframework.boot&lt;/groupId>
-        &lt;artifactId>spring-boot-starter-webflux&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.cloud&lt;/groupId>
-        &lt;artifactId>spring-cloud-starter-gateway&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.security&lt;/groupId>
-        &lt;artifactId>spring-security-config&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.security&lt;/groupId>
-        &lt;artifactId>spring-security-oauth2-resource-server&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.security&lt;/groupId>
-        &lt;artifactId>spring-security-oauth2-client&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>org.springframework.security&lt;/groupId>
-        &lt;artifactId>spring-security-oauth2-jose&lt;/artifactId>
-    &lt;/dependency>
-    &lt;dependency>
-        &lt;groupId>com.nimbusds&lt;/groupId>
-        &lt;artifactId>nimbus-jose-jwt&lt;/artifactId>
-        &lt;version>8.16&lt;/version>
-    &lt;/dependency>
-&lt;/dependencies>
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>在<code>application.yml</code>中添加相关配置，主要是路由规则的配置、Oauth2中RSA公钥的配置及路由白名单的配置；</li>
-</ul>
-<div><pre><code>server:
-  port: 9201
-spring:
-  profiles:
-    active: dev
-  application:
-    name: micro-oauth2-gateway
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-    gateway:
-      routes: #配置路由规则
-        - id: oauth2-api-route
-          uri: lb://micro-oauth2-api
-          predicates:
-            - Path=/api/**
-          filters:
-            - StripPrefix=1
-        - id: oauth2-auth-route
-          uri: lb://micro-oauth2-auth
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
-      discovery:
-        locator:
-          enabled: true #开启从注册中心动态创建路由的功能
-          lower-case-service-id: true #使用小写服务名，默认是大写
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: 'http://localhost:9401/rsa/publicKey' #配置RSA的公钥访问地址
-  redis:
-    database: 0
-    port: 6379
-    host: localhost
-    password: 
-secure:
-  ignore:
-    urls: #配置白名单路径
-      - "/actuator/**"
-      - "/auth/oauth/token"
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>对网关服务进行配置安全配置，由于Gateway使用的是<code>WebFlux</code>，所以需要使用<code>@EnableWebFluxSecurity</code>注解开启；</li>
-</ul>
-<div><pre><code>/**
- * 资源服务器配置
- * Created by macro on 2020/6/19.
- */
-@AllArgsConstructor
-@Configuration
-@EnableWebFluxSecurity
-public class ResourceServerConfig {
-    private final AuthorizationManager authorizationManager;
-    private final IgnoreUrlsConfig ignoreUrlsConfig;
-    private final RestfulAccessDeniedHandler restfulAccessDeniedHandler;
-    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.oauth2ResourceServer().jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
-        http.authorizeExchange()
-                .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(),String.class)).permitAll()//白名单配置
-                .anyExchange().access(authorizationManager)//鉴权管理器配置
-                .and().exceptionHandling()
-                .accessDeniedHandler(restfulAccessDeniedHandler)//处理未授权
-                .authenticationEntryPoint(restAuthenticationEntryPoint)//处理未认证
-                .and().csrf().disable();
-        return http.build();
-    }
-
-    @Bean
-    public Converter&lt;Jwt, ? extends Mono&lt;? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
-        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthConstant.AUTHORITY_PREFIX);
-        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthConstant.AUTHORITY_CLAIM_NAME);
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
-        return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>在<code>WebFluxSecurity</code>中自定义鉴权操作需要实现<code>ReactiveAuthorizationManager</code>接口；</li>
-</ul>
-<div><pre><code>/**
- * 鉴权管理器，用于判断是否有资源的访问权限
- * Created by macro on 2020/6/19.
- */
-@Component
-public class AuthorizationManager implements ReactiveAuthorizationManager&lt;AuthorizationContext> {
-    @Autowired
-    private RedisTemplate&lt;String,Object> redisTemplate;
-
-    @Override
-    public Mono&lt;AuthorizationDecision> check(Mono&lt;Authentication> mono, AuthorizationContext authorizationContext) {
-        //从Redis中获取当前路径可访问角色列表
-        URI uri = authorizationContext.getExchange().getRequest().getURI();
-        Object obj = redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLES_MAP, uri.getPath());
-        List&lt;String> authorities = Convert.toList(String.class,obj);
-        authorities = authorities.stream().map(i -> i = AuthConstant.AUTHORITY_PREFIX + i).collect(Collectors.toList());
-        //认证通过且角色匹配的用户可访问当前路径
-        return mono
-                .filter(Authentication::isAuthenticated)
-                .flatMapIterable(Authentication::getAuthorities)
-                .map(GrantedAuthority::getAuthority)
-                .any(authorities::contains)
-                .map(AuthorizationDecision::new)
-                .defaultIfEmpty(new AuthorizationDecision(false));
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>这里我们还需要实现一个全局过滤器<code>AuthGlobalFilter</code>，当鉴权通过后将JWT令牌中的用户信息解析出来，然后存入请求的Header中，这样后续服务就不需要解析JWT令牌了，可以直接从请求的Header中获取到用户信息。</li>
-</ul>
-<div><pre><code>/**
- * 将登录用户的JWT转化成用户信息的全局过滤器
- * Created by macro on 2020/6/17.
- */
-@Component
-public class AuthGlobalFilter implements GlobalFilter, Ordered {
-
-    private static Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
-
-    @Override
-    public Mono&lt;Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
-        if (StrUtil.isEmpty(token)) {
-            return chain.filter(exchange);
-        }
-        try {
-            //从token中解析用户信息并设置到Header中去
-            String realToken = token.replace("Bearer ", "");
-            JWSObject jwsObject = JWSObject.parse(realToken);
-            String userStr = jwsObject.getPayload().toString();
-            LOGGER.info("AuthGlobalFilter.filter() user:{}",userStr);
-            ServerHttpRequest request = exchange.getRequest().mutate().header("user", userStr).build();
-            exchange = exchange.mutate().request(request).build();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return chain.filter(exchange);
-    }
-
-    @Override
-    public int getOrder() {
-        return 0;
-    }
-}
-
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="micro-oauth2-api" tabindex="-1"> micro-oauth2-api</h3>
-<blockquote>
-<p>最后我们搭建一个API服务，它不会集成和实现任何安全相关逻辑，全靠网关来保护它。</p>
-</blockquote>
-<ul>
-<li>在<code>pom.xml</code>中添加相关依赖，就添加了一个web依赖；</li>
-</ul>
-<div><pre><code>&lt;dependencies>
-    &lt;dependency>
-        &lt;groupId>org.springframework.boot&lt;/groupId>
-        &lt;artifactId>spring-boot-starter-web&lt;/artifactId>
-    &lt;/dependency>
-&lt;/dependencies>
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>在<code>application.yml</code>添加相关配置，很常规的配置；</li>
-</ul>
-<div><pre><code>server:
-  port: 9501
-spring:
-  profiles:
-    active: dev
-  application:
-    name: micro-oauth2-api
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>创建一个测试接口，网关验证通过即可访问；</li>
-</ul>
-<div><pre><code>/**
- * 测试接口
- * Created by macro on 2020/6/19.
- */
-@RestController
-public class HelloController {
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World.";
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>创建一个<code>LoginUserHolder</code>组件，用于从请求的Header中直接获取登录用户信息；</li>
-</ul>
-<div><pre><code>/**
- * 获取登录用户信息
- * Created by macro on 2020/6/17.
- */
-@Component
-public class LoginUserHolder {
-
-    public UserDTO getCurrentUser(){
-        //从Header中获取用户信息
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = servletRequestAttributes.getRequest();
-        String userStr = request.getHeader("user");
-        JSONObject userJsonObject = new JSONObject(userStr);
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername(userJsonObject.getStr("user_name"));
-        userDTO.setId(Convert.toLong(userJsonObject.get("id")));
-        userDTO.setRoles(Convert.toList(String.class,userJsonObject.get("authorities")));
-        return userDTO;
-    }
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>创建一个获取当前用户信息的接口。</li>
-</ul>
-<div><pre><code>/**
- * 获取登录用户信息接口
- * Created by macro on 2020/6/19.
- */
-@RestController
-@RequestMapping("/user")
-public class UserController{
-
-    @Autowired
-    private LoginUserHolder loginUserHolder;
-
-    @GetMapping("/currentUser")
-    public UserDTO currentUser() {
-        return loginUserHolder.getCurrentUser();
-    }
-
-}
-复制代码
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="功能演示" tabindex="-1"> 功能演示</h2>
-<blockquote>
-<p>接下来我们来演示下微服务系统中的统一认证鉴权功能，所有请求均通过网关访问。</p>
-</blockquote>
-<ul>
-<li>在此之前先启动我们的Nacos和Redis服务，然后依次启动<code>micro-oauth2-auth</code>、<code>micro-oauth2-gateway</code>及<code>micro-oauth2-api</code>服务；</li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da5ee93bd~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<ul>
-<li>使用密码模式获取JWT令牌，访问地址：<a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken" target="_blank" rel="noopener noreferrer">http://localhost:9201/auth/oauth/token</a></li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da61f640e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<ul>
-<li>使用获取到的JWT令牌访问需要权限的接口，访问地址：<a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello" target="_blank" rel="noopener noreferrer">http://localhost:9201/api/hello</a></li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da5591caf~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<ul>
-<li>使用获取到的JWT令牌访问获取当前登录用户信息的接口，访问地址：<a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fuser%2FcurrentUser" target="_blank" rel="noopener noreferrer">http://localhost:9201/api/user/currentUser</a></li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da6c59fd8~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<ul>
-<li>当JWT令牌过期时，使用refresh_token获取新的JWT令牌，访问地址：<a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken" target="_blank" rel="noopener noreferrer">http://localhost:9201/auth/oauth/token</a></li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da69ef4c1~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<ul>
-<li>使用没有访问权限的<code>andy</code>账号登录，访问接口时会返回如下信息，访问地址：<a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello" target="_blank" rel="noopener noreferrer">http://localhost:9201/api/hello</a></li>
-</ul>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da665d734~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-]]></content:encoded>
-      <enclosure url="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da5ee93bd~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" type="image/"/>
     </item>
   </channel>
 </rss>
