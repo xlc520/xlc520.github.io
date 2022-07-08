@@ -171,3 +171,12 @@ getData(){
 console.log( this.$refs.authTree.getData());
 ```
 
+
+
+**注意：**
+
+```typescript
+emits.emit("setAcctStatusPilh",res.data.acctType);  //如果组件lazy为true，打开时组件未祖册，无法设置
+this.$refs.pilhacctmthlyblginfsgmt.getAcctType(res.data.acctType);  //如果组件lazy为false，打开时组件未祖册，无法设置
+```
+
