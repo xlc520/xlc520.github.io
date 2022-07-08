@@ -2,7 +2,20 @@ import { navbar } from "vuepress-theme-hope";
 
 export default navbar([
   { text: 'Home', link: '/' , icon: "home"},
-  { text: '学习', link: '/study/' ,icon: "note"},
+  { text: '学习', icon: "note", prefix: "/study/",
+    children:[
+      {
+        text: "学习",
+        icon: "note",
+        link: ""
+      },
+      {
+        text: "Vue3+TS 快速上手",
+        icon: "vue",
+        link: "vue3_quick_study/"
+      }
+    ]
+  },
   { text: '算法', link: '/algorithm/' ,icon: "shell"},
   { text: '开发', link: '/dev/' ,icon:"java" },
   { text: 'Linux', link: '/linux/' ,icon:"linux"},
