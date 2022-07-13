@@ -10,6 +10,7 @@ dateline: true
 icon: vue
 password: 
 ---
+
 # 2. 其他新的API
 ## 全新的全局API
 - createApp()
@@ -30,5 +31,5 @@ password:
   - prop：value -> modelValue；
   - event：input -> update:modelValue；
 - .sync修改符已移除, 由v-model代替
-  - <ChildComponent v-model:title="pageTitle" v-model:content="pageContent" />
+  - `<ChildComponent v-model:title="pageTitle" v-model:content="pageContent" />`
 - v-if优先v-for解析
