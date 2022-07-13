@@ -2,7 +2,7 @@
 author: xlc520
 title: SpringBoot+Kafka+ELK 完成海量日志收集
 description: 
-date: 2022-07-17
+date: 2022-08-05
 category: Java
 tag: Java
 article: true
