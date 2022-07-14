@@ -6,8 +6,8 @@
     <link>https://blog.ciberviler.top/</link>
     <description>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 13 Jul 2022 10:50:17 GMT</pubDate>
-    <lastBuildDate>Wed, 13 Jul 2022 10:50:17 GMT</lastBuildDate>
+    <pubDate>Thu, 14 Jul 2022 03:08:25 GMT</pubDate>
+    <lastBuildDate>Thu, 14 Jul 2022 03:08:25 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Java</category>
@@ -19,8 +19,442 @@
     <category>essay</category>
     <category>Script</category>
     <category>pc</category>
-    <category>Python</category>
-    <category>Tools</category>
+    <item>
+      <title>logback - 自定义日志脱敏组件</title>
+      <link>https://blog.ciberviler.top/dev/logback%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%BF%97%E8%84%B1%E6%95%8F%E7%BB%84%E4%BB%B6.html</link>
+      <guid>https://blog.ciberviler.top/dev/logback%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%BF%97%E8%84%B1%E6%95%8F%E7%BB%84%E4%BB%B6.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">logback - 自定义日志脱敏组件</source>
+      <category>Java</category>
+      <pubDate>Mon, 08 Aug 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="logback-自定义日志脱敏组件" tabindex="-1"> logback - 自定义日志脱敏组件</h1>
+<h2 id="前言" tabindex="-1"> 前言</h2>
+<p>在我们书写代码的时候，会书写许多日志代码，但是有些敏感数据是需要进行安全脱敏处理的。</p>
+<p>对于日志脱敏的方式有很多，常见的有<strong>①使用conversionRule标签，继承MessageConverter②书写一个脱敏工具类，在打印日志的时候对特定特字段进行脱敏返回。</strong></p>
+<p>两种方式各有优缺点：</p>
+<p>第一种方式需要修改代码，不符合开闭原则。</p>
+<p>第二种方式，需要在日志方法的参数进行脱敏，对原生日志有入侵行为。</p>
+<h2 id="自定义脱敏组件-slf4j-logback" tabindex="-1"> 自定义脱敏组件（slf4j+logback）</h2>
+<p>一个项目在书写了很多打印日志的代码，但是后面有了脱敏需求，如果我们去手动改动代码，会花费大量时间。如果引入本组件，完成配置即可轻松完成脱敏。（仅需三步可轻松配置）</p>
+<h3 id="一、自定义脱敏组件-脱敏效果演示" tabindex="-1"> 一、自定义脱敏组件 - 脱敏效果演示</h3>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129141855313.png" alt="需要脱敏的日志">
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129141946269.png" alt="控制台脱敏结果"></p>
+<h3 id="二、自定义脱敏组件-使用方式" tabindex="-1"> 二、自定义脱敏组件 - 使用方式</h3>
+<h5 id="_1、引入jar包依赖" tabindex="-1"> 1、引入Jar包依赖</h5>
+<p>前提是你将Jar包打入本地仓库，Jar包地址见后文。</p>
+<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
+    <span><span><span>&lt;</span>groupId</span><span>></span></span>pers.liuchengyin<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+    <span><span><span>&lt;</span>artifactId</span><span>></span></span>logback-desensitization<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+    <span><span><span>&lt;</span>version</span><span>></span></span>1.0.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="_2、替换日志文件配置类-logback-xml" tabindex="-1"> 2、替换日志文件配置类(logback.xml)</h5>
+<p>日志打印方式都只需要替换成脱敏的类即可，如果你的业务不需要，则无需替换。
+①ConsoleAppender - 控制台脱敏</p>
+<div><pre><code><span>// 原类</span>
+<span><span>ch<span>.</span>qos<span>.</span>logback<span>.</span>core<span>.</span></span>ConsoleAppender</span>
+<span>// 替换类</span>
+<span><span>pers<span>.</span>liuchengyin<span>.</span>logbackadvice<span>.</span></span>LcyConsoleAppender</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>②RollingFileAppender - 滚动文件</p>
+<div><pre><code><span>// 原类</span>
+<span><span>ch<span>.</span>qos<span>.</span>logback<span>.</span>core<span>.</span>rolling<span>.</span></span>RollingFileAppender</span>
+<span>// 替换类</span>
+<span><span>pers<span>.</span>liuchengyin<span>.</span>logbackadvice<span>.</span></span>LcyRollingFileAppender</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>③FileAppender - 文件</p>
+<div><pre><code><span>// 原类</span>
+<span><span>ch<span>.</span>qos<span>.</span>logback<span>.</span>core<span>.</span></span>FileAppender</span>
+<span>// 替换类</span>
+<span><span>pers<span>.</span>liuchengyin<span>.</span>logbackadvice<span>.</span></span>LcyFileAppender</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p><strong>替换示例：</strong></p>
+<div><pre><code><span><span><span>&lt;</span>property</span> <span>name</span><span><span>=</span><span>"</span>CONSOLE_LOG_PATTERN<span>"</span></span>
+          <span>value</span><span><span>=</span><span>"</span>%yellow(%date{yyyy-MM-dd HH:mm:ss}) |%highlight(%-5level) |%blue(%thread) |%blue(%file:%line) |%green(%logger) |%cyan(%msg%n)<span>"</span></span><span>/></span></span>
+
+<span>&lt;!-- ConsoleAppender 控制台输出日志 --></span>
+<span><span><span>&lt;</span>appender</span> <span>name</span><span><span>=</span><span>"</span>CONSOLE<span>"</span></span> <span>class</span><span><span>=</span><span>"</span>pers.liuchengyin.logbackadvice.LcyConsoleAppender<span>"</span></span><span>></span></span>
+    <span><span><span>&lt;</span>encoder</span><span>></span></span>
+        <span><span><span>&lt;</span>pattern</span><span>></span></span>
+            ${CONSOLE_LOG_PATTERN}
+        <span><span><span>&lt;/</span>pattern</span><span>></span></span>
+    <span><span><span>&lt;/</span>encoder</span><span>></span></span>
+<span><span><span>&lt;/</span>appender</span><span>></span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h5 id="_3、添加脱敏配置文件-logback-desensitize-yml" tabindex="-1"> 3、添加脱敏配置文件(logback-desensitize.yml)</h5>
+<p>该配置文件应该放在resources文件下
+<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129150716849.png" alt="图片"></p>
+<h3 id="三、自定义脱敏组件-脱敏规范" tabindex="-1"> 三、自定义脱敏组件 - 脱敏规范</h3>
+<h5 id="_1、支持数据类型" tabindex="-1"> 1、支持数据类型</h5>
+<p>八大基本类型及其包装类型、Map、List、业务里的Pojo对象、List&lt;业务里的Pojo对象&gt;、JSON字符串。
+注：在配置文件中配置的时候，只需要配置对象里的属性值就行。</p>
+<h5 id="_2、不支持的数据类型" tabindex="-1"> 2、不支持的数据类型</h5>
+<p>List&lt;八大基本类型及包装类型&gt;，因为不知道脱敏的数据源具体是哪一个。</p>
+<h5 id="_3、匹配规则" tabindex="-1"> 3、匹配规则</h5>
+<p><code>key + 分割符 + value</code>，目前仅支持冒号(<code>:</code>)和等号(<code>=</code>)，示例如下：</p>
+<div><pre><code>log<span>.</span><span>info</span><span>(</span><span>"your email:{}, your phone:{}"</span><span>,</span> <span>"123456789@qq.com"</span><span>,</span><span>"15310763497"</span><span>)</span><span>;</span>
+log<span>.</span><span>info</span><span>(</span><span>"your email={}, your cellphone={}"</span><span>,</span> <span>"123456789@qq.com"</span><span>,</span><span>"15310763497"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>key：定义了对应需要脱敏的关键字，如上诉的email、phone等以及业务对象中的字段、Map中的Key、JSON中的Key
+value：需要脱敏的值，如上诉的<code>123456789@qq.com</code>、<code>15310763497</code>。</p>
+<h5 id="_4、日志规范" tabindex="-1"> 4、日志规范</h5>
+<p>建议书写日志的时候尽量规范，对于key为中文的是没有办法脱敏的，规范程度可以见脱敏效果演示里的代码。</p>
+<h3 id="四、logback-desensitize-yml配置说明" tabindex="-1"> 四、logback-desensitize.yml配置说明</h3>
+<div><pre><code><span># 日志脱敏</span>
+<span>log-desensitize</span><span>:</span>
+  <span># 是否忽略大小写匹配，默认为true</span>
+  <span>ignore</span><span>:</span> <span>true</span>
+  <span># 是否开启脱敏，默认为false</span>
+  <span>open</span><span>:</span> <span>true</span>
+  <span># pattern下的key/value为固定脱敏规则</span>
+  <span>pattern</span><span>:</span>
+    <span># 邮箱 - @前第4-7位脱敏</span>
+    <span>email</span><span>:</span> <span>"@>(4,7)"</span>
+    <span># qq邮箱 - @后1-3位脱敏</span>
+    <span>qqemail</span><span>:</span> <span>"@&lt;(1,3)"</span>
+    <span># 姓名 - 姓脱敏，如*杰伦</span>
+    <span>name</span><span>:</span> <span>1</span><span>,</span><span>1</span>
+    <span># 密码 - 所有需要完全脱敏的都可以使用内置的password</span>
+    <span>password</span><span>:</span> password
+  <span>patterns</span><span>:</span>
+    <span># 身份证号，key后面的字段都可以匹配以下规则(用逗号分隔)</span>
+    <span>-</span> <span>key</span><span>:</span> identity<span>,</span>idcard
+      <span># 定义规则的标识</span>
+      <span>custom</span><span>:</span>
+        <span># defaultRegex表示使用组件内置的规则：identity表示身份证号 - 内置的18/15位</span>
+        <span>-</span> <span>defaultRegex</span><span>:</span> identity
+          <span>position</span><span>:</span> <span>9</span><span>,</span><span>13</span>
+        <span># 内置的other表示如果其他规则都无法匹配到，则按该规则处理</span>
+        <span>-</span> <span>defaultRegex</span><span>:</span> other
+          <span>position</span><span>:</span> <span>9</span><span>,</span><span>10</span>
+    <span># 电话号码，key后面的字段都可以匹配以下规则(用逗号分隔)</span>
+    <span>-</span> <span>key</span><span>:</span> phone<span>,</span>cellphone<span>,</span>mobile
+      <span>custom</span><span>:</span>
+        <span># 手机号 - 内置的11位手机匹配规则</span>
+        <span>-</span> <span>defaultRegex</span><span>:</span> phone
+          <span>position</span><span>:</span> <span>4</span><span>,</span><span>7</span>
+        <span># 自定义正则匹配表达式：座机号(带区号，号码七位|八位)</span>
+        <span>-</span> <span>customRegex</span><span>:</span> <span>"^0[0-9]{2,3}-[0-9]{7,8}"</span>
+        <span># -后面的1-4位脱敏</span>
+          <span>position</span><span>:</span> <span>"-&lt;(1,4)"</span>
+        <span># 自定义正则匹配表达式：座机号(不带区号)</span>
+        <span>-</span> <span>customRegex</span><span>:</span> <span>"^[0-9]{7,8}"</span>
+          <span>position</span><span>:</span> <span>3</span><span>,</span><span>5</span>
+        <span># 内置的other表示如果其他规则都无法匹配到，则按该规则处理</span>
+        <span>-</span> <span>defaultRegex</span><span>:</span> other
+          <span>position</span><span>:</span> <span>1</span><span>,</span><span>3</span>
+    <span># 这种方式不太推荐 - 一旦匹配不上，就不会脱敏</span>
+    <span>-</span> <span>key</span><span>:</span> localMobile
+      <span>custom</span><span>:</span>
+          <span>customRegex</span><span>:</span> <span>"^0[0-9]{2,3}-[0-9]{7,8}"</span>
+          <span>position</span><span>:</span> <span>1</span><span>,</span><span>3</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上面这个配置是相对完整的，一定要严格遵守层级配置格式。</p>
+<h4 id="自定义脱敏支持的方式" tabindex="-1"> 自定义脱敏支持的方式</h4>
+<p><strong>1、key:value的方式</strong>
+<code>phone:4,7</code>，表示phone属性的4-7位进行脱敏
+原始数据：13610357861
+脱敏后：136****7861</p>
+<p><strong>2、以符号作为起始、结束节点作为脱敏标志</strong>
+<code>emai:&quot;@&gt;(4,7)&quot;</code>，<code>@</code>为脱敏标志，<code>&gt;</code>表示其为结束节点，<code>&lt;</code>表示其为开始节点。即@&gt;表示对@之前的进行脱敏，@&lt;表示对@之后的进行脱敏。这个示例就是@前的数据的第4-7位进行脱敏。<code>注意：这种规则里的双引号、括号不能省略</code>，<code>其次:和=不能作为标志符号，因为和匹配规则有冲突</code>
+原始数据：<code>123456789@qq.com</code>
+<code>&quot;@&gt;(4,7)&quot;</code>脱敏后：<code>123****89@qq.com</code>
+<code>&quot;@&lt;(1,3)&quot;</code>脱敏后：<code>123456789@***com</code></p>
+<p><strong>3、自定义正则脱敏</strong></p>
+<div><pre><code>  <span>patterns</span><span>:</span>
+    <span># 手机号</span>
+    <span>-</span> <span>key</span><span>:</span> phone<span>,</span>mobile
+      <span>custom</span><span>:</span>
+        <span># 手机号的正则</span>
+        <span>-</span> <span>customRegex</span><span>:</span> <span>"^1[0-9]{10}"</span>
+          <span># 脱敏范围</span>
+          <span>position</span><span>:</span> <span>4</span><span>,</span><span>7</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>customRegex：正则表达式，如果符合该表达式，则使用其对应的脱敏规则(position)</p>
+<p><strong>4、一个字段，根据多种值含义进行自定义脱敏</strong>
+比如说，username字段的值可以是手机号、也可以是邮箱，这个值动态改变的，前面几种方式都没办法解决，可以使用该方式。</p>
+<div><pre><code><span>patterns</span><span>:</span>
+  <span>-</span> <span>key</span><span>:</span> username
+    <span>custom</span><span>:</span>
+      <span># 手机号 - 11位</span>
+      <span>-</span> <span>defaultRegex</span><span>:</span> phone
+        <span>position</span> <span>:</span> <span>4</span><span>,</span><span>7</span>
+      <span># 邮箱 - @</span>
+	  <span>-</span> <span>defaultRegex</span><span>:</span> email
+	    <span>position</span> <span>:</span> <span>"@>(3,12)"</span>
+	  <span># 身份证 - 15/18位</span>
+	  <span>-</span> <span>defaultRegex</span><span>:</span> identity
+	    <span>position</span> <span>:</span> <span>1</span><span>,</span><span>3</span>
+	  <span># 自定义正则</span>
+	  <span>-</span> <span>customRegex</span><span>:</span> <span>"^1[0-9]{10}"</span>
+	    <span>position</span> <span>:</span> <span>1</span><span>,</span><span>3</span>
+	  <span># 都匹配不到时，按照这种规则来</span>
+	  <span>-</span> <span>defaultRegex</span><span>:</span> other
+	    <span>position</span> <span>:</span> <span>1</span><span>,</span><span>3</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><code>注意：上面示例中匹配规则里的 双引号和括号 都不能省略</code>
+该组件内置四种匹配规则：手机号、身份证号、邮箱、other(其他匹配不到时用的)，内置一种脱敏方式：password，表示完全脱敏，可用于pattren下的。</p>
+<div><pre><code>注：当pattern和patterns下的key有重复的时候，只会使用pattern下指定的方式进行脱敏。
+</code></pre><div aria-hidden="true"><div></div></div></div><h3 id="jar包地址和源码地址" tabindex="-1"> Jar包地址和源码地址</h3>
+<p><a href="https://github.com/liuchengyin01/LogbackDesensitization/tree/master/repo/pers/liuchengyin/logback-desensitization/1.0.0" target="_blank" rel="noopener noreferrer">Jar包Github地址 - logback-desensitization-1.0.0.jar</a></p>
+<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129201007764.png" alt="图片"></p>
+<p>Github地址：<a href="https://github.com/liuchengyin01/LogbackDesensitization" target="_blank" rel="noopener noreferrer">Logback和slf4j的日志脱敏组件Demo</a></p>
+<p>Gitee地址：<a href="https://gitee.com/liuchengyin_vae/LogbackDesensitization" target="_blank" rel="noopener noreferrer">Logback和slf4j的日志脱敏组件Demo</a></p>
+<h4 id="jar包打入maven本地仓库的方式" tabindex="-1"> Jar包打入Maven本地仓库的方式</h4>
+<p>1、下载Jar包，放在一个文件夹里</p>
+<p>2、在这个文件夹里打开cmd(打开cmd，进入到这个文件夹)</p>
+<p>3、执行命令(前提保证maven配置正常，使用mvn -v命令查看是否正常，如果显示版本号表示正常)</p>
+<div><pre><code>mvn install<span>:</span>install<span>-</span>file <span>-</span><span>DgroupId</span><span>=</span>pers<span>.</span>liuchengyin <span>-</span><span>DartifactId</span><span>=</span>logback<span>-</span>desensitization <span>-</span><span>Dversion</span><span>=</span><span>1.0</span><span>.0</span> <span>-</span><span>Dpackaging</span><span>=</span>jar <span>-</span><span>Dfile</span><span>=</span>logback<span>-</span>desensitization<span>-</span><span>1.0</span><span>.0</span><span>.</span>jar
+</code></pre><div aria-hidden="true"><div></div></div></div><p><strong>命令说明：</strong></p>
+<div><pre><code> <span>-</span><span>DgroupId</span>
+	表示jar对应的groupId  
+	<span><span>&lt;</span>groupId<span>></span></span>pers<span>.</span>liuchengyin<span>&lt;</span><span>/</span>groupId<span>></span>
+ <span>-</span><span>DartifactId</span><span>:</span>
+	表示jar对应的artifactId
+	<span><span>&lt;</span>artifactId<span>></span></span>logback<span>-</span>desensitization<span>&lt;</span><span>/</span>artifactId<span>></span>
+ <span>-</span><span>Dversion</span>
+	表示jar对应的 version
+	<span><span>&lt;</span>version<span>></span></span><span>1.0</span><span>.0</span><span>&lt;</span><span>/</span>version<span>></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/20210129141855313.png" type="image/png"/>
+    </item>
+    <item>
+      <title>通过注解实现接口返回数据脱敏</title>
+      <link>https://blog.ciberviler.top/dev/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F.html</link>
+      <guid>https://blog.ciberviler.top/dev/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">通过注解实现接口返回数据脱敏</source>
+      <category>Java</category>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="通过注解实现接口返回数据脱敏" tabindex="-1"> 通过注解实现接口返回数据脱敏</h1>
+<h3 id="思路" tabindex="-1"> 思路</h3>
+<p>1.要做成可配置多策略的脱敏操作，要不然一个个接口进行脱敏操作，重复的工作量太多，很显然违背了“多写一行算我输”的程序员规范，思来想去，定义数据脱敏注解和数据脱敏逻辑的接口， 在返回类上，对需要进行脱敏的属性加上，并指定对应的脱敏策略操作</p>
+<p>2.接下来我只需要拦截控制器返回的数据，找到带有脱敏注解的属性操作即可，一开始打算用@ControllerAdvice去实现，但发现需要自己去反射类获取注解，当返回对象比较复杂，需要递归去反射，性能一下子就会降低，于是换种思路，我想到平时使用的@JsonFormat，跟我现在的场景很类似，通过自定义注解跟字段解析器，对字段进行自定义解析，tql</p>
+<h3 id="代码" tabindex="-1"> 代码</h3>
+<h4 id="_1-自定义数据注解-并可以配置数据脱敏策略" tabindex="-1"> 1. 自定义数据注解，并可以配置数据脱敏策略</h4>
+<div><pre><code><span>@Target</span><span>(</span><span>{</span><span>ElementType</span><span>.</span>FIELD<span>,</span> <span>ElementType</span><span>.</span>TYPE<span>}</span><span>)</span>
+<span>@Retention</span><span>(</span><span>RetentionPolicy</span><span>.</span>RUNTIME<span>)</span>
+<span>@Documented</span>
+<span>public</span> <span>@interface</span> <span>DataMasking</span> <span>{</span>
+
+    <span>DataMaskingFunc</span> <span>maskFunc</span><span>(</span><span>)</span> <span>default</span> <span>DataMaskingFunc</span><span>.</span>NO_MASK<span>;</span>
+
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_2-自定义serializer-参考jackson的stringserializer-下面的示例只针对string类型进行脱敏" tabindex="-1"> 2. 自定义Serializer，参考jackson的StringSerializer，下面的示例只针对String类型进行脱敏</h4>
+<div><pre><code><span>public</span> <span>interface</span> <span>DataMaskingOperation</span> <span>{</span>
+
+    <span>String</span> MASK_CHAR <span>=</span> <span>"*"</span><span>;</span>
+    
+    <span>String</span> <span>mask</span><span>(</span><span>String</span> content<span>,</span> <span>String</span> maskChar<span>)</span><span>;</span>
+
+<span>}</span>
+
+
+<span>public</span> <span>enum</span> <span>DataMaskingFunc</span> <span>{</span>
+
+     <span>/**
+     *  脱敏转换器
+     */</span>
+     <span>NO_MASK</span><span>(</span><span>(</span>str<span>,</span> maskChar<span>)</span> <span>-></span> <span>{</span>
+        <span>return</span> str<span>;</span>
+     <span>}</span><span>)</span><span>,</span>
+     <span>ALL_MASK</span><span>(</span><span>(</span>str<span>,</span> maskChar<span>)</span> <span>-></span> <span>{</span>
+        <span>if</span> <span>(</span><span>StringUtils</span><span>.</span><span>hasLength</span><span>(</span>str<span>)</span><span>)</span> <span>{</span>
+            <span>StringBuilder</span> sb <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> str<span>.</span><span>length</span><span>(</span><span>)</span><span>;</span> i<span>++</span><span>)</span> <span>{</span>
+                sb<span>.</span><span>append</span><span>(</span><span>StringUtils</span><span>.</span><span>hasLength</span><span>(</span>maskChar<span>)</span> <span>?</span> maskChar <span>:</span> <span>DataMaskingOperation</span><span>.</span>MASK_CHAR<span>)</span><span>;</span>
+            <span>}</span>
+            <span>return</span> sb<span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>return</span> str<span>;</span>
+        <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+
+    <span>private</span> <span>final</span> <span>DataMaskingOperation</span> operation<span>;</span>
+
+    <span>private</span> <span>DataMaskingFunc</span><span>(</span><span>DataMaskingOperation</span> operation<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>operation <span>=</span> operation<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>DataMaskingOperation</span> <span>operation</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>this</span><span>.</span>operation<span>;</span>
+    <span>}</span>
+
+<span>}</span>
+
+
+<span>public</span> <span>final</span> <span>class</span> <span>DataMaskingSerializer</span> <span>extends</span> <span>StdScalarSerializer</span><span><span>&lt;</span><span>Object</span><span>></span></span> <span>{</span>
+    <span>private</span> <span>final</span> <span>DataMaskingOperation</span> operation<span>;</span>
+
+    <span>public</span> <span>DataMaskingSerializer</span><span>(</span><span>)</span> <span>{</span>
+        <span>super</span><span>(</span><span>String</span><span>.</span><span>class</span><span>,</span> <span>false</span><span>)</span><span>;</span>
+        <span>this</span><span>.</span>operation <span>=</span> <span>null</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>DataMaskingSerializer</span><span>(</span><span>DataMaskingOperation</span> operation<span>)</span> <span>{</span>
+        <span>super</span><span>(</span><span>String</span><span>.</span><span>class</span><span>,</span> <span>false</span><span>)</span><span>;</span>
+        <span>this</span><span>.</span>operation <span>=</span> operation<span>;</span>
+    <span>}</span>
+
+
+    <span>public</span> <span>boolean</span> <span>isEmpty</span><span>(</span><span>SerializerProvider</span> prov<span>,</span> <span>Object</span> value<span>)</span> <span>{</span>
+        <span>String</span> str <span>=</span> <span>(</span><span>String</span><span>)</span>value<span>;</span>
+        <span>return</span> str<span>.</span><span>isEmpty</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>serialize</span><span>(</span><span>Object</span> value<span>,</span> <span>JsonGenerator</span> gen<span>,</span> <span>SerializerProvider</span> provider<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>if</span> <span>(</span><span>Objects</span><span>.</span><span>isNull</span><span>(</span>operation<span>)</span><span>)</span> <span>{</span>
+            <span>String</span> content <span>=</span> <span>DataMaskingFunc</span><span>.</span>ALL_MASK<span>.</span><span>operation</span><span>(</span><span>)</span><span>.</span><span>mask</span><span>(</span><span>(</span><span>String</span><span>)</span> value<span>,</span> <span>null</span><span>)</span><span>;</span>
+            gen<span>.</span><span>writeString</span><span>(</span>content<span>)</span><span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>String</span> content <span>=</span> operation<span>.</span><span>mask</span><span>(</span><span>(</span><span>String</span><span>)</span> value<span>,</span> <span>null</span><span>)</span><span>;</span>
+            gen<span>.</span><span>writeString</span><span>(</span>content<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>public</span> <span>final</span> <span>void</span> <span>serializeWithType</span><span>(</span><span>Object</span> value<span>,</span> <span>JsonGenerator</span> gen<span>,</span> <span>SerializerProvider</span> provider<span>,</span> <span>TypeSerializer</span> typeSer<span>)</span> <span>throws</span> <span>IOException</span> <span>{</span>
+        <span>this</span><span>.</span><span>serialize</span><span>(</span>value<span>,</span> gen<span>,</span> provider<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>JsonNode</span> <span>getSchema</span><span>(</span><span>SerializerProvider</span> provider<span>,</span> <span>Type</span> typeHint<span>)</span> <span>{</span>
+        <span>return</span> <span>this</span><span>.</span><span>createSchemaNode</span><span>(</span><span>"string"</span><span>,</span> <span>true</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>acceptJsonFormatVisitor</span><span>(</span><span>JsonFormatVisitorWrapper</span> visitor<span>,</span> <span>JavaType</span> typeHint<span>)</span> <span>throws</span> <span>JsonMappingException</span> <span>{</span>
+        <span>this</span><span>.</span><span>visitStringFormat</span><span>(</span>visitor<span>,</span> typeHint<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_3-自定义annotationintrospector-适配我们自定义注解返回相应的serializer" tabindex="-1"> 3. 自定义AnnotationIntrospector，适配我们自定义注解返回相应的Serializer</h4>
+<div><pre><code><span>@Slf4j</span>
+<span>public</span> <span>class</span> <span>DataMaskingAnnotationIntrospector</span> <span>extends</span> <span>NopAnnotationIntrospector</span> <span>{</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>Object</span> <span>findSerializer</span><span>(</span><span>Annotated</span> am<span>)</span> <span>{</span>
+        <span>DataMasking</span> annotation <span>=</span> am<span>.</span><span>getAnnotation</span><span>(</span><span>DataMasking</span><span>.</span><span>class</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span>annotation <span>!=</span> <span>null</span><span>)</span> <span>{</span>
+            <span>return</span> <span>new</span> <span>DataMaskingSerializer</span><span>(</span>annotation<span>.</span><span>maskFunc</span><span>(</span><span>)</span><span>.</span><span>operation</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> <span>null</span><span>;</span>
+    <span>}</span>
+
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_4-覆盖objectmapper" tabindex="-1"> 4. 覆盖ObjectMapper</h4>
+<div><pre><code><span>@Configuration</span><span>(</span>
+        proxyBeanMethods <span>=</span> <span>false</span>
+<span>)</span>
+<span>public</span> <span>class</span> <span>DataMaskConfiguration</span> <span>{</span>
+
+    <span>@Configuration</span><span>(</span>
+            proxyBeanMethods <span>=</span> <span>false</span>
+    <span>)</span>
+    <span>@ConditionalOnClass</span><span>(</span><span>{</span><span>Jackson2ObjectMapperBuilder</span><span>.</span><span>class</span><span>}</span><span>)</span>
+    <span>static</span> <span>class</span> <span>JacksonObjectMapperConfiguration</span> <span>{</span>
+        <span>JacksonObjectMapperConfiguration</span><span>(</span><span>)</span> <span>{</span>
+        <span>}</span>
+
+        <span>@Bean</span>
+        <span>@Primary</span>
+        <span>ObjectMapper</span> <span>jacksonObjectMapper</span><span>(</span><span>Jackson2ObjectMapperBuilder</span> builder<span>)</span> <span>{</span>
+            <span>ObjectMapper</span> objectMapper <span>=</span> builder<span>.</span><span>createXmlMapper</span><span>(</span><span>false</span><span>)</span><span>.</span><span>build</span><span>(</span><span>)</span><span>;</span>
+            <span>AnnotationIntrospector</span> ai <span>=</span> objectMapper<span>.</span><span>getSerializationConfig</span><span>(</span><span>)</span><span>.</span><span>getAnnotationIntrospector</span><span>(</span><span>)</span><span>;</span>
+            <span>AnnotationIntrospector</span> newAi <span>=</span> <span>AnnotationIntrospectorPair</span><span>.</span><span>pair</span><span>(</span>ai<span>,</span> <span>new</span> <span>DataMaskingAnnotationIntrospector</span><span>(</span><span>)</span><span>)</span><span>;</span>
+            objectMapper<span>.</span><span>setAnnotationIntrospector</span><span>(</span>newAi<span>)</span><span>;</span>
+            <span>return</span> objectMapper<span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="_5-返回对象加上注解" tabindex="-1"> 5. 返回对象加上注解</h4>
+<div><pre><code><span>public</span> <span>class</span> <span>User</span> <span>implements</span> <span>Serializable</span> <span>{</span>
+    <span>/**
+     * 主键ID
+     */</span>
+    <span>private</span> <span>Long</span> id<span>;</span>
+
+    <span>/**
+     * 姓名
+     */</span>
+    <span>@DataMasking</span><span>(</span>maskFunc <span>=</span> <span>DataMaskingFunc</span><span>.</span>ALL_MASK<span>)</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+
+    <span>/**
+     * 年龄
+     */</span>
+    <span>private</span> <span>Integer</span> age<span>;</span>
+
+    <span>/**
+     * 邮箱
+     */</span>
+    <span>@DataMasking</span><span>(</span>maskFunc <span>=</span> <span>DataMaskingFunc</span><span>.</span>ALL_MASK<span>)</span>
+    <span>private</span> <span>String</span> email<span>;</span>
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>sql语句优化的30种方法</title>
+      <link>https://blog.ciberviler.top/dev/sql%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96%E7%9A%8430%E7%A7%8D%E6%96%B9%E6%B3%95.html</link>
+      <guid>https://blog.ciberviler.top/dev/sql%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96%E7%9A%8430%E7%A7%8D%E6%96%B9%E6%B3%95.html</guid>
+      <source url="https://blog.ciberviler.top/rss.xml">sql语句优化的30种方法</source>
+      <category>Java</category>
+      <pubDate>Sat, 06 Aug 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="sql语句优化的30种方法" tabindex="-1"> sql语句优化的30种方法</h1>
+<h5 id="_1-对查询进行优化-应尽量避免全表扫描-首先应考虑在-where-及-order-by-涉及的列上建立索引。" tabindex="-1"> 1.对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</h5>
+<h5 id="_2-应尽量避免在-where-子句中使用-或-操作符-否则将引擎放弃使用索引而进行全表扫描。" tabindex="-1"> 2.应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。</h5>
+<h5 id="_3-应尽量避免在-where-子句中对字段进行-null-值判断-否则将导致引擎放弃使用索引而进行全表扫描-如" tabindex="-1"> 3.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num <span>is</span> <span>null</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>0</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_4-应尽量避免在-where-子句中使用-or-来连接条件-否则将导致引擎放弃使用索引而进行全表扫描-如" tabindex="-1"> 4.应尽量避免在 where 子句中使用 or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>10</span> <span>or</span> num<span>=</span><span>20</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>可以这样查询：</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>10</span> 
+<span>union</span> <span>all</span> 
+<span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>20</span> 
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h5 id="_5-下面的查询也将导致全表扫描" tabindex="-1"> 5.下面的查询也将导致全表扫描：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> name <span>like</span> <span>'%abc%'</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>若要提高效率，可以考虑全文检索。</p>
+<h5 id="_6-in-和-not-in-也要慎用-否则会导致全表扫描-如" tabindex="-1"> <a href="http://6.in" target="_blank" rel="noopener noreferrer">6.in</a> 和 not in 也要慎用，否则会导致全表扫描，如：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num <span>in</span><span>(</span><span>1</span><span>,</span><span>2</span><span>,</span><span>3</span><span>)</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>对于连续的数值，能用 between 就不要用 in 了：</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num <span>between</span> <span>1</span> <span>and</span> <span>3</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_7-如果在-where-子句中使用参数-也会导致全表扫描。因为sql只有在运行时才会解析局部变量-但优化程序不能将访问计划的选择推迟到运行时-它必须在编译时进行选择。然而-如果在编译时建立访问计划-变量的值还是未知的-因而无法作为索引选择的输入项。如下面语句将进行全表扫描" tabindex="-1"> 7.如果在 where 子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>@num</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>可以改为强制查询使用索引：</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>with</span><span>(</span><span>index</span><span>(</span>索引名<span>)</span><span>)</span> <span>where</span> num<span>=</span><span>@num</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_8-应尽量避免在-where-子句中对字段进行表达式操作-这将导致引擎放弃使用索引而进行全表扫描。如" tabindex="-1"> 8.应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>/</span><span>2</span><span>=</span><span>100</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>应改为:</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> num<span>=</span><span>100</span><span>*</span><span>2</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_9-应尽量避免在where子句中对字段进行函数操作-这将导致引擎放弃使用索引而进行全表扫描。如" tabindex="-1"> 9.应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：</h5>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> substring<span>(</span>name<span>,</span><span>1</span><span>,</span><span>3</span><span>)</span><span>=</span><span>'abc'</span><span>--name以abc开头的id </span>
+<span>select</span> id <span>from</span> t <span>where</span> datediff<span>(</span><span>day</span><span>,</span>createdate<span>,</span><span>'2005-11-30'</span><span>)</span><span>=</span><span>0</span><span>--'2005-11-30'生成的id </span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>应改为:</p>
+<div><pre><code><span>select</span> id <span>from</span> t <span>where</span> name <span>like</span> <span>'abc%'</span> 
+<span>select</span> id <span>from</span> t <span>where</span> createdate<span>>=</span><span>'2005-11-30'</span> <span>and</span> createdate<span>&lt;</span><span>'2005-12-1'</span> 
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h5 id="_10-不要在-where-子句中的-左边进行函数、算术运算或其他表达式运算-否则系统将可能无法正确使用索引。" tabindex="-1"> 10.不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</h5>
+<h5 id="_11-在使用索引字段作为条件时-如果该索引是复合索引-那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引-否则该索引将不会被使用-并且应尽可能的让字段顺序与索引顺序相一致。" tabindex="-1"> 11.在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。</h5>
+<h5 id="_12-不要写一些没有意义的查询-如需要生成一个空表结构" tabindex="-1"> 12.不要写一些没有意义的查询，如需要生成一个空表结构：</h5>
+<div><pre><code><span>select</span> col1<span>,</span>col2 <span>into</span> <span>#t from t where 1=0 </span>
+</code></pre><div aria-hidden="true"><div></div></div></div><p>这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样：</p>
+<div><pre><code><span>create</span> <span>table</span> <span>#t(...) </span>
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_13-很多时候用-exists-代替-in-是一个好的选择" tabindex="-1"> 13.很多时候用 exists 代替 in 是一个好的选择：</h5>
+<div><pre><code><span>select</span> num <span>from</span> a <span>where</span> num <span>in</span><span>(</span><span>select</span> num <span>from</span> b<span>)</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><p>用下面的语句替换：</p>
+<div><pre><code><span>select</span> num <span>from</span> a <span>where</span> <span>exists</span><span>(</span><span>select</span> <span>1</span> <span>from</span> b <span>where</span> num<span>=</span>a<span>.</span>num<span>)</span> 
+</code></pre><div aria-hidden="true"><div></div></div></div><h5 id="_14-并不是所有索引对查询都有效-sql是根据表中数据来进行查询优化的-当索引列有大量数据重复时-sql查询可能不会去利用索引-如一表中有字段sex-male、female几乎各一半-那么即使在sex上建了索引也对查询效率起不了作用。" tabindex="-1"> 14.并不是所有索引对查询都有效，SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。</h5>
+<h5 id="_15-索引并不是越多越好-索引固然可以提高相应的-select-的效率-但同时也降低了-insert-及-update-的效率-因为-insert-或-update-时有可能会重建索引-所以怎样建索引需要慎重考虑-视具体情况而定。一个表的索引数最好不要超过6个-若太多则应考虑一些不常使用到的列上建的索引是否有必要。" tabindex="-1"> 15.索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</h5>
+<h5 id="_16-应尽可能的避免更新-clustered-索引数据列-因为-clustered-索引数据列的顺序就是表记录的物理存储顺序-一旦该列值改变将导致整个表记录的顺序的调整-会耗费相当大的资源。若应用系统需要频繁更新-clustered-索引数据列-那么需要考虑是否应将该索引建为-clustered-索引。" tabindex="-1"> 16.应尽可能的避免更新 clustered 索引数据列，因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。</h5>
+<h5 id="_17-尽量使用数字型字段-若只含数值信息的字段尽量不要设计为字符型-这会降低查询和连接的性能-并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符-而对于数字型而言只需要比较一次就够了。" tabindex="-1"> 17.尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</h5>
+<h5 id="_18-尽可能的使用-varchar-nvarchar-代替-char-nchar-因为首先变长字段存储空间小-可以节省存储空间-其次对于查询来说-在一个相对较小的字段内搜索效率显然要高些。" tabindex="-1"> 18.尽可能的使用 varchar/nvarchar 代替 char/nchar ，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</h5>
+<h5 id="_19-任何地方都不要使用-select-from-t-用具体的字段列表代替-不要返回用不到的任何字段。" tabindex="-1"> 19.任何地方都不要使用 select * from t ，用具体的字段列表代替“*”，不要返回用不到的任何字段。</h5>
+<h5 id="_20-尽量使用表变量来代替临时表。如果表变量包含大量数据-请注意索引非常有限-只有主键索引-。" tabindex="-1"> 20.尽量使用表变量来代替临时表。如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。</h5>
+<h5 id="_21-避免频繁创建和删除临时表-以减少系统表资源的消耗。" tabindex="-1"> 21.避免频繁创建和删除临时表，以减少系统表资源的消耗。</h5>
+<h5 id="_22-临时表并不是不可使用-适当地使用它们可以使某些例程更有效-例如-当需要重复引用大型表或常用表中的某个数据集时。但是-对于一次性事件-最好使用导出表。" tabindex="-1"> 22.临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。</h5>
+<h5 id="_23-在新建临时表时-如果一次性插入数据量很大-那么可以使用-select-into-代替-create-table-避免造成大量-log-以提高速度-如果数据量不大-为了缓和系统表的资源-应先create-table-然后insert。" tabindex="-1"> 23.在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</h5>
+<h5 id="_24-如果使用到了临时表-在存储过程的最后务必将所有的临时表显式删除-先-truncate-table-然后-drop-table-这样可以避免系统表的较长时间锁定。" tabindex="-1"> 24.如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</h5>
+<h5 id="_25-尽量避免使用游标-因为游标的效率较差-如果游标操作的数据超过1万行-那么就应该考虑改写。" tabindex="-1"> 25.尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。</h5>
+<h5 id="_26-使用基于游标的方法或临时表方法之前-应先寻找基于集的解决方案来解决问题-基于集的方法通常更有效。" tabindex="-1"> 26.使用基于游标的方法或临时表方法之前，应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。</h5>
+<h5 id="_27-与临时表一样-游标并不是不可使用。对小型数据集使用-fast-forward-游标通常要优于其他逐行处理方法-尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括-合计-的例程通常要比使用游标执行的速度快。如果开发时间允许-基于游标的方法和基于集的方法都可以尝试一下-看哪一种方法的效果更好。" tabindex="-1"> 27.与临时表一样，游标并不是不可使用。对小型数据集使用 FAST_FORWARD 游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。</h5>
+<h5 id="_28-在所有的存储过程和触发器的开始处设置-set-nocount-on-在结束时设置-set-nocount-off-。无需在执行存储过程和触发器的每个语句后向客户端发送-done-in-proc-消息。" tabindex="-1"> 28.在所有的存储过程和触发器的开始处设置 SET NOCOUNT ON ，在结束时设置 SET NOCOUNT OFF 。无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。</h5>
+<h5 id="_29-尽量避免向客户端返回大数据量-若数据量过大-应该考虑相应需求是否合理。" tabindex="-1"> 29.尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</h5>
+<h5 id="_30-尽量避免大事务操作-提高系统并发能力。" tabindex="-1"> 30.尽量避免大事务操作，提高系统并发能力。</h5>
+]]></content:encoded>
+    </item>
     <item>
       <title>SpringBoot+Kafka+ELK 完成海量日志收集</title>
       <link>https://blog.ciberviler.top/dev/SpringBoot+Kafka+ELK%E5%AE%8C%E6%88%90%E6%B5%B7%E9%87%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86.html</link>
@@ -21138,344 +21572,6 @@ public class OrderService implements IOrderService{
 <p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220526110603169.png" alt="image-20220526110603169"></p>
 ]]></content:encoded>
       <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220526110603169.png" type="image/png"/>
-    </item>
-    <item>
-      <title>Python 批量下载某网页的所有图片</title>
-      <link>https://blog.ciberviler.top/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html</link>
-      <guid>https://blog.ciberviler.top/dev/Python%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%9F%90%E7%BD%91%E9%A1%B5%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">Python 批量下载某网页的所有图片</source>
-      <description>Python 批量下载某网页的所有图片</description>
-      <category>Python</category>
-      <pubDate>Tue, 31 May 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="python-批量下载某网页的所有图片" tabindex="-1"> Python 批量下载某网页的所有图片</h1>
-<div><pre><code><span># requests是第三方库：用pip install requests安装</span>
-<span>import</span> requests
-
-<span>from</span> bs4 <span>import</span> BeautifulSoup
-
-<span># 设置变量用于拼接网址</span>
-page_number <span>=</span> <span>4</span>
-
-<span># 用while循环控制访问的网页</span>
-<span>while</span> page_number <span>&lt;</span> <span>8</span> <span>:</span>
-
-    <span># page_number = 4时，访问的是网址的第4页</span>
-    html_url <span>=</span> <span>'https://www.tukuppt.com/peitu/zonghe_0_0_0_0_0_0_{}.html'</span><span>.</span><span>format</span><span>(</span>page_number<span>)</span>
-
-    <span># 用get函数发送网页请求</span>
-    url_response <span>=</span> requests<span>.</span>get<span>(</span>html_url<span>)</span>
-    
-    <span># 检验请求是否成功</span>
-    <span>print</span><span>(</span>url_response<span>.</span>status_code<span>)</span>
-
-    <span># 解析请求到的网页内容</span>
-    bs <span>=</span> BeautifulSoup<span>(</span>url_response<span>.</span>text<span>,</span><span>'html.parser'</span><span>)</span>
-    <span>#print(bs)</span>
-
-    <span># 搜索网页中所有包含图片名称和图片链接的tag</span>
-    <span># 得到一整个dl标签</span>
-    picture_list <span>=</span> bs<span>.</span>find_all<span>(</span><span>'dl'</span><span>,</span>class_<span>=</span><span>'cbox item'</span><span>)</span>
-    <span>#print(picture_list)</span>
-
-    <span># for 循环取出dl中的每一个标签</span>
-    <span>for</span> i <span>in</span> picture_list <span>:</span>
-        <span># 取出dl标签中的所有a标签中的第2个a标签</span>
-        <span># [1]取到的是第2个标签</span>
-        picture_list_a <span>=</span> i<span>.</span>find_all<span>(</span><span>'a'</span><span>)</span><span>[</span><span>1</span><span>]</span>
-        <span>#print(picture_list_a)</span>
-
-        <span># 取出图片名称：图片名称在img标签内属性为'alt'</span>
-        picture_name <span>=</span> picture_list_a<span>.</span>find<span>(</span><span>'img'</span><span>)</span><span>[</span><span>'alt'</span><span>]</span>
-        <span>#print(picture_name)</span>
-
-        <span># 取出图片链接：图片链接在img标签内属性为'data-original'</span>
-        picture_url_d <span>=</span> picture_list_a<span>.</span>find<span>(</span><span>'img'</span><span>)</span><span>[</span><span>'data-original'</span><span>]</span>
-        <span>#print(picture_url_d)</span>
-        
-        <span># 完整的图片链接</span>
-        picture_url <span>=</span> <span>(</span><span>'https:'</span><span>+</span>picture_url_d<span>)</span>
-        <span>#print(picture_url)</span>
-
-        <span># 访问图片链接</span>
-        picture_url_response <span>=</span> requests<span>.</span>get<span>(</span>picture_url<span>)</span>
-
-        <span># 将访问的响应结果以二进制数据的形式返回</span>
-        picture_content <span>=</span> picture_url_response<span>.</span>content
-
-        <span># 图片内容以二进制形式写入</span>
-        <span>with</span> <span>open</span> <span>(</span><span>'.\\摄影图\\'</span><span>+</span>picture_name<span>+</span><span>'.jpg'</span><span>,</span> <span>'wb'</span> <span>)</span> <span>as</span> f <span>:</span>
-          
-            <span># 将二进制数据写入文件</span>
-            f<span>.</span>write<span>(</span>picture_content<span>)</span>
-        <span># 用print查看代码运行步骤</span>
-        <span>print</span><span>(</span><span>'《{}》已保存'</span><span>.</span><span>format</span><span>(</span>picture_name<span>)</span><span>)</span>
-
-    page_number <span>+=</span> <span>1</span>
-<span>print</span><span>(</span><span>'程序结束!'</span><span>)</span>
-
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>短视频解析</title>
-      <link>https://blog.ciberviler.top/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html</link>
-      <guid>https://blog.ciberviler.top/tools/%E7%9F%AD%E8%A7%86%E9%A2%91%E8%A7%A3%E6%9E%90.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">短视频解析</source>
-      <category>Tools</category>
-      <pubDate>Sun, 29 May 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="短视频解析" tabindex="-1"> 短视频解析</h1>
-<p>1.去水印视频解析： <a href="https://parse.bqrdh.com/smart" target="_blank" rel="noopener noreferrer">https://parse.bqrdh.com/smart</a></p>
-<p>2.酷豆去水印： <a href="https://dy.kukutool.com/" target="_blank" rel="noopener noreferrer">https://dy.kukutool.com/</a></p>
-<p>3.疯狂视频去水印： <a href="https://douyin.video996.com/" target="_blank" rel="noopener noreferrer">https://douyin.video996.com/</a></p>
-<p>4.视频去水印： <a href="https://weibo.iiilab.com/" target="_blank" rel="noopener noreferrer">https://weibo.iiilab.com/</a></p>
-<p>5.映客小视频去水印： <a href="https://inke.iiilab.com/" target="_blank" rel="noopener noreferrer">https://inke.iiilab.com/</a></p>
-<p>6.蜜蜂去水印： <a href="https://video.ciding.cc/" target="_blank" rel="noopener noreferrer">https://video.ciding.cc/</a></p>
-<p>7.短视频解析： <a href="http://www.dspjx.com/" target="_blank" rel="noopener noreferrer">http://www.dspjx.com/</a></p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</title>
-      <link>https://blog.ciberviler.top/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html</link>
-      <guid>https://blog.ciberviler.top/dev/SpringBoot%E5%BC%95%E5%85%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0+Queue%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%8D%95%E4%B8%9A%E5%8A%A1.html</guid>
-      <source url="https://blog.ciberviler.top/rss.xml">SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</source>
-      <category>Java</category>
-      <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="springboot-引入线程池-queue缓冲队列实现高并发下单业务" tabindex="-1"> SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务</h1>
-<ul>
-<li>1.首先是springBoot的项目框架如下：</li>
-<li>2.业务测试流程涉及的类，如下</li>
-<li>3.使用JMeter模拟并发下单请求</li>
-<li>4.结果</li>
-</ul>
-<hr>
-<p>主要是自己在项目中(中小型项目) 有支付下单业务(只是办理VIP，没有涉及到商品库存)，目前用户量还没有上来，目前没有出现问题，但是想到如果用户量变大，下单并发量变大，可能会出现一系列的问题，趁着空闲时间，做了这个demo测试相关问题。</p>
-<p>可能遇到的问题如下：</p>
-<ol>
-<li>订单重复</li>
-<li>高并发下，性能变慢</li>
-</ol>
-<p>解决方式：<code>ThreadPoolExecutor</code>线程池 + Queue队列</p>
-<h2 id="_1-首先是springboot的项目框架如下" tabindex="-1"> 1.首先是springBoot的项目框架如下：</h2>
-<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524225159288.png" alt="image-20220524225159288"></p>
-<h2 id="_2-业务测试流程涉及的类-如下" tabindex="-1"> 2.业务测试流程涉及的类，如下</h2>
-<ul>
-<li>BusinessThread 类</li>
-</ul>
-<div><pre><code>package com.springboot.demo.Threads;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope("prototype")//spring 多例
-public class BusinessThread implements Runnable{
-
-    private String acceptStr;
-
-    public BusinessThread(String acceptStr) {
-        this.acceptStr = acceptStr;
-    }
-
-    public String getAcceptStr() {
-        return acceptStr;
-    }
-
-    public void setAcceptStr(String acceptStr) {
-        this.acceptStr = acceptStr;
-    }
-
-    @Override
-    public void run() {
-        //业务操作
-        System.out.println("多线程已经处理订单插入系统，订单号："+acceptStr);
-
-        //线程阻塞
-        /*try {
-            Thread.sleep(1000);
-            System.out.println("多线程已经处理订单插入系统，订单号："+acceptStr);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>TestThreadPoolManager 类</li>
-</ul>
-<div><pre><code>package com.springboot.demo.Threads;
-
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.*;
-
-@Component
-public class TestThreadPoolManager implements BeanFactoryAware {
-
-    //用于从IOC里取对象
-    private BeanFactory factory; //如果实现Runnable的类是通过spring的application.xml文件进行注入,可通过 factory.getBean()获取，这里只是提一下
-
-    // 线程池维护线程的最少数量
-    private final static int CORE_POOL_SIZE = 2;
-    // 线程池维护线程的最大数量
-    private final static int MAX_POOL_SIZE = 10;
-    // 线程池维护线程所允许的空闲时间
-    private final static int KEEP_ALIVE_TIME = 0;
-    // 线程池所使用的缓冲队列大小
-    private final static int WORK_QUEUE_SIZE = 50;
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        factory = beanFactory;
-    }
-
-    /**
-     * 用于储存在队列中的订单,防止重复提交,在真实场景中，可用redis代替 验证重复
-     */
-    Map&lt;String, Object> cacheMap = new ConcurrentHashMap&lt;>();
-
-
-    /**
-     * 订单的缓冲队列,当线程池满了，则将订单存入到此缓冲队列
-     */
-    Queue&lt;Object> msgQueue = new LinkedBlockingQueue&lt;Object>();
-
-
-    /**
-     * 当线程池的容量满了，执行下面代码，将订单存入到缓冲队列
-     */
-    final RejectedExecutionHandler handler = new RejectedExecutionHandler() {
-        @Override
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            //订单加入到缓冲队列
-            msgQueue.offer(((BusinessThread) r).getAcceptStr());
-            System.out.println("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
-        }
-    };
-
-
-    /**创建线程池*/
-   final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue(WORK_QUEUE_SIZE), this.handler);
-
-
-    /**将任务加入订单线程池*/
-    public void addOrders(String orderId){
-        System.out.println("此订单准备添加到线程池，订单号：" + orderId);
-        //验证当前进入的订单是否已经存在
-        if (cacheMap.get(orderId) == null) {
-            cacheMap.put(orderId, new Object());
-            BusinessThread businessThread = new BusinessThread(orderId);
-            threadPool.execute(businessThread);
-        }
-    }
-
-    /**
-     * 线程池的定时任务----> 称为(调度线程池)。此线程池支持 定时以及周期性执行任务的需求。
-     */
-    final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
-
-
-    /**
-     * 检查(调度线程池)，每秒执行一次，查看订单的缓冲队列是否有 订单记录，则重新加入到线程池
-     */
-    final ScheduledFuture scheduledFuture = scheduler.scheduleAtFixedRate(new Runnable() {
-        @Override
-        public void run() {
-            //判断缓冲队列是否存在记录
-            if(!msgQueue.isEmpty()){
-                //当线程池的队列容量少于WORK_QUEUE_SIZE，则开始把缓冲队列的订单 加入到 线程池
-                if (threadPool.getQueue().size() &lt; WORK_QUEUE_SIZE) {
-                    String orderId = (String) msgQueue.poll();
-                    BusinessThread businessThread = new BusinessThread(orderId);
-                    threadPool.execute(businessThread);
-                    System.out.println("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号："+orderId);
-                }
-            }
-        }
-    }, 0, 1, TimeUnit.SECONDS);
-
-
-    /**获取消息缓冲队列*/
-    public Queue&lt;Object> getMsgQueue() {
-        return msgQueue;
-    }
-
-    /**终止订单线程池+调度线程池*/
-    public void shutdown() {
-        //true表示如果定时任务在执行，立即中止，false则等待任务结束后再停止
-        System.out.println("终止订单线程池+调度线程池："+scheduledFuture.cancel(false));
-        scheduler.shutdown();
-        threadPool.shutdown();
-
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
-<li>TestController 类</li>
-</ul>
-<div><pre><code>package com.springboot.demo;
-
-import com.springboot.demo.Threads.TestThreadPoolManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Queue;
-import java.util.UUID;
-
-/**
- * Created by Administrator on 2018/5/9.
- */
-@RestController
-public class TestController {
-
-    @Autowired
-    TestThreadPoolManager testThreadPoolManager;
-
-    /**
-     * 测试模拟下单请求 入口
-     * @param id
-     * @return
-     */
-    @GetMapping("/start/{id}")
-    public String start(@PathVariable Long id) {
-        //模拟的随机数
-        String orderNo = System.currentTimeMillis() + UUID.randomUUID().toString();
-
-        testThreadPoolManager.addOrders(orderNo);
-
-        return "Test ThreadPoolExecutor start";
-    }
-
-    /**
-     * 停止服务
-     * @param id
-     * @return
-     */
-    @GetMapping("/end/{id}")
-    public String end(@PathVariable Long id) {
-
-        testThreadPoolManager.shutdown();
-
-        Queue q = testThreadPoolManager.getMsgQueue();
-        System.out.println("关闭了线程服务，还有未处理的信息条数：" + q.size());
-        return "Test ThreadPoolExecutor start";
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。</p>
-<p>项目地址：<a href="https://github.com/YunaiV/onemall" target="_blank" rel="noopener noreferrer">https://github.com/YunaiV/onemall</a></p>
-</blockquote>
-<h2 id="_3-使用jmeter模拟并发下单请求" tabindex="-1"> 3.使用JMeter模拟并发下单请求</h2>
-<p>[<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16533988082341.png" alt="图片">]</p>
-<h2 id="_4-结果" tabindex="-1"> 4.结果</h2>
-<p>打印的日志说明，开始的订单直接执行插入到系统，当线程池的容量已经满了，则使用<code>RejectedExecutionHandler</code>方法把后面的订单添加到 Queue缓冲队列，使用<code>ScheduledFuture</code>方法定时(我这里是每秒一次)检查Queue队列，重新把队列里面的订单添加到线程池，执行后面的插入任务。</p>
-<p>部分日志如下</p>
-<p>[<img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16533988082342.png" alt="图片">]</p>
-]]></content:encoded>
-      <enclosure url="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524225159288.png" type="image/png"/>
     </item>
   </channel>
 </rss>
