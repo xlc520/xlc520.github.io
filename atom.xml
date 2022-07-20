@@ -3,7 +3,7 @@
   <id>https://blog.ciberviler.top/</id>
   <title>StudyNote</title>
   <subtitle>个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。</subtitle>
-  <updated>2022-07-14T03:08:25.337Z</updated>
+  <updated>2022-07-20T03:06:12.329Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://blog.ciberviler.top/atom.xml"/>
   <link rel="alternate" href="https://blog.ciberviler.top/"/>
@@ -19,6 +19,171 @@
   <contributor>
     <name>xlc520</name>
   </contributor>
+  <entry>
+    <title type="html">SpringBoot中如何优雅的使用多线程</title>
+    <id>https://blog.ciberviler.top/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B.html</id>
+    <link href="https://blog.ciberviler.top/dev/SpringBoot%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B.html"/>
+    <updated>2022-07-20T03:04:00.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="springboot中如何优雅的使用多线程" tabindex="-1"> SpringBoot中如何优雅的使用多线程</h1>
+<blockquote>
+<p>本文带你快速了解@Async注解的用法，包括异步方法无返回值、有返回值，最后总结了@Async注解失效的几个坑。</p>
+</blockquote>
+<p>在 SpringBoot 应用中，经常会遇到在一个接口中，同时做事情1，事情2，事情3，如果同步执行的话，则本次接口时间取决于事情1 2 3执行时间之和；如果三件事同时执行，则本次接口时间取决于事情1 2 3执行时间最长的那个，合理使用多线程，可以大大缩短接口时间。那么在 SpringBoot 应用中如何优雅的使用多线程呢？</p>
+<h2 id="快速使用" tabindex="-1"> 快速使用</h2>
+<p>SpringBoot应用中需要添加<code>@EnableAsync</code>注解，来开启异步调用，一般还会配置一个线程池，异步的方法交给特定的线程池完成，如下：</p>
+<div><pre><code><span>@Configuration</span>
+<span>@EnableAsync</span>
+<span>public</span> <span>class</span> <span>AsyncConfiguration</span> <span>{</span>
+
+    <span>@Bean</span><span>(</span><span>"doSomethingExecutor"</span><span>)</span>
+    <span>public</span> <span>Executor</span> <span>doSomethingExecutor</span><span>(</span><span>)</span> <span>{</span>
+        <span>ThreadPoolTaskExecutor</span> executor <span>=</span> <span>new</span> <span>ThreadPoolTaskExecutor</span><span>(</span><span>)</span><span>;</span>
+        <span>// 核心线程数：线程池创建时候初始化的线程数</span>
+        executor<span>.</span><span>setCorePoolSize</span><span>(</span><span>10</span><span>)</span><span>;</span>
+        <span>// 最大线程数：线程池最大的线程数，只有在缓冲队列满了之后才会申请超过核心线程数的线程</span>
+        executor<span>.</span><span>setMaxPoolSize</span><span>(</span><span>20</span><span>)</span><span>;</span>
+        <span>// 缓冲队列：用来缓冲执行任务的队列</span>
+        executor<span>.</span><span>setQueueCapacity</span><span>(</span><span>500</span><span>)</span><span>;</span>
+        <span>// 允许线程的空闲时间60秒：当超过了核心线程之外的线程在空闲时间到达之后会被销毁</span>
+        executor<span>.</span><span>setKeepAliveSeconds</span><span>(</span><span>60</span><span>)</span><span>;</span>
+        <span>// 线程池名的前缀：设置好了之后可以方便我们定位处理任务所在的线程池</span>
+        executor<span>.</span><span>setThreadNamePrefix</span><span>(</span><span>"do-something-"</span><span>)</span><span>;</span>
+        <span>// 缓冲队列满了之后的拒绝策略：由调用线程处理（一般是主线程）</span>
+        executor<span>.</span><span>setRejectedExecutionHandler</span><span>(</span><span>new</span> <span>ThreadPoolExecutor<span>.</span>DiscardPolicy</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        executor<span>.</span><span>initialize</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> executor<span>;</span>
+    <span>}</span>
+    
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>使用的方式非常简单，在需要异步的方法上加<code>@Async</code>注解</p>
+<div><pre><code><span>@RestController</span>
+<span>public</span> <span>class</span> <span>AsyncController</span> <span>{</span>
+
+    <span>@Autowired</span>
+    <span>private</span> <span>AsyncService</span> asyncService<span>;</span>
+
+    <span>@GetMapping</span><span>(</span><span>"/open/something"</span><span>)</span>
+    <span>public</span> <span>String</span> <span>something</span><span>(</span><span>)</span> <span>{</span>
+        <span>int</span> count <span>=</span> <span>10</span><span>;</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> count<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            asyncService<span>.</span><span>doSomething</span><span>(</span><span>"index = "</span> <span>+</span> i<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> <span>"success"</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+
+<span>@Slf4j</span>
+<span>@Service</span>
+<span>public</span> <span>class</span> <span>AsyncService</span> <span>{</span>
+
+    <span>// 指定使用beanname为doSomethingExecutor的线程池</span>
+    <span>@Async</span><span>(</span><span>"doSomethingExecutor"</span><span>)</span>
+    <span>public</span> <span>String</span> <span>doSomething</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        log<span>.</span><span>info</span><span>(</span><span>"do something, message={}"</span><span>,</span> message<span>)</span><span>;</span>
+        <span>try</span> <span>{</span>
+            <span>Thread</span><span>.</span><span>sleep</span><span>(</span><span>1000</span><span>)</span><span>;</span>
+        <span>}</span> <span>catch</span> <span>(</span><span>InterruptedException</span> e<span>)</span> <span>{</span>
+            log<span>.</span><span>error</span><span>(</span><span>"do something error: "</span><span>,</span> e<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>访问：127.0.0.1:8080/open/something，日志如下</p>
+<div><pre><code>2020-04-19 23:42:42.486  INFO 21168 --- [io-8200-exec-17] x.g.b.system.controller.AsyncController  : do something end, time 8 milliseconds
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-1] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 0</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-5] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 4</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-4] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 3</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-6] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 5</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-9] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 8</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-8] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 7</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [do-something-10] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 9</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-7] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 6</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-2] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 1</span>
+<span>2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-3] x.gits.boot.system.service.AsyncService  : do something, message</span><span>=</span><span>index = 2</span>
+复制代码
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>由此可见已经达到异步执行的效果了，并且使用到了咱们配置的线程池。</p>
+<h2 id="获取异步方法返回值" tabindex="-1"> 获取异步方法返回值</h2>
+<p>当异步方法有返回值时，如何获取异步方法执行的返回结果呢？这时需要异步调用的方法带有返回值CompletableFuture。</p>
+<p>CompletableFuture是对Feature的增强，Feature只能处理简单的异步任务，而CompletableFuture可以将多个异步任务进行复杂的组合。如下：</p>
+<div><pre><code><span>@RestController</span>
+<span>public</span> <span>class</span> <span>AsyncController</span> <span>{</span>
+
+    <span>@Autowired</span>
+    <span>private</span> <span>AsyncService</span> asyncService<span>;</span>
+
+    <span>@SneakyThrows</span>
+    <span>@ApiOperation</span><span>(</span><span>"异步 有返回值"</span><span>)</span>
+    <span>@GetMapping</span><span>(</span><span>"/open/somethings"</span><span>)</span>
+    <span>public</span> <span>String</span> <span>somethings</span><span>(</span><span>)</span> <span>{</span>
+        <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> createOrder <span>=</span> asyncService<span>.</span><span>doSomething1</span><span>(</span><span>"create order"</span><span>)</span><span>;</span>
+        <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> reduceAccount <span>=</span> asyncService<span>.</span><span>doSomething2</span><span>(</span><span>"reduce account"</span><span>)</span><span>;</span>
+        <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> saveLog <span>=</span> asyncService<span>.</span><span>doSomething3</span><span>(</span><span>"save log"</span><span>)</span><span>;</span>
+        
+        <span>// 等待所有任务都执行完</span>
+        <span>CompletableFuture</span><span>.</span><span>allOf</span><span>(</span>createOrder<span>,</span> reduceAccount<span>,</span> saveLog<span>)</span><span>.</span><span>join</span><span>(</span><span>)</span><span>;</span>
+        <span>// 获取每个任务的返回结果</span>
+        <span>String</span> result <span>=</span> createOrder<span>.</span><span>get</span><span>(</span><span>)</span> <span>+</span> reduceAccount<span>.</span><span>get</span><span>(</span><span>)</span> <span>+</span> saveLog<span>.</span><span>get</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> result<span>;</span>
+    <span>}</span>
+<span>}</span>
+
+
+<span>@Slf4j</span>
+<span>@Service</span>
+<span>public</span> <span>class</span> <span>AsyncService</span> <span>{</span>
+
+    <span>@Async</span><span>(</span><span>"doSomethingExecutor"</span><span>)</span>
+    <span>public</span> <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> <span>doSomething1</span><span>(</span><span>String</span> message<span>)</span> <span>throws</span> <span>InterruptedException</span> <span>{</span>
+        log<span>.</span><span>info</span><span>(</span><span>"do something1: {}"</span><span>,</span> message<span>)</span><span>;</span>
+        <span>Thread</span><span>.</span><span>sleep</span><span>(</span><span>1000</span><span>)</span><span>;</span>
+        <span>return</span> <span>CompletableFuture</span><span>.</span><span>completedFuture</span><span>(</span><span>"do something1: "</span> <span>+</span> message<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>@Async</span><span>(</span><span>"doSomethingExecutor"</span><span>)</span>
+    <span>public</span> <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> <span>doSomething2</span><span>(</span><span>String</span> message<span>)</span> <span>throws</span> <span>InterruptedException</span> <span>{</span>
+        log<span>.</span><span>info</span><span>(</span><span>"do something2: {}"</span><span>,</span> message<span>)</span><span>;</span>
+        <span>Thread</span><span>.</span><span>sleep</span><span>(</span><span>1000</span><span>)</span><span>;</span>
+        <span>return</span> <span>CompletableFuture</span><span>.</span><span>completedFuture</span><span>(</span><span>"; do something2: "</span> <span>+</span> message<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>@Async</span><span>(</span><span>"doSomethingExecutor"</span><span>)</span>
+    <span>public</span> <span>CompletableFuture</span><span><span>&lt;</span><span>String</span><span>></span></span> <span>doSomething3</span><span>(</span><span>String</span> message<span>)</span> <span>throws</span> <span>InterruptedException</span> <span>{</span>
+        log<span>.</span><span>info</span><span>(</span><span>"do something3: {}"</span><span>,</span> message<span>)</span><span>;</span>
+        <span>Thread</span><span>.</span><span>sleep</span><span>(</span><span>1000</span><span>)</span><span>;</span>
+        <span>return</span> <span>CompletableFuture</span><span>.</span><span>completedFuture</span><span>(</span><span>"; do something3: "</span> <span>+</span> message<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>访问接口</p>
+<div><pre><code>C<span>:</span>\Users\Administrator<span>></span>curl <span>-</span>X <span>GET</span> <span>"http://localhost:8200/open/somethings"</span> <span>-</span>H <span>"accept: */*"</span>
+<span>do</span> something1<span>:</span> create order<span>;</span> <span>do</span> something2<span>:</span> reduce account<span>;</span> <span>do</span> something3<span>:</span> save <span>log</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>控制台上关键日志如下：</p>
+<div><pre><code>2020-04-20 00:27:42.238  INFO 5672 --- [ do-something-3] x.gits.boot.system.service.AsyncService  : do something3: save log
+2020-04-20 00:27:42.238  INFO 5672 --- [ do-something-2] x.gits.boot.system.service.AsyncService  : do something2: reduce account
+2020-04-20 00:27:42.238  INFO 5672 --- [ do-something-1] x.gits.boot.system.service.AsyncService  : do something1: create order
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="注意事项" tabindex="-1"> 注意事项</h2>
+<p><code>@Async</code>注解会在以下几个场景失效，也就是说明明使用了<code>@Async</code>注解，但就没有走多线程。</p>
+<ul>
+<li>异步方法使用static关键词修饰；</li>
+<li>异步类不是一个Spring容器的bean（一般使用注解<code>@Component</code>和<code>@Service</code>，并且能被Spring扫描到）；</li>
+<li>SpringBoot应用中没有添加<code>@EnableAsync</code>注解；</li>
+<li>在同一个类中，一个方法调用另外一个有@Async注解的方法，注解不会生效。原因是@Async注解的方法，是在代理类中执行的。</li>
+</ul>
+<p>需要注意的是： 异步方法使用注解@Async的返回值只能为void或者Future及其子类，当返回结果为其他类型时，方法还是会异步执行，但是返回值都是null，部分源码如下：</p>
+<p>AsyncExecutionInterceptor#invoke</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/5/28/1725ba6de41fa8b1~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="image.png"></p>
+<p>通过上边几个示例，@Async实际还是通过Future或CompletableFuture来异步执行的，Spring又封装了一下，让我们使用的更方便。</p>
+]]></content>
+    <author>
+      <name>xlc520</name>
+    </author>
+    <category term="Java" scheme=""/>
+    <contributor>
+      <name>xlc520</name>
+    </contributor>
+    <published>2022-08-09T00:00:00.000Z</published>
+    <rights>Copyright by xlc520</rights>
+  </entry>
   <entry>
     <title type="html">logback - 自定义日志脱敏组件</title>
     <id>https://blog.ciberviler.top/dev/logback%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%BF%97%E8%84%B1%E6%95%8F%E7%BB%84%E4%BB%B6.html</id>
@@ -21773,453 +21938,6 @@ scheduler<span>.</span><span>addCalendar</span><span>(</span><span>"exclude"</sp
       <name>xlc520</name>
     </contributor>
     <published>2022-06-01T00:00:00.000Z</published>
-    <rights>Copyright by xlc520</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 命名规范</title>
-    <id>https://blog.ciberviler.top/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html</id>
-    <link href="https://blog.ciberviler.top/dev/Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html"/>
-    <updated>2022-05-26T03:43:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="java-命名规范" tabindex="-1"> Java 命名规范</h1>
-<p>在本文中，将从大到小，从外到内，总结Java编程中的命名规范。文中将会涉及到日常工作中常见的命名示例，如包命名，类命名，接口命名，方法命名，变量命名，常类命名，抽象类命名，异常类命名以及扩展类命名等。我将按照项目工程目录结构，从包，类(接口，抽象类，异常类)，方法，变量和常量的顺序展开介绍。</p>
-<p>本文是 Java 命名规范的介绍，建议收藏转发。更多文章可以关注公众号「Java后端」自行搜索。</p>
-<h2 id="_1-包命名规范" tabindex="-1"> <strong>1. 包命名规范</strong></h2>
-<p>包(Package)的作用是将功能相似或相关的类或者接口进行分组管理，便于类的定位和查找，同时也可以使用包来避免类名的冲突和访问控制，使代码更容易维护。通常，包命使用小写英文字母进行命名，并使用“.”进行分割，每个被分割的单元只能包含一个名词。</p>
-<p>一般地，包命名常采用顶级域名作为前缀，例如com，net，org，edu，gov，cn，io等，随后紧跟公司/组织/个人名称以及功能模块名称。下面是一些包命名示例：</p>
-<div><pre><code>package org.springframework.boot.autoconfigure.cloud
-package org.springframework.boot.util
-package org.hibernate.action
-package org.hibernate.cfg
-package com.alibaba.druid
-package com.alibaba.druid.filter
-package com.alibaba.nacos.client.config
-package com.ramostear.blog.web
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>下面是Oracle Java的一些常见包命名例子：</p>
-<div><pre><code>package java.beans
-package java.io
-package java.lang
-package java.net
-package java.util
-package javax.annotation
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_2-类命名规范" tabindex="-1"> <strong>2. 类命名规范</strong></h2>
-<p>类(Class)通常采用名词进行命名，且首字母大写，如果一个类名包含两个以上名词，建议使用驼峰命名(Camel-Case)法书写类名,每个名词首字母也应该大写。一般地，类名的书写尽量使其保持简单和描述的完整性，因此在书写类名时不建议使用缩写(一些约定俗成的命名除外。</p>
-<p>例如 Internationalization and Localization 缩写成i18n，Uniform Resource Identifier缩写成URI，Data Access Object缩写成DAO，JSON Web Token缩写成JWT，HyperText Markup Language缩写成HTML等等)。下列是一些常见的类命名示例：</p>
-<div><pre><code>public class UserDTO{
-
-}
-class EmployeeService{
-    
-}
-class StudentDAO{
-    
-}
-class OrderItemEntity{
-    
-}
-public class UserServiceImpl{
-    
-}
-public class OrderItemController{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>下面是 Oracle Java 中的一些标准命名示例：</p>
-<div><pre><code>public class HTMLEditorKit{
-    
-}
-public abstract class HttpContext{
-    
-}
-public interface ImageObserver{
-    
-}
-public class ArrayIndexOutOfBoundsException{
-    
-}
-public class enum Thread.State{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_2-1-接口命名规范" tabindex="-1"> <strong>2.1 接口命名规范</strong></h3>
-<p>首先，接口(Interface)是一种表述某一类型对象动作的特殊类；简单来说，接口也是类(不太严谨)，所以，接口的名称的书写也应该符合类名书写规范，首字母应该大写，与普通类名不同的是，接口命名时通常采用形容词或动词来描述接口的动作行为。下列是Oracle Java中一些标准库的接口使用形容词命名示例：</p>
-<div><pre><code>public interface Closeable{
-    
-}
-public interface Cloneable{
-    
-}
-public interface Runnable{
-    
-}
-public interface Comparable&lt;T>{
-    
-}
-public interface CompletionService&lt;V>{
-    
-}
-public interface Iterable&lt;T>{
-    
-}
-public interface EventListener{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>在Spring Framework标准库中，通常采用名词+动词/形容词的组合方式来命名接口，下列是Spring Framework中一些接口命名示例：</p>
-<div><pre><code>public interface AfterAdvice{
-    
-}
-public interface TargetClassAware{
-    
-}
-public interface ApplicationContextAware{
-    
-}
-public interface MessageSourceResolvable{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>2.2 抽象类命名规范</strong></p>
-<p>抽象类(Abstract Class)是一种特殊的类，其命名与普通类的命名规范相当。一般地，为了将抽象类与普通类和接口做出区别，提高抽象类的可读性，在命名抽象类时，会以“Abstract”/“Base”作为类命的前缀。下面是编程中一些常规的命名示例：</p>
-<div><pre><code>public abstract class AbstractRepository&lt;T>{
-    
-}
-public abstract class AbstractController{
-    
-}
-public abstract class BaseDao&lt;T,ID>{
-    
-}
-public abstract class AbstractCommonService&lt;T>{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>以下是Spring Framework中常见的抽象类示例：</p>
-<div><pre><code>public abstract class AbstractAspectJAdvice{
-    
-}
-public abstract class AbstractSingletonProxyFactoryBean{
-    
-}
-public abstract class AbstractBeanFactoryPointcutAdvisor{
-    
-}
-public abstract class AbstractCachingConfiguration{
-    
-}
-public abstract class AbstractContextLoaderInitializer{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>2.3 异常类命名规范</strong></p>
-<p>异常类(Exception Class)也是类的一种，但与普通类命名不同的是，异常类在命名时需要使用“Exception”作为其后缀。下面是常见的异常类命名示例：</p>
-<div><pre><code>public class FileNotFoundException{
-    
-}
-public class UserAlreadyExistException{
-    
-}
-public class TransactionException{
-    
-}
-public class ClassNotFoundException{
-    
-}
-public class IllegalArgumentException{
-    
-}
-public class IndexOutOfBoundsException{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>另外，在Java中还有另外一类异常类，它们属于系统异常，这一类异常类的命名使用“Error”作为其后缀，以区分Exception(编码，环境，操作等异常)。下面是系统异常(非检查异常)的命名示例：</p>
-<div><pre><code>public abstract class VirtualMachineError{
-    
-}
-public class StackOverflowError{
-    
-}
-public class OutOfMemoryError{
-    
-}
-public class IllegalAccessError{
-    
-}
-public class NoClassDefFoundError{
-    
-}
-public class NoSuchFieldError{
-    
-}
-public class NoSuchMethodError{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>3.方法命名规范</strong></p>
-<p>方法(Method)命名时,其首字母应该小写，如果方法签名由多个单词组成，则从第二个单词起，使用驼峰命名法进行书写。一般地，在对方法进行命名时，通常采用动词/动词+名词的组合，下面是方法命名的一些常见示例。</p>
-<h3 id="_3-1-表述获取" tabindex="-1"> <strong>3.1 表述获取</strong></h3>
-<p>如果一个方法用于获取某个值，通常使用“get”作为其前缀，例如：</p>
-<div><pre><code>public String getUserName(){
-    
-}
-public List&lt;Integer> getUserIds(){
-    
-}
-public User getOne(){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>3.2 表述查询</strong></p>
-<p>如果方法需要通过查询或筛选的方式获取某个数据，通常使用“find”/“query”作为其前缀，例如：</p>
-<div><pre><code>public List&lt;User> findOne(Integer id){
-    
-}
-public List&lt;Integer> findAll(){
-    
-}
-public List&lt;String> queryOrders(){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_3-3-表述条件" tabindex="-1"> <strong>3.3 表述条件</strong></h3>
-<p>如果一个方法需要一些条件参数，则可以使用“by”/“with”等字符作为方法名中条件的连接符，例如：</p>
-<div><pre><code>public User findByUsername(String username){
-    
-}
-public List&lt;Integer> getUserIdsWithState(boolean state){
-    
-}
-public List&lt;User> findAllByUsernameOrderByIdDesc(String username){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>3.4 表述设置</strong></p>
-<p>如果一个方法是要设置，插入，修改，删除等操作，应该将对应的动词(set,insert,update,delete)作为其名词的前缀，例如：</p>
-<div><pre><code>public void setName(String name){
-    
-}
-public User insert(User user){
-    
-}
-public void update(User user){
-    
-}
-public void clearAll(){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>3.5 其他规范</strong></p>
-<p>如果一个方法用于获取某组数据的长度或数量，则该方法应该使用length或size命名；如果方法的返回值为布尔类型(Boolean)，则该方法应该使用“is”或”has”作为前缀；</p>
-<p>如果方法用于将一种类型的数据转换为另一种数据数类型，则可以使用“to”作为前缀。下面是综合示例：</p>
-<div><pre><code>public long length(){
-    
-}
-public int size(){
-    
-}
-public boolean isOpen(){
-    
-}
-public boolean isNotEmpty(){
-    
-}
-public boolean hasLength(){
-    
-}
-public Set&lt;Integer> mapToSet(Map map){
-    
-}
-public UserDto convertTo(User user){
-    
-}
-public String toString(Object obj){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>4. 变量命名规范</strong></p>
-<p>变量(Variable)命名包括参数名称，成员变量和局部变量。变量命名通常以小写字母开头，如果变量名由多个单词构成，则从第二个单词起首字母需要大写，在变量命名过程中，不建议使用“_”作为前缀或者单词之间的分割符号。下面是一些常见的变量命名示例：</p>
-<div><pre><code>private String nickName;
-private String mobileNumber;
-private Long id;
-private String username;
-private Long orderId;
-private Long orderItemId;
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>\5. 常量命名规范</p>
-<p>一般地，常量名称采用全部大写的英文单词书写，如果常量名称由多个单词组成，则单词之间统一使用“_”进行分割，下面是常量命名示例：</p>
-<div><pre><code>public static final String LOGIN_USER_SESSION_KEY = "current_login_user";
-public static final int MAX_AGE_VALUE = 120;
-public static final int DEFAULT_PAGE_NO = 1;
-public static final long MAX_PAGE_SIZE = 1000;
-public static final boolean HAS_LICENSE = false;
-public static final boolean IS_CHECKED = false;
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6-枚举命名规范" tabindex="-1"> <strong>6. 枚举命名规范</strong></h2>
-<p>枚举(Enum)类是一种特殊的类，其命名规范遵循普通类的命名约束条件，首字母大写，采用驼峰命名法；枚举类中定义的值的名称遵循常量的命名规范，且枚举值的名称需要与类名有一定的关联性，下面是枚举的一些示例：</p>
-<div><pre><code>public enum Color{
-    RED,YELLOW,BLUE,GREEN,WHITE;
-}
-public enum PhysicalSize{
-    TINY,SMALL,MEDIUM,LARGE,HUGE,GIGANTIC;
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>下面是Oracle Java标准库中的一个示例：</p>
-<div><pre><code>public enum ElementType{
-    TYPE,
-    FIELD,
-    METHOD,
-    PARAMETER,
-    CONSTRUCTOR,
-    LOCAL_VARIABLE,
-    ANNOTATION_TYPE,
-    PACKAGE,
-    TYPE_PARAMETER,
-    TYPE_USE;
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_7-其他命名规范" tabindex="-1"> <strong>7. 其他命名规范</strong></h2>
-<h3 id="_7-1-数组" tabindex="-1"> <strong>7.1 数组</strong></h3>
-<p>在定义数组时，为了便于阅读，尽量保持以下的书写规范：</p>
-<div><pre><code>int[] array = new int[10];
-int[] idArray ={1,2,3,4,5};
-String[] nameArray = {"First","Yellow","Big"}
-
-public List&lt;String> getNameById(Integer[] ids){
-    
-}
-
-public List&lt;String> getNameById(Integer...ids){
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_7-2-表述复数或者集合" tabindex="-1"> <strong>7.2 表述复数或者集合</strong></h3>
-<p>如果一个变量用于描述多个数据时，尽量使用单词的复数形式进行书写，例如：</p>
-<div><pre><code>Collection&lt;Order> orders;
-int[] values;
-List&lt;Item> items;
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>另外，如果表述的是一个Map数据，则应使用“map”作为其后缀，例如：</p>
-<div><pre><code>Map&lt;String,User> userMap;
-Map&lt;String,List&lt;Object>> listMap;
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h3 id="_7-3-泛型类" tabindex="-1"> <strong>7.3 泛型类</strong></h3>
-<p>在书写泛型类时，通常做以下的约定：</p>
-<ul>
-<li>E表示Element，通常用在集合中；</li>
-<li>ID用于表示对象的唯一标识符类型</li>
-<li>T表示Type(类型)，通常指代类；</li>
-<li>K表示Key(键),通常用于Map中；</li>
-<li>V表示Value(值),通常用于Map中，与K结对出现；</li>
-<li>N表示Number,通常用于表示数值类型；</li>
-<li>？表示不确定的Java类型；</li>
-<li>X用于表示异常；</li>
-<li>U,S表示任意的类型。</li>
-</ul>
-<p>下面时泛型类的书写示例：</p>
-<div><pre><code>public class HashSet&lt;E> extends AbstractSet&lt;E>{
-    
-}
-public class HashMap&lt;K,V> extends AbstractMap&lt;K,V>{
-    
-}
-public class ThreadLocal&lt;T>{
-    
-}
-public interface Functor&lt;T,X extends Throwable>{
-    T val() throws X;
-}
-public class Container&lt;K,V>{
-    private K key;
-    private V value;
-    Container(K key,V value){
-        this.key = key;
-        this.value = value;
-    }
-    
-}
-
-public interface BaseRepository&lt;T,ID>{
-    T findById(ID id);
-
-    void update(T t);
-
-    List&lt;T> findByIds(ID...ids);
-}
-
-public static &lt;T> List&lt;T> methodName(Class&lt;T> clz){
-    List&lt;T> dataList = getByClz(clz);
-    return dataList;
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>7.4 接口实现类</strong></p>
-<p>为了便于阅读，在通常情况下，建议接口实现类使用“Impl作为后缀”，不建议使用大写的“I”作为接口前缀，下面是接口和接口实现类的书写示例。</p>
-<p>推荐写法：</p>
-<div><pre><code>public interface OrderService{
-    
-}
-public class OrderServiceImpl implements OrderService{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>不建议的写法：</p>
-<div><pre><code>public interface IOrderService{
-    
-}
-public class OrderService implements IOrderService{
-    
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_7-5-测试类和测试方法" tabindex="-1"> <strong>7.5 测试类和测试方法</strong></h3>
-<p>在项目中，测试类采用被测试业务模块名/被测试接口/被测试类+“Test”的方法进行书写，测试类中的测试函数采用“test”+用例操作_状态的组合方式进行书写，例如：</p>
-<div><pre><code>public class UserServiceTest{
-
-    public void testFindByUsernameAndPassword(){
-        
-    }
-
-    public void testUsernameExist_notExist(){
-        
-    }
-
-    public void testDeleteById_isOk(){
-        
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><strong>8 扩展：速记 Java 开发中的各种O</strong></p>
-<p>最后，通过一张表和图快速对Java中的<code>BO</code>,<code>DTO</code>,<code>DAO</code>,<code>PO</code>,<code>POJO</code>,<code>VO</code>之间的含义，区别以及联系进行梳理。</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>使用范围</th>
-<th>解释说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BO</td>
-<td>用于Service,Manager,Business等业务相关类的命名</td>
-<td>Business Object业务处理对象，主要作用是把业务逻辑封装成一个对象。</td>
-</tr>
-<tr>
-<td>DTO</td>
-<td>经过加工后的PO对象，其内部属性可能增加或减少</td>
-<td>Data Transfer Object数据传输对象，主要用于远程调用等需要大量传输数据的地方，例如，可以将一个或多个PO类的部分或全部属性封装为DTO进行传输</td>
-</tr>
-<tr>
-<td>DAO</td>
-<td>用于对数据库进行读写操作的类进行命名</td>
-<td>Data Access Object数据访问对象，主要用来封装对数据库的访问，通过DAO可以将POJO持久化为PO，也可以利用PO封装出VO和DTO</td>
-</tr>
-<tr>
-<td>PO</td>
-<td>Bean,Entity等类的命名</td>
-<td>Persistant Object持久化对象，数据库表中的数据在Java对象中的映射状态，可以简单的理解为一个PO对象即为数据库表中的一条记录</td>
-</tr>
-<tr>
-<td>POJO</td>
-<td>POJO是DO/DTO/BO/VO的统称</td>
-<td>Plain Ordinary Java Object 简单Java对象，它是一个简单的普通Java对象，禁止将类命名为XxxxPOJO</td>
-</tr>
-<tr>
-<td>VO</td>
-<td>通常是视图控制层和模板引擎之间传递的数据对象</td>
-<td>Value Object 值对象，主要用于视图层，视图控制器将视图层所需的属性封装成一个对象，然后用一个VO对象在视图控制器和视图之间进行数据传输。</td>
-</tr>
-<tr>
-<td>AO</td>
-<td>应用层对象</td>
-<td>Application Object，在Web层与Service层之间抽象的复用对象模型，很少用。</td>
-</tr>
-</tbody>
-</table>
-<p>下面将通过一张图来理解上述几种O之间相互转换的关系：</p>
-<p><img src="http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220526110603169.png" alt="image-20220526110603169"></p>
-]]></content>
-    <author>
-      <name>xlc520</name>
-    </author>
-    <category term="Java" scheme=""/>
-    <contributor>
-      <name>xlc520</name>
-    </contributor>
-    <published>2022-05-28T00:00:00.000Z</published>
     <rights>Copyright by xlc520</rights>
   </entry>
 </feed>
