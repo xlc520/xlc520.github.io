@@ -1,13 +1,15 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme";
-import { searchPlugin } from "@vuepress/plugin-search";
-// import pluginFullTextSearch from "vuepress2-plugin-full-text-search";
 // import { nextSearchPlugin } from 'vuepress-plugin-next-search';
+// import pluginFullTextSearch from "vuepress2-plugin-full-text-search";
+import { searchPlugin } from "@vuepress/plugin-search";
 export default defineUserConfig({
   lang: "zh-CN",
   title: "StudyNote",
   description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
   base: "/",
+
+  theme,
   head: [
     // 百度统计
     [
@@ -39,16 +41,18 @@ export default defineUserConfig({
       },
     ],
   ],
-  locales: {
-    "/": {
-      lang: "zh-CN",
-      title: "StudyNote",
-      description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
-    },
-  },
-  theme,
   shouldPrefetch: false,
-  plugins: [
+  // plugins: [
+  //   nextSearchPlugin({
+  //     fullText: true,
+  //     placeholder: '搜索',
+  //     frontmatter: {
+  //       tag: '标签',
+  //       category: '分类',
+  //     }
+  //   }),
+  // ]
+plugins: [
     searchPlugin({
       locales: {
         '/': {
@@ -59,28 +63,5 @@ export default defineUserConfig({
       maxSuggestions:13
     }),
   ],
-//   plugins: [
-//     [
-//       // nextSearchPlugin({}),
-//       // nextSearchPlugin({
-//       //   fullText: true,
-//       //   placeholder: '搜索',
-//       //   frontmatter: {
-//       //     tag: '标签',
-//       //     category: '分类',
-//       //   }
-//       // }),
-//       // require("vuepress2-plugin-full-text-search").default,
-//       // pluginFullTextSearch,
-//     // searchPlugin({
-//     //   locales: {
-//     //     "/": {
-//     //       placeholder: "搜索",
-//     //     },
-//     //   },
-//     //   hotKeys:['s', '/'],
-//     //   maxSuggestions: 13,//指定搜索结果的最大条数
-//     // }),
-//   ]
-// ]
+
 });
