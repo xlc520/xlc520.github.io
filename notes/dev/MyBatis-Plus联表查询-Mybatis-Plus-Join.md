@@ -210,15 +210,6 @@ mybatis-plus-join示例：
 
 
 
-### 关于该插件的一点问题
-
-1. 出现了bug怎么办，不是mybatis plus官方的会不会不稳定啊？ 这个大可以放心，这个插件我已经在生产环境跑了半年多了，没出过什么问题，如果遇到问题可以在 Issues 上提出，我看见就会解决，上午提的，不忙的话下午就能打包新版本，忙的话大概就需要晚上就差不多了
-2. 关于维护到啥时候？mybatis plus不倒我不倒（当然，如果长期没有star，哪怕是我得先倒了，还是那，您的star就是作者更新的动力，手动ღ( ´･ᴗ･` )比心）
-3. 有什么有想法的新功能啊，或者改善啊，可以在Issues 上提出
-4. 如果想联系作者，可以在wx上搜索小程序 <u>马汇博的博客</u>在关于我中有微信号，欢迎来扰
-
-
-
 **目前支持大部分mp常用版本**
 
 maven坐标
@@ -313,17 +304,17 @@ mybatis plus：3.2.0版本依赖地址：
 
 `joinPage -> page`
 
-**注意：这几个方法，前面俩参数和mp的用法一致，最后一个class类型的是返回类型，这个主要是大多数多表操作都是需要有额外字段，所以需要额外定义，而Wrapper<E> wrapper中的这个需要填写在需要构建条件的实体，这个实体是任意的，不强制，创建条件构造器的时候定义的那个对象就是主表**
+**注意：这几个方法，前面俩参数和mp的用法一致，最后一个class类型的是返回类型，这个主要是大多数多表操作都是需要有额外字段，所以需要额外定义，而`Wrapper<E> wrapper`中的这个需要填写在需要构建条件的实体，这个实体是任意的，不强制，创建条件构造器的时候定义的那个对象就是主表**
 
 
 
 ## 基本使用方法
 
-1.mapper继承 JoinBaseMapper< T>
+1.mapper继承 `JoinBaseMapper< T>`
 
-2.service继承 JoinIService< T>
+2.service继承 `JoinIService< T>`
 
-3.impl 继承 JoinServiceImpl<M,T>
+3.impl 继承 `JoinServiceImpl<M,T>`
 
 4.注入mp自定义方法，主要是继承JoinDefaultSqlInjector
 
@@ -791,8 +782,6 @@ List<UsersVo> usersVoList = usersService.joinList(wrapper,UsersVo.class);
 
 ```
 
-
-
 ### 自定义别名 TableAlias
 
 ```java
@@ -802,14 +791,10 @@ List<UsersVo> usersVoList = usersService.joinList(wrapper,UsersVo.class);
 */
 @TableName("app_users")
 @TableAlias("users")
-public class Users implements Serializable {
+public class Users implements Serializable 
   
 }
 ```
-
-
-
-
 
 ## 用法注意
 
