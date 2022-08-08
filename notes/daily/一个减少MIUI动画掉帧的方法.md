@@ -15,9 +15,9 @@ password:
 
 分享一个减少MIUI12动画掉帧的方法。
 
-![图片](http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16542238760163.jpeg)
+![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16542238760163.jpeg)
 
-![图片](http://alist.ciberviler.top/d/ecloud180/images/blogImage/640-16542238760162.jpeg)
+![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16542238760162.jpeg)
 
 应用管理找到系统跟踪清除数据
 然后进入开发者选项中的系统跟踪选择关闭跟踪可调试应用

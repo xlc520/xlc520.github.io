@@ -702,4 +702,4 @@ controller层新增方法
 2.**UpdateWrapper** ： Update 条件封装，用于Entity对象更新操作
 3.条件构造器使用中的各个方法格式和说明
 
-![image-20220620164733512](http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220620164733512.png)
+![image-20220620164733512](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220620164733512.png)

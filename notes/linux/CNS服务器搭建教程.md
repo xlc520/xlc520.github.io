@@ -23,15 +23,15 @@ password:
 
 3.安装CentOS 7.6 64bit
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/0bc8e91b11654c27b036bf749f71064c.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/0bc8e91b11654c27b036bf749f71064c.jpeg)
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/f6e7f8face15443aab91a9ddc3c2db31.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/f6e7f8face15443aab91a9ddc3c2db31.jpeg)
 
 4.远程登陆服务器
 
 可以直接用腾讯自带的登陆，点击登陆即可。**进去首先输入sudo -i** 获取最高管理员权限。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/9e76c679e87942e48aff3fd934cb3575.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/9e76c679e87942e48aff3fd934cb3575.jpeg)
 
 ## 方法一（一键安装）
 
@@ -50,16 +50,16 @@ password:
 
 需要填写的是两个信息：需要设置的CNS服务器端口和密码。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/fe4adc68df7445f2b98c11de6fd06d76.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/fe4adc68df7445f2b98c11de6fd06d76.jpeg)
 
  如上图，我设置的是6688端口，密码为980829.
 
 出现以下信息就代表CNS服务器搭建完成。
 
- ![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/f58fbc517c9d453db6d8dffb5a3e538a.jpeg)
+ ![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/f58fbc517c9d453db6d8dffb5a3e538a.jpeg)
 
 CNS服务器搭建完成后，需要放行相应的端口才可以运行。例如我使用的是6688端口，则需要对防火墙进行如下设置。
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/11bda07f400c4bdfaa11124e01e69e1c.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/11bda07f400c4bdfaa11124e01e69e1c.jpeg)
 
 
 
@@ -75,33 +75,33 @@ CNS服务器搭建完成后，需要放行相应的端口才可以运行。例�
 
 下载FinalShell服务器管理软件，百度一搜就有！
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/4f37415688f94330bba68a2bb50b80e6.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/4f37415688f94330bba68a2bb50b80e6.jpeg)
 
  如上图，依次点击这三个地方。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2eb86558d2384c6094896e0b663c02a4.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2eb86558d2384c6094896e0b663c02a4.png)
 
 填写蓝色圈起来的四项。密码是服务器密码。点击确定。
 
 会出现以你设置的用户名命名的一行。双击即可。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/3b231c3c7ac94c6ab7501108ccd675b7.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/3b231c3c7ac94c6ab7501108ccd675b7.png)
 
  注意：不要开任何代理软件，否则无法连接。
 
- ![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/64e6e716ac4e4109a0b13885fee80d1b.png)
+ ![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/64e6e716ac4e4109a0b13885fee80d1b.png)
 
  提示连接成功，即可。
 
 在下方的root文件夹中新建一个名为CNS的文件夹。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/14c48e106ed94bb39b270dd6ecd9c087.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/14c48e106ed94bb39b270dd6ecd9c087.png)
 
  双击进入CNS文件夹，并把我们解压到桌面的cns文件以及config.cfg文件拖拽到CNS文件夹内。
 
 双击config.cfg打开config文件
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2c9e02069a23486189b4d0ac88e2a9a6.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2c9e02069a23486189b4d0ac88e2a9a6.png)
 
 ```r
 proxyKey = Meng #随意，但是强烈建议改一下
@@ -124,7 +124,7 @@ enableTFO = #t
 
 在输入后台启动cns文件的命令./cns -daemon
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/af4a6ed25d2c4e088f7b35e5d38cfd24.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/af4a6ed25d2c4e088f7b35e5d38cfd24.png)
 
  代码如下，自行复制粘贴。FinalShell中复制为ALT+C,粘贴为ALT+V。
 
@@ -148,15 +148,15 @@ chmod u+x cns
 
 使用龙哥模块的，首先打开ZJL文件，将715行的IP地址更换为time1.cloud.tencent.com,保存。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/5fa1a096915b40aa96cb84294a9d608b.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/5fa1a096915b40aa96cb84294a9d608b.jpeg)
 
 打开.conf文件，进行如下修改，服务器IP：端口都按照上面的设置来填写。建议使用最新版的龙哥模块。
 
- ![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/cd9ac3980991433bb140164d4acbfab4.jpeg)
+ ![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/cd9ac3980991433bb140164d4acbfab4.jpeg)
 
  保存以后，运行一次开启.sh即可。出现如下情况，即是配置成功。
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/247457a355504576bd7a3e17dadce2a1.jpeg)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/247457a355504576bd7a3e17dadce2a1.jpeg)
 
  **注意：如果出现UDP连接×，请检查以下两点：**
 

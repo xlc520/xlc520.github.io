@@ -130,29 +130,29 @@ public class AsyncServiceImpl implements AsyncService {
 
 ### 模拟2000003 条数据进行测试
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225121702208.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225121702208.png)
 
  
 
 多线程 测试 2000003 耗时如下：耗时1.67分钟
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2019122512171971.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2019122512171971.png)
 
  
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225121745132.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225121745132.png)
 
 本次开启30个线程，截图如下：
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225121812550.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225121812550.png)
 
  
 
 单线程测试2000003 耗时如下：耗时5.75分钟
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225121832495.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225121832495.png)
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225121848593.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225121848593.png)
 
  
 
@@ -160,18 +160,18 @@ public class AsyncServiceImpl implements AsyncService {
 
 根据id分组，查看是否有id重复的数据，通过sql语句检查，没有发现重复入库的问题
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2019122512191274.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2019122512191274.png)
 
  
 
 检查数据完整性： 通过sql语句查询，多线程录入数据完整
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/20191225122051393.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20191225122051393.png)
 
 ## 测试结果
 
 不同线程数测试：
 
-![img](http://alist.ciberviler.top/d/ecloud180/images/blogImage/2019122512213611.png)
+![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2019122512213611.png)
 
  
 

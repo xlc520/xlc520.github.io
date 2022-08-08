@@ -74,7 +74,7 @@ public class SuperScheduledConfig {
 3、使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
 4、主要实现逻辑在postProcessAfterInitialization()方法中
 
-![image-20220524212320260](http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524212320260.png)
+![image-20220524212320260](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220524212320260.png)
 
 ```java
 @DependsOn({"superScheduledConfig"})
@@ -174,7 +174,7 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
 3、实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
 4、主要实现逻辑在run()方法中
 
-![image-20220524212339560](http://alist.ciberviler.top/d/ecloud180/images/blogImage/image-20220524212339560.png)
+![image-20220524212339560](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220524212339560.png)
 
 ```java
 @DependsOn("threadPoolTaskScheduler")

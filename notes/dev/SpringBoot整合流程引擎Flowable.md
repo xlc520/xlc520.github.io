@@ -29,7 +29,7 @@ Java 领域另一个流程引擎是 Activiti，不过我觉得这两个东西，
 
 首先我们创建一个 Spring Boot 项目，引入 Web、和 MySQL 驱动两个依赖，如下图：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_mysql](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013239_62852db7da56536801.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_mysql](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013239_62852db7da56536801.png)
 
 项目创建成功之后，我们引入 flowable 依赖，如下：
 
@@ -57,7 +57,7 @@ spring:
 
 默认的表比较多，截图只是其中一部分。
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_02](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013239_62852db80079472215.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_02](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013239_62852db80079472215.png)
 
 ## 3. 画流程图
 
@@ -65,7 +65,7 @@ spring:
 
 这里说一下我常用的 IDEA 插件 **Flowable BPMN visualizer**，如下图：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程图_03](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db81d94797834.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程图_03](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db81d94797834.png)
 
 插件怎么安装就不用我教了吧，小伙伴们自行安装即可。
 
@@ -73,7 +73,7 @@ spring:
 
 接下来我们在 processes 目录下，新建一个 BPMN 文件（插件装好了就有这个选项了），如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程图_04](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db84066473563.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程图_04](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db84066473563.png)
 
 我们来画个请假的流程，就叫做 ask_for_leave.bpmn20.xml，注意最后面的 `.bpmn20.xml` 是固定后缀。
 
@@ -81,7 +81,7 @@ spring:
 
 我的请假流程画出来是这样：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_05](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db8574fe29098.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_05](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db8574fe29098.png)
 
 员工发起一个请假流程，首先是组长审核，组长审核通过了，就进入到经理审核，经理审核通过了，这个流程就结束了，如果组长审核未通过或者经理审核未通过，则流程给员工发送一个请假失败的通知，流程结束。
 
@@ -256,7 +256,7 @@ void askForLeave() {
 
 好啦，现在我们执行这个单元测试方法，执行完成后，控制台会打印出当前这个流程的 id，我们拿着这个 id 去访问 4.2 小节的接口，结果如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_java_06](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db86702137091.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_java_06](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db86702137091.png)
 
 可以看到，请假用红色的框框起来了，说明当前流程走到了这一步。
 
@@ -287,7 +287,7 @@ void submitToZuzhang() {
 
 提交完成后，我们再去看流程图片，如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_mysql_07](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db8757ea39709.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_mysql_07](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db8757ea39709.png)
 
 可以看到，流程图走到组长审批了。
 
@@ -338,7 +338,7 @@ void zuZhangReject() {
 
 假设这里执行了同意，那么流程图如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_spring boot_08](http://alist.ciberviler.top/d/ecloud180/images/blogImage/19013240_62852db88301484841.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_spring boot_08](http://122.9.159.116:5244/d/ecloud180/images/blogImage/19013240_62852db88301484841.png)
 
 ### 4.6 经理审批
 
