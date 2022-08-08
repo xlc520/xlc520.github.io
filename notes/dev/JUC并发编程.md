@@ -9144,12 +9144,13 @@ public class ReferenceDemo
 此时使用软引用可以解决这个问题。
 
 　　设计思路是：用一个HashMap来保存图片的路径和相应图片对象关联的软引用之间的映射关系，在内存不足时，JVM会自动回收这些缓存图片对象所占用的空间，从而有效地避免了OOM的问题。
-
+```java
 Map<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
+```
 
 ##### 4、虚引用
 
-虚引用需要java.lang.ref.PhantomReference类来实现。
+虚引用需要`java.lang.ref.PhantomReference`类来实现。
 
 ​		顾名思义，就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收，它不能单独使用也不能通过它访问对象，虚引用必须和引用队列 (ReferenceQueue)联合使用。
 
@@ -10554,7 +10555,7 @@ CLH：Craig、Landin and Hagersten 队列，是一个单向链表，AQS中的队
 
 既然说到了排队等候机制，那么就一定会有某种队列形成，这样的队列是什么数据结构呢？
 
-​		如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中，这个队列就是AQS的抽象表现。它将请求共享资源的线程封装成队列的结点（Node），通过CAS、自旋以及LockSupport.park()的方式，维护state变量的状态，使并发达到同步的效果。
+​		如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中，这个队列就是AQS的抽象表现。它将请求共享资源的线程封装成队列的结点（Node），通过CAS、自旋以及`LockSupport.park()`的方式，维护state变量的状态，使并发达到同步的效果。
 
 ![image-20210929214426330](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210929214426330.png)
 
@@ -10653,14 +10654,14 @@ Lock接口的实现类，基本都是通过【聚合】了一个【队列同步�
 ![image-20210929215217723](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210929215217723.png)
 
 > 可以明显看出公平锁与非公平锁的lock()方法唯一的区别就在于公平锁在获取同步状态时多了一个限制条件：
-> hasQueuedPredecessors()
-> hasQueuedPredecessors是公平锁加锁时判断等待队列中是否存在有效节点的方法
+> `hasQueuedPredecessors()`
+> `hasQueuedPredecessors`是公平锁加锁时判断等待队列中是否存在有效节点的方法
 
 #### 3、非公平锁 方法lock()
 
-对比公平锁和非公平锁的 tryAcquire()方法的实现代码，其实差别就在于非公平锁获取锁时比公平锁中少了一个判断 !hasQueuedPredecessors()
+对比公平锁和非公平锁的 tryAcquire()方法的实现代码，其实差别就在于非公平锁获取锁时比公平锁中少了一个判断 `!hasQueuedPredecessors()`
 
-hasQueuedPredecessors() 中判断了是否需要排队，导致公平锁和非公平锁的差异如下：
+`hasQueuedPredecessors()` 中判断了是否需要排队，导致公平锁和非公平锁的差异如下：
 
 公平锁：公平锁讲究先来先到，线程在获取锁时，如果这个锁的等待队列中已经有线程在等待，那么当前线程就会进入等待队列中；
 
@@ -10729,9 +10730,9 @@ shouldParkAfterFailedAcquire
 
 ![image-20210929215907481](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210929215907481.png)
 
-​		如果前驱节点的 waitStatus 是 SIGNAL状态，即 shouldParkAfterFailedAcquire 方法会返回 true 程序会继续向下执行 parkAndCheckInterrupt 方法，用于将当前线程挂起
+​		如果前驱节点的 `waitStatus` 是 `SIGNAL`状态，即 `shouldParkAfterFailedAcquire` 方法会返回 `true` 程序会继续向下执行 `parkAndCheckInterrupt` 方法，用于将当前线程挂起
 
-parkAndCheckInterrupt 
+`parkAndCheckInterrupt `
 
 ![image-20210929215923254](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210929215923254.png)
 
@@ -10753,10 +10754,10 @@ unparkSuccessor
 
 #### 1、读写锁意义和特点
 
-​		读写锁ReentrantReadWriteLock并不是真正意义上的读写分离，它只允许读读共存，而读写和写写依然是互斥的，
+​		读写锁`ReentrantReadWriteLock`并不是真正意义上的读写分离，它只允许读读共存，而读写和写写依然是互斥的，
 大多实际场景是“读/读”线程间并不存在互斥关系，只有"读/写"线程或"写/写"线程间的操作需要互斥的。因此引入ReentrantReadWriteLock。
 
-​		一个ReentrantReadWriteLock同时只能存在一个写锁但是可以存在多个读锁，但不能同时存在写锁和读锁(切菜还是拍蒜选一个)。也即一个资源可以被多个读操作访问或一个写操作访问，但两者不能同时进行。
+​		一个`ReentrantReadWriteLock`同时只能存在一个写锁但是可以存在多个读锁，但不能同时存在写锁和读锁(切菜还是拍蒜选一个)。也即一个资源可以被多个读操作访问或一个写操作访问，但两者不能同时进行。
 
 
 只有在读多写少情境之下，读写锁才具有较高的性能体现。
@@ -11053,9 +11054,5 @@ public class StampedLockDemo
 
 - StampedLock 不支持重入，没有Re开头
 - StampedLock 的悲观读锁和写锁都不支持条件变量（Condition），这个也需要注意。
-- 使用 StampedLock一定不要调用中断操作，即不要调用interrupt() 方法
-  - 如果需要支持中断功能，一定使用可中断的悲观读锁 readLockInterruptibly()和写锁writeLockInterruptibly()
-
-# 附：我的博客
-
-![我的博客](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/我的博客.jpg)
+- 使用 StampedLock一定不要调用中断操作，即不要调用`interrupt()` 方法
+  - 如果需要支持中断功能，一定使用可中断的悲观读锁 `readLockInterruptibly()`和写锁`writeLockInterruptibly()`
