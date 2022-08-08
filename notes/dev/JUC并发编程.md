@@ -8983,8 +8983,8 @@ ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的m
 ![image-20210927223927641](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210927223927641.png)
 
 ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的map(其实是以它为Key)，不过是经过了两层包装的ThreadLocal对象：
-（1）第一层包装是使用 WeakReference<ThreadLocal<?>> 将ThreadLocal对象变成一个弱引用的对象；
-（2）第二层包装是定义了一个专门的类 Entry 来扩展 WeakReference<ThreadLocal<?>>
+（1）第一层包装是使用 `WeakReference<ThreadLocal<?>>` 将ThreadLocal对象变成一个弱引用的对象；
+（2）第二层包装是定义了一个专门的类 Entry 来扩展 `WeakReference<ThreadLocal<?>>`
 
 ![image-20210927223943383](http://122.9.159.116:5244/d/ecloud180/images/blogImage/JUC并发编程/image-20210927223943383.png)
 
