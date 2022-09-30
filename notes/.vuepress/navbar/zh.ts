@@ -1,6 +1,6 @@
 import { navbar } from "vuepress-theme-hope";
 
-export default navbar([
+export const zhNavbar = navbar([
   { text: 'Home', link: '/' , icon: "home"},
   { text: '学习', icon: "note", prefix: "/study/",
     children:[
@@ -54,5 +54,4 @@ export default navbar([
       }, 
     ],
   },
-  // { text: 'DownGit', link: 'https://git.xulc.workers.dev/' ,icon:"github"},
 ]);
