@@ -35,7 +35,7 @@ export const zhNavbar = navbar([
       {
         text: "Alist",
         icon: "share",
-        link: "http://alist.ciberviler.top",
+        link: "http://122.9.159.116:5244",
       },
       {
         text: "Cloudreve",
