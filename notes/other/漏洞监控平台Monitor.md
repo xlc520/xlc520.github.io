@@ -7,7 +7,7 @@ category: other
 tag: other
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 # 漏洞监控平台——Monitor

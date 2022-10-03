@@ -9,7 +9,7 @@ tag:
  - API
 article: true
 dateline: true
-icon: 
+icon: type
 password: 
 ---
 # API

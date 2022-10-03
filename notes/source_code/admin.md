@@ -7,7 +7,7 @@ category: Code
 tag: Code
 article: true
 dateline: true
-icon: 
+icon: type
 password: 
 ---
 # 开源后台管理项目

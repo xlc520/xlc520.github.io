@@ -7,7 +7,7 @@ category: other
 tag: other
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 # 安装WSA-激活GPU-双击安装APK

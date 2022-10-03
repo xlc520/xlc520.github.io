@@ -7,7 +7,7 @@ category: Linux
 tag: Linux
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 

@@ -7,7 +7,7 @@ category: other
 tag: other
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 # Linux脚本工具

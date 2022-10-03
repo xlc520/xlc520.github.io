@@ -7,7 +7,7 @@ category: Script
 tag: Script
 article: true
 dateline: true
-icon: 
+icon: type
 password: 
 ---
 # 京东脚本仓库

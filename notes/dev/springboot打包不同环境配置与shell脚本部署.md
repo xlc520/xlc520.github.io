@@ -7,7 +7,7 @@ category: other
 tag: other
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 # SpringBoot打包不同环境配置与shell脚本部署

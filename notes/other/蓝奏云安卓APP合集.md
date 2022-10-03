@@ -7,7 +7,7 @@ category: other
 tag: 蓝奏
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 

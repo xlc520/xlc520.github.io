@@ -7,7 +7,7 @@ category: Tools
 tag: Tools
 article: true
 dateline: true
-icon: 
+icon: type
 password: 
 ---
 # Lenovo

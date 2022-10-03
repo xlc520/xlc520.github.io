@@ -9,7 +9,7 @@ tag:
  - CDN
 article: true
 dateline: true
-icon: 
+icon: type
 password: 
 ---
 

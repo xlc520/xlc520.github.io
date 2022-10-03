@@ -7,7 +7,7 @@ category: daily
 tag: daily
 article: true
 timeline: true
-icon: date
+icon: type
 password: 
 ---
 

@@ -7,7 +7,7 @@ category: Java
 tag: Java
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 

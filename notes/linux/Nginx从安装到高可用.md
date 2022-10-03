@@ -7,7 +7,7 @@ category: other
 tag: other
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
 ---
 # Nginx从安装到高可用

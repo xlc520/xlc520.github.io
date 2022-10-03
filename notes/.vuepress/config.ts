@@ -1,27 +1,13 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
-import { searchPlugin } from "@vuepress/plugin-search";
+
 export default defineUserConfig({
   base: "/",
   lang: "zh-CN",
   dest: "./dist",
   title: "StudyNote",
   description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
-  // locales: {
-  //   "/": {
-  //     lang: "en-US",
-  //     title: "Blog Demo",
-  //     description: "A blog demo for vuepress-theme-hope",
-  //   },
-  //   "/zh/": {
-  //     lang: "zh-CN",
-  //     title: "博客演示",
-  //     description: "vuepress-theme-hope 的博客演示",
-  //   },
-  // },
-
   theme,
-
   shouldPrefetch: false,
   head: [
     // 百度统计
@@ -54,15 +40,4 @@ export default defineUserConfig({
       },
     ],
   ],
-  plugins: [
-    searchPlugin({
-      hotKeys: ['s', '/'],
-      maxSuggestions:15,
-      locales: {
-        '/': {
-          placeholder: '搜索',
-        },
-      },
-    }),
-  ]
 });

@@ -172,6 +172,7 @@ export default hopeTheme({
       favicon: "/favicon.ico",
       cacheHTML: true,
       cachePic: true,
+      update: "available",
       appendBase: true,
       apple: {
         icon: "/assets/icon/apple-icon-152.png",

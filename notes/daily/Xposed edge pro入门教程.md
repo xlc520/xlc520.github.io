@@ -7,9 +7,8 @@ category: daily
 tag: daily
 article: true
 timeline: true
-icon: 
+icon: type
 password: 
-
 ---
 
 # Xposed edge pro入门教程
