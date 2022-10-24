@@ -1,0 +1,118 @@
+import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as c,c as r,a as n,b as e,e as a,d as i,r as o}from"./app.8f5de41a.js";const l={},u=i(`<h1 id="linux\u65B0\u5F00\u673A\u5668\u914D\u7F6E" tabindex="-1"><a class="header-anchor" href="#linux\u65B0\u5F00\u673A\u5668\u914D\u7F6E" aria-hidden="true">#</a> Linux\u65B0\u5F00\u673A\u5668\u914D\u7F6E</h1><h2 id="_1-\u66F4\u6362yum-apt\u6E90" tabindex="-1"><a class="header-anchor" href="#_1-\u66F4\u6362yum-apt\u6E90" aria-hidden="true">#</a> 1.\u66F4\u6362yum/apt\u6E90</h2><blockquote><p><strong>\u901A\u77E5\uFF1ACentOS 8\u64CD\u4F5C\u7CFB\u7EDF\u7248\u672C\u7ED3\u675F\u4E86\u751F\u547D\u5468\u671F\uFF08EOL\uFF09\uFF0CLinux\u793E\u533A\u5DF2\u4E0D\u518D\u7EF4\u62A4\u8BE5\u64CD\u4F5C\u7CFB\u7EDF\u7248\u672C\u3002\u5EFA\u8BAE\u60A8\u5207\u6362\u5230Anolis\u6216Alinux\u3002\u5982\u679C\u60A8\u7684\u4E1A\u52A1\u8FC7\u6E21\u671F\u4ECD\u9700\u8981\u4F7F\u7528CentOS 8\u7CFB\u7EDF\u4E2D\u7684\u4E00\u4E9B\u5B89\u88C5\u5305\uFF0C\u8BF7\u6839\u636E\u4E0B\u6587\u5207\u6362CentOS 8\u7684\u6E90\u3002</strong></p></blockquote><h3 id="centos" tabindex="-1"><a class="header-anchor" href="#centos" aria-hidden="true">#</a> CentOS</h3><h4 id="_1-\u5907\u4EFD" tabindex="-1"><a class="header-anchor" href="#_1-\u5907\u4EFD" aria-hidden="true">#</a> 1. \u5907\u4EFD</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_2-\u4E0B\u8F7D\u65B0\u7684-centos-base-repo-\u5230-etc-yum-repos-d" tabindex="-1"><a class="header-anchor" href="#_2-\u4E0B\u8F7D\u65B0\u7684-centos-base-repo-\u5230-etc-yum-repos-d" aria-hidden="true">#</a> 2. \u4E0B\u8F7D\u65B0\u7684 CentOS-Base.repo \u5230 /etc/yum.repos.d/</h4><h5 id="centos8-centos8\u5B98\u65B9\u6E90\u5DF2\u4E0B\u7EBF-\u5EFA\u8BAE\u5207\u6362centos-vault\u6E90" tabindex="-1"><a class="header-anchor" href="#centos8-centos8\u5B98\u65B9\u6E90\u5DF2\u4E0B\u7EBF-\u5EFA\u8BAE\u5207\u6362centos-vault\u6E90" aria-hidden="true">#</a> centos8\uFF08centos8\u5B98\u65B9\u6E90\u5DF2\u4E0B\u7EBF\uFF0C\u5EFA\u8BAE\u5207\u6362centos-vault\u6E90\uFF09</h5><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>\u6216\u8005</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><strong>CentOS 7</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>\u6216\u8005</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-\u8FD0\u884C-yum-makecache-\u751F\u6210\u7F13\u5B58" tabindex="-1"><a class="header-anchor" href="#_3-\u8FD0\u884C-yum-makecache-\u751F\u6210\u7F13\u5B58" aria-hidden="true">#</a> 3. \u8FD0\u884C <code>yum makecache</code> \u751F\u6210\u7F13\u5B58</h4><h3 id="ubuntu" tabindex="-1"><a class="header-anchor" href="#ubuntu" aria-hidden="true">#</a> Ubuntu</h3><p>\u56E0\u4E3ALinux\u5B50\u7CFB\u7EDF\u7684apt\u6E90\u4F7F\u7528\u7684\u662F\u5B98\u65B9\u6E90\uFF0C\u9700\u8981\u8FDE\u63A5\u5230\u56FD\u5916\u7684\u670D\u52A1\u5668\u3002\u6240\u4EE5\u5B89\u88C5\u4E00\u4E9B\u8F6F\u4EF6\u65F6\u4E0B\u8F7D\u4F1A\u5F88\u6162\uFF0C\u6211\u4EEC\u53EF\u4EE5\u6539\u7528\u56FD\u5185\u7684\u955C\u50CFapt\u6E90\u3002\u56FD\u5185\u7684\u955C\u50CF\u6E90\u4E3B\u8981\u6709\uFF1A</p><p>\u53EF\u4EE5\u76F4\u63A5\u4F7F\u7528 vim \u5BF9 /etc/apt/sources.list\u6587\u4EF6\u8FDB\u884C\u4FEE\u6539\u3002</p><p>\u5148\u8FDB\u884C\u4E00\u4E0B\u5907\u4EFD\u3002</p><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">mv</span> /etc/apt/sources.list /etc/apt/sources.list.bak
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>\u7136\u540E</p><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">vim</span> /etc/apt/sources.list
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="\u963F\u91CC\u6E90ubuntu-20-04-focal" tabindex="-1"><a class="header-anchor" href="#\u963F\u91CC\u6E90ubuntu-20-04-focal" aria-hidden="true">#</a> \u963F\u91CC\u6E90ubuntu 20.04(focal)</h4><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># \u9ED8\u8BA4\u6CE8\u91CA\u4E86\u6E90\u7801\u955C\u50CF\u4EE5\u63D0\u9AD8 apt update \u901F\u5EA6\uFF0C\u5982\u6709\u9700\u8981\u53EF\u81EA\u884C\u53D6\u6D88\u6CE8\u91CA</span>
+deb https://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+<span class="token comment"># deb-src https://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span>
+deb https://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+<span class="token comment"># deb-src https://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span>
+deb https://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+<span class="token comment"># deb-src https://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span>
+<span class="token comment"># deb https://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span>
+<span class="token comment"># deb-src https://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span>
+deb https://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+<span class="token comment"># deb-src https://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span>
+
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>\u6267\u884C<code>apt-get update</code>\u66F4\u65B0\u7D22\u5F15</p><h4 id="\u534E\u4E3A\u4E91\u6E90ubuntu-20-04-focal" tabindex="-1"><a class="header-anchor" href="#\u534E\u4E3A\u4E91\u6E90ubuntu-20-04-focal" aria-hidden="true">#</a> \u534E\u4E3A\u4E91\u6E90ubuntu 20.04(focal)</h4><p>1\u3001\u5907\u4EFD\u914D\u7F6E\u6587\u4EF6\uFF1A</p><p>sudo cp -a /etc/apt/sources.list /etc/apt/sources.list.bak</p>`,29),d=n("strong",null,"sources.list",-1),m={href:"http://archive.ubuntu.com",target:"_blank",rel:"noopener noreferrer"},p={href:"http://security.ubuntu.com",target:"_blank",rel:"noopener noreferrer"},v={href:"http://repo.huaweicloud.com",target:"_blank",rel:"noopener noreferrer"},b={href:"http://.*archive.ubuntu.com@http",target:"_blank",rel:"noopener noreferrer"},h={href:"http://.*security.ubuntu.com@http",target:"_blank",rel:"noopener noreferrer"},k=i(`<p>3\u3001\u6267\u884C<code>apt-get update</code>\u66F4\u65B0\u7D22\u5F15</p><p><strong>\u9644: \u534E\u4E3A\u4E91\u6E90ubuntu 20.04(focal)</strong>\uFF1A</p><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># deb cdrom:[Ubuntu-Server 20.04 LTS _Focal Fossa_ - Release amd64 (20200423)]/ focal main restricted</span>
+
+<span class="token comment">#deb cdrom:[Ubuntu-Server 20.04 LTS _Focal Fossa_ - Release amd64 (20200423)]/ focal main restricted</span>
+
+<span class="token comment"># See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to</span>
+<span class="token comment"># newer versions of the distribution.</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal main restricted
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal main restricted</span>
+
+<span class="token comment">## Major bug fix updates produced after the final release of the</span>
+<span class="token comment">## distribution.</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal-updates main restricted
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal-updates main restricted</span>
+
+<span class="token comment">## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span>
+<span class="token comment">## team. Also, please note that software in universe WILL NOT receive any</span>
+<span class="token comment">## review or updates from the Ubuntu security team.</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal universe
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal universe</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal-updates universe
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal-updates universe</span>
+
+<span class="token comment">## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span>
+<span class="token comment">## team, and may not be under a free licence. Please satisfy yourself as to</span>
+<span class="token comment">## your rights to use the software. Also, please note that software in</span>
+<span class="token comment">## multiverse WILL NOT receive any review or updates from the Ubuntu</span>
+<span class="token comment">## security team.</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal multiverse
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal multiverse</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal-updates multiverse
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal-updates multiverse</span>
+
+<span class="token comment">## N.B. software from this repository may not have been tested as</span>
+<span class="token comment">## extensively as that contained in the main release, although it includes</span>
+<span class="token comment">## newer versions of some applications which may provide useful features.</span>
+<span class="token comment">## Also, please note that software in backports WILL NOT receive any review</span>
+<span class="token comment">## or updates from the Ubuntu security team.</span>
+deb http://repo.huaweicloud.com/ubuntu/ focal-backports main restricted universe multiverse
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu/ focal-backports main restricted universe multiverse</span>
+
+<span class="token comment">## Uncomment the following two lines to add software from Canonical&#39;s</span>
+<span class="token comment">## &#39;partner&#39; repository.</span>
+<span class="token comment">## This software is not part of Ubuntu, but is offered by Canonical and the</span>
+<span class="token comment">## respective vendors as a service to Ubuntu users.</span>
+<span class="token comment"># deb http://archive.canonical.com/ubuntu focal partner</span>
+<span class="token comment"># deb-src http://archive.canonical.com/ubuntu focal partner</span>
+
+deb http://repo.huaweicloud.com/ubuntu focal-security main restricted
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu focal-security main restricted</span>
+deb http://repo.huaweicloud.com/ubuntu focal-security universe
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu focal-security universe</span>
+deb http://repo.huaweicloud.com/ubuntu focal-security multiverse
+<span class="token comment"># deb-src http://repo.huaweicloud.com/ubuntu focal-security multiverse</span>
+
+<span class="token comment"># This system was installed using small removable media</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_2-docker\u5B89\u88C5" tabindex="-1"><a class="header-anchor" href="#_2-docker\u5B89\u88C5" aria-hidden="true">#</a> <strong>2.Docker\u5B89\u88C5</strong></h2><p>\u4E00\u952E\u5B89\u88C5\u547D\u4EE4\uFF1A</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>curl -sSL https://get.daocloud.io/docker | sh
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token comment">#\u5347\u7EA7yum</span>
+<span class="token function">sudo</span> yum update  
+
+<span class="token comment">#\u5378\u8F7D\u65E7\u7248\u672C</span>
+<span class="token function">sudo</span> yum remove <span class="token function">docker</span>  docker-common docker-selinux docker-engine  
+
+<span class="token comment">#\u5B89\u88C5\u4F9D\u8D56  </span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> <span class="token parameter variable">-y</span> yum-utils device-mapper-persistent-data lvm2  
+
+<span class="token comment">#\u8BBE\u7F6E\u6E90  </span>
+<span class="token function">sudo</span> yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo   
+
+<span class="token comment"># \u66F4\u65B0yum\u7F13\u5B58</span>
+yum makecache fast
+
+<span class="token comment"># \u5B89\u88C5Docker</span>
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> docker-ce
+
+<span class="token comment"># \u542F\u52A8</span>
+systemctl start <span class="token function">docker</span>
+
+<span class="token comment"># \u67E5\u770B\u662F\u5426\u542F\u52A8\u6210\u529F</span>
+<span class="token function">docker</span> info
+
+<span class="token comment"># \u5F00\u673A\u81EA\u542F</span>
+systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+
+<span class="token comment"># Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the d</span>
+systemctl restart <span class="token function">docker</span>  <span class="token comment">#\u91CD\u542F\u4E00\u4E0B\u5C31\u884C</span>
+
+<span class="token comment"># \u5728\u4E0B\u8F7D\u955C\u50CF\u524D\uFF0C\u9700\u8981\u8BBE\u7F6E\u4E00\u4E0B\u56FD\u5185\u6E90\uFF0C\u7528\u6765\u63D0\u9AD8\u4E0B\u8F7D\u901F\u5EA6</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/docker/daemon.json
+
+<span class="token comment"># \u914D\u7F6E</span>
+<span class="token punctuation">{</span>  
+    <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;https://d7grpode.mirror.aliyuncs.com&quot;</span><span class="token punctuation">]</span>  
+<span class="token punctuation">}</span>
+
+<span class="token comment"># \u91CD\u542F</span>
+<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>\u5378\u8F7DDocker</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sudo apt-get remove docker docker-engine
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>\u5378\u8F7DDocker\u540E,/var/lib/docker/\u76EE\u5F55\u4E0B\u4F1A\u4FDD\u7559\u539FDocker\u7684\u955C\u50CF,\u7F51\u7EDC,\u5B58\u50A8\u5377\u7B49\u6587\u4EF6. \u5982\u679C\u9700\u8981\u5168\u65B0\u5B89\u88C5Docker,\u9700\u8981\u5220\u9664/var/lib/docker/\u76EE\u5F55</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>rm -fr /var/lib/docker/
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>`,11);function f(g,y){const s=o("ExternalLinkIcon");return c(),r("div",null,[u,n("p",null,[e("2\u3001\u4FEE\u6539"),d,e("\u6587\u4EF6\uFF0C\u5C06"),n("strong",null,[n("a",m,[e("http://archive.ubuntu.com"),a(s)])]),e("\u548C"),n("strong",null,[n("a",p,[e("http://security.ubuntu.com"),a(s)])]),e("\u66FF\u6362\u6210"),n("strong",null,[n("a",v,[e("http://repo.huaweicloud.com"),a(s)])]),e("\uFF0C\u53EF\u4EE5\u53C2\u8003\u5982\u4E0B\u547D\u4EE4\uFF1A")]),n("p",null,[e('sudo sed -i "s@'),n("a",b,[e("http://.*archive.ubuntu.com@http"),a(s)]),e('\u{1F615}/repo.huaweicloud.com@g" /etc/apt/sources.list sudo sed -i "s@'),n("a",h,[e("http://.*security.ubuntu.com@http"),a(s)]),e('\u{1F615}/repo.huaweicloud.com@g" /etc/apt/sources.list')]),k])}const w=t(l,[["render",f],["__file","Linux\u65B0\u5F00\u673A\u5668\u914D\u7F6E.html.vue"]]);export{w as default};
