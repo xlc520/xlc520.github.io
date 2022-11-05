@@ -224,7 +224,7 @@ sed -i "s#k8s.gcr.io/pause#registry.aliyuncs.com/google_containers/pause#g"     
 grep sandbox_image  /etc/containerd/config.toml
 ```
 
-![K8S高可用部署](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640.png)
+![K8S高可用部署](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-1667642653044-0.png)
 
 #### 5）配置 containerd cgroup 驱动程序 systemd（所有节点）
 
