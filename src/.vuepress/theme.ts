@@ -98,7 +98,6 @@ export default hopeTheme({
     blog: {
       autoExcerpt: true,//是否为每个页面生成摘录
     },
-
     // 如果你不需要评论，可以直接删除 comment 配置，
     // 以下配置仅供体验，如果你需要评论，请自行配置并使用自己的环境，详见文档。
     // 为了避免打扰主题开发者以及消耗他的资源，请不要在你的正式环境中直接使用下列配置!!!!!
@@ -125,7 +124,7 @@ export default hopeTheme({
     //   // serverURL: "https://vuepress-theme-hope-comment.vercel.app",
     // },
 
-    // Disable features you don't want here
+    // Disable features you don’t want here
     mdEnhance: {
       align: true,
       attrs: true,
@@ -136,10 +135,11 @@ export default hopeTheme({
       echarts: true,
       flowchart: true,
       gfm: true,
+      imageLazyload: true,
+      imageTitle: true,
       imageSize: true,
       include: true,
       katex: true,
-      lazyLoad: true,
       mark: true,
       mermaid: true,
       playground: {
@@ -150,13 +150,13 @@ export default hopeTheme({
       },
       stylize: [
         {
-          matcher: "Recommanded",
+          matcher: "Recommended",
           replacer: ({ tag }) => {
             if (tag === "em")
               return {
                 tag: "Badge",
                 attrs: { type: "tip" },
-                content: "Recommanded",
+                content: "Recommended",
               };
           },
         },
@@ -164,7 +164,7 @@ export default hopeTheme({
       sub: true,
       sup: true,
       tabs: true,
-      vpre: true,
+      vPre: true,
       vuePlayground: true,
     },
 
@@ -172,7 +172,6 @@ export default hopeTheme({
       favicon: "/favicon.ico",
       cacheHTML: true,
       cachePic: true,
-      update: "available",
       appendBase: true,
       apple: {
         icon: "/assets/icon/apple-icon-152.png",

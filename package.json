@@ -5,10 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "vuepress build notes",
-    "clean-dev": "vuepress dev notes --clean-cache",
-    "dev": "vuepress dev notes",
-    "fix-memory-limit": "cross-env LIMIT=10000 increase-memory-limit"
+    "build": "vuepress build src",
+    "clean-dev": "vuepress dev src --clean-cache",
+    "dev": "vuepress dev src"
   },
   "devDependencies": {
     "@vuepress/client": "2.0.0-beta.53",
