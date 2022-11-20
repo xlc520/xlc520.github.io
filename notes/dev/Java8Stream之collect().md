@@ -128,11 +128,11 @@ public class UserDTO {
 
 ## 将集合通过Stream.collect() 转换成其他集合/数组：  
 
-现在拿List<UserDTO> 做例子
+现在拿`List<UserDTO> `做例子
 
 
 
-转成  HashSet<UserDTO> ：
+转成  `HashSet<UserDTO> `：
 
 ```java
         List<UserDTO> userList = getUserList();
@@ -144,7 +144,7 @@ public class UserDTO {
 
 
 
-转成  Set<UserDTO> usersSet ：
+转成  `Set<UserDTO> usersSet` ：
 
 ```java
         List<UserDTO> userList = getUserList();
@@ -156,7 +156,7 @@ public class UserDTO {
 
 
 
-转成  ArrayList<UserDTO> ：
+转成  `ArrayList<UserDTO> `：
 
 ```java
         List<UserDTO> userList = getUserList();
@@ -168,7 +168,7 @@ public class UserDTO {
 
 
 
-转成  Object[] objects ：
+转成  `Object[] objects` ：
 
 ```java
         List<UserDTO> userList = getUserList();
@@ -180,7 +180,7 @@ public class UserDTO {
 
 
 
-转成  UserDTO[] users ：
+转成  `UserDTO[] users `：
 
 ```java
         List<UserDTO> userList = getUserList();
