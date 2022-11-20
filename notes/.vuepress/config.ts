@@ -1,6 +1,6 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
-
+import { searchProPlugin } from "vuepress-plugin-search-pro";
 export default defineUserConfig({
   base: "/",
   lang: "zh-CN",
@@ -39,5 +39,45 @@ export default defineUserConfig({
         href: "//at.alicdn.com/t/font_2410206_mfj6e1vbwo.css",
       },
     ],
+  ],
+  plugins: [
+    searchProPlugin({
+      // 配置选项
+      indexContent: true,
+      hotReload: true,
+      customFields: [
+        {
+          name: "tags",
+          getter: ({ frontmatter }) => frontmatter.tag as string[],
+          formatter: `标签: $content`,
+        },
+        {
+          name: "category",
+          getter: ({ frontmatter }) => frontmatter.category as string[],
+          formatter: `分类: $content`,
+        },
+        {
+          name: "updateTime",
+          getter: ({ frontmatter }) => frontmatter.git?.git.toLocaleString(),
+          formatter: `更新时间: $content`,
+        },
+        {
+          name: "author",
+          getter: ({ frontmatter }) => frontmatter.author as string[],
+          formatter: `作者: $content`,
+        },
+        {
+          name: "title",
+          getter: ({ frontmatter }) => frontmatter.title as string[],
+          formatter: `标题: $content`,
+        },
+        {
+          name: "description",
+          getter: ({ frontmatter }) => frontmatter.description as string[],
+          formatter: `描述: $content`,
+        },
+        
+      ]
+    }),
   ],
 });
