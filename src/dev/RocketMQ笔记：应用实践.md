@@ -18,7 +18,6 @@ password:
 
 # RocketMQ笔记：应用实践
 
-https://www.jianshu.com/p/ab51c380fb09
 
 ### 普通消息
 
