@@ -1,9 +1,9 @@
 ---
 home: true
-layout: Blog
+layout: BlogHome
 icon: home
 title: 博客主页
-# heroImage: /logo.svg
+heroImage: /logo.svg
 heroText: StudyNote - 个人学习笔记
 heroFullScreen: true
 bgImage: https://api.btstu.cn/sjbz/api.php?lx=fengjing&format=images
@@ -29,14 +29,5 @@ projects:
     desc: 各种脚本
     link: /script/
 
-  # - icon: friend
-  #   name: 伙伴名称
-  #   desc: 伙伴详细介绍
-  #   link: https://你的伙伴链接
-
-  # - icon: /logo.svg
-  #   name: 自定义项目
-  #   desc: 自定义详细介绍
-  #   link: https://你的自定义链接
-
 footer: 两情若是久长时，又岂在朝朝暮暮
+---

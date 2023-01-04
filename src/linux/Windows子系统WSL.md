@@ -19,6 +19,10 @@ password:
 
 ## 自定义安装
 
+```powershell
+Add-AppxPackage .\app_name.appx
+```
+
 ### 1.第一种
 
 直接下载相关的镜像包。在下载网址中找到自己需要下载的系统包，然后点击即可。
@@ -681,8 +685,6 @@ su root
 
 ```powershell
 D:\Linux\Ubuntu>ubuntu config --default-user root
-
-D:\Linux\Ubuntu>
 ```
 
 ```bash
@@ -745,4 +747,72 @@ registries = ['i2kldsde.mirror.aliyuncs.com','docker.io']
 ```
 
 
+
+## Ubuntu20.04配置静态固定IP地址
+
+
+
+Ubuntu从17.10开始，放弃在/etc/network/interfaces里面配置IP，改为在/etc/netplan/XX-installer-config.yaml的yaml文件中配置IP地址。
+查看网络配置信息
+在Ubuntu20.04中，默认没有安装ifconfig，因此使用ip addr命令
+
+```bash
+ip addr
+
+查看网关
+ip route show
+```
+
+或者使用nmcli 查看，需要执行安装
+
+```bash
+sudo apt install network-manager
+
+nmcli device show ens32
+```
+
+修改配置文件
+使用熟悉的编辑器打开 `/etc/netplan/`下面的yaml配置文件，我的是`01-network-manager-all.yaml` 文件名，看实际情况
+
+```bash
+cd /etc/netplan/
+sudo vi /etc/netplan/01-network-manager-all.yaml
+或者是
+sudo gedit /etc/netplan/01-network-manager-all.yaml
+```
+
+打开后可以是
+
+```bash
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+
+```
+
+根据自己的需要修改配置
+输入 `:wq`保存退出后，执行 `sudo netplan apply` 使配置生效，之后每次启动虚拟机IP地址就不会再改变了。这样虚拟机内部可以正常上网，在物理机中也可以直接使用虚拟机的ip访问内部的服务。
+
+```bash
+# Let NetworkManager manage all devices on this system
+network:
+  ethernets:
+    enp0s8:   # 配置的网卡的名称
+      addresses: [192.168.56.102/24]   # 配置的静态ip地址和掩码
+      dhcp4: false   # 关闭dhcp4
+      optional: true
+      gateway4: 192.168.56.1 # 网关地址
+      nameservers:
+        addresses: [192.168.56.1,114.114.114.114]  # DNS服务器地址，多个DNS服务器地址需要用英文逗号分>隔开，可不配置
+  version: 2
+  renderer: NetworkManager
+
+```
+
+使配置生效
+```
+sudo netplan apply
+```
+至此Ubuntu20.04的静态IP配置完成。经过测试，可以正常上网。
 

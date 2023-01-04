@@ -39,7 +39,7 @@ export const enNavbar = navbar([
         ],
       },
       { text: "Cherry", icon: "edit", link: "cherry" },
-      { text: "Dragonfruit", icon: "edit", link: "dragonfruit" },
+      { text: "Dragon Fruit", icon: "edit", link: "dragonfruit" },
       "tomato",
       "strawberry",
     ],
@@ -47,6 +47,6 @@ export const enNavbar = navbar([
   {
     text: "V2 Docs",
     icon: "note",
-    link: "https://vuepress-theme-hope.github.io/v2/",
+    link: "https://theme-hope.vuejs.vuepress/",
   },
 ]);

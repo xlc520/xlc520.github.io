@@ -26,3 +26,5 @@ notes/.vuepress/dist/
 
 # Coverage Files
 coverage/
+blog
+上传HTML到服务器.bat
