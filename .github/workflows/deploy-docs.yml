@@ -33,7 +33,7 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=8192
         run: |-
-          yarn run docs:build
+          yarn run build
           > src/.vuepress/dist/.nojekyll
 
       - name: 部署文档
