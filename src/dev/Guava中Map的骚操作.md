@@ -231,9 +231,7 @@ biMap.put("Stark","IronMan");
 
 ```
 
-这样代码无法正常结束，会抛出一个`IllegalArgumentException`异常：
-
-![img](E:\source\blogImage\4d88f0bef0cf47729a62cb1a14a98e6ftplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp)
+这样代码无法正常结束，会抛出一个`IllegalArgumentException`异常
 
 如果你非想把新的`key`映射到已有的`value`上，那么也可以使用`forcePut`方法强制替换掉原有的`key`：
 
