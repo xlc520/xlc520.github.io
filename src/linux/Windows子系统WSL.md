@@ -816,3 +816,60 @@ sudo netplan apply
 ```
 至此Ubuntu20.04的静态IP配置完成。经过测试，可以正常上网。
 
+
+
+## wsl2 远程登陆ssh
+
+### 前提
+
+```bash
+ 1.确保window主机可以使用 最好可以连接网络
+ 2.已经安装wsl2并已经启动
+```
+
+### 配置
+
+#### 1.下载配置ssh
+
+```bash
+#下载   (如果没有ssh)
+apt-get update
+apt-get install openssh-server
+
+
+#配置
+vi /etc/ssh/sshd_config
+
+# 配置
+Port 2111 # 端口号 默认22
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+PasswordAuthentication yes # 是否允许使用密码登录 选“是”
+# 其它配置没必要改变
+
+#开启
+service ssh start
+```
+
+#### 2.查看 linux ip ，在linux中输入
+
+```bash
+ifconfig # 不是ipconfig
+```
+
+### SSH 登录 Ubuntu 出现错误，拒绝密码：Permission denied,please try again.
+
+新安装的Ubuntu 虚拟机已经打开了ssh 服务，并且ssh时密码也输入正确，但是一直提示被拒绝，如图：
+
+解决方法：
+ 修ssh改配置文件，设置为允许root远程登录：
+
+`vim /etc/ssh/sshd_config`
+
+将`PermitRootLogin prohibie-password` 修改为：`PermitRootLogin yes` 即可。
+
+保存退出，重启ssh服务：
+
+`service ssh start`
+
