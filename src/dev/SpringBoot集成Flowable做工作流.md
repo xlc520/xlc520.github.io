@@ -30,7 +30,7 @@ password:
 
 工作流引擎其实就是使用代码实现UML流程图中的各个步骤而已：
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/a92297eeb2b94961ae0b379f4d8b9ddc.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/a92297eeb2b94961ae0b379f4d8b9ddc.png)
 
 凡是需要多个人（或者多个部门）按照先后顺序去一级一级审批的业务都可以使用工作流来完成。
 
@@ -63,11 +63,11 @@ BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0
 - 中间：发生的开始和结束事件之间，影响处理的流程
 - 结束：表示该过程结束
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/v2-36313c37bab54e452e04cf942787110b_720w.jpg)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/v2-36313c37bab54e452e04cf942787110b_720w.jpg)
 
 2、**活动（Activities）**：包括任务和子流程两类。子流程在图形的下方中间外加一个小加号（+）来区分。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/v2-fe4af1b4136cc94af7b5b7e74043e35a_720w.jpg)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/v2-fe4af1b4136cc94af7b5b7e74043e35a_720w.jpg)
 
 3、**网关（Gateways）**：用于表示流程的分支与合并。
 
@@ -76,7 +76,7 @@ BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0
 - 包容网关：可以同时执行多条线路，也可以在网关上设置条件
 - 事件网关：专门为中间捕获事件设置的，允许设置多个输出流指向多个不同的中间捕获事件。当流程执行到事件网关后，流程处于等待状态，需要等待抛出事件才能将等待状态转换为活动状态。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/v2-94eafef2e7a66e2ae8461217a884f360_720w.jpg)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/v2-94eafef2e7a66e2ae8461217a884f360_720w.jpg)
 
 **数据（Data）**
 
@@ -103,11 +103,11 @@ BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0
 
 **实例1**：拍卖服务BPMN模板
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/v2-16176e4ff653436daf61415cf9763276_720w.jpg)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/v2-16176e4ff653436daf61415cf9763276_720w.jpg)
 
 **实例2**：书籍销售流程 BPMN
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/v2-d1d2769a122c2e9e88fdea04e905d0b5_720w.jpg)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/v2-d1d2769a122c2e9e88fdea04e905d0b5_720w.jpg)
 
 # Flowable简介
 
@@ -129,11 +129,11 @@ Flowable是BPMN的一个基于java的软件实现，不过Flowable不仅仅包�
 
 选择下载版本，我这里下载的是 6.5.0
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2443180-20220509132750126-1538478027.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2443180-20220509132750126-1538478027.png)
 
 2、下载后解压，wars 文件目录里面共 5 个 war包：
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2443180-20220509140242743-532479050.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2443180-20220509140242743-532479050.png)
 
 - flowable-admin：后台管理
 - flow-idm：用户组权限管理
@@ -293,7 +293,7 @@ spring.datasource.password=root折叠
 
 **新建流程图**
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2443180-20220509153032863-1101803880.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2443180-20220509153032863-1101803880.png)
 
 **注意：这个key最好不要有中文，后期流程部署、启动、跳转都可能会用到它，所有不要定义的过于随意**
 
@@ -301,19 +301,19 @@ spring.datasource.password=root折叠
 
 1、节点分类：开始节点、用户任务节点、结束节点
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2443180-20220509153231253-1781852235.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2443180-20220509153231253-1781852235.png)
 
 2、节点名称：可直接在“名称”处填写，也可以双击节点输入
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70.png)
 
 3、分配用户（只针对用户任务节点）
 
 为节点分配审批人（由于Flowable自带的的组织结构和我们的组织架构可能存在差异，所以我们一般用固定值）
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160551.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160551.png)
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160552.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160552.png)
 
 4、任务监听器（只针对用户任务节点）
 
@@ -324,7 +324,7 @@ spring.datasource.password=root折叠
 - complete：当任务完成时执行的监听器。
 - delete：当任务被删除时执行的监听器。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160553.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160553.png)
 
 （2）常用的任务监听器以及使用场景
 
@@ -338,7 +338,7 @@ Flowable支持一个节点多个实例；通俗讲就是你在流程图里只画
 
 多实例还支持串行Sequential和并行parallel；通俗来讲所谓的串行就是顺序执行，并行就是不按顺序执行，但它俩的相同点都是必须要所有的实例都完成这个节点才算结束。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20210609175024118.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/20210609175024118.png)
 
 6、流程线
 
@@ -348,13 +348,13 @@ Flowable支持一个节点多个实例；通俗讲就是你在流程图里只画
 
 Flowable流条件是以占位符的方式存在的。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160554.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160554.png)
 
 （2）跳过表达式
 
 和流条件配置方式一样；流程启动后，当传入的流程变量值符合要求时会自动跳过。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2c7b7063ccbb4ff1bc6185ea7aee7606.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2c7b7063ccbb4ff1bc6185ea7aee7606.png)
 
 7、常用的网关
 
@@ -364,19 +364,19 @@ Flowable流条件是以占位符的方式存在的。
 
 （2） 并行网关：只有所有要经过它的任务流都完成时才会进行下一步。
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160565.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160565.png)
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
 **保存**
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160566.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160566.png)
 
 保存后流程图相关数据会保存在act_de_model表内，并且每次更新并保存后，流程定义的版本会+1
 
 **下载**
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160567.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160567.png)
 
 # SpringBoot使用Flowable
 
@@ -565,7 +565,7 @@ flowable:
 </definitions>折叠 
 ```
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/2443180-20220509181200516-2065082021.png)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/2443180-20220509181200516-2065082021.png)
 
  
 
@@ -919,11 +919,11 @@ Flowable整体是通过ProcessEngine来操作的。即不管什么框架操作�
 
 类图如下：
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/170fc025f13b64dftplv-t2oaga2asx-zoom-in-crop-mark1304000.webp)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/170fc025f13b64dftplv-t2oaga2asx-zoom-in-crop-mark1304000.webp)
 
 关系图如下：
 
-![SpringBoot集成Flowable](http://122.9.159.116:5244/d/ecloud180/images/blogImage/170fc02e3be42183tplv-t2oaga2asx-zoom-in-crop-mark1304000.webp)
+![SpringBoot集成Flowable](https://static.xlc520.ml/blogImage/170fc02e3be42183tplv-t2oaga2asx-zoom-in-crop-mark1304000.webp)
 
 ## FormService
 

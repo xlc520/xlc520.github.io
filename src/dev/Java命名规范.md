@@ -542,4 +542,4 @@ public class UserServiceTest{
 
 下面将通过一张图来理解上述几种O之间相互转换的关系：
 
-![image-20220526110603169](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220526110603169.png)
+![image-20220526110603169](https://static.xlc520.ml/blogImage/image-20220526110603169.png)

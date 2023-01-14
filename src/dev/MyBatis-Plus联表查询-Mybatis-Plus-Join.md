@@ -44,15 +44,15 @@ password:
 
 订单表：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873680.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873680.png)
 
 用户表，包含用户姓名：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873681.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873681.png)
 
 商品表，包含商品名称和单价：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873682.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873682.png)
 
 在订单表中，通过用户id和商品id与其他两张表进行关联。
 
@@ -102,7 +102,7 @@ public void getOrder() {
 
 不看代码，我们先调用接口来看一下执行结果：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873683.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873683.png)
 
 可以看到，成功查询出了关联表中的信息，下面我们一点点介绍上面代码的语义。
 
@@ -132,7 +132,7 @@ public class OrderDto extends Order {
 
 我们用插件读取日志转化为可读的sql语句，可以看到两条左连接条件都被正确地添加到了sql中：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873694.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873694.png)
 
 ### MPJQueryWrapper
 
@@ -193,7 +193,7 @@ public void page() {
 
 注意在这里需要添加一个分页参数的`Page`对象，我们再执行上面的代码，并对日志进行解析，查看sql语句：
 
-![mybatis-plus-join](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16586333873695.png)
+![mybatis-plus-join](https://static.xlc520.ml/blogImage/640-16586333873695.png)
 
 可以看到底层通过添加`limit`进行了分页，同理，`MPJQueryWrapper`也可以这样进行分页。
 

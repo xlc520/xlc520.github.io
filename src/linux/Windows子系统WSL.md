@@ -461,7 +461,7 @@ cd \\wsl$\Ubuntu\
 
 或者打开文件资源管理器，在地址栏输入 `\\wsl$`  或  `\\wsl$\Ubuntu\`，也可以Ubuntu子系统根目录。 
 
-![6645072-861e342815516794.png](http://122.9.159.116:5244/d/ecloud180/images/blogImage/6645072-861e342815516794.png)
+![6645072-861e342815516794.png](https://static.xlc520.ml/blogImage/6645072-861e342815516794.png)
 
 
 

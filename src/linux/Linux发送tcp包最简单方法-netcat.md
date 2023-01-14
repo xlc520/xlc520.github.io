@@ -17,7 +17,7 @@ password:
 
 ## 网络拓扑
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/a2ae9f6f67a64c6587f07caffddca26b.png)
+![img](https://static.xlc520.ml/blogImage/a2ae9f6f67a64c6587f07caffddca26b.png)
 
 ##  服务器
 

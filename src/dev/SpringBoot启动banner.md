@@ -54,7 +54,7 @@ AnsiStyle： 用来控制加粗、斜体、下划线等等。
 
 使用${AnsiFoo.Bar}来指定样式，当指定样式的时候会有提示的：
 
-[image](http://122.9.159.116:5244/d/ecloud180/images/blogImage/784924-20170831000838452-507152231.png)
+[image](https://static.xlc520.ml/blogImage/784924-20170831000838452-507152231.png)
 
 指定一种试一下，比如下面这种：
 

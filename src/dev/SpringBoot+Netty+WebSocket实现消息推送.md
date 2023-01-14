@@ -260,11 +260,11 @@ public class IndexController {
 
 ## **效果演示**
 
-![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16612195691460.png)
+![图片](https://static.xlc520.ml/blogImage/640-16612195691460.png)
 
-![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16612195691461.png)
+![图片](https://static.xlc520.ml/blogImage/640-16612195691461.png)
 
-![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16612195691462.png)
+![图片](https://static.xlc520.ml/blogImage/640-16612195691462.png)
 
 ## **改造netty支持url参数**
 

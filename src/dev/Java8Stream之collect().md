@@ -40,7 +40,7 @@ Stream流 其实操作分三大块 ：
 
 我今天想分享的是 收集 这part的玩法。
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/3426558c692f4273921554c6c043e41b.png)
+![img](https://static.xlc520.ml/blogImage/3426558c692f4273921554c6c043e41b.png)
 
  
 
@@ -235,7 +235,7 @@ stream.max（）
 
 效果：
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/75c5e09c2fa54cfebbcbb3c85e06fa57.png)
+![img](https://static.xlc520.ml/blogImage/75c5e09c2fa54cfebbcbb3c85e06fa57.png)
 
  输出：
 
@@ -285,7 +285,7 @@ stream.min（）
 
 效果：
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/49bc1d66e04c490aa4dcd19935f56ac6.png)
+![img](https://static.xlc520.ml/blogImage/49bc1d66e04c490aa4dcd19935f56ac6.png)
 
  
 
@@ -332,7 +332,7 @@ stream.min（）
 
 效果： 
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/497c8a9436fd42ae94c9bbbbda1e0a57.png)
+![img](https://static.xlc520.ml/blogImage/497c8a9436fd42ae94c9bbbbda1e0a57.png)
 
  
 
@@ -355,7 +355,7 @@ stream.min（）
 
 效果：
 
- ![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/71e5c6bb9fd143fabf251e98c610092a.png)
+ ![img](https://static.xlc520.ml/blogImage/71e5c6bb9fd143fabf251e98c610092a.png)
 
  
 
@@ -385,6 +385,6 @@ stream.min（）
 
 效果：
 
-![img](http://122.9.159.116:5244/d/ecloud180/images/blogImage/a22f1c8f49954825840c34c955d43972.png)
+![img](https://static.xlc520.ml/blogImage/a22f1c8f49954825840c34c955d43972.png)
 
  

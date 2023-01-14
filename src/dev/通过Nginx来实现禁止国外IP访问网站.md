@@ -134,13 +134,13 @@ configure arguments: --with-http_stub_status_module --prefix=/usr/local/nginx --
 
 点击左侧 ，Download Files
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/a965a80a0e354dde96ba5fa1091cf86f.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/a965a80a0e354dde96ba5fa1091cf86f.png)
 
 
 
 选择 GeoLite2 Country ，点击 Download GZIP 下载即可
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/c3e087baa970419593541115de1ad8be.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/c3e087baa970419593541115de1ad8be.png)
 
 
 
@@ -180,7 +180,7 @@ $geoip2_data_country_code country iso_code;
 }
 ```
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/bfc6d7c990cf41b08b13280b8ee9f0e8.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/bfc6d7c990cf41b08b13280b8ee9f0e8.png)
 
 
 
@@ -198,7 +198,7 @@ if ($allowed_country = yes) {
           }
 ```
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/58effbcb1b4d4422b637a238d8371051.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/58effbcb1b4d4422b637a238d8371051.png)
 
 
 
@@ -219,13 +219,13 @@ nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 
 这里我的IP 是 来自于韩国
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/fca231769f3c40458a321bdca7c356f1.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/fca231769f3c40458a321bdca7c356f1.png)
 
 
 
 可以看到访问网站报错 404 Not Found
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/ac732b838fd84cf9a1ba52a27c13d76d.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/ac732b838fd84cf9a1ba52a27c13d76d.png)
 
 
 
@@ -235,7 +235,7 @@ nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
 "13.125.1.194 - - [14/Aug/2020:16:15:51 +0800] "GET /favicon.ico HTTP/1.1" **404** 548 "https://www.fxkjnj.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"
 ```
 
-![通过Nginx来实现禁止国外IP访问网站](http://122.9.159.116:5244/d/ecloud180/images/blogImage/e74537e1a7b4476098d4e68a38203704.png)
+![通过Nginx来实现禁止国外IP访问网站](https://static.xlc520.ml/blogImage/e74537e1a7b4476098d4e68a38203704.png)
 
 
 

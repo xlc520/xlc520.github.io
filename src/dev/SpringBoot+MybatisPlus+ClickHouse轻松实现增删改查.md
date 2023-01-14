@@ -303,9 +303,9 @@ public class UserMapperTest {
 }
 ```
 
-![image-20220524224012350](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220524224012350.png)
+![image-20220524224012350](https://static.xlc520.ml/blogImage/image-20220524224012350.png)
 
-![图片](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16534030656526.png)
+![图片](https://static.xlc520.ml/blogImage/640-16534030656526.png)
 
 
 

@@ -53,11 +53,11 @@ localhost:9090
 
 请注意，您必须允许 Web 浏览器的自定义 https 访问。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101207.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101207.png)
 
 之后，您应该会看到如下界面：
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101224.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101224.png)
 
 请注意，此处所需的用户名和密码与您用于服务器的凭据相同。
 
@@ -69,7 +69,7 @@ localhost:9090
 
 ### 系统总览
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101239.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101239.png)
 
 ### 日志
 
@@ -92,7 +92,7 @@ localhost:9090
 - 过去 24 小时
 - 过去 7 天
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101256.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101256.png)
 
 ### 贮存
 
@@ -105,7 +105,7 @@ localhost:9090
 - 驱动器
 - 其他设备
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101310.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101310.png)
 
 即使您有一个单独的日志部分，也有一个专门的日志部分用于单独存储是有帮助的。
 
@@ -116,7 +116,7 @@ localhost:9090
 - 接口
 - 网络日志
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101323.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101323.png)
 
 网络日志，类似于存储日志，仅列出与网络统计相关的所有消息。
 
@@ -124,7 +124,7 @@ localhost:9090
 
 此部分显示在相应 Linux 服务器上注册的所有系统用户。您可以通过此界面创建或删除用户。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101337.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101337.png)
 
 ### 服务
 
@@ -136,39 +136,39 @@ localhost:9090
 - 计时器
 - 路径
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101351.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101351.png)
 
 ### 终端
 
 这是我最喜欢的，不仅仅是因为您可以在这里运行命令或四处寻找，当您需要运行重要但冗长的命令时，如果使用 Web 界面，在终端上输入整个内容可能会非常烦人。我在 Linode 提供的基于 Web 的控制台（即 Weblish 和Glish ）上体验过这一点。您不能在其中复制和粘贴任何命令。但在 Cockpit 上，您绝对可以！
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101411.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101411.png)
 
 ## **系统状态监控**
 
 如果您想要更简单的实时统计概览，您可以转至仪表板。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101430.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101430.png)
 
 统计信息分为四个基本选项卡：CPU、内存、网络和磁盘 I/O。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101544.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101544.png)
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101556.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101556.png)
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101721.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101721.png)
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101728.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101728.png)
 
 ### 添加 SSH 密钥
 
 在右上角，单击您的用户名，然后单击“身份验证”。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101744.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101744.png)
 
 如果您的 SSH 密钥位于其默认位置，则会自动检测到它，否则，您需要手动添加并启用它。这与您通过终端使用的 SSH 配置相同。如果您在本地使用 SSH 密码，则必须在单击下面显示的按钮后输入该密码。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101810.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101810.png)
 
 ## **在 Cockpit 仪表板中添加更多 Linux 服务器**
 
@@ -178,31 +178,31 @@ localhost:9090
 - Cockpit 在添加之前安装在所有服务器上。
 - 您的 SSH 密钥（此处假定为标准）已预先添加并启用
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101824.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101824.png)
 
 要添加机器，而不是上面提到的 9090，您必须使用与远程服务器上相同的 SSH 端口号。默认情况下，它是 22。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101842.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101842.png)
 
 单击“添加”后，您可能会收到如下错误：
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101852.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101852.png)
 
 这是因为，Cockpit 正在尝试使用与远程服务器的当前系统相同的凭据。在同一错误页面上（如上图所示），您可以将用户名更改为远程服务器可识别的名称。
 
 完成此操作并单击登录后，将添加您的远程服务器。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101906.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101906.png)
 
 ## **从 Cockpit 中删除服务器**
 
 要删除已添加的服务器，您需要单击“编辑服务器”图标：
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101920.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101920.png)
 
 单击后，您可以删除标记为红色的添加服务器，另一个是灰色的，因为您无法删除当前连接的服务器。
 
-![Cockpit](http://122.9.159.116:5244/d/ecloud180/images/blogImage/20220513101934.png)
+![Cockpit](https://static.xlc520.ml/blogImage/20220513101934.png)
 
 请记住，删除的服务器将从该 Cockpit 的仪表板中删除。由于 Cockpit 仍然安装在该服务器上，您可以在服务器 IP 地址的端口 9090 上使用它。您应该卸载服务器的 Cockpit 程序。
 

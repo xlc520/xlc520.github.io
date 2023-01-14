@@ -17,19 +17,19 @@ password:
 
 整体流程大概如下：
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343400.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343400.png)
 
 ### 服务器准备
 
 在这先列出各服务器节点，方便同学们在下文中对照节点查看相应内容
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343401.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343401.png)
 
 ### SpringBoot项目准备
 
 引入log4j2替换SpringBoot默认log，demo项目结构如下：
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220713182137039.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/image-20220713182137039.png)
 
 **pom**
 
@@ -311,7 +311,7 @@ public class NetUtil {
 
 启动项目，访问`/index`和`/ero`接口，可以看到项目中生成了`app-collector.log`和`error-collector.log`两个日志文件
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220713182234947.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/image-20220713182234947.png)
 
 我们将Springboot服务部署在192.168.11.31这台机器上。
 
@@ -454,7 +454,7 @@ ps -ef | grep filebeat
 
 可以看到filebeat已经启动成功
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220713182332234.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/image-20220713182332234.png)
 
 然后我们访问192.168.11.31:8001/index和192.168.11.31:8001/err，再查看kafka的logs文件，可以看到已经生成了app-log-collector-0和error-log-collector-0文件，说明filebeat已经帮我们把数据收集好放到了kafka上。
 
@@ -573,17 +573,17 @@ output {
 
 可以看到控制台开始打印日志
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343402.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343402.png)
 
 ### ElasticSearch与Kibana
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343403.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343403.png)
 
 ES和Kibana的搭建之前没写过博客，网上资料也比较多，大家可以自行搜索。
 
 搭建完成后，访问Kibana的管理页面`192.168.11.35:5601`，选择Management -> Kinaba - Index Patterns
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343404.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343404.png)
 
 然后Create index pattern
 
@@ -594,10 +594,10 @@ ES和Kibana的搭建之前没写过博客，网上资料也比较多，大家可
 
 我们再次访问`192.168.11.31:8001/err`，这个时候就可以看到我们已经命中了一条log信息
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343405.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343405.png)
 
 里面展示了日志的全量信息
 
-![SpringBoot+Kafka+ELK](http://122.9.159.116:5244/d/ecloud180/images/blogImage/640-16577076343406.png)
+![SpringBoot+Kafka+ELK](https://static.xlc520.ml/blogImage/640-16577076343406.png)
 
 到这里，我们完整的日志收集及可视化就搭建完成了！

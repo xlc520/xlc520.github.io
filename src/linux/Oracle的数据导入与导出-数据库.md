@@ -438,22 +438,22 @@ directory=testdata1 dumpfile=expdp.dmp schemas=system table_exists_action;
 
   导出步骤tools ->export user object，选择要导出的对象，导出.sql格式文件并等待导出完成，如 下图：
 
- ![image-20220620092932901](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220620092932901.png)
+ ![image-20220620092932901](https://static.xlc520.ml/blogImage/image-20220620092932901.png)
 
 导出数据文件 ;
    2.导出步骤tools ->export tables，选择要导出的表及导出的格式进行导出。 
 
    导出为dmp格式，如下图：
 
-![image-20220620092943308](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220620092943308.png)
+![image-20220620092943308](https://static.xlc520.ml/blogImage/image-20220620092943308.png)
 
 导出为sql格式，如下图： 
 
-![image-20220620092949353](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220620092949353.png)
+![image-20220620092949353](https://static.xlc520.ml/blogImage/image-20220620092949353.png)
 
 导出为pde格式，如下图： 
 
-![image-20220620092954469](http://122.9.159.116:5244/d/ecloud180/images/blogImage/image-20220620092954469.png)
+![image-20220620092954469](https://static.xlc520.ml/blogImage/image-20220620092954469.png)
 
  提示说明：采用第三方工具导出导入整个数据库的话，耗时较长，一定要有足够
 
