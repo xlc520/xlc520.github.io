@@ -185,7 +185,7 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
 - 实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
 - 主要实现逻辑在run()方法中
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/odp4zTVAogpHicXEISlz2It1lVzibw1E0jeh9cuzvwdIz5iaJvW8WJg4wvWVdIxxJuEYiaksjATDEFZKBlftCMMEXw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184414412-0.jpeg)
 
 ```
 @DependsOn("threadPoolTaskScheduler")

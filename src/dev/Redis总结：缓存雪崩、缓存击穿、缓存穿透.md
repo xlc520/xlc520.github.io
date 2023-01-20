@@ -84,7 +84,7 @@ password:
 
 缓存穿透的关键在于在Redis中查不到key值，它和缓存击穿的根本区别在于传进来的key在Redis中是不存在的。假如有黑客传进大量的不存在的key，那么大量的请求打在数据库上是很致命的问题，所以在日常开发中要对参数做好校验，一些非法的参数，不可能存在的key就直接返回错误提示。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/AFfPBZXiba0uKqFLRUWolShSoZm90t6hpGhIAZ3Oyr03gBqibZSxpAxO5dqjxEqSiatuSl3OnIP3xpksH36xVl9WA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184514758-0.png)
 
 
 
@@ -98,7 +98,7 @@ password:
 
 如果布隆过滤器判定某个 key 不存在布隆过滤器中，那么就一定不存在，如果判定某个 key 存在，那么很大可能是存在(存在一定的误判率)。于是我们可以在缓存之前再加一个布隆过滤器，将数据库中的所有key都存储在布隆过滤器中，在查询Redis前先去布隆过滤器查询 key 是否存在，如果不存在就直接返回，不让其访问数据库，从而避免了对底层存储系统的查询压力。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/AFfPBZXiba0uKqFLRUWolShSoZm90t6hp9j7iaVR2e454IH23wwWK51ejJic0DCxPvkkvpQVtu1vNE756WITnoPkA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184544998-3.png)
 
 
 

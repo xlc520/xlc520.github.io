@@ -12,11 +12,11 @@ password:
 
 ---
 
+# Podman开源的容器
+
+![图片](https://static.xlc520.ml/blogImage/640-1674185164154-0.png)
 
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/GjuWRiaNxhnQ7UdGu7GkFW1JTLG84Sbke4nPJmv0419zZF8UBbuvqNQc9PscMEOQUf9Q11xX4no3LKadzfhNZoA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
-
-来源：http://t-t.ink/0V26K
 
 ### 什么是Podman？
 

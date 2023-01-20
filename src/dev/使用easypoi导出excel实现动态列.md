@@ -46,11 +46,11 @@ password:
 
 变更前样式
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4csic7r2ZwEQBWEnsC0k4Aaq6alNV28H5Gl7iaAo7NIxRn5liayjQTxCyuA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184514758-0.png)
 
 变更后样式
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4cAUvrUmnGPYnulOgLpRflnhMsedEKSolpnsNMZicckf5ne7WITAIOZsA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184514758-3.png)
 
 ### 代码解析
 
@@ -271,7 +271,7 @@ public class BiPlatformStatisRespDTO implements Serializable {
 
 ##### 测试结果示例
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqian47myMbgAAXib3tTubM4cOoQzAXu4ZIlniaJ4ustt2RUfYS3yu0MCGtgeCBicX0StNMH5x36MXnDQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674184521222-6.png)
 
 ##### 测试数据json示例
 

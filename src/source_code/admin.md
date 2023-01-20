@@ -28,7 +28,7 @@ password:
 
 开源协议：MIT
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/eukZ9J6BEiafcgC4cZoq1wlOpXwr7cEdrbLtOZiaBFMQVLc51Jqf18DanpSOsoO8qTfgwdWQCkHcx799BWqBq24Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)图片
+![图片](https://static.xlc520.ml/blogImage/640-1674185256162-0.png)图片
 
 **2. vue-element-admin**
 
@@ -106,7 +106,7 @@ password:
 
 开源协议：MIT License
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/eukZ9J6BEiafcgC4cZoq1wlOpXwr7cEdrMyEJUQ5BQxeYs8ybhwtlKs5tkKLguOzBibGR6l3lcEbvNyRA4H7PQ2A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)图片
+![图片](https://static.xlc520.ml/blogImage/640-1674185256162-3.png)图片
 
 **9. ant-design-pro**
 
@@ -140,7 +140,7 @@ password:
 
 开源协议：MIT License
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/eukZ9J6BEiafcgC4cZoq1wlOpXwr7cEdrc1MIqGPicM0qPN9HMAZ5NuwpmW4Nkh5bhYsojAytQMCqFK6S6GUOBPQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)图片
+![图片](https://static.xlc520.ml/blogImage/640-1674185258456-6.png)图片
 
 **12.EAdmin**
 
@@ -152,7 +152,7 @@ password:
 
 开源协议：无 Java项目分享
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/eukZ9J6BEiafcgC4cZoq1wlOpXwr7cEdrib5adrGYYYHdGNicDGTFj2ZUzqeNNzXjDy14ia7yJCwKiaPzwcRpeD2ZHQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://static.xlc520.ml/blogImage/640-1674185260023-9.png)
 
 
 
