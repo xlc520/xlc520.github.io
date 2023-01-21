@@ -15,10 +15,10 @@ password:
 
 ## 前言
 
-一般来说，我们用SpringSecurity默认的话是前后端整在一起的，比如[thymeleaf](https://so.csdn.net/so/search?q=thymeleaf&spm=1001.2101.3001.7020)或者Freemarker，SpringSecurity还自带login登录页,还让你配置登出页,错误页。
+一般来说，我们用SpringSecurity默认的话是前后端整在一起的，比如thymeleaf或者Freemarker，SpringSecurity还自带login登录页,还让你配置登出页,错误页。
 但是现在前后端分离才是正道，前后端分离的话，那就需要将返回的页面换成Json格式交给前端处理了
 
-SpringSecurity默认的是采用[Session](https://so.csdn.net/so/search?q=Session&spm=1001.2101.3001.7020)来判断请求的用户是否登录的，但是不方便分布式的扩展，虽然SpringSecurity也支持采用SpringSession来管理分布式下的用户状态，不过现在分布式的还是无状态的Jwt比较主流。 所以下面说下怎么让SpringSecurity变成前后端分离，采用Jwt来做认证的
+SpringSecurity默认的是采用Session来判断请求的用户是否登录的，但是不方便分布式的扩展，虽然SpringSecurity也支持采用SpringSession来管理分布式下的用户状态，不过现在分布式的还是无状态的Jwt比较主流。 所以下面说下怎么让SpringSecurity变成前后端分离，采用Jwt来做认证的
 
 ## 一、五个handler一个filter两个User
 
@@ -49,7 +49,6 @@ public class CustomerAuthenticationEntryPoint implements AuthenticationEntryPoin
     }
 }
 
-1234567891011121314
 ```
 
 ### 1.2 AuthenticationSuccessHandler
@@ -79,7 +78,7 @@ public class CustomerAuthenticationSuccessHandler implements AuthenticationSucce
         ResponseUtil.out(ResultUtil.success(token));
     }
 }
-12345678910111213141516171819202122
+
 ```
 
 ### 1.3 AuthenticationFailureHandler
@@ -106,7 +105,6 @@ public class CustomerAuthenticationFailHandler implements AuthenticationFailureH
 
 }
 
-12345678910111213141516171819
 ```
 
 ### 1.4 LogoutSuccessHandler
@@ -127,7 +125,7 @@ public class CustomerLogoutSuccessHandler implements LogoutSuccessHandler {
         ResponseUtil.out(ResultUtil.success("Logout Success!"));
     }
 }
-1234567891011
+
 ```
 
 ### 1.5 AccessDeniedHandler
@@ -149,7 +147,7 @@ public class CustomerRestAccessDeniedHandler implements AccessDeniedHandler {
     }
 
 }
-1234567891011121314
+
 ```
 
 ### 1.6 一个过滤器OncePerRequestFilter
@@ -225,7 +223,7 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 }
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556
+
 ```
 
 ### 1.7 实现UserDetails扩充字段
@@ -312,7 +310,6 @@ public class CustomerUserDetails extends User implements UserDetails {
   }
 }
 
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677
 ```
 
 ### 1.8 实现UserDetailsService
@@ -375,7 +372,6 @@ public class CustomerUserDetailService implements UserDetailsService {
   }
 }
 
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455
 ```
 
 ### 1.9 userSessionService
@@ -439,7 +435,6 @@ public class UserCacheSessionServiceImpl implements UserSessionService  {
   }
 }
 
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758
 ```
 
 ### 1.10 ResonseUtil
@@ -510,8 +505,6 @@ public class ResponseUtil {
 
   }
 }
-
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768
 ```
 
 ## 二、配置WebSecurityConfigurerAdapter
@@ -654,7 +647,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127
 ```
 
 ## 三、其他
@@ -798,7 +790,7 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
         return timestamp.equals(jwtTimestamp);
     }
 }
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798
+
 package com.zgd.shop.web.auth.user;
 
 import com.google.common.collect.Maps;
@@ -857,7 +849,6 @@ public class UserTokenManager {
   }
 }
 
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758
 ```
 
 ##### 更新

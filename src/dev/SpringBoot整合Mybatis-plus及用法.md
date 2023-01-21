@@ -532,7 +532,7 @@ public class UserInfoController {
 }
 ```
 
-controller层用到[lambda](https://so.csdn.net/so/search?q=lambda&spm=1001.2101.3001.7020)语法
+controller层用到lambda语法
 
 ```java
  
@@ -611,7 +611,7 @@ public class UserInfoPlusController {
 }
 ```
 
-以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data [jpa](https://so.csdn.net/so/search?q=jpa&spm=1001.2101.3001.7020)框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的
+以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data jpa框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的
 
 mybatis-plus只是mybatis的增强版，它不影响mybatis的使用，我们可以写我们自定的方法以及sql，接下来我们看一个小案例
 

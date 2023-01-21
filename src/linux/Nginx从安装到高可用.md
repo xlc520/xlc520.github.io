@@ -12,11 +12,6 @@ password:
 ---
 # Nginx从安装到高可用
 
-```
-原文：blog.csdn.net/qq_34886352/article/details/103581973
-第1-100期：100期Java项目整理
-```
-
 ### 一、Nginx安装
 
 ##### 1、去官网http://nginx.org/下载对应的nginx包，推荐使用稳定版本

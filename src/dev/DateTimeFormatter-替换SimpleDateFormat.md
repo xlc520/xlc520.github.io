@@ -15,7 +15,7 @@ password:
 
 # DateTimeFormatter-替换SimpleDateFormat
 
-我们先来看看SImpleDateFormat类的部分[源码](https://so.csdn.net/so/search?q=源码&spm=1001.2101.3001.7020)，如图 1所示。
+我们先来看看SImpleDateFormat类的部分源码，如图 1所示。
 
 ![img](https://static.xlc520.ml/blogImage/20210502205438290.png)
 

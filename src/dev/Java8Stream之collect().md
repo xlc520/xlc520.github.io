@@ -19,7 +19,7 @@ password:
 
 
 
-本身我是一个比较偏向少使用[Stream](https://so.csdn.net/so/search?q=Stream&spm=1001.2101.3001.7020)的人，因为调试比较不方便。
+本身我是一个比较偏向少使用Stream的人，因为调试比较不方便。
 
 但是, 不得不说，stream确实会给我们编码带来便捷。
 

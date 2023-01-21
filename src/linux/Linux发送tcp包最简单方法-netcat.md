@@ -13,7 +13,7 @@ password:
 
 # Linux发送udp/tcp包最简单方法-netcat
 
-由于测试需要，需要从一台linux向另一台建立连接，[并发](https://so.csdn.net/so/search?q=并发&spm=1001.2101.3001.7020)送tcp/udp包。觉得用python写个client/server脚本有点麻烦，于是想找一个命令直接发送，一搜就搜到了netcat
+由于测试需要，需要从一台linux向另一台建立连接，并发送tcp/udp包。觉得用python写个client/server脚本有点麻烦，于是想找一个命令直接发送，一搜就搜到了netcat
 
 ## 网络拓扑
 
@@ -21,7 +21,7 @@ password:
 
 ##  服务器
 
-先在机器B上进行netcat服务器端的配置，配置使其[监听](https://so.csdn.net/so/search?q=监听&spm=1001.2101.3001.7020)机器B的6901端口，输入以下命令
+先在机器B上进行netcat服务器端的配置，配置使其监听机器B的6901端口，输入以下命令
 
 ```bash
 > nc -v -n -l 192.168.0.4 6901
@@ -61,7 +61,7 @@ Connection from 192.168.0.3 33446 received!
 
 ## 后记
 
-到这里A和B两台机器其实已经建立了tcp链接，也发过tcp包了。如果想要建立[udp](https://so.csdn.net/so/search?q=udp&spm=1001.2101.3001.7020)链接，则需要使用 -u 参数即可。建立链接之后，可以在任一机器终端输入文字并按回车，文字也会马上出现在另一台机器的终端上，比如你可以在A上输入：
+到这里A和B两台机器其实已经建立了tcp链接，也发过tcp包了。如果想要建立udp链接，则需要使用 -u 参数即可。建立链接之后，可以在任一机器终端输入文字并按回车，文字也会马上出现在另一台机器的终端上，比如你可以在A上输入：
 
 ```css
 hello, I am A. Who are you ?

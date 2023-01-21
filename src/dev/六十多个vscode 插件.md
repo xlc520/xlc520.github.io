@@ -151,7 +151,7 @@ password:
 
 运行代码，可以在编辑器中查看结果，前端同学可以在控制台看 `console.log` ，还有很多其他玩法，具体使用参考此篇文章
 
-👉👉 [VSCode插件推荐 | Code Runner: 代码一键运行，支持超过40种语言](https://link.juejin.cn/?target=https%3A%2F%2Fwww.sohu.com%2Fa%2F296509369_791833)
+👉👉 VSCode插件推荐 | Code Runner: 代码一键运行，支持超过40种语言
 
 ![image.png](https://static.xlc520.ml/blogImage/55906fc48cdc4d7d8b3939e3fecc20bb.jpg)
 
@@ -183,7 +183,7 @@ password:
 
 检查代码中单词拼写是否正确，当单词不正常的时候，就会在下方出现波浪线进行提示，还可以自定义词典，忽略某个单词的检查等，更多用法参考下面链接。
 
-👉👉 [VSCode中插件Code Spell Checker](https://link.juejin.cn/?target=https%3A%2F%2Fblog.csdn.net%2Fqq_42078081%2Farticle%2Fdetails%2F115014474)
+👉👉 VSCode中插件Code Spell Checker
 
 ![image.png](https://static.xlc520.ml/blogImage/f88a2af524fc4e19967ac6c4625ca171.jpg)
 
@@ -199,7 +199,7 @@ password:
 
 配置文件的具体内容和使用方法可以看这一篇，很详细。
 
-👉👉 [VSCode配置 Debugger for Chrome插件](https://link.juejin.cn/?target=https%3A%2F%2Fblog.csdn.net%2Fweixin_40965293%2Farticle%2Fdetails%2F80525317)
+👉👉 VSCode配置 Debugger for Chrome插件
 
 ## Git History
 
@@ -466,7 +466,7 @@ password:
 
 在根目录下新建 `.prettierrc.json` 文件，在里面书写自己想要的格式就行了。更具体的配置内容查看链接
 
-👉👉 [# vscode 使用Prettier插件格式化配置使用](https://link.juejin.cn/?target=https%3A%2F%2Fblog.csdn.net%2Fhbiao68%2Farticle%2Fdetails%2F107176795%2F%3Futm_term%3Dvscode%E7%9A%84prettier%E9%85%8D%E7%BD%AE%26utm_medium%3Ddistribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-1-107176795%26spm%3D3001.4430)
+👉👉 # vscode 使用Prettier插件格式化配置使用
 
 ![image.png](https://static.xlc520.ml/blogImage/dc1655149c624a9da511d737151e4253.jpg)
 

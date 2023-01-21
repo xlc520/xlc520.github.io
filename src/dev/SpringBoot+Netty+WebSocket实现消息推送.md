@@ -44,7 +44,6 @@ public class SpringCloudStudyDemoApplication {
   SpringApplication.run(SpringCloudStudyDemoApplication.class,args);
   try {
    new NettyServer(12345).start();
-   System.out.println("https://blog.csdn.net/moshowgame");
    System.out.println("http://127.0.0.1:6688/netty-websocket/index");
   }catch(Exception e) {
    System.out.println("NettyServerError:"+e.getMessage());
@@ -58,11 +57,6 @@ public class SpringCloudStudyDemoApplication {
 启动的NettyServer，这里进行配置
 
 ```java
-/**
- * NettyServer Netty服务器配置
- * @author zhengkai.blog.csdn.net
- * @date 2019-06-12
- */
 public class NettyServer {
     private final int port;
  
@@ -110,12 +104,6 @@ public class NettyServer {
 通道组池，管理所有websocket连接
 
 ```java
-/**
- * MyChannelHandlerPool
- * 通道组池，管理所有websocket连接
- * @author zhengkai.blog.csdn.net
- * @date 2019-06-12
- */
 public class MyChannelHandlerPool {
 
     public MyChannelHandlerPool(){}
@@ -134,11 +122,6 @@ public class MyChannelHandlerPool {
 - channelRead0客户端发送消息处理
 
 ```java
-/**
- * NettyServer Netty服务器配置
- * @author zhengkai.blog.csdn.net
- * @date 2019-06-12
- */
 public class NettyServer {
     private final int port;
  
@@ -192,7 +175,6 @@ public class NettyServer {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Netty-Websocket</title>
     <script type="text/javascript">
-        // by zhengkai.blog.csdn.net
         var socket;
         if(!window.WebSocket){
             window.WebSocket = window.MozWebSocket;
@@ -297,7 +279,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocke
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        //首次连接是FullHttpRequest，处理参数 by zhengkai.blog.csdn.net
+        //首次连接是FullHttpRequest，处理参数 
         if (null != msg && msg instanceof FullHttpRequest) {
             FullHttpRequest request = (FullHttpRequest) msg;
             String uri = request.uri();

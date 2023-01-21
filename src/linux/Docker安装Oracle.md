@@ -166,7 +166,12 @@ docker exec -it oracle bash
 
 #### 3.3.1. 编辑环境变量
 
-[优化冒泡排序和选择排序zip![img](https://static.xlc520.ml/blogImage/star.png)0星超过10%的资源595KB![img](https://static.xlc520.ml/blogImage/arrowDownWhite.png)下载](https://download.csdn.net/download/mmc_maodun/6970951)
+优化冒泡排序和选择排序zip
+![img](https://static.xlc520.ml/blogImage/star.png)
+
+0星超过10%的资源595KB
+
+![img](https://static.xlc520.ml/blogImage/arrowDownWhite.png)
 
 ```shell
 vi /etc/profile
@@ -216,7 +221,10 @@ alter user system identified by system ;--修改system用户账号密码；
 alter user sys identified by sys ;--修改sys用户账号密码；
 ```
 
-[冒泡排序和选择法排序的源代码c![img](https://static.xlc520.ml/blogImage/star.png)0星超过10%的资源712.0B![img](https://static.xlc520.ml/blogImage/arrowDownWhite.png)下载](https://download.csdn.net/download/weiwei1988815/5500567)
+冒泡排序和选择法排序的源代码
+![img](https://static.xlc520.ml/blogImage/star.png)
+
+![img](https://static.xlc520.ml/blogImage/arrowDownWhite.png)
 
 #### 3.5.2. 添加和授权用户
 
@@ -352,7 +360,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/zhuyijun/oracle:19c
 
 ![在这里插入图片描述](https://static.xlc520.ml/blogImage/2031bd4759e54c4c9dd4249ab2e29eee.png)
 
-### 第二步：创建[挂载](https://so.csdn.net/so/search?q=挂载&spm=1001.2101.3001.7020)文件
+### 第二步：创建挂载文件
 
 ```sh
 # 创建文件

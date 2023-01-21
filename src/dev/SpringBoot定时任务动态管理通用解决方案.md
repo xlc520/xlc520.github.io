@@ -474,7 +474,7 @@ public interface BaseStrengthen {
 }
 ```
 
-#### (2) 代理[抽象类](https://so.csdn.net/so/search?q=抽象类&spm=1001.2101.3001.7020)
+#### (2) 代理抽象类
 
 ```java
 public abstract class Point {
@@ -515,7 +515,7 @@ public class Chain {
 }
 ```
 
-#### (4) [cglib](https://so.csdn.net/so/search?q=cglib&spm=1001.2101.3001.7020)动态代理实现
+#### (4) cglib动态代理实现
 
 使用cglib代理增强器，将增强器全部代理成调用链节点Point
 
