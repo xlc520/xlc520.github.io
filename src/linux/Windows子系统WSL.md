@@ -2,7 +2,7 @@
 author: xlc520
 title: Windows 子系统 WSL
 description: 
-date: 2022-08-20
+date: 2023-01-25
 category: Linux
 tag: 
  - Linux
@@ -315,15 +315,17 @@ vim /etc/docker/daemon.json
 ```json
 {
 	"registry-mirrors":[
-        "https://l1hp9lgc.mirror.aliyuncs.com",
-        "https://docker.mirrors.ustc.edu.cn",
-        "http://hub-mirror.c.163.com",
-        "http://f1361db2.m.daocloud.io",
-        "https://ovfftd6p.mirror.aliyuncs.com",
-        "https://ayyx3zqn.mirror.aliyuncs.com",
-        "https://registry.docker-cn.com",
-        "https://dockerhub.azk8s.cn",
-        "https://reg-mirror.qiniu.com"
+      "https://docker.mirrors.ustc.edu.cn",
+      "https://l1hp9lgc.mirror.aliyuncs.com",
+      "https://hub-mirror.c.163.com",
+      "http://f1361db2.m.daocloud.io",
+      "https://ovfftd6p.mirror.aliyuncs.com",
+      "https://ayyx3zqn.mirror.aliyuncs.com",
+      "https://1nj0zren.mirror.aliyuncs.com",
+      "https://registry.docker-cn.com",
+      "https://dockerhub.azk8s.cn",
+      "https://reg-mirror.qiniu.com"
+      
     ]
 }
 ```
