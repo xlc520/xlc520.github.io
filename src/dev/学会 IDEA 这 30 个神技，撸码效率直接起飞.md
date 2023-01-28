@@ -52,7 +52,7 @@ IDEA 作为Java开发工具的后起之秀，几乎以碾压之势把其他对�
 
 鼠标在需要查看的java类 右键 找到`Local History` >> `Show History` 点开即可看到历史版本，常用于自己忘记代码改了哪些内容 或需要恢复至某个版本 (注意 只能看近期修改 太久了也是看不到的)
 
-![图片](https://static.xlc520.ml/blogImage/640.png)
+![图片](https://static.xlc520.ml/blogImage/640-1674302588592-0.png)
 
 ### 2. 调整idea的虚拟内存：
 

@@ -1,7 +1,7 @@
 ---
 author: xlc520
 title: Linux 系统日常运维巡检脚本
-description: 
+description: Linux 系统日常巡检脚本，巡检内容包含了，磁盘，内存 cpu 进程 文件更改 用户登录等一系列的操作 直接用就行了
 date: 2023-01-22
 category: Linux
 tag: Linux
