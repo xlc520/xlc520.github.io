@@ -11,7 +11,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # Windows 10 安装 WSA

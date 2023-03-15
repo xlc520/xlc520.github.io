@@ -8,8 +8,6 @@ tag: daily
 article: true
 timeline: true
 icon: type
-password: 
-
 ---
 
 # 去除MIUI10秒的警告

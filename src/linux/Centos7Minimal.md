@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: type
-password: 
 ---
 # Centos7 Minimal 安装后初始化配置
 

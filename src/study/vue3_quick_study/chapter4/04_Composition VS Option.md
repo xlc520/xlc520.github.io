@@ -8,7 +8,6 @@ tag: Vue
 article: true
 dateline: true
 icon: vue
-password: 
 ---
 # 4. Composition API VS Option API
 

@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # 使用OpenSSL生成自签名证书，实现HTTPS传输

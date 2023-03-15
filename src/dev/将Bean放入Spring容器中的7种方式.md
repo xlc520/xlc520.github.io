@@ -8,7 +8,6 @@ tag: Java
 article: true
 timeline: true
 icon: type
-password: 
 ---
 # SpringBoot将Bean放入Spring容器中的7(五)种方式
 

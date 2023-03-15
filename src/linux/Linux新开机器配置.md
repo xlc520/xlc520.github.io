@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # Linux新开机器配置

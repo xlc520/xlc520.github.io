@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: others
-password: 
 ---
 
 # 谷歌Gmail注册显示此号码不能验证的解决办法

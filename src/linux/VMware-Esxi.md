@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # VMware-Esxi 各个版本镜像文件iso下载链接

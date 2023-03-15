@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # Linux 系统日常运维巡检脚本

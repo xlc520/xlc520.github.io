@@ -8,7 +8,6 @@ tag: Java
 article: true
 timeline: true
 icon: java
-password: 
 ---
 
 # IntelliJ IDEA 快捷键大全 + 动图演示

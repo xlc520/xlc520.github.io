@@ -8,7 +8,6 @@ tag: Git
 article: true
 dateline: true
 icon: git
-password: 
 ---
 
 <p align="center"> 

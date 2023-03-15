@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: type
-password: 
 ---
 
 # 宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号

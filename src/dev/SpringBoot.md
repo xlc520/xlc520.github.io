@@ -8,7 +8,6 @@ tag: other
 article: true
 timeline: true
 icon: type
-password: 
 ---
 # SpringBoot+拦截器+自定义异常+自定义注解+全局异常处理
 

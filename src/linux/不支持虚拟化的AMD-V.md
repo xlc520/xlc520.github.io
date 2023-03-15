@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # 主机支持AMD-V但处于禁用?不支持虚拟化的AMD-V？无法打开BIOS？

@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: type
-password: 
 ---
 
 # 实用 shell 脚本

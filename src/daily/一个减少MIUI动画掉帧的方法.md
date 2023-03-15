@@ -8,7 +8,6 @@ tag: daily
 article: true
 timeline: true
 icon: date
-password: 
 ---
 
 # 一个减少MIUI动画掉帧的方法

@@ -8,7 +8,6 @@ tag: Git
 article: true
 dateline: true
 icon: type
-password: 
 ---
 
 # Git丨commit规范 & emoji表情

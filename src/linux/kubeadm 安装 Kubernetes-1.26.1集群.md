@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # kubeadm 安装 Kubernetes-1.26.1集群

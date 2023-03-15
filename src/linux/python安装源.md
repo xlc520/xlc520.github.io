@@ -8,7 +8,6 @@ tag: other
 article: true
 timeline: true
 icon: type
-password: 
 ---
 # python安装源
 

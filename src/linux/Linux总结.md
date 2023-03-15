@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: type
-password: 
 ---
 
 # Linux系统总结

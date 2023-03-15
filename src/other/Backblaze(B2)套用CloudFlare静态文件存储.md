@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: others
-password: 
 ---
 
 # Backblaze(B2)套用CloudFlare静态文件存储

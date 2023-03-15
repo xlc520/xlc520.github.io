@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # 自动封禁IP脚本

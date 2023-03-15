@@ -8,7 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # Linux发送udp/tcp包最简单方法-netcat

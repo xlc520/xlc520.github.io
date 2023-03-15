@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # tmpfiles.d 中文手册

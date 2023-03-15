@@ -74,10 +74,14 @@ export default defineUserConfig({
       // 索引全部内容
       indexContent: true,
       hotKeys: [{key: 'k', ctrl: true}], //热键
-      // 存储历史项目的最大数量
-      historyCount: 10,
+      // 存储搜索结果历史的最大数量
+      resultHistoryCount: 10,
+      // 存储搜索查询词历史的最大数量
+      queryHistoryCount: 10,
       // 结束输入到开始搜索的延时
       delay: 500,
+      // 是否在开发服务器中中启用实时热重载
+      hotReload: true,
       // 为分类和标签添加索引
       customFields: [
         {

@@ -12,7 +12,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # Windows 子系统 WSL

@@ -8,7 +8,6 @@ tag: pc
 article: true
 timeline: true
 icon: computer
-password: 
 ---
 
 # 9个很酷的CMD命令

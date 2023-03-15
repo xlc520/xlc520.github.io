@@ -13,7 +13,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # 搭建基于Docker Desktop & WSL2

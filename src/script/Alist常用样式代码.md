@@ -10,7 +10,6 @@ tag:
 article: true
 dateline: true
 icon: script
-password: 
 ---
 
 # Alist常用样式代码

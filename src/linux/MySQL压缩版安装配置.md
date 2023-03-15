@@ -8,7 +8,6 @@ tag: other
 article: true
 timeline: true
 icon: type
-password: 
 ---
 # MySQL压缩版安装配置
 

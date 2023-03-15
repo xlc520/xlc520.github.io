@@ -8,7 +8,6 @@ tag: Java
 article: true
 timeline: true
 icon: type
-password: 
 ---
 
 # Spring Boot启动默认的banner

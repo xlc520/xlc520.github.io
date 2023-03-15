@@ -8,7 +8,6 @@ tag: Tools
 article: true
 dateline: true
 icon: type
-password: 
 ---
 # SSH客户端软件
 

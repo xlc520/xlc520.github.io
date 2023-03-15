@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: linux
-password: 
 ---
 
 # kubernetes笔记

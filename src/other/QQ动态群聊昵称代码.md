@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: others
-password: 
 ---
 
 # QQ动态群聊昵称代码

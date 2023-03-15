@@ -8,7 +8,6 @@ tag: other
 article: true
 timeline: true
 icon: others
-password: 
 ---
 
 # 全平台 DoH DoT 设置教程

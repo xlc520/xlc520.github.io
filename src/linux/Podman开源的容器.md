@@ -8,8 +8,6 @@ tag: Linux
 article: true
 timeline: true
 icon: type
-password: 
-
 ---
 
 # Podman开源的容器

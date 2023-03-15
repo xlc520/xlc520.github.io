@@ -10,7 +10,6 @@ tag:
 article: true
 timeline: true
 icon: others
-password: 
 ---
 
 # 新版QQ修改彩色颜色字体代码教程

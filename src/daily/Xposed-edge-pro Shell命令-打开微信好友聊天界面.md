@@ -8,8 +8,6 @@ tag: daily
 article: true
 timeline: true
 icon: type
-password: 
-
 ---
 
 # Xposed-edge-pro Shell命令-打开微信好友聊天界面

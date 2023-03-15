@@ -8,7 +8,6 @@ tag: Java
 article: true
 timeline: true
 icon: java
-password: 
 ---
 
 # JSP和JSTL获取服务器参数

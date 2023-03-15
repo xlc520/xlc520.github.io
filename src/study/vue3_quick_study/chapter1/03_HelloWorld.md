@@ -8,7 +8,6 @@ tag: Vue
 article: true
 dateline: true
 icon: vue
-password: 
 ---
 # 3. 第一个 TypeScript 程序
 
