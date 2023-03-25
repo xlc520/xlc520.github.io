@@ -6,8 +6,9 @@ export default hopeTheme({
   hostname: "https://blog.ciberviler.top",
 
   author: {
-    name: "xlc520",
+    name: "xlc520 - Lin Cheng",
     url: "https://github.com/xlc520",
+    email: "xulinch520@gmail.com"
   },
 
   iconAssets: "iconfont",
