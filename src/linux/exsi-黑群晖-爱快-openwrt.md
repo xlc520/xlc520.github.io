@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: exsi+黑群晖+爱快+openwrt
+title: exsi-黑群晖-爱快-openwrt
 description: 
 date: 2022-10-01
 category: Linux
@@ -10,7 +10,7 @@ timeline: true
 icon: linux
 ---
 
-# exsi+黑群晖+爱快+openwrt
+# exsi-黑群晖-爱快-openwrt
 
 ### 一. 硬件选型:
 

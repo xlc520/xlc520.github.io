@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: 搭建基于Docker Desktop & WSL2
+title: 搭建基于Docker Desktop - WSL2
 description: Linux分类
 date: 2022-09-22
 category: Linux
@@ -15,7 +15,7 @@ timeline: true
 icon: linux
 ---
 
-# 搭建基于Docker Desktop & WSL2
+# 搭建基于Docker Desktop - WSL2
 
 https://www.cnblogs.com/taylorshi/p/13698355.html
 

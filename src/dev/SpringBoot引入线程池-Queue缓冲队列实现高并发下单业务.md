@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务
+title: SpringBoot 引入线程池-Queue缓冲队列实现高并发下单业务
 description: 
 date: 2022-05-26
 category: Java
@@ -12,7 +12,7 @@ icon: java
 
 
 
-# SpringBoot 引入线程池+Queue缓冲队列实现高并发下单业务
+# SpringBoot 引入线程池-Queue缓冲队列实现高并发下单业务
 
 - 1.首先是springBoot的项目框架如下：
 - 2.业务测试流程涉及的类，如下

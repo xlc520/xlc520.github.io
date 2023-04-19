@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: ESXI+iKuai+OpenWrt
+title: ESXI-iKuai-OpenWrt
 description: 
 date: 2022-10-02
 category: Linux
@@ -10,7 +10,7 @@ timeline: true
 icon: linux
 ---
 
-# ESXI+iKuai+OpenWrt
+# ESXI-iKuai-OpenWrt
 
 ### 一、安装准备
 
