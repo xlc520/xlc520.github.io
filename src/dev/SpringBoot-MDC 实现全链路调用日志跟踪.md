@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: SpringBoot + MDC 实现全链路调用日志跟踪
+title: SpringBoot - MDC 实现全链路调用日志跟踪
 description: 
 date: 2023-01-23
 category: Java
@@ -14,7 +14,7 @@ icon: java
 
 
 
-# SpringBoot + MDC 实现全链路调用日志跟踪
+# SpringBoot - MDC 实现全链路调用日志跟踪
 
 ### MDC 介绍
 

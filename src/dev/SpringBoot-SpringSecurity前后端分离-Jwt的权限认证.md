@@ -1,7 +1,7 @@
 ---
 author: xlc520
-title: SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
-description: SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
+title: SpringBoot-SpringSecurity前后端分离-Jwt的权限认证
+description: 
 date: 2022-02-13
 category: Java
 tag: Java
@@ -10,7 +10,7 @@ timeline: true
 icon: type
 ---
 
-# SpringBoot+SpringSecurity前后端分离+Jwt的权限认证
+# SpringBoot-SpringSecurity前后端分离-Jwt的权限认证
 
 ## 前言
 

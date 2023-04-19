@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: Spring Boot + Netty + WebSocket 实现消息推送
+title: Spring Boot - Netty - WebSocket 实现消息推送
 description: 
 date: 2022-08-21
 category: Java
@@ -12,7 +12,7 @@ icon: java
 
 
 
-# Spring Boot + Netty + WebSocket 实现消息推送
+# Spring Boot - Netty - WebSocket 实现消息推送
 
 ## **关于Netty**
 

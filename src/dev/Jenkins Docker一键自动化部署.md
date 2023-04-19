@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: Jenkins + Docker 一键自动化部署
+title: Jenkins Docker一键自动化部署
 description: 
 date: 2022-11-09
 category: Java
@@ -13,9 +13,7 @@ timeline: true
 icon: java
 ---
 
-
-
-# Jenkins + Docker 一键自动化部署
+# Jenkins Docker一键自动化部署
 
 - 环境：CentOS7 + Git (Gitee)
 - 实现步骤：在 Docker 安装 Jenkins，配置 Jenkins 基本信息，利用 Dockerfile 和 Shell 脚本实现项目自动拉取打包并运行。

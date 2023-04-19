@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查
+title: Spring Boot - Mybatis Plus - ClickHouse 轻松实现增删改查
 description: 
 date: 2022-05-27
 category: Java
@@ -12,7 +12,7 @@ icon: java
 
 
 
-# Spring Boot + Mybatis Plus + ClickHouse 轻松实现增删改查
+# Spring Boot - Mybatis Plus - ClickHouse 轻松实现增删改查
 
 ## 项目场景：
 

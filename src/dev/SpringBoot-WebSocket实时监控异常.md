@@ -1,7 +1,7 @@
 ---
 author: xlc520
-title: SpringBoot+WebSocket实时监控异常
-description: SpringBoot+WebSocket实时监控异常
+title: SpringBoot-WebSocket实时监控异常
+description: SpringBoot-WebSocket实时监控异常
 date: 2022-05-15
 category: Java
 tag: Java
@@ -10,7 +10,7 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot+WebSocket实时监控异常
+# SpringBoot-WebSocket实时监控异常
 
 ## 需求
 

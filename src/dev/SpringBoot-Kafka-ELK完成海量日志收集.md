@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: SpringBoot+Kafka+ELK 完成海量日志收集
+title: SpringBoot-Kafka-ELK 完成海量日志收集
 description: 
 date: 2022-08-05
 category: Java
@@ -12,7 +12,7 @@ icon: java
 
 
 
-# SpringBoot+Kafka+ELK 完成海量日志收集
+# SpringBoot-Kafka-ELK 完成海量日志收集
 
 整体流程大概如下：
 

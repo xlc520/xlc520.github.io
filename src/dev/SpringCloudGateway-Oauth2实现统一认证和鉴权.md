@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: Spring Cloud Gateway + Oauth2 实现统一认证和鉴权
+title: Spring Cloud Gateway - Oauth2 实现统一认证和鉴权
 description: 微服务权限终极解决方案，Spring Cloud Gateway + Oauth2 实现统一认证和鉴权
 date: 2022-04-09
 category: Java
@@ -12,7 +12,7 @@ icon: java
 
 
 
-# Spring Cloud Gateway + Oauth2 实现统一认证和鉴权
+# Spring Cloud Gateway - Oauth2 实现统一认证和鉴权
 
 ## 摘要
 
