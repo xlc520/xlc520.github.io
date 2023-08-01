@@ -14,7 +14,7 @@ icon: java
 
 # Quartz - 任务调度框架整合使用
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548287.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548287.png)
 
 
 各种实现自定义定时任务的方案，从Quartz到Xxl-job，再到Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz 的保姆级教程，在这里分享给大家；
@@ -45,7 +45,7 @@ Quartz 的核心类有以下三部分：
 
 主要关系如下：
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548281.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548281.png)
 
 ## 3Demo
 
@@ -113,13 +113,13 @@ public static void main(String[] args) throws Exception {
 
 日志打印情况：
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548282.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548282.png)
 
 ## 4JobDetail
 
 JobDetail 的作用是绑定 Job，是一个任务实例，它为 Job 添加了许多扩展参数。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548293.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548293.png)
 
 每次`Scheduler`调度执行一个Job的时候，首先会拿到对应的Job，然后创建该Job实例，再去执行Job中的`execute()`的内容，任务执行结束后，关联的Job对象实例会被释放，且会被JVM GC清除。
 
@@ -283,7 +283,7 @@ TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("* * *
 
 Cron 表达式这里不介绍，贴个图跳过
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548294.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548294.png)
 
 顺便推荐一个非常好用的Cron 表达式在线生成，反解析的工具：www.matools.com/cron 非常好用，点几下，就能得到自己想要的cron表达式；
 
@@ -293,7 +293,7 @@ Cron 表达式这里不介绍，贴个图跳过
 
 ![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548295.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548295.png)
 
 从上面的截图中，可以看到这个定时任务模块实现了：
 
@@ -805,7 +805,7 @@ public int insertJob(QuartzJob job) throws Exception {
 
 再手动启动任务，根据 ID 来启动任务：
 
-![图片](https://static.xlc520.ml/blogImage/640-16535411548296.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535411548296.png)
 
 实现代码：
 

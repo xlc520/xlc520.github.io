@@ -95,7 +95,7 @@ icon: java
 
 - `<fileNamePattern>`标签指定生成日志保存地址 通过这样配置已经实现了分类分天手机日志的目标了
 
-![图片](https://static.xlc520.ml/blogImage/640-16556915204025.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-16556915204025.jpeg)
 
 ### 03、logback 高级特性异步输出日志
 
@@ -141,7 +141,7 @@ icon: java
 - `Ramp-Up Loop`(可以理解为启动线程所用时间) ：0 可以理解为100个线程同时启用
 - 测试结果
 
-![图片](https://static.xlc520.ml/blogImage/640-16556915204021.png)
+![图片](https://static.linch.eu.org/blogImage/640-16556915204021.png)
 
 重点关注指标 Throughput【TPS】 吞吐量：系统在单位时间内处理请求的数量，在同步输出日志中 TPS 为 44.2/sec
 
@@ -151,7 +151,7 @@ icon: java
 - `Ramp-Up Loop`：0
 - 测试结果
 
-![图片](https://static.xlc520.ml/blogImage/640-16556915204022.png)
+![图片](https://static.linch.eu.org/blogImage/640-16556915204022.png)
 
 TPS 为 497.5/sec ， 性能提升了10多倍！！！
 
@@ -159,7 +159,7 @@ TPS 为 497.5/sec ， 性能提升了10多倍！！！
 
 从`logback`框架下的`Logger.info`方法开始追踪。一路的方法调用路径如下图所示：
 
-![图片](https://static.xlc520.ml/blogImage/640-16556915204023.png)
+![图片](https://static.linch.eu.org/blogImage/640-16556915204023.png)
 
 异步输出日志中最关键的就是配置文件中`ch.qos.logback.classic``AsyncAppenderBase``append`
 
@@ -184,7 +184,7 @@ aai.appendLoopOnAppenders(e);
 
 从阻塞队列中取出一个日志，并调用`AppenderAttachableImpl`类中的`appendLoopOnAppenders`方法维护一个`Append`列表。`Worker`线程中调用方法过程主要如下图：
 
-![图片](https://static.xlc520.ml/blogImage/640-16556915204024.png)
+![图片](https://static.linch.eu.org/blogImage/640-16556915204024.png)
 
 最主要的两个方法就是`encode``write``encode`
 

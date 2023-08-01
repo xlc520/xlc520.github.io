@@ -37,7 +37,7 @@ icon: type
 
 **那么这套生态规范都提供了哪些技术框架呢？**
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184769926-0.png)
+![图片](https://static.linch.eu.org/blogImage/640-1674184769926-0.png)
 ## 一、Spring Boot（服务基座）
 
 Spring Boot 是Spring框架的扩展，提供更加 `丰富的注解`，根据 **约定胜于配置** 原则，与市场主流的开源框架打通， 设计了 `Starter` 和 `AutoConfiguration` 机制，简化配置流程，通过简单的jar包引入，快速具备组件集成能力。大大提高了程序员的开发效率。
@@ -66,7 +66,7 @@ Nacos 有一个控制台，可以帮助用户管理服务，监控服务状态�
 
 Nacos 官方提供的集群部署架构图：
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184769926-3.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1674184769926-3.jpeg)
 
 > https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html
 
@@ -91,7 +91,7 @@ Nacos 官方提供的集群部署架构图：
 
 当然 `OpenResty` 也可能成为单点故障，为了保证高可用，我们需要借助 `Keepalived`
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184773759-6.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1674184773759-6.jpeg)
 
 客户端请求 VIP，然后请求打到了 OpenResty，由 OpenResty 转发给具体的某个 Nacos 节点。
 
@@ -220,7 +220,7 @@ Dubbo Spring Cloud = Spring Cloud  + Dubbo
 
 网关充当反向代理的角色，作为流量的第一入口，承载了很多基础的、公共的模块功能，如：流控、鉴权、监控、路由转发等。
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184784231-9.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1674184784231-9.jpeg)
 
 Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区停止了维护。官方后来推出了 Spring Cloud Gateway，**其底层是基于 WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。
 
@@ -372,7 +372,7 @@ Seata 是一款开源的分布式事务解决方案，致力于提供高性能�
 - 对业务无侵入：即减少技术架构上的微服务化所带来的分布式事务问题对业务的侵入
 - 高性能：减少分布式事务解决方案所带来的性能消耗
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184804718-12.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1674184804718-12.jpeg)
 **Seata有3个基本组成部分** ：
 
 - 事务管理器（TM）：定义全局事务的范围：开始全局事务，提交或回滚全局事务。
@@ -484,7 +484,7 @@ SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云�
 - 多个语言自动探针。包括 Java，.NET Core 和 Node.JS。
 - 强大的可视化后台
 
-![图片](https://static.xlc520.ml/blogImage/640-1674184808450-15.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1674184808450-15.jpeg)
 
 - 上部分 Agent ：负责从应用中，收集链路信息，发送给 SkyWalking OAP 服务器。目前支持 SkyWalking、Zikpin、Jaeger 等提供的 Tracing 数据信息。而我们目前采用的是，SkyWalking Agent 收集 SkyWalking Tracing 数据，传递给服务器。
 - 下部分 SkyWalking OAP ：负责接收 Agent 发送的 Tracing 数据信息，然后进行分析(Analysis Core) ，存储到外部存储器( Storage )，最终提供查询( Query )功能。

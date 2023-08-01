@@ -46,7 +46,7 @@ BUCKET(桶)文件数：无限
 
 配上CloudFlare配置缓存时间更久一些，辣么下载请求无限次免费啦。看看联盟有没有你熟悉的LOGO？
 
-![img](https://static.xlc520.ml/blogImage/c57394926b319339.png)
+![img](https://static.linch.eu.org/blogImage/c57394926b319339.png)
 
  
 
@@ -60,7 +60,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 **提醒一下，界面右下角可以切换到简体中文**
 
-![img](https://static.xlc520.ml/blogImage/6aa0b5180f158c7a.png)
+![img](https://static.linch.eu.org/blogImage/6aa0b5180f158c7a.png)
 
  
 
@@ -72,13 +72,13 @@ https://www.backblaze.com/b2/sign-up.html
 
 **特别提醒：桶名称要复杂一些，小心被刷流量！建议生成UUID**
 
-![img](https://static.xlc520.ml/blogImage/6bcae128a5aae3f2.png)
+![img](https://static.linch.eu.org/blogImage/6bcae128a5aae3f2.png)
 
  
 
 2）创建成功后 点击 【上载/下载】可以去上传一个文件！
 
-![img](https://static.xlc520.ml/blogImage/d059f7012f8e6c7f.png)
+![img](https://static.linch.eu.org/blogImage/d059f7012f8e6c7f.png)
 
  
 
@@ -86,7 +86,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 特别要记住友好URL中的域名，如图是 **f004.backblazeb2.com**
 
-![img](https://static.xlc520.ml/blogImage/5080cc13667c7a8b.png)
+![img](https://static.linch.eu.org/blogImage/5080cc13667c7a8b.png)
 
  
 
@@ -98,7 +98,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 **没有域名？参考文章：[人人都可申请拥有EU.org免费域名](https://51.ruyo.net/17863.html)**
 
-![img](https://static.xlc520.ml/blogImage/f7fe01ec953be195.png)
+![img](https://static.linch.eu.org/blogImage/f7fe01ec953be195.png)
 
  
 
@@ -108,7 +108,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 经过一波骚操作，访问URL提示：Error 522 错误？？
 
-![img](https://static.xlc520.ml/blogImage/d8f4f762cf8bb6a5.png)
+![img](https://static.linch.eu.org/blogImage/d8f4f762cf8bb6a5.png)
 
  
 
@@ -120,7 +120,7 @@ Cloudflare 通过纯 HTTP 而不是 HTTPS 访问上游服务器。
 
 为了解决这个问题，在 Cloudflare 仪表板的 【SSL/TLS 部分】，将加密模式从“灵活”更改为“完全（严格）”，以便 Cloudflare 通过 HTTPS 连接到 Backblaze，并且需要 CA 颁发的证书。
 
-![img](https://static.xlc520.ml/blogImage/15904fb466238d83.png)
+![img](https://static.linch.eu.org/blogImage/15904fb466238d83.png)
 
  
 
@@ -132,7 +132,7 @@ B2 桶 - 自己创建的桶 - 桶设定
 
 桶信息填写(缓存一个月)：`{"cache-control":"max-age=2592000"}`
 
-![img](https://static.xlc520.ml/blogImage/935e290f3246a582.png)
+![img](https://static.linch.eu.org/blogImage/935e290f3246a582.png)
 
  
 
@@ -142,7 +142,7 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 设置选择： 缓存级别 - 标准，边缘缓存TTL - 1个月
 
-![img](https://static.xlc520.ml/blogImage/370cfd749d6b3126.png)
+![img](https://static.linch.eu.org/blogImage/370cfd749d6b3126.png)
 
  
 
@@ -156,7 +156,7 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 **Cloudflare 域名仪表盘 - 规则 - 转换规则- 创建转换规则 - 重写URL**
 
-![img](https://static.xlc520.ml/blogImage/238a2376952d1ca8.png)
+![img](https://static.linch.eu.org/blogImage/238a2376952d1ca8.png)
 
  
 
@@ -178,13 +178,13 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 名称随意，允许访问桶 建议选择1个，其他默认即可
 
-![img](https://static.xlc520.ml/blogImage/542c803a7f301bc8.png)
+![img](https://static.linch.eu.org/blogImage/542c803a7f301bc8.png)
 
  
 
 2）提交成功，一定要记住记住相关信息，关了以后密钥就看不到了，只能重新创建
 
-![img](https://static.xlc520.ml/blogImage/0372c8e08620f583.png)
+![img](https://static.linch.eu.org/blogImage/0372c8e08620f583.png)
 
  
 

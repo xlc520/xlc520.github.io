@@ -22,11 +22,11 @@ icon: linux
 
 
 
-![img](https://static.xlc520.ml/blogImage/v2-8a79263cd27fc8794234052614fad7ed_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-8a79263cd27fc8794234052614fad7ed_r.jpg)
 
 
 
-![img](https://static.xlc520.ml/blogImage/v2-b003e2e88a990f28d34b632cfc633b3e_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-b003e2e88a990f28d34b632cfc633b3e_r.jpg)
 
 
 
@@ -41,19 +41,19 @@ icon: linux
 
 > systemctl get-default
 
-![img](https://static.xlc520.ml/blogImage/v2-a3040b761b076098bb9b688bfb835f69_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-a3040b761b076098bb9b688bfb835f69_r.jpg)
 
 再查看软链接目录下是否有误：
 
 > ls -al /etc/systemd/system/
 
-![img](https://static.xlc520.ml/blogImage/v2-2e028bdf7ea4e0697861d4f096b272aa_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-2e028bdf7ea4e0697861d4f096b272aa_r.jpg)
 
 2、排查开机启动项
 
 > cat /etc/rc.d/rc.local
 
-![img](https://static.xlc520.ml/blogImage/v2-822cc5cdeec7d67cb8e2d16fb7284cbf_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-822cc5cdeec7d67cb8e2d16fb7284cbf_r.jpg)
 
 并无有关设置启动级别的条目，这里大家也不要试了，这里我试过将startx加入到这里开机运行，结果开机直接卡在了桌面，进不去。和这里应该是没有关系的。
 
@@ -63,7 +63,7 @@ icon: linux
 
 > cat /boot/grub2/grub.cfg
 
-![img](https://static.xlc520.ml/blogImage/v2-3ffc729159af0dbbfb2d5f9ab59e9996_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-3ffc729159af0dbbfb2d5f9ab59e9996_r.jpg)
 
 
 
@@ -89,9 +89,9 @@ GDM (The GNOME Display Manager)是GNOME显示环境的管理器，并被用来�
 
 下面我们直接测试该服务如果设置开机不自启动，会产生什么样的现象：
 
-![img](https://static.xlc520.ml/blogImage/v2-b04965446234d2582cac0f0babb1dbe6_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-b04965446234d2582cac0f0babb1dbe6_r.jpg)
 
-![img](https://static.xlc520.ml/blogImage/v2-a13c66244680f02646ec57bc32d89455_r.jpg)
+![img](https://static.linch.eu.org/blogImage/v2-a13c66244680f02646ec57bc32d89455_r.jpg)
 
 **重启后进入了命令行模式，也实现了无论如何设置开机启动级别，但是开机依然进入了命令行。这个时候你就要注意看看是不是这个服务被设置成开机不自启动了**。
 

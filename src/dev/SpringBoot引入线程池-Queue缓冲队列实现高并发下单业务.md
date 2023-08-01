@@ -32,7 +32,7 @@ icon: java
 
 ## 1.首先是springBoot的项目框架如下：
 
-![image-20220524225159288](https://static.xlc520.ml/blogImage/image-20220524225159288.png)
+![image-20220524225159288](https://static.linch.eu.org/blogImage/image-20220524225159288.png)
 
 
 
@@ -257,11 +257,11 @@ public class TestController {
 
 ## 3.使用JMeter模拟并发下单请求
 
-[![图片](https://static.xlc520.ml/blogImage/640-16533988082341.png)]
+[![图片](https://static.linch.eu.org/blogImage/640-16533988082341.png)]
 ## 4.结果
 
 打印的日志说明，开始的订单直接执行插入到系统，当线程池的容量已经满了，则使用`RejectedExecutionHandler`方法把后面的订单添加到 Queue缓冲队列，使用`ScheduledFuture`方法定时(我这里是每秒一次)检查Queue队列，重新把队列里面的订单添加到线程池，执行后面的插入任务。
 
 部分日志如下
 
-[![图片](https://static.xlc520.ml/blogImage/640-16533988082342.png)]
+[![图片](https://static.linch.eu.org/blogImage/640-16533988082342.png)]

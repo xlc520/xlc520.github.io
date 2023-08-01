@@ -18,7 +18,7 @@ icon: computer
 
 操作方法：只要在在打开的cmd命令界面中输入“ipconfig”就可以了。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928341.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928341.png)
 
 ## **msg**
 
@@ -26,7 +26,7 @@ icon: computer
 
 操作方法：首先你要知道对方的IP地址，接下来输入命令“msg /server:对方电脑IP * ”。在“*”后输入你要发送的内容即可。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928331.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928331.png)
 
 ## **Net user**
 
@@ -34,7 +34,7 @@ icon: computer
 
 操作方法：和ipconfig一样，net user也有很多衍生的命令后缀，比方说“net user xxx 123456 /add”，输入后就会在系统中创建一个名为“xxx”的新用户，而新用户密码则是“123456”。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928342.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928342.png)
 
 ## **Net share**
 
@@ -50,7 +50,7 @@ icon: computer
 
 操作方法：在提示符状态输入“nslookup 对方网站域名”，哒哒哒哒……结果出来了！
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928343.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928343.png)
 
 ## **Netsh wlan show**
 
@@ -58,7 +58,7 @@ icon: computer
 
 操作方法：在提示符状态输入命令“netsh wlan show profile SSID key=clear”，输入完成后Windows会自动返回当前已连接WIFI的详细信息，包括SSID和连接密码。当前这里有一个前提，那就是你现在已经成功连接了。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928344.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928344.png)
 
 ## **telnet**
 
@@ -74,7 +74,7 @@ icon: computer
 
 操作方法：在需要导出结果的命令后方添加“|”，再加入导出位置就可以了。比方说“| clip”是导出到剪贴板，“| xxx.txt”是导出到xxx.txt。总之，你需要什么地方用，就放到哪儿，“|”支持绝大多数CMD指令。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928345.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928345.png)
 
 ## **&&**
 
@@ -82,7 +82,7 @@ icon: computer
 
 操作方法：&&是CMD里一项“命令连接”语句，直接放在要连接的命令行中间即可。效果就是下图所示，一次输入后CMD会顺序执行所有命令。
 
-![图片](https://static.xlc520.ml/blogImage/640-16535737928346.png)
+![图片](https://static.linch.eu.org/blogImage/640-16535737928346.png)
 
 
 

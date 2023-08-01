@@ -30,7 +30,7 @@ https://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-you
 
 
 
-![图片](https://static.xlc520.ml/blogImage/640-1672653580048-0.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1672653580048-0.jpeg)
 
 第二步：手机连接电脑，打开ADB工具箱，并且安装驱动（不会的可直接360驱动检测）
 
@@ -38,7 +38,7 @@ https://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-you
 
 再次输入fastboot oem get_unlock_data 回车，成功读取一堆
 
-![图片](https://static.xlc520.ml/blogImage/640-1672653580048-1.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1672653580048-1.jpeg)
 
 第三步:打开你的摩托罗拉解锁账户地址：
 
@@ -46,15 +46,15 @@ https://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-you
 
 将我们第2步生成的unlock数值去掉括号和括号里面的bootloader还有不必要的问题，然后生成一个很长的数值，可能非常长，但千万不要去除错了字母数字符号，将很长的内容复制下面的框框里。这一步非常重要，错误填写都将导致解锁失败
 
-![图片](https://static.xlc520.ml/blogImage/640-1672653580048-2.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1672653580048-2.jpeg)
 
 第四步：获取解锁具体的unlock Code文件解锁。将第三步生成的内容，复制到下图对应位置，直接点击“Can my device beunlocked?”，一路同意，很快我们就成功获取自己机型的unlock Code啦，也就是大家常常说的解锁码。为了安全，请妥善保存好解锁码数字
 
-![图片](https://static.xlc520.ml/blogImage/640-1672653580048-3.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1672653580048-3.jpeg)
 
 第五步：在fastboot模式下，我们直接输入fastboot oem  unlock ******** 回车这个******** 就是我们上一步获取的解锁码数字，可复制进入直接回车
 
-![图片](https://static.xlc520.ml/blogImage/640-1672653580048-4.jpeg)
+![图片](https://static.linch.eu.org/blogImage/640-1672653580048-4.jpeg)
 
 当执行解锁命令并且解锁码正确的时候，手机立马进入解锁引导界面，用音量下移动到UNLOCK THE BOOTLOADER上，然后按1次开机按键，系统就立马自动解锁BL+清空数据开机啦。首次开机较慢，开机完成oem会变成灰色，至此解锁BL成功。解锁BL后，那么面具ROOT就支持刷入修改的magisk_root文件，获取权限啦。如动手能力不强的，也可以联系ROM乐园官方技术团队，在线远程刷机root救砖等，安全快速
 

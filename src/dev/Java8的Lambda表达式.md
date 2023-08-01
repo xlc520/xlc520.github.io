@@ -94,7 +94,7 @@ public class Test {
 
 **示例：本篇所有示例都基于以下三个类。OutstandingClass：班级；Student：学生；SpecialityEnum：特长。**
 
-![img](https://static.xlc520.ml/blogImage/16ae40638d420acdtplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae40638d420acdtplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ##### 1.2 惰性求值与及早求值
 
@@ -127,7 +127,7 @@ public class TestCase {
 
 顾名思义，起**过滤筛选**的作用。**内部就是Predicate接口。惰性求值。**
 
-![img](https://static.xlc520.ml/blogImage/16ae40638d2c0a51tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae40638d2c0a51tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 比如我们筛选出出身高小于180的同学。
 
@@ -153,7 +153,7 @@ public class TestCase {
 
 **转换功能，内部就是Function接口。惰性求值**
 
-![img](https://static.xlc520.ml/blogImage/16ae40638d1c6610tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae40638d1c6610tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -178,7 +178,7 @@ public class TestCase {
 
 **将多个Stream合并为一个Stream。惰性求值**
 
-![img](https://static.xlc520.ml/blogImage/16ae40638c4cca86tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae40638c4cca86tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -262,7 +262,7 @@ public class TestCase {
 **reduce 操作可以实现从一组值中生成一个值**。在上述例子中用到的 count 、 min 和 max 方
 法，因为常用而被纳入标准库中。事实上，这些方法都是 reduce 操作。**及早求值。**
 
-![img](https://static.xlc520.ml/blogImage/16ae40638c52397btplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae40638c52397btplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -332,7 +332,7 @@ maxBy或者minBy就是求最大值与最小值。
 
 **常用的流操作是将其分解成两个集合，Collectors.partitioningBy帮我们实现了，接收一个Predicate函数式接口。**
 
-![img](https://static.xlc520.ml/blogImage/16ae4063943b9487tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae4063943b9487tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 将示例学生分为会唱歌与不会唱歌的两个集合。
 
@@ -352,7 +352,7 @@ public class PartitioningByTest {
 数据分组是一种更自然的分割数据操作，与将数据分成 ture 和 false 两部分不同，**可以使**
 **用任意值对数据分组。Collectors.groupingBy接收一个Function做转换。**
 
-![img](https://static.xlc520.ml/blogImage/16ae4063f5d78c78tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://static.linch.eu.org/blogImage/16ae4063f5d78c78tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 **如图，我们使用groupingBy将根据进行分组为圆形一组，三角形一组，正方形一组。**
 

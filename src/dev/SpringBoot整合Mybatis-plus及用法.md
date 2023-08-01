@@ -701,4 +701,4 @@ controller层新增方法
 2.**UpdateWrapper** ： Update 条件封装，用于Entity对象更新操作
 3.条件构造器使用中的各个方法格式和说明
 
-![image-20220620164733512](https://static.xlc520.ml/blogImage/image-20220620164733512.png)
+![image-20220620164733512](https://static.linch.eu.org/blogImage/image-20220620164733512.png)

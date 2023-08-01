@@ -137,7 +137,7 @@ step3：人像比对。在web后台实例化并调用百度云人脸识别的sdk
 
 页面截图，本人太帅，先行打码，嘿嘿
 
-![img](https://static.xlc520.ml/blogImage/16532156632002.png)
+![img](https://static.linch.eu.org/blogImage/16532156632002.png)
 
 后台具体代码如下:
 
@@ -189,19 +189,19 @@ private static final String APP_ID = "****";
 
 APP_ID 、API_KEY、SECRET_KEY三个参数分别为百度云人脸识别上面的三个数据项，如下图
 
-![img](https://static.xlc520.ml/blogImage/16532156632001.png)
+![img](https://static.linch.eu.org/blogImage/16532156632001.png)
 
-![img](https://static.xlc520.ml/blogImage/16532156632012.png)
+![img](https://static.linch.eu.org/blogImage/16532156632012.png)
 
  点击完注册按钮后，就会发现。。。
 
-![img](https://static.xlc520.ml/blogImage/16532156632013.png)
+![img](https://static.linch.eu.org/blogImage/16532156632013.png)
 
-![img](https://static.xlc520.ml/blogImage/16532156632014.png)
+![img](https://static.linch.eu.org/blogImage/16532156632014.png)
 
-![img](https://static.xlc520.ml/blogImage/16532156632015.png)
+![img](https://static.linch.eu.org/blogImage/16532156632015.png)
 
-![img](https://static.xlc520.ml/blogImage/16532156632016.png)
+![img](https://static.linch.eu.org/blogImage/16532156632016.png)
 
 到这就算一个用户注册成功了，个人这张大帅脸也算是录进去了，下面就是刷脸登录了。
 
@@ -209,7 +209,7 @@ APP_ID 、API_KEY、SECRET_KEY三个参数分别为百度云人脸识别上面�
 
 当我注册完周后就会进入登录页面
 
-![img](https://static.xlc520.ml/blogImage/16532156632017.png)
+![img](https://static.linch.eu.org/blogImage/16532156632017.png)
 
 这时我点击登录按钮，js触发后台方法，具体入下：
 
@@ -253,11 +253,11 @@ APP_ID 、API_KEY、SECRET_KEY三个参数分别为百度云人脸识别上面�
 
 接着我正面面对摄像头，点击登录按钮，就进入了一个大大的success页面
 
-![img](https://static.xlc520.ml/blogImage/16532156632018.png)
+![img](https://static.linch.eu.org/blogImage/16532156632018.png)
 
 我侧脸或者拿照片试一下，不好意思，您老只能是404了
 
-![img](https://static.xlc520.ml/blogImage/16532156632029.png)
+![img](https://static.linch.eu.org/blogImage/16532156632029.png)
 
 以上就是整个实现的思路和一些步骤了，demo涉及的类和页面比较多，不方便一一截图，随后我把资源上传到本站。如有需要可自行下载。
 

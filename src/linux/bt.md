@@ -50,7 +50,7 @@ icon: type
 ```
 
 示例：
-![](https://static.xlc520.ml/bt_2.png)
+![](https://static.linch.eu.org/bt_2.png)
 
 修改完成后重启面板，重启完成后就可以直接安装收费的插件了，Nginx防火墙也可以直接安装使用
 
@@ -68,7 +68,7 @@ icon: type
 ```
 
 示例：
-![](https://static.xlc520.ml/bt_1.png)
+![](https://static.linch.eu.org/bt_1.png)
 
 然后再次重启面板，即可使用网站监控报表插件了；
 

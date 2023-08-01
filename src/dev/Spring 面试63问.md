@@ -62,7 +62,7 @@ icon: type
 
   Spring 总共大约有 20 个模块， 由 1300 多个不同的文件构成。而这些组件被分别整合在核心容器（Core Container） 、 AOP（Aspect Oriented Programming）和设备支持（Instrmentation） 、数据访问与集成（Data Access/Integeration） 、 Web、 消息（Messaging） 、 Test等 6 个模块中。以下是 Spring 5 的模块结构图：
 
-  ![893a32f9ecd60a71e72fd247e0d7bc1c.png](https://static.xlc520.ml/blogImage/893a32f9ecd60a71e72fd247e0d7bc1c.png)
+  ![893a32f9ecd60a71e72fd247e0d7bc1c.png](https://static.linch.eu.org/blogImage/893a32f9ecd60a71e72fd247e0d7bc1c.png)
 
   - `spring core`：提供了框架的基本组成部分，包括控制反转（Inversion of Control，IOC）和依赖注入（Dependency Injection，DI）功能。
   - `spring beans`：提供了BeanFactory，是工厂模式的一个经典实现，Spring将管理对象称为Bean。
@@ -88,7 +88,7 @@ icon: type
 
   备就绪的运行环境。其中 Bean 缓存池为 HashMap 实现
 
-  ![355d105ac37a91dee72b8a4195844e0d.png](https://static.xlc520.ml/blogImage/355d105ac37a91dee72b8a4195844e0d.png)
+  ![355d105ac37a91dee72b8a4195844e0d.png](https://static.linch.eu.org/blogImage/355d105ac37a91dee72b8a4195844e0d.png)
 
   ## IOC 容器实现
 
@@ -98,7 +98,7 @@ icon: type
 
   ApplicationContext 面向使用Spring 框架的开发者，几乎所有的应用场合我们都直接使用 ApplicationContext 而非底层的 BeanFactory。
 
-  ![ca21e934e8b5c9738300fa4c8003c789.png](https://static.xlc520.ml/blogImage/ca21e934e8b5c9738300fa4c8003c789.png)
+  ![ca21e934e8b5c9738300fa4c8003c789.png](https://static.linch.eu.org/blogImage/ca21e934e8b5c9738300fa4c8003c789.png)
 
   - **BeanDefinitionRegistry 注册表**：Spring 配置文件中每一个节点元素在 Spring 容器里都通过一个 BeanDefinition 对象表示，它描述了 Bean 的配置信息。而 BeanDefinitionRegistry 接口提供了向容器手工注册BeanDefinition 对象的方法。
   - **BeanFactory 顶层接口**：位于类结构树的顶端 ，它最主要的方法就是 getBean(String beanName)，该方法从容器中返回特定名称的 Bean，BeanFactory 的功能通过其他的接口得到不断扩展：
@@ -117,7 +117,7 @@ icon: type
 
   上，还通过多个其他的接口扩展了 BeanFactory 的功能：
 
-  ![9c9a78edbc6b9d2f3f849cbcfd3917ae.png](https://static.xlc520.ml/blogImage/9c9a78edbc6b9d2f3f849cbcfd3917ae.png)
+  ![9c9a78edbc6b9d2f3f849cbcfd3917ae.png](https://static.linch.eu.org/blogImage/9c9a78edbc6b9d2f3f849cbcfd3917ae.png)
 
   - ClassPathXmlApplicationContext：默认从类路径加载配置文件
   - FileSystemXmlApplicationContext：默认从文件系统中装载配置文件
@@ -193,7 +193,7 @@ icon: type
 
   ## 构造器依赖注入和 Setter方法注入的区别
 
-  ![59c181416a4997b4f05d2446e3ff6f08.png](https://static.xlc520.ml/blogImage/59c181416a4997b4f05d2446e3ff6f08.png)
+  ![59c181416a4997b4f05d2446e3ff6f08.png](https://static.linch.eu.org/blogImage/59c181416a4997b4f05d2446e3ff6f08.png)
 
   两种依赖方式都可以使用，构造器注入和Setter方法注入。最好的解决方案是用构造器参数实现强制依赖，setter方法实现可选依赖。
 
@@ -201,7 +201,7 @@ icon: type
 
   WebApplicationContext 是专门为 Web 应用准备的，它允许从相对于 Web 根目录的路径中装载配置文件完成初始化工作。从 WebApplicationContext 中可以获得ServletContext 的引用，整个 Web 应用上下文对象将作为属性放置到 ServletContext 中，以便 Web 应用环境可以访问 Spring 应用上下文。
 
-  ![0d58667ed73f47e65be170d3a114d94c.png](https://static.xlc520.ml/blogImage/0d58667ed73f47e65be170d3a114d94c.png)
+  ![0d58667ed73f47e65be170d3a114d94c.png](https://static.linch.eu.org/blogImage/0d58667ed73f47e65be170d3a114d94c.png)
 
   ## Spring Bean 定义
 
@@ -232,7 +232,7 @@ icon: type
 
   ## Spring Bean 生命周期
 
-  ![63a7c3663fa56e9acf085898f0266cd1.png](https://static.xlc520.ml/blogImage/63a7c3663fa56e9acf085898f0266cd1.png)
+  ![63a7c3663fa56e9acf085898f0266cd1.png](https://static.linch.eu.org/blogImage/63a7c3663fa56e9acf085898f0266cd1.png)
 
   **实例化**
 
@@ -588,7 +588,7 @@ icon: type
   
   Spring 的模型-视图-控制器（MVC）框架是围绕一个 DispatcherServlet 来设计的，这个 Servlet会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。
   
-  ![73ee5a65e7e6e8a0733e3730a486a6e8.png](https://static.xlc520.ml/blogImage/73ee5a65e7e6e8a0733e3730a486a6e8.png)
+  ![73ee5a65e7e6e8a0733e3730a486a6e8.png](https://static.linch.eu.org/blogImage/73ee5a65e7e6e8a0733e3730a486a6e8.png)
   
   **Http 请求到 DispatcherServlet**
   
@@ -749,31 +749,31 @@ icon: type
   
 注入普通字符
   
-![37a5272847ff6ca86690a2e1d3f4dfaa.png](https://static.xlc520.ml/blogImage/37a5272847ff6ca86690a2e1d3f4dfaa.png)
+![37a5272847ff6ca86690a2e1d3f4dfaa.png](https://static.linch.eu.org/blogImage/37a5272847ff6ca86690a2e1d3f4dfaa.png)
   
 注入操作系统属性
   
-![e4803c07763e1811c00d4c7e602ce0a5.png](https://static.xlc520.ml/blogImage/e4803c07763e1811c00d4c7e602ce0a5.png)
+![e4803c07763e1811c00d4c7e602ce0a5.png](https://static.linch.eu.org/blogImage/e4803c07763e1811c00d4c7e602ce0a5.png)
   
 注入表达式结果
   
-![0a1da82128f379c30ad8a617633e8dbe.png](https://static.xlc520.ml/blogImage/0a1da82128f379c30ad8a617633e8dbe.png)
+![0a1da82128f379c30ad8a617633e8dbe.png](https://static.linch.eu.org/blogImage/0a1da82128f379c30ad8a617633e8dbe.png)
   
 注入其它bean属性
   
-![73e51190ca79d307501ca874efee2e3b.png](https://static.xlc520.ml/blogImage/73e51190ca79d307501ca874efee2e3b.png)
+![73e51190ca79d307501ca874efee2e3b.png](https://static.linch.eu.org/blogImage/73e51190ca79d307501ca874efee2e3b.png)
   
 注入文件资源
   
-![9bd391199c575bbc9d4f158a881c7d18.png](https://static.xlc520.ml/blogImage/9bd391199c575bbc9d4f158a881c7d18.png)
+![9bd391199c575bbc9d4f158a881c7d18.png](https://static.linch.eu.org/blogImage/9bd391199c575bbc9d4f158a881c7d18.png)
   
 注入网站资源
   
-![cdaf29b32bdc7f7835aec018fecc3f50.png](https://static.xlc520.ml/blogImage/cdaf29b32bdc7f7835aec018fecc3f50.png)
+![cdaf29b32bdc7f7835aec018fecc3f50.png](https://static.linch.eu.org/blogImage/cdaf29b32bdc7f7835aec018fecc3f50.png)
   
 注入配置文件
   
-![08a820d9676736e45563568e57f708da.png](https://static.xlc520.ml/blogImage/08a820d9676736e45563568e57f708da.png)
+![08a820d9676736e45563568e57f708da.png](https://static.linch.eu.org/blogImage/08a820d9676736e45563568e57f708da.png)
   
   `@PropertySource` 加载配置文件(类上)，还需配置一个`PropertySourcesPlaceholderConfigurer`的bean。
   

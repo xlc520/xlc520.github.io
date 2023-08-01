@@ -33,13 +33,13 @@ icon: java
 
 首先我们先看一个常见的用户下单的场景：
 
-![img](https://static.xlc520.ml/blogImage/c3a784c49bbf4207ae38cf7b738fb813tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp)
+![img](https://static.linch.eu.org/blogImage/c3a784c49bbf4207ae38cf7b738fb813tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp)
 
 在同步操作中，我们执行到 **发送短信** 的时候，我们必须等待这个方法彻底执行完才能执行 **赠送积分** 这个操作，如果 **赠送积分** 这个动作执行时间较长，发送短信需要等待，这就是典型的同步场景。
 
 实际上，发送短信和赠送积分没有任何的依赖关系，通过异步，我们可以实现`赠送积分`和`发送短信`这两个操作能够同时进行，比如：
 
-![img](https://static.xlc520.ml/blogImage/416eac77406a42d59711fb7bb4c8d4edtplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp)
+![img](https://static.linch.eu.org/blogImage/416eac77406a42d59711fb7bb4c8d4edtplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp)
 
 这就是所谓的异步，是不是非常简单，下面就说说异步的几种实现方式吧。
 

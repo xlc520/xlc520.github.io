@@ -30,7 +30,7 @@ Producer对于消息的发送方式也有多种选择，不同的方式会产生
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-193ccbd53ee099bf-1669645258627-2.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-193ccbd53ee099bf-1669645258627-2.png)
 
 
 
@@ -121,7 +121,7 @@ ConsumeConcurrentlyContext context) {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-b47737f367b084f3.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-b47737f367b084f3.png)
 
 
 
@@ -172,7 +172,7 @@ public class AsyncProducer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-5600c1fecc8aae68.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-5600c1fecc8aae68.png)
 
 
 
@@ -213,11 +213,11 @@ public class OneWayProducer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-fe253c94e9b882d5.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-fe253c94e9b882d5.png)
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-bace363ccb1c9a69.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-bace363ccb1c9a69.png)
 
 
 
@@ -225,7 +225,7 @@ public class OneWayProducer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-534df51cfc8537e5.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-534df51cfc8537e5.png)
 
 
  基于上述的情况，可以设计如下方案：对于相同订单号的消息，通过一定的策略，将其放置在一个Queue中，然后消费者再采用一定的策略（例如，一个线程独立处理一个queue，保证处理消息的顺序性），能够保证消费的顺序性。
@@ -236,7 +236,7 @@ public class OneWayProducer {
 
 ###### 全局有序
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-151df36b6ec59c60.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-151df36b6ec59c60.png)
 
 
 
@@ -249,7 +249,7 @@ public class OneWayProducer {
 
 ###### 分区有序
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-d738ba97a3eeed92.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-d738ba97a3eeed92.png)
 
 
 
@@ -311,7 +311,7 @@ public class OrderedProducer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-7ca807e4cef7d5a6.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-7ca807e4cef7d5a6.png)
 
 
 
@@ -327,7 +327,7 @@ messageDelayLevel = 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 1
 
 ##### 延时消息实现原理
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-1faf5eaa2d6ad221.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-1faf5eaa2d6ad221.png)
 
 
 
@@ -348,7 +348,7 @@ Producer将消息发送到Broker后，Broker会首先将消息写入到commitlog
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-51fe73a842bc6397.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-51fe73a842bc6397.png)
 
 - 修改消息索引单元内容。索引单元中的Message Tag HashCode部分原本存放的是消息的Tag的Hash值。现修改为消息的投递时间。投递时间是指该消息被重新修改为原Topic后再次被写入到commitlog中的时间。投递时间 = 消息存储时间 + 延时等级时间。消息存储时间指的是消息被发送到Broker时的时间戳。
 - 将消息索引写入到SCHEDULE_TOPIC_XXXX主题下相应的consumequeue中。
@@ -425,7 +425,7 @@ public class OtherConsumer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-6b96b7f354ae742e.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-6b96b7f354ae742e.png)
 
 
 
@@ -442,7 +442,7 @@ public class OtherConsumer {
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-6209bbbff652d387.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-6209bbbff652d387.png)
 
 
 
@@ -501,7 +501,7 @@ public enum LocalTransactionState {
 
 ###### 消息回查
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-1f4ca72e56175484.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-1f4ca72e56175484.png)
 
 
 
@@ -550,7 +550,7 @@ RocketMQ中事务消息的Producer及Broker均是RM。
 
 ##### XA模式架构
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-10a6bc91bce7eadb.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-10a6bc91bce7eadb.png)
 
 
 
@@ -668,7 +668,7 @@ public class TransactionProducer {
 
 ###### 生产者发送的消息大小
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-a8b004aff7cb0c9c.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-a8b004aff7cb0c9c.png)
 
 
 
@@ -678,7 +678,7 @@ public class TransactionProducer {
 
 ###### 修改批量属性
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-4697ce78abbab6b5.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-4697ce78abbab6b5.png)
 
 
 
@@ -1046,7 +1046,7 @@ consumer.setMaxReconsumeTimes(10);
 
 
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-491ccd590e11c545.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-491ccd590e11c545.png)
 
 
 
@@ -1056,7 +1056,7 @@ Broker对于重试消息的处理是通过延时消息实现的。先将消息�
 
 ##### 消费重试配置方式
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-885793a60bb98e8d.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-885793a60bb98e8d.png)
 
 
 
@@ -1068,7 +1068,7 @@ Broker对于重试消息的处理是通过延时消息实现的。先将消息�
 
 ##### 消费不重试配置方式
 
-![RocketMQ](https://static.xlc520.ml/blogImage/10329501-3d677eb7d52f21eb.png)
+![RocketMQ](https://static.linch.eu.org/blogImage/10329501-3d677eb7d52f21eb.png)
 
 
 

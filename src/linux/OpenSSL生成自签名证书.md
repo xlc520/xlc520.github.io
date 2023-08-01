@@ -32,7 +32,7 @@ OpenSSL在Linux操作系统、Windows操作系统、MAC操作系统里均可安�
 
 如下图所示，基于RSA握手和密钥交换的客户端验证服务器端为示例详解SSL证书握手过程[2]。
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545682.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545682.png)
 
 
 
@@ -46,7 +46,7 @@ CentOS 7虚拟机（模拟服务器端），Nginx服务器，Windows 10 本机�
 
 自签名证书生成与部署流程如下图所示：
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545681.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545681.png)
 
 
 
@@ -56,7 +56,7 @@ CentOS 7虚拟机（模拟服务器端），Nginx服务器，Windows 10 本机�
 
 在CentOS 7虚拟机上安装OpenSSL。
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545692.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545692.png)
 
 
 **命令：openssl genrsa -out /etc/pki/CA/private/cakey.pem 2048**
@@ -71,7 +71,7 @@ genrsa  用于生成RSA密钥对的OpenSSL命令
 
 【注：OpenSSL-1.1.1及以上版本可使用命令（openssl ecparam -genkey -name SM2 -out priv.key）生成基于SM2国密算法的私钥文件】
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545693.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545693.png)
 
 
 **命令：openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem -days 900**
@@ -132,7 +132,7 @@ req 指令也可以生成密钥对，但在使用req 同时生成密钥对是对
 
 【注：参数中带-x509表示直接生成自签证书，不带则表示生成证书签署请求】
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545694.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545694.png)
 
 #### x509
 
@@ -164,7 +164,7 @@ x509指令能已各种方式显示一个证书的内容，也可以对一个证�
 
 指定第一个颁发证书的序列号。
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545695.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545695.png)
 
 
 **3.3签署CA用户服务器证书**
@@ -173,7 +173,7 @@ x509指令能已各种方式显示一个证书的内容，也可以对一个证�
 
 生成CA用户服务器的私钥文件。
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545696.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545696.png)
 
 
 **命令：openssl req -new -key test.key -out test.csr**
@@ -186,7 +186,7 @@ A challenge password 为了保证证书在互联网中传输安全可以添加�
 
 【注：此文件中的国家、省份、地区、公司名称必须与CA自签名证书一致】
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545697.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545697.png)
 
 
 #### ca 指令
@@ -220,7 +220,7 @@ ca指令模拟一个完整的CA服务器，它包括签发用户证书，吊销�
 
 -out 签发后的证书文件
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545698.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545698.png)
 
 
 
@@ -232,12 +232,12 @@ ca指令模拟一个完整的CA服务器，它包括签发用户证书，吊销�
 
 安装Nginx服务器。Nginx服务器位于客户端与目标服务器之间，提供正向代理功能，客户端访问目标服务器的请求，需通过Nginx进行处理再转交给目标服务器，并将获得的内容返回给客户端，本文通过Nginx服务器部署自签名证书。
 
-![图片](https://static.xlc520.ml/blogImage/640-16532729545699.png)
+![图片](https://static.linch.eu.org/blogImage/640-16532729545699.png)
 
 
 图10在/usr/share/nginx/html目录下放入编写好的静态网页index.html。从客户端访问虚拟机地址：http://192.168.231.135 ，如下图所示，可访问静态网页，并具有“不安全”的提示字样。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295456910.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295456910.png)
 
 
 
@@ -255,7 +255,7 @@ ca指令模拟一个完整的CA服务器，它包括签发用户证书，吊销�
 
 进入nginx所在的目录，通过vim指令访问nginx.conf配置文件。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295456911.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295456911.png)
 
 
 修改nginx.conf配置文件，在ssl_certificate字段后面填写证书test.crt的路径；在ssl_certificate_key字段后面填写私钥文件test.key的路径；在root字段后添加静态网页所在的目录；配置完成后退出vim模式。
@@ -264,31 +264,31 @@ ca指令模拟一个完整的CA服务器，它包括签发用户证书，吊销�
 
 重启Nginx服务。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295456912.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295456912.png)
 
 
 
 从客户端浏览器访问地址：https://192.168.231.135 ，如下图所示，浏览器提示“您的连接不是私密连接”， 这是因为自签名证书不受浏览器的信任，浏览器就会弹出安全警告，需要用户确认访问此连接。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295456913.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295456913.png)
 
 
 点击“高级”按钮，选择“继续前往192.168.231.135（不安全）”，通过HTTPS请求访问到静态网页，证明自签名证书部署成功。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295457014.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295457014.png)
 
 
 可以从火狐浏览器查看自签名证书的相关信息。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295457015.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295457015.png)
 
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295457016.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295457016.png)
 
 
 打开nginx.conf文件，在监听80端口（HTTP协议默认端口）的配置中，添加语句：**rewrite ^(.)$ https://192.168.231.135 permanent;**可使HTTP请求重定向为HTTPS请求。重启Nginx服务后，从客户端访问地址：http://192.168.231.135，将自动跳转为https://192.168.231.135 。
 
-![图片](https://static.xlc520.ml/blogImage/640-165327295457017.png)
+![图片](https://static.linch.eu.org/blogImage/640-165327295457017.png)
 
 
 

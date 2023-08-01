@@ -17,7 +17,7 @@ icon: java
 
 # Redis与Guava本地缓存组合
 
-![Redis与本地缓存组合](https://static.xlc520.ml/blogImage/98d8c80f6ae24256832ae271c74d81f2tplv-k3u1fbpfcp-zoom-crop-mark3024302430241702.webp)
+![Redis与本地缓存组合](https://static.linch.eu.org/blogImage/98d8c80f6ae24256832ae271c74d81f2tplv-k3u1fbpfcp-zoom-crop-mark3024302430241702.webp)
 
 ## 前言
 
@@ -31,7 +31,7 @@ icon: java
 
 ### 流程图
 
-![Redis懒加载缓存.png](https://static.xlc520.ml/blogImage/98a4b375d0444e589b217a94065219aatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
+![Redis懒加载缓存.png](https://static.linch.eu.org/blogImage/98a4b375d0444e589b217a94065219aatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
 
 ### 代码示例
 
@@ -139,7 +139,7 @@ public class Xx {
 
 ### 流程图
 
-![本地缓存.png](https://static.xlc520.ml/blogImage/1028922154004ccc9c2811c75325efdctplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
+![本地缓存.png](https://static.linch.eu.org/blogImage/1028922154004ccc9c2811c75325efdctplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
 
 ### 业务场景
 

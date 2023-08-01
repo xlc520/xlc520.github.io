@@ -41,43 +41,43 @@ icon: java
 
 1.计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。
 
-![f65f6640-fde3-4f6f-be2a-aa05b6a3c1b9](https://static.xlc520.ml/juc/f65f6640-fde3-4f6f-be2a-aa05b6a3c1b9.png)
+![f65f6640-fde3-4f6f-be2a-aa05b6a3c1b9](https://static.linch.eu.org/juc/f65f6640-fde3-4f6f-be2a-aa05b6a3c1b9.png)
 
 2.假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。
 
-![aa874eba-0c27-4924-be97-9c853c009ca9](https://static.xlc520.ml/juc/aa874eba-0c27-4924-be97-9c853c009ca9.png)
+![aa874eba-0c27-4924-be97-9c853c009ca9](https://static.linch.eu.org/juc/aa874eba-0c27-4924-be97-9c853c009ca9.png)
 
 3.进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。
 
-![f03b160d-4e18-46a1-9158-913a4afdb2b2](https://static.xlc520.ml/juc/f03b160d-4e18-46a1-9158-913a4afdb2b2.png)
+![f03b160d-4e18-46a1-9158-913a4afdb2b2](https://static.linch.eu.org/juc/f03b160d-4e18-46a1-9158-913a4afdb2b2.png)
 
 4.一个车间里，可以有很多工人。他们协同完成一个任务。
 
-![9985e48b-92bd-434e-8a4e-6f85c95a8dbd](https://static.xlc520.ml/juc/9985e48b-92bd-434e-8a4e-6f85c95a8dbd.png)
+![9985e48b-92bd-434e-8a4e-6f85c95a8dbd](https://static.linch.eu.org/juc/9985e48b-92bd-434e-8a4e-6f85c95a8dbd.png)
 
 5.线程就好比车间里的工人。一个进程可以包括多个线程。
 
-![3dc76caa-b3d9-4555-b8c4-c805bb97e03e](https://static.xlc520.ml/juc/3dc76caa-b3d9-4555-b8c4-c805bb97e03e.png)
+![3dc76caa-b3d9-4555-b8c4-c805bb97e03e](https://static.linch.eu.org/juc/3dc76caa-b3d9-4555-b8c4-c805bb97e03e.png)
 
 6.车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。
 
-![b3ef804e-346b-4280-bb8d-809c9bd42853](https://static.xlc520.ml/juc/b3ef804e-346b-4280-bb8d-809c9bd42853.png)
+![b3ef804e-346b-4280-bb8d-809c9bd42853](https://static.linch.eu.org/juc/b3ef804e-346b-4280-bb8d-809c9bd42853.png)
 
 
 
 7.可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候，其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存。
 
-![bea2bf20-2b08-484e-80b7-3e210d0e20df](https://static.xlc520.ml/juc/bea2bf20-2b08-484e-80b7-3e210d0e20df.png)
+![bea2bf20-2b08-484e-80b7-3e210d0e20df](https://static.linch.eu.org/juc/bea2bf20-2b08-484e-80b7-3e210d0e20df.png)
 
 8.一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫”互斥锁”（Mutual exclusion，缩写 Mutex），防止多个线程同时读写某一块内存区域。
 
-![876a4f82-7931-4674-ac6b-a6d04a88a5b1](https://static.xlc520.ml/juc/876a4f82-7931-4674-ac6b-a6d04a88a5b1.png)
+![876a4f82-7931-4674-ac6b-a6d04a88a5b1](https://static.linch.eu.org/juc/876a4f82-7931-4674-ac6b-a6d04a88a5b1.png)
 
 
 
 9.还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的线程使用。
 
-![ae960b3a-c0e8-4c3d-bbcb-bfc5ebbecb79](https://static.xlc520.ml/juc/ae960b3a-c0e8-4c3d-bbcb-bfc5ebbecb79.png)
+![ae960b3a-c0e8-4c3d-bbcb-bfc5ebbecb79](https://static.linch.eu.org/juc/ae960b3a-c0e8-4c3d-bbcb-bfc5ebbecb79.png)
 
 10.这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做”信号量”（Semaphore），用来保证多个线程不会互相冲突。
 
@@ -102,7 +102,7 @@ new Thread(() -> {
 // Monitor对象会和Java对象一同创建并销毁，它底层是由C++语言来实现的。
 ```
 
-![image-20210904000040589](https://static.xlc520.ml/juc/image-20210904000040589.png)
+![image-20210904000040589](https://static.linch.eu.org/juc/image-20210904000040589.png)
 
 #### 5、线程状态？
 
@@ -393,7 +393,7 @@ public final native void notify();
 
 那么wait()方法和notify()方法是如何工作的呢？如图2.5展示了两者的工作过程。如果一个线程调用了object.wait()方法，那么它就会进出object对象的等待队列。这个队列中，可能会有多个线程，因为系统可能运行多个线程同时等待某一个对象。当object.notify()方法被调用时，它就会从这个队列中随机选择一个线程，并将其唤醒。这里希望大家注意一下，这个选择是不公平的，并不是先等待线程就会优先被选择，这个选择完全是随机的。
 
-![f950f73b-52a6-4ecd-a8cb-5422bcd3a44e](https://static.xlc520.ml/juc/f950f73b-52a6-4ecd-a8cb-5422bcd3a44e.png)
+![f950f73b-52a6-4ecd-a8cb-5422bcd3a44e](https://static.linch.eu.org/juc/f950f73b-52a6-4ecd-a8cb-5422bcd3a44e.png)
 
 除notify()方法外，Object独享还有一个nofiyAll()方法，它和notify()方法的功能类似，不同的是，它会唤醒在这个等待队列中所有等待的线程，而不是随机选择一个。
 
@@ -461,7 +461,7 @@ public class Demo06 {
 
 可以这么理解，obj对象上有2个队列，如图1，**q1：等待队列，q2：准备获取锁的队列**；两个队列都为空。
 
-![5f1e0099-c802-4e79-803a-a5117e6666ff](https://static.xlc520.ml/juc/5f1e0099-c802-4e79-803a-a5117e6666ff.png)
+![5f1e0099-c802-4e79-803a-a5117e6666ff](https://static.linch.eu.org/juc/5f1e0099-c802-4e79-803a-a5117e6666ff.png)
 
 **obj.wait()过程：**
 
@@ -473,9 +473,9 @@ synchronize(obj){
 
 假如有3个线程，t1、t2、t3同时执行上面代码，t1、t2、t3会进入q2队列，如图2，进入q2的队列的这些线程才有资格去争抢obj的锁，假设t1争抢到了，那么t2、t3机型在q2中等待着获取锁，t1进入代码块执行wait()方法，此时t1会进入q1队列，然后系统会通知q2队列中的t2、t3去争抢obj的锁，抢到之后过程如t1的过程。最后t1、t2、t3都进入了q1队列，如图3。
 
-![6c5eec72-3303-40a5-b70d-6e24ba12d2de](https://static.xlc520.ml/juc/6c5eec72-3303-40a5-b70d-6e24ba12d2de.png)
+![6c5eec72-3303-40a5-b70d-6e24ba12d2de](https://static.linch.eu.org/juc/6c5eec72-3303-40a5-b70d-6e24ba12d2de.png)
 
-![45fd3950-b371-4d46-a5df-2ce1c8303707](https://static.xlc520.ml/juc/45fd3950-b371-4d46-a5df-2ce1c8303707.png)
+![45fd3950-b371-4d46-a5df-2ce1c8303707](https://static.linch.eu.org/juc/45fd3950-b371-4d46-a5df-2ce1c8303707.png)
 
 上面过程之后，又来了线程t4执行了notify()方法，如下：**
 
@@ -487,9 +487,9 @@ synchronize(obj){
 
 t4会获取到obj的锁，然后执行notify()方法，系统会从q1队列中随机取一个线程，将其加入到q2队列，假如t2运气比较好，被随机到了，然后t2进入了q2队列，如图4，进入q2的队列的锁才有资格争抢obj的锁，t4线程执行完毕之后，会释放obj的锁，此时队列q2中的t2会获取到obj的锁，然后继续执行，执行完毕之后，q1中包含t1、t3，q2队列为空，如图5
 
-![fbf3b798-65f7-4b90-a614-66854fcce5fa](https://static.xlc520.ml/juc/fbf3b798-65f7-4b90-a614-66854fcce5fa.png)
+![fbf3b798-65f7-4b90-a614-66854fcce5fa](https://static.linch.eu.org/juc/fbf3b798-65f7-4b90-a614-66854fcce5fa.png)
 
-![b3868bc9-3da0-474b-a48e-20f90c1335ee](https://static.xlc520.ml/juc/b3868bc9-3da0-474b-a48e-20f90c1335ee.png)
+![b3868bc9-3da0-474b-a48e-20f90c1335ee](https://static.linch.eu.org/juc/b3868bc9-3da0-474b-a48e-20f90c1335ee.png)
 
 **接着又来了个t5队列，执行了notifyAll()方法，如下：**
 
@@ -503,7 +503,7 @@ synchronize(obj){
 
 t5会获取到obj的锁，然后执行notifyAll()方法，系统会将队列q1中的线程都移到q2中，如图6，t5线程执行完毕之后，会释放obj的锁，此时队列q2中的t1、t3会争抢obj的锁，争抢到的继续执行，未增强到的带锁释放之后，系统会通知q2中的线程继续争抢索，然后继续执行，最后两个队列中都为空了。
 
-![9e648015-c445-4e84-bd8c-a53a380cbd7f](https://static.xlc520.ml/juc/9e648015-c445-4e84-bd8c-a53a380cbd7f.png)
+![9e648015-c445-4e84-bd8c-a53a380cbd7f](https://static.linch.eu.org/juc/9e648015-c445-4e84-bd8c-a53a380cbd7f.png)
 
 #### 5、挂起（suspend）和继续执行（resume）线程
 
@@ -712,21 +712,21 @@ openjdk8\jdk\src\share\native\java\lang   thread.c
 java线程是通过start的方法启动执行的，主要内容在native方法start0中，Openjdk的写JNI一般是一一对应的，Thread.java对应的就是Thread.c start0其实就是JVM_StartThread。此时查看源代码可以看到在jvm.h中找到了声明，jvm.cpp中有实现。    
 ```
 
-![image-20210903235656449](https://static.xlc520.ml/juc/image-20210903235656449.png)
+![image-20210903235656449](https://static.linch.eu.org/juc/image-20210903235656449.png)
 
 ```java
 openjdk8\hotspot\src\share\vm\prims  jvm.cpp
 ```
 
-![image-20210903235812379](https://static.xlc520.ml/juc/image-20210903235812379.png)
+![image-20210903235812379](https://static.linch.eu.org/juc/image-20210903235812379.png)
 
-![image-20210903235817486](https://static.xlc520.ml/juc/image-20210903235817486.png)
+![image-20210903235817486](https://static.linch.eu.org/juc/image-20210903235817486.png)
 
 ```java
 openjdk8\hotspot\src\share\vm\runtime  thread.cpp
 ```
 
-![image-20210903235840971](https://static.xlc520.ml/juc/image-20210903235840971.png)
+![image-20210903235840971](https://static.linch.eu.org/juc/image-20210903235840971.png)
 
 
 
@@ -817,15 +817,15 @@ class MyThread2 implements Callable<Integer>{
 
 直接替换runnable是否可行？
 
-![image](https://static.xlc520.ml/juc/1614161513991-ca4fa075-8d4d-4c45-b1c8-cf6f3d83c6e4.png)
+![image](https://static.linch.eu.org/juc/1614161513991-ca4fa075-8d4d-4c45-b1c8-cf6f3d83c6e4.png)
 
 不可行，因为：thread类的构造方法根本没有Callable
 
-![image](https://static.xlc520.ml/juc/1614161519289-57011bee-6de0-4002-b81e-433cede8c7a0.png)
+![image](https://static.linch.eu.org/juc/1614161519289-57011bee-6de0-4002-b81e-433cede8c7a0.png)
 
 认识不同的人找中间人
 
-![image](https://static.xlc520.ml/juc/1614161525949-6b3bf259-23a9-421e-8877-ae7f7de4f3d8.png)
+![image](https://static.linch.eu.org/juc/1614161525949-6b3bf259-23a9-421e-8877-ae7f7de4f3d8.png)
 
 ```java
 public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -836,7 +836,7 @@ public static void main(String[] args) throws ExecutionException, InterruptedExc
 
 运行成功后如何获得返回值？
 
-![image](https://static.xlc520.ml/juc/1614161535188-cd8c298a-b466-41da-bee3-8ee572236b1f.png)
+![image](https://static.linch.eu.org/juc/1614161535188-cd8c298a-b466-41da-bee3-8ee572236b1f.png)
 
 ```java
 public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -956,7 +956,7 @@ public class MyThreadPoolDemo {
 
 ### 4、ThreadPoolExecutor底层原理
 
-![fdae3766-9607-424f-8f77-ba9a14583e8e](https://static.xlc520.ml/juc/fdae3766-9607-424f-8f77-ba9a14583e8e.png)
+![fdae3766-9607-424f-8f77-ba9a14583e8e](https://static.linch.eu.org/juc/fdae3766-9607-424f-8f77-ba9a14583e8e.png)
 
 **举个例子，加深理解：**
 
@@ -964,7 +964,7 @@ public class MyThreadPoolDemo {
 
 **原理：**先找几个人干活，大家都忙于干活，任务太多可以排期，排期的任务太多了，再招一些人来干活，最后干活的和排期都达到上层领导要求的上限了，那需要采取一些其他策略进行处理了。对于长时间不干活的人，考虑将其开掉，节约资源和成本。
 
-![image](https://static.xlc520.ml/juc/1614161583621-6ff005f3-9806-4c18-a497-e655aec5a2d0.png)
+![image](https://static.linch.eu.org/juc/1614161583621-6ff005f3-9806-4c18-a497-e655aec5a2d0.png)
 
 ```java
 public ThreadPoolExecutor(int corePoolSize,
@@ -1004,9 +1004,9 @@ public ThreadPoolExecutor(int corePoolSize,
 
 7. handler：拒绝策略，表示当队列满了，并且工作线程大于等于线程池的最大线程数（maximumPoolSize）时如何来拒绝请求执行的runnable的策略
 
-![image](https://static.xlc520.ml/juc/1614161593084-bebbf57e-a1cd-4178-b763-24959203717b.png)
+![image](https://static.linch.eu.org/juc/1614161593084-bebbf57e-a1cd-4178-b763-24959203717b.png)
 
-![image](https://static.xlc520.ml/juc/1614161599622-b82c39bb-1dbb-495e-9e4a-78f413f1c724.png)
+![image](https://static.linch.eu.org/juc/1614161599622-b82c39bb-1dbb-495e-9e4a-78f413f1c724.png)
 
 **调用线程池的execute方法处理任务，执行execute方法的过程：**
 
@@ -1134,11 +1134,11 @@ Nthreads = Ncpu × Ucpu × (1+W/C)
    System. out .println(Runtime. getRuntime ().availableProcessors());
    ```
 
-   ￼![image-20220329145519183](https://static.xlc520.ml/juc/image-20220329145519183.png)
+   ￼![image-20220329145519183](https://static.linch.eu.org/juc/image-20220329145519183.png)
 
 2. IO密集型
    1. 由于IO密集型任务线程并不是一直在执行任务，则应配置尽可能多的线程，如**CPU核数 * 2** 。
-   2. ![image-20220329145652545](https://static.xlc520.ml/juc/image-20220329145652545.png)
+   2. ![image-20220329145652545](https://static.linch.eu.org/juc/image-20220329145652545.png)
 
 看公司业务是CPU密集型还是IO密集型的，这两种不一样，来决定线程池线程数的最佳合理配置数。
 
@@ -1146,7 +1146,7 @@ Nthreads = Ncpu × Ucpu × (1+W/C)
 
 答案是**一个都不用**，我们工作中只能使用自定义的
 
-![image](https://static.xlc520.ml/juc/1614161641934-fd8ddb1d-5b05-4d88-81c6-04a40367c591.png)
+![image](https://static.linch.eu.org/juc/1614161641934-fd8ddb1d-5b05-4d88-81c6-04a40367c591.png)
 
 
 
@@ -1240,7 +1240,7 @@ public class MyThreadPoolDemo {
 
 阻塞：必须要阻塞/不得不阻塞 
 
-![image](https://static.xlc520.ml/juc/1614161550577-d838e7b4-62c9-4630-ad52-34ecf72f3aee.png)
+![image](https://static.linch.eu.org/juc/1614161550577-d838e7b4-62c9-4630-ad52-34ecf72f3aee.png)
 
 线程1往阻塞队列里添加元素，线程2从阻塞队列里移除元素
 
@@ -1252,7 +1252,7 @@ public class MyThreadPoolDemo {
 
 试图向已满的队列中添加新元素的线程将会被阻塞，直到其他线程从队列中移除一个或多个元素或者完全清空，使队列变得空闲起来并后续新增
 
-![image](https://static.xlc520.ml/juc/1614161556740-782f1ca1-a941-4b76-b581-4b9ffef9a5ca.png)
+![image](https://static.linch.eu.org/juc/1614161556740-782f1ca1-a941-4b76-b581-4b9ffef9a5ca.png)
 
 #### 3、种类分析
 
@@ -1351,9 +1351,9 @@ public class Demo3 {
 
 #### 4、BlockingQueue核心方法
 
-![image](https://static.xlc520.ml/juc/1614161565952-60513c15-8261-450d-9fd3-57f35be66a42.png)
+![image](https://static.linch.eu.org/juc/1614161565952-60513c15-8261-450d-9fd3-57f35be66a42.png)
 
-![image](https://static.xlc520.ml/juc/1614161571726-0fb6d810-ca4c-4f9f-b0c7-ee1282a95d7e.png)
+![image](https://static.linch.eu.org/juc/1614161571726-0fb6d810-ca4c-4f9f-b0c7-ee1282a95d7e.png)
 
 ```java
 
@@ -1562,7 +1562,7 @@ pool-1-thread-9处理任务-8
 
 Future接口定义了操作异步任务执行一些方法，如获取异步任务的执行结果、取消任务的执行、判断任务是否被取消、判断任务执行是否完毕等。
 
-![image-20210904000352470](https://static.xlc520.ml/juc/image-20210904000352470.png)
+![image-20210904000352470](https://static.linch.eu.org/juc/image-20210904000352470.png)
 
 Callable接口中定义了需要有返回的任务需要实现的方法
 
@@ -1572,9 +1572,9 @@ Callable接口中定义了需要有返回的任务需要实现的方法
 
 Future接口相关架构
 
-![](https://static.xlc520.ml/juc/image-20210904000518011.png)
+![](https://static.linch.eu.org/juc/image-20210904000518011.png)
 
-![image-20210904000529226](https://static.xlc520.ml/juc/image-20210904000529226.png)
+![image-20210904000529226](https://static.linch.eu.org/juc/image-20210904000529226.png)
 
 
 
@@ -1648,15 +1648,15 @@ isDone()轮询
 
 #### 1、类CompletableFuture
 
-![image-20210904001054865](https://static.xlc520.ml/juc/image-20210904001054865.png)
+![image-20210904001054865](https://static.linch.eu.org/juc/image-20210904001054865.png)
 
-![image-20210904001102892](https://static.xlc520.ml/juc/image-20210904001102892.png)
+![image-20210904001102892](https://static.linch.eu.org/juc/image-20210904001102892.png)
 
-![image-20210904001143180](https://static.xlc520.ml/juc/image-20210904001143180.png)
+![image-20210904001143180](https://static.linch.eu.org/juc/image-20210904001143180.png)
 
 #### 2、接口CompletionStage
 
-![image-20210904001214909](https://static.xlc520.ml/juc/image-20210904001214909.png)
+![image-20210904001214909](https://static.linch.eu.org/juc/image-20210904001214909.png)
 
 代表异步计算过程中的某一个阶段，一个阶段完成以后可能会触发另外一个阶段，有些类似Linux系统的管道分隔符传参数。
 
@@ -1698,7 +1698,7 @@ public class CompletableFutureDemo3{
 }
 ```
 
-![image-20210904001511947](https://static.xlc520.ml/juc/image-20210904001511947.png)
+![image-20210904001511947](https://static.linch.eu.org/juc/image-20210904001511947.png)
 
 #### 4、Code 有 返回值
 
@@ -1974,9 +1974,9 @@ public class CompletableFutureDemo4{
 }   
 ```
 
-![image-20210904003033912](https://static.xlc520.ml/juc/image-20210904003033912.png)
+![image-20210904003033912](https://static.linch.eu.org/juc/image-20210904003033912.png)
 
-![image-20210904003036925](https://static.xlc520.ml/juc/image-20210904003036925.png)
+![image-20210904003036925](https://static.linch.eu.org/juc/image-20210904003036925.png)
 
 #### 3、对计算结果进行消费
 
@@ -2121,21 +2121,21 @@ Fork：把一个复杂任务进行分拆，大事化小
 
 Join：把分拆任务的结果进行合并
 
-![image](https://static.xlc520.ml/juc/1614161705639-4b976bd8-4f72-4667-872a-6f5071b4405e.png)
+![image](https://static.linch.eu.org/juc/1614161705639-4b976bd8-4f72-4667-872a-6f5071b4405e.png)
 
 #### 1、相关类
 
 ##### 1、ForkJoinPool
 
-![image](https://static.xlc520.ml/juc/1614161713661-c27a4d4c-134a-4f28-be61-65fd50270b3a.png)
+![image](https://static.linch.eu.org/juc/1614161713661-c27a4d4c-134a-4f28-be61-65fd50270b3a.png)
 
 ##### 2、ForkJoinTask
 
-![image](https://static.xlc520.ml/juc/1614161726172-14ae279d-84af-4616-9daf-04cb700a151e.png)
+![image](https://static.linch.eu.org/juc/1614161726172-14ae279d-84af-4616-9daf-04cb700a151e.png)
 
 ##### 3、RecursiveTask
 
-![image](https://static.xlc520.ml/juc/1614161734753-741e762e-7430-4910-a3c0-5e40803f7850.png)
+![image](https://static.linch.eu.org/juc/1614161734753-741e762e-7430-4910-a3c0-5e40803f7850.png)
 
 ```java
 // 递归任务：继承后可以实现递归(自己调自己)调用的任务
@@ -2222,7 +2222,7 @@ public class ForkJoinDemo {
 
 ### 1、Lock
 
-![image](https://static.xlc520.ml/juc/1614161410285-50f57395-d195-4f93-bed4-7b7dffaf078b.png)
+![image](https://static.linch.eu.org/juc/1614161410285-50f57395-d195-4f93-bed4-7b7dffaf078b.png)
 
 ```java
 // Lock implementations provide more extensive locking operations than can be obtained using synchronized methods and statements. They allow more flexible structuring, may have quite different properties, and may support multiple associated Condition objects.
@@ -2652,7 +2652,7 @@ java.lang.InterruptedException
 
 从上面信息中可以看出，代码的31行触发了异常，**中断标志输出：false**
 
-![ec24264d-651f-4eb6-aa60-bb98a3098f78](https://static.xlc520.ml/juc/ec24264d-651f-4eb6-aa60-bb98a3098f78.png)
+![ec24264d-651f-4eb6-aa60-bb98a3098f78](https://static.linch.eu.org/juc/ec24264d-651f-4eb6-aa60-bb98a3098f78.png)
 
 t2在31行一直获取不到lock1的锁，主线程中等待了5秒之后，t2线程调用了`interrupt()`方法，将线程的中断标志置为true，此时31行会触发`InterruptedException`异常，然后线程t2可以继续向下执行，释放了lock2的锁，然后线程t1可以正常获取锁，程序得以继续进行。线程发送中断信号触发InterruptedException异常之后，中断标志将被清空。
 
@@ -2879,7 +2879,7 @@ atomicInteger.incrementAndGet();
 
 #### 1、JDK源码(notify方法)
 
-![image-20210907200227293](https://static.xlc520.ml/juc/image-20210907200227293-16310161483121.png)
+![image-20210907200227293](https://static.linch.eu.org/juc/image-20210907200227293-16310161483121.png)
 
 #### 2、8种锁的案例实际体现在3个地方
 
@@ -3414,7 +3414,7 @@ public class SaleTicketDemo
 
 ​		按序排队公平锁，就是判断同步队列是否还有先驱节点的存在(我前面还有人吗?)，如果没有先驱节点才能获取锁；先占先得非公平锁，是不管这个事的，只要能抢获到同步状态就可以
 
-![image-20210916224629198](https://static.xlc520.ml/juc/image-20210916224629198.png)
+![image-20210916224629198](https://static.linch.eu.org/juc/image-20210916224629198.png)
 
 
 
@@ -3613,7 +3613,7 @@ public class ReEntryLockDemo{
 
 ​		死锁是指两个或两个以上的线程在执行过程中,因争夺资源而造成的一种互相等待的现象,若无外力干涉那它们都将无法推进下去，如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。
 
-![图像](https://static.xlc520.ml/juc/图像.png)
+![图像](https://static.linch.eu.org/juc/图像.png)
 
 #### 1、产生死锁主要原因
 
@@ -3784,13 +3784,13 @@ public class NotifyWaitDemoOne{
 
 解决虚假唤醒：查看API，java.lang.Object
 
-![image](https://static.xlc520.ml/juc/1614161426163-57912cc0-5b3e-4851-93f4-6d7c4c97118b.png)
+![image](https://static.linch.eu.org/juc/1614161426163-57912cc0-5b3e-4851-93f4-6d7c4c97118b.png)
 
 中断和虚假唤醒是可能产生的，所以要用loop循环，if只判断一次，while是只要唤醒就要拉回来再判断一次。if换成while
 
 #### 4、java8新版实现
 
-![image](https://static.xlc520.ml/juc/1614161433565-2c36af0b-fd95-455c-a4a3-7e3bcff3c86b.png)
+![image](https://static.linch.eu.org/juc/1614161433565-2c36af0b-fd95-455c-a4a3-7e3bcff3c86b.png)
 
 ```java
 class BoundedBuffer {
@@ -4138,7 +4138,7 @@ public class ThreadOrderAccess
 
 ##### 1、如何停止、中断一个运行中的线程？？
 
-![fdsfsdf](https://static.xlc520.ml/juc/fdsfsdf.png)
+![fdsfsdf](https://static.linch.eu.org/juc/fdsfsdf.png)
 
 ##### 2、什么是中断？
 
@@ -4224,23 +4224,23 @@ public class StopThreadDemo
 
 1. 实例方法interrupt()，没有返回值
 
-![image-20210916231409508](https://static.xlc520.ml/juc/image-20210916231409508.png)
+![image-20210916231409508](https://static.linch.eu.org/juc/image-20210916231409508.png)
 
 | public void interrupt() | 实例方法，<br/>调用interrupt()方法仅仅是在当前线程中打了一个停止的标记，并不是真正立刻停止线程。 |
 | ----------------------- | ------------------------------------------------------------ |
 
-![vcxvdfgsdgdg](https://static.xlc520.ml/juc/vcxvdfgsdgdg.png)
+![vcxvdfgsdgdg](https://static.linch.eu.org/juc/vcxvdfgsdgdg.png)
 
-![image-20210916231506817](https://static.xlc520.ml/juc/image-20210916231506817.png)
+![image-20210916231506817](https://static.linch.eu.org/juc/image-20210916231506817.png)
 
 2. 实例方法isInterrupted，返回布尔值
 
-![image-20210916231603313](https://static.xlc520.ml/juc/image-20210916231603313.png)
+![image-20210916231603313](https://static.linch.eu.org/juc/image-20210916231603313.png)
 
 | public boolean isInterrupted() | 实例方法，<br/>获取中断标志位的当前值是什么，<br/>判断当前线程是否被中断（通过检查中断标志位），默认是false |
 | ------------------------------ | ------------------------------------------------------------ |
 
-![image-20210916231626044](https://static.xlc520.ml/juc/image-20210916231626044.png)
+![image-20210916231626044](https://static.linch.eu.org/juc/image-20210916231626044.png)
 
 ```java
 public class InterruptDemo
@@ -4313,9 +4313,9 @@ public class InterruptDemo2 {
 }
 ```
 
-![image-20210916231745805](https://static.xlc520.ml/juc/image-20210916231745805.png)
+![image-20210916231745805](https://static.linch.eu.org/juc/image-20210916231745805.png)
 
-![image-20210916231758523](https://static.xlc520.ml/juc/image-20210916231758523.png)
+![image-20210916231758523](https://static.linch.eu.org/juc/image-20210916231758523.png)
 
 **中断只是一种协同机制，修改中断标识位仅此而已，不是立刻stop打断**
 
@@ -4345,13 +4345,13 @@ public class InterruptDemo
 | public static boolean interrupted() | 静态方法，Thread.interrupted();  <br/>判断线程是否被中断，并清除当前中断状态，类似i++<br/>这个方法做了两件事：<br/>1 返回当前线程的中断状态<br/>2 将当前线程的中断状态设为false<br/> <br/>这个方法有点不好理解，因为连续调用两次的结果可能不一样。 |
 | ----------------------------------- | ------------------------------------------------------------ |
 
-![image-20210916231923048](https://static.xlc520.ml/juc/image-20210916231923048.png)
+![image-20210916231923048](https://static.linch.eu.org/juc/image-20210916231923048.png)
 
 都会返回中断状态，两者对比
 
-![image-20210916231944854](https://static.xlc520.ml/juc/image-20210916231944854.png)
+![image-20210916231944854](https://static.linch.eu.org/juc/image-20210916231944854.png)
 
-![](https://static.xlc520.ml/juc/image-20210916232053782.png)
+![](https://static.linch.eu.org/juc/image-20210916232053782.png)
 
 #### 6、总结
 
@@ -4378,11 +4378,11 @@ Thread类的静态方法interrupted()
 1. 方式1：使用Object中的wait()方法让线程等待，使用Object中的notify()方法唤醒线程
 2. 方式2：使用juc包中Condition的await()方法让线程等待，使用signal()方法唤醒线程
 
-![image-20210916232319808](https://static.xlc520.ml/juc/image-20210916232319808.png)
+![image-20210916232319808](https://static.linch.eu.org/juc/image-20210916232319808.png)
 
-![image-20210916232333615](https://static.xlc520.ml/juc/image-20210916232333615.png)
+![image-20210916232333615](https://static.linch.eu.org/juc/image-20210916232333615.png)
 
-![image-20210916232340860](https://static.xlc520.ml/juc/image-20210916232340860.png)
+![image-20210916232340860](https://static.linch.eu.org/juc/image-20210916232340860.png)
 
 
 LockSupport是用来创建锁和其他同步类的基本线程阻塞原语。
@@ -4533,7 +4533,7 @@ public class LockSupportDemo
 
 wait方法和notify方法，两个都去掉同步代码块
 
-![image-20210916232855724](https://static.xlc520.ml/juc/image-20210916232855724.png)
+![image-20210916232855724](https://static.linch.eu.org/juc/image-20210916232855724.png)
 
 ##### 3、异常2
 
@@ -4680,7 +4680,7 @@ public class LockSupportDemo2
 
 去掉lock/unlock
 
-![image-20210916233230684](https://static.xlc520.ml/juc/image-20210916233230684.png)
+![image-20210916233230684](https://static.linch.eu.org/juc/image-20210916233230684.png)
 
 condition.await();和 condition.signal();都触发了 IllegalMonitorStateException异常。
 
@@ -4755,7 +4755,7 @@ Condtion中的线程等待和唤醒方法之前，需要先获取锁
 
 通过park()和unpark(thread)方法来实现阻塞和唤醒线程的操作
 
-![image-20210916233452889](https://static.xlc520.ml/juc/image-20210916233452889.png)
+![image-20210916233452889](https://static.linch.eu.org/juc/image-20210916233452889.png)
 
 LockSupport是用来创建锁和其他同步类的基本线程阻塞原语。
 
@@ -4765,13 +4765,13 @@ permit只有两个值1和零，默认是零。
 
 ##### 1、主要方法
 
-![image-20210916233517944](https://static.xlc520.ml/juc/image-20210916233517944.png)
+![image-20210916233517944](https://static.linch.eu.org/juc/image-20210916233517944.png)
 
 **阻塞**
 
 park() /park(Object blocker) 
 
-![image-20210916233615025](https://static.xlc520.ml/juc/image-20210916233615025.png)
+![image-20210916233615025](https://static.linch.eu.org/juc/image-20210916233615025.png)
 
 阻塞当前线程/阻塞传入的具体线程
 
@@ -4781,7 +4781,7 @@ park() /park(Object blocker)
 
 unpark(Thread thread) 
 
-![image-20210916233726972](https://static.xlc520.ml/juc/image-20210916233726972.png)
+![image-20210916233726972](https://static.linch.eu.org/juc/image-20210916233726972.png)
 
 唤醒处于阻塞状态的指定线程
 
@@ -4835,7 +4835,7 @@ public class T1
 }
 ```
 
-![image-20210916233832563](https://static.xlc520.ml/juc/image-20210916233832563.png)
+![image-20210916233832563](https://static.linch.eu.org/juc/image-20210916233832563.png)
 
 
 
@@ -4877,7 +4877,7 @@ public boolean add(E e) {
 List list = new Vector<>();
 ```
 
-![image](https://static.xlc520.ml/juc/1614161454663-ad91cc9b-df6d-46b9-b9ea-cb30859660e3.png)
+![image](https://static.linch.eu.org/juc/1614161454663-ad91cc9b-df6d-46b9-b9ea-cb30859660e3.png)
 
 ```java
 // 看Vector的源码
@@ -4898,7 +4898,7 @@ List list = Collections.synchronizedList(new ArrayList<>());
 // 那HashMap，HashSet是线程安全的吗？也不是,所以有同样的线程安全方法
 ```
 
-![image](https://static.xlc520.ml/juc/1614161465300-4f72afb7-5318-41d8-ac75-afa03514b63f.png)
+![image](https://static.linch.eu.org/juc/1614161465300-4f72afb7-5318-41d8-ac75-afa03514b63f.png)
 
 
 
@@ -4908,7 +4908,7 @@ List list = Collections.synchronizedList(new ArrayList<>());
 List<String> list = new CopyOnWriteArrayList<>();
 ```
 
-![image](https://static.xlc520.ml/juc/1614161496374-08a7194a-7fe7-4a1b-8491-73632bbfb33d.png)
+![image](https://static.linch.eu.org/juc/1614161496374-08a7194a-7fe7-4a1b-8491-73632bbfb33d.png)
 
 
 
@@ -6571,11 +6571,11 @@ JMM(java内存模型)，由于并发程序要比串行程序复杂很多，其�
 
  计算机存储结构，从本地磁盘到主存到CPU缓存，也就是从硬盘到内存，到CPU。一般对应的程序的操作就是从数据库查数据到内存然后到CPU进行计算
 
-![image-20210917214130116](https://static.xlc520.ml/juc/image-20210917214130116.png)
+![image-20210917214130116](https://static.linch.eu.org/juc/image-20210917214130116.png)
 
 ​		因为有这么多级的缓存(cpu和物理主内存的速度不一致的)，CPU的运行并不是直接操作内存而是先把内存里边的数据读到缓存，而内存的读和写操作的时候就会造成不一致的问题
 
-![image-20210917214254898](https://static.xlc520.ml/juc/image-20210917214254898.png)
+![image-20210917214254898](https://static.linch.eu.org/juc/image-20210917214254898.png)
 
 ​		Java虚拟机规范中试图定义一种Java内存模型（java Memory Model，简称JMM) 来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。推导出我们需要知道JMM
 
@@ -6594,15 +6594,15 @@ JMM(java内存模型)，由于并发程序要比串行程序复杂很多，其�
 
 #### 1、可见性
 
-![image-20210917214426713](https://static.xlc520.ml/juc/image-20210917214426713.png)
+![image-20210917214426713](https://static.linch.eu.org/juc/image-20210917214426713.png)
 
 ​		Java中普通的共享变量不保证可见性，因为数据修改被写入内存的时机是不确定的，多线程并发下很可能出现"脏读"，所以每个线程都有自己的工作内存，线程自己的工作内存中保存了该线程使用到的变量的主内存副本拷贝，线程对变量的所有操作（读取，赋值等 ）都必需在线程自己的工作内存中进行，而不能够直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量值的传递均需要通过主内存来完成
 
-![image-20210917214441440](https://static.xlc520.ml/juc/image-20210917214441440.png)
+![image-20210917214441440](https://static.linch.eu.org/juc/image-20210917214441440.png)
 
  线程脏读：如果没有可见性保证
 
-![image-20210917214501491](https://static.xlc520.ml/juc/image-20210917214501491.png)
+![image-20210917214501491](https://static.linch.eu.org/juc/image-20210917214501491.png)
 
 #### 2、原子性
 
@@ -6623,13 +6623,13 @@ JMM(java内存模型)，由于并发程序要比串行程序复杂很多，其�
 指令重排可以保证串行语义一致，但没有义务保证多线程间的语义也一致，即可能产生"脏读"，简单说，
 两行以上不相干的代码在执行的时候有可能先执行的不是第一条，不见得是从上到下顺序执行，执行顺序会被优化。
 
-![image-20210917214606690](https://static.xlc520.ml/juc/image-20210917214606690.png)
+![image-20210917214606690](https://static.linch.eu.org/juc/image-20210917214606690.png)
 
 单线程环境里面确保程序最终执行结果和代码顺序执行的结果一致。
 处理器在进行重排序时必须要考虑指令之间的数据依赖性
 多线程环境中线程交替执行,由于编译器优化重排的存在，两个线程中使用的变量能否保证一致性是无法确定的,结果无法预测
 
-![image-20210917214623939](https://static.xlc520.ml/juc/image-20210917214623939.png)
+![image-20210917214623939](https://static.linch.eu.org/juc/image-20210917214623939.png)
 
 ### 4、JMM规范下，多线程对变量的读写过程
 
@@ -6637,7 +6637,7 @@ JMM(java内存模型)，由于并发程序要比串行程序复杂很多，其�
 
 ​		由于JVM运行程序的实体是线程，而每个线程创建时JVM都会为其创建一个工作内存(有些地方称为栈空间)，工作内存是每个线程的私有数据区域，而Java内存模型中规定所有变量都存储在主内存，主内存是共享内存区域，所有线程都可以访问，但线程对变量的操作(读取赋值等)必须在工作内存中进行，首先要将变量从主内存拷贝到的线程自己的工作内存空间，然后对变量进行操作，操作完成后再将变量写回主内存，不能直接操作主内存中的变量，各个线程中的工作内存中存储着主内存中的变量副本拷贝，因此不同的线程间无法访问对方的工作内存，线程间的通信(传值)必须通过主内存来完成，其简要访问过程如下图:
 
-![image-20210917214744040](https://static.xlc520.ml/juc/image-20210917214744040.png)
+![image-20210917214744040](https://static.linch.eu.org/juc/image-20210917214744040.png)
 
 JMM定义了线程和主内存之间的抽象关系
 1 线程之间的共享变量存储在主内存中(从硬件角度来说就是内存条)
@@ -6654,7 +6654,7 @@ JMM定义了线程和主内存之间的抽象关系
 
 在JMM中，如果一个操作执行的结果需要对另一个操作可见性或者 代码重排序，那么这两个操作之间必须存在happens-before关系。
 
-![image-20210917214911737](https://static.xlc520.ml/juc/image-20210917214911737.png)
+![image-20210917214911737](https://static.linch.eu.org/juc/image-20210917214911737.png)
 
 #### 1、先行发生原则说明 
 
@@ -6733,7 +6733,7 @@ Thread::isAlive()的返回值等手段检测线程是否已经终止执行。
 
 ### 7、案例说明
 
-![image-20210917215555073](https://static.xlc520.ml/juc/image-20210917215555073.png)
+![image-20210917215555073](https://static.linch.eu.org/juc/image-20210917215555073.png)
 
 ​		假设存在线程A和B，线程A先（时间上的先后）调用了setValue(1)，然后线程B调用了同一个对象的getValue()，那么线程B收到的返回值是什么？
 
@@ -6769,13 +6769,13 @@ Thread::isAlive()的返回值等手段检测线程是否已经终止执行。
 
 - 设定规则，禁止乱序
 
-![image-20210922203923024](https://static.xlc520.ml/juc/image-20210922203923024.png)
+![image-20210922203923024](https://static.linch.eu.org/juc/image-20210922203923024.png)
 
 上海南京路步行街武警“人墙”当红灯
 
-![image-20210922204024363](https://static.xlc520.ml/juc/image-20210922204024363.png)
+![image-20210922204024363](https://static.linch.eu.org/juc/image-20210922204024363.png)
 
-![image-20210922204027690](https://static.xlc520.ml/juc/image-20210922204027690.png)
+![image-20210922204027690](https://static.linch.eu.org/juc/image-20210922204027690.png)
 
 #### 2、内存屏障是什么
 
@@ -6783,7 +6783,7 @@ Thread::isAlive()的返回值等手段检测线程是否已经终止执行。
 
 ​		内存屏障之前的所有写操作都要回写到主内存，内存屏障之后的所有读操作都能获得内存屏障之前的所有写操作的最新结果(实现了可见性)。
 
-![image-20210922204126528](https://static.xlc520.ml/juc/image-20210922204126528.png)
+![image-20210922204126528](https://static.linch.eu.org/juc/image-20210922204126528.png)
 
 因此重排序时，不允许把内存屏障之后的指令重排序到内存屏障之前。
 一句话：对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读，也叫写后读。
@@ -6796,37 +6796,37 @@ Thread::isAlive()的返回值等手段检测线程是否已经终止执行。
 
 Unsafe.class
 
-![image-20210922204301539](https://static.xlc520.ml/juc/image-20210922204301539.png)
+![image-20210922204301539](https://static.linch.eu.org/juc/image-20210922204301539.png)
 
 Unsafe.java
 
-![image-20210922204320477](https://static.xlc520.ml/juc/image-20210922204320477.png)
+![image-20210922204320477](https://static.linch.eu.org/juc/image-20210922204320477.png)
 
 Unsafe.cpp
 
-![image-20210922204329642](https://static.xlc520.ml/juc/image-20210922204329642.png)
+![image-20210922204329642](https://static.linch.eu.org/juc/image-20210922204329642.png)
 
 OrderAccess.hpp
 
-![image-20210922204339917](https://static.xlc520.ml/juc/image-20210922204339917.png)
+![image-20210922204339917](https://static.linch.eu.org/juc/image-20210922204339917.png)
 
 orderAccess_linux_x86.inline.hpp
 
-![image-20210922204349150](https://static.xlc520.ml/juc/image-20210922204349150.png)
+![image-20210922204349150](https://static.linch.eu.org/juc/image-20210922204349150.png)
 
 
 
 #### 5、四大屏障分别是什么意思
 
-![image-20210922204417963](https://static.xlc520.ml/juc/image-20210922204417963.png)
+![image-20210922204417963](https://static.linch.eu.org/juc/image-20210922204417963.png)
 
 orderAccess_linux_x86.inline.hpp
 
-![image-20210922204432078](https://static.xlc520.ml/juc/image-20210922204432078.png)
+![image-20210922204432078](https://static.linch.eu.org/juc/image-20210922204432078.png)
 
 #### 6、happens-before 之 volatile 变量规则
 
-![image-20210922204533258](https://static.xlc520.ml/juc/image-20210922204533258.png)
+![image-20210922204533258](https://static.linch.eu.org/juc/image-20210922204533258.png)
 
 | 当第一个操作为volatile读时，不论第二个操作是什么，都不能重排序。这个操作保证了volatile读之后的操作不会被重排到volatile读之前。 |
 | ------------------------------------------------------------ |
@@ -6843,7 +6843,7 @@ orderAccess_linux_x86.inline.hpp
   - 在每个 volatile 读操作的后⾯插⼊⼀个 LoadLoad 屏障
   - 在每个 volatile 读操作的后⾯插⼊⼀个 LoadStore 屏障
 
-![image-20210922204820482](https://static.xlc520.ml/juc/image-20210922204820482.png)
+![image-20210922204820482](https://static.linch.eu.org/juc/image-20210922204820482.png)
 
 ### 4、volatile特性
 
@@ -6903,7 +6903,7 @@ public class VolatileSeeDemo
 Java内存模型中定义的8种工作内存与主内存之间的原子操作
 read(读取)→load(加载)→use(使用)→assign(赋值)→store(存储)→write(写入)→lock(锁定)→unlock(解锁)
 
-![image-20210922205210267](https://static.xlc520.ml/juc/image-20210922205210267.png)
+![image-20210922205210267](https://static.linch.eu.org/juc/image-20210922205210267.png)
 
 read: 作用于主内存，将变量的值从主内存传输到工作内存，主内存到工作内存
 load: 作用于工作内存，将read从主内存传输的变量值放入工作内存变量副本中，即数据加载
@@ -6953,7 +6953,7 @@ public class VolatileNoAtomicDemo
 
 从i++的字节码角度说明
 
-![image-20210922205402552](https://static.xlc520.ml/juc/image-20210922205402552.png)
+![image-20210922205402552](https://static.linch.eu.org/juc/image-20210922205402552.png)
 
 ```java
 原子性指的是一个操作是不可中断的，即使是在多线程环境下，一个操作一旦开始就不会被其他线程影响。
@@ -6965,7 +6965,7 @@ public void add()
 并执行相同值的加1操作，这也就造成了线程安全失败，因此对于add方法必须使用synchronized修饰，以便保证线程安全.
 ```
 
-![image-20210922205426175](https://static.xlc520.ml/juc/image-20210922205426175.png)
+![image-20210922205426175](https://static.linch.eu.org/juc/image-20210922205426175.png)
 
 ```java
 多线程环境下，"数据计算"和"数据赋值"操作可能多次出现，即操作非原子。若数据在加载之后，若主内存count变量发生修改之后，由于线程工作内存中的值在此前已经加载，从而不会对变更操作做出相应变化，即私有内存和公共内存中变量不同步，进而导致数据不一致
@@ -6977,7 +6977,7 @@ public void add()
 
 当线程1对主内存对象发起read操作到write操作第一套流程的时间里，线程2随时都有可能对这个主内存对象发起第二套操作
 
-![image-20210922205521467](https://static.xlc520.ml/juc/image-20210922205521467.png)
+![image-20210922205521467](https://static.linch.eu.org/juc/image-20210922205521467.png)
 
 ##### 3、既然一修改就是可见，为什么还不能保证原子性？
 
@@ -6990,11 +6990,11 @@ volatile主要是对其中部分指令做了处理
 就这样通过用的时候直接从主内存取，在赋值到直接写回主内存做到了内存可见性。注意蓝色框框的间隙。。。。。。o(╥﹏╥)o
 ```
 
-![image-20210922205631332](https://static.xlc520.ml/juc/image-20210922205631332.png)
+![image-20210922205631332](https://static.linch.eu.org/juc/image-20210922205631332.png)
 
 ##### 4、读取赋值一个volatile变量的情况
 
-![image-20210922205704525](https://static.xlc520.ml/juc/image-20210922205704525.png)
+![image-20210922205704525](https://static.linch.eu.org/juc/image-20210922205704525.png)
 
 ```java
  read-load-use 和 assign-store-write 成为了两个不可分割的原子操作，但是在use和assign之间依然有极小的一段真空期，有可能变量会被其他线程读取，导致写丢失一次...o(╥﹏╥)o
@@ -7002,13 +7002,13 @@ volatile主要是对其中部分指令做了处理
 《深入理解Java虚拟机》提到：
 ```
 
-![image-20210922205718122](https://static.xlc520.ml/juc/image-20210922205718122.png)
+![image-20210922205718122](https://static.linch.eu.org/juc/image-20210922205718122.png)
 
 ##### 5、面试回答
 
 JVM的字节码，i++分成三步，间隙期不同步非原子操作(i++)
 
-![image-20210922205752322](https://static.xlc520.ml/juc/image-20210922205752322.png)
+![image-20210922205752322](https://static.linch.eu.org/juc/image-20210922205752322.png)
 
 #### 3、指令禁重排
 
@@ -7022,7 +7022,7 @@ JVM的字节码，i++分成三步，间隙期不同步非原子操作(i++)
 重排序的分类和执行流程
 ```
 
-![image-20210922205902093](https://static.xlc520.ml/juc/image-20210922205902093.png)
+![image-20210922205902093](https://static.linch.eu.org/juc/image-20210922205902093.png)
 
 ```java
 编译器优化的重排序： 编译器在不改变单线程串行语义的前提下，可以重新调整指令的执行顺序
@@ -7045,13 +7045,13 @@ JVM的字节码，i++分成三步，间隙期不同步非原子操作(i++)
 编译器和处理器在重排序时，会遵守数据依赖性，不会改变存在依赖关系的两个操作的执行,但不同处理器和不同线程之间的数据性不会被编译器和处理器考虑，其只会作用于单处理器和单线程环境，下面三种情况，只要重排序两个操作的执行顺序，程序的执行结果就会被改变。
 ```
 
-![image-20210922210024000](https://static.xlc520.ml/juc/image-20210922210024000.png)
+![image-20210922210024000](https://static.linch.eu.org/juc/image-20210922210024000.png)
 
 ##### 1、volatile的底层实现是通过内存屏障
 
 volatile有关的禁止指令重排的行为
 
-![image-20210922210055834](https://static.xlc520.ml/juc/image-20210922210055834.png)
+![image-20210922210055834](https://static.linch.eu.org/juc/image-20210922210055834.png)
 
 | 当第一个操作为volatile读时，不论第二个操作是什么，都不能重排序。这个操作保证了volatile读之后的操作不会被重排到volatile读之前。 |
 | ------------------------------------------------------------ |
@@ -7086,7 +7086,7 @@ public class VolatileTest {
 }
 ```
 
-![image-20210922210258725](https://static.xlc520.ml/juc/image-20210922210258725.png)
+![image-20210922210258725](https://static.linch.eu.org/juc/image-20210922210258725.png)
 
 #### 4、如何正确使用volatile
 
@@ -7185,7 +7185,7 @@ public class SafeDoubleCheckSingleton
 
 单线程环境下(或者说正常情况下)，在"问题代码处"，会执行如下操作，保证能获取到已完成初始化的实例
 
-![image-20210922210741247](https://static.xlc520.ml/juc/image-20210922210741247.png)
+![image-20210922210741247](https://static.linch.eu.org/juc/image-20210922210741247.png)
 
 由于存在指令重排序......
 
@@ -7193,7 +7193,7 @@ public class SafeDoubleCheckSingleton
 
 隐患：多线程环境下，在"问题代码处"，会执行如下操作，由于重排序导致2,3乱序，后果就是其他线程得到的是null而不是完成初始化的对象
 
-![image-20210922210815931](https://static.xlc520.ml/juc/image-20210922210815931.png)
+![image-20210922210815931](https://static.linch.eu.org/juc/image-20210922210815931.png)
 
 
 
@@ -7230,7 +7230,7 @@ public class SingletonDemo
 
 ##### 1、内存屏障是什么
 
-![image-20210922211112799](https://static.xlc520.ml/juc/image-20210922211112799.png)
+![image-20210922211112799](https://static.linch.eu.org/juc/image-20210922211112799.png)
 
 #####  2、内存屏障能干嘛
 
@@ -7241,42 +7241,42 @@ public class SingletonDemo
 ##### 3、内存屏障四大指令
 
 - 在每一个volatile写操作前面插入一个StoreStore屏障
-  - ![image-20210922211216698](https://static.xlc520.ml/juc/image-20210922211216698.png)
+  - ![image-20210922211216698](https://static.linch.eu.org/juc/image-20210922211216698.png)
 - 在每一个volatile写操作后面插入一个StoreLoad屏障
-  - ![image-20210922211234267](https://static.xlc520.ml/juc/image-20210922211234267.png)
+  - ![image-20210922211234267](https://static.linch.eu.org/juc/image-20210922211234267.png)
 - 在每一个volatile读操作后面插入一个LoadLoad屏障
-  - ![image-20210922211247865](https://static.xlc520.ml/juc/image-20210922211247865.png)
+  - ![image-20210922211247865](https://static.linch.eu.org/juc/image-20210922211247865.png)
 - 在每一个volatile读操作后面插入一个LoadStore屏障
-  - ![image-20210922211259274](https://static.xlc520.ml/juc/image-20210922211259274.png)
+  - ![image-20210922211259274](https://static.linch.eu.org/juc/image-20210922211259274.png)
 
 ##### 4、凭什么我们java写了一个volatile关键字系统底层加入内存屏障？两者关系怎么勾搭上的?
 字节码层面
 
-![image-20210922211344635](https://static.xlc520.ml/juc/image-20210922211344635.png)
+![image-20210922211344635](https://static.linch.eu.org/juc/image-20210922211344635.png)
 
-![image-20210922211354764](https://static.xlc520.ml/juc/image-20210922211354764.png)
+![image-20210922211354764](https://static.linch.eu.org/juc/image-20210922211354764.png)
 
 ##### 5、volatile可见性
 
-![image-20210922211419405](https://static.xlc520.ml/juc/image-20210922211419405.png)
+![image-20210922211419405](https://static.linch.eu.org/juc/image-20210922211419405.png)
 
 ##### 6、volatile禁重排
 
 写指令
 
-![image-20210922211436123](https://static.xlc520.ml/juc/image-20210922211436123.png)
+![image-20210922211436123](https://static.linch.eu.org/juc/image-20210922211436123.png)
 
 读指令
 
-![image-20210922211447326](https://static.xlc520.ml/juc/image-20210922211447326.png)
+![image-20210922211447326](https://static.linch.eu.org/juc/image-20210922211447326.png)
 
 ##### 7、对比java.util.concurrent.locks.Lock来理解
 
-![image-20210922211501481](https://static.xlc520.ml/juc/image-20210922211501481.png)
+![image-20210922211501481](https://static.linch.eu.org/juc/image-20210922211501481.png)
 
 ##### 8、一句话总结
 
-![image-20210922211532860](https://static.xlc520.ml/juc/image-20210922211532860.png)
+![image-20210922211532860](https://static.linch.eu.org/juc/image-20210922211532860.png)
 
 
 
@@ -7346,7 +7346,7 @@ compare and swap的缩写，中文翻译成比较并交换,实现并发算法时
 CAS有3个操作数，位置内存值V，旧的预期值A，要修改的更新值B。
 当且仅当旧的预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做或重来
 
-![image-20210922211800641](https://static.xlc520.ml/juc/image-20210922211800641.png)
+![image-20210922211800641](https://static.linch.eu.org/juc/image-20210922211800641.png)
 
 ```java
 CAS是JDK提供的非阻塞原子性操作，它通过硬件保证了比较-更新的原子性。
@@ -7373,7 +7373,7 @@ public class CASDemo
 
 compareAndSet()方法的源代码：
 
-![image-20210922211916954](https://static.xlc520.ml/juc/image-20210922211916954.png)
+![image-20210922211916954](https://static.linch.eu.org/juc/image-20210922211916954.png)
 
 上面三个方法都是类似的，主要对4个参数做一下说明。
 var1：表示要操作的对象
@@ -7381,7 +7381,7 @@ var2：表示要操作对象中属性地址的偏移量
 var4：表示需要修改数据的期望的值
 var5/var6：表示需要修改为的新值
 
-![image-20210922211925337](https://static.xlc520.ml/juc/image-20210922211925337.png)
+![image-20210922211925337](https://static.linch.eu.org/juc/image-20210922211925337.png)
 
 
 
@@ -7389,7 +7389,7 @@ var5/var6：表示需要修改为的新值
 
 #### 1、UnSafe
 
-![image-20210922212018603](https://static.xlc520.ml/juc/image-20210922212018603.png)
+![image-20210922212018603](https://static.linch.eu.org/juc/image-20210922212018603.png)
 
 1. Unsafe
       	是CAS的核心类，由于Java方法无法直接访问底层系统，需要通过本地（native）方法来访问，Unsafe相当于一个后门，基于该类可以直接操作特定内存的数据。Unsafe类存在于sun.misc包中，其内部方法操作可以像C的指针一样直接操作内存，因为Java中CAS操作的执行依赖于Unsafe类的方法。
@@ -7397,7 +7397,7 @@ var5/var6：表示需要修改为的新值
 
 2. 变量valueOffset，表示该变量值在内存中的偏移地址，因为Unsafe就是根据内存偏移地址获取数据的。
 
-![image-20210922212041394](https://static.xlc520.ml/juc/image-20210922212041394.png)
+![image-20210922212041394](https://static.linch.eu.org/juc/image-20210922212041394.png)
 
 3. 变量value用volatile修饰，保证了多线程之间的内存可见性。
 
@@ -7407,13 +7407,13 @@ CAS的全称为Compare-And-Swap，它是一条CPU并发原语。
 它的功能是判断内存某个位置的值是否为预期值，如果是则更改为新的值，这个过程是原子的。
 AtomicInteger 类主要利用 CAS (compare and swap) + volatile 和 native 方法来保证原子操作，从而避免 synchronized 的高开销，执行效率大为提升。
 
-![image-20210922212208816](https://static.xlc520.ml/juc/image-20210922212208816.png)
+![image-20210922212208816](https://static.linch.eu.org/juc/image-20210922212208816.png)
 
 new AtomicInteger().getAndIncrement();
 
-![image-20210922212236304](https://static.xlc520.ml/juc/image-20210922212236304.png)
+![image-20210922212236304](https://static.linch.eu.org/juc/image-20210922212236304.png)
 
-![image-20210922212248701](https://static.xlc520.ml/juc/image-20210922212248701.png)
+![image-20210922212248701](https://static.linch.eu.org/juc/image-20210922212248701.png)
 
 
 假设线程A和线程B两个线程同时执行getAndAddInt操作（分别跑在不同CPU上）：
@@ -7543,7 +7543,7 @@ public class AtomicReferenceDemo
 是指尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁，
 当线程发现锁被占用时，会不断循环判断锁的状态，直到获取。这样的好处是减少线程上下文切换的消耗，缺点是循环会消耗CPU
 
-![image-20210922212914003](https://static.xlc520.ml/juc/image-20210922212914003.png)
+![image-20210922212914003](https://static.linch.eu.org/juc/image-20210922212914003.png)
 
 ```java
 /**
@@ -7602,7 +7602,7 @@ public class SpinLockDemo
 
 我们可以看到getAndAddInt方法执行时，有个do while
 
-![image-20210922213308155](https://static.xlc520.ml/juc/image-20210922213308155.png)
+![image-20210922213308155](https://static.linch.eu.org/juc/image-20210922213308155.png)
 
 如果CAS失败，会一直进行尝试。如果CAS长时间一直不成功，可能会给CPU带来很大的开销。
 
@@ -7669,7 +7669,7 @@ public class ABADemo
 
 ## 十二、原子操作类之18罗汉增强
 
-![image-20210922213530641](https://static.xlc520.ml/juc/image-20210922213530641.png)
+![image-20210922213530641](https://static.linch.eu.org/juc/image-20210922213530641.png)
 
 1. AtomicBoolean
 2. AtomicInteger
@@ -8131,11 +8131,11 @@ AtomicReferenceFieldUpdater
 - LongAccumulator
 - LongAdder
 
-![image-20210925210537531](https://static.xlc520.ml/juc/image-20210925210537531.png)
+![image-20210925210537531](https://static.linch.eu.org/juc/image-20210925210537531.png)
 
 #### 1、点赞计数器，看看性能
 
-![image-20210925210601595](https://static.xlc520.ml/juc/image-20210925210601595.png)
+![image-20210925210601595](https://static.linch.eu.org/juc/image-20210925210601595.png)
 
 LongAdder只能用来计算加法，且从零开始计算
 
@@ -8332,7 +8332,7 @@ public class LongAdderDemo2
 }
 ```
 
-![image-20210925210808233](https://static.xlc520.ml/juc/image-20210925210808233.png)
+![image-20210925210808233](https://static.linch.eu.org/juc/image-20210925210808233.png)
 
 
 
@@ -8340,11 +8340,11 @@ public class LongAdderDemo2
 
 ##### 1、架构
 
-![image-20210925211148889](https://static.xlc520.ml/juc/image-20210925211148889.png)
+![image-20210925211148889](https://static.linch.eu.org/juc/image-20210925211148889.png)
 
 LongAdder是Striped64的子类
 
-![image-20210925211209788](https://static.xlc520.ml/juc/image-20210925211209788.png)
+![image-20210925211209788](https://static.linch.eu.org/juc/image-20210925211209788.png)
 
 ##### 2、剩下两罗汉
 
@@ -8355,7 +8355,7 @@ Number
 
 ##### 3、原理(LongAdder为什么这么快)
 
-![image-20210925211404913](https://static.xlc520.ml/juc/image-20210925211404913.png)
+![image-20210925211404913](https://static.linch.eu.org/juc/image-20210925211404913.png)
 
 ###### 1、Striped64有几个比较重要的成员函数
 
@@ -8383,11 +8383,11 @@ transient volatile int cellsBusy;
 
 最重要的2个
 
-![image-20210925211458685](https://static.xlc520.ml/juc/image-20210925211458685.png)
+![image-20210925211458685](https://static.linch.eu.org/juc/image-20210925211458685.png)
 
 ###### 2、Striped64中一些变量或者方法的定义
 
-![image-20210925211609167](https://static.xlc520.ml/juc/image-20210925211609167.png)
+![image-20210925211609167](https://static.linch.eu.org/juc/image-20210925211609167.png)
 
 
 
@@ -8395,7 +8395,7 @@ transient volatile int cellsBusy;
 
 是 java.util.concurrent.atomic 下 Striped64 的一个内部类
 
-![image-20210925211634587](https://static.xlc520.ml/juc/image-20210925211634587.png)
+![image-20210925211634587](https://static.linch.eu.org/juc/image-20210925211634587.png)
 
 
 
@@ -8406,11 +8406,11 @@ transient volatile int cellsBusy;
 ​		sum()会将所有Cell数组中的value和base累加作为返回值，核心的思想就是将之前AtomicLong一个value的更新压力分散到多个value中去，
 从而降级更新热点。
 
-![image-20210925211716139](https://static.xlc520.ml/juc/image-20210925211716139.png)
+![image-20210925211716139](https://static.linch.eu.org/juc/image-20210925211716139.png)
 
 
 
-![image-20210925211738409](https://static.xlc520.ml/juc/image-20210925211738409.png)
+![image-20210925211738409](https://static.linch.eu.org/juc/image-20210925211738409.png)
 
 
 
@@ -8424,7 +8424,7 @@ Cell[]数组：竞态条件下，累加个各个线程自己的槽Cell[i]中
 
 ​		LongAdder在无竞争的情况，跟AtomicLong一样，对同一个base进行操作，当出现竞争关系时则是采用化整为零的做法，从空间换时间，用一个数组cells，将一个value拆分进这个数组cells。多个线程需要同时对value进行操作时候，可以对线程id进行hash得到hash值，再根据hash值映射到这个数组cells的某个下标，再对该下标所对应的值进行自增操作。当所有线程操作完毕，将数组cells的所有值和无竞争值base都加起来作为最终结果。
 
-![image-20210925211849436](https://static.xlc520.ml/juc/image-20210925211849436.png)
+![image-20210925211849436](https://static.linch.eu.org/juc/image-20210925211849436.png)
 
 ```java
 longAdder.increment()
@@ -8432,11 +8432,11 @@ longAdder.increment()
 
 ###### 1、add(1L)
 
-![image-20210925211939336](https://static.xlc520.ml/juc/image-20210925211939336.png)
+![image-20210925211939336](https://static.linch.eu.org/juc/image-20210925211939336.png)
 
-![image-20210925211956219](https://static.xlc520.ml/juc/image-20210925211956219.png)
+![image-20210925211956219](https://static.linch.eu.org/juc/image-20210925211956219.png)
 
-![image-20210925212001450](https://static.xlc520.ml/juc/image-20210925212001450.png)
+![image-20210925212001450](https://static.linch.eu.org/juc/image-20210925212001450.png)
 
 
 
@@ -8448,27 +8448,27 @@ longAdder.increment()
 
 **longAccumulate入参说明**
 
-![image-20210925212131070](https://static.xlc520.ml/juc/image-20210925212131070.png)
+![image-20210925212131070](https://static.linch.eu.org/juc/image-20210925212131070.png)
 
 **Striped64中一些变量或者方法的定义**
 
-![image-20210925212144634](https://static.xlc520.ml/juc/image-20210925212144634.png)
+![image-20210925212144634](https://static.linch.eu.org/juc/image-20210925212144634.png)
 
 **线程hash值：probe**
 
-![image-20210925212206841](https://static.xlc520.ml/juc/image-20210925212206841.png)
+![image-20210925212206841](https://static.linch.eu.org/juc/image-20210925212206841.png)
 
-![image-20210925212211672](https://static.xlc520.ml/juc/image-20210925212211672.png)
+![image-20210925212211672](https://static.linch.eu.org/juc/image-20210925212211672.png)
 
-![image-20210925212214106](https://static.xlc520.ml/juc/image-20210925212214106.png)
+![image-20210925212214106](https://static.linch.eu.org/juc/image-20210925212214106.png)
 
 
 
-![image-20210925212219015](https://static.xlc520.ml/juc/image-20210925212219015.png)
+![image-20210925212219015](https://static.linch.eu.org/juc/image-20210925212219015.png)
 
 **总纲**
 
-![image-20210925212236202](https://static.xlc520.ml/juc/image-20210925212236202.png)
+![image-20210925212236202](https://static.linch.eu.org/juc/image-20210925212236202.png)
 
 ```
 上述代码首先给当前线程分配一个hash值，然后进入一个for(;;)自旋，这个自旋分为三个分支：
@@ -8481,7 +8481,7 @@ CASE3：Cell[]数组正在初始化中
 
 未初始化过Cell[]数组，尝试占有锁并首次初始化cells数组
 
-![image-20210925212315327](https://static.xlc520.ml/juc/image-20210925212315327.png)
+![image-20210925212315327](https://static.linch.eu.org/juc/image-20210925212315327.png)
 
 ```
 如果上面条件都执行成功就会执行数组的初始化及赋值操作， Cell[] rs = new Cell[2]表示数组的长度为2，
@@ -8493,7 +8493,7 @@ h & 1类似于我们之前HashMap常用到的计算散列桶index的算法，通
 
 多个线程尝试CAS修改失败的线程会走到这个分支
 
-![image-20210925212343899](https://static.xlc520.ml/juc/image-20210925212343899.png)
+![image-20210925212343899](https://static.linch.eu.org/juc/image-20210925212343899.png)
 
 该分支实现直接操作base基数，将值累加到base上，也即其它线程正在初始化，多个线程正在更新base的值。
 
@@ -8503,11 +8503,11 @@ h & 1类似于我们之前HashMap常用到的计算散列桶index的算法，通
 
 多个线程同时命中一个cell的竞争
 
-![image-20210925212437808](https://static.xlc520.ml/juc/image-20210925212437808.png)
+![image-20210925212437808](https://static.linch.eu.org/juc/image-20210925212437808.png)
 
 1. 
 
-   ![image-20210925212506154](https://static.xlc520.ml/juc/image-20210925212506154.png)
+   ![image-20210925212506154](https://static.linch.eu.org/juc/image-20210925212506154.png)
 
    
 
@@ -8519,22 +8519,22 @@ h & 1类似于我们之前HashMap常用到的计算散列桶index的算法，通
 
 2. 
 
-![image-20210925212521292](https://static.xlc520.ml/juc/image-20210925212521292.png)
+![image-20210925212521292](https://static.linch.eu.org/juc/image-20210925212521292.png)
 
-3. ![image-20210925212535517](https://static.xlc520.ml/juc/image-20210925212535517.png)
+3. ![image-20210925212535517](https://static.linch.eu.org/juc/image-20210925212535517.png)
 
    ```
    说明当前线程对应的数组中有了数据，也重置过hash值，
    这时通过CAS操作尝试对当前数中的value值进行累加x操作，x默认为1，如果CAS成功则直接跳出循环。
    ```
 
-4. ![image-20210925212601882](https://static.xlc520.ml/juc/image-20210925212601882.png)
+4. ![image-20210925212601882](https://static.linch.eu.org/juc/image-20210925212601882.png)
 
-5. ![image-20210925212607291](https://static.xlc520.ml/juc/image-20210925212607291.png)
+5. ![image-20210925212607291](https://static.linch.eu.org/juc/image-20210925212607291.png)
 
-6. ![image-20210925212613752](https://static.xlc520.ml/juc/image-20210925212613752.png)
+6. ![image-20210925212613752](https://static.linch.eu.org/juc/image-20210925212613752.png)
 
-![image-20210925212621738](https://static.xlc520.ml/juc/image-20210925212621738.png)
+![image-20210925212621738](https://static.linch.eu.org/juc/image-20210925212621738.png)
 
 ###### 3、sum
 
@@ -8548,7 +8548,7 @@ sum执行时，并没有限制对base和cells的更新(一句要命的话)。所
 ​		首先，最终返回的sum局部变量，初始被复制为base，而最终返回时，很可能base已经被更新了，而此时局部变量sum不会更新，造成不一致。
 其次，这里对cell的读取也无法保证是最后一次写入的值。所以，sum方法在没有并发的情况下，可以获得正确的结果。
 
-![image-20210925212713186](https://static.xlc520.ml/juc/image-20210925212713186.png)
+![image-20210925212713186](https://static.linch.eu.org/juc/image-20210925212713186.png)
 
 #### 5、使用总结
 
@@ -8594,7 +8594,7 @@ sum执行时，并没有限制对base和cells的更新(一句要命的话)。所
 
 ### 1、ThreadLocal简介
 
-![image-20210927222129464](https://static.xlc520.ml/juc/image-20210927222129464.png)
+![image-20210927222129464](https://static.linch.eu.org/juc/image-20210927222129464.png)
 
 ​		稍微翻译一下：
 ​		ThreadLocal提供线程局部变量。这些变量与正常的变量不同，因为每一个线程在访问ThreadLocal实例的时候（通过其get或set方法）都有自己的、独立初始化的变量副本。ThreadLocal实例通常是类中的私有静态字段，使用它的目的是希望将状态（例如，用户ID或事务ID）与线程关联起来。
@@ -8603,9 +8603,9 @@ sum执行时，并没有限制对base和cells的更新(一句要命的话)。所
 
 ​		实现每一个线程都有自己专属的本地变量副本(自己用自己的变量不麻烦别人，不和其他人共享，人人有份，人各一份)，主要解决了让每个线程绑定自己的值，通过使用get()和set()方法，获取默认值或将其值更改为当前线程所存的副本的值从而避免了线程安全问题。
 
-![](https://static.xlc520.ml/juc/image-20210927222231797.png)
+![](https://static.linch.eu.org/juc/image-20210927222231797.png)
 
-![image-20210927222241804](https://static.xlc520.ml/juc/image-20210927222241804.png)
+![image-20210927222241804](https://static.linch.eu.org/juc/image-20210927222241804.png)
 
 ### 2、永远的helloworld
 
@@ -8754,11 +8754,11 @@ public class ThreadLocalDemo
 
 ### 3、从阿里ThreadLocal规范开始
 
-![image-20210927222614201](https://static.xlc520.ml/juc/image-20210927222614201.png)
+![image-20210927222614201](https://static.linch.eu.org/juc/image-20210927222614201.png)
 
 #### 1、非线程安全的SimpleDateFormat
 
-![image-20210927222646376](https://static.xlc520.ml/juc/image-20210927222646376.png)
+![image-20210927222646376](https://static.linch.eu.org/juc/image-20210927222646376.png)
 
 ​		上述翻译：SimpleDateFormat中的日期格式不是同步的。推荐（建议）为每个线程创建独立的格式实例。如果多个线程同时访问一个格式，则它必须保持外部同步。
 
@@ -8817,9 +8817,9 @@ java.lang.NumberFormatException: For input string: ".20202E.20202E44"
 
 ​		SimpleDateFormat类内部有一个Calendar对象引用,它用来储存和这个SimpleDateFormat相关的日期信息,例如sdf.parse(dateStr),sdf.format(date) 诸如此类的方法参数传入的日期相关String,Date等等, 都是交由Calendar引用来储存的.这样就会导致一个问题如果你的SimpleDateFormat是个static的, 那么多个thread 之间就会共享这个SimpleDateFormat, 同时也是共享这个Calendar引用。
 
-![image-20210927222827543](https://static.xlc520.ml/juc/image-20210927222827543.png)
+![image-20210927222827543](https://static.linch.eu.org/juc/image-20210927222827543.png)
 
-![image-20210927222831591](https://static.xlc520.ml/juc/image-20210927222831591.png)
+![image-20210927222831591](https://static.linch.eu.org/juc/image-20210927222831591.png)
 
 #### 2、解决1
 
@@ -8939,17 +8939,17 @@ public class DateUtils{
 
 Thread和ThreadLocal
 
-![image-20210927223107547](https://static.xlc520.ml/juc/image-20210927223107547.png)
+![image-20210927223107547](https://static.linch.eu.org/juc/image-20210927223107547.png)
 
 再次体会，各自线程，人手一份
 
 ThreadLocal和ThreadLocalMap
 
-![image-20210927223131768](https://static.xlc520.ml/juc/image-20210927223131768.png)
+![image-20210927223131768](https://static.linch.eu.org/juc/image-20210927223131768.png)
 
 All三者总概括
 
-![image-20210927223141071](https://static.xlc520.ml/juc/image-20210927223141071.png)
+![image-20210927223141071](https://static.linch.eu.org/juc/image-20210927223141071.png)
 
 ​		threadLocalMap实际上就是一个以threadLocal实例为key，任意对象为value的Entry对象。
 当我们为threadLocal变量赋值，实际上就是以当前threadLocal实例为key，值为value的Entry往这个threadLocalMap中存放
@@ -8957,7 +8957,7 @@ All三者总概括
 近似的可以理解为:
 ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的map(其实是以ThreadLocal为Key)，不过是经过了两层包装的ThreadLocal对象：
 
-![image-20210927223215319](https://static.xlc520.ml/juc/image-20210927223215319.png)
+![image-20210927223215319](https://static.linch.eu.org/juc/image-20210927223215319.png)
 
 
 
@@ -8967,7 +8967,7 @@ ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的m
 
 ### 5、ThreadLocal内存泄露问题
 
-![image-20210927223726167](https://static.xlc520.ml/juc/image-20210927223726167.png)
+![image-20210927223726167](https://static.linch.eu.org/juc/image-20210927223726167.png)
 
 #### 1、什么是内存泄漏
 
@@ -8975,17 +8975,17 @@ ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的m
 
 #### 2、谁惹的祸？
 
-![image-20210927223802332](https://static.xlc520.ml/juc/image-20210927223802332.png)
+![image-20210927223802332](https://static.linch.eu.org/juc/image-20210927223802332.png)
 
 #### 3、强引用、软引用、弱引用、虚引用分别是什么？
 
-![image-20210927223927641](https://static.xlc520.ml/juc/image-20210927223927641.png)
+![image-20210927223927641](https://static.linch.eu.org/juc/image-20210927223927641.png)
 
 ThreadLocalMap从字面上就可以看出这是一个保存ThreadLocal对象的map(其实是以它为Key)，不过是经过了两层包装的ThreadLocal对象：
 （1）第一层包装是使用 `WeakReference<ThreadLocal<?>>` 将ThreadLocal对象变成一个弱引用的对象；
 （2）第二层包装是定义了一个专门的类 Entry 来扩展 `WeakReference<ThreadLocal<?>>`
 
-![image-20210927223943383](https://static.xlc520.ml/juc/image-20210927223943383.png)
+![image-20210927223943383](https://static.linch.eu.org/juc/image-20210927223943383.png)
 
 java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。
 
@@ -9159,9 +9159,9 @@ Map<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReferenc
 
 换句话说，设置虚引用关联的唯一目的，就是在这个对象被收集器回收的时候收到一个系统通知或者后续添加进一步的处理。
 
-![image-20210927224455350](https://static.xlc520.ml/juc/image-20210927224455350.png)
+![image-20210927224455350](https://static.linch.eu.org/juc/image-20210927224455350.png)
 
-![image-20210927224500569](https://static.xlc520.ml/juc/image-20210927224500569.png)
+![image-20210927224500569](https://static.linch.eu.org/juc/image-20210927224500569.png)
 
 我被回收前需要被引用队列保存下。
 
@@ -9255,17 +9255,17 @@ public class ReferenceDemo
 
 ##### 5、GCRoots和四大引用小总结
 
-![image-20210927224539900](https://static.xlc520.ml/juc/image-20210927224539900.png)
+![image-20210927224539900](https://static.linch.eu.org/juc/image-20210927224539900.png)
 
 
 
 #### 4、关系
 
-![image-20210927224633866](https://static.xlc520.ml/juc/image-20210927224633866.png)
+![image-20210927224633866](https://static.linch.eu.org/juc/image-20210927224633866.png)
 
 
 
-![image-20210927224637416](https://static.xlc520.ml/juc/image-20210927224637416.png)
+![image-20210927224637416](https://static.linch.eu.org/juc/image-20210927224637416.png)
 
 
 
@@ -9290,7 +9290,7 @@ public void function01()
 //line2调用set()方法后新建一个Entry，通过源码可知Entry对象里的k是弱引用指向这个对象。
 ```
 
-![image-20210927224731712](https://static.xlc520.ml/juc/image-20210927224731712.png)
+![image-20210927224731712](https://static.linch.eu.org/juc/image-20210927224731712.png)
 
 ​		当function01方法执行完毕后，栈帧销毁强引用 tl 也就没有了。但此时线程的ThreadLocalMap里某个entry的key引用还指向这个对象,若这个key引用是强引用，就会导致key指向的ThreadLocal对象及v指向的对象不能被gc回收，造成内存泄漏；若这个key引用是弱引用就大概率会减少内存泄漏的问题(还有一个key为null的雷)。使用弱引用，就可以使ThreadLocal对象在方法执行完毕后顺利被回收且Entry的key引用指向为null。
 
@@ -9306,7 +9306,7 @@ public void function01()
 
 ##### 2、key为null的entry，原理解析
 
-![image-20210927224633866](https://static.xlc520.ml/juc/image-20210927224633866.png)
+![image-20210927224633866](https://static.linch.eu.org/juc/image-20210927224633866.png)
 
 ​		ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用引用他，那么系统gc的时候，这个ThreadLocal势必会被回收，这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话(比如正好用在线程池)，这些key为null的Entry的value就会一直存在一条强引用链。
 
@@ -9316,23 +9316,23 @@ public void function01()
 
 set()
 
-![image-20210927224959196](https://static.xlc520.ml/juc/image-20210927224959196.png)
+![image-20210927224959196](https://static.linch.eu.org/juc/image-20210927224959196.png)
 
-![image-20210927225002054](https://static.xlc520.ml/juc/image-20210927225002054.png)
+![image-20210927225002054](https://static.linch.eu.org/juc/image-20210927225002054.png)
 
 
 
 get()
 
-![](https://static.xlc520.ml/juc/image-20210927225105228.png)
+![](https://static.linch.eu.org/juc/image-20210927225105228.png)
 
-![image-20210927225110265](https://static.xlc520.ml/juc/image-20210927225110265.png)
+![image-20210927225110265](https://static.linch.eu.org/juc/image-20210927225110265.png)
 
-![image-20210927225059412](https://static.xlc520.ml/juc/image-20210927225059412.png)
+![image-20210927225059412](https://static.linch.eu.org/juc/image-20210927225059412.png)
 
 remove()
 
-![image-20210927225121559](https://static.xlc520.ml/juc/image-20210927225121559.png)
+![image-20210927225121559](https://static.linch.eu.org/juc/image-20210927225121559.png)
 
 结论
 
@@ -9341,13 +9341,13 @@ remove()
 
 ##### 4、结论
 
-![image-20210927225235846](https://static.xlc520.ml/juc/image-20210927225235846.png)
+![image-20210927225235846](https://static.linch.eu.org/juc/image-20210927225235846.png)
 
-![image-20210927225238663](https://static.xlc520.ml/juc/image-20210927225238663.png)
+![image-20210927225238663](https://static.linch.eu.org/juc/image-20210927225238663.png)
 
 ### 7、最佳实践
 
-![image-20210927225409632](https://static.xlc520.ml/juc/image-20210927225409632.png)
+![image-20210927225409632](https://static.linch.eu.org/juc/image-20210927225409632.png)
 
 用完记得手动remove
 
@@ -9937,11 +9937,11 @@ public class Demo4 {
 
 ### 1、对象在堆内存中布局
 
-![image-20210927225655948](https://static.xlc520.ml/juc/image-20210927225655948.png)
+![image-20210927225655948](https://static.linch.eu.org/juc/image-20210927225655948.png)
 
 #### 1、对象在堆内存中的存储布局
 
-![image-20210927225734825](https://static.xlc520.ml/juc/image-20210927225734825.png)
+![image-20210927225734825](https://static.linch.eu.org/juc/image-20210927225734825.png)
 
 对象内部结构分为：对象头、实例数据、对齐填充（保证8个字节的倍数）。
 对象头分为对象标记（markOop）和类元信息（klassOop），类元信息存储的是指向该对象类元数据（klass）的首地址。
@@ -9950,21 +9950,21 @@ public class Demo4 {
 
 ##### 1、对象标记Mark Word
 
-![image-20210927225858356](https://static.xlc520.ml/juc/image-20210927225858356.png)
+![image-20210927225858356](https://static.linch.eu.org/juc/image-20210927225858356.png)
 
 
 
-![image-20210927225903931](https://static.xlc520.ml/juc/image-20210927225903931.png)
+![image-20210927225903931](https://static.linch.eu.org/juc/image-20210927225903931.png)
 
 在64位系统中，Mark Word占了8个字节，类型指针占了8个字节，一共是16个字节
 
-![image-20210927225919957](https://static.xlc520.ml/juc/image-20210927225919957.png)
+![image-20210927225919957](https://static.linch.eu.org/juc/image-20210927225919957.png)
 
 ​		默认存储对象的HashCode、分代年龄和锁标志位等信息。这些信息都是与对象自身定义无关的数据，所以MarkWord被设计成一个非固定的数据结构以便在极小的空间内存存储尽量多的数据。它会根据对象的状态复用自己的存储空间，也就是说在运行期间MarkWord里存储的数据会随着锁标志位的变化而变化。
 
 ##### 2、类元信息(又叫类型指针)
 
-![image-20210927230011055](https://static.xlc520.ml/juc/image-20210927230011055.png)
+![image-20210927230011055](https://static.linch.eu.org/juc/image-20210927230011055.png)
 
 对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。
 
@@ -9984,12 +9984,12 @@ http://openjdk.java.net/groups/hotspot/docs/HotSpotGlossary.html
 
 http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/89fb452b3688/src/share/vm/oops/oop.hpp
 
-![image-20210927230137020](https://static.xlc520.ml/juc/image-20210927230137020.png)
+![image-20210927230137020](https://static.linch.eu.org/juc/image-20210927230137020.png)
 
 _mark字段是mark word，_metadata是类指针klass pointer，
 对象头（object header）即是由这两个字段组成，这些术语可以参考Hotspot术语表，
 
-![image-20210927230150668](https://static.xlc520.ml/juc/image-20210927230150668.png)
+![image-20210927230150668](https://static.linch.eu.org/juc/image-20210927230150668.png)
 
 
 
@@ -9997,7 +9997,7 @@ _mark字段是mark word，_metadata是类指针klass pointer，
 
 #### 1、oop.hpp
 
-![image-20210927230137020](https://static.xlc520.ml/juc/image-20210927230137020.png)
+![image-20210927230137020](https://static.linch.eu.org/juc/image-20210927230137020.png)
 
 #### 2、markOop.hpp
 
@@ -10010,11 +10010,11 @@ JavaThread* ：保存持有偏向锁的线程ID
 epoch： 保存偏向时间戳
 ```
 
-![image-20210927230308057](https://static.xlc520.ml/juc/image-20210927230308057.png)
+![image-20210927230308057](https://static.linch.eu.org/juc/image-20210927230308057.png)
 
 markword(64位)分布图，对象布局、GC回收和后面的锁升级就是对象标记MarkWord里面标志位的变化
 
-![image-20210927230321279](https://static.xlc520.ml/juc/image-20210927230321279.png)
+![image-20210927230321279](https://static.linch.eu.org/juc/image-20210927230321279.png)
 
 
 
@@ -10048,7 +10048,7 @@ public class MyObject
 }
 ```
 
-![image-20210927230415577](https://static.xlc520.ml/juc/image-20210927230415577.png)
+![image-20210927230415577](https://static.linch.eu.org/juc/image-20210927230415577.png)
 
 ```java
 public class JOLDemo
@@ -10061,7 +10061,7 @@ public class JOLDemo
 }
 ```
 
-![image-20210927230442184](https://static.xlc520.ml/juc/image-20210927230442184.png)
+![image-20210927230442184](https://static.linch.eu.org/juc/image-20210927230442184.png)
 
 | OFFSET      | 偏移量，也就是到这个字段位置所占用的byte数 |
 | ----------- | ------------------------------------------ |
@@ -10074,7 +10074,7 @@ public class JOLDemo
 
 -XX:MaxTenuringThreshold=16
 
-![image-20210927230617433](https://static.xlc520.ml/juc/image-20210927230617433.png)
+![image-20210927230617433](https://static.linch.eu.org/juc/image-20210927230617433.png)
 
 #### 2、默认开启压缩说明
 
@@ -10082,13 +10082,13 @@ public class JOLDemo
 java -XX:+PrintCommandLineFlags -version
 ```
 
-![image-20210927230700348](https://static.xlc520.ml/juc/image-20210927230700348.png)
+![image-20210927230700348](https://static.linch.eu.org/juc/image-20210927230700348.png)
 
 ```
 -XX:+UseCompressedClassPointers
 ```
 
-![image-20210927230717948](https://static.xlc520.ml/juc/image-20210927230717948.png)
+![image-20210927230717948](https://static.linch.eu.org/juc/image-20210927230717948.png)
 
 上述表示开启了类型指针的压缩，以节约空间，假如不加压缩？？？
 
@@ -10098,13 +10098,13 @@ java -XX:+PrintCommandLineFlags -version
 -XX:-UseCompressedClassPointers
 ```
 
-![image-20210927230743485](https://static.xlc520.ml/juc/image-20210927230743485.png)
+![image-20210927230743485](https://static.linch.eu.org/juc/image-20210927230743485.png)
 
 ### 4、换成其他对象试试
 
-![image-20210927230805766](https://static.xlc520.ml/juc/image-20210927230805766.png)
+![image-20210927230805766](https://static.linch.eu.org/juc/image-20210927230805766.png)
 
-![image-20210927230808775](https://static.xlc520.ml/juc/image-20210927230808775.png)
+![image-20210927230808775](https://static.linch.eu.org/juc/image-20210927230808775.png)
 
 ## 十五、Synchronized与锁升级
 
@@ -10113,7 +10113,7 @@ java -XX:+PrintCommandLineFlags -version
 用锁能够实现数据的安全性，但是会带来性能下降。
 无锁能够基于线程并行提升程序性能，但是会带来安全性下降。
 
-![image-20210929210812273](https://static.xlc520.ml/juc/image-20210929210812273.png)
+![image-20210929210812273](https://static.linch.eu.org/juc/image-20210929210812273.png)
 
 synchronized锁：由对象头中的Mark Word根据锁标志位的不同而被复用及锁升级策略
 
@@ -10123,7 +10123,7 @@ java5以前，只有Synchronized，这个是操作系统级别的重量级操作
 
 #### 1、Java5之前，用户态和内核态之间的切换
 
-![image-20210929210932836](https://static.xlc520.ml/juc/image-20210929210932836.png)
+![image-20210929210932836](https://static.linch.eu.org/juc/image-20210929210932836.png)
 
 ​		java的线程是映射到操作系统原生线程之上的，如果要阻塞或唤醒一个线程就需要操作系统介入，需要在户态与核心态之间切换，这种切换会消耗大量的系统资源，因为用户态与内核态都有各自专用的内存空间，专用的寄存器等，用户态切换至内核态需要传递给许多变量、参数给内核，内核也需要保护好用户态在切换时的一些寄存器值、变量等，以便内核态调用结束后切换回用户态继续工作。
 
@@ -10134,17 +10134,17 @@ Java 6之后，为了减少获得锁和释放锁所带来的性能消耗，引�
 
 markOop.hpp
 
-![image-20210929211015422](https://static.xlc520.ml/juc/image-20210929211015422.png)
+![image-20210929211015422](https://static.linch.eu.org/juc/image-20210929211015422.png)
 
 ​		Monitor可以理解为一种同步工具，也可理解为一种同步机制，常常被描述为一个Java对象。Java对象是天生的Monitor，每一个Java对象都有成为Monitor的潜质，因为在Java的设计中 ，每一个Java对象自打娘胎里出来就带了一把看不见的锁，它叫做内部锁或者Monitor锁。
 
-![image-20210929211037543](https://static.xlc520.ml/juc/image-20210929211037543.png)
+![image-20210929211037543](https://static.linch.eu.org/juc/image-20210929211037543.png)
 
 Monitor的本质是依赖于底层操作系统的Mutex Lock实现，操作系统实现线程之间的切换需要从用户态到内核态的转换，成本非常高。
 
 Monitor(监视器锁)
 
-![image-20210929211107964](https://static.xlc520.ml/juc/image-20210929211107964.png)
+![image-20210929211107964](https://static.linch.eu.org/juc/image-20210929211107964.png)
 
 Mutex Lock 
 Monitor是在jvm底层实现的，底层代码是c++。本质是依赖于底层操作系统的Mutex Lock实现，操作系统实现线程之间的切换需要从用户态到内核态的转换，状态转换需要耗费很多的处理器时间成本非常高。所以synchronized是Java语言中的一个重量级操作。
@@ -10173,7 +10173,7 @@ Java 6之后，为了减少获得锁和释放锁所带来的性能消耗，引�
 
 synchronized用的锁是存在Java对象头里的Mark Word中锁升级功能主要依赖MarkWord中锁标志位和释放偏向锁标志位
 
-![image-20210929211353978](https://static.xlc520.ml/juc/image-20210929211353978.png)
+![image-20210929211353978](https://static.linch.eu.org/juc/image-20210929211353978.png)
 
 #### 3、无锁
 
@@ -10193,9 +10193,9 @@ public class MyObject
 }
 ```
 
-![image-20210929211429008](https://static.xlc520.ml/juc/image-20210929211429008.png)
+![image-20210929211429008](https://static.linch.eu.org/juc/image-20210929211429008.png)
 
-![image-20210929211444490](https://static.xlc520.ml/juc/image-20210929211444490.png)
+![image-20210929211444490](https://static.linch.eu.org/juc/image-20210929211444490.png)
 
 #### 4、偏向锁
 
@@ -10208,7 +10208,7 @@ public class MyObject
 >
 >偏向锁就是在这种情况下出现的，它的出现是为了解决只有在一个线程执行同步时提高性能。
 
-![image-20210929211553962](https://static.xlc520.ml/juc/image-20210929211553962.png)
+![image-20210929211553962](https://static.linch.eu.org/juc/image-20210929211553962.png)
 
 通过CAS方式修改markword中的线程ID
 
@@ -10230,11 +10230,11 @@ public class MyObject
 
 偏向锁的操作不用直接捅到操作系统，不涉及用户到内核转换，不必要直接升级为最高级，我们以一个account对象的“对象头”为例，
 
-![image-20210929211754329](https://static.xlc520.ml/juc/image-20210929211754329.png)
+![image-20210929211754329](https://static.linch.eu.org/juc/image-20210929211754329.png)
 
 ​		假如有一个线程执行到synchronized代码块的时候，JVM使用CAS操作把线程指针ID记录到Mark Word当中，并修改标偏向标示，标示当前线程就获得该锁。锁对象变成偏向锁（通过CAS修改对象头里的锁标志位），字面意思是“偏向于第一个获得它的线程”的锁。执行完同步代码块后，线程并不会主动释放偏向锁。
 
-![image-20210929211803269](https://static.xlc520.ml/juc/image-20210929211803269.png)
+![image-20210929211803269](https://static.linch.eu.org/juc/image-20210929211803269.png)
 
 ​		这时线程获得了锁，可以执行同步代码块。当该线程第二次到达同步代码块时会判断此时持有锁的线程是否还是自己（持有锁的线程ID也在对象头里），JVM通过account对象的Mark Word判断：当前线程ID还在，说明还持有着这个对象的锁，就可以继续进入临界区工作。由于之前没有释放锁，这里也就不需要重新加锁。 如果自始至终使用锁的线程只有一个，很明显偏向锁几乎没有额外开销，性能极高。
 
@@ -10249,9 +10249,9 @@ public class MyObject
 java -XX:+PrintFlagsInitial |grep BiasedLock*
 ```
 
-![image-20210929211909262](https://static.xlc520.ml/juc/image-20210929211909262.png)
+![image-20210929211909262](https://static.linch.eu.org/juc/image-20210929211909262.png)
 
-![image-20210929211918843](https://static.xlc520.ml/juc/image-20210929211918843.png)
+![image-20210929211918843](https://static.linch.eu.org/juc/image-20210929211918843.png)
 
 ```
 * 实际上偏向锁在JDK1.6之后是默认开启的，但是启动时间有延迟，
@@ -10282,11 +10282,11 @@ java -XX:+PrintFlagsInitial |grep BiasedLock*
  }
  ```
 
-![image-20210929212100730](https://static.xlc520.ml/juc/image-20210929212100730.png)
+![image-20210929212100730](https://static.linch.eu.org/juc/image-20210929212100730.png)
 
 一切默认，演示无效果,因为参数系统默认开启
 
-![image-20210929212916026](https://static.xlc520.ml/juc/image-20210929212916026.png)
+![image-20210929212916026](https://static.linch.eu.org/juc/image-20210929212916026.png)
 
 ```sh
 -XX:+UseBiasedLocking                       # 开启偏向锁(默认)           
@@ -10306,7 +10306,7 @@ java -XX:+PrintFlagsInitial |grep BiasedLock*
 -XX:BiasedLockingStartupDelay=0
 ```
 
-![image-20210929212953054](https://static.xlc520.ml/juc/image-20210929212953054.png)
+![image-20210929212953054](https://static.linch.eu.org/juc/image-20210929212953054.png)
 
 ##### 5、偏向锁的撤销
 
@@ -10321,9 +10321,9 @@ java -XX:+PrintFlagsInitial |grep BiasedLock*
 > 此时轻量级锁由原持有偏向锁的线程持有，继续执行其同步代码，而正在竞争的线程会进入自旋等待获得该轻量级锁。
 > ②  第一个线程执行完成synchronized方法(退出同步块)，则将对象头设置成无锁状态并撤销偏向锁，重新偏向 。
 
-![](https://static.xlc520.ml/juc/image-20210929213113133.png)
+![](https://static.linch.eu.org/juc/image-20210929213113133.png)
 
-![image-20210929213128855](https://static.xlc520.ml/juc/image-20210929213128855.png)
+![image-20210929213128855](https://static.linch.eu.org/juc/image-20210929213128855.png)
 
 
 
@@ -10344,15 +10344,15 @@ java -XX:+PrintFlagsInitial |grep BiasedLock*
 此时线程B操作中有两种情况：
 如果锁获取成功，直接替换Mark Word中的线程ID为B自己的ID(A → B)，重新偏向于其他线程(即将偏向锁交给其他线程，相当于当前线程"被"释放了锁)，该锁会保持偏向锁状态，A线程Over，B线程上位；
 
-![image-20210929213253052](https://static.xlc520.ml/juc/image-20210929213253052.png)
+![image-20210929213253052](https://static.linch.eu.org/juc/image-20210929213253052.png)
 
 ​		如果锁获取失败，则偏向锁升级为轻量级锁，此时轻量级锁由原持有偏向锁的线程持有，继续执行其同步代码，而正在竞争的线程B会进入自旋等待获得该轻量级锁。
 
-![image-20210929213304246](https://static.xlc520.ml/juc/image-20210929213304246.png)
+![image-20210929213304246](https://static.linch.eu.org/juc/image-20210929213304246.png)
 
 ##### 2、Code演示
 
-![image-20210929213324762](https://static.xlc520.ml/juc/image-20210929213324762.png)
+![image-20210929213324762](https://static.linch.eu.org/juc/image-20210929213324762.png)
 
 如果关闭偏向锁，就可以直接进入轻量级锁
 
@@ -10382,15 +10382,15 @@ Java6之后
 
 有大量的线程参与锁的竞争，冲突性很高
 
-![image-20210929213558173](https://static.xlc520.ml/juc/image-20210929213558173.png)
+![image-20210929213558173](https://static.linch.eu.org/juc/image-20210929213558173.png)
 
-![image-20210929213604489](https://static.xlc520.ml/juc/image-20210929213604489.png)
+![image-20210929213604489](https://static.linch.eu.org/juc/image-20210929213604489.png)
 
 
 
 #### 7、各种锁优缺点、synchronized锁升级和实现原理
 
-![image-20210929213623068](https://static.xlc520.ml/juc/image-20210929213623068.png)
+![image-20210929213623068](https://static.linch.eu.org/juc/image-20210929213623068.png)
 
 synchronized锁升级过程总结：一句话，就是先自旋，不行再阻塞。
 实际上是把之前的悲观锁(重量级锁)变成在一定条件下使用偏向锁以及使用轻量级(自旋锁CAS)的形式
@@ -10493,7 +10493,7 @@ public class LockBigDemo
 
 字面意思:抽象的队列同步器
 
-![image-20210929214004518](https://static.xlc520.ml/juc/image-20210929214004518.png)
+![image-20210929214004518](https://static.linch.eu.org/juc/image-20210929214004518.png)
 
 ```java
 AbstractOwnableSynchronizer
@@ -10506,7 +10506,7 @@ AbstractQueuedSynchronizer
 
 ​		是用来构建锁或者其它同步器组件的重量级基础框架及整个JUC体系的基石，通过内置的FIFO队列来完成资源获取线程的排队工作，并通过一个int类变量表示持有锁的状态
 
-![image-20210929214041662](https://static.xlc520.ml/juc/image-20210929214041662.png)
+![image-20210929214041662](https://static.linch.eu.org/juc/image-20210929214041662.png)
 
 
 
@@ -10516,23 +10516,23 @@ CLH：Craig、Landin and Hagersten 队列，是一个单向链表，AQS中的队
 
 #### 1、和AQS有关的
 
-![image-20210929214144170](https://static.xlc520.ml/juc/image-20210929214144170.png)
+![image-20210929214144170](https://static.linch.eu.org/juc/image-20210929214144170.png)
 
 #### 2、ReentrantLock
 
-![image-20210929214213703](https://static.xlc520.ml/juc/image-20210929214213703.png)
+![image-20210929214213703](https://static.linch.eu.org/juc/image-20210929214213703.png)
 
 #### 3、CountDownLatch
 
-![image-20210929214224423](https://static.xlc520.ml/juc/image-20210929214224423.png)
+![image-20210929214224423](https://static.linch.eu.org/juc/image-20210929214224423.png)
 
 #### 4、ReentrantReadWriteLock
 
-![image-20210929214237561](https://static.xlc520.ml/juc/image-20210929214237561.png)
+![image-20210929214237561](https://static.linch.eu.org/juc/image-20210929214237561.png)
 
 #### 5、Semaphore
 
-![image-20210929214249848](https://static.xlc520.ml/juc/image-20210929214249848.png)
+![image-20210929214249848](https://static.linch.eu.org/juc/image-20210929214249848.png)
 
 #### 6、进一步理解锁和同步器的关系
 
@@ -10556,25 +10556,25 @@ CLH：Craig、Landin and Hagersten 队列，是一个单向链表，AQS中的队
 
 ​		如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中，这个队列就是AQS的抽象表现。它将请求共享资源的线程封装成队列的结点（Node），通过CAS、自旋以及`LockSupport.park()`的方式，维护state变量的状态，使并发达到同步的效果。
 
-![image-20210929214426330](https://static.xlc520.ml/juc/image-20210929214426330.png)
+![image-20210929214426330](https://static.linch.eu.org/juc/image-20210929214426330.png)
 
 ### 4、AQS初步
 
 #### 1、官网解释
 
-![image-20210929214506123](https://static.xlc520.ml/juc/image-20210929214506123.png)
+![image-20210929214506123](https://static.linch.eu.org/juc/image-20210929214506123.png)
 
 有阻塞就需要排队，实现排队必然需要队列
 
 ​		AQS使用一个volatile的int类型的成员变量来表示同步状态，通过内置的FIFO队列来完成资源获取的排队工作将每条要去抢占资源的线程封装成一个Node节点来实现锁的分配，通过CAS完成对State值的修改。
 
-![image-20210929214546424](https://static.xlc520.ml/juc/image-20210929214546424.png)
+![image-20210929214546424](https://static.linch.eu.org/juc/image-20210929214546424.png)
 
 #### 2、AQS内部体系架构
 
-![image-20210929214605895](https://static.xlc520.ml/juc/image-20210929214605895.png)
+![image-20210929214605895](https://static.linch.eu.org/juc/image-20210929214605895.png)
 
-![image-20210929214622747](https://static.xlc520.ml/juc/image-20210929214622747.png)
+![image-20210929214622747](https://static.linch.eu.org/juc/image-20210929214622747.png)
 
 ##### 1、AQS自身
 
@@ -10582,7 +10582,7 @@ CLH：Craig、Landin and Hagersten 队列，是一个单向链表，AQS中的队
 
 AQS的同步状态State成员变量
 
-![image-20210929214734697](https://static.xlc520.ml/juc/image-20210929214734697.png)
+![image-20210929214734697](https://static.linch.eu.org/juc/image-20210929214734697.png)
 
 
 
@@ -10598,7 +10598,7 @@ AQS的同步状态State成员变量
 
 CLH队列(三个大牛的名字组成)，为一个双向队列
 
-![image-20210929214808112](https://static.xlc520.ml/juc/image-20210929214808112.png)
+![image-20210929214808112](https://static.linch.eu.org/juc/image-20210929214808112.png)
 
 **小总结**
 
@@ -10622,15 +10622,15 @@ volatile int waitStatus
 
 2. Node此类的讲解
 
-![image-20210929214940522](https://static.xlc520.ml/juc/image-20210929214940522.png)
+![image-20210929214940522](https://static.linch.eu.org/juc/image-20210929214940522.png)
 
 
 
-![image-20210929214949657](https://static.xlc520.ml/juc/image-20210929214949657.png)
+![image-20210929214949657](https://static.linch.eu.org/juc/image-20210929214949657.png)
 
 ##### 3、AQS同步队列的基本结构
 
-![image-20210929215024937](https://static.xlc520.ml/juc/image-20210929215024937.png)
+![image-20210929215024937](https://static.linch.eu.org/juc/image-20210929215024937.png)
 
 CLH：Craig、Landin and Hagersten 队列，是个单向链表，AQS中的队列是CLH变体的虚拟双向队列（FIFO）
 
@@ -10640,17 +10640,17 @@ Lock接口的实现类，基本都是通过【聚合】了一个【队列同步�
 
 #### 1、ReentrantLock的原理
 
-![image-20210929215121096](https://static.xlc520.ml/juc/image-20210929215121096.png)
+![image-20210929215121096](https://static.linch.eu.org/juc/image-20210929215121096.png)
 
 
 
 #### 2、从最简单的lock方法开始看看公平和非公平
 
-![image-20210929215157532](https://static.xlc520.ml/juc/image-20210929215157532.png)
+![image-20210929215157532](https://static.linch.eu.org/juc/image-20210929215157532.png)
 
-![image-20210929215208921](https://static.xlc520.ml/juc/image-20210929215208921.png)
+![image-20210929215208921](https://static.linch.eu.org/juc/image-20210929215208921.png)
 
-![image-20210929215217723](https://static.xlc520.ml/juc/image-20210929215217723.png)
+![image-20210929215217723](https://static.linch.eu.org/juc/image-20210929215217723.png)
 
 > 可以明显看出公平锁与非公平锁的lock()方法唯一的区别就在于公平锁在获取同步状态时多了一个限制条件：
 > `hasQueuedPredecessors()`
@@ -10666,31 +10666,31 @@ Lock接口的实现类，基本都是通过【聚合】了一个【队列同步�
 
 非公平锁：不管是否有等待队列，如果可以获取锁，则立刻占有锁对象。也就是说队列的第一个排队线程在unpark()，之后还是需要竞争锁（存在线程竞争的情况下）
 
-![image-20210929215348250](https://static.xlc520.ml/juc/image-20210929215348250.png)
+![image-20210929215348250](https://static.linch.eu.org/juc/image-20210929215348250.png)
 
 #### 4、源码解读
 
 ##### 1、lock()
 
-![image-20210929215500057](https://static.xlc520.ml/juc/image-20210929215500057.png)
+![image-20210929215500057](https://static.linch.eu.org/juc/image-20210929215500057.png)
 
 ##### 2、acquire()
 
-![image-20210929215527782](https://static.xlc520.ml/juc/image-20210929215527782.png)
+![image-20210929215527782](https://static.linch.eu.org/juc/image-20210929215527782.png)
 
-![image-20210929215532317](https://static.xlc520.ml/juc/image-20210929215532317.png)
+![image-20210929215532317](https://static.linch.eu.org/juc/image-20210929215532317.png)
 
 ##### 3、tryAcquire(arg)
 
 非公平锁
 
-![image-20210929215617239](https://static.xlc520.ml/juc/image-20210929215617239.png)
+![image-20210929215617239](https://static.linch.eu.org/juc/image-20210929215617239.png)
 
-![image-20210929215622470](https://static.xlc520.ml/juc/image-20210929215622470.png)
+![image-20210929215622470](https://static.linch.eu.org/juc/image-20210929215622470.png)
 
 nonfairTryAcquire(acquires)
 
-![image-20210929215636783](https://static.xlc520.ml/juc/image-20210929215636783.png)
+![image-20210929215636783](https://static.linch.eu.org/juc/image-20210929215636783.png)
 
 return false; 继续推进条件，走下一个方法
 
@@ -10700,11 +10700,11 @@ return true; 结束
 
 addWaiter(Node mode)
 
-![image-20210929215721311](https://static.xlc520.ml/juc/image-20210929215721311.png)
+![image-20210929215721311](https://static.linch.eu.org/juc/image-20210929215721311.png)
 
 enq(node);
 
-![image-20210929215749207](https://static.xlc520.ml/juc/image-20210929215749207.png)
+![image-20210929215749207](https://static.linch.eu.org/juc/image-20210929215749207.png)
 
 双向链表中，第一个节点为虚节点(也叫哨兵节点)，其实并不存储任何信息，只是占位。
 真正的第一个有数据的节点，是从第二个节点开始的。
@@ -10717,23 +10717,23 @@ prev - compareAndSetTail - next
 
 acquireQueued
 
-![image-20210929215842781](https://static.xlc520.ml/juc/image-20210929215842781.png)
+![image-20210929215842781](https://static.linch.eu.org/juc/image-20210929215842781.png)
 
 假如再抢抢失败就会进入
 
 shouldParkAfterFailedAcquire 和 parkAndCheckInterrupt 方法中
 
-![image-20210929215859160](https://static.xlc520.ml/juc/image-20210929215859160.png)
+![image-20210929215859160](https://static.linch.eu.org/juc/image-20210929215859160.png)
 
 shouldParkAfterFailedAcquire 
 
-![image-20210929215907481](https://static.xlc520.ml/juc/image-20210929215907481.png)
+![image-20210929215907481](https://static.linch.eu.org/juc/image-20210929215907481.png)
 
 ​		如果前驱节点的 `waitStatus` 是 `SIGNAL`状态，即 `shouldParkAfterFailedAcquire` 方法会返回 `true` 程序会继续向下执行 `parkAndCheckInterrupt` 方法，用于将当前线程挂起
 
 `parkAndCheckInterrupt `
 
-![image-20210929215923254](https://static.xlc520.ml/juc/image-20210929215923254.png)
+![image-20210929215923254](https://static.linch.eu.org/juc/image-20210929215923254.png)
 
 #### 5、unlock
 
@@ -10749,7 +10749,7 @@ unparkSuccessor
 
 读写锁定义为：一个资源能够被多个读线程访问，或者被一个写线程访问，但是不能同时存在读写线程。
 
-![image-20210929220234946](https://static.xlc520.ml/juc/image-20210929220234946.png)
+![image-20210929220234946](https://static.linch.eu.org/juc/image-20210929220234946.png)
 
 #### 1、读写锁意义和特点
 
@@ -10807,7 +10807,7 @@ public class ReentrantReadWriteLockDemo
 
 锁的严苛程度变强叫做升级，反之叫做降级
 
-![image-20210929220521703](https://static.xlc520.ml/juc/image-20210929220521703.png)
+![image-20210929220521703](https://static.linch.eu.org/juc/image-20210929220521703.png)
 
 锁降级：将写入锁降级为读锁(类似Linux文件读写权限理解，就像写权限要高于读权限一样)
 
@@ -10818,11 +10818,11 @@ public class ReentrantReadWriteLockDemo
 锁降级：遵循获取写锁→再获取读锁→再释放写锁的次序，写锁能够降级成为读锁。
 如果一个线程占有了写锁，在不释放写锁的情况下，它还能占有读锁，即写锁降级为读锁。
 
-![image-20210929220618332](https://static.xlc520.ml/juc/image-20210929220618332.png)
+![image-20210929220618332](https://static.linch.eu.org/juc/image-20210929220618332.png)
 
 Java8 官网说明
 
-![image-20210929220638216](https://static.xlc520.ml/juc/image-20210929220638216.png)
+![image-20210929220638216](https://static.linch.eu.org/juc/image-20210929220638216.png)
 
 重入还允许通过获取写入锁定，然后读取锁然后释放写锁从写锁到读取锁, 但是，从读锁定升级到写锁是不可能的。
 
@@ -10862,13 +10862,13 @@ public class LockDownGradingDemo
 
 线程获取读锁是不能直接升级为写入锁的。
 
-![image-20210929220808008](https://static.xlc520.ml/juc/image-20210929220808008.png)
+![image-20210929220808008](https://static.linch.eu.org/juc/image-20210929220808008.png)
 
-![image-20210929220811350](https://static.xlc520.ml/juc/image-20210929220811350.png)
+![image-20210929220811350](https://static.linch.eu.org/juc/image-20210929220811350.png)
 
 在ReentrantReadWriteLock中，当读锁被使用时，如果有线程尝试获取写锁，该写线程会被阻塞。所以，需要释放所有读锁，才可获取写锁，
 
-![image-20210929220821174](https://static.xlc520.ml/juc/image-20210929220821174.png)
+![image-20210929220821174](https://static.linch.eu.org/juc/image-20210929220821174.png)
 
 ##### 2、写锁和读锁是互斥的
 
@@ -10884,7 +10884,7 @@ public class LockDownGradingDemo
 ReentrantWriteReadLock支持锁降级，遵循按照获取写锁，获取读锁再释放写锁的次序，写锁能够降级成为读锁，不支持锁升级。
 解读在最下面:
 
-![image-20210929221016416](https://static.xlc520.ml/juc/image-20210929221016416.png)
+![image-20210929221016416](https://static.linch.eu.org/juc/image-20210929221016416.png)
 
 1. 代码中声明了一个volatile类型的cacheValid变量，保证其可见性。
 

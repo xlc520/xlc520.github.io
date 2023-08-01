@@ -17,7 +17,7 @@ icon: java
 ## 概述
 
 Logback是一个日志框架，Logback和Log4j都是开源的日志工具库，Logback是Log4j的改良版本，内置实现了slf4j，比Log4j拥有更多的特性，性能也带来很大提升。SpringBoot默认内置了Logback日志框架，Spring Boot 集成logback需要添加 `spring-boot-starter-logging` 依赖，而此依赖已经在 `spring-boot-starter` 中添加过了，所以不用再添加此依赖了(如下图) ：
-[![img](https://static.xlc520.ml/blogImage/6123ac4244eaada7399e7576.jpg)](https://pic.imgdb.cn/item/6123ac4244eaada7399e7576.jpg)
+[![img](https://static.linch.eu.org/blogImage/6123ac4244eaada7399e7576.jpg)](https://pic.imgdb.cn/item/6123ac4244eaada7399e7576.jpg)
 
 Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG，优先级高的将被打印出来。（logback通用）
 通过定义级别，可以作为应用程序中相应级别的日志信息的开关。
@@ -29,7 +29,7 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 ## 配置详解
 
 默认情况下，SpringBoot会用Logback来记录日志，并用INFO级别输出到控制台。 配置Logback常用节点结构图：
-[![img](https://static.xlc520.ml/blogImage/6123ae6e44eaada739a38bd4.png)](https://pic.imgdb.cn/item/6123ae6e44eaada739a38bd4.png)
+[![img](https://static.linch.eu.org/blogImage/6123ae6e44eaada739a38bd4.png)](https://pic.imgdb.cn/item/6123ae6e44eaada739a38bd4.png)
 
 ### configuration
 
@@ -392,7 +392,7 @@ key: 标识此 的名字；
 
 这个日志配置文件是我部署在线上的个人博客使用的，已经经过验证了。生成的日志格式如下：
 
-[![img](https://static.xlc520.ml/blogImage/6123bc1644eaada739c2c707.jpg)](https://pic.imgdb.cn/item/6123bc1644eaada739c2c707.jpg)
+[![img](https://static.linch.eu.org/blogImage/6123bc1644eaada739c2c707.jpg)](https://pic.imgdb.cn/item/6123bc1644eaada739c2c707.jpg)
 
 
 

@@ -16,6 +16,7 @@ export const zhNavbar = navbar([
       }
     ]
   },
+  { text: 'AI', link: '/ai/' ,icon: "android"},
   { text: '算法', link: '/algorithm/' ,icon: "shell"},
   { text: '开发', link: '/dev/' ,icon:"java" },
   { text: 'Linux', link: '/linux/' ,icon:"linux"},

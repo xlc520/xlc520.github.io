@@ -27,7 +27,7 @@ icon: type
 
 开源协议：MIT
 
-![图片](https://static.xlc520.ml/blogImage/640-1674185256162-0.png)图片
+![图片](https://static.linch.eu.org/blogImage/640-1674185256162-0.png)图片
 
 **2. vue-element-admin**
 
@@ -105,7 +105,7 @@ icon: type
 
 开源协议：MIT License
 
-![图片](https://static.xlc520.ml/blogImage/640-1674185256162-3.png)图片
+![图片](https://static.linch.eu.org/blogImage/640-1674185256162-3.png)图片
 
 **9. ant-design-pro**
 
@@ -139,7 +139,7 @@ icon: type
 
 开源协议：MIT License
 
-![图片](https://static.xlc520.ml/blogImage/640-1674185258456-6.png)图片
+![图片](https://static.linch.eu.org/blogImage/640-1674185258456-6.png)图片
 
 **12.EAdmin**
 
@@ -151,7 +151,7 @@ icon: type
 
 开源协议：无 Java项目分享
 
-![图片](https://static.xlc520.ml/blogImage/640-1674185260023-9.png)
+![图片](https://static.linch.eu.org/blogImage/640-1674185260023-9.png)
 
 
 

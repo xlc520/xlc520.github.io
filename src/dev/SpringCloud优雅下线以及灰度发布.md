@@ -86,7 +86,7 @@ curl -X POST http://你想停止的服务实例地址/actuator/pause
 
 执行后的效果类似下图：
 
-![image-20220411090258141](https://static.xlc520.ml/blogImage/20201019194250166.png)
+![image-20220411090258141](https://static.linch.eu.org/blogImage/20201019194250166.png)
 
 如图所示，该应用在 Eureka Server 上的状已被标记为DOWN，但是应用本身其实依然是可以正常对外服务的。在 Spring Cloud 中，Ribbon 做负载均衡时，只会负载到标记为UP的实例上。
 
@@ -121,7 +121,7 @@ curl -X "POST" "http://localhost:8000/actuator/service-registry?status=DOWN" \
 
 实行后的效果类似如下图：
 
-![图片](https://static.xlc520.ml/blogImage/20201019194250166-1674279427908-3.png)
+![图片](https://static.linch.eu.org/blogImage/20201019194250166-1674279427908-3.png)
 
 ### 优雅的下线方式
 

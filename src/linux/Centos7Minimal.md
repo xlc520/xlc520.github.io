@@ -29,7 +29,7 @@ yum provides ifconfig
 ## 3: 设置IP
 `ip addr`
 
-![](https://static.xlc520.ml/Centos7Minimal_3.jpg)
+![](https://static.linch.eu.org/Centos7Minimal_3.jpg)
 
  暂时未分配IP, 所以进行如下修改
 ### 3.1 分配随机IP 
@@ -40,7 +40,7 @@ yum provides ifconfig
 cd /etc/sysconfig/network-scripts
 vim ifcfg-ens192
 ```
-![](https://static.xlc520.ml/Centos7Minimal_1.jpg)
+![](https://static.linch.eu.org/Centos7Minimal_1.jpg)
 
 将ONBOOT=no修改为ONBOOT=yes保存退出
 重启网络服务
@@ -53,7 +53,7 @@ vim ifcfg-ens192
  
 ### 3.2: 设置静态IP
 
-![](https://static.xlc520.ml/Centos7Minimal_2.jpg)
+![](https://static.linch.eu.org/Centos7Minimal_2.jpg)
 
 设置完,重启网络
 `service network restart`
