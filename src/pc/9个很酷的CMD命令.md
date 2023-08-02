@@ -42,8 +42,6 @@ icon: computer
 
 操作方法：在cmd界面中输入“net share”查看所有已共享资源，然后输入“net share 要删除的共享文件夹 /delete”就可以啦！
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
 ## **Nslookup**
 
 作用：检查网站IP地址
@@ -66,7 +64,6 @@ icon: computer
 
 操作方法：在提示符状态输入命令“telnet towel.blinkenlights.nl”，输入完成后稍等一会即可，电影会自动开演
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
 
 ## **|**
 

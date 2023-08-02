@@ -361,7 +361,7 @@ kafka-topics.sh --zookeeper 192.168.11.111:2181 --topic app-log-test --describe
 
 可以看到已经成功启用了`app-log-collector`和`error-log-collector`两个topic
 
-![SpringBoot+Kafka+ELK](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+
 
 ### filebeat安装和启用
 

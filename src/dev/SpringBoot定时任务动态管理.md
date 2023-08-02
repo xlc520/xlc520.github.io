@@ -84,8 +84,6 @@ public class SuperScheduledConfig {
 
   
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
 ```
 @DependsOn({"superScheduledConfig"})
 @Component

@@ -291,8 +291,6 @@ Cron 表达式这里不介绍，贴个图跳过
 
 下面集成应用截图来自 Ruoyi 框架：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
 ![图片](https://static.linch.eu.org/blogImage/640-16535411548295.png)
 
 从上面的截图中，可以看到这个定时任务模块实现了：

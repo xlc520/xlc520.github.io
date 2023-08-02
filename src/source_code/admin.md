@@ -39,7 +39,6 @@ icon: type
 
 开源协议：MIT Java项目分享
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)图片
 
 **3. JEECG-BOOT**
 
@@ -51,7 +50,7 @@ icon: type
 
 开源协议：Apache-2.0 License
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)图片
+
 
 **4. GIN-VUE-ADMIN**
 
@@ -93,7 +92,7 @@ icon: type
 
 开源协议：MIT License  Java项目分享  最新整理全集，找项目不累啦 06版
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)图片
+
 
 **8. renren-fast-vue**
 
@@ -127,7 +126,6 @@ icon: type
 
 开源协议：MIT License
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)图片
 
 **11. material-dashboard**
 
