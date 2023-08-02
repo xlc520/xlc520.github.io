@@ -1,3 +1,4 @@
+---
 author: xlc520
 title: WIN10 安装 WSA
 description: 
@@ -7,6 +8,7 @@ tag: pc
 article: true
 timeline: true
 icon: computer
+---
 
 # WIN10 安装 WSA
 

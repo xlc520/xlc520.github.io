@@ -1,14 +1,17 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
+
 export default defineUserConfig({
   base: "/",
   lang: "zh-CN",
   dest: "./dist",
   title: "StudyNote",
   description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
+
   theme,
 
+  // Enable it with pwa
   shouldPrefetch: false,
   head: [
     ["meta", { name: "robots", content: "all" }],
@@ -73,15 +76,19 @@ export default defineUserConfig({
     searchProPlugin({
       // 索引全部内容
       indexContent: true,
-      hotKeys: [{key: 'k', ctrl: true}], //热键
+      // 是否自动提示搜索建议
+      autoSuggestions: true,
+      hotKeys: [{ key: "k", ctrl: true }, { key: "/", ctrl: true }], //热键
       // 存储搜索结果历史的最大数量
       resultHistoryCount: 10,
       // 存储搜索查询词历史的最大数量
       queryHistoryCount: 10,
       // 结束输入到开始搜索的延时
-      delay: 500,
+      searchDelay: 500,
       // 是否在开发服务器中中启用实时热重载
       hotReload: true,
+      // 结果排序策略
+      sortStrategy: "max",
       // 为分类和标签添加索引
       customFields: [
         {
