@@ -18,25 +18,25 @@ icon: others
 
 - 会变色钻石 `<$ǿĀD>钻石<$ǿĀD>` 效果图：
 
-![img](https://static.linch.eu.org/blogImage/1620-16536500405884.png)
+![img](https://static.xlc520.tk/blogImage/1620-16536500405884.png)
 
 钻石
 
 - 手掌比心 `<$ÿĀ">比心<$ÿĀ">` 效果图：
 
-![img](https://static.linch.eu.org/blogImage/1620-16536500405881.png)
+![img](https://static.xlc520.tk/blogImage/1620-16536500405881.png)
 
 比心
 
 - 滑稽 `<$²>滑稽<$²>` 效果图：
 
-![img](https://static.linch.eu.org/blogImage/1620-16536500405882.png)
+![img](https://static.xlc520.tk/blogImage/1620-16536500405882.png)
 
 滑稽
 
 - 可爱的手掌 `<$ÿĀ>小手<$ÿĀ>` 效果图：
 
-![img](https://static.linch.eu.org/blogImage/1620-16536500405883.png)
+![img](https://static.xlc520.tk/blogImage/1620-16536500405883.png)
 
 会动的小手
 

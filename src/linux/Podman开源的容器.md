@@ -12,7 +12,7 @@ icon: type
 
 # Podman开源的容器
 
-![图片](https://static.linch.eu.org/blogImage/640-1674185164154-0.png)
+![图片](https://static.xlc520.tk/blogImage/640-1674185164154-0.png)
 
 
 

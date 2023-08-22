@@ -39,13 +39,13 @@ Microsoft 365 E5 Renew Plus为Microsoft 365 E5 Renew的升级版，其功能性�
 
 ## 主界面
 
-![图片](https://static.linch.eu.org/blogImage/b23cb7e4945747fca6e88b5c36e80e08.png)
+![图片](https://static.xlc520.tk/blogImage/b23cb7e4945747fca6e88b5c36e80e08.png)
 
-![图片](https://static.linch.eu.org/blogImage/185cfc81a55746eb8d915e6f0923d1ca.png)
+![图片](https://static.xlc520.tk/blogImage/185cfc81a55746eb8d915e6f0923d1ca.png)
 
 ## 运行结果查看
 
-![图片](https://static.linch.eu.org/blogImage/20210323150719810.png)
+![图片](https://static.xlc520.tk/blogImage/20210323150719810.png)
 
 # **入群须知**
 
@@ -83,12 +83,12 @@ Microsoft 365 E5 Renew Plus为Microsoft 365 E5 Renew的升级版，其功能性�
 ### 0.1 复制旧版本程序账户信息
 
 打开旧版本程序根目录下的Account.txt文件，依照每行复制一个账号信息（不支持多行识别）。
-![图片](https://static.linch.eu.org/blogImage/20210323143621396.png)
+![图片](https://static.xlc520.tk/blogImage/20210323143621396.png)
 
 ### 0.2 导入账户信息到新版本程序中
 
 打开新版本程序点击“开始运行”-“添加账号”，在弹出的“添加账号”窗口中找到右上角的剪切板图标，点击后程序会自动识别复制的账号信息，如果复制的内容没有错误程序会自动识别调用类型并填充所有空白项，检查无误后单击“确定”按钮完成一个账号信息的导入。
-![图片](https://static.linch.eu.org/blogImage/20210323143246326.png)
+![图片](https://static.xlc520.tk/blogImage/20210323143246326.png)
 
 ## 1 注册Azure应用程序
 
@@ -96,22 +96,22 @@ Microsoft 365 E5 Renew Plus为Microsoft 365 E5 Renew的升级版，其功能性�
 
 1. [点击登录 Azure](https://portal.azure.com/#home)或[点击直接进入Azure应用注册](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)，登录账号使用申请到的Microsoft 365 E5的**管理员账户**（账户名类似XXXX@YYYY.onmicrosoft.com格式）。
    2.登录完成后点击右上角的“门户”按钮进入Azure管理中心，在搜索栏内输入“应用注册”，点击进入[（若应用注册搜索不到请点击此处直接进入）](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)。
-   ![图片](https://static.linch.eu.org/blogImage/20200618170032256.png)
+   ![图片](https://static.xlc520.tk/blogImage/20200618170032256.png)
    3.单击“新注册”按钮
-   ![图片](https://static.linch.eu.org/blogImage/2020061817051341.png)
+   ![图片](https://static.xlc520.tk/blogImage/2020061817051341.png)
    4.配置应用 应用名称随意写、注意可访问性选项选择最后一项、重定向URL暂时不填 、完成后点击注册
-   ![图片](https://static.linch.eu.org/blogImage/20200618170801323.png)
+   ![图片](https://static.xlc520.tk/blogImage/20200618170801323.png)
 
 ### 1.2 配置应用重定向URL（身份验证）
 
 1.先点击“概述”，然后点击“添加重定向URL”，进入重定向URL配置界面，**下图中的应用程序(客户端)ID即为"客户端ID"**。
-![图片](https://static.linch.eu.org/blogImage/2020061817121972.png)
+![图片](https://static.xlc520.tk/blogImage/2020061817121972.png)
 2.点击“添加平台”，再点击“移动和桌面应用程序”，
-![图片](https://static.linch.eu.org/blogImage/20200618171501396.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171501396.png)
 3.继续勾选中第一个URL，最后点击底部的“配置”，该URL为“https://login.microsoftonline.com/common/oauth2/nativeclient”也可手动添加。
-![图片](https://static.linch.eu.org/blogImage/20200618171651338.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171651338.png)
 4.配置默认客户端类型将应用程序视为公共客户端 点击切换按钮为“是” ，最后点击“保存”按钮保存。
-![图片](https://static.linch.eu.org/blogImage/20200618171850779.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171850779.png)
 
 ## 2 配置应用程序的API权限（重要）
 
@@ -134,58 +134,58 @@ Microsoft 365 E5 Renew Plus为Microsoft 365 E5 Renew的升级版，其功能性�
 #### 2.1.1 使用程序自动请求配置API权限
 
 1.点击“添加账号”，API调用方式选择“登陆调用”，正确填写“MS365 E5账号”和“应用程序（客户端）ID”后点击“启动自动授权”。
-![图片](https://static.linch.eu.org/blogImage/20210308150608437.png)
+![图片](https://static.xlc520.tk/blogImage/20210308150608437.png)
 
 2.在弹出的登陆页面中输入你的管理员账户名和密码登录（**该账户必须为全局管理员账户且拥有该客户端ID的控制权限**），登录成功时弹出“请求征得许可界面”，滚动到页面最底部勾选“代表组织同意”，最后点击“接受”。
-![图片](https://static.linch.eu.org/blogImage/20200628135742984.png)
+![图片](https://static.xlc520.tk/blogImage/20200628135742984.png)
 3.判断是否添加API权限成功：首先程序提示授权成功，其次用管理员账户登录Azure查看应用的API权限，发现所有需求的权限全部添加或可以成功调用均视为已添加成功。
 ng)
-![图片](https://static.linch.eu.org/blogImage/20210323142238814.png)
+![图片](https://static.xlc520.tk/blogImage/20210323142238814.png)
 
 #### 2.1.2 手动配置API权限
 
 1.点击“API权限”-“添加权限”-“Microsoft Graph”
-![图片](https://static.linch.eu.org/blogImage/2020061819283823.png)
-2.选择“委托的权限”![图片](https://static.linch.eu.org/blogImage/20200618172538991.png)
+![图片](https://static.xlc520.tk/blogImage/2020061819283823.png)
+2.选择“委托的权限”![图片](https://static.xlc520.tk/blogImage/20200618172538991.png)
 3.根据下方列出的API权限需求表来勾选所对应的API权限，全部选择完成后点击"添加权限"。
 
 **BookingsAppointment.ReadWrite.All; Calendars.Read; Contacts.Read; Directory.Read.All;
 Files.Read.All; Files.ReadWrite.All; Group.Read.All; Mail.Read; Mail.Send; MailboxSettings.Read;
 Notes.Read.All; People.Read.All; Presence.Read.All; Sites.Read.All; Tasks.ReadWrite; User.Read.All;**
 
-![图片](https://static.linch.eu.org/blogImage/20200618172627969.png)
+![图片](https://static.xlc520.tk/blogImage/20200618172627969.png)
 添加完成的效果如图
 **如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用**
-![图片](https://static.linch.eu.org/blogImage/20201112111140479.png)
+![图片](https://static.xlc520.tk/blogImage/20201112111140479.png)
 4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“委托的权限(用户登录)”全部API所需要的权限)。
 
-![图片](https://static.linch.eu.org/blogImage/20201112110505347.png)
+![图片](https://static.xlc520.tk/blogImage/20201112110505347.png)
 
 ### 2.2 选择“应用程序权限(非用户登录)”类型的API
 
 #### 2.2.1 手动配置API权限
 
 1.点击“API权限”-“添加权限”-“Microsoft Graph”
-![图片](https://static.linch.eu.org/blogImage/2020061819283823-165380581365141.png)
+![图片](https://static.xlc520.tk/blogImage/2020061819283823-165380581365141.png)
 2.选择“应用程序权限”
-![图片](https://static.linch.eu.org/blogImage/20200801120027971.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120027971.png)
 3.根据程序中列出的API权限需求表来勾选所对应的API权限，全部选择完成后点击"添加权限"。
 **Calendars.Read; Contacts.Read; Directory.Read.All; Files.Read.All; Files.ReadWrite.All; Mail.Read;
 Mail.Send; MailboxSettings.Read; Notes.Read.All; Sites.Read.All; User.Read.All;**
-![图片](https://static.linch.eu.org/blogImage/20200618172627969-165380581693146.png)
+![图片](https://static.xlc520.tk/blogImage/20200618172627969-165380581693146.png)
 添加完成的效果如图
 **如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用**
-![图片](https://static.linch.eu.org/blogImage/20200801120623311.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120623311.png)
 4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“应用程序权限(非用户登录)”全部API所需要的权限）。
-![图片](https://static.linch.eu.org/blogImage/20200801120818260.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120818260.png)
 
 #### 2.2.2 创建客户端密码
 
 1.点击“证书密码”-“新客户端密码”-“24个月”-“添加”
-![图片](https://static.linch.eu.org/blogImage/20210609101116972.png)
+![图片](https://static.xlc520.tk/blogImage/20210609101116972.png)
 
 2.点击“值”该列中的“复制”（不要复制"ID"列中的值），并立即将该密码保存至电脑，**保存的值即为“客户端密码”**， 注：该值必须立即保存，退出该页面后将永远无法查看。
-![图片](https://static.linch.eu.org/blogImage/2020120711360840.jpeg)
+![图片](https://static.xlc520.tk/blogImage/2020120711360840.jpeg)
 
 ## 3 使用程序进行API调用
 
@@ -197,35 +197,35 @@ Mail.Send; MailboxSettings.Read; Notes.Read.All; Sites.Read.All; User.Read.All;*
 ### 3.1 添加一个账户
 
 点击“开始运行”-“添加账号”
-![图片](https://static.linch.eu.org/blogImage/a4451a28afdb4b01b18f566feaf07759.png)
+![图片](https://static.xlc520.tk/blogImage/a4451a28afdb4b01b18f566feaf07759.png)
 
 这里可以切换API调用方式但也需要更改对应的填写内容
 
 登录调用方式填写
-![图片](https://static.linch.eu.org/blogImage/20210307154000125.png)
+![图片](https://static.xlc520.tk/blogImage/20210307154000125.png)
 非登录调用方式填写
-![图片](https://static.linch.eu.org/blogImage/20210307154255163.png)
+![图片](https://static.xlc520.tk/blogImage/20210307154255163.png)
 
 最后点击确定
-![图片](https://static.linch.eu.org/blogImage/202103071542145.png)
+![图片](https://static.xlc520.tk/blogImage/202103071542145.png)
 
 ### 3.2 开始运行
 
 点击“开始运行”
-![图片](https://static.linch.eu.org/blogImage/60b549fee8464ba08722d38b4cb999c0.png)
+![图片](https://static.xlc520.tk/blogImage/60b549fee8464ba08722d38b4cb999c0.png)
 
 # 写在最后面
 
 ## 关闭E5账户登录双重验证
 
 [点击进入Office 365 E5账户多重身份验证管理](https://account.activedirectory.windowsazure.com/UserManagement/MultifactorVerification.aspx)，按照下图配置即可关闭E5账户登录的双重验证。
-![图片](https://static.linch.eu.org/blogImage/20210519091511446.png)
-![图片](https://static.linch.eu.org/blogImage/20210519091736252.png)
+![图片](https://static.xlc520.tk/blogImage/20210519091511446.png)
+![图片](https://static.xlc520.tk/blogImage/20210519091736252.png)
 
 ## 关闭Azure中API调用的双重验证
 
 [点击进入Azure Active Directory管理中心](https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview)，按照下图配置即可关闭Azure中API调用的双重验证。
-![图片](https://static.linch.eu.org/blogImage/20201010153543698.png)
+![图片](https://static.xlc520.tk/blogImage/20201010153543698.png)
 
 ## 查询续订剩余天数
 
@@ -239,16 +239,16 @@ E5续订执行是微软统一的具有一定时间周期的续订，如果你的
 
 ### 仪表盘变化
 
-![图片](https://static.linch.eu.org/blogImage/2020082317495235.png)
-![图片](https://static.linch.eu.org/blogImage/20210129090340925.png)
+![图片](https://static.xlc520.tk/blogImage/2020082317495235.png)
+![图片](https://static.xlc520.tk/blogImage/20210129090340925.png)
 
 ### 续订邮件
 
 第一次续订
-![图片](https://static.linch.eu.org/blogImage/20200820125542472.jpeg)
+![图片](https://static.xlc520.tk/blogImage/20200820125542472.jpeg)
 第二次续订
-![图片](https://static.linch.eu.org/blogImage/20201031134336350.png)
+![图片](https://static.xlc520.tk/blogImage/20201031134336350.png)
 
 ### 警告邮件
 
-![图片](https://static.linch.eu.org/blogImage/20200820125531157.jpeg)
+![图片](https://static.xlc520.tk/blogImage/20200820125531157.jpeg)

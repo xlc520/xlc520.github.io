@@ -16,13 +16,13 @@ icon: java
 
 我们先来看看SImpleDateFormat类的部分源码，如图 1所示。
 
-![img](https://static.linch.eu.org/blogImage/20210502205438290.png)
+![img](https://static.xlc520.tk/blogImage/20210502205438290.png)
 
 图 1
 
 接着再来看看DateTimeFormatter类的部分源码，如 图2所示。
 
-![img](https://static.linch.eu.org/blogImage/20210502205459779.png)
+![img](https://static.xlc520.tk/blogImage/20210502205459779.png)
 
 图 2
 

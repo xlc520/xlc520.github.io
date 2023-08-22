@@ -88,7 +88,7 @@ netstat -tunlp | grep 1688
 ```
 
 如下图代表运行成功
-![image-1680614199864](https://static.linch.eu.org/blogImage/image-1680614199864.png)
+![image-1680614199864](https://static.xlc520.tk/blogImage/image-1680614199864.png)
 
 ### 三、激活自己的windows和office
 
@@ -109,14 +109,14 @@ kms.a.com  #这个域名就是kms服务
 首先确认你的Windows版本
 可以打开
 此电脑-属性-关于
-![image-1680615623446](https://static.linch.eu.org/blogImage/image-1680615623446.png)
+![image-1680615623446](https://static.xlc520.tk/blogImage/image-1680615623446.png)
 如我的电脑Windows版本是：
 Windows Server 2022 Datacenter
 他所对应的密钥是
 WX4NM-KYWYW-QJJR4-XV3QB-6VM33
 可以参考附：密钥
 激活步骤（管理员命令执行）
-![image-1680615813867](https://static.linch.eu.org/blogImage/image-1680615813867.png)
+![image-1680615813867](https://static.xlc520.tk/blogImage/image-1680615813867.png)
 
 #### 1.设置服务
 
@@ -124,7 +124,7 @@ WX4NM-KYWYW-QJJR4-XV3QB-6VM33
 slmgr -skms kms.a.com   #将kms服务设置为kms.a.com
 ```
 
-![image-1680615872706](https://static.linch.eu.org/blogImage/image-1680615872706.png)
+![image-1680615872706](https://static.xlc520.tk/blogImage/image-1680615872706.png)
 
 #### 2.安装密钥
 
@@ -132,7 +132,7 @@ slmgr -skms kms.a.com   #将kms服务设置为kms.a.com
 slmgr -ipk WX4NM-KYWYW-QJJR4-XV3QB-6VM33 #版本对应秘钥
 ```
 
-![image-1680615927619](https://static.linch.eu.org/blogImage/image-1680615927619.png)
+![image-1680615927619](https://static.xlc520.tk/blogImage/image-1680615927619.png)
 
 #### 3.激活系统
 
@@ -140,7 +140,7 @@ slmgr -ipk WX4NM-KYWYW-QJJR4-XV3QB-6VM33 #版本对应秘钥
 slmgr -ato
 ```
 
-![image-1680615978478](https://static.linch.eu.org/blogImage/image-1680615978478.png)
+![image-1680615978478](https://static.xlc520.tk/blogImage/image-1680615978478.png)
 
 #### 4.确认KMS服务是否已成功激活
 
@@ -148,7 +148,7 @@ slmgr -ato
 slmgr.vbs /dlv #以获取有关KMS服务状态的详细信息
 ```
 
-![image-1680616188380](https://static.linch.eu.org/blogImage/image-1680616188380.png)
+![image-1680616188380](https://static.xlc520.tk/blogImage/image-1680616188380.png)
 
 #### 5.查询过期时间
 
@@ -156,13 +156,13 @@ slmgr.vbs /dlv #以获取有关KMS服务状态的详细信息
 slmgr /xpr   #当前汻可证状态的截止日期
 ```
 
-![image-1680918310917](https://static.linch.eu.org/blogImage/image-1680918310917.png)
+![image-1680918310917](https://static.xlc520.tk/blogImage/image-1680918310917.png)
 
 以上是Windows激活过程
 
 ### 2)激活自己的office
 
-![image-1680616885520](https://static.linch.eu.org/blogImage/image-1680616885520.png)
+![image-1680616885520](https://static.xlc520.tk/blogImage/image-1680616885520.png)
 查看自己的office版本(注意必须是VL/LTSC 批量授权版本的才可以激活)
 我的是
 Office 21, Office21ProjectPro2021VL_KMS_Client_AE edition
@@ -187,7 +187,7 @@ cd "C:\Program Files\Microsoft Office\Office16"  #进入此目录
 ls  #查看当前目录下的文件
 ```
 
-![image-1680617002263](https://static.linch.eu.org/blogImage/image-1680617002263.png)
+![image-1680617002263](https://static.xlc520.tk/blogImage/image-1680617002263.png)
 
 #### 2. 注册 KMS 服务
 
@@ -195,7 +195,7 @@ ls  #查看当前目录下的文件
 cscript ospp.vbs /sethst:kms.a.com  #注册 KMS 服务 
 ```
 
-![image-1680617066807](https://static.linch.eu.org/blogImage/image-1680617066807.png)
+![image-1680617066807](https://static.xlc520.tk/blogImage/image-1680617066807.png)
 
 #### 3. 激活 Office
 
@@ -203,11 +203,11 @@ cscript ospp.vbs /sethst:kms.a.com  #注册 KMS 服务
 cscript ospp.vbs /act #激活 Office 
 ```
 
-![image-1680617165146](https://static.linch.eu.org/blogImage/image-1680617165146.png)
+![image-1680617165146](https://static.xlc520.tk/blogImage/image-1680617165146.png)
 
 #### 4.查看office激活状态
 
-![image-1680617302781](https://static.linch.eu.org/blogImage/image-1680617302781.png)
+![image-1680617302781](https://static.xlc520.tk/blogImage/image-1680617302781.png)
 
 ## 附：密钥
 

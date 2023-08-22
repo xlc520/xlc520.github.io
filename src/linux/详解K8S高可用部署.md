@@ -223,7 +223,7 @@ sed -i "s#k8s.gcr.io/pause#registry.aliyuncs.com/google_containers/pause#g"     
 grep sandbox_image  /etc/containerd/config.toml
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653044-0.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653044-0.png)
 
 #### 5）配置 containerd cgroup 驱动程序 systemd（所有节点）
 
@@ -248,13 +248,13 @@ systemctl enable --now kubelet
 systemctl status kubelet
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653044-1.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653044-1.png)
 
 查看日志，发现有报错，报错如下：
 
 > kubelet.service: Main process exited, code=exited, status=1/FAILURE kubelet.service: Failed with result 'exit-code'.
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-2.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-2.png)
 
 > 【解释】重新安装（或第一次安装）k8s，未经过 kubeadm init 或者 kubeadm join 后，kubelet 会不断重启，这个是正常现象……，执行 init 或 join 后问题会自动解决，对此官网有如下描述，也就是此时不用理会 kubelet.service。
 
@@ -265,7 +265,7 @@ kubectl version
 yum info kubeadm
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-3.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-3.png)
 
 #### 7）使用 kubeadm 初始化集群（master 节点）
 
@@ -335,13 +335,13 @@ echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bash_profile
 source  ~/.bash_profile
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-4.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-4.png)
 
 发现节点还是有问题，查看日志 /var/log/messages
 
 > "Container runtime network not ready" networkReady="NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized"
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-5.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-5.png)
 
 接下来就是安装 Pod 网络插件
 
@@ -362,7 +362,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 再查看 node 节点，就已经正常了
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-6.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-6.png)
 
 #### 9）node 节点加入 k8s 集群
 
@@ -408,7 +408,7 @@ kubectl get pods -A
 kubectl get nodes
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-7.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-7.png)
 
 #### 10）配置 IPVS
 
@@ -441,7 +441,7 @@ yum install ipset ipvsadm -y
 kubectl edit  configmap -n kube-system  kube-proxy
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-8.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-8.png)
 
 4、重启 kube-proxy
 
@@ -454,7 +454,7 @@ kubectl get pod -n kube-system | grep kube-proxy |awk '{system("kubectl delete p
 kubectl get pod -n kube-system | grep kube-proxy
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-9.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-9.png)
 
 5、查看 ipvs 转发规则
 
@@ -462,7 +462,7 @@ kubectl get pod -n kube-system | grep kube-proxy
 ipvsadm -Ln
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-10.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-10.png)
 
 #### 11）集群高可用配置
 
@@ -470,11 +470,11 @@ ipvsadm -Ln
 
 使用堆叠（stacked）控制平面节点，其中 etcd 节点与控制平面节点共存（本章使用），架构图如下：
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-11.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-11.png)
 
 使用外部 etcd 节点，其中 etcd 在与控制平面不同的节点上运行，架构图如下：
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653045-12.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-12.png)
 
 这里新增一台机器作为另外一个 master 节点：192.168.0.116 配置跟上面 master 节点一样。只是不需要最后一步初始化了。
 
@@ -696,7 +696,7 @@ kubeadm join cluster-endpoint:6443 --token wswrfw.fc81au4yvy6ovmhh --discovery-t
 # --certificate-key ... 将导致从集群中的 kubeadm-certs Secret 下载控制平面证书并使用给定的密钥进行解密。这里的值
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-13.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-13.png)
 
 根据提示执行如下命令：
 
@@ -713,13 +713,13 @@ kubectl get nodes
 kubectl get pods -A -owide
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-14.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-14.png)
 
 虽然现在已经有两个 master 了，但是对外还是只能有一个入口的，所以还得要一个负载均衡器，如果一个 master 挂了，会自动切到另外一个 master 节点。
 
 #### 12）部署 Nginx+Keepalived 高可用负载均衡器
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-15.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-15.png)
 
 1、安装 Nginx 和 Keepalived
 
@@ -911,7 +911,7 @@ ip a
 
 
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-16.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-16.png)
 
 6、修改 hosts（所有节点）
 
@@ -933,7 +933,7 @@ ip a
 curl -k https://cluster-endpoint:16443/version
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-17.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-17.png)
 
 高可用测试验证，将 k8s-master-168-0-113 节点关机
 
@@ -1276,7 +1276,7 @@ spec:
           emptyDir: {}
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-18.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-18.png)
 
 重新部署
 
@@ -1286,7 +1286,7 @@ kubectl apply -f recommended.yaml
 kubectl get svc,pods -n kubernetes-dashboard
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-19.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-19.png)
 
 #### 2）创建登录用户
 
@@ -1328,11 +1328,11 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 登录：https://cluster-endpoint:31443
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-20.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-20.png)
 
 输入上面创建的 token 登录
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-21.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-21.png)
 
 ### 四、k8s 镜像仓库 harbor 环境部署
 
@@ -1439,7 +1439,7 @@ kubectl taint nodes k8s-master2-168-0-116 node-role.kubernetes.io/control-plane:
 kubectl apply -f deploy.yaml
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-22.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-22.png)
 
 #### 5）安装 nfs
 
@@ -1675,7 +1675,7 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
 kubectl get pods,deploy,sc -n nfs-provisioner
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-23.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-23.png)
 
 #### 7）部署 Harbor（Https 方式）
 
@@ -1723,7 +1723,7 @@ helm install myharbor --namespace harbor harbor/harbor \
 kubectl get ingress,svc,pods,pvc -n harbor
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-24.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-24.png)
 
 ### 5、ingress 没有 ADDRESS 问题解决
 
@@ -1817,19 +1817,19 @@ helm install myharbor --namespace harbor harbor/harbor \
   --set harborAdminPassword=Harbor12345
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-25.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-25.png)
 
 5、访问 harbor
 
 https://myharbor.com
 账号/密码：admin/Harbor12345
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-26.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-26.png)
 
 6、harbor 常见操作
 【1】创建项目 bigdata
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653046-27.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-27.png)
 
 【2】配置私有仓库
 在文件/etc/docker/daemon.json添加如下内容：
@@ -1851,7 +1851,7 @@ docker login https://myharbor.com
 #账号/密码：admin/Harbor12345
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653047-28.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-28.png)
 
 【4】打标签并把镜像上传到 harbor
 
@@ -1864,7 +1864,7 @@ docker push myharbor.com/bigdata/pause:3.6
 
 以前使用 docker-engine 的时候，只需要修改/etc/docker/daemon.json 就行，但是新版的 k8s 已经使用 containerd 了，所以这里需要做相关配置，要不然 containerd 会失败。证书（ca.crt）可以在页面上下载：
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653047-29.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-29.png)
 
 创建域名目录
 
@@ -1895,7 +1895,7 @@ cp ca.crt /etc/containerd/myharbor.com/
           endpoint = ["https://myharbor.com"]
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653047-30.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-30.png)
 
 重启 containerd
 
@@ -1937,6 +1937,6 @@ EOF
 crictl pull myharbor.com/bigdata/mysql:5.7.38
 ```
 
-![K8S高可用部署](https://static.linch.eu.org/blogImage/640-1667642653047-31.png)
+![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-31.png)
 
 Kubernetes（k8s）最新版最完整版基础环境部署+master 高可用实现详细步骤就到这里了

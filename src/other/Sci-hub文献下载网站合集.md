@@ -22,9 +22,9 @@ icon: others
 
 **英文文献**下载网站应有尽有。也提供超多**中****文文献下载方法**。**百度学术、文库、知网**等网站文献都免费下载！除此之外，广西图书馆和浙江图书馆直接注册登录即可下载文献，好用又便捷！
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-0.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-0.png)
 
-温馨提示：网站还提供了**文\**献\******互助微信群**和**导师评价网**，超级贴心哦~![图片](https://static.linch.eu.org/blogImage/640-1679543822056-1.png)
+温馨提示：网站还提供了**文\**献\******互助微信群**和**导师评价网**，超级贴心哦~![图片](https://static.xlc520.tk/blogImage/640-1679543822056-1.png)
 
 ## 大木虫
 
@@ -32,7 +32,7 @@ icon: others
 
 大木虫是一个**学术导航**，界面简洁清新，功能强大，这里收集了大量常用且好用的**数据库网站、搜索引擎、镜像网站**。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822056-2.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822056-2.png)
 
 ## 文献小镇
 
@@ -40,7 +40,7 @@ icon: others
 
 文献小镇号称是**中国版的SCI-HUB**，界面同SCI-HUB一样简洁明了，可以采用**URL,PMID/DOI**等方式搜索下载文献。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822056-3.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822056-3.png)
 
 ## 小鲸鱼文献
 
@@ -50,7 +50,7 @@ icon: others
 
 这里收集了大量常用且好用的**数据库网站、搜索引擎、镜像网站**。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822056-4.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822056-4.png)
 
 ## 文献神器V8.0：
 
@@ -58,9 +58,9 @@ icon: others
 
 增添了**谷歌翻译，搜狗翻译**等翻译网站，还有**PDF转换功能**，国内外的**专利，标准**也可以在软件内直接查询。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-5.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-5.png)
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-6.gif)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-6.gif)
 
 文献神器v7.0文献下载演示
 
@@ -78,7 +78,7 @@ icon: others
 
 柠檬文献界面清新，没有广告和弹窗，还能下载90%的国内外文献。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-7.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-7.png)
 
 ## 龙猫学术导航 
 
@@ -90,7 +90,7 @@ icon: others
 
 比如生物医药中，包含了很多医学方面的网站。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-8.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-8.png)
 
 ## 文献下载导航
 
@@ -100,7 +100,7 @@ icon: others
 
 这里收集了大量常用且好用的**数据库网站、搜索引擎、镜像网站**。以镜像举例，谷歌镜像、谷歌学术镜像、SCI-Hub统统都有，而且有好几个可供选择的网址。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-9.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-9.png)
 
 ## 格桑花学术导航： 
 
@@ -114,7 +114,7 @@ icon: others
 
 由于比较小众，知道的人不是很多，所以查找文献十分流畅，基本不会出现卡顿的情况。
 
-**![图片](https://static.linch.eu.org/blogImage/640-1679543822057-10.png)**
+**![图片](https://static.xlc520.tk/blogImage/640-1679543822057-10.png)**
 
 **再给大家推荐2个免费的文献翻译网站，相信你能用的到！**
 
@@ -128,7 +128,7 @@ icon: others
 
 
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822057-11.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822057-11.png)
 
 
 
@@ -150,7 +150,7 @@ icon: others
 
 ***\*优势：翻译精准，小体积客户端，使用便捷，永久免费\****
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-12.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-12.png)
 
 在线翻译，多语系多语种，翻译速度快；专业术语翻译精准，适合各专业文献；体积小，运行速度流畅，无卡顿现象；使用免费，没有广告，维护科研人的利益。
 
@@ -160,7 +160,7 @@ icon: others
 
 ## 小鲸鱼搜书
 
-小鲸鱼搜书是一个功能非常强大的电子书导航网站，也是一个非常实用的学习网站，可以帮助你搜索很多学习书籍和小说![图片](https://static.linch.eu.org/blogImage/640-1679543822058-13.png)。
+小鲸鱼搜书是一个功能非常强大的电子书导航网站，也是一个非常实用的学习网站，可以帮助你搜索很多学习书籍和小说![图片](https://static.xlc520.tk/blogImage/640-1679543822058-13.png)。
 
 各种格式都有，涵盖txt、mobi、epub等
 
@@ -168,17 +168,17 @@ icon: others
 
 **小鲸鱼搜书：****www.3646.net**
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-14.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-14.png)
 
 
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-15.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-15.png)
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-16.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-16.png)
 
  功能实在是太强大了！不仅仅是一个单独的搜书网站，它还集合了各大搜书网站，这里我随意搜了一本书后，直接下载就可以看了。
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-17.jpeg)   ![图片](https://static.linch.eu.org/blogImage/640-1679543822058-18.png) 
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-17.jpeg)   ![图片](https://static.xlc520.tk/blogImage/640-1679543822058-18.png) 
 
 **小鲸鱼搜书：*****\*www.3646.net\**** **一站搞定电子书下载！快来体验吧！请在电脑端访问，体验更佳！**
 
@@ -198,7 +198,7 @@ icon: others
 
 
 
-![图片](https://static.linch.eu.org/blogImage/640-1679543822058-19.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679543822058-19.png)
 
 
 

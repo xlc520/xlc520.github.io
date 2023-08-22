@@ -24,7 +24,7 @@ icon: java
 
 惯例，先看看本次实战示例项目结构：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-0.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-0.png)
 
 可以看到内容不多，也就是说，springboot 整合socket， 跟着我学，轻轻松松。
 
@@ -214,7 +214,7 @@ public class MyMessage {
 
 代码简析：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-1.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-1.png)
 
 ##### ⑤创建 socket handler 负责记录客户端 连接、下线
 
@@ -277,7 +277,7 @@ public class MySocketHandler {
 
 代码简析：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-2.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-2.png)
 
 ##### ⑥ 封装的socket 小函数
 
@@ -365,7 +365,7 @@ public class SocketUtil {
 
 代码简析：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-3.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-3.png)
 
 ##### ⑦写1个接口，模拟场景，前端页面调用后端接口，做消息推送
 
@@ -415,7 +415,7 @@ public class TestController {
 
 代码简析：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-4.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-4.png)
 
 好了，7步了。一切已经就绪了。
 
@@ -423,7 +423,7 @@ public class TestController {
 
 接下来搞点前端HTML页面， 玩一玩看看效果:
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-5.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-5.png)
 
 **第一个页面：**
 
@@ -519,7 +519,7 @@ TestClientStudentJC.html
 
 代码简析：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-6.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-6.png)
 
 **第二个页面，跟第一个基本一样，改一下用户唯一标识：**
 
@@ -619,31 +619,31 @@ OK，把项目跑起来，开始玩。
 
 > http://127.0.0.1:8089/TestClientStudentJC.html
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-7.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-7.png)
 
 可以看到服务端有监测到：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-8.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-8.png)
 
 这里监测的：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207389-9.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207389-9.png)
 
 先试试客户端给系统推消息先：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-10.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-10.png)
 
 可以看到服务端成功收到消息：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-11.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-11.png)
 
 这种方式，其实是因为服务监听了相关的频道：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-12.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-12.png)
 
 前端使用JS推到这个系统频道：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-13.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-13.png)
 
 > ps： 其实前端给服务端推消息，其实调用接口就可以。
 
@@ -653,7 +653,7 @@ OK，进入核心应用场景1：
 
 系统给连上的客户端都推送消息
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-14.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-14.png)
 
 ```json
 {
@@ -669,7 +669,7 @@ OK，进入核心应用场景1：
 
 看看效果：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-15.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-15.png)
 
 ##### 然后是场景2，局部群发，部分人群都能收到
 
@@ -681,11 +681,11 @@ OK，进入核心应用场景1：
 
 当然，老师监听的是 老师频道：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-16.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-16.png)
 
 然后我们模拟推送一下消息到指定的老师频道：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-17.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-17.png)
 
 ```json
 {
@@ -699,16 +699,16 @@ OK，进入核心应用场景1：
 }
 ```
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-18.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-18.png)
 
 ##### 最后一个场景，也就是单点推送，指定某个人收到
 
 模拟 学生 PU 给 学生JC 推消息：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207390-19.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207390-19.png)
 
 可以看到在学生频道的JC正常收到了PU的消息：
 
-![SpringBoot整合Socket](https://static.linch.eu.org/blogImage/640-1669203207391-20.png)
+![SpringBoot整合Socket](https://static.xlc520.tk/blogImage/640-1669203207391-20.png)
 
 好了，该篇就到这吧。

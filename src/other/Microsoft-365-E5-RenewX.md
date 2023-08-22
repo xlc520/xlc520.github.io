@@ -78,22 +78,22 @@ Microsoft 365 E5 Renew X为Microsoft 365 E5 Web的升级版，相对于旧版其
 
 1. [点击登录 Azure](https://portal.azure.com/#home)或[点击直接进入Azure应用注册](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)，登录账号使用申请到的Microsoft 365 E5的**管理员账户**（账户名类似XXXX@YYYY.onmicrosoft.com格式）。
    2.登录完成后点击右上角的“门户”按钮进入Azure管理中心，在搜索栏内输入“应用注册”，点击进入[（若应用注册搜索不到请点击此处直接进入）](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)。
-   ![图片](https://static.linch.eu.org/blogImage/20200618170032256-165380585664583.png)
+   ![图片](https://static.xlc520.tk/blogImage/20200618170032256-165380585664583.png)
    3.单击“新注册”按钮
-   ![图片](https://static.linch.eu.org/blogImage/2020061817051341-165380585814786.png)
+   ![图片](https://static.xlc520.tk/blogImage/2020061817051341-165380585814786.png)
    4.配置应用 应用名称随意写、注意可访问性选项选择最后一项、重定向URL暂时不填 、完成后点击注册
-   ![图片](https://static.linch.eu.org/blogImage/20200618170801323-165380585941389.png)
+   ![图片](https://static.xlc520.tk/blogImage/20200618170801323-165380585941389.png)
 
 ### 1.2 配置应用重定向URL（身份验证）
 
 1.先点击“概述”，然后点击“添加重定向URL”，进入重定向URL配置界面，**下图中的应用程序(客户端)ID即为"客户端ID"**。
-![图片](https://static.linch.eu.org/blogImage/2020061817121972-165380586091892.png)
+![图片](https://static.xlc520.tk/blogImage/2020061817121972-165380586091892.png)
 2.点击“添加平台”，再点击“移动和桌面应用程序”，
-![图片](https://static.linch.eu.org/blogImage/20200618171501396-165380586226995.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171501396-165380586226995.png)
 3.继续勾选中第一个URL，最后点击底部的“配置”，该URL为“https://login.microsoftonline.com/common/oauth2/nativeclient”也可手动添加。
-![图片](https://static.linch.eu.org/blogImage/20200618171651338-165380586350298.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171651338-165380586350298.png)
 4.配置默认客户端类型将应用程序视为公共客户端 点击切换按钮为“是” ，最后点击“保存”按钮保存。
-![图片](https://static.linch.eu.org/blogImage/20200618171850779-1653805864822101.png)
+![图片](https://static.xlc520.tk/blogImage/20200618171850779-1653805864822101.png)
 
 ## 2 配置应用程序的API权限（重要）
 
@@ -110,7 +110,7 @@ Microsoft 365 E5 Renew X为Microsoft 365 E5 Web的升级版，相对于旧版其
 | 显示颜色标识 | 蓝色                                 | 深青色                                                 |
 
 **以下是登录或非登录所需要的权限列表**：
-![图片](https://static.linch.eu.org/blogImage/20201102171130141.png)
+![图片](https://static.xlc520.tk/blogImage/20201102171130141.png)
 
 最后根据所选的API权限类型在：**2.1 选择“委托的权限(用户登录)”类型的API**或者**2.2 选择“应用程序权限(非用户登录)”类型的API**中选择性阅读。
 
@@ -119,42 +119,42 @@ Microsoft 365 E5 Renew X为Microsoft 365 E5 Web的升级版，相对于旧版其
 #### 手动配置API权限
 
 1.点击“API权限”-“添加权限”-“Microsoft Graph”
-![图片](https://static.linch.eu.org/blogImage/2020061819283823-1653805868573106.png)
-2.选择“委托的权限”![图片](https://static.linch.eu.org/blogImage/20200618172538991-1653805869901109.png)
+![图片](https://static.xlc520.tk/blogImage/2020061819283823-1653805868573106.png)
+2.选择“委托的权限”![图片](https://static.xlc520.tk/blogImage/20200618172538991-1653805869901109.png)
 3.根据编辑页面中列出的API权限需求表（注意在程序中切换为"**登录**“）来勾选所对应的API权限，全部选择完成后点击"添加权限”。
-![图片](https://static.linch.eu.org/blogImage/20201102171303292.png)
-![图片](https://static.linch.eu.org/blogImage/20200618172627969-1653805874862114.png)
+![图片](https://static.xlc520.tk/blogImage/20201102171303292.png)
+![图片](https://static.xlc520.tk/blogImage/20200618172627969-1653805874862114.png)
 添加完成的效果如图
 **如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用**
-![图片](https://static.linch.eu.org/blogImage/20201112111140479.png)
+![图片](https://static.xlc520.tk/blogImage/20201112111140479.png)
 
 4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“委托的权限(用户登录)”全部API所需要的权限）。
 
-![图片](https://static.linch.eu.org/blogImage/20201112110505347.png)
+![图片](https://static.xlc520.tk/blogImage/20201112110505347.png)
 
 ### 2.2 选择“应用程序权限(非用户登录)”类型的API
 
 #### 2.2.1 手动配置API权限
 
 1.点击“API权限”-“添加权限”-“Microsoft Graph”
-![图片](https://static.linch.eu.org/blogImage/2020061819283823-1653805879510121.png)
+![图片](https://static.xlc520.tk/blogImage/2020061819283823-1653805879510121.png)
 2.选择“应用程序权限”
-![图片](https://static.linch.eu.org/blogImage/20200801120027971-1653805882870124.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120027971-1653805882870124.png)
 3.根据编辑页面中列出的API权限需求表（注意在程序中切换为"**非登录**“）来勾选所对应的API权限，全部选择完成后点击"添加权限”。
-![图片](https://static.linch.eu.org/blogImage/20201102171349129.png)
-![图片](https://static.linch.eu.org/blogImage/20200618172627969-1653805884862127.png)
+![图片](https://static.xlc520.tk/blogImage/20201102171349129.png)
+![图片](https://static.xlc520.tk/blogImage/20200618172627969-1653805884862127.png)
 添加完成的效果如图
 **如果没有“代表XXX授予管理员同意”按钮 说明该账号不是管理员账号 换登管理员账号创建应用**
-![图片](https://static.linch.eu.org/blogImage/20200801120623311-1653805887894132.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120623311-1653805887894132.png)
 4.最后点击代表XXX授予管理员同意,对话框选择“是”（该图包含了当前程序“应用程序权限(非用户登录)”全部API所需要的权限）。
-![图片](https://static.linch.eu.org/blogImage/20200801120818260-1653805889622135.png)
+![图片](https://static.xlc520.tk/blogImage/20200801120818260-1653805889622135.png)
 
 #### 2.2.2 创建客户端密码
 
 1.点击“证书密码”-“新客户端密码”-“24个月”-“添加”
-![图片](https://static.linch.eu.org/blogImage/20210609101116972-1653805890998138.png)
+![图片](https://static.xlc520.tk/blogImage/20210609101116972-1653805890998138.png)
 2.点击“值”该列中的“复制”（不要复制"ID"列中的值），并立即将该密码保存至电脑，**保存的值即为“客户端密码”**， 注：该值必须立即保存，退出该页面后将永远无法查看。
-![图片](https://static.linch.eu.org/blogImage/2020120711360840.jpeg)
+![图片](https://static.xlc520.tk/blogImage/2020120711360840.jpeg)
 
 ## 3 将账号API调用托管至服务
 
@@ -170,32 +170,32 @@ Microsoft 365 E5 Renew X为Microsoft 365 E5 Web的升级版，相对于旧版其
 从两种登录中任选一个，这里不建议选择GitHub登录（GitHub的第三方登录很迷经常性崩溃）
 
 第一次登录账户系统会显示注册成功，然后再登录一次即可登录进入系统
-![请添加图片描述](https://static.linch.eu.org/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
 ### 3.2 激活您的账户
 
 阅读并同意用户协议，点击激活账户
-![请添加图片描述](https://static.linch.eu.org/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16-1653805902079145.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAU3VuZGF5Ulg=,size_20,color_FFFFFF,t_70,g_se,x_16-1653805902079145.png)
 
 ### 3.3 添加一个E5账户的运行配置信息
 
 在成功登录系统后，页面会自动跳转到“主页”页面，在“账户详情”页面点击“添加运行账号”按钮，前往“账户运行配置”页面
-![请添加图片描述](https://static.linch.eu.org/blogImage/2375b23f6de74f5e9d9ff37bca1e7dcc.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/2375b23f6de74f5e9d9ff37bca1e7dcc.png)
 
 在账户运行配置页面中填写账户信息，且登录调用填写账户密码、非登录调用填写客户端密码，并选择自己选定的调用方式，注意调用方式不要选错了！！！ 最后点击“添加运行账号”按钮完成配置。
-![请添加图片描述](https://static.linch.eu.org/blogImage/eb5d982940a340719b4b5dbd1a46420c.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/eb5d982940a340719b4b5dbd1a46420c.png)
 由于前后台数据同步需要时间，任何添加账户或者修改账户配置信息的操作都不会立即被后台执行。
 
 返回用户页面查看账户信息中的“配置同步状态”，如果显示为“正在运行”表明配置已经上传至后台，修改账户配置成功。
-**警示：配置成功了也要定期来看看自己的账户是否在正常运行（虽然有邮件通知服务），但也建议每月查看一次账户状态！！！**![请添加图片描述](https://static.linch.eu.org/blogImage/3b2651537fee45088202efd02cad6d74.png)
+**警示：配置成功了也要定期来看看自己的账户是否在正常运行（虽然有邮件通知服务），但也建议每月查看一次账户状态！！！**![请添加图片描述](https://static.xlc520.tk/blogImage/3b2651537fee45088202efd02cad6d74.png)
 
 ### 3.4 设置一个通知邮箱（可选）
 
 在任何页面下 点击右上角“用户名-账户设置”，进入个人信息设置
-![请添加图片描述](https://static.linch.eu.org/blogImage/8229363a593549bbb884960e65875673.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/8229363a593549bbb884960e65875673.png)
 记住你的UID，出现任何问题请使用这个UID与你所选站点的管理员沟通
 编辑你的邮箱 并点击保存
-![请添加图片描述](https://static.linch.eu.org/blogImage/fea87de6e5774a319c4b4a2e818d3341.png)
+![请添加图片描述](https://static.xlc520.tk/blogImage/fea87de6e5774a319c4b4a2e818d3341.png)
 
 # 部署端**(请勿使用任何Cookie缓存加速服务)**
 

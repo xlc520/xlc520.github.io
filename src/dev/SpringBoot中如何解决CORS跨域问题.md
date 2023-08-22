@@ -60,7 +60,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 当项目中还有一个自定义过滤器，并且在过滤器中通过 `response.getWriter().print()`直接向客户端输出返回信息：
 
-![图片](https://static.linch.eu.org/blogImage/640-1674184416050-0.png)
+![图片](https://static.xlc520.tk/blogImage/640-1674184416050-0.png)
 
 在这种情况下是不会继续执行后面的过滤器链的。
 

@@ -485,7 +485,7 @@ cd \\wsl$\Ubuntu\
 
 或者打开文件资源管理器，在地址栏输入 `\\wsl$`  或  `\\wsl$\Ubuntu\`，也可以Ubuntu子系统根目录。 
 
-![6645072-861e342815516794.png](https://static.linch.eu.org/blogImage/6645072-861e342815516794.png)
+![6645072-861e342815516794.png](https://static.xlc520.tk/blogImage/6645072-861e342815516794.png)
 
 
 

@@ -132,7 +132,7 @@ apt install curl --no-install-recommends -y && \
 apt install python3 -y --no-install-recommends
 ```
 
-如下图所示，带有 new 标签的镜像由于添加了此标志而减少了 5MB。当我们要安装多个包时，这将非常有帮助。![图片](https://static.linch.eu.org/blogImage/640-1679364162221-0.png)
+如下图所示，带有 new 标签的镜像由于添加了此标志而减少了 5MB。当我们要安装多个包时，这将非常有帮助。![图片](https://static.xlc520.tk/blogImage/640-1679364162221-0.png)
 
 您可以在 apk add 命令中添加 --no-cache。
 
@@ -149,7 +149,7 @@ apt install python3 -y --no-install-recommends && \
 rm -rf /var/lib/apt/lists/*
 ```
 
-![图片](https://static.linch.eu.org/blogImage/640-1679364162221-1.png)
+![图片](https://static.xlc520.tk/blogImage/640-1679364162221-1.png)
 
 从上图中可以看出，我们已将 docker 镜像的大小减少了约 41 MB。
 

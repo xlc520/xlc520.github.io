@@ -18,29 +18,29 @@ icon: java
 
 ## **一、安装插件**
 
-![img](https://static.linch.eu.org/blogImage/v2-c19397d241007d79c422291524cc08d6_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-c19397d241007d79c422291524cc08d6_r.jpg)
 
 ## **二、获取git代理服务器文件**
 
 [ilanyu/ReverseProxygithub.com/ilanyu/ReverseProxy/releases/tag/v1.0](https://github.com/ilanyu/ReverseProxy/releases/tag/v1.0)
 
-![img](https://static.linch.eu.org/blogImage/v2-0531c01eea2c41be17b1101f67abdc99_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-0531c01eea2c41be17b1101f67abdc99_r.jpg)
 
 安装运行文件，监听端口8888
 
-![img](https://static.linch.eu.org/blogImage/v2-6d125df94f8e74239f5406a6058272fa_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-6d125df94f8e74239f5406a6058272fa_r.jpg)
 
 ## **三、运行IDEA激活**
 
 [访问](https://www.guidgen.com/)： [Generate GUIDs online](https://www.guidgen.com/)生成ID ，选择激活服务器激活：
 
-![img](https://static.linch.eu.org/blogImage/v2-d13f9f1a60a0cd14598e76dcadf28e5e_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-d13f9f1a60a0cd14598e76dcadf28e5e_r.jpg)
 
 服务器写入 http://127.0.0.1:8888/网站获取的ID 邮箱随便填写。
 
 稍等一下会出现激活界面：
 
-![img](https://static.linch.eu.org/blogImage/v2-a8ec52ff05355f905397e7e2e34bda6d_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-a8ec52ff05355f905397e7e2e34bda6d_r.jpg)
 
 ## **四、在maven配置加入jrebel**
 
@@ -69,7 +69,7 @@ icon: java
 
 **1） 设置为自动编译项目**
 
-![img](https://static.linch.eu.org/blogImage/v2-0321ff68c6fc9815509cdfb485fc9bd7_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-0321ff68c6fc9815509cdfb485fc9bd7_r.jpg)
 
 
 
@@ -79,19 +79,19 @@ icon: java
 
 close掉即可，此时已经生效，修改代码后ctrl+s会自动重新编译
 
-![img](https://static.linch.eu.org/blogImage/v2-6f704cfa339181e74bdecde476fd083c_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-6f704cfa339181e74bdecde476fd083c_r.jpg)
 
 ## **六、启动测试**
 
 启动jrebel 功能： debug
 
-![img](https://static.linch.eu.org/blogImage/v2-0f04281ce71caf38d62bf491a89780d2_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-0f04281ce71caf38d62bf491a89780d2_r.jpg)
 
 项目启动完成在controller加入新方法，可以看到控制台输出热部署记载提示。
 
 在idea中自带的ctrl+f9可以在不修改方法的情况下进行热加载，添加或修改后就不能重新编译了。
 
-![img](https://static.linch.eu.org/blogImage/v2-f7b5a2963397475acad2c6183cedb291_r.jpg)
+![img](https://static.xlc520.tk/blogImage/v2-f7b5a2963397475acad2c6183cedb291_r.jpg)
 
 访问测试
 

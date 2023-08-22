@@ -241,11 +241,11 @@ public class IndexController {
 
 ## **效果演示**
 
-![图片](https://static.linch.eu.org/blogImage/640-16612195691460.png)
+![图片](https://static.xlc520.tk/blogImage/640-16612195691460.png)
 
-![图片](https://static.linch.eu.org/blogImage/640-16612195691461.png)
+![图片](https://static.xlc520.tk/blogImage/640-16612195691461.png)
 
-![图片](https://static.linch.eu.org/blogImage/640-16612195691462.png)
+![图片](https://static.xlc520.tk/blogImage/640-16612195691462.png)
 
 ## **改造netty支持url参数**
 

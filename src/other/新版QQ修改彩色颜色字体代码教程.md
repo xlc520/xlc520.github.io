@@ -34,7 +34,7 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ## 纯色昵称代码：
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289982.jpeg)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289982.jpeg)
 
 ```
 <&ÿĀĀĀ>黑色
@@ -54,7 +54,7 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ### 彩色昵称代码
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289981.jpeg)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289981.jpeg)
 
 代码如下
 
@@ -148,12 +148,12 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ## 效果展示
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289982.png)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289982.png)
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289983.jpeg)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289983.jpeg)
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289984.jpeg)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289984.jpeg)
 
-![img](https://static.linch.eu.org/blogImage/1620-16536501289985.jpeg)
+![img](https://static.xlc520.tk/blogImage/1620-16536501289985.jpeg)
 
    效果图来源于网络，若无意侵权，联系删除即可！

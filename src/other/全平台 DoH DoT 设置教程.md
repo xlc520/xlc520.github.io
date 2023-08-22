@@ -161,7 +161,7 @@ iOS的设置比较复杂，不像安卓，直接系统设置就有，往里一�
 
 这3组w加密DNS服务器Win11其实系统已经内置了，如果你将DNS设置为下表中的这些IP地址，那么直接选择开(自动模版)，然后保存即可
 
-![img](https://static.linch.eu.org/blogImage/20230113145440.png)
+![img](https://static.xlc520.tk/blogImage/20230113145440.png)
 
 #### 你想设置另外的DoH服务器
 
@@ -179,7 +179,7 @@ win 系统出于安全性考虑，禁止使用未绑定域名与 IP 关系的 Do
 
 #### 手动设定其他的DNS
 
-![img](https://static.linch.eu.org/blogImage/20230113145737.png)
+![img](https://static.xlc520.tk/blogImage/20230113145737.png)
 
 1. DNS：写DoH服务器的IP
 
@@ -199,7 +199,7 @@ win 系统出于安全性考虑，禁止使用未绑定域名与 IP 关系的 Do
 
 3. 点击以管理员身份运行
 
-![img](https://static.linch.eu.org/blogImage/20230113153621.png)
+![img](https://static.xlc520.tk/blogImage/20230113153621.png)
 
 1. 按如下格式输入命令
 

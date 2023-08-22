@@ -105,13 +105,13 @@ http://{部署Jenkins所在服务IP}:8080
 # 复制密码到输入框里面
 ```
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-0.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-0.png)
 
 #### **2.2 安装插件**
 
 选择第一项：**安装推荐的插件**。
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-1.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-1.png)
 
 #### **2.3 创建管理员用户**
 
@@ -125,7 +125,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-2.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-2.png)
 
 
 
@@ -139,7 +139,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 进入【首页】–【系统管理】–【全局配置】，拉到页面最下方 maven–maven 安装。
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-3.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-3.png)
 
 ##  
 
@@ -153,7 +153,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-4.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-4.png)
 
 ###  
 
@@ -163,11 +163,11 @@ http://{部署Jenkins所在服务IP}:8080
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096704-5.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096704-5.png)
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096705-6.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096705-6.png)
 
 ###  
 
@@ -177,7 +177,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096705-7.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096705-7.png)
 
 此处命令只是 install，看是否能生成 jar 包。
 
@@ -185,7 +185,7 @@ http://{部署Jenkins所在服务IP}:8080
 clean install -Dmaven.test.skip=true
 ```
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096705-8.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096705-8.png)
 
 ### **4. 保存**
 
@@ -201,7 +201,7 @@ clean install -Dmaven.test.skip=true
 
 点击构建按钮。
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096706-9.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096706-9.png)
 
 ###  
 
@@ -213,15 +213,15 @@ clean install -Dmaven.test.skip=true
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096706-9.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096706-9.png)
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096706-10.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096706-10.png)
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096706-11.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096706-11.png)
 
 ###  
 
@@ -261,7 +261,7 @@ FROM jdk:8VOLUME /tmpADD target/zx-order-0.0.1-SNAPSHOT.jar app.jarEXPOSE 8888EN
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096706-12.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096706-12.png)
 
 
 
@@ -269,7 +269,7 @@ FROM jdk:8VOLUME /tmpADD target/zx-order-0.0.1-SNAPSHOT.jar app.jarEXPOSE 8888EN
 
 
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096707-13.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096707-13.png)
 
 
 
@@ -289,7 +289,7 @@ cd /var/jenkins_home/workspace/zx-order-apidocker stop zx-order || truedocker rm
 
 ### 4. 构建：查看 Jenkins 控制台输出，输出如下，证明成功；
 
-![Jenkins+Docker](https://static.linch.eu.org/blogImage/640-1667833096707-14.png)
+![Jenkins+Docker](https://static.xlc520.tk/blogImage/640-1667833096707-14.png)
 
 ### 5. 验证
 

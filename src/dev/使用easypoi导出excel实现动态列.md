@@ -45,11 +45,11 @@ icon: java
 
 变更前样式
 
-![图片](https://static.linch.eu.org/blogImage/640-1674184514758-0.png)
+![图片](https://static.xlc520.tk/blogImage/640-1674184514758-0.png)
 
 变更后样式
 
-![图片](https://static.linch.eu.org/blogImage/640-1674184514758-3.png)
+![图片](https://static.xlc520.tk/blogImage/640-1674184514758-3.png)
 
 ### 代码解析
 
@@ -270,7 +270,7 @@ public class BiPlatformStatisRespDTO implements Serializable {
 
 ##### 测试结果示例
 
-![图片](https://static.linch.eu.org/blogImage/640-1674184521222-6.png)
+![图片](https://static.xlc520.tk/blogImage/640-1674184521222-6.png)
 
 ##### 测试数据json示例
 

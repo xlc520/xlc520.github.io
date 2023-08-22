@@ -18,7 +18,7 @@ icon: java
 
 
 
-![Docker疑难杂症汇总](https://static.linch.eu.org/blogImage/docker-have-some-trouble.png)
+![Docker疑难杂症汇总](https://static.xlc520.tk/blogImage/docker-have-some-trouble.png)
 
 **Docker疑难杂症汇总**
 
@@ -26,7 +26,7 @@ icon: java
 
 
 
-![Docker疑难杂症汇总](https://static.linch.eu.org/blogImage/docker-have-some-trouble-1.png)
+![Docker疑难杂症汇总](https://static.xlc520.tk/blogImage/docker-have-some-trouble-1.png)
 
 **Docker疑难杂症汇总**
 
@@ -127,7 +127,7 @@ $ sudo cp -arv /data/docker /data2/docker
 
 
 
-![Docker迁移存储目录](https://static.linch.eu.org/blogImage/docker-have-some-trouble-3.png)
+![Docker迁移存储目录](https://static.xlc520.tk/blogImage/docker-have-some-trouble-3.png)
 
 **Docker迁移存储目录**
 
@@ -776,7 +776,7 @@ NFS clients support flock() locks by emulating them as byte-range locks on the e
 
 
 
-![Docker默认使用网段](https://static.linch.eu.org/blogImage/docker-have-some-trouble-2.png)
+![Docker默认使用网段](https://static.xlc520.tk/blogImage/docker-have-some-trouble-2.png)
 
 **Docker默认使用网段**
 
@@ -832,7 +832,7 @@ B: /data2/app/docker-compose.yml
 
 
 
-![Docker服务启动串台](https://static.linch.eu.org/blogImage/docker-have-some-trouble-4.png)
+![Docker服务启动串台](https://static.xlc520.tk/blogImage/docker-have-some-trouble-4.png)
 
 **Docker服务启动串台**
 
@@ -876,7 +876,7 @@ $ docker-compose -f ./docker-compose.yml -p app1 up -d
 
 
 
-![Docker命令调用报错](https://static.linch.eu.org/blogImage/docker-have-some-trouble-5.png)
+![Docker命令调用报错](https://static.xlc520.tk/blogImage/docker-have-some-trouble-5.png)
 
 **Docker命令调用报错**
 
@@ -906,7 +906,7 @@ docker exec -it <container_name> psql -Upostgres ......
 
 
 
-![Docker命令调用报错](https://static.linch.eu.org/blogImage/docker-have-some-trouble-6.png)
+![Docker命令调用报错](https://static.xlc520.tk/blogImage/docker-have-some-trouble-6.png)
 
 **Docker命令调用报错**
 
@@ -1476,7 +1476,7 @@ $ docker network inspect app | grep Subnet
 
 
 
-![Docker 不使用默认网段](https://static.linch.eu.org/blogImage/docker-have-some-trouble-7.png)
+![Docker 不使用默认网段](https://static.xlc520.tk/blogImage/docker-have-some-trouble-7.png)
 
 **Docker 不使用默认网段**
 
@@ -1506,7 +1506,7 @@ $ sudo cat /etc/docker/daemon.json
 
 
 
-![Docker 不使用默认网段](https://static.linch.eu.org/blogImage/docker-have-some-trouble-8.png)
+![Docker 不使用默认网段](https://static.xlc520.tk/blogImage/docker-have-some-trouble-8.png)
 
 **Docker 不使用默认网段**
 
@@ -1611,7 +1611,7 @@ environment:
 
 
 
-![Docker 容器导致磁盘不足](https://static.linch.eu.org/blogImage/docker-have-some-trouble-9.png)
+![Docker 容器导致磁盘不足](https://static.xlc520.tk/blogImage/docker-have-some-trouble-9.png)
 
 **Docker 容器导致磁盘不足**
 
@@ -1637,7 +1637,7 @@ $ sudo du -sh /var/lib/docker/overlay2
 
 
 
-![Docker 容器导致磁盘不足](https://static.linch.eu.org/blogImage/docker-have-some-trouble-10.png)
+![Docker 容器导致磁盘不足](https://static.xlc520.tk/blogImage/docker-have-some-trouble-10.png)
 
 **Docker 容器导致磁盘不足**
 
@@ -1696,7 +1696,7 @@ drwx------   3 root root  4096 4月  24 12:22 work/
 
 
 
-![Docker 容器导致磁盘不足](https://static.linch.eu.org/blogImage/docker-have-some-trouble-11.png)
+![Docker 容器导致磁盘不足](https://static.xlc520.tk/blogImage/docker-have-some-trouble-11.png)
 
 **Docker 容器导致磁盘不足**
 

@@ -16,7 +16,7 @@ icon: linux
 
 ## 网络拓扑
 
-![img](https://static.linch.eu.org/blogImage/a2ae9f6f67a64c6587f07caffddca26b.png)
+![img](https://static.xlc520.tk/blogImage/a2ae9f6f67a64c6587f07caffddca26b.png)
 
 ##  服务器
 

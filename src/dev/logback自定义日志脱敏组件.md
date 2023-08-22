@@ -32,8 +32,8 @@ icon: java
 
 ### 一、自定义脱敏组件 - 脱敏效果演示
 
-![需要脱敏的日志](https://static.linch.eu.org/blogImage/20210129141855313.png)
-![控制台脱敏结果](https://static.linch.eu.org/blogImage/20210129141946269.png)
+![需要脱敏的日志](https://static.xlc520.tk/blogImage/20210129141855313.png)
+![控制台脱敏结果](https://static.xlc520.tk/blogImage/20210129141946269.png)
 
 ### 二、自定义脱敏组件 - 使用方式
 
@@ -98,7 +98,7 @@ pers.liuchengyin.logbackadvice.LcyFileAppender
 ##### 3、添加脱敏配置文件(logback-desensitize.yml)
 
 该配置文件应该放在resources文件下
-![图片](https://static.linch.eu.org/blogImage/20210129150716849.png)
+![图片](https://static.xlc520.tk/blogImage/20210129150716849.png)
 
 ### 三、自定义脱敏组件 - 脱敏规范
 
@@ -245,7 +245,7 @@ patterns:
 
 [Jar包Github地址 - logback-desensitization-1.0.0.jar](https://github.com/liuchengyin01/LogbackDesensitization/tree/master/repo/pers/liuchengyin/logback-desensitization/1.0.0)
 
-![图片](https://static.linch.eu.org/blogImage/20210129201007764.png)
+![图片](https://static.xlc520.tk/blogImage/20210129201007764.png)
 
 Github地址：[Logback和slf4j的日志脱敏组件Demo](https://github.com/liuchengyin01/LogbackDesensitization)
 

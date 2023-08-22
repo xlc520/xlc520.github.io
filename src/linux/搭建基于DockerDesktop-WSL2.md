@@ -39,7 +39,7 @@ Kubernetes（简称k8s)已成为目前业界容器编排的事实标准，其搭
 
 Borg主要由`BorgMaster`、`Borglet`、`borgcfg`和`Scheduler`组成，如下图所示
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920015036286-1409787293.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920015036286-1409787293.png)
 
 - BorgMaster是整个集群的大脑，负责维护整个集群的状态，并将数据持久化到Paxos存储中；
 - Scheduer负责任务的调度，根据应用的特点将其调度到具体的机器上去；
@@ -50,7 +50,7 @@ Borg主要由`BorgMaster`、`Borglet`、`borgcfg`和`Scheduler`组成，如下�
 
 Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod单IP等。Kubernetes的整体架构跟Borg非常像，如下图所示
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920015227616-2027254697.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920015227616-2027254697.png)
 
 Kubernetes主要由以下几个核心组件组成：
 
@@ -71,13 +71,13 @@ Kubernetes主要由以下几个核心组件组成：
 - `Federation`提供跨可用区的集群
 - `Fluentd-elasticsearch`提供集群日志采集、存储与查询
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920015503920-677622898.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920015503920-677622898.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920015508721-1218848536.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920015508721-1218848536.png)
 
 Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，如下图所示
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920015719817-2060783609.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920015719817-2060783609.png)
 
 - 核心层：Kubernetes最核心的功能，对外提供API构建高层的应用，对内提供插件式应用执行环境
 - 应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS解析等）
@@ -152,11 +152,11 @@ K8s还支持使用Persistent Volume Claim即PVC这种逻辑存储，使用这种
 - 已经安装并启用至少一个Windows10 Linux发行版，比如Ubuntu 20.04
 - 已经设置好Linux发行版为Docker运行的默认容器。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920191653359-653163530.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920191653359-653163530.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920011447642-1671879599.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920011447642-1671879599.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920011536810-200194442.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920011536810-200194442.png)
 
 接下来，以`Docker Desktop`版本`v2.3.0.4`为例，其中自带的`Kubernetes`版本为`v1.16.5`
 
@@ -170,7 +170,7 @@ K8s还支持使用Persistent Volume Claim即PVC这种逻辑存储，使用这种
 git clone git@github.com:AliyunContainerService/k8s-for-docker-desktop.git
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920020300015-355962561.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920020300015-355962561.png)
 
 `git clone`完毕之后，切换到它的目录。
 
@@ -178,11 +178,11 @@ git clone git@github.com:AliyunContainerService/k8s-for-docker-desktop.git
 cd .\k8s-for-docker-desktop\
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920020454805-1441919526.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920020454805-1441919526.png)
 
 这里需要注意的是，由于不同的Docker Desktop带的Kubernetes是不一样的，然后我们需要的镜像版本应该和自带的Kubernetes保持一致，举例，如果你的Docker Desktop关于页面写着Kubernetes的版本是v1.16.5的话，我们需要把这个项目切换到对应的分支。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920192344515-1587195360.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920192344515-1587195360.png)
 
 ```bash
 git checkout v1.16.5
@@ -202,7 +202,7 @@ git checkout v1.16.5
 - 如Kubernetes版本为`v1.13.0`, 请使用下面命令切换`v1.13.0`分支 `git checkout v1.13.0`
 - 如Kubernetes版本为`v1.10.11`, 请使用下面命令切换`v1.10.11`分支 `git checkout v1.10.11`
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920204052206-383225007.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920204052206-383225007.png)
 
 接下来，就可以执行其中的ps脚本：`load_images.ps1`
 
@@ -241,13 +241,13 @@ quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1=registry.c
 
 不小心，可能就会遇到一个权限坑
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920021036665-648664370.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920021036665-648664370.png)
 
 不要慌，这是要允许Powershell来执行未知脚本。
 
 请在开始菜单图标上右键，选`Windows PowerShell管理员`模式运行。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920021334941-1028246888.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920021334941-1028246888.png)
 
 根据提示执行命令即可
 
@@ -255,13 +255,13 @@ quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1=registry.c
 Set-ExecutionPolicy RemoteSigned
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920021446329-985938.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920021446329-985938.png)
 
 然后记得重启一次PowerShell使其生效。
 
 好了，解除权限限制之后，便可以开始继续上诉脚本执行了。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920204238369-2146637537.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920204238369-2146637537.png)
 
 如果一切顺利，不要多久你可以看到所有的镜像都拉取到本地了。
 
@@ -271,7 +271,7 @@ Set-ExecutionPolicy RemoteSigned
 docker images
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920204317270-637976343.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920204317270-637976343.png)
 
 ## 本地HOST环境设置
 
@@ -304,12 +304,12 @@ docker images
 # GitHub End
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920204418843-1843976703.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920204418843-1843976703.png)
 
 - 其中`kubernetes.docker.internal`指向`127.0.0.1`可避免遇到`kubernetes.docker.internal: no such host`的问题。
 - 其中`Github`相关的Host呢，是避免遇到`raw.githubusercontent.com 找不到host`的问题。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920204455963-1896633151.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920204455963-1896633151.png)
 
 另外需要注意，`Docker Desktop For Windows 10`的日志这个路径，如果需要可以查看
 
@@ -317,7 +317,7 @@ docker images
 C:\ProgramData\DockerDesktop\service.txt
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920071826472-286092709.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920071826472-286092709.png)
 
 另外，`Docker Desktop For Windows 10`生成的Kubernetes的配置文件路径位置在
 
@@ -333,23 +333,23 @@ C:\Users\UserName\.kube
 kubectl version
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920030203241-1025556876.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920030203241-1025556876.png)
 
 但是，其实也看到，Kubernetes服务并没有起来，好了，我们接下来启用并安装自带的K8S吧。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920030421627-1176573897.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920030421627-1176573897.png)
 
 在桌面右下角，右键打开你的Docker Desktop小图标，进入`Settings`页面的最后一项`Kubernetes`
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920022902881-1865014691.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920022902881-1865014691.png)
 
 请勾选其中的`Enable Kubernetes`项，然后点击`Apply & Restart`即可开始安装。
 
 > 如果你想通过Docker命令行查看Kubernetes内部的容器资源，那么可以多勾选一个`Show System Containers(Advanced)`，默认不建议勾选，以免它产生的实例形成干扰信息。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920031705150-1882295227.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920031705150-1882295227.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920032559468-655038327.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920032559468-655038327.png)
 
 这里需要等待一段时间，这期间，如果你勾选了`Show System Containers(Advanced)`，希望检查是否成功执行，可以通过以下命令来查看实例创建情况
 
@@ -365,11 +365,11 @@ docker ps
 
 如果你没有勾选`Show System Containers(Advanced)`，你会看到一个干净的Docker Desktop Dashboard面板，里面不会看到`Kubernetes`相关的容器，如果你勾选了，会新增一堆实例。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205013588-743988895.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205013588-743988895.png)
 
 底部状态的`Kubernetes Running`就代表我们已经安装并启用成功了。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205435168-1342089193.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205435168-1342089193.png)
 
 接下来，验证下集群的状态，执行命令
 
@@ -377,7 +377,7 @@ docker ps
 kubectl cluster-info
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205531103-1519922837.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205531103-1519922837.png)
 
 查看的node节点
 
@@ -385,7 +385,7 @@ kubectl cluster-info
 kubectl get nodes
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205627877-616000426.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205627877-616000426.png)
 
 如果以上命令都成功执行，如图输出，说明已经运转正常了。
 
@@ -393,13 +393,13 @@ kubectl get nodes
 
 如果你设置了前面的host文件呢，这时候其中`raw.githubusercontent.com`的配置就马上要起到作用了，不然接下来这个命令就惨了。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205809227-1883125507.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205809227-1883125507.png)
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc5/aio/deploy/recommended.yaml
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205734928-1474063800.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205734928-1474063800.png)
 
 这一步会安装并设置Kubernetes的Dashboard面板。
 
@@ -413,7 +413,7 @@ kubectl get pod -n kubernetes-dashboard
 
 多执行几次上诉命令，接下来你会看到每一个Pod都开始变成`1/1`，这时候说明Dashboard面板实例已经就位了，等待我们访问。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205857499-1713108756.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205857499-1713108756.png)
 
 ## 生成可登录Kubernetes Dashboard的`Token`
 
@@ -423,7 +423,7 @@ kubectl get pod -n kubernetes-dashboard
 $TOKEN=((kubectl -n kube-system describe secret default | Select-String "token:") -split " +")[1]
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920205922707-1136895879.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920205922707-1136895879.png)
 
 然后把这个`Token`，写入`Kubernetes`的上下文`docker-desktop`中，以便下一步登录使用
 
@@ -431,7 +431,7 @@ $TOKEN=((kubectl -n kube-system describe secret default | Select-String "token:"
 kubectl config set-credentials docker-desktop --token="${TOKEN}"
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210045301-346214260.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210045301-346214260.png)
 
 我们把这个`Token`，在终端中打印出来，并且复制保存哈。。
 
@@ -439,7 +439,7 @@ kubectl config set-credentials docker-desktop --token="${TOKEN}"
 echo $TOKEN
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210112527-624896796.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210112527-624896796.png)
 
 接着，我们开启API Server访问代理
 
@@ -447,23 +447,23 @@ echo $TOKEN
 kubectl proxy
 ```
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210413547-2033488985.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210413547-2033488985.png)
 
 然后，我们就可以使用Url来访问可视化界面了。
 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210501303-1804114165.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210501303-1804114165.png)
 
 打开后，我们选择`Token`的登录方式，输入我们得到的`Token`信息。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210641744-598654338.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210641744-598654338.png)
 
 点击`登录`，即可进入传说中的`Dashboard`
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210756742-1026070019.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210756742-1026070019.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200920210818191-996036967.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200920210818191-996036967.png)
 
 恭喜你，开启成功！
 
@@ -471,11 +471,11 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 
 1. 创建一个`.Net Core 3.1`的API实例项目`DeployToK8s`
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921001804546-1308356919.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921001804546-1308356919.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921001854580-1993225198.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921001854580-1993225198.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921002014182-1112505069.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921002014182-1112505069.png)
 
 1. 准备演示应用的领域模型
 
@@ -506,9 +506,9 @@ public class User
 - Pomelo.EntityFrameworkCore.MySql
 - Microsoft.EntityFrameworkCore.Proxies
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921002455527-1306803793.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921002455527-1306803793.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921005622476-821993304.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921005622476-821993304.png)
 
 并设置好MYSQL的连接字符串
 
@@ -542,13 +542,13 @@ using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactor
 
 往数据中插入一些模拟数据，创建好默认Controller，然后并设置项目启动目录指向它。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921085911887-858401810.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921085911887-858401810.png)
 
 1. 给项目添加Docker支持
 
 在项目上右键，添加 -> Docker支持 -> Linux模式 -> 确认
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921090012804-350915610.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921090012804-350915610.png)
 
 它将在项目中新建一个`DockerFile`，这个是后续生成Docker镜像的配置文件。
 
@@ -580,15 +580,15 @@ ENTRYPOINT ["dotnet", "DeployToK8s.dll"]
 
 直接在项目的这个`DockerFile`文件上右键，有一个选项是`生成Docker镜像`，点击即可。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921090758873-643346420.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921090758873-643346420.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921090816944-1125396572.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921090816944-1125396572.png)
 
 它将开始执行构建，一共有18步骤，很快就能完成。
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921090902656-128754629.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921090902656-128754629.png)
 
-![Kubernetes-WSL2](https://static.linch.eu.org/blogImage/375390-20200921091048032-75040421.png)
+![Kubernetes-WSL2](https://static.xlc520.tk/blogImage/375390-20200921091048032-75040421.png)
 
 ## 附录
 

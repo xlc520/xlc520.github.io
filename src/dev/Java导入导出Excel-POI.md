@@ -192,7 +192,7 @@ output.flush();
 
 　　 在2.3中我们寥寥几行代码实际上就已经就是实现了导出Excel一个简单示例，下面我们在看如何实现导出如图所示的Excel表格？
 
-![img](https://static.linch.eu.org/blogImage/170838550954408.png)
+![img](https://static.xlc520.tk/blogImage/170838550954408.png)
 
 　　代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如Servlet的doGet/doPost方法或Struts框架的execute方法中）
 
