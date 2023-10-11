@@ -4,15 +4,15 @@ import { searchProPlugin } from "vuepress-plugin-search-pro";
 
 export default defineUserConfig({
   base: "/",
+
   lang: "zh-CN",
-  dest: "./dist",
   title: "StudyNote",
   description: "个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。",
 
   theme,
 
   // Enable it with pwa
-  shouldPrefetch: false,
+  // shouldPrefetch: false,
   head: [
     ["meta", { name: "robots", content: "all" }],
     ["meta", { name: "author", content: "xlc520" }],
@@ -102,7 +102,7 @@ export default defineUserConfig({
           formatter: {
             "/": "标签：$content",
           },
-        }
+        },
       ],
     }),
   ],

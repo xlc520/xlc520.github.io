@@ -8,13 +8,13 @@
     "build": "vuepress build src",
     "clean-dev": "vuepress dev src --clean-cache",
     "dev": "vuepress dev src",
-    "update-package": "yarn dlx vp-update"
+    "update-package": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/client": "2.0.0-beta.66",
-    "vue": "^3.2.47",
-    "vuepress": "2.0.0-beta.66",
-    "vuepress-plugin-search-pro": "^2.0.0-beta.234",
-    "vuepress-theme-hope": "2.0.0-beta.234"
+    "@vuepress/client": "2.0.0-beta.67",
+    "vue": "^3.3.4",
+    "vuepress": "2.0.0-beta.67",
+    "vuepress-plugin-search-pro": "2.0.0-beta.238",
+    "vuepress-theme-hope": "2.0.0-beta.238"
   }
 }

@@ -14,15 +14,13 @@ export default hopeTheme({
     email: "xulinch520@gmail.com"
   },
 
+  // iconAssets: "fontawesome-with-brands",
   iconAssets: "iconfont", //"fontawesome-with-brands"
-
   logo: "/logo.svg",
 
   repo: "https://github.com/xlc520/xlc520.github.io",
-
-  docsDir: "docs",
-  docsRepo: "https://github.com/xlc520/xlc520.github.io",
-  docsBranch: "master",
+  repoDisplay:true, //是否在导航栏显示仓库链接
+  docsDir: "src",
 
   // navbar
   navbar,
@@ -30,13 +28,25 @@ export default hopeTheme({
   // sidebar
   sidebar,
 
-  hotReload: true, //是否需要在开发服务器启用完整功能与热更新。 是否在开发服务器中启用热重载。
-  pageInfo: ["Author", "Original", "Date", "Category", "Tag", "ReadingTime","Word"],
-  fullscreen: true, //全屏按钮
-
-  footer: "两情若是久长时，又岂在朝朝暮暮",
+  footer: "默认页脚",
 
   displayFooter: true,
+
+  hotReload: true, //是否需要在开发服务器启用完整功能与热更新。 是否在开发服务器中启用热重载。
+  // "Author": 作者
+  // "Date": 写作日期
+  // "Original": 是否原创
+  // "Category": 分类
+  // "Tag": 标签
+  // "ReadingTime": 预计阅读时间
+  // "Word": 字数
+  // "PageView": 页面浏览量
+  pageInfo: ["Author", "Date", "Category", "Tag", "ReadingTime","Word","PageView"],
+  fullscreen: true, //全屏按钮
+
+  prevLink: true,  //是否在页面底部显示上一篇链接
+  nextLink: true,  //是否在页面底部显示下一篇链接
+
 
   blog: {
     // 博主姓名
@@ -54,7 +64,6 @@ export default hopeTheme({
     description: "山有木兮木有枝,心悦君兮君不知",
     intro: "/intro.html",
     medias: {
-      // MrHope: ["https://blog.ciberviler.top", "https://avatars.githubusercontent.com/u/56480807?v=4"],
       Github: "https://github.com/xlc520",
 		  Gitee: "https://gitee.com/xulch",
       Baidu: "https://baidu.com",
@@ -90,7 +99,7 @@ export default hopeTheme({
       // Whatsapp: "https://example.com",
       // Youtube: "https://example.com",
       // Zhihu: "https://example.com",
-      
+      // MrHope: ["https://mister-hope.com", MR_HOPE_AVATAR],
     },
   },
 
@@ -107,6 +116,7 @@ export default hopeTheme({
 
   plugins: {
     blog: true,
+
     // comment: {
     //   // You should generate and use your own comment service
     //   provider: "Waline",
@@ -133,7 +143,9 @@ export default hopeTheme({
       playground: {
         presets: ["ts", "vue"],
       },
-      presentation: ["highlight", "math", "search", "notes", "zoom"],
+      revealjs: {
+        plugins: ["highlight", "math", "search", "notes", "zoom"],
+      },
       stylize: [
         {
           matcher: "Recommended",

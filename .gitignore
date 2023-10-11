@@ -1,11 +1,12 @@
 guide
 posts
+demo
 blogImage
 node_modules/
 
 # Build files
 packages/*/lib/
-
+pnpm-lock.yaml
 # Vuepress Cache
 .cache
 notes/.vuepress/.cache/
