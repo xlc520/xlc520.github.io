@@ -28,7 +28,7 @@ export default hopeTheme({
   // sidebar
   sidebar,
 
-  footer: "默认页脚",
+  footer: "两情若是久长时，又岂在朝朝暮暮",
 
   displayFooter: true,
 
