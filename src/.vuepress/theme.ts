@@ -32,7 +32,7 @@ export default hopeTheme({
 
   displayFooter: true,
 
-  hotReload: true, //是否需要在开发服务器启用完整功能与热更新。 是否在开发服务器中启用热重载。
+  hotReload: true, //是否需要在开发服务器启用完整功能与热更新。 是否在开发服务器中启用热重载。提供自动摘录生成功能
   // "Author": 作者
   // "Date": 写作日期
   // "Original": 是否原创
@@ -115,7 +115,12 @@ export default hopeTheme({
   },
 
   plugins: {
-    blog: true,
+    blog: {
+      // 摘要生成
+      excerpt:true,
+      // 摘要长度
+      excerptLength:100,
+    },
 
     // comment: {
     //   // You should generate and use your own comment service
