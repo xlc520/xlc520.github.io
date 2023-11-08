@@ -1,6 +1,6 @@
 ---
 author: xlc520
-title: 
+title: Netty+SpringBoot 打造一个 TCP 长连接通讯方案
 description: 
 date: 2023-10-21
 category: Java
@@ -9,8 +9,6 @@ article: true
 timeline: true
 icon: java
 ---
-
-
 
 # Netty+SpringBoot 打造一个 TCP 长连接通讯方案
 
