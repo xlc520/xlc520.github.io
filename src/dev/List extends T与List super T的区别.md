@@ -22,19 +22,19 @@ icon: java
 
 我们先来看一下名词解释：
 
-## 1）？
+## 1）`？`
 
 ？表示类型通配符，即具体传什么参数类型，在List定义时不用考虑。
 
-## 2）<T>
+## 2）`<T>`
 
-这里的 <> 表示泛型，T 表示泛型中装载的类型为T类型，等到需要的时候，我们可以具体这个 T。我们在使用动态数组实现 ArrayList 的时候，如果希望这个 ArrayList 不仅仅支持一个类型的话，我们可以给这个 ArrayList 定义泛型，泛型中存放的是T类型。在实际创建出这个 ArrayList 对象时，我们可以指定泛型中的具体类型。
+这里的 `<>` 表示泛型，T 表示泛型中装载的类型为T类型，等到需要的时候，我们可以具体这个 T。我们在使用动态数组实现 ArrayList 的时候，如果希望这个 ArrayList 不仅仅支持一个类型的话，我们可以给这个 ArrayList 定义泛型，泛型中存放的是T类型。在实际创建出这个 ArrayList 对象时，我们可以指定泛型中的具体类型。
 
-## 3）<? extends T>
+## 3）`<? extends T>`
 
 类型上界，这里的 ? 可以是 T 类型或者 T 的子类类型。
 
-## 4）<? super T>
+## 4）`<? super T>`
 
 类型下界，这里的?可以是T类型或者T的超类类型，但不代表我们可以往里面添加任意超类类型的元素。
 ![图片](https://static.xlc520.tk/blogImage/640-1697803438447-1.png)
@@ -67,7 +67,7 @@ Number number = list.get(0);
 
 可以读取，但不能写入，比如以下的代码就直接报错。
 
-```
+```java
 public class Main {
 
     static class A { }
@@ -90,7 +90,7 @@ A 的子类 B 与子类 C 是不能相互转换的，因此是不能往该 list 
 
 虽然不能添加元素，但可以在初始化的时候，接受一个已经定义好的 list，而该 list 存放的类型一定相同。因此，`List<? extends T>`可直接接受一个定义好的 list。
 
-```
+```java
 public static List<Integer> getList(){
     List<Integer> list=new ArrayList<>();
     list.add(1);
@@ -115,7 +115,7 @@ public static void main(String[] args) {
 
 而传入 T 类型及其子类类型时，能够直接转化为 T 的任意超类类型。比如，下面的代码是可以运行的
 
-```
+```java
 public class Main {
 
     static class A { }
@@ -135,7 +135,7 @@ public class Main {
 
 该 list 也可以读取其中的元素，从第二节可以得出，只能用 Object 接收，没多大意义。
 
-```
+```java
 List<? super Integer> list2 = new ArrayList<>();
 list2.add(new Integer(1));
 Object integer=list2.get(0);
@@ -145,7 +145,7 @@ Object integer=list2.get(0);
 
 如果我们非要使用`List<? super Integer>`中的 Integer 类型来接收获取到的元素，那么必须进行强制类型转换，是会出现异常的，无法保障。
 
-```
+```java
 List<? super Integer> list2 = new ArrayList<>();
 list2.add(new Integer(1));
 Integer integer1= (Integer) list2.get(0);
@@ -165,11 +165,11 @@ Integer integer1= (Integer) list2.get(0);
 
 注意：`向上转型是安全的，向下转型是不安全的，除非你知道 List 中的真实类型，否则向下转型就会报错`。
 
-## extends
+## `extends`
 
 `List<? extends Number> foo3`意味着下面的赋值语句都是合法的：
 
-```
+```java
 List<? extends Number> foo3 = new ArrayList<Number>();  // Number "extends" Number (in this context)
 List<? extends Number> foo3 = new ArrayList<Integer>(); // Integer extends Number
 List<? extends Number> foo3 = new ArrayList<Double>();  // Double extends Number
@@ -181,23 +181,20 @@ List<? extends Number> foo3 = new ArrayList<Double>();  // Double extends Number
 
 - 你可以读取一个`Number`对象，因为上面任意一个list都包含`Number`对象或者`Number`子类的对象（上面的Number、Integer、Double都可以转型成Number，并且是安全的，所以读取总是可以的）。如下代码就不会报错：
 
-```
+```java
 List<? extends Number> foo4 = new ArrayList<Integer>();
 Number number = foo4.get(0);
 ```
 
 - 你不能读取一个`Integer`对象，因为`foo3`可能指向的是`List<Double>`（与其运行时发现Double转成Integer报错，不如编译时就不让从`foo3`中取`Integer`对象）。如下代码编译时会报`Incompatible types`错的：
 
-```
+```java
 List<? extends Number> foo4 = new ArrayList<Integer>();
 Integer number = foo4.get(0);
 ```
 
 因为编译的时候编译器只知道foo4引用是一个List<? extends Number>，要到运行时才会绑定到new ArrayList()，所以编译的时候是无法判断foo4指向的List中到底是什么类型，唯一能确定的就是这个类型是Number的子类（或者就是Number类）。
 
-> 推荐划水摸鱼地址：
->
-> https://www.yoodb.com/slack-off/home.html
 
 - 你也不能读取一个`Double`对象，因为`foo3`可能指向的是`List<Integer>`。
 
@@ -207,7 +204,7 @@ Integer number = foo4.get(0);
 
 - 你不能添加一个`Integer`对象，因为`foo3`可能指向的是`List<Double>`。如下代码是会编译报错的：
 
-```
+```java
 List<? extends Number> foo4 = new ArrayList<Integer>();
 foo4.add(new Integer(1));
 ```
@@ -219,14 +216,12 @@ foo4.add(new Integer(1));
 
 **「总结一下」**：你不能往`List<? extends T>`中添加任何对象，因为你不能保证`List`真正指向哪个类型，所以不能确定添加的对象就是`List`所能接受的类型。能保证的，仅仅是你可以从`List`中读取的时候，你获得的肯定是一个`T`类型的对象（即使是`T`类型的子类对象也是`T`类型的）。
 
-## supers
-
-### 
+## `supers`
 
 现在考虑`List<? super T>`
 包含通配符的声明`List<? super Integer> foo3`意味着下面任何一个赋值语句都是合法的：
 
-```
+```java
 List<? super Integer> foo3 = new ArrayList<Integer>();  // Integer is a "superclass" of Integer (in this context)
 List<? super Integer> foo3 = new ArrayList<Number>();   // Number is a superclass of Integer
 List<? super Integer> foo3 = new ArrayList<Object>();   // Object is a superclass of Integer
@@ -250,11 +245,9 @@ List<? super Integer> foo3 = new ArrayList<Object>();   // Object is a superclas
 - 你不可以添加`Number`类型，因为`foo3`可能指向的是`ArrayList<Integer>`。
 - 你不可以添加`Object`类型，因为`foo3`可能指向的是`ArrayList<Integer>`。
 
-## PECS
+## `PECS`
 
-### 
-
-PECS是"Producer Extends,Consumer Super"（生产者用Extends，消费者用Super）的缩写。
+`PECS`是"Producer Extends,Consumer Super"（生产者用Extends，消费者用Super）的缩写。
 
 - "Producer Extends"的意思是，如果你需要一个`List`去生产`T`类型values（也就是说你需要去list中读取`T`类型实例），你需要声明这个`List`中的元素为`? extends T`，例如`List<? extends Integer>`，但是你不能往里面添加元素。
 - "Consumer Super"的意思是，如果你需要一个`List`去消费`T`类型values（也就是说你需要往list中添加`T`类型实例），你需要声明这个`List`中的元素为`? super T`，例如`List<? super Integer>`。但是不能保证你从这个list中读取出来对象类型。

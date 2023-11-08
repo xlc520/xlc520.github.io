@@ -38,7 +38,7 @@ docker-compose up -d
 
 
 
-![图片](E:/source/blogImage/640-1698065409894-0.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698065409894-0.png)
 
 ## 二、开始编排部署（Elasticsearch 和 Kibana）
 
@@ -56,7 +56,7 @@ docker-compose up -d
 - **商业支持**：Elastic N.V. 提供了 Elasticsearch 的商业支持和托管服务，以满足企业级需求。
 
 总之，Elasticsearch 是一个强大且多才多艺的搜索和分析引擎，适用于各种用途，从全文搜索到日志分析和可视化数据。它在各种行业中被广泛使用，包括**搜索引擎**、**电子商务**、**日志管理**、**安全信息与事件管理、科学研究**和更多领域。
-![图片](E:/source/blogImage/640-1698065409894-1.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698065409894-1.png)
 
 服务布局：
 
@@ -488,10 +488,10 @@ curl localhost:9200
 curl localhost:9200/_cat/health
 ```
 
-![图片](E:/source/blogImage/640-1698065409894-2.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698065409894-2.png)
 
 kibana：`http://ip:5601/`
 
-![图片](E:/source/blogImage/640-1698065409894-3.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698065409894-3.png)
 
 git 地址：https://gitee.com/hadoop-bigdata/docker-compose-es-kibana.git

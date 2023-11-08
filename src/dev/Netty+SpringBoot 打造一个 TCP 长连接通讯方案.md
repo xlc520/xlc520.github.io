@@ -12,7 +12,7 @@ icon: java
 
 # Netty+SpringBoot 打造一个 TCP 长连接通讯方案
 
-![图片](E:/source/blogImage/640-1697803848284-64.jpeg)
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-64.jpeg)
 
 ------
 
@@ -31,7 +31,7 @@ icon: java
 
 本项目目录结构如下图：
 
-![图片](E:/source/blogImage/640-1697803848284-34.png)
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-34.png)
 
 `netty-tcp-core`是公共模块，主要是工具类。`netty-tcp-server`是netty服务端，服务端仅作测试使用，实际项目中我们只使用了客户端。`netty-tcp-client`是客户端，也是本文的重点。
 
@@ -519,19 +519,19 @@ public class DemoController {
 
 测试接口代码如上，调用testOne，日志如下：
 
-![图片](E:/source/blogImage/640-1697803848284-35.png)
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-35.png)
 
 可以看到第一条消息触发了客户端创建流程，创建后发送了消息，而5秒后的第二条消息直接通过已有通道发送了。
 
 测试接口代码如上，调用testTwo，日志如下：
 
-![图片](E:/source/blogImage/640-1697803848284-36.png)
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-36.png)
 
 发送shutdown可以主动断开已有连接。
 
 测试接口代码如上，调用testThree，日志如下：
 
-![图片](E:/source/blogImage/640-1697803848284-37.png)
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-37.png)
 
 可以看到第二条消息重新入列并被延迟消费了。
 

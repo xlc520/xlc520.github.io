@@ -70,7 +70,7 @@ docker pull dockerproxy.com/library/nginx
 
 
 
-![图片](E:/source/blogImage/640-1697803848284-0.png)docker-registry-cn-mirror-test result
+![图片](https://static.xlc520.tk/blogImage/640-1697803848284-0.png)docker-registry-cn-mirror-test result
 
 
 
@@ -82,7 +82,7 @@ docker pull dockerproxy.com/library/nginx
 
 
 
-![图片](E:/source/blogImage/640-1698065215359-39.png)阿里云镜像加速器
+![图片](https://static.xlc520.tk/blogImage/640-1698065215359-39.png)阿里云镜像加速器
 
 
 
@@ -146,10 +146,10 @@ const routes = {``  "docker.your-domain.com": "https://registry-1.docker.io",`` 
 
 4.点击 "Deploy" 按钮部署，部署后如下：
 
-![图片](E:/source/blogImage/640-1698065215359-40.png)Cloudflare Worker
+![图片](https://static.xlc520.tk/blogImage/640-1698065215359-40.png)Cloudflare Worker
 
 5.在 Cloudflare 的 DNS 记录里添加 `CNAME` 指向部署后的 `${workername}.${username}.workers.dev` 地址。如下：![图片](https://mmbiz.qpic.cn/mmbiz_png/lvd46ZxX8UTLzDsF9BvKaYsPvHibLX26icmWBo3QjlQ7nLQLUeicXm40HzhTTHicFlIjlPx3TBdw5q42lvic697DPjA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)Cloudflare DNS Records6.在 Workers 的 HTTP Routes 里，添加 `xxx.your-domain.com/*` 路由指向 cloudflare-docker-proxy, xxx 就是 `docker` `quay` `gcr` 等，如下：
-![图片](E:/source/blogImage/640-1698065215359-42.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698065215359-42.png)
 Cloudflare Worker Routes
 
 

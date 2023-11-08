@@ -30,7 +30,7 @@ icon: java
 
 RSA加密是一种非对称加密。可以在不直接传递密钥的情况下，完成解密。这能够确保信息的安全性，避免了直接传递密钥所造成的被破解的风险。是由一对密钥来进行加解密的过程，分别称为公钥和私钥。两者之间有数学相关，该加密算法的原理就是对一极大整数做因数分解的困难性来保证安全性。通常个人保存私钥，公钥是公开的（可能同时多人持有）。
 
-# ![图片](E:/source/blogImage/640-1698158560240-0.png)
+# ![图片](https://static.xlc520.tk/blogImage/640-1698158560240-0.png)
 
 **举例子大法**
 
@@ -132,23 +132,23 @@ public String Decryption(@RequestBody TestBean testBean){
 
 ##### 1、引入maven
 
-![图片](E:/source/blogImage/640-1698158560239-1.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560239-1.png)
 
 ##### 2、启动类添加注解
 
-![图片](E:/source/blogImage/640-1698158560240-2.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-2.png)
 
 ##### 3、YML添加配置密钥
 
-![图片](E:/source/blogImage/640-1698158560240-3.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-3.png)
 
 ##### 4、创建一个实体类
 
-![图片](E:/source/blogImage/640-1698158560240-4.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-4.png)
 
 ##### 5、写一个对外API接口
 
-![图片](E:/source/blogImage/640-1698158560240-5.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-5.png)
 
 ##### 6、启动项目
 
@@ -160,7 +160,7 @@ public String Decryption(@RequestBody TestBean testBean){
 
 我们看到返回的数据未加密
 
-![图片](E:/source/blogImage/640-1698158560240-6.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-6.png)
 
 ##### 7、修改
 
@@ -185,11 +185,11 @@ rsa:
 
 我们看到返回的数据已加密
 
-![图片](E:/source/blogImage/640-1698158560240-7.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-7.png)
 
 ##### 9、加密日志
 
-![图片](E:/source/blogImage/640-1698158560240-8.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-8.png)
 
 ### 解密实战
 
@@ -273,7 +273,7 @@ function tijiao() {
 
 ##### 1、 Controller添加解密方法接口
 
-![图片](E:/source/blogImage/640-1698158560240-9.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-9.png)
 
 ##### 2、前端页面引入js以及方法
 
@@ -335,11 +335,11 @@ function tijiao() {
 
 http://localhost:8080
 
-![图片](E:/source/blogImage/640-1698158560240-10.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-10.png)
 
 ##### 4、后台解密日志
 
-![图片](E:/source/blogImage/640-1698158560240-11.png)
+![图片](https://static.xlc520.tk/blogImage/640-1698158560240-11.png)
 
 ### 总结
 

@@ -34,7 +34,7 @@ icon: java
 
 **(2). 与vuex相比，pinia的优势有哪些？**
 
-  A. mutations 不再存在，在store中，无论是在**getter 或 actions中**，都可以**直接通过this(代表store实例）来直接修改state中的数据**。
+  A. mutations 不再存在，在store中，无论是在**getter 或 actions中**，都可以**直接通过this(代表store实例)来直接修改state中的数据**。
 
   B. 更友好的TypeScript支持，Vuex之前对TS的支持很不友好；
 
@@ -42,13 +42,13 @@ icon: java
 
   **注：在pinia里，扁平化定义多个store即可，store与store之间直接通过import引入，相互调用即可。**
 
-![img](E:/source/blogImage/1031302-20230115083853292-561688627.png)
+![img](https://static.xlc520.tk/blogImage/1031302-20230115083853292-561688627.png)
 
  
 
 **3. 核心总结**
 
-![img](E:/source/blogImage/1031302-20230115115754024-1151644537.png)
+![img](https://static.xlc520.tk/blogImage/1031302-20230115115754024-1151644537.png)
 
 **4. 快速入门**
 
@@ -190,9 +190,9 @@ export default useUser1Store;
 
 **2. 调用**
 
- **总结：首先实例化store实例，比如这里的user1Store，然后无论是在<script> or <template>中，直接通过user1Store.xxx ，即可调用state中的数据。**
+ **总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `，即可调用`state`中的数据。**
 
-(1). 在<script setup> 中调用
+(1). 在`<script setup> `中调用
 
 ```javascript
 <script setup>
@@ -339,9 +339,9 @@ export default useRole1Store;
 
 **2. 调用**
 
-**总结：首先实例化store实例，比如这里的user1Store，然后无论是在<script> or <template>中，直接通过user1Store.xxx ，即可调用getters中的数据。**
+**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `，即可调用`getters`中的数据。**
 
-(1). 在<script setup> 中调用
+(1). 在`<script setup>` 中调用
 
 (2). 在template模板中调用
 
@@ -404,9 +404,9 @@ export const useUsers = defineStore('users', {
 
 **2. 调用**
 
-**总结：首先实例化store实例，比如这里的user1Store，然后无论是在<script> or <template>中，直接通过user1Store.xxx ，即可调用actions中的方法。**
+**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script> `or` <template>`中，直接通过`user1Store.xxx` ，即可调用`actions`中的方法。**
 
-(1). 在<script setup> 中调用
+(1). 在`<script setup> `中调用
 
 (2). 在template模板中调用
 
@@ -469,7 +469,7 @@ const Test1 = () => {
 
 **2. 修改state中的值**
 
-  可以直接修改 或者 调用 $patch方法，可以同时修改多个对象
+  可以直接修改 或者 调用` $patch`方法，可以同时修改多个对象
 
 ```javascript
 // 2. 修改state中的值
@@ -489,9 +489,9 @@ const Test3 = () => {
 
  
 
-**3. 重置 $reset() 方法将状态 重置 到其初始值**
+**3. 重置 `$reset() `方法将状态 重置 到其初始值**
 
- 调用$reset方法，可以将state中的数据重置为初始化的状态。
+ 调用`$reset`方法，可以将state中的数据重置为初始化的状态。
 
 ```javascript
 // 3. 重置 $reset() 方法将状态 重置 到其初始值
@@ -522,11 +522,11 @@ const Test5 = () => {
 1. 与 Vue 组合式 API 的 setup 函数 相似，我们可以传入一个函数，该函数定义了一些响应式属性和方法，并且返回一个带有我们想暴露出去的属性和方法的对象
 2. 在 Setup Store 中：
 
-  (1).  ref() 就是 state 属性
+  (1).  `ref() `就是` state` 属性
 
-  (2).  computed() 就是 getters
+  (2).  `computed() `就是 `getters`
 
-  (3).  function() 就是 actions
+  (3).  `function() `就是` actions`
 
   注：Setup store 比 Option Store 带来了更多的灵活性，因为你可以在一个 store 内创建侦听器，并自由地使用任何组合式函数。不过，请记住，使用组合式函数会让 SSR 变得更加复杂。
 
