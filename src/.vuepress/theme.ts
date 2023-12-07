@@ -121,7 +121,9 @@ export default hopeTheme({
       // 摘要长度
       excerptLength:100,
     },
-
+    components: {
+      components: ["VPCard"]
+    },
     // comment: {
     //   // You should generate and use your own comment service
     //   provider: "Waline",
@@ -137,10 +139,11 @@ export default hopeTheme({
     // },
 
     // all features are enabled for demo, only preserve features you need here
+    // 2.0.0-rc.1 (2023-11-26) md-enhance: container option is deprecated, use hint instead danger is renamed to caution to align GFM
     mdEnhance: {
       align: true,
       attrs: true,
-      card: true,
+      // card: true,
 
       // install chart.js before enabling it
       // chart: true,

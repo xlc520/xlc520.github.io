@@ -241,22 +241,24 @@ public final class Optional<T> {
 **map()方法将对应Optional< Funcation >函数式接口中的对象，进行二次运算，封装成新的对象然后返回在Optional中** 源码:
 
 ```java
-    public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
-        Objects.requireNonNull(mapper);
-        if (!isPresent())
-            return empty();
-        else {
-            return Objects.requireNonNull(mapper.apply(value));
-        }
+public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
+    Objects.requireNonNull(mapper);
+    if (!isPresent())
+        return empty();
+    else {
+        return Objects.requireNonNull(mapper.apply(value));
     }
+}
 ```
 
 实例：
 
 ```java
-        Person person=new Person();
-        person.setAge(2);
-        Optional<Object> optName = Optional.ofNullable(person).map(p -> Optional.ofNullable(p.getName()).orElse("name为空"));
+Person person=new Person();
+person.setAge(2);
+Optional<Object> optName = Optional.ofNullable(person)
+    .map(p -> Optional.ofNullable(p.getName())
+         .orElse("name为空"));
 ```
 
 #### 2.8 Optional.orElse()方法(为空返回对象)
@@ -264,18 +266,18 @@ public final class Optional<T> {
 **常用方法之一，这个方法意思是如果包装对象为空的话，就执行orElse方法里的value，如果非空，则返回写入对象** 源码:
 
 ```java
-    public T orElse(T other) {
+public T orElse(T other) {
     //如果非空，返回value，如果为空，返回other
-        return value != null ? value : other;
-    }
+    return value != null ? value : other;
+}
 ```
 
 实例：
 
 ```java
-        Person person1=new Person();
-        person.setAge(2);
-        Optional.ofNullable(person).orElse(new Person("小明", 2));
+Person person1=new Person();
+person.setAge(2);
+Optional.ofNullable(person).orElse(new Person("小明", 2));
 ```
 
 #### 2.9 Optional.orElseGet()方法(为空返回Supplier对象)
@@ -283,17 +285,17 @@ public final class Optional<T> {
 **这个与orElse很相似，入参不一样，入参为Supplier对象，为空返回传入对象的.get()方法，如果非空则返回当前对象** 源码:
 
 ```java
-    public T orElseGet(Supplier<? extends T> other) {
-        return value != null ? value : other.get();
-    }
+public T orElseGet(Supplier<? extends T> other) {
+    return value != null ? value : other.get();
+}
 ```
 
 实例：
 
 ```java
-         Optional<Supplier<Person>> sup=Optional.ofNullable(Person::new);
-        //调用get()方法，此时才会调用对象的构造方法，即获得到真正对象
-         Optional.ofNullable(person).orElseGet(sup.get());
+Optional<Supplier<Person>> sup=Optional.ofNullable(Person::new);
+//调用get()方法，此时才会调用对象的构造方法，即获得到真正对象
+Optional.ofNullable(person).orElseGet(sup.get());
 ```
 
 **说真的对于Supplier对象我也懵逼了一下，去网上简单查阅才得知 Supplier也是创建对象的一种方式,简单来说，Suppiler是一个接口，是类似Spring的懒加载，声明之后并不会占用内存，只有执行了get()方法之后，才会调用构造方法创建出对象 创建对象的语法的话就是`Supplier<Person> supPerson= Person::new;`** 需要使用时`supPerson.get()`即可
@@ -303,21 +305,21 @@ public final class Optional<T> {
 **这个我个人在实战中也经常用到这个方法，方法作用的话就是如果为空，就抛出你定义的异常，如果不为空返回当前对象，在实战中所有异常肯定是要处理好的，为了代码的可读性** 源码：
 
 ```java
-    public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
-        if (value != null) {
-            return value;
-        } else {
-            throw exceptionSupplier.get();
-        }
+public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
+    if (value != null) {
+        return value;
+    } else {
+        throw exceptionSupplier.get();
     }
+}
 ```
 
 实例： 这个就贴实战源码了
 
 ```java
 //简单的一个查询
-        Member member = memberService.selectByPhone(request.getPhone());
-        Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询的相关数据"));
+Member member = memberService.selectByPhone(request.getPhone());
+Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询的相关数据"));
 ```
 
 #### 2.11 相似方法进行对比分析
@@ -337,17 +339,17 @@ public final class Optional<T> {
 场景1： 在service层中 查询一个对象，返回之后判断是否为空并做处理
 
 ```java
-        //查询一个对象
-        Member member = memberService.selectByIdNo(request.getCertificateNo());
-        //使用ofNullable加orElseThrow做判断和操作
-        Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询的相关数据"));
+//查询一个对象
+Member member = memberService.selectByIdNo(request.getCertificateNo());
+//使用ofNullable加orElseThrow做判断和操作
+Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询的相关数据"));
 ```
 
 场景2： 我们可以在dao接口层中定义返回值时就加上Optional 例如： 我使用的是jpa，其他也同理
 
 ```java
 public interface LocationRepository extends JpaRepository<Location, String> {
-Optional<Location> findLocationById(String id);
+    Optional<Location> findLocationById(String id);
 }
 ```
 
@@ -355,24 +357,24 @@ Optional<Location> findLocationById(String id);
 
 ```java
 public TerminalVO findById(String id) {
-//这个方法在dao层也是用了Optional包装了
-        Optional<Terminal> terminalOptional = terminalRepository.findById(id);
-        //直接使用isPresent()判断是否为空
-        if (terminalOptional.isPresent()) {
+    //这个方法在dao层也是用了Optional包装了
+    Optional<Terminal> terminalOptional = terminalRepository.findById(id);
+    //直接使用isPresent()判断是否为空
+    if (terminalOptional.isPresent()) {
         //使用get()方法获取对象值
-            Terminal terminal = terminalOptional.get();
-            //在实战中，我们已经免去了用set去赋值的繁琐，直接用BeanCopy去赋值
-            TerminalVO terminalVO = BeanCopyUtils.copyBean(terminal, TerminalVO.class);
-            //调用dao层方法返回包装后的对象
-            Optional<Location> location = locationRepository.findLocationById(terminal.getLocationId());
-            if (location.isPresent()) {
-                terminalVO.setFullName(location.get().getFullName());
-            }
-            return terminalVO;
+        Terminal terminal = terminalOptional.get();
+        //在实战中，我们已经免去了用set去赋值的繁琐，直接用BeanCopy去赋值
+        TerminalVO terminalVO = BeanCopyUtils.copyBean(terminal, TerminalVO.class);
+        //调用dao层方法返回包装后的对象
+        Optional<Location> location = locationRepository.findLocationById(terminal.getLocationId());
+        if (location.isPresent()) {
+            terminalVO.setFullName(location.get().getFullName());
         }
-        //不要忘记抛出异常
-        throw new ServiceException("该终端不存在");
+        return terminalVO;
     }
+    //不要忘记抛出异常
+    throw new ServiceException("该终端不存在");
+}
 ```
 
 **实战场景还有很多，包括return时可以判断是否返回当前值还是跳转到另一个方法体中，什么的还有很多，如果大家没有经验的小伙伴还想进行学习，可以评论一下我会回复大家**
@@ -387,7 +389,7 @@ person.setName("");
 persion.setAge(2);
 //普通判断
 if(StringUtils.isNotBlank(person.getName())){
-  //名称不为空执行代码块
+    //名称不为空执行代码块
 }
 //使用Optional做判断
 Optional.ofNullable(person).map(p -> p.getName()).orElse("name为空");
@@ -400,3 +402,93 @@ Optional.ofNullable(person).map(p -> p.getName()).orElse("name为空");
 首先增加了三个方法: **or()、ifPresentOrElse() 和 stream()。** **or()** 与orElse等方法相似，如果对象不为空返回对象，如果为空则返回or()方法中预设的值。 **ifPresentOrElse()** 方法有两个参数：一个 Consumer 和一个 Runnable。如果对象不为空，会执行 Consumer 的动作，否则运行 Runnable。相比ifPresent（）多了OrElse判断。 **stream()**将Optional转换成stream，如果有值就返回包含值的stream，如果没值，就返回空的stream。
 
 因为这个jdk1.9的Optional具体我没有测试，同时也发现有蛮好的文章已经也能让大家明白jdk1.9的option的优化,我就不深入去说了。
+
+
+
+## 6.更多用法
+
+#### 例一
+
+在函数方法中
+
+以前写法
+
+```java
+public String getCity(User user)  throws Exception{
+    if(user!=null){
+        if(user.getAddress()!=null){
+            Address address = user.getAddress();
+            if(address.getCity()!=null){
+                return address.getCity();
+            }
+        }
+    }
+    throw new Excpetion("取值错误");
+}
+```
+
+JAVA8写法
+
+```java
+public String getCity(User user) throws Exception{
+    return Optional.ofNullable(user)
+        .map(u-> u.getAddress())
+        .map(a->a.getCity())
+        .orElseThrow(()->new Exception("取指错误"));
+}
+```
+
+#### 例二
+
+比如，在主程序中
+
+以前写法
+
+```java
+if(user!=null){
+    dosomething(user);
+}
+```
+
+JAVA8写法
+
+```java
+Optional.ofNullable(user)
+    .ifPresent(u->{
+        dosomething(u);
+    });
+```
+
+#### 例三
+
+以前写法
+
+```java
+public User getUser(User user) throws Exception{
+    if(user!=null){
+        String name = user.getName();
+        if("zhangsan".equals(name)){
+            return user;
+        }
+    }else{
+        user = new User();
+        user.setName("zhangsan");
+        return user;
+    }
+}
+```
+
+java8写法
+
+```java
+public User getUser(User user) {
+    return Optional.ofNullable(user)
+        .filter(u->"zhangsan".equals(u.getName()))
+        .orElseGet(()-> {
+            User user1 = new User();
+            user1.setName("zhangsan");
+            return user1;
+        });
+}
+```
+

@@ -897,3 +897,45 @@ ifconfig # 不是ipconfig
 
 `service ssh start`
 
+
+
+## 新特性 2023-09-19 11:21
+
+微软今天属于是史诗级更新 WSL2 到 2.0 版本，带来了以下特性：
+
+1. 支持自动回收内存
+2. 支持自动释放 WSL2 虚拟硬盘空间
+3. 支持和 Windows 使用相同的网络（镜像网络）
+4. 支持 DNS Tunneling
+5. 支持 Windows 设置的代理
+6. 支持 Windows 防火墙
+7. 支持 Multicast
+
+详细可以前往：[Windows Subsystem for Linux September 2023 update](https://devblogs.microsoft.com/commandline/windows-subsystem-for-linux-september-2023-update/)
+
+开启方法：
+
+1. 更新系统版本到 23H2 （目前还没发正式版，可以考虑加入 Windows Insider 的 Release Preview 或者 Beta 预览版通道）。或者如果不想加入预览版计划的话你也可以等几周，23H2 也快发布正式版了。
+2. `wsl --update --pre-release` 把 WSL2 更新到 2.0.0 或以上版本
+3. 在 `%userprofile%\.wslconfig` 中写入以下内容然后保存：
+
+```ini
+[experimental]
+autoMemoryReclaim=gradual # 可以在 gradual 、dropcache 、disabled 之间选择
+networkingMode=mirrored
+dnsTunneling=true
+firewall=true
+autoProxy=true
+sparseVhd=true
+```
+
+4. 然后运行 `wsl --manage 发行版名字 --set-sparse true` 启用稀疏 VHD 允许 WSL2 的硬盘空间自动回收，比如 `wsl --manage Ubuntu --set-sparse true`
+
+然后你会发现，WSL2 和 Windows 主机的网络互通而且 IP 地址相同了，还支持 IPv6 了，并且从外部（比如局域网）可以同时访问 WSL2 和 Windows 的网络。这波升级彻底带回以前 WSL1 那时候的无缝网络体验了，并且 Windows 防火墙也能过滤 WSL 里的包了，再也不需要什么桥接网卡、端口转发之类的操作了。并且 WSL2 的内存占用和硬盘空间都可以自动回收了！
+
+另外，使用 `VSCode - WSL` 插件的，建议去 VSCode 设置里把自动端口转发关掉（`Remote: Auto Forward Ports`），避免冲突，因为 WSL2 更新之后新的网络已经是和你的 Windows 使用相同网络了，不再需要端口转发了。
+
+最后，如果你在 WSL 里使用 docker，那需要将 `autoMemoryReclaim` 配置为 `dropcache` 或者 `disabled`，然后在 `/etc/docker/daemon.json` 里添加一句 `"iptables": false` ，否则你可能无法正常使用 docker。
+
+
+

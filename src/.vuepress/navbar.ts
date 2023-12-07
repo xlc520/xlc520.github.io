@@ -2,6 +2,8 @@ import { navbar } from "vuepress-theme-hope";
 
 export default navbar([
   { text: 'Home', link: '/' , icon: "home"},
+  { text: '开发', link: '/dev/' ,icon:"java" },
+  { text: 'Linux', link: '/linux/' ,icon:"linux"},
   { text: '学习', icon: "note", prefix: "/study/",
     children:[
       {
@@ -18,8 +20,6 @@ export default navbar([
   },
   { text: 'AI', link: '/ai/' ,icon: "android"},
   { text: '算法', link: '/algorithm/' ,icon: "shell"},
-  { text: '开发', link: '/dev/' ,icon:"java" },
-  { text: 'Linux', link: '/linux/' ,icon:"linux"},
   { text: '脚本', link: '/script/' ,icon:"script"},
   { text: '工具', link: '/tools/' ,icon:"tool"},
   { text: '源码', link: '/source_code/' ,icon:"code"},

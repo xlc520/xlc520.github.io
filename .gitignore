@@ -3,7 +3,7 @@ posts
 demo
 blogImage
 node_modules/
-
+.idea
 # Build files
 packages/*/lib/
 pnpm-lock.yaml
