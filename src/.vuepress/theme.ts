@@ -27,7 +27,7 @@ export default hopeTheme({
 
   // sidebar
   sidebar,
-
+  // 页脚
   footer: "两情若是久长时，又岂在朝朝暮暮",
 
   displayFooter: true,
@@ -46,7 +46,6 @@ export default hopeTheme({
 
   prevLink: true,  //是否在页面底部显示上一篇链接
   nextLink: true,  //是否在页面底部显示下一篇链接
-
 
   blog: {
     // 博主姓名
@@ -122,7 +121,7 @@ export default hopeTheme({
       excerptLength:100,
     },
     components: {
-      components: ["VPCard"]
+      components: ["Badge", "VPCard"]
     },
     // comment: {
     //   // You should generate and use your own comment service
@@ -143,49 +142,14 @@ export default hopeTheme({
     mdEnhance: {
       align: true,
       attrs: true,
-      // card: true,
-
-      // install chart.js before enabling it
-      // chart: true,
-
       codetabs: true,
+      component: true,
       demo: true,
-
-      // install echarts before enabling it
-      // echarts: true,
-
       figure: true,
-
-      // install flowchart.ts before enabling it
-      // flowchart: true,
-
-      // gfm requires mathjax-full to provide tex support
-      // gfm: true,
-
       imgLazyload: true,
       imgSize: true,
       include: true,
-
-      // install katex before enabling it
-      // katex: true,
-
-      // install mathjax-full before enabling it
-      // mathjax: true,
-
       mark: true,
-
-      // install mermaid before enabling it
-      // mermaid: true,
-
-      playground: {
-        presets: ["ts", "vue"],
-      },
-
-      // install reveal.js before enabling it
-      // revealJs: {
-      //   plugins: ["highlight", "math", "search", "notes", "zoom"],
-      // },
-
       stylize: [
         {
           matcher: "Recommended",
@@ -204,65 +168,143 @@ export default hopeTheme({
       tabs: true,
       vPre: true,
 
-      // install @vue/repl before enabling it
-      // vuePlayground: true,
-    },
+      // 在启用之前安装 chart.js
+      // chart: true,
 
+      // insert component easily
+
+      // 在启用之前安装 echarts
+      // echarts: true,
+
+      // 在启用之前安装 flowchart.ts
+      // flowchart: true,
+
+      // gfm requires mathjax-full to provide tex support
+      // gfm: true,
+
+      // 在启用之前安装 katex
+      // katex: true,
+
+      // 在启用之前安装 mathjax-full
+      // mathjax: true,
+
+      // 在启用之前安装 mermaid
+      // mermaid: true,
+
+      // playground: {
+      //   presets: ["ts", "vue"],
+      // },
+
+      // 在启用之前安装 reveal.js
+      // revealJs: {
+      //   plugins: ["highlight", "math", "search", "notes", "zoom"],
+      // },
+
+      // 在启用之前安装 @vue/repl
+      // vuePlayground: true,
+
+      // install sandpack-vue3 before enabling it
+      // sandpack: true,
+    },
+    searchPro: {
+      // 索引全部内容
+      indexContent: false,
+      // 是否自动提示搜索建议
+      autoSuggestions: true,
+      hotKeys: [{ key: "k", ctrl: true }, { key: "/", ctrl: true }], //热键
+      // 存储搜索结果历史的最大数量
+      resultHistoryCount: 15,
+      // 存储搜索查询词历史的最大数量
+      queryHistoryCount: 15,
+      // 结束输入到开始搜索的延时
+      searchDelay: 500,
+      // 是否在开发服务器中中启用实时热重载
+      hotReload: true,
+      // 结果排序策略
+      sortStrategy: "max",
+      // 为分类和标签添加索引
+      customFields: [
+        {
+          getter: (page) => page.frontmatter.category,
+          formatter: {
+            "/": "分类：$content",
+          },
+        },
+        {
+          getter: (page) => page.frontmatter.tag,
+          formatter: {
+            "/": "标签：$content",
+          },
+        },
+        {
+          // name: "author",
+          getter: (page) => page.frontmatter.author,
+          formatter: "作者：$content",
+        },
+        // {
+        //   // name: "updateTime",
+        //   getter: (page) => page.data.git?.updateTime.toLocaleString(),
+        //   formatter: {
+        //     "/": "更新时间：$content",
+        //   },
+        // },
+      ],
+    },
     // uncomment these if you want a PWA
-    // pwa: {
-    //   favicon: "/favicon.ico",
-    //   cacheHTML: true,
-    //   cachePic: true,
-    //   appendBase: true,
-    //   apple: {
-    //     icon: "/assets/icon/apple-icon-152.png",
-    //     statusBarColor: "black",
-    //   },
-    //   msTile: {
-    //     image: "/assets/icon/ms-icon-144.png",
-    //     color: "#ffffff",
-    //   },
-    //   manifest: {
-    //     icons: [
-    //       {
-    //         src: "/assets/icon/chrome-mask-512.png",
-    //         sizes: "512x512",
-    //         purpose: "maskable",
-    //         type: "image/png",
-    //       },
-    //       {
-    //         src: "/assets/icon/chrome-mask-192.png",
-    //         sizes: "192x192",
-    //         purpose: "maskable",
-    //         type: "image/png",
-    //       },
-    //       {
-    //         src: "/assets/icon/chrome-512.png",
-    //         sizes: "512x512",
-    //         type: "image/png",
-    //       },
-    //       {
-    //         src: "/assets/icon/chrome-192.png",
-    //         sizes: "192x192",
-    //         type: "image/png",
-    //       },
-    //     ],
-    //     shortcuts: [
-    //       {
-    //         name: "Demo",
-    //         short_name: "Demo",
-    //         url: "/demo/",
-    //         icons: [
-    //           {
-    //             src: "/assets/icon/guide-maskable.png",
-    //             sizes: "192x192",
-    //             purpose: "maskable",
-    //             type: "image/png",
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //   },
-    // },
+    pwa: {
+      favicon: "/favicon.ico",
+      cacheHTML: true,
+      cachePic: true,
+      appendBase: true,
+      // apple: {
+      //   icon: "/assets/icon/apple-icon-152.png",
+      //   statusBarColor: "black",
+      // },
+      // msTile: {
+      //   image: "/assets/icon/ms-icon-144.png",
+      //   color: "#ffffff",
+      // },
+      // manifest: {
+      //   icons: [
+      //     {
+      //       src: "/assets/icon/chrome-mask-512.png",
+      //       sizes: "512x512",
+      //       purpose: "maskable",
+      //       type: "image/png",
+      //     },
+      //     {
+      //       src: "/assets/icon/chrome-mask-192.png",
+      //       sizes: "192x192",
+      //       purpose: "maskable",
+      //       type: "image/png",
+      //     },
+      //     {
+      //       src: "/assets/icon/chrome-512.png",
+      //       sizes: "512x512",
+      //       type: "image/png",
+      //     },
+      //     {
+      //       src: "/assets/icon/chrome-192.png",
+      //       sizes: "192x192",
+      //       type: "image/png",
+      //     },
+      //   ],
+        // shortcuts: [
+        //   {
+        //     name: "Demo",
+        //     short_name: "Demo",
+        //     url: "/demo/",
+        //     icons: [
+        //       {
+        //         src: "/assets/icon/guide-maskable.png",
+        //         sizes: "192x192",
+        //         purpose: "maskable",
+        //         type: "image/png",
+        //       },
+        //     ],
+        //   },
+        // ],
+      // },
+    },
   },
 });

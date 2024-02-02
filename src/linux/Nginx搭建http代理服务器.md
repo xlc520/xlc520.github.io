@@ -138,13 +138,39 @@ make upgrade
 # load_module module/ngx_http_proxy_connect_module.so;
 
 http {
+
+	server {
+        resolver 114.114.114.114 8.8.8.8;
+        resolver_timeout 10s;
+        listen 82;
+        proxy_connect;                          #启用 CONNECT HTTP方法
+        #proxy_connect_allow  443 80;  #指定代理CONNECT方法可以连接的端口号或范围的列表,all;#支持不同端口https
+        proxy_connect_allow            all;		#支持不同端口https
+        proxy_connect_connect_timeout  20s;     #定义客户端与代理服务器建立连接的超时时间
+        proxy_connect_read_timeout     20s;     #定义客户端从代理服务器读取响应的超时时间
+        proxy_connect_send_timeout     20s;     #设置客户端将请求传输到代理服务器的超时时间
+        proxy_connect_data_timeout     10s;
+        location / {
+             proxy_pass $scheme://$http_host$request_uri;
+             proxy_set_header HOST $http_host;
+            proxy_buffers 256 4k;
+            proxy_max_temp_file_size 0k; 
+            proxy_connect_timeout 30;
+            proxy_send_timeout 60;
+            proxy_read_timeout 60;
+            proxy_next_upstream error timeout invalid_header http_502;
+        }
+   }
+   
     server {
         listen 8080;
         server_name localhost;
         resolver 114.114.114.114 ipv6=off;
         proxy_connect;
         proxy_connect_allow 443 80;
-        proxy_connect_connect_timeout  10s;
+        proxy_connect_connect_timeout  20s;     #定义客户端与代理服务器建立连接的超时时间
+        proxy_connect_read_timeout     20s;     #定义客户端从代理服务器读取响应的超时时间
+        proxy_connect_send_timeout     20s;     #设置客户端将请求传输到代理服务器的超时时间
         proxy_connect_data_timeout     10s;
         # 指定代理日志
         access_log logs/access_proxy.log main;
@@ -156,6 +182,31 @@ http {
 ```
 
 此时访问`https://www.baidu.com`，在`access_proxy.log`产生如下日志，说明https代理成功。
+
+
+
+需要出网服务器配置
+打开/etc/profile文件，在最下面添加如下配置即可
+
+```
+#http代理，ip是nginx的ip，端口是步骤4配置的监听端口
+export http_proxy="http://ip:82"
+#https代理
+export https_proxy="http://ip:82"
+#不需要代理的ip,访问这些ip，不会走代理
+export no_proxy="127.0.0.1, localhost"
+```
+
+测试
+
+```
+curl http://www.baidu.com
+curl https://www.baidu.com
+```
+
+访问成功就恭喜你了
+
+
 
 ## **3.Nginx反向代理（http）**
 

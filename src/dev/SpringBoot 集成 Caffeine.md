@@ -14,6 +14,12 @@ icon: java
 
 # SpringBoot 集成 Caffeine
 
+其他参考：
+
+https://www.cnblogs.com/rickiyang/p/11074158.html
+
+
+
 **环境配置：**
 
 - JDK 版本：1.8
