@@ -1,8 +1,8 @@
 ---
 author: xlc520
-title: Java
-description: Java
-date: 2022-01-05
+title: Java性能优化的50个细节
+description: 
+date: 2024-01-30
 category: Java
 tag: Java
 article: true
