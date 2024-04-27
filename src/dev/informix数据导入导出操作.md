@@ -1,13 +1,13 @@
 ---
 author: xlc520
 title: informix数据导入导出操作
-excerpt: 
-description: 
+excerpt: informix数据导入导出操作
+description: informix数据导入导出操作
 date: 2023-04-06
 category: Java
-tag: 
-- Java
-- informix
+tag:
+  - Java
+  - informix
 article: true
 timeline: true
 icon: java

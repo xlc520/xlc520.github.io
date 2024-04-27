@@ -1,7 +1,7 @@
 ---
 author: xlc520
 title: 50条MySQL常用脚本
-excerpt: 
+excerpt: 50条MySQL常用脚本
 description: 50条MySQL常用脚本
 date: 2024-04-20
 category: Java
