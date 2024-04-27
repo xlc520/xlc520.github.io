@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: JDK1.8 的 Lambda、Stream、LocalDateTime
+excerpt: 
 description: 
 date: 2023-09-28
 category: Java
@@ -10,17 +11,16 @@ timeline: true
 icon: java
 ---
 
-
-
 # JDK1.8 的 Lambda、Stream、LocalDateTime
 
 ## Lambda
 
-### Lambda介绍
+### Lambda 介绍
 
-> Lambda 表达式(lambda expression)是一个匿名函数，Lambda表达式基于数学中的λ演算得名，直接对应于其中的lambda抽象(lambda abstraction)，是一个匿名函数，即没有函数名的函数。
+> Lambda 表达式(lambda expression)是一个匿名函数，Lambda 表达式基于数学中的λ演算得名，直接对应于其中的 lambda 抽象(lambda
+> abstraction)，是一个匿名函数，即没有函数名的函数。
 
-### Lambda表达式的结构
+### Lambda 表达式的结构
 
 - 一个 Lambda 表达式可以有零个或多个参数
 - 参数的类型既可以明确声明，也可以根据上下文来推断。例如：(int a)与(a)效果相同
@@ -33,9 +33,9 @@ icon: java
 
 ### Lambda 表达式的使用
 
-下面我们先使用一个简单的例子来看看Lambda的效果吧。
+下面我们先使用一个简单的例子来看看 Lambda 的效果吧。
 
-比如我们对Map 的遍历 传统方式遍历如下:
+比如我们对 Map 的遍历 传统方式遍历如下:
 
 ```java
   Map<String, String> map = new HashMap<>();
@@ -50,7 +50,7 @@ icon: java
   }
 ```
 
-使用Lambda进行遍历:
+使用 Lambda 进行遍历:
 
 ```java
   System.out.println("map拉姆达表达式遍历:");
@@ -59,7 +59,7 @@ icon: java
  });
 ```
 
-List也同理，不过List还可以通过双冒号运算符遍历:
+List 也同理，不过 List 还可以通过双冒号运算符遍历:
 
 ```java
   List<String> list = new ArrayList<String>();
@@ -100,7 +100,7 @@ List也同理，不过List还可以通过双冒号运算符遍历:
  dddd
 ```
 
-Lambda 除了在for循环遍历中使用外，它还可以代替匿名的内部类。比如下面这个例子的线程创建:
+Lambda 除了在 for 循环遍历中使用外，它还可以代替匿名的内部类。比如下面这个例子的线程创建:
 
 ```java
  //使用普通的方式创建
@@ -115,37 +115,47 @@ Lambda 除了在for循环遍历中使用外，它还可以代替匿名的内部�
  Runnable r2 = ()-> System.out.println("拉姆达方式创建!");
 ```
 
-注: 这个例子中使用Lambda表达式的时候，编译器会自动推断：根据线程类的构造函数签名 Runnable r { }，将该 Lambda 表达式赋 Runnable 接口。
+注: 这个例子中使用 Lambda 表达式的时候，编译器会自动推断：根据线程类的构造函数签名 Runnable r { }，将该 Lambda 表达式赋
+Runnable 接口。
 
-**Lambda 表达式与匿名类的区别**使用匿名类与 Lambda 表达式的一大区别在于关键词的使用。对于匿名类，关键词 this 解读为匿名类，而对于 Lambda 表达式，关键词 this 解读为写就 Lambda 的外部类。
+**Lambda 表达式与匿名类的区别**使用匿名类与 Lambda 表达式的一大区别在于关键词的使用。对于匿名类，关键词 this 解读为匿名类，而对于
+Lambda 表达式，关键词 this 解读为写就 Lambda 的外部类。
 
-### Lambda表达式使用注意事项
+### Lambda 表达式使用注意事项
 
-> Lambda虽然简化了代码的编写，但同时也减少了可读性。
+> Lambda 虽然简化了代码的编写，但同时也减少了可读性。
 
 ## Stream
 
-### Stream介绍
+### Stream 介绍
 
-> Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。Stream API可以极大提高Java程序员的生产力，让程序员写出高效率、干净、简洁的代码。这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。
+> Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。Stream API 可以极大提高
+> Java 程序员的生产力，让程序员写出高效率、干净、简洁的代码。这种风格将要处理的元素集合看作一种流， 流在管道中传输，
+> 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。
 
-**Stream特性：**
+**Stream 特性：**
 
-- 不是数据结构：它没有内部存储，它只是用操作管道从 source（数据结构、数组、generator function、IO channel）抓取数据。它也绝不修改自己所封装的底层数据结构的数据。例如 Stream 的 filter 操作会产生一个不包含被过滤元素的新 Stream，而不是从 source 删除那些元素。
+- 不是数据结构：它没有内部存储，它只是用操作管道从 source（数据结构、数组、generator function、IO
+  channel）抓取数据。它也绝不修改自己所封装的底层数据结构的数据。例如 Stream 的 filter 操作会产生一个不包含被过滤元素的新
+  Stream，而不是从 source 删除那些元素。
 - 不支持索引访问：但是很容易生成数组或者 List 。
 - 惰性化：很多 Stream 操作是向后延迟的，一直到它弄清楚了最后需要多少数据才会开始。Intermediate 操作永远是惰性化的。
 - 并行能力。当一个 Stream 是并行化的，就不需要再写多线程代码，所有对它的操作会自动并行进行的。
-- 可以是无限的：集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream 进行运算并很快完成。
+- 可以是无限的：集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream
+  进行运算并很快完成。
 - **注意事项：所有 Stream 的操作必须以 lambda 表达式为参数。**
 
 **Stream 流操作类型：**
 
-- Intermediate：一个流可以后面跟随零个或多个 intermediate 操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。
-- Terminal：一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。Terminal操作的执行，才会真正开始流的遍历，并且会生成一个结果，或者一个 side effect。
+- Intermediate：一个流可以后面跟随零个或多个 intermediate
+  操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。
+- Terminal：一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。Terminal
+  操作的执行，才会真正开始流的遍历，并且会生成一个结果，或者一个 side effect。
 
-### Stream使用
+### Stream 使用
 
-这里我们依旧使用一个简单示例来看看吧。在开发中，我们有时需要对一些数据进行过滤，如果是传统的方式，我们需要对这批数据进行遍历过滤，会显得比较繁琐，如果使用steam流方式的话，那么可以很方便的进行处理。
+这里我们依旧使用一个简单示例来看看吧。在开发中，我们有时需要对一些数据进行过滤，如果是传统的方式，我们需要对这批数据进行遍历过滤，会显得比较繁琐，如果使用
+steam 流方式的话，那么可以很方便的进行处理。
 
 首先通过普通的方式进行过滤:
 
@@ -161,7 +171,7 @@ List<String> list = Arrays.asList("张三", "李四", "王五", "xuwujing");
  System.out.println("过滤之后:" + result);
 ```
 
-使用Steam方式进行过滤：
+使用 Steam 方式进行过滤：
 
 ```java
 List<String> result2 = list.stream().filter(str -> !"李四".equals(str)).collect(Collectors.toList());
@@ -176,9 +186,9 @@ System.out.println("stream 过滤之后:" + result2);
 stream 过滤之后:[张三, 王五, xuwujing]
 ```
 
-是不是很简洁和方便呢。其实Stream流还有更多的使用方法，filter只是其中的一角而已。那么在这里我们就来学习了解下这些用法吧。
+是不是很简洁和方便呢。其实 Stream 流还有更多的使用方法，filter 只是其中的一角而已。那么在这里我们就来学习了解下这些用法吧。
 
-**1.构造Stream流的方式**
+**1.构造 Stream 流的方式**
 
 ```java
  Stream stream = Stream.of("a", "b", "c");
@@ -189,9 +199,10 @@ stream 过滤之后:[张三, 王五, xuwujing]
  stream = list.stream();
 ```
 
-**2.Stream流的之间的转换**
+**2.Stream 流的之间的转换**
 
-注意:一个Stream流只可以使用一次，这段代码为了简洁而重复使用了数次，因此会抛出 stream has already been operated upon or closed 异常。
+注意:一个 Stream 流只可以使用一次，这段代码为了简洁而重复使用了数次，因此会抛出 stream has already been operated upon or
+closed 异常。
 
 ```java
 try {
@@ -212,9 +223,9 @@ try {
  }
 ```
 
-**3.Stream流的map使用**
+**3.Stream 流的 map 使用**
 
-map方法用于映射每个元素到对应的结果，一对一。
+map 方法用于映射每个元素到对应的结果，一对一。
 
 示例一：转换大写
 
@@ -245,9 +256,9 @@ map方法用于映射每个元素到对应的结果，一对一。
  // [1, 4, 9, 16, 25]
 ```
 
-**4.Stream流的filter使用**
+**4.Stream 流的 filter 使用**
 
-filter方法用于通过设置的条件过滤出元素。
+filter 方法用于通过设置的条件过滤出元素。
 
 示例二：通过与 findAny 得到 if/else 的值
 
@@ -299,11 +310,11 @@ flatMap 方法用于映射每个元素到对应的结果，一对多。
  // future
 ```
 
-**6.Stream流的limit使用**
+**6.Stream 流的 limit 使用**
 
 limit 方法用于获取指定数量的流。
 
-示例一：获取前n条数的数据
+示例一：获取前 n 条数的数据
 
 ```java
  Random rd = new Random();
@@ -315,9 +326,9 @@ limit 方法用于获取指定数量的流。
  // 1977868798
 ```
 
-示例二：结合skip使用得到需要的数据
+示例二：结合 skip 使用得到需要的数据
 
-skip表示的是扔掉前n个元素。
+skip 表示的是扔掉前 n 个元素。
 
 ```java
 List<User> list9 = new ArrayList<User>();
@@ -338,9 +349,9 @@ List<User> list9 = new ArrayList<User>();
 
 注:User实体类中 getName 方法会打印姓名。
 
-**7.Stream流的sort使用**
+**7.Stream 流的 sort 使用**
 
-sorted方法用于对流进行升序排序。
+sorted 方法用于对流进行升序排序。
 
 示例一：随机取值排序
 
@@ -371,9 +382,9 @@ tips: 先获取在排序效率会更高!
  //优化排序之后的数据:[{"id":1,"name":"pancm1"}, {"id":2,"name":"pancm2"}, {"id":3,"name":"pancm3"}]
 ```
 
-**8.Stream流的peek使用**
+**8.Stream 流的 peek 使用**
 
-peek对每个元素执行操作并返回一个新的Stream
+peek 对每个元素执行操作并返回一个新的 Stream
 
 示例: 双重操作
 
@@ -388,7 +399,7 @@ peek对每个元素执行操作并返回一个新的Stream
  // 转换之后: FOUR
 ```
 
-**9.Stream流的parallel使用**
+**9.Stream 流的 parallel 使用**
 
 parallelStream 是流并行处理程序的代替方法。
 
@@ -401,7 +412,7 @@ parallelStream 是流并行处理程序的代替方法。
  System.out.println("空字符串的个数:"+count);
 ```
 
-**10.Stream流的max/min/distinct使用**
+**10.Stream 流的 max/min/distinct 使用**
 
 示例一：得到最大最小值
 
@@ -425,7 +436,7 @@ parallelStream 是流并行处理程序的代替方法。
  //去重复之后:[day, good, study, up]
 ```
 
-**11.Stream流的Match使用**
+**11.Stream 流的 Match 使用**
 
 - allMatch：Stream 中全部元素符合则返回 true ;
 - anyMatch：Stream 中只要有一个元素符合则返回 true;
@@ -445,7 +456,7 @@ parallelStream 是流并行处理程序的代替方法。
  // 是否没有一个大于3的:false
 ```
 
-**12.Stream流的reduce使用**
+**12.Stream 流的 reduce 使用**
 
 reduce 主要作用是把 Stream 元素组合起来进行操作。
 
@@ -485,9 +496,10 @@ System.out.println("过滤和字符串连接:" + concat);
  //过滤和字符串连接:ace
 ```
 
-**13.Stream流的iterate使用**
+**13.Stream 流的 iterate 使用**
 
-> iterate 跟 reduce 操作很像，接受一个种子值，和一个UnaryOperator（例如 f）。然后种子值成为 Stream 的第一个元素，f(seed) 为第二个，f(f(seed)) 第三个，以此类推。在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。
+> iterate 跟 reduce 操作很像，接受一个种子值，和一个 UnaryOperator（例如 f）。然后种子值成为 Stream 的第一个元素，f(seed)
+> 为第二个，f(f(seed)) 第三个，以此类推。在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。
 
 示例:生成一个等差队列
 
@@ -498,9 +510,9 @@ System.out.println("过滤和字符串连接:" + concat);
  // 2 4 6 8 10
 ```
 
-**14.Stream流的 Supplier 使用**
+**14.Stream 流的 Supplier 使用**
 
-通过实现Supplier类的方法可以自定义流计算规则。
+通过实现 Supplier 类的方法可以自定义流计算规则。
 
 示例：随机获取两条用户信息
 
@@ -535,7 +547,7 @@ class UserSupplier implements Supplier<User> {
 }
 ```
 
-**15.Stream流的groupingBy/partitioningBy使用**
+**15.Stream 流的 groupingBy/partitioningBy 使用**
 
 - groupingBy：分组排序；
 - partitioningBy：分区排序。
@@ -594,9 +606,9 @@ class UserSupplier implements Supplier<User> {
  }
 ```
 
-**16.Stream流的summaryStatistics使用**
+**16.Stream 流的 summaryStatistics 使用**
 
-IntSummaryStatistics 用于收集统计信息(如count、min、max、sum和average)的状态对象。
+IntSummaryStatistics 用于收集统计信息(如 count、min、max、sum 和 average)的状态对象。
 
 示例:得到最大、最小、之和以及平均数。
 
@@ -615,13 +627,15 @@ IntSummaryStatistics 用于收集统计信息(如count、min、max、sum和avera
  // 平均数 : 5.0
 ```
 
-Stream 介绍就到这里了，JDK1.8中的Stream流其实还有很多很多用法，更多的用法则需要大家去查看JDK1.8的API文档了。
+Stream 介绍就到这里了，JDK1.8 中的 Stream 流其实还有很多很多用法，更多的用法则需要大家去查看 JDK1.8 的 API 文档了。
 
 ## LocalDateTime
 
 ### 介绍
 
-> JDK1.8除了新增了lambda表达式、stream流之外，它还新增了全新的日期时间API。在JDK1.8之前，Java处理日期、日历和时间的方式一直为社区所诟病，将 java.util.Date设定为可变类型，以及SimpleDateFormat的非线程安全使其应用非常受限。因此推出了java.time包，该包下的所有类都是不可变类型而且线程安全。
+> JDK1.8 除了新增了 lambda 表达式、stream 流之外，它还新增了全新的日期时间 API。在 JDK1.8 之前，Java 处理日期、日历和时间的方式一直为社区所诟病，将
+> java.util.Date 设定为可变类型，以及 SimpleDateFormat 的非线程安全使其应用非常受限。因此推出了 java.time
+> 包，该包下的所有类都是不可变类型而且线程安全。
 
 ### 关键类
 
@@ -629,13 +643,13 @@ Stream 介绍就到这里了，JDK1.8中的Stream流其实还有很多很多用�
 - LocalDate：本地日期，不包含具体时间, 格式 yyyy-MM-dd。
 - LocalTime：本地时间，不包含日期. 格式 yyyy-MM-dd HH:mm:ss.SSS 。
 - LocalDateTime：组合了日期和时间，但不包含时差和时区信息。
-- ZonedDateTime：最完整的日期时间，包含时区和相对UTC或格林威治的时差。
+- ZonedDateTime：最完整的日期时间，包含时区和相对 UTC 或格林威治的时差。
 
 ### 使用
 
 **1.获取当前的日期时间**
 
-通过静态工厂方法now()来获取当前时间。
+通过静态工厂方法 now()来获取当前时间。
 
 ```java
  //本地日期,不包括时分秒
@@ -650,7 +664,7 @@ Stream 介绍就到这里了，JDK1.8中的Stream流其实还有很多很多用�
 
 **2.获取当前的年月日时分秒**
 
-获取时间之后，直接get获取年月日时分秒。
+获取时间之后，直接 get 获取年月日时分秒。
 
 ```java
   //获取当前的时间，包括毫秒
@@ -671,7 +685,7 @@ Stream 介绍就到这里了，JDK1.8中的Stream流其实还有很多很多用�
 
 **3.格式化时间**
 
-格式时间格式需要用到DateTimeFormatter类。
+格式时间格式需要用到 DateTimeFormatter 类。
 
 ```java
 LocalDateTime ldt = LocalDateTime.now();
@@ -720,7 +734,7 @@ System.out.println("格式化时间: "+ ldt.format(DateTimeFormatter.ofPattern("
  // 相差年: 0 相差月 :1 相差天:19
 ```
 
-注:这里的月份是不满足一年，天数是不满足一个月的。这里实际相差的是1月19天，也就是49天。
+注:这里的月份是不满足一年，天数是不满足一个月的。这里实际相差的是 1 月 19 天，也就是 49 天。
 
 示例二：相差总数的时间
 
@@ -769,9 +783,9 @@ Duration 这个类以秒和纳秒为单位建模时间的数量或数量。
 
 得到其他时区的时间。
 
-示例一:通过Clock时钟类获取计算
+示例一:通过 Clock 时钟类获取计算
 
-Clock时钟类用于获取当时的时间戳，或当前时区下的日期时间信息。
+Clock 时钟类用于获取当时的时间戳，或当前时区下的日期时间信息。
 
 ```java
   Clock clock = Clock.systemUTC();
@@ -785,7 +799,7 @@ Clock时钟类用于获取当时的时间戳，或当前时区下的日期时间
   //  美国纽约此时的时间戳:1545209277658
 ```
 
-示例二: 通过ZonedDateTime类和ZoneId
+示例二: 通过 ZonedDateTime 类和 ZoneId
 
 ```java
   ZoneId zoneId= ZoneId.of("America/New_York");
@@ -796,13 +810,21 @@ Clock时钟类用于获取当时的时间戳，或当前时区下的日期时间
   // 美国纽约此时的时间 和时区: 2018-12-19T03:52:22.494-05:00[America/New_York]
 ```
 
-Java 8日期时间API总结:
+Java 8 日期时间 API 总结:
 
-- 提供了javax.time.ZoneId 获取时区。
-- 提供了LocalDate和LocalTime类。
-- Java 8 的所有日期和时间API都是不可变类并且线程安全，而现有的Date和Calendar API中的java.util.Date和SimpleDateFormat是非线程安全的。
-- 主包是 java.time,包含了表示日期、时间、时间间隔的一些类。里面有两个子包java.time.format用于格式化， java.time.temporal用于更底层的操作。
-- 时区代表了地球上某个区域内普遍使用的标准时间。每个时区都有一个代号，格式通常由区域/城市构成（Asia/Tokyo），在加上与格林威治或 UTC的时差。例如：东京的时差是+09:00。
-- OffsetDateTime类实际上组合了LocalDateTime类和ZoneOffset类。用来表示包含和格林威治或UTC时差的完整日期（年、月、日）和时间（时、分、秒、纳秒）信息。
-- DateTimeFormatter 类用来格式化和解析时间。与SimpleDateFormat不同，这个类不可变并且线程安全，需要时可以给静态常量赋值。DateTimeFormatter类提供了大量的内置格式化工具，同时也允许你自定义。在转换方面也提供了parse()将字符串解析成日期，如果解析出错会抛出DateTimeParseException。DateTimeFormatter类同时还有format()用来格式化日期，如果出错会抛出DateTimeException异常。
-- 再补充一点，日期格式“MMM d yyyy”和“MMM dd yyyy”有一些微妙的不同，第一个格式可以解析“Jan 2 2014”和“Jan 14 2014”，而第二个在解析“Jan 2 2014”就会抛异常，因为第二个格式里要求日必须是两位的。如果想修正，你必须在日期只有个位数时在前面补零，就是说“Jan 2 2014”应该写成 “Jan 02 2014”。
+- 提供了 javax.time.ZoneId 获取时区。
+- 提供了 LocalDate 和 LocalTime 类。
+- Java 8 的所有日期和时间 API 都是不可变类并且线程安全，而现有的 Date 和 Calendar API 中的 java.util.Date 和
+  SimpleDateFormat 是非线程安全的。
+- 主包是 java.time,包含了表示日期、时间、时间间隔的一些类。里面有两个子包 java.time.format 用于格式化， java.time.temporal
+  用于更底层的操作。
+- 时区代表了地球上某个区域内普遍使用的标准时间。每个时区都有一个代号，格式通常由区域/城市构成（Asia/Tokyo），在加上与格林威治或
+  UTC 的时差。例如：东京的时差是+09:00。
+- OffsetDateTime 类实际上组合了 LocalDateTime 类和 ZoneOffset 类。用来表示包含和格林威治或 UTC
+  时差的完整日期（年、月、日）和时间（时、分、秒、纳秒）信息。
+- DateTimeFormatter 类用来格式化和解析时间。与 SimpleDateFormat 不同，这个类不可变并且线程安全，需要时可以给静态常量赋值。DateTimeFormatter
+  类提供了大量的内置格式化工具，同时也允许你自定义。在转换方面也提供了 parse()将字符串解析成日期，如果解析出错会抛出
+  DateTimeParseException。DateTimeFormatter 类同时还有 format()用来格式化日期，如果出错会抛出 DateTimeException 异常。
+- 再补充一点，日期格式“MMM d yyyy”和“MMM dd yyyy”有一些微妙的不同，第一个格式可以解析“Jan 2 2014”和“Jan 14
+  2014”，而第二个在解析“Jan 2 2014”就会抛异常，因为第二个格式里要求日必须是两位的。如果想修正，你必须在日期只有个位数时在前面补零，就是说“Jan
+  2 2014”应该写成 “Jan 02 2014”。

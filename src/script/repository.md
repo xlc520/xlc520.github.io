@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 京东脚本仓库
+excerpt: 
 description: 京东脚本仓库
 date: 2022-01-03
 category: Script
@@ -9,26 +10,25 @@ article: true
 dateline: true
 icon: type
 ---
+
 # 京东脚本仓库
 
-2022年2月8日
-https://github.com/danteswx/fxxk
+2022 年 2 月 8 日
+<https://github.com/danteswx/fxxk>
 
-https://github.com/woaim65/Oz
+<https://github.com/woaim65/Oz>
 
-https://github.com/xdhgsq/xdh
+<https://github.com/xdhgsq/xdh>
 
-https://github.com/whzsyx/xuescripts
+<https://github.com/whzsyx/xuescripts>
 
-https://github.com/sanbing666/scripts
+<https://github.com/sanbing666/scripts>
 
-https://github.com/XCould/jd-scripts-docker
+<https://github.com/XCould/jd-scripts-docker>
 
-https://github.com/skyyaman/temp
+<https://github.com/skyyaman/temp>
 
-https://github.com/linmudaye/linmudaye
-
-
+<https://github.com/linmudaye/linmudaye>
 
 ```shell
 

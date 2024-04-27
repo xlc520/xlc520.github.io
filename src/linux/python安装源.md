@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: python安装源
+excerpt: 
 description: python安装源
 date: 2022-01-19
 category: other
@@ -9,7 +10,8 @@ article: true
 timeline: true
 icon: type
 ---
-# python安装源
+
+# python 安装源
 
 在`C:\Users\Administrator\pip`下，新建`pip.ini`，输入以下内容：
 
@@ -42,4 +44,3 @@ index-url = https://mirrors.aliyun.com/pypi/simple/
 # 中国科学院
 # index-url = http://pypi.mirrors.opencas.cn/simple/ 
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Windows 子系统 WSL
+excerpt: 
 description: 
 date: 2023-01-25
 category: Linux
@@ -28,7 +29,7 @@ Add-AppxPackage .\app_name.appx
 
 **下载网址：**
 
-**https://docs.microsoft.com/zh-cn/windows/wsl/install-manual**
+**<https://docs.microsoft.com/zh-cn/windows/wsl/install-manual>**
 
 如果愿意，你也可通过命令行下载首选的发行版，可将 PowerShell
 与 [Invoke-WebRequest](https://docs.microsoft.com/zh-CN/powershell/module/microsoft.powershell.utility/invoke-webrequest)
@@ -64,19 +65,20 @@ Add-AppxPackage Ubuntu2004-220404.appxbundle
 Appx 包下载完成后，可以通过双击 appx 文件开始运行新发行版。 （命令 `wsl -l` 不会在此步骤完成之前显示发行版已安装）。
 
 在下载完成后，用压缩软件解压或者打开，然后解压出带`*****x86.appx`,然后在这个`.appx`
-的解压你需要安装的位置。然后我们找到Ubuntu.exe这个文件，双击运行即可。安装的过程需要等几分钟，然后会让我们设置用户名和密码。
+的解压你需要安装的位置。然后我们找到 Ubuntu.exe 这个文件，双击运行即可。安装的过程需要等几分钟，然后会让我们设置用户名和密码。
 
-（老版本）我们将镜像包的后缀改为.zip，然后解压到自己想要安装的盘，然后我们找到Ubuntu2004.exe这个文件，双击运行即可。安装的过程需要等几分钟，然后会让我们设置用户名和密码。
+（老版本）我们将镜像包的后缀改为.zip，然后解压到自己想要安装的盘，然后我们找到 Ubuntu2004.exe
+这个文件，双击运行即可。安装的过程需要等几分钟，然后会让我们设置用户名和密码。
 
 ### 2.第二种
 
-#### 查看已安装的linux发行版本
+#### 查看已安装的 linux 发行版本
 
 ```scss
 wsl -l --all -v
 ```
 
-#### 如果状态显示为Running，先停止
+#### 如果状态显示为 Running，先停止
 
 ```scss
 wsl --shutdown
@@ -84,29 +86,29 @@ wsl --shutdown
 
 #### 开始迁移
 
-导出发行版到指定盘符，我这里选择E盘吧
+导出发行版到指定盘符，我这里选择 E 盘吧
 
-#### Debian导出
+#### Debian 导出
 
 ```scss
 wsl --export Debian e:\\wsl-Debian.tar
 ```
 
-#### Ubuntu-22.04导出
+#### Ubuntu-22.04 导出
 
 ```scss
 wsl --export Ubuntu-22.04 e:\\wsl-Ubuntu22.04.tar
 ```
 
-#### 注销当前已安装的linux版本
+#### 注销当前已安装的 linux 版本
 
-注销Debian
+注销 Debian
 
 ```scss
 wsl --unregister Debian
 ```
 
-注销Ubuntu-22.04
+注销 Ubuntu-22.04
 
 ```scss
 wsl --unregister Ubuntu-22.04
@@ -114,25 +116,26 @@ wsl --unregister Ubuntu-22.04
 
 #### 重新安装子系统到指定盘符下
 
-安装Debian
+安装 Debian
 
 ```scss
 wsl --import Debian e:\\wsl-debian e:\\wsl-Debian.tar --version 2
 ```
 
-安装Ubuntu
+安装 Ubuntu
 
 ```scss
 wsl --import Ubuntu-22.04 e:\\wsl-ubuntu e:\\wsl-ubuntu22.04.tar --version 2
 ```
 
-3.[WSL2.0 安装、自定义目录、docker、开机+docker自启、报错教程](https://www.cnblogs.com/AJun816/p/16214924.html)
+3.[WSL2.0 安装、自定义目录、docker、开机+docker 自启、报错教程](https://www.cnblogs.com/AJun816/p/16214924.html)
 
-## 更换apt源
+## 更换 apt 源
 
-因为Linux子系统的apt源使用的是官方源，需要连接到国外的服务器。所以安装一些软件时下载会很慢，我们可以改用国内的镜像apt源。国内的镜像源主要有：
+因为 Linux 子系统的 apt 源使用的是官方源，需要连接到国外的服务器。所以安装一些软件时下载会很慢，我们可以改用国内的镜像 apt
+源。国内的镜像源主要有：
 
-可以直接使用 vim 对 /etc/apt/sources.list文件进行修改。
+可以直接使用 vim 对 /etc/apt/sources.list 文件进行修改。
 
 先进行一下备份。
 
@@ -146,7 +149,7 @@ mv /etc/apt/sources.list /etc/apt/sources.list.bak
 vim /etc/apt/sources.list
 ```
 
-### 阿里源Ubuntu 22.04(jammy)
+### 阿里源 Ubuntu 22.04(jammy)
 
 ```sh
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
@@ -164,7 +167,7 @@ deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe 
 # deb-src https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
 ```
 
-### **清华源Ubuntu 22.04(jammy)**
+### **清华源 Ubuntu 22.04(jammy)**
 
 ````sh
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
@@ -182,7 +185,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted 
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 ````
 
-### **中科大源Ubuntu 22.04(jammy)**
+### **中科大源 Ubuntu 22.04(jammy)**
 
 ```sh
 # 默认注释了源码仓库，如有需要可自行取消注释
@@ -203,7 +206,7 @@ deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe
 # deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 ```
 
-### 清华源Ubuntu 20.04(focal)
+### 清华源 Ubuntu 20.04(focal)
 
 ```sh
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
@@ -221,7 +224,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted 
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
 ```
 
-### 阿里源ubuntu 20.04(focal)
+### 阿里源 ubuntu 20.04(focal)
 
 ```sh
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
@@ -250,7 +253,7 @@ deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe 
 deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
 ```
 
-### 科大源ubuntu 20.04(focal)
+### 科大源 ubuntu 20.04(focal)
 
 ```shell
 # 默认注释了源码仓库，如有需要可自行取消注释
@@ -267,7 +270,7 @@ deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe
 # deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
 ```
 
-### 网易源ubuntu 20.04(focal)
+### 网易源 ubuntu 20.04(focal)
 
 ```shell
 deb http://mirrors.163.com/ubuntu/ wily main restricted universe multiverse
@@ -293,9 +296,9 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-## 在WSL2下安装Docker
+## 在 WSL2 下安装 Docker
 
-wsl2已经完整使用了linux内核此种方式与之前在vmware虚拟机安装docker类似，依次执行如下命令：
+wsl2 已经完整使用了 linux 内核此种方式与之前在 vmware 虚拟机安装 docker 类似，依次执行如下命令：
 
 ```shell
 curl -sSL https://get.daocloud.io/docker | sh
@@ -303,9 +306,9 @@ curl -sSL https://get.daocloud.io/docker | sh
 curl -fsSL https://get.docker.com -o get-docker.sh$ sudo sh get-docker.sh
 ```
 
-**原生linux安装docker方式**
+**原生 linux 安装 docker 方式**
 
-因为wsl2已经完整使用了linux内核了，此种方式和先前在linux虚拟机安装docker类似，步骤如下：
+因为 wsl2 已经完整使用了 linux 内核了，此种方式和先前在 linux 虚拟机安装 docker 类似，步骤如下：
 
 ```shell
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -313,21 +316,23 @@ sudo sh get-docker.sh
 sudo service docker start
 ```
 
-执行脚本安装过程中，脚本提示“**建议使用Docker Desktop for windows**”，20s内按Ctrl+C会退出安装，所以需要等待20s，此种方式需要访问网络。
+执行脚本安装过程中，脚本提示“**建议使用 Docker Desktop for windows**”，20s 内按 Ctrl+C 会退出安装，所以需要等待
+20s，此种方式需要访问网络。
 
-最后一个步骤，启动Docker daemon。但是此处有一个问题，WSL2经过测试无法使用systemctl命令（此问题已经解决ubuntu20.04），因此我们使用service命令启动Docker
-daemon进程。命令如下所示：
+最后一个步骤，启动 Docker daemon。但是此处有一个问题，WSL2 经过测试无法使用 systemctl 命令（此问题已经解决
+ubuntu20.04），因此我们使用 service 命令启动 Docker
+daemon 进程。命令如下所示：
 
 ```shell
 sudo service docker start
 * Starting Docker: docker
 ```
 
-**注意:**在我安装完毕docker后,docker pull以及run都会出现异常 Error response from daemon:
-Get https://registry-1.docker.io/v2/library/redis/manifests/latest: remote error: tls: bad record MAC
-此时只需要修改docker镜像下载地址为国内镜像即可 必须修改 daemon.json ,docker pull register方式无效!!!
+**注意:**在我安装完毕 docker 后,docker pull 以及 run 都会出现异常 Error response from daemon:
+Get <https://registry-1.docker.io/v2/library/redis/manifests/latest>: remote error: tls: bad record MAC
+此时只需要修改 docker 镜像下载地址为国内镜像即可 必须修改 daemon.json ,docker pull register 方式无效!!!
 
-修改daemon.json操作命令如下:
+修改 daemon.json 操作命令如下:
 
 ````shell
 vim /etc/docker/daemon.json
@@ -335,7 +340,7 @@ vim /etc/docker/daemon.json
 
 ```json
 {
-	"registry-mirrors":[
+ "registry-mirrors":[
       "https://docker.mirrors.ustc.edu.cn",
       "https://l1hp9lgc.mirror.aliyuncs.com",
       "https://hub-mirror.c.163.com",
@@ -351,7 +356,7 @@ vim /etc/docker/daemon.json
 }
 ```
 
-检查docker安装正常
+检查 docker 安装正常
 
 ```shell
 service docker restart
@@ -363,7 +368,7 @@ docker pull busybox
 docker images
 ```
 
-### 卸载Docker
+### 卸载 Docker
 
 - Ubuntu|Debian
 
@@ -371,7 +376,8 @@ docker images
 sudo apt-get remove docker docker-engine
 ```
 
-卸载Docker后,/var/lib/docker/目录下会保留原Docker的镜像,网络,存储卷等文件. 如果需要全新安装Docker,需要删除/var/lib/docker/目录
+卸载 Docker 后,/var/lib/docker/目录下会保留原 Docker 的镜像,网络,存储卷等文件. 如果需要全新安装
+Docker,需要删除/var/lib/docker/目录
 
 ```sh
 rm -fr /var/lib/docker/
@@ -379,8 +385,8 @@ rm -fr /var/lib/docker/
 
 ## 安装 Docker Compose
 
-[Docker Compose ](https://docs.docker.com/compose/install/)存放在Git Hub，不太稳定。
-你可以通过执行下面的命令，高速安装Docker Compose。
+[Docker Compose](https://docs.docker.com/compose/install/)存放在 Git Hub，不太稳定。
+你可以通过执行下面的命令，高速安装 Docker Compose。
 
 ```sh
 curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -388,25 +394,27 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.0/docker-
 chmod +x /usr/local/bin/docker-compose
 ```
 
-你可以通过修改URL中的版本，可以自定义您的需要的版本。
+你可以通过修改 URL 中的版本，可以自定义您的需要的版本。
 
 ## 在 Windows/Mac 上安装 Docker
 
-[Docker for Windows ](https://www.docker.com/products/docker#/windows)在Windows上运行Docker。系统要求，Windows10x64位，支持Hyper-V。
+[Docker for Windows](https://www.docker.com/products/docker#/windows)在 Windows 上运行 Docker。系统要求，Windows10x64 位，支持
+Hyper-V。
 
-[Docker for Mac ](https://www.docker.com/products/docker#/mac)在Mac上运行Docker。系统要求，OS X 10.10.3
-或者更高版本，至少4G内存，4.3.30版本以前的VirtualBox会与Docker for Mac产生冲突，所以请卸载旧版本的VitrualBox。
+[Docker for Mac](https://www.docker.com/products/docker#/mac)在 Mac 上运行 Docker。系统要求，OS X 10.10.3
+或者更高版本，至少 4G 内存，4.3.30 版本以前的 VirtualBox 会与 Docker for Mac 产生冲突，所以请卸载旧版本的 VitrualBox。
 
-如果您的电脑版本过旧，可以使用 [Docker Toolbox ](https://www.docker.com/toolbox)在Windows或者Mac上运行Docker。适用于Mac OS
+如果您的电脑版本过旧，可以使用 [Docker Toolbox](https://www.docker.com/toolbox)在 Windows 或者 Mac 上运行 Docker。适用于
+Mac OS
 X 10.8+ 或者 Windows 7/8.1。
 
 [下载 Docker for Windows](https://get.daocloud.io/docker-install/windows) [下载 Docker for Mac](https://get.daocloud.io/docker-install/mac) [下载 Docker Toolbox](https://get.daocloud.io/toolbox/)
 
 ## WSL2+Docker 开机自启
 
-> 测试Ubuntu 20.04有效，22.04无效，不知道为何
+> 测试 Ubuntu 20.04 有效，22.04 无效，不知道为何
 
-### WSL2内操作
+### WSL2 内操作
 
 1. 命令行输入
 
@@ -421,7 +429,7 @@ sudo vim /etc/init.wsl
 service docker start
 ```
 
-注：这里可放入其它Linux命令
+注：这里可放入其它 Linux 命令
 
 1. 按‘Esc’退出编辑模式，输入以下命令保存并退出
 
@@ -435,11 +443,11 @@ service docker start
 sudo chmod +x /etc/init.wsl
 ```
 
-### 其他方法：
+### 其他方法
 
 - ***Option 1**:* On Windows 11, add the necessary commands to the `[boot]` section in `/etc/wsl.conf`:
 
-  ```
+  ```plain
   [boot]
   command="service docker start"
   ```
@@ -453,7 +461,7 @@ sudo chmod +x /etc/init.wsl
 - ***Option 2**:* On Windows 10, run the necessary commands in your *user* startup scripts (e.g. `.profile`). Do it with
   a check to see if the service is running first, like:
 
-  ```
+  ```plain
   wsl.exe -u root -e sh -c "service docker status || service docker start"
   ```
 
@@ -468,41 +476,41 @@ sudo chmod +x /etc/init.wsl
 - ***Option 3:*** (old answer, here for posterity): `visudo` or add rules to `/etc/sudoers.d` to allow your user to run
   the commands without a password:
 
-  ```
+  ```plain
   username ALL = (root) NOPASSWD: /usr/sbin/service docker *
   ```
 
   Then edit your `.profile` to add:
 
-  ```
+  ```plain
   sudo service docker status || sudo service docker start
   ```
 
-## Win10与wsl2子系统互相访问
+## Win10 与 wsl2 子系统互相访问
 
-Win10访问wsl2系统比vm虚拟机是亮点，特别方便，进入CMD或者PowerShell，输入：
+Win10 访问 wsl2 系统比 vm 虚拟机是亮点，特别方便，进入 CMD 或者 PowerShell，输入：
 
-```
+```plain
 cd \\wsl$\Ubuntu\
 ```
 
-可以进入Ubuntu-20.04子系统根目录
+可以进入 Ubuntu-20.04 子系统根目录
 
-或者打开文件资源管理器，在地址栏输入 `\\wsl$`  或  `\\wsl$\Ubuntu\`，也可以Ubuntu子系统根目录。
+或者打开文件资源管理器，在地址栏输入 `\\wsl$`  或  `\\wsl$\Ubuntu\`，也可以 Ubuntu 子系统根目录。
 
 ![6645072-861e342815516794.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6645072-861e342815516794.png)
 
-## Ubuntu 22.04(jammy) 安装docker启动报错
+## Ubuntu 22.04(jammy) 安装 docker 启动报错
 
-```
+```plain
 root@Legion:~# sudo docker run hello-world
 docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
 See 'docker run --help'.
 ```
 
-### 解决方法：
+### 解决方法
 
-https://crapts.org/2022/05/15/install-docker-in-wsl2-with-ubuntu-22-04-lts/
+<https://crapts.org/2022/05/15/install-docker-in-wsl2-with-ubuntu-22-04-lts/>
 
 However, when you install Docker in WSL2 with the latest Ubuntu 22.04 LTS, you will notice that Docker will not start
 after running `sudo service docker start`. You will receive errors when starting a container,
@@ -515,7 +523,7 @@ to `iptables-legacy` so that Docker will work again:
 2. Enter `1` to select `iptables-legacy`
 3. Now run `sudo service docker start`, and Docker will start as expected!
 
-## systemctl命令无法使用（20.04）
+## systemctl 命令无法使用（20.04）
 
 现象为在命令行执行`systemctl`命令，报如下错误：
 
@@ -527,7 +535,7 @@ Failed to connect to bus: Host is down
 参考了[https://forum.snapcraft.io/t/running-snaps-on-wsl2-insiders-only-for-now/13033](https://links.jianshu.com/go?to=https%3A%2F%2Fforum.snapcraft.io%2Ft%2Frunning-snaps-on-wsl2-insiders-only-for-now%2F13033)
 之后给出如下解决方案：
 
-1.安装daemonize和fontconfig
+1.安装 daemonize 和 fontconfig
 
 ```shell
 apt install -y fontconfig daemonize
@@ -555,11 +563,11 @@ fi
 %sudo ALL=(ALL) NOPASSWD: /usr/bin/nsenter -t [0-9]* -a su - [a-zA-Z0-9]*
 ```
 
-4.执行`source /etc/profile`或者是重新打开terminal，执行`systemctl`验证是否能够正常操作。
+4.执行`source /etc/profile`或者是重新打开 terminal，执行`systemctl`验证是否能够正常操作。
 
 ## Vmmem 进程占用过多内存
 
-我们可以通过WSL的配置文件，限制vmmem进程的内存占用。在%UserProfile%目录创建`.wslconfig`文件，添加如下内容：
+我们可以通过 WSL 的配置文件，限制 vmmem 进程的内存占用。在%UserProfile%目录创建`.wslconfig`文件，添加如下内容：
 
 ```csharp
 [wsl2]
@@ -568,8 +576,8 @@ swap=0
 localhostForwarding=true
 ```
 
-这里限制了vmmem进程最大内存不超过6GB，不使用交换空间。
-创建完配置文件后，执行`wsl --shutdown`关闭WSL，再重新启动即可生效。
+这里限制了 vmmem 进程最大内存不超过 6GB，不使用交换空间。
+创建完配置文件后，执行`wsl --shutdown`关闭 WSL，再重新启动即可生效。
 
 参考资料：
 [https://github.com/microsoft/WSL/issues/4166](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fmicrosoft%2FWSL%2Fissues%2F4166)
@@ -589,7 +597,7 @@ localhostForwarding=true
 cd /etc/profile.d
 ```
 
-### 启动docker
+### 启动 docker
 
 ```sh
 vim docker.sh
@@ -598,7 +606,7 @@ vim docker.sh
 service docker start
 ```
 
-### 固定IP
+### 固定 IP
 
 ```sh
 vim /etc/profile.d/static_ip.sh
@@ -620,7 +628,7 @@ echo -e "nameserver 223.5.5.5 \nnameserver 192.168.50.1 \nnameserver 192.168.89.
 chmod +x /etc/profile.d/static_ip.sh
 ```
 
-#### 免密sudo权限
+#### 免密 sudo 权限
 
 为了执行上一步，需要这个权限。
 在 `/etc/sudoers` 里添加：
@@ -631,7 +639,7 @@ vim /etc/sudoers
 UserName ALL=(ALL) NOPASSWD:ALL
 ```
 
-#### 配置DNS
+#### 配置 DNS
 
 在 `/etc/wsl.conf` 文件写入
 
@@ -668,7 +676,7 @@ nameserver 8.8.4.4
 
 ## WSL2 系统占用磁盘空间不释放
 
-WSL2本质是虚拟机，它使用的是vhdx虚拟磁盘格式。它支持自动扩容，但是并不会自动缩容。
+WSL2 本质是虚拟机，它使用的是 vhdx 虚拟磁盘格式。它支持自动扩容，但是并不会自动缩容。
 
 我们可以使用`diskpart`命令，手工执行缩容操作。
 
@@ -682,11 +690,11 @@ detach vdisk
 exit
 ```
 
-其中`D:\WSL\Ubuntu\ext4.vhdx`为WSL2系统虚拟磁盘文件路径。
+其中`D:\WSL\Ubuntu\ext4.vhdx`为 WSL2 系统虚拟磁盘文件路径。
 
 ## WSL 使用 root 用户
 
-### 修改root用户密码
+### 修改 root 用户密码
 
 - WSL 默认是没有设置 root 密码的
 - 设置 root 用户密码, 这样要输三次命令, 第一次当前用户密码, 后两次就是设置密码以及确认密码
@@ -719,16 +727,18 @@ PS C:\Users\ibbd\Desktop>
 # 没有报错就代表成功
 ```
 
-重新打开已经是root用户了
+重新打开已经是 root 用户了
 
-## (可选)使用Podman取代Docker
+## (可选)使用 Podman 取代 Docker
 
-Podman已成为CentOS8官方御用容器管理器，并且Kubernetes1.12已经放弃对Docker的支持。相比Docker，Podman无需守护进程，不强制要求使用root用户来管理容器，具有更好的灵活性和安全性。Podman使用方式和Docker完全相同，兼容Docker的镜像格式。
-经本人试验Podman可以完美的在WSL2 Ubuntu中运行。
+Podman 已成为 CentOS8 官方御用容器管理器，并且 Kubernetes1.12 已经放弃对 Docker 的支持。相比 Docker，Podman 无需守护进程，不强制要求使用
+root 用户来管理容器，具有更好的灵活性和安全性。Podman 使用方式和 Docker 完全相同，兼容 Docker 的镜像格式。
+经本人试验 Podman 可以完美的在 WSL2 Ubuntu 中运行。
 
-在WSL2中安装Podman的方法可参考如下链接：[https://www.redhat.com/sysadmin/podman-windows-wsl2](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.redhat.com%2Fsysadmin%2Fpodman-windows-wsl2)
+在 WSL2 中安装 Podman
+的方法可参考如下链接：[https://www.redhat.com/sysadmin/podman-windows-wsl2](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.redhat.com%2Fsysadmin%2Fpodman-windows-wsl2)
 
-下面脚本为Podman的安装脚本：
+下面脚本为 Podman 的安装脚本：
 
 ```shell
 . /etc/os-release
@@ -741,7 +751,7 @@ sudo mkdir -p /etc/containers
 echo -e "[registries.search]\nregistries = ['docker.io', 'quay.io']" | sudo tee /etc/containers/registries.conf
 ```
 
-如果没有其他报错信息，到这里Podman已安装完毕。我们可以执行`podman info`命令，验证是否安装成功。
+如果没有其他报错信息，到这里 Podman 已安装完毕。我们可以执行`podman info`命令，验证是否安装成功。
 
 **官方安装**
 
@@ -769,11 +779,12 @@ registries = ['i2kldsde.mirror.aliyuncs.com','docker.io']
 
 ```
 
-## Ubuntu20.04配置静态固定IP地址
+## Ubuntu20.04 配置静态固定 IP 地址
 
-Ubuntu从17.10开始，放弃在/etc/network/interfaces里面配置IP，改为在/etc/netplan/XX-installer-config.yaml的yaml文件中配置IP地址。
+Ubuntu 从 17.10 开始，放弃在/etc/network/interfaces 里面配置 IP，改为在/etc/netplan/XX-installer-config.yaml 的 yaml 文件中配置
+IP 地址。
 查看网络配置信息
-在Ubuntu20.04中，默认没有安装ifconfig，因此使用ip addr命令
+在 Ubuntu20.04 中，默认没有安装 ifconfig，因此使用 ip addr 命令
 
 ```bash
 ip addr
@@ -782,7 +793,7 @@ ip addr
 ip route show
 ```
 
-或者使用nmcli 查看，需要执行安装
+或者使用 nmcli 查看，需要执行安装
 
 ```bash
 sudo apt install network-manager
@@ -791,7 +802,7 @@ nmcli device show ens32
 ```
 
 修改配置文件
-使用熟悉的编辑器打开 `/etc/netplan/`下面的yaml配置文件，我的是`01-network-manager-all.yaml` 文件名，看实际情况
+使用熟悉的编辑器打开 `/etc/netplan/`下面的 yaml 配置文件，我的是`01-network-manager-all.yaml` 文件名，看实际情况
 
 ```bash
 cd /etc/netplan/
@@ -811,7 +822,8 @@ network:
 ```
 
 根据自己的需要修改配置
-输入 `:wq`保存退出后，执行 `sudo netplan apply` 使配置生效，之后每次启动虚拟机IP地址就不会再改变了。这样虚拟机内部可以正常上网，在物理机中也可以直接使用虚拟机的ip访问内部的服务。
+输入 `:wq`保存退出后，执行 `sudo netplan apply` 使配置生效，之后每次启动虚拟机 IP 地址就不会再改变了。这样虚拟机内部可以正常上网，在物理机中也可以直接使用虚拟机的
+ip 访问内部的服务。
 
 ```bash
 # Let NetworkManager manage all devices on this system
@@ -831,13 +843,13 @@ network:
 
 使配置生效
 
-```
+```plain
 sudo netplan apply
 ```
 
-至此Ubuntu20.04的静态IP配置完成。经过测试，可以正常上网。
+至此 Ubuntu20.04 的静态 IP 配置完成。经过测试，可以正常上网。
 
-## wsl2 远程登陆ssh
+## wsl2 远程登陆 ssh
 
 ### 前提
 
@@ -848,7 +860,7 @@ sudo netplan apply
 
 ### 配置
 
-#### 1.下载配置ssh
+#### 1.下载配置 ssh
 
 ```bash
 #下载   (如果没有ssh)
@@ -871,24 +883,24 @@ PasswordAuthentication yes # 是否允许使用密码登录 选“是”
 service ssh start
 ```
 
-#### 2.查看 linux ip ，在linux中输入
+#### 2.查看 linux ip ，在 linux 中输入
 
 ```bash
 ifconfig # 不是ipconfig
 ```
 
-### SSH 登录 Ubuntu 出现错误，拒绝密码：Permission denied,please try again.
+### SSH 登录 Ubuntu 出现错误，拒绝密码：Permission denied,please try again
 
-新安装的Ubuntu 虚拟机已经打开了ssh 服务，并且ssh时密码也输入正确，但是一直提示被拒绝，如图：
+新安装的 Ubuntu 虚拟机已经打开了 ssh 服务，并且 ssh 时密码也输入正确，但是一直提示被拒绝，如图：
 
 解决方法：
-修ssh改配置文件，设置为允许root远程登录：
+修 ssh 改配置文件，设置为允许 root 远程登录：
 
 `vim /etc/ssh/sshd_config`
 
 将`PermitRootLogin prohibie-password` 修改为：`PermitRootLogin yes` 即可。
 
-保存退出，重启ssh服务：
+保存退出，重启 ssh 服务：
 
 `service ssh start`
 
@@ -935,6 +947,3 @@ Windows 的网络。这波升级彻底带回以前 WSL1 那时候的无缝网络
 
 最后，如果你在 WSL 里使用 docker，那需要将 `autoMemoryReclaim` 配置为 `dropcache` 或者 `disabled`
 ，然后在 `/etc/docker/daemon.json` 里添加一句 `"iptables": false` ，否则你可能无法正常使用 docker。
-
-
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Podman开源的容器
+excerpt: 
 description: Docker 大势已去，Podman 即将崛起
 date: 2022-02-28
 category: Linux
@@ -10,11 +11,11 @@ timeline: true
 icon: type
 ---
 
-# Podman开源的容器
+# Podman 开源的容器
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185164154-0.png)
 
-### 什么是Podman？
+### 什么是 Podman？
 
 Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。Podman 提供与 Docker
 非常相似的功能。正如前面提到的那样，它不需要在你的系统上运行任何守护进程，并且它也可以在没有 root 权限的情况下运行。
@@ -22,41 +23,46 @@ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上
 Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像。Podman 提供了一个与 Docker 兼容的命令行前端来管理
 Docker 镜像。
 
-Podman 官网地址：https://podman.io/
+Podman 官网地址：<https://podman.io/>
 
-#### **「Podman和Docker的主要区别是什么？」**
+#### **「Podman 和 Docker 的主要区别是什么？」**
 
-- dockers在实现CRI的时候，它需要一个守护进程，其次需要以root运行，因此这也带来了安全隐患。
-- podman不需要守护程序，也不需要root用户运行，从逻辑架构上，比docker更加合理。
-- 在docker的运行体系中，需要多个daemon才能调用到OCI的实现RunC。
-- 在容器管理的链路中，Docker Engine的实现就是dockerd
-- daemon，它在linux中需要以root运行，dockerd调用containerd，containerd调用containerd-shim，然后才能调用runC。顾名思义shim起的作用也就是“垫片”，避免父进程退出影响容器的运训
--
+- dockers 在实现 CRI 的时候，它需要一个守护进程，其次需要以 root 运行，因此这也带来了安全隐患。
+- podman 不需要守护程序，也不需要 root 用户运行，从逻辑架构上，比 docker 更加合理。
+- 在 docker 的运行体系中，需要多个 daemon 才能调用到 OCI 的实现 RunC。
+- 在容器管理的链路中，Docker Engine 的实现就是 dockerd
+- daemon，它在 linux 中需要以 root 运行，dockerd 调用 containerd，containerd 调用 containerd-shim，然后才能调用 runC。顾名思义
+  shim 起的作用也就是“垫片”，避免父进程退出影响容器的运训
 
-podman直接调用OCI,runtime（runC），通过common作为容器进程的管理工具，但不需要dockerd这种以root身份运行的守护进程。([点击下载2021年最新阿里p7面试题](http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&mid=2247499357&idx=1&sn=77697f0fbec449d80e58cafbfb1f7eb4&chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&scene=21#wechat_redirect)
+podman 直接调用 OCI,runtime（runC），通过 common 作为容器进程的管理工具，但不需要 dockerd 这种以 root
+身份运行的守护进程。([点击下载 2021 年最新阿里 p7 面试题](http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&mid=2247499357&idx=1&sn=77697f0fbec449d80e58cafbfb1f7eb4&chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&scene=21#wechat_redirect)
 教程)
 
--
+在 podman 体系中，有个称之为 common 的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common
+的父则通常是 1 号进程。podman 中的 common 其实相当于 docker 体系中的 containerd-shim。
 
-在podman体系中，有个称之为common的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common的父则通常是1号进程。podman中的common其实相当于docker体系中的containerd-shim。
+图中所体现的事情是，podman 不需要守护进程，而 dorker 需要守护进程。在这个图的示意中，dorcker 的 containerd-shim 与 podman 的
+common 被归在 Container 一层。
 
-图中所体现的事情是，podman不需要守护进程，而dorker需要守护进程。在这个图的示意中，dorcker的containerd-shim与podman的common被归在Container一层。
+#### **「Podman 的使用与 docker 有什么区别？」**
 
-#### **「Podman的使用与docker有什么区别？」**
+podman 的定位也是与 docker 兼容，因此在使用上面尽量靠近 docker。在使用方面，可以分成两个方面来说，一是系统构建者的角度，二是使用者的角度。
 
-podman的定位也是与docker兼容，因此在使用上面尽量靠近docker。在使用方面，可以分成两个方面来说，一是系统构建者的角度，二是使用者的角度。
+在系统构建者方面，用 podman 的默认软件，与 docker 的区别不大，只是在进程模型、进程关系方面有所区别。如果习惯了 docker
+几个关联进程的调试方法，在 podman 中则需要适应。可以通过 pstree 命令查看进程的树状结构。总体来看，podman 比 docker 要简单。由于
+podman 比 docker 少了一层 daemon，因此重启的机制也就不同了。
 
-在系统构建者方面，用podman的默认软件，与docker的区别不大，只是在进程模型、进程关系方面有所区别。如果习惯了docker几个关联进程的调试方法，在podman中则需要适应。可以通过pstree命令查看进程的树状结构。总体来看，podman比docker要简单。由于podman比docker少了一层daemon，因此重启的机制也就不同了。
+在使用者方面，podman 与 docker
+的命令基本兼容，都包括容器运行时（run/start/kill/ps/inspect），本地镜像（images/rmi/build）、镜像仓库（login/pull/push）等几个方面。因此
+podman 的命令行工具与 docker 类似，比如构建镜像、启停容器等。甚至可以通过 alias
 
-在使用者方面，podman与docker的命令基本兼容，都包括容器运行时（run/start/kill/ps/inspect），本地镜像（images/rmi/build）、镜像仓库（login/pull/push）等几个方面。因此podman的命令行工具与docker类似，比如构建镜像、启停容器等。甚至可以通过alias
+docker=podman 可以进行替换。因此，即便使用了 podman，仍然可以使用 docker.io 作为镜像仓库，这也是兼容性最关键的部分。
 
-docker=podman可以进行替换。因此，即便使用了podman，仍然可以使用docker.io作为镜像仓库，这也是兼容性最关键的部分。
-
-### Podman常用命令
+### Podman 常用命令
 
 #### **「容器」**
 
-```
+```plain
 podman run           创建并启动容器
 podman start         启动容器
 podman ps            查看容器
@@ -72,7 +78,7 @@ podman logs          查看日志
 
 #### **「镜像」**
 
-```
+```plain
 podman search                检索镜像
 podman pull                  获取镜像
 podman images                列出镜像
@@ -94,16 +100,16 @@ podmanfile                   定制镜像（三个）
 
 #### **「部署 Podman」**
 
-```
+```plain
 //安装podman
 [root@localhost ~]# yum -y install podman
 ```
 
 ### **「Podman 加速器」**
 
-版本7配置加速器
+版本 7 配置加速器
 
-```
+```plain
 //仓库配置
 [root@localhost ~]# vim /etc/containers/registries.conf
 [registries.search]
@@ -114,9 +120,9 @@ registries = ["docker.io"]    #如果只留一个，则只在一个源里查找
 location="j3m2itm3.mirror.aliyuncs.com"
 ```
 
-版本8配置加速器
+版本 8 配置加速器
 
-```
+```plain
 #unqualified-search-registries = ["registry.fedoraproject.org", "registry.access.redhat.com", "registry.centos.org", "docker.io"]     #直接注释掉
 unqualified-search-registries = ["docker.io"]    #添加一个docker.io
 [[registry]]
@@ -130,7 +136,7 @@ location = "j3m2itm3.mirror.aliyuncs.com" （不用加https://  直接加地址�
 
 #### 运行一个容器
 
-```
+```plain
 [root@localhost ~]# podman run -d --name httpd docker.io/library/httpd
 Trying to pull docker.io/library/httpd...
 Getting image source signatures
@@ -152,20 +158,20 @@ docker.io/library/httpd     latest   ea28e1b82f31   11 days ago   148 MB
 
 #### 列出运行的容器
 
-```
+```plain
 [root@localhost ~]# podman ps
 CONTAINER ID  IMAGE                             COMMAND           CREATED             STATUS                 PORTS  NAMES
 0492e405b9ec  docker.io/library/httpd:latest    httpd-foreground  About a minute ago  Up About a minute ago         httpd
 ```
 
-注意：如果在ps命令中添加-a，Podman 将显示所有容器。
+注意：如果在 ps 命令中添加-a，Podman 将显示所有容器。
 
 #### 检查正在运行的容器
 
 您可以“检查”正在运行的容器的元数据和有关其自身的详细信息。我们甚至可以使用 inspect 子命令查看分配给容器的 IP
 地址。由于容器以无根模式运行，因此未分配 IP 地址，并且该值将在检查的输出中列为“无”。
 
-```
+```plain
 [root@localhost ~]# podman inspect -l | grep IPAddress\": 
             "SecondaryIPAddresses": null, 
             "IPAddress": "10.88.0.5",
@@ -178,7 +184,7 @@ CONTAINER ID  IMAGE                             COMMAND           CREATED       
 
 #### 查看一个运行中容器的日志
 
-```
+```plain
 选项
   --latest    #最近的
   
@@ -191,9 +197,9 @@ AH00558: httpd: Could not reliably determine the server's fully qualified domain
 10.88.0.1 - - [13/Dec/2021:15:20:47 +0000] "GET / HTTP/1.1" 200 45
 ```
 
-查看一个运行容器中的进程资源使用情况，可以使用top观察容器中的 nginx pid
+查看一个运行容器中的进程资源使用情况，可以使用 top 观察容器中的 nginx pid
 
-```
+```plain
 语法：
   podman top <container_id>  
   
@@ -207,7 +213,7 @@ www-data   9     1      0.000   15m38.599880444s   ?     0s     httpd -DFOREGROU
 
 #### 停止一个运行中的容器
 
-```
+```plain
 [root@localhost ~]# podman stop --latest
 2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4
 [root@localhost ~]# podman ps
@@ -216,7 +222,7 @@ CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
 
 #### 删除一个容器
 
-```
+```plain
 [root@localhost ~]# podman rm --latest
 2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4
 [root@localhost ~]# podman ps -a
@@ -229,7 +235,7 @@ CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
 
 例如，如果我们想在 docker.io 上分享我们新建的 Nginx 容器镜像，这很容易。首先登录码头：
 
-```
+```plain
 [root@localhost nginx]# tree 
 .
 ├── Dockerfile
@@ -303,7 +309,7 @@ Storing signatures
 
 如果习惯了使用 Docker 命令，可以直接给 Podman 配置一个别名来实现无缝转移。你只需要在 .bashrc 下加入以下行内容即可：
 
-```
+```plain
 [root@localhost ~]# echo "alias docker=podman" >> .bashrc
 source .bashrc
 [root@localhost ~]# alias
@@ -314,12 +320,13 @@ alias docker='podman'
 
 ### **「用户操作」**
 
-在允许没有root特权的用户运行Podman之前，管理员必须安装或构建Podman并完成以下配置
+在允许没有 root 特权的用户运行 Podman 之前，管理员必须安装或构建 Podman 并完成以下配置
 
 cgroup
-V2Linux内核功能允许用户限制普通用户容器可以使用的资源，如果使用cgroupV2启用了运行Podman的Linux发行版，则可能需要更改默认的OCI运行时。某些较旧的版本runc不适用于cgroupV2，必须切换到备用OCI运行时crun。
+V2Linux 内核功能允许用户限制普通用户容器可以使用的资源，如果使用 cgroupV2 启用了运行 Podman 的 Linux 发行版，则可能需要更改默认的
+OCI 运行时。某些较旧的版本 runc 不适用于 cgroupV2，必须切换到备用 OCI 运行时 crun。
 
-```
+```plain
 [root@localhost ~]# yum -y install crun     //centos8系统自带
 
 [root@localhost ~]# vi /usr/share/containers/containers.conf 
@@ -335,11 +342,11 @@ c8664d2e43c872e1e5219f82d41f63048ed3a5ed4fb6259c225a14d6c243677f
             "crun",
 ```
 
-#### 安装slirp4netns和fuse-overlayfs
+#### 安装 slirp4netns 和 fuse-overlayfs
 
-在普通用户环境中使用Podman时，建议使用fuse-overlayfs而不是VFS文件系统，至少需要版本0.7.6。现在新版本默认就是了。
+在普通用户环境中使用 Podman 时，建议使用 fuse-overlayfs 而不是 VFS 文件系统，至少需要版本 0.7.6。现在新版本默认就是了。
 
-```
+```plain
 [root@localhost ~]# yum -y install slirp4netns
 
 [root@localhost ~]# yum -y install fuse-overlayfs
@@ -347,11 +354,11 @@ c8664d2e43c872e1e5219f82d41f63048ed3a5ed4fb6259c225a14d6c243677f
 77 mount_program = "/usr/bin/fuse-overlayfs"     //取消注释
 ```
 
-#### / etc / subuid和/ etc / subgid配置
+#### / etc / subuid 和/ etc / subgid 配置
 
-Podman要求运行它的用户在/ etc / subuid和/ etc / subgid文件中列出一系列UID,shadow-utils或newuid包提供这些文件
+Podman 要求运行它的用户在/ etc / subuid 和/ etc / subgid 文件中列出一系列 UID,shadow-utils 或 newuid 包提供这些文件
 
-```
+```plain
 [root@localhost ~]# yum -y install shadow-utils
 
 可以在/ etc / subuid和/ etc / subgid查看，每个用户的值必须唯一且没有任何重叠。
@@ -367,14 +374,14 @@ zz:100000:65536
 net.ipv4.ping_group_range = 0 200000
 ```
 
-这个文件的格式是 USERNAME:UID:RANGE中/etc/passwd或输出中列出的用户名getpwent。
+这个文件的格式是 USERNAME:UID:RANGE中/etc/passwd 或输出中列出的用户名 getpwent。
 
 - 为用户分配的初始 UID。
 - 为用户分配的 UID 范围的大小。
 
-该usermod程序可用于为用户分配 UID 和 GID，而不是直接更新文件。
+该 usermod 程序可用于为用户分配 UID 和 GID，而不是直接更新文件。
 
-```
+```plain
 [root@localhost ~]# usermod --add-subuids 200000-201000 --add-subgids 200000-201000 hh
 grep hh /etc/subuid /etc/subgid
 /etc/subuid:hh:200000:1001
@@ -387,7 +394,7 @@ grep hh /etc/subuid /etc/subgid
 
 container.conf
 
-```
+```plain
 // 用户配置文件
 [root@localhost ~]# cat /usr/share/containers/containers.conf
 [root@localhost ~]# cat /etc/containers/containers.conf
@@ -396,16 +403,16 @@ container.conf
 
 如果它们以该顺序存在。每个文件都可以覆盖特定字段的前一个文件。
 
-配置storage.conf文件
+配置 storage.conf 文件
 
-```
+```plain
 1./etc/containers/storage.conf
 2.$HOME/.config/containers/storage.conf
 ```
 
 在普通用户中**/etc/containers/storage.conf**的一些字段将被忽略
 
-```
+```plain
 [root@localhost ~]#  vi /etc/containers/storage.conf
 [storage]
 
@@ -419,7 +426,7 @@ mount_program = "/usr/bin/fuse-overlayfs"    #取消注释
 
 在普通用户中这些字段默认
 
-```
+```plain
 graphroot="$HOME/.local/share/containers/storage"
 runroot="$XDG_RUNTIME_DIR/containers"
 ```
@@ -428,7 +435,7 @@ registries.conf
 
 配置按此顺序读入,这些文件不是默认创建的,可以从**/usr/share/containers**「或复制文件」**/etc/containers**并进行修改。
 
-```
+```plain
 1./etc/containers/registries.conf
 2./etc/containers/registries.d/*
 3.HOME/.config/containers/registries.conf
@@ -436,9 +443,9 @@ registries.conf
 
 授权文件
 
-此文件里面写了docker账号的密码，以加密方式显示
+此文件里面写了 docker 账号的密码，以加密方式显示
 
-```
+```plain
 [root@localhost ~]# podman login
 Username: 1314444
 Password: 
@@ -453,9 +460,9 @@ Login Succeeded!
 }
 ```
 
-普通用户是无法看见root用户的镜像的
+普通用户是无法看见 root 用户的镜像的
 
-```
+```plain
 //root用户
 [root@localhost ~]# podman images
 REPOSITORY                  TAG      IMAGE ID       CREATED       SIZE
@@ -469,13 +476,13 @@ REPOSITORY  TAG         IMAGE ID    CREATED     SIZE
 
 ### 卷
 
-- 容器与root用户一起运行，则root容器中的用户实际上就是主机上的用户。
-- UID GID是在/etc/subuid和/etc/subgid等中用户映射中指定的第一个UID GID。
+- 容器与 root 用户一起运行，则 root 容器中的用户实际上就是主机上的用户。
+- UID GID 是在/etc/subuid 和/etc/subgid 等中用户映射中指定的第一个 UID GID。
 - 如果普通用户的身份从主机目录挂载到容器中，并在该目录中以根用户身份创建文件，则会看到它实际上是你的用户在主机上拥有的。
 
 #### 使用卷
 
-```
+```plain
 [root@localhost ~]# su - zz
 [zz@localhost ~]$ pwd
 /home/zz
@@ -500,7 +507,7 @@ total 0
 
 #### 在主机上查看
 
-```
+```plain
 [zz@localhost ~]$ ll data/
 总用量 0
 -rw-r--r-- 1 zz zz 0 12月 13 00:17 123
@@ -513,7 +520,7 @@ hell world
 
 #### 容器里查看
 
-```
+```plain
 /data # cat 123
 hell world
 
@@ -532,14 +539,14 @@ total 4
 
 使用普通用户映射容器端口时会报“ permission denied”的错误
 
-```
+```plain
 [zz@localhost ~]$ podman run  -d -p 80:80 httpd
 Error: rootlessport cannot expose privileged port 80, you can add 'net.ipv4.ip_unprivileged_port_start=80' to /etc/sysctl.conf (currently 1024), or choose a larger port number (>= 1024): listen tcp 0.0.0.0:80: bind: permission denied
 ```
 
-普通用户可以映射>= 1024的端口
+普通用户可以映射>= 1024 的端口
 
-```
+```plain
 [zz@localhost ~]$ podman run  -d -p 1024:80 httpd
 58613a6bdc70d4d4f9f624583f795a62a610596d166f0873bdff8fb26aa15092
 [zz@localhost ~]$ ss -anlt
@@ -549,9 +556,9 @@ LISTEN      0           128                          *:1024                     
 LISTEN      0           128                       [::]:22                     [::]:* 
 ```
 
-配置echo ‘net.ipv4.ip_unprivileged_port_start=80’ >> /etc/sysctl.conf后可以映射大于等于80的端口
+配置 echo ‘net.ipv4.ip_unprivileged_port_start=80’ >> /etc/sysctl.conf 后可以映射大于等于 80 的端口
 
-```
+```plain
 [root@localhost ~]# echo  'net.ipv4.ip_unprivileged_port_start=80'  >> /etc/sysctl.conf
 [root@localhost ~]# sysctl -p
 net.ipv4.ip_unprivileged_port_start = 80

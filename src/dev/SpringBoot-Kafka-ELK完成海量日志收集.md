@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot-Kafka-ELK 完成海量日志收集
+excerpt: 
 description: 
 date: 2022-08-05
 category: Java
@@ -22,9 +23,9 @@ icon: java
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16577076343401.png)
 
-### SpringBoot项目准备
+### SpringBoot 项目准备
 
-引入log4j2替换SpringBoot默认log，demo项目结构如下：
+引入 log4j2 替换 SpringBoot 默认 log，demo 项目结构如下：
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220713182137039.png)
 
@@ -109,7 +110,7 @@ icon: java
 
 **IndexController**
 
-测试Controller，用以打印日志进行调试
+测试 Controller，用以打印日志进行调试
 
 ```java
 @Slf4j
@@ -146,7 +147,7 @@ public class IndexController {
 
 **InputMDC**
 
-用以获取log中的`[%X{hostName}]`、`[%X{ip}]`、`[%X{applicationName}]`三个字段值
+用以获取 log 中的`[%X{hostName}]`、`[%X{ip}]`、`[%X{applicationName}]`三个字段值
 
 ```java
 @Component
@@ -310,15 +311,16 @@ public class NetUtil {
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220713182234947.png)
 
-我们将Springboot服务部署在192.168.11.31这台机器上。
+我们将 Springboot 服务部署在 192.168.11.31 这台机器上。
 
-### Kafka安装和启用
+### Kafka 安装和启用
 
-kafka下载地址：
+kafka 下载地址：
 
-> http://kafka.apache.org/downloads.html
+> <http://kafka.apache.org/downloads.html>
 
-kafka安装步骤：首先kafka安装需要依赖与zookeeper，所以小伙伴们先准备好zookeeper环境（三个节点即可），然后我们来一起构建kafka
+kafka 安装步骤：首先 kafka 安装需要依赖与 zookeeper，所以小伙伴们先准备好 zookeeper 环境（三个节点即可），然后我们来一起构建
+kafka
 broker。
 
 ```shell
@@ -344,7 +346,7 @@ mkdir /usr/local/kafka_2.12/kafka-logs
 /usr/local/kafka_2.12/bin/kafka-server-start.sh /usr/local/kafka_2.12/config/server.properties &
 ```
 
-创建两个topic
+创建两个 topic
 
 ```shell
 ## 创建topic
@@ -352,17 +354,17 @@ kafka-topics.sh --zookeeper 192.168.11.111:2181 --create --topic app-log-collect
 kafka-topics.sh --zookeeper 192.168.11.111:2181 --create --topic error-log-collector --partitions 1  --replication-factor 1 
 ```
 
-我们可以查看一下topic情况
+我们可以查看一下 topic 情况
 
 ```shell
 kafka-topics.sh --zookeeper 192.168.11.111:2181 --topic app-log-test --describe
 ```
 
-可以看到已经成功启用了`app-log-collector`和`error-log-collector`两个topic
+可以看到已经成功启用了`app-log-collector`和`error-log-collector`两个 topic
 
-### filebeat安装和启用
+### filebeat 安装和启用
 
-**filebeat下载**
+**filebeat 下载**
 
 ```shell
 cd /usr/local/software
@@ -371,7 +373,7 @@ cd /usr/local
 mv filebeat-6.6.0-linux-x86_64/ filebeat-6.6.0
 ```
 
-配置filebeat，可以参考下方yml配置文件
+配置 filebeat，可以参考下方 yml 配置文件
 
 ```yaml
 vim /usr/local/filebeat-5.6.2/filebeat.yml
@@ -426,7 +428,7 @@ output.kafka:
 logging.to_files: true
 ```
 
-**filebeat启动：**
+**filebeat 启动：**
 
 检查配置是否正确
 
@@ -436,7 +438,7 @@ cd /usr/local/filebeat-6.6.0
 ## Config OK
 ```
 
-启动filebeat
+启动 filebeat
 
 ```shell
 /usr/local/filebeat-6.6.0/filebeat &
@@ -448,22 +450,23 @@ cd /usr/local/filebeat-6.6.0
 ps -ef | grep filebeat
 ```
 
-可以看到filebeat已经启动成功
+可以看到 filebeat 已经启动成功
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220713182332234.png)
 
-然后我们访问192.168.11.31:8001/index和192.168.11.31:
-8001/err，再查看kafka的logs文件，可以看到已经生成了app-log-collector-0和error-log-collector-0文件，说明filebeat已经帮我们把数据收集好放到了kafka上。
+然后我们访问 192.168.11.31:8001/index 和 192.168.11.31:
+8001/err，再查看 kafka 的 logs 文件，可以看到已经生成了 app-log-collector-0 和 error-log-collector-0 文件，说明 filebeat
+已经帮我们把数据收集好放到了 kafka 上。
 
-### logstash安装
+### logstash 安装
 
-我们在logstash的安装目录下新建一个文件夹
+我们在 logstash 的安装目录下新建一个文件夹
 
 ```shell
 mkdir scrpit
 ```
 
-然后cd进该文件，创建一个`logstash-script.conf`文件
+然后 cd 进该文件，创建一个`logstash-script.conf`文件
 
 ```properties
 cd scrpit
@@ -560,7 +563,7 @@ output {
 }
 ```
 
-启动logstash
+启动 logstash
 
 ```shell
 /usr/local/logstash-6.6.0/bin/logstash -f /usr/local/logstash-6.6.0/script/logstash-script.conf &
@@ -572,24 +575,24 @@ output {
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16577076343402.png)
 
-### ElasticSearch与Kibana
+### ElasticSearch 与 Kibana
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16577076343403.png)
 
-ES和Kibana的搭建之前没写过博客，网上资料也比较多，大家可以自行搜索。
+ES 和 Kibana 的搭建之前没写过博客，网上资料也比较多，大家可以自行搜索。
 
-搭建完成后，访问Kibana的管理页面`192.168.11.35:5601`，选择Management -> Kinaba - Index Patterns
+搭建完成后，访问 Kibana 的管理页面`192.168.11.35:5601`，选择 Management -> Kinaba - Index Patterns
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16577076343404.png)
 
-然后Create index pattern
+然后 Create index pattern
 
 - index pattern 输入 `app-log-*`
 - Time Filter field name 选择 currentDateTime
 
 这样我们就成功创建了索引。
 
-我们再次访问`192.168.11.31:8001/err`，这个时候就可以看到我们已经命中了一条log信息
+我们再次访问`192.168.11.31:8001/err`，这个时候就可以看到我们已经命中了一条 log 信息
 
 ![SpringBoot+Kafka+ELK](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16577076343405.png)
 

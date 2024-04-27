@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 提升吞吐量
+excerpt: 
 description: 
 date: 2024-01-14
 category: Java
@@ -18,8 +19,6 @@ icon: java
 
 - 使用异步注解 @aysnc、启动类：添加 @EnableAsync 注解
 - JDK 8 本身有一个非常好用的 Future 类——CompletableFuture
-
-
 
 ```java
 @AllArgsConstructor
@@ -46,8 +45,6 @@ public class AskThread implements Runnable{
     }
 }
 ```
-
-
 
 在该示例中，启动一个线程，此时 AskThread 对象还没有拿到它需要的数据，执行到 myRe = re.get() * re.get() 会阻塞。
 
@@ -81,9 +78,11 @@ CompletableFuture.supplyAsync 方法构造一个 CompletableFuture 实例，在 
 
 而返回的 CompletableFuture 实例就可以作为这次调用的契约，在将来任何场合，用于获得最终的计算结果。
 
-supplyAsync 用于提供返回值的情况，CompletableFuture 还有一个不需要返回值的异步调用方法 runAsync(Runnable runnable)，一般我们在优化 Controller 时，使用这个方法比较多。
+supplyAsync 用于提供返回值的情况，CompletableFuture 还有一个不需要返回值的异步调用方法 runAsync(Runnable runnable)
+，一般我们在优化 Controller 时，使用这个方法比较多。
 
-这两个方法如果在不指定线程池的情况下，都是在 ForkJoinPool.common 线程池中执行，而这个线程池中的所有线程都是 Daemon（守护）线程，所以，当主线程结束时，这些线程无论执行完毕都会退出系统。
+这两个方法如果在不指定线程池的情况下，都是在 ForkJoinPool.common 线程池中执行，而这个线程池中的所有线程都是
+Daemon（守护）线程，所以，当主线程结束时，这些线程无论执行完毕都会退出系统。
 
 **核心代码：**
 
@@ -210,8 +209,6 @@ public class HelloController {
 }
 ```
 
-
-
 ## **2、增加内嵌 Tomcat 的最大连接数**
 
 **代码如下：**
@@ -240,13 +237,9 @@ public class TomcatConfig {
 }
 ```
 
-
-
 ## **3、使用 @ComponentScan()**
 
 使用 @ComponentScan() 定位扫包比 @SpringBootApplication 扫包更快。
-
-
 
 ## **4、默认 Tomcat 容器改为 Undertow**
 
@@ -270,13 +263,9 @@ public class TomcatConfig {
 </dependency>
 ```
 
-
-
 ## **5、使用 BufferedWriter 进行缓冲**
 
 这里不给大家举例，可自行尝试。
-
-
 
 **6、Defer2red 方式实现异步调用**
 
@@ -325,8 +314,6 @@ public class AsyncDeferredController {
     }
 }
 ```
-
-
 
 ## **7、异步调用可以使用 AsyncHandlerInterceptor 进行拦截**
 

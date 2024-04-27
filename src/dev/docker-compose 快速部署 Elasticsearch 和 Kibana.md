@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: docker-compose 快速部署 Elasticsearch 和 Kibana
+excerpt: 
 description: 
 date: 2023-10-24
 category: Java
@@ -25,7 +26,7 @@ icon: java
 5. 数据卷设置：在 docker-compose.yml 文件中，通常会使用数据卷来保存 Elasticsearch 数据。这确保了数据的持久性。
 6. 启动容器：在终端中，导航到包含 `docker-compose.yml` 文件的目录，并运行以下命令以启动 Elasticsearch 和 Kibana。
 
-```
+```plain
 docker-compose up -d
 # -d 选项用于在后台运行容器。
 ```
@@ -155,7 +156,7 @@ reboot -h now
 
 ### 7）添加 IK 分词器
 
-GitHub 下载地址：https://github.com/medcl/elasticsearch-analysis-ik/releases
+GitHub 下载地址：<https://github.com/medcl/elasticsearch-analysis-ik/releases>
 
 ```shell
 # 将下载的分词器复制到ES安装目录的plugins目录中并进行解压
@@ -500,4 +501,4 @@ kibana：`http://ip:5601/`
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1698065409894-3.png)
 
-git 地址：https://gitee.com/hadoop-bigdata/docker-compose-es-kibana.git
+git 地址：<https://gitee.com/hadoop-bigdata/docker-compose-es-kibana.git>

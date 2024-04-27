@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 如何读取resources目录下的文件路径（九种方式）
+excerpt: 
 description: 
 date: 2022-08-13
 category: Java
@@ -10,9 +11,7 @@ timeline: true
 icon: java
 ---
 
-
-
-# 如何读取resources目录下的文件路径（九种方式）
+# 如何读取 resources 目录下的文件路径（九种方式）
 
 ### **前情提要**
 
@@ -43,7 +42,7 @@ public static void getFileContent(Object fileInPath) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式一**
 
@@ -59,11 +58,12 @@ public void function1(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式二**
 
-主要核心方法是使用`getResource`和`getPath`方法，直接通过`getResource(fileName)`方法获取文件路径，注意如果是路径中带有中文一定要使用`URLDecoder.decode`解码。
+主要核心方法是使用`getResource`和`getPath`方法，直接通过`getResource(fileName)`
+方法获取文件路径，注意如果是路径中带有中文一定要使用`URLDecoder.decode`解码。
 
 ```java
 /**
@@ -85,7 +85,8 @@ public void function2(String fileName) throws IOException {
 
 ### **方式三**
 
-直接通过`文件名+getFile()`来获取文件。如果是文件路径的话`getFile`和`getPath`效果是一样的，如果是URL路径的话`getPath`是带有参数的路径。
+直接通过`文件名+getFile()`来获取文件。如果是文件路径的话`getFile`和`getPath`效果是一样的，如果是 URL 路径的话`getPath`
+是带有参数的路径。
 
 如下所示：
 
@@ -112,11 +113,12 @@ public void function3(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式四（重要）**
 
-直接使用`getResourceAsStream`方法获取流，上面的几种方式都需要获取文件路径，但是在SpringBoot中所有文件都在jar包中，没有一个实际的路径，因此可以使用以下方式。
+直接使用`getResourceAsStream`方法获取流，上面的几种方式都需要获取文件路径，但是在 SpringBoot 中所有文件都在 jar
+包中，没有一个实际的路径，因此可以使用以下方式。
 
 ```java
 /**
@@ -132,11 +134,12 @@ public void function4(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式五（重要）**
 
-主要也是使用`getResourceAsStream`方法获取流，不使用`getClassLoader`可以使用`getResourceAsStream("/配置测试.txt")`直接从`resources`根路径下获取，SpringBoot中所有文件都在jar包中，没有一个实际的路径，因此可以使用以下方式。
+主要也是使用`getResourceAsStream`方法获取流，不使用`getClassLoader`可以使用`getResourceAsStream("/配置测试.txt")`
+直接从`resources`根路径下获取，SpringBoot 中所有文件都在 jar 包中，没有一个实际的路径，因此可以使用以下方式。
 
 ```java
 /**
@@ -152,11 +155,11 @@ public void function5(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式六（重要）**
 
-通过`ClassPathResource`类获取文件流，SpringBoot中所有文件都在jar包中，没有一个实际的路径，因此可以使用以下方式。
+通过`ClassPathResource`类获取文件流，SpringBoot 中所有文件都在 jar 包中，没有一个实际的路径，因此可以使用以下方式。
 
 ```java
 /**
@@ -173,7 +176,7 @@ public void function6(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式七**
 
@@ -192,7 +195,7 @@ public void function7(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式八**
 
@@ -218,7 +221,7 @@ public void function8(String fileName) throws IOException {
 }
 ```
 
-###  
+###     
 
 ### **方式九**
 

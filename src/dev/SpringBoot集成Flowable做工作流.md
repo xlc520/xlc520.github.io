@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot集成Flowable做工作流
+excerpt: 
 description: 
 date: 2022-08-11
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# 什么是BPMN
+# 什么是 BPMN
 
 ## **工作流(引擎)介绍**
 
@@ -25,7 +26,7 @@ icon: java
 
 就算你自己没有设计过工作流，那么你每天肯定也在使用各种流程。
 
-工作流引擎其实就是使用代码实现UML流程图中的各个步骤而已：
+工作流引擎其实就是使用代码实现 UML 流程图中的各个步骤而已：
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/a92297eeb2b94961ae0b379f4d8b9ddc.png)
 
@@ -43,9 +44,9 @@ Code（硬编码），这种玩法实现流程初级会比较快，但是长远�
 2. 流程无法复用，当组织出现新的工作流程，又要重新写一套代码，开发成本非常高
 3. 流程和业务代码耦合，你中有我，我中有你（并不符合单一职责和解耦的设计原则）
 
-## 认识BPMN基础元素
+## 认识 BPMN 基础元素
 
-BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0 的核心：
+BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握 BPMN 2.0 的核心：
 
 1. 流对象
 2. 数据)
@@ -98,56 +99,57 @@ BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0
 
 通过泳道对主要的建模元素进行分组，将活动划分到不同的可视化类别中来描述由不同的参与者的责任与职责。
 
-## BPMN实例
+## BPMN 实例
 
-**实例1**：拍卖服务BPMN模板
+**实例 1**：拍卖服务 BPMN 模板
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-16176e4ff653436daf61415cf9763276_720w.jpg)
 
-**实例2**：书籍销售流程 BPMN
+**实例 2**：书籍销售流程 BPMN
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-d1d2769a122c2e9e88fdea04e905d0b5_720w.jpg)
 
-# Flowable简介
+# Flowable 简介
 
-> 目前最新版是**Flowable 6.7.2**（2022年05月09日）
+> 目前最新版是**Flowable 6.7.2**（2022 年 05 月 09 日）
 >
-> 官方网站：https://www.flowable.com/open-source
+> 官方网站：<https://www.flowable.com/open-source>
 >
-> 用户手册：https://tkjohn.github.io/flowable-userguide/
+> 用户手册：<https://tkjohn.github.io/flowable-userguide/>
 >
-> GitHub：https://github.com/flowable
+> GitHub：<https://github.com/flowable>
 
-Flowable是BPMN的一个基于java的软件实现，不过Flowable不仅仅包括BPMN，还有DMN决策表和CMMN
-Case管理引擎，并且有自己的用户管理、微服务API等一系列功能，是一个服务平台。
+Flowable 是 BPMN 的一个基于 java 的软件实现，不过 Flowable 不仅仅包括 BPMN，还有 DMN 决策表和 CMMN
+Case 管理引擎，并且有自己的用户管理、微服务 API 等一系列功能，是一个服务平台。
 
-## Flowable部署
+## Flowable 部署
 
 1、下载
 
-访问：https://github.com/flowable/flowable-engine/releases
+访问：<https://github.com/flowable/flowable-engine/releases>
 
 选择下载版本，我这里下载的是 6.5.0
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2443180-20220509132750126-1538478027.png)
 
-2、下载后解压，wars 文件目录里面共 5 个 war包：
+2、下载后解压，wars 文件目录里面共 5 个 war 包：
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2443180-20220509140242743-532479050.png)
 
 - flowable-admin：后台管理
 - flow-idm：用户组权限管理
 - flow-modeler：流程定义管理
-- flowable-rest：流程引擎对外提供的API接⼝
+- flowable-rest：流程引擎对外提供的 API 接⼝
 - flowable-task：用户任务管理
 
-把它们放到tomact的 webapps 目录，然后找到 tomcat / bin / startup.bat 启动 tomcat，会等待一段时间。
+把它们放到 tomact 的 webapps 目录，然后找到 tomcat / bin / startup.bat 启动 tomcat，会等待一段时间。
 
 3、修改配置文件
 
-所有war包都解压后，找到每个项目中的，比如：\webapps\flowable-admin\WEB-INF\classes application-dev.properties 这样的配置文件
+所有 war 包都解压后，找到每个项目中的，比如：\webapps\flowable-admin\WEB-INF\classes application-dev.properties 这样的配置文件
 
-1）修改：改成自己的数据库链接地址，数据库名flowable自己创建，从flowable-6.5.0.zip里面database下面的creat/all 下的sql 脚本执行去建表
+1）修改：改成自己的数据库链接地址，数据库名 flowable 自己创建，从 flowable-6.5.0.zip 里面 database 下面的 creat/all 下的 sql
+脚本执行去建表
 几十张表
 
 ```plaintext
@@ -164,13 +166,13 @@ flowable.admin.app.server-config.form.port=9999
 flowable.admin.app.server-config.content.port=9999
 ```
 
-2）修改\webapps\flowable-admin\WEB-INF\classes flowable-default.properties， 主要就是修改数据库链接上，改成mysql的
+2）修改\webapps\flowable-admin\WEB-INF\classes flowable-default.properties， 主要就是修改数据库链接上，改成 mysql 的
 
 > 注意：
 >
-> 1）需要在每个项目的WEB-INF\lib目录下添加mysql的驱动包。
+> 1）需要在每个项目的 WEB-INF\lib 目录下添加 mysql 的驱动包。
 >
-> 2）高版本的mysql驱动包，有些必须的连接参数需要配置。我使用的是mysql-connector-java-8.0.11.jar，配置如下：
+> 2）高版本的 mysql 驱动包，有些必须的连接参数需要配置。我使用的是 mysql-connector-java-8.0.11.jar，配置如下：
 >
 > jdbc:mysql://localhost:3306/flowable?serverTimezone=Asia/Shanghai&useUnicode=true&charcterEncoding=UTF-8&useSSL=false
 
@@ -224,37 +226,37 @@ spring.datasource.username=root
 spring.datasource.password=root折叠 
 ```
 
-几个项目的都修改完，关闭之前运行的tomcat ，重新启动。
+几个项目的都修改完，关闭之前运行的 tomcat ，重新启动。
 
 5、访问
 
 需要时间会久点，都正常启动后
 
-访问 http://127.0.0.1:8080/flowable-admin  用户名 admin 密码 test
+访问 <http://127.0.0.1:8080/flowable-admin>  用户名 admin 密码 test
 
-访问 http://127.0.0.1:8080/flowable-idm  用户名 admin 密码 test
+访问 <http://127.0.0.1:8080/flowable-idm>  用户名 admin 密码 test
 
-访问 http://127.0.0.1:8080/flowable-modeler  用户名 admin 密码 test
+访问 <http://127.0.0.1:8080/flowable-modeler>  用户名 admin 密码 test
 
-## Flowable数据表
+## Flowable 数据表
 
-1、Flowable的所有数据库表都以ACT_开头。服务API的命名也大略符合这个规则。
+1、Flowable 的所有数据库表都以 ACT_开头。服务 API 的命名也大略符合这个规则。
 
-2、ACT_RE_：'RE'代表repository。带有这个前缀的表包含“静态”信息，例如流程定义与流程资源（图片、规则等）。
+2、ACT_RE_：'RE'代表 repository。带有这个前缀的表包含“静态”信息，例如流程定义与流程资源（图片、规则等）。
 
-3、ACT_RU_：'RU'代表runtime。这些表存储运行时信息，例如流程实例（process instance）、用户任务（user
-task）、变量（variable）、作业（job）等。Flowable只在流程实例运行中保存运行时数据，并在流程实例结束时删除记录。这样保证运行时表小和快。
+3、ACT_RU_：'RU'代表 runtime。这些表存储运行时信息，例如流程实例（process instance）、用户任务（user
+task）、变量（variable）、作业（job）等。Flowable 只在流程实例运行中保存运行时数据，并在流程实例结束时删除记录。这样保证运行时表小和快。
 
-4、ACT_HI_：'HI'代表history。这些表存储历史数据，例如已完成的流程实例、变量、任务等。
+4、ACT_HI_：'HI'代表 history。这些表存储历史数据，例如已完成的流程实例、变量、任务等。
 
 5、ACT_GE_：通用数据。在多处使用。
 
-**1）通用数据表（2个）**
+**1）通用数据表（2 个）**
 
 - act_ge_bytearray：二进制数据表，如流程定义、流程模板、流程图的字节流文件；
 - act_ge_property：Flowable 相关的基本信息（不常用）。比如各个 module 使用的版本信息
 
-**2）历史表（8个，HistoryService接口操作的表）**
+**2）历史表（8 个，HistoryService 接口操作的表）**
 
 - act_hi_actinst：历史节点表，存放流程实例运转的各个节点信息（包含开始、结束等非任务节点）；
 - act_hi_attachment：历史附件表，存放历史节点上传的附件信息（不常用）；
@@ -265,35 +267,35 @@ task）、变量（variable）、作业（job）等。Flowable只在流程实例
 - act_hi_taskinst：历史流程任务表，存储历史任务节点；
 - act_hi_varinst：流程历史变量表，存储流程历史节点的变量信息；
 
-**3）用户相关表（4个，IdentityService接口操作的表）**
+**3）用户相关表（4 个，IdentityService 接口操作的表）**
 
 - act_id_group：用户组信息表，对应节点选定候选组信息；
 - act_id_info：用户扩展信息表，存储用户扩展信息；
 - act_id_membership：用户与用户组关系表；
 - act_id_user：用户信息表，对应节点选定办理人或候选人信息；
 
-**4）流程定义、流程模板相关表（3个，RepositoryService接口操作的表）**
+**4）流程定义、流程模板相关表（3 个，RepositoryService 接口操作的表）**
 
 - act_re_deployment：部属信息表，存储流程定义、模板部署信息；
-- act_re_procdef：流程定义信息表，存储流程定义相关描述信息，但其真正内容存储在act_ge_bytearray表中，以字节形式存储；
-- act_re_model：流程模板信息表，存储流程模板相关描述信息，但其真正内容存储在act_ge_bytearray表中，以字节形式存储；
+- act_re_procdef：流程定义信息表，存储流程定义相关描述信息，但其真正内容存储在 act_ge_bytearray 表中，以字节形式存储；
+- act_re_model：流程模板信息表，存储流程模板相关描述信息，但其真正内容存储在 act_ge_bytearray 表中，以字节形式存储；
 
-**5）流程运行时表（6个，RuntimeService接口操作的表）**
+**5）流程运行时表（6 个，RuntimeService 接口操作的表）**
 
 - act_ru_task：运行时流程任务节点表，存储运行中流程的任务节点信息，重要，常用于查询人员或部门的待办任务时使用；
 - act_ru_event_subscr：监听信息表，不常用；
-- act_ru_execution：运行时流程执行实例表，记录运行中流程运行的各个分支信息（当没有子流程时，其数据与act_ru_task表数据是一一对应的）；
+- act_ru_execution：运行时流程执行实例表，记录运行中流程运行的各个分支信息（当没有子流程时，其数据与 act_ru_task 表数据是一一对应的）；
 - act_ru_identitylink：运行时流程人员表，重要，常用于查询人员或部门的待办任务时使用；
 - act_ru_job：运行时定时任务数据表，存储流程的定时任务信息；
 - act_ru_variable：运行时流程变量数据表，存储运行中的流程各节点的变量信息；
 
-# Flowable流程设计器的使用
+# Flowable 流程设计器的使用
 
 **新建流程图**
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2443180-20220509153032863-1101803880.png)
 
-**注意：这个key最好不要有中文，后期流程部署、启动、跳转都可能会用到它，所有不要定义的过于随意**
+**注意：这个 key 最好不要有中文，后期流程部署、启动、跳转都可能会用到它，所有不要定义的过于随意**
 
 **根据业务需求画流程图**
 
@@ -307,7 +309,7 @@ task）、变量（variable）、作业（job）等。Flowable只在流程实例
 
 3、分配用户（只针对用户任务节点）
 
-为节点分配审批人（由于Flowable自带的的组织结构和我们的组织架构可能存在差异，所以我们一般用固定值）
+为节点分配审批人（由于 Flowable 自带的的组织结构和我们的组织架构可能存在差异，所以我们一般用固定值）
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160551.png)
 
@@ -326,15 +328,16 @@ task）、变量（variable）、作业（job）等。Flowable只在流程实例
 
 （2）常用的任务监听器以及使用场景
 
-create：上面讲的给用户节点设置审批人只适用于办理人是固定的某一个人或多个候选人；如果一个用户节点办理人是不固定的话，我们可以用create任务监听器来实现
+create：上面讲的给用户节点设置审批人只适用于办理人是固定的某一个人或多个候选人；如果一个用户节点办理人是不固定的话，我们可以用
+create 任务监听器来实现
 
-complete：当遇到一个用户任务办完需要抄送或者触发其他事物的时候，我们可以使用complete任务监听器；不同类型的任务监听器使用方法都一样。
+complete：当遇到一个用户任务办完需要抄送或者触发其他事物的时候，我们可以使用 complete 任务监听器；不同类型的任务监听器使用方法都一样。
 
 5、多实例
 
-Flowable支持一个节点多个实例；通俗讲就是你在流程图里只画了一个用户节点，但是通过多实例配置可以使流程运行时为这一个节点创建多个实例；这个类似于循环，而循环的次数取决于你设置的基数。
+Flowable 支持一个节点多个实例；通俗讲就是你在流程图里只画了一个用户节点，但是通过多实例配置可以使流程运行时为这一个节点创建多个实例；这个类似于循环，而循环的次数取决于你设置的基数。
 
-多实例还支持串行Sequential和并行parallel；通俗来讲所谓的串行就是顺序执行，并行就是不按顺序执行，但它俩的相同点都是必须要所有的实例都完成这个节点才算结束。
+多实例还支持串行 Sequential 和并行 parallel；通俗来讲所谓的串行就是顺序执行，并行就是不按顺序执行，但它俩的相同点都是必须要所有的实例都完成这个节点才算结束。
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210609175024118.png)
 
@@ -344,7 +347,7 @@ Flowable支持一个节点多个实例；通俗讲就是你在流程图里只画
 
 审批流当中最常见的就是通过和驳回，这时候就需要为通过和驳回的流程线设置流转条件。
 
-Flowable流条件是以占位符的方式存在的。
+Flowable 流条件是以占位符的方式存在的。
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1MDk5Mw==,size_16,color_FFFFFF,t_70-16587155160554.png)
 
@@ -358,7 +361,7 @@ Flowable流条件是以占位符的方式存在的。
 
 （1）排他网关：通过它的流只能有一条。
 
-注意：排他网关支持默认出口；流程启动后，当其他流程线都返回false时走默认流。
+注意：排他网关支持默认出口；流程启动后，当其他流程线都返回 false 时走默认流。
 
 （2） 并行网关：只有所有要经过它的任务流都完成时才会进行下一步。
 
@@ -370,13 +373,13 @@ Flowable流条件是以占位符的方式存在的。
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160566.png)
 
-保存后流程图相关数据会保存在act_de_model表内，并且每次更新并保存后，流程定义的版本会+1
+保存后流程图相关数据会保存在 act_de_model 表内，并且每次更新并保存后，流程定义的版本会+1
 
 **下载**
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQ29kZXJXYW5nQENoaW5h,size_20,color_FFFFFF,t_70,g_se,x_16-16587155160567.png)
 
-# SpringBoot使用Flowable
+# SpringBoot 使用 Flowable
 
 ## 基本用法
 
@@ -432,7 +435,7 @@ Flowable流条件是以占位符的方式存在的。
 </dependency>折叠 
 ```
 
-2、application.yml配置
+2、application.yml 配置
 
 ```yaml
 server:
@@ -452,14 +455,14 @@ flowable:
   database-schema-update: true
 ```
 
-3、绘制BPMN流程图
+3、绘制 BPMN 流程图
 
 这里用学生请假流程做例子，首先由学生发起请假申请，然后由老师进行审核，老师审核结束后进行判断：
 
-- 如果请假天数大于2天，流转到校长处审核，然后流程结束。
-- 如果请假天数不大于2天，流程结束。
+- 如果请假天数大于 2 天，流转到校长处审核，然后流程结束。
+- 如果请假天数不大于 2 天，流程结束。
 
-部署流程需要一个.bpmn20.xml文件，可用手动编辑，也可以借助一些工具创建。
+部署流程需要一个.bpmn20.xml 文件，可用手动编辑，也可以借助一些工具创建。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -559,7 +562,10 @@ flowable:
 
 ![SpringBoot集成Flowable](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2443180-20220509181200516-2065082021.png)
 
-将xml保存为【学生请假流程.bpmn20.xml】，复制到项目【resources/processes】目录下（可以通过修改flowable.process-definition-location-prefix配置项默认值重新指定），如果没有processes文件夹就自己创建一个，Flowable会自动部署processes目录下的流程模型。启动项目后可以通过RepositoryService查询已经部署的模型，若查询结果不为空就代表模型部署成功了。（如果与flowable建模设计器用的都是同一个库，可以在flowable-admin管理平台进行部署流程）
+将 xml 保存为【学生请假流程.bpmn20.xml】，复制到项目【resources/processes】目录下（可以通过修改
+flowable.process-definition-location-prefix 配置项默认值重新指定），如果没有 processes 文件夹就自己创建一个，Flowable 会自动部署
+processes 目录下的流程模型。启动项目后可以通过 RepositoryService 查询已经部署的模型，若查询结果不为空就代表模型部署成功了。（如果与
+flowable 建模设计器用的都是同一个库，可以在 flowable-admin 管理平台进行部署流程）
 
 ```java
 @Autowired
@@ -729,7 +735,7 @@ public void testFlow() {
 结束
 ```
 
-将请假日期day改为5，打印结果：
+将请假日期 day 改为 5，打印结果：
 
 ```plaintext
 开始
@@ -745,7 +751,7 @@ public void testFlow() {
 结束
 ```
 
-## Flowable常用配置项
+## Flowable 常用配置项
 
 ```properties
 # ===================================================================
@@ -753,7 +759,7 @@ public void testFlow() {
 # 通用Flowable Spring Boot参数
 #
 # This sample file is provided as a guideline. Do NOT copy it in its
-# entirety to your own application.	           ^^^
+# entirety to your own application.            ^^^
 # 本示例文件只作为指导。请不要直接拷贝至你自己的应用中。
 # ===================================================================
 
@@ -891,9 +897,10 @@ management.endpoint.flowable.cache.time-to-live=0ms # 缓存响应的最大时�
 management.endpoint.flowable.enabled=true # 是否启用flowable端点。折叠 
 ```
 
-# Flowable 常用API
+# Flowable 常用 API
 
-Flowable整体是通过ProcessEngine来操作的。即不管什么框架操作流程，都需要通过ProcessEngine这个类来处理。ProcessEngine是Flowable对外公开的门面。
+Flowable 整体是通过 ProcessEngine 来操作的。即不管什么框架操作流程，都需要通过 ProcessEngine 这个类来处理。ProcessEngine 是
+Flowable 对外公开的门面。
 
 类图如下：
 
@@ -1040,5 +1047,3 @@ ProcessEngineConfigurationImpl processEngineConfiguration =
 identityService.createUserQuery().userId(userId).singleResult();  获取审批用户的具体信息
 identityService.createGroupQuery().groupId(groupId).singleResult(); 获取审批组的具体信息
 ```
-
- 

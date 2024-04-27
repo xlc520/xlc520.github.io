@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot利用ThreadPoolTaskExecutor批量插入
+excerpt: 
 description: 
 date: 2022-11-07
 category: Java
@@ -12,9 +13,7 @@ timeline: true
 icon: java
 ---
 
-
-
-# SpringBoot利用ThreadPoolTaskExecutor批量插入
+# SpringBoot 利用 ThreadPoolTaskExecutor 批量插入
 
 ## **前言**
 
@@ -51,7 +50,7 @@ async.executor.thread.queue_capacity = 99988
 async.executor.thread.name.prefix = async-importDB-
 ```
 
-spring容器注入线程池bean对象
+spring 容器注入线程池 bean 对象
 
 ```java
 @Configuration
@@ -132,4 +131,3 @@ public int testMultiThread() {
     return logOutputResults.size();
 }
 ```
-

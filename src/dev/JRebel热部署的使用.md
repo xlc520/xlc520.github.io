@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: JRebel热部署的使用
+excerpt: 
 description: 
 date: 2022-07-09
 category: Java
@@ -10,39 +11,39 @@ timeline: true
 icon: java
 ---
 
-# JRebel热部署的使用
+# JRebel 热部署的使用
 
 对比图：
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/feabc010fbd0a0467f3bcb155faede3b-16565707073351.png)
 
-IDEA在这里配置了自动编译：
+IDEA 在这里配置了自动编译：
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c2dc072b4fb156f0ee8da0c3dd86abb5-16565707098543.png)
 
-所以当你的代码有变化时，JRebel会自动重新加载最新的代码，所以不用你手动重新编译
+所以当你的代码有变化时，JRebel 会自动重新加载最新的代码，所以不用你手动重新编译
 
-## **注意事项：**
+## **注意事项**
 
-c盘下的用户名一定不能为中文名称，否则会一直提示路径错误
+c 盘下的用户名一定不能为中文名称，否则会一直提示路径错误
 
 ![注意事项](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210318093831211.png)
 
-## 1、安装jrebel插件
+## 1、安装 jrebel 插件
 
-File–》Settings—》plugins----》marketplace----》搜索jrebel
+File–》Settings—》plugins----》marketplace----》搜索 jrebel
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210318095405727.png)
 
-安装成功后会重启idea，出现下面的图片
+安装成功后会重启 idea，出现下面的图片
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2021031809551542.png)
 
-## 2、配置jrebel插件
+## 2、配置 jrebel 插件
 
-### 2.1激活jrebel
+### 2.1 激活 jrebel
 
-先获取GUID
+先获取 GUID
 
 - 第一种
 
@@ -51,21 +52,21 @@ File–》Settings—》plugins----》marketplace----》搜索jrebel
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/715c5a15e09cf6bf8bc357073a697464.png)
 
-```
+```plain
 https://jrebel.qekang.com/xxxx
 ```
 
 - 第二种
 
-在线生成GUID地址 （[**https://www.guidgen.com/**](https://www.guidgen.com/)）， PS：如果失效刷新GUID替换就可以！
+在线生成 GUID 地址 （[**https://www.guidgen.com/**](https://www.guidgen.com/)）， PS：如果失效刷新 GUID 替换就可以！
 
-输入url：`https://jrebel.qekang.com/GUID`(其中的GUID是2.1生成的，邮箱自己随意填写)
+输入 url：`https://jrebel.qekang.com/GUID`(其中的 GUID 是 2.1 生成的，邮箱自己随意填写)
 
-之前点击蓝色字体会出现这个窗口，将上面获取到的GUID根据图片提示输入进去
+之前点击蓝色字体会出现这个窗口，将上面获取到的 GUID 根据图片提示输入进去
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210318094513359.png)
 
-如果没有出现下面提示，请确定自己的网络通畅，然后再次点击激活，如果还不行，更改guid
+如果没有出现下面提示，请确定自己的网络通畅，然后再次点击激活，如果还不行，更改 guid
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2021031809480460.png)
 
@@ -73,29 +74,29 @@ https://jrebel.qekang.com/xxxx
 
 ## 3、JRebel 配置
 
-### 3、1 将工作模式改成离线工作，！！！！
+### 3、1 将工作模式改成离线工作
 
-不修改成离线工作，你的jrebel会一直报错，当然某些小伙伴的是没有问题
+不修改成离线工作，你的 jrebel 会一直报错，当然某些小伙伴的是没有问题
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210318100401836.png)
 
-- 你的右上角会有两个绿色的小图标，这个就是jrebel启动
+- 你的右上角会有两个绿色的小图标，这个就是 jrebel 启动
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210318100852670.png)
 
-## 4、使用jreBel
+## 4、使用 jreBel
 
 ### 4、1 进行项目热部署
 
-- 左下角有一个JreBel，点击在打开的窗口，选择你所需要进行热部署的项目。
+- 左下角有一个 JreBel，点击在打开的窗口，选择你所需要进行热部署的项目。
 
   ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603103938126.png)
 
-- 勾选后会生成一个rebel.xml文件，此文件可以忽略
+- 勾选后会生成一个 rebel.xml 文件，此文件可以忽略
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603104004373.png)
 
-### 4、3 更改后使用ctrl+f9实现不重启服务器部署项目
+### 4、3 更改后使用 ctrl+f9 实现不重启服务器部署项目
 
 - 或者点击小锤子也是
   ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603104217131.png)
@@ -107,13 +108,13 @@ https://jrebel.qekang.com/xxxx
   ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2021060310490611.png)
 - 右下角会出现一个提示
   ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603104826766.png)
-- 然后点击ctrl+F9，此时右下角会有提示，点击红色停止
+- 然后点击 ctrl+F9，此时右下角会有提示，点击红色停止
   ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603105037206.png)
-- 会弹出一个窗口，在窗口中输入build
+- 会弹出一个窗口，在窗口中输入 build
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603105130362.png)
 
-- 打开设置，找到kaymap
+- 打开设置，找到 kaymap
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210603105243414.png)
 
@@ -121,6 +122,6 @@ https://jrebel.qekang.com/xxxx
 
 ![JRebel热部署的使用](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2021060310541226.png)
 
-### 警告！！！
+### 警告
 
-JreBel不适用于resources包下面的文件，修改此包下面的必须重启，否则不生效。
+JreBel 不适用于 resources 包下面的文件，修改此包下面的必须重启，否则不生效。

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: IDEA 206个快捷键 动图演示
+excerpt: 
 description: IDEA 206个快捷键 动图演示
 date: 2022-05-09
 category: Java
@@ -10,16 +11,16 @@ timeline: true
 icon: java
 ---
 
-# IDEA 206个快捷键 动图演示
+# IDEA 206 个快捷键 动图演示
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9e911fdfd9d07a3c026a9c504d1db1f5.png)
 
-本文参考了 IntelliJ IDEA 的官网，列举了IntelliJ IDEA（Windows 版）的所有快捷键。并在此基础上，为 90%
+本文参考了 IntelliJ IDEA 的官网，列举了 IntelliJ IDEA（Windows 版）的所有快捷键。并在此基础上，为 90%
 以上的快捷键提供了动图演示，能够直观的看到操作效果。
 
 该快捷键共分 16 种，可以方便的按各类查找自己需要的快捷键~~
 
-## Part1一、构建/编译
+## Part1 一、构建/编译
 
 #### 1`Ctrl + F9`：构建项目
 
@@ -37,9 +38,9 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d7290ad52882e3f6effc232ad8003eea.png)
 
-在IntelliJ IDEA 中打开要编译的类，执行该命令会编译当前类。
+在 IntelliJ IDEA 中打开要编译的类，执行该命令会编译当前类。
 
-## Part2二、文本编辑
+## Part2 二、文本编辑
 
 #### 3`Ctrl + X`：剪切
 
@@ -135,7 +136,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/3891eaca7497e6363659e52087780dde.gif)
 
-## Part3三、光标操作
+## Part3 三、光标操作
 
 #### 23`Ctrl + Left`：左移一个单词
 
@@ -185,7 +186,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/328e4be0c2750ac2a1acea7703c2cc59.gif)
 
-## Part4四、文本选择
+## Part4 四、文本选择
 
 #### 38`Ctrl + A`：全选
 
@@ -243,7 +244,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/567cc3561ef5d6a1d684655f4d3d0ca5.gif)
 
-## Part5五、代码折叠
+## Part5 五、代码折叠
 
 #### 57`Ctrl + NumPad+`：展开代码块
 
@@ -265,7 +266,7 @@ icon: java
 
 #### 63`Ctrl + .`：折叠选择
 
-## Part6六、多个插入符号和范围选择
+## Part6 六、多个插入符号和范围选择
 
 #### 64`Alt + Shift + Click`：添加/删除插入符号
 
@@ -275,13 +276,13 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d236737b13a6a636c4d8c55cebdedd74.gif)
 
-#### 66双击`Ctrl` + `Up`：向上克隆插入符号
+#### 66 双击`Ctrl` + `Up`：向上克隆插入符号
 
 按`Ctrl`键两次，然后在不松开的情况下按向上箭头键。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/55034334c6a85169eefe3ff1a1aad788.gif)
 
-#### 67双击`Ctrl` + `Down`：向下克隆插入符号
+#### 67 双击`Ctrl` + `Down`：向下克隆插入符号
 
 按`Ctrl`键两次，然后在不松开的情况下按向下箭头键。
 
@@ -313,7 +314,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/bb12a7c0f3f775c40e669c9878a4ae05.gif)
 
-## Part7七、辅助编码
+## Part7 七、辅助编码
 
 #### 75`Alt + Enter`：显示建议操作
 
@@ -379,7 +380,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0e6cb1c2e8cbde2028761ca549e27837.gif)
 
-## Part8八、上下文导航
+## Part8 八、上下文导航
 
 #### 92`Alt + Down`：跳转至下一个方法
 
@@ -447,9 +448,9 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c26d14168c30874f5cf02cad12fc1439.gif)
 
-## Part9九、查找操作
+## Part9 九、查找操作
 
-#### 112双击`Shift`：查找所有
+#### 112 双击`Shift`：查找所有
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f4af891913492ce0d700e8cc49f8da58.gif)
 
@@ -491,7 +492,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/103a16dbc06845af9fbfba2d240d3f76.gif)
 
-## Part10十、符号导航
+## Part10 十、符号导航
 
 #### 124`Alt + F7`：查找用法
 
@@ -511,7 +512,7 @@ icon: java
 
 #### 130`Ctrl + Shift + F7`：突出显示文件中的用法
 
-## Part11十一、代码分析
+## Part11 十一、代码分析
 
 #### 131`Alt + Enter`：显示意图操作
 
@@ -533,9 +534,9 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5f61eda6c61aac30266b0eca2c2961f3.gif)
 
-## Part12十二、运行和调试
+## Part12 十二、运行和调试
 
-#### 137双击`Ctrl`：运行所有
+#### 137 双击`Ctrl`：运行所有
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/dfd83fcdb2df5c7268711d56ab2068d9.gif)
 
@@ -615,7 +616,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d78ce349615dd68ee7447a312ec8ee49.gif)
 
-## Part13十三、代码重构
+## Part13 十三、代码重构
 
 #### 164`Ctrl + Alt + Shift + T`：打开重构列表
 
@@ -639,7 +640,7 @@ icon: java
 
 #### 173`Alt + Delete`：安全删除
 
-## Part14十四、全局 CVS 操作
+## Part14 十四、全局 CVS 操作
 
 #### 174`Alt + `` ：弹出 CVS 窗口
 
@@ -669,7 +670,7 @@ icon: java
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/865e5aecc673da3fce5cc31559c10f20.gif)
 
-## Part15十五、差异查看器
+## Part15 十五、差异查看器
 
 #### 183`F7`：下一个差异
 
@@ -687,7 +688,7 @@ icon: java
 
 #### 188`Ctrl + Shift + D`：显示差异设置窗口
 
-## Part16十六、工具窗口
+## Part16 十六、工具窗口
 
 #### 189`Shift + Escape`：隐藏活动的工具窗口
 
@@ -734,4 +735,3 @@ icon: java
 #### 206`Alt + F12`：显示终端窗口
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/282103793f92294a49ef3bd929740153.gif)
-

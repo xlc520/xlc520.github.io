@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Boot实现 IP地址解析
+excerpt: 
 description: 
 date: 2023-07-05
 category: Java
@@ -10,30 +11,30 @@ timeline: true
 icon: java
 ---
 
+# Spring Boot 实现 IP 地址解析
 
+#### 引入
 
-# Spring Boot实现 IP地址解析
-
-#### 引入：
-
-如果使用本地ip 解析的话，我们将会借助ip2region，该项目维护了一份较为详细的本地ip 地址对应表，如果为了离线环境的使用，需要导入该项目依赖，并指定版本，不同版本的方法可能存在差异。
+如果使用本地 ip 解析的话，我们将会借助 ip2region，该项目维护了一份较为详细的本地 ip
+地址对应表，如果为了离线环境的使用，需要导入该项目依赖，并指定版本，不同版本的方法可能存在差异。
 
 ```xml
 <!--ip库-->
 <dependency>
-	<groupId>org.lionsoul</groupId>
-	<artifactId>ip2region</artifactId>
-	<version>2.6.3</version>
+ <groupId>org.lionsoul</groupId>
+ <artifactId>ip2region</artifactId>
+ <version>2.6.3</version>
 </dependency>
 ```
 
-官方gitee：https://gitee.com/lionsoul/ip2region
+官方 gitee：<https://gitee.com/lionsoul/ip2region>
 
-#### 开发：
+#### 开发
 
-在使用时需要将 xdb 文件下载到工程文件目录下，使用ip2region即使是完全基于 xdb 文件的查询，单次查询响应时间在十微秒级别，可通过如下两种方式开启内存加速查询：
+在使用时需要将 xdb 文件下载到工程文件目录下，使用 ip2region 即使是完全基于 xdb 文件的查询，单次查询响应时间在十微秒级别，可通过如下两种方式开启内存加速查询：
 
-1. vIndex 索引缓存 ：使用固定的 512KiB 的内存空间缓存 vector index 数据，减少一次 IO 磁盘操作，保持平均查询效率稳定在10-20微秒之间。
+1. vIndex 索引缓存 ：使用固定的 512KiB 的内存空间缓存 vector index 数据，减少一次 IO 磁盘操作，保持平均查询效率稳定在 10-20
+   微秒之间。
 2. xdb 整个文件缓存：将整个 xdb 文件全部加载到内存，内存占用等同于 xdb 文件大小，无磁盘 IO 操作，保持微秒级别的查询效率。
 
 ```java
@@ -97,11 +98,13 @@ public class IPUtil {
     }
 ```
 
-这里我们将ip 解析封装成一个工具类，包含获取IP和ip 地址解析两个方法，ip 的解析可以在请求中获取。获取到ip后，需要根据ip ，在xdb 中查找对应的IP地址的解析，由于是本地数据库可能存在一定的缺失，部分ip 存在无法解析的情况。
+这里我们将 ip 解析封装成一个工具类，包含获取 IP 和 ip 地址解析两个方法，ip 的解析可以在请求中获取。获取到 ip 后，需要根据 ip
+，在 xdb 中查找对应的 IP 地址的解析，由于是本地数据库可能存在一定的缺失，部分 ip 存在无法解析的情况。
 
-#### 在线解析:
+#### 在线解析
 
-如果想要获取更加全面的ip 地址信息，可使用在线数据库，这里提供的是 whois.pconline.com  的IP解析，该IP解析在我的使用过程中表现非常流畅，而且只有少数的ip 存在无法解析的情况。
+如果想要获取更加全面的 ip 地址信息，可使用在线数据库，这里提供的是 whois.pconline.com 的 IP 解析，该 IP
+解析在我的使用过程中表现非常流畅，而且只有少数的 ip 存在无法解析的情况。
 
 ```java
 @Slf4j
@@ -176,11 +179,10 @@ public class AddressUtils {
 }
 ```
 
+#### 场景
 
-
-#### 场景：
-
-那么在开发的什么流程获取ip 地址是比较合适的，这里就要用到我们的拦截器了。拦截进入服务的每个请求，进行前置操作，在进入时就完成请求头的解析，ip 获取以及ip 地址解析，这样在后续流程的全环节，都可以复用ip 地址等信息。
+那么在开发的什么流程获取 ip 地址是比较合适的，这里就要用到我们的拦截器了。拦截进入服务的每个请求，进行前置操作，在进入时就完成请求头的解析，ip
+获取以及 ip 地址解析，这样在后续流程的全环节，都可以复用 ip 地址等信息。
 
 ```java
 /**
@@ -224,8 +226,8 @@ java复制代码@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     IpUrlLimitInterceptor ipUrlLimitInterceptor;
-	
-	    //执行ip拦截器
+ 
+     //执行ip拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(ipUrlLimitInterceptor)
@@ -234,6 +236,3 @@ public class WebConfig implements WebMvcConfigurer {
     }
 }
 ```
-
-
-

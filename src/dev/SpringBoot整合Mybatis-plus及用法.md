@@ -1,90 +1,94 @@
 ---
 author: xlc520
 title: SpringBoot整合Mybatis-plus及用法
-description: 
+excerpt:
+description:
 date: 2022-07-01
 category: Java
-tag: 
-- Java
-- SpringBoot
-- Mybatis-plus
+tag:
+  - Java
+  - SpringBoot
+  - Mybatis-plus
 article: true
 timeline: true
 icon: java
 ---
 
-# SpringBoot整合Mybatis-plus及用法
+# SpringBoot 整合 Mybatis-plus 及用法
 
-## 一、mybatis-plus简介：
+## 一、mybatis-plus 简介
 
-Mybatis-Plus（简称MP）是一个 Mybatis 的增强工具，在 Mybatis
-的基础上只做增强不做改变，为简化开发、提高效率而生。这是官方给的定义，关于mybatis-plus的更多介绍及特性，可以参考mybatis-plus官网。那么它是怎么增强的呢？其实就是它已经封装好了一些crud方法，我们不需要再写xml了，直接调用这些方法就行，就类似于JPA。并且3.X系列支持lambda语法,让我在写条件构造的时候少了很多的"
+Mybatis-Plus（简称 MP）是一个 Mybatis 的增强工具，在 Mybatis
+的基础上只做增强不做改变，为简化开发、提高效率而生。这是官方给的定义，关于 mybatis-plus 的更多介绍及特性，可以参考
+mybatis-plus 官网。那么它是怎么增强的呢？其实就是它已经封装好了一些 crud 方法，我们不需要再写 xml 了，直接调用这些方法就行，就类似于
+JPA。并且 3.X 系列支持 lambda 语法,让我在写条件构造的时候少了很多的"
 魔法值",从代码结构上更简洁了.
 
-## 二、springboot整合mybatis-plus案例
+## 二、springboot 整合 mybatis-plus 案例
 
-pom.xml配置
+pom.xml 配置
 
 ```xml
+
 <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
     </dependency>
     <!--springboot程序测试依赖，如果是自动创建项目默认添加-->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.16.10</version>
-      <scope>provided</scope>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.16.10</version>
+        <scope>provided</scope>
     </dependency>
     <!-- 包含spirng Mvc ,tomcat的包包含requestMapping restController 等注解 -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid-spring-boot-starter</artifactId>
-      <version>1.1.10</version>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>1.1.10</version>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <!-- druid依赖 -->
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.1.0</version>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.1.0</version>
     </dependency>
     <!-- mybatisPlus 核心库 -->
     <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>3.1.0</version>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>3.1.0</version>
     </dependency>
-  </dependencies>
+</dependencies>
 ```
 
-application.yml配置
+application.yml 配置
 
 ```yaml
 server:
   port: 10100   #  配置启动端口号
- 
+
 mybatis:
   config-location: classpath:mybatis.cfg.xml    #  mybatis主配置文件所在路径
   type-aliases-package: com.demo.drools.entity  #  定义所有操作类的别名所在包
-  mapper-locations:                                     #  所有的mapper映射文件
+  mapper-locations: #  所有的mapper映射文件
     - classpath:mapper/*.xml
- 
- 
+
+
 spring: #springboot的配置
   datasource: #定义数据源
     #127.0.0.1为本机测试的ip，3306是mysql的端口号。serverTimezone是定义时区，照抄就好，mysql高版本需要定义这些东西
@@ -94,7 +98,7 @@ spring: #springboot的配置
     password: 123456 #该数据库用户的密码
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
- 
+
 # mybatis-plus相关配置
 mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
@@ -172,7 +176,7 @@ public class UserInfoEntity {
 }
 ```
 
-config类-1(推荐)
+config 类-1(推荐)
 
 ```java
 package com.xlc.springmybatisdemo.config;
@@ -212,7 +216,7 @@ public class MybatisPlusConfig {
 }
 ```
 
-config类-2
+config 类-2
 
 ```java
  
@@ -246,7 +250,7 @@ public class MybatisPlusConfig {
 }
 ```
 
-spring boot启动类
+spring boot 启动类
 
 ```java
 package com.demo.drools;
@@ -268,7 +272,7 @@ public class DroolsApplication {
 }
 ```
 
-dao层
+dao 层
 
 ```java
  
@@ -292,7 +296,7 @@ public interface UserInfoDao extends BaseMapper<UserInfoEntity> {
 }
 ```
 
-service层
+service 层
 
 ```java
  
@@ -313,7 +317,7 @@ public interface UserInfoService extends IService<UserInfoEntity> {
 }
 ```
 
-serviceImpl实现类层
+serviceImpl 实现类层
 
 ```java
  
@@ -340,7 +344,7 @@ public class UserInfoSerivceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
 }
 ```
 
-controller控制层
+controller 控制层
 
 ```java
  
@@ -530,7 +534,7 @@ public class UserInfoController {
 }
 ```
 
-controller层用到lambda语法
+controller 层用到 lambda 语法
 
 ```java
  
@@ -609,12 +613,13 @@ public class UserInfoPlusController {
 }
 ```
 
-以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data
-jpa框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的
+以上就是 mybatis-plus 的小案例，mybatis-plus 它像我之前使用的 spring data
+jpa 框架不用写 sql 语句，就可以实现简单的增删改查、批量操作、分页 mybatis-plus 功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个
+mybatis-plus 的
 
-mybatis-plus只是mybatis的增强版，它不影响mybatis的使用，我们可以写我们自定的方法以及sql，接下来我们看一个小案例
+mybatis-plus 只是 mybatis 的增强版，它不影响 mybatis 的使用，我们可以写我们自定的方法以及 sql，接下来我们看一个小案例
 
-dao层新增方法
+dao 层新增方法
 
 ```java
 /**
@@ -630,7 +635,7 @@ dao层新增方法
             @Param(value = "fraction")Long fraction);
 ```
 
-service新增方法
+service 新增方法
 
 ```java
 /**
@@ -644,7 +649,7 @@ service新增方法
     IPage<UserInfoEntity> selectUserInfoByGtFraction(IPage<UserInfoEntity> page,Long fraction);
 ```
 
-serviceImpl层新增方法
+serviceImpl 层新增方法
 
 ```java
 /**
@@ -661,7 +666,7 @@ serviceImpl层新增方法
     }
 ```
 
-controller层新增方法
+controller 层新增方法
 
 ```java
  /**
@@ -681,7 +686,7 @@ controller层新增方法
     }
 ```
 
-配置我们的mybatis的xml
+配置我们的 mybatis 的 xml
 
 ```bash
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -693,12 +698,12 @@ controller层新增方法
 </mapper>
 ```
 
-以上配置就是我们的mybatis用法。
+以上配置就是我们的 mybatis 用法。
 
-## mybatis plus强大的条件构造器queryWrapper、updateWrapper
+## mybatis plus 强大的条件构造器 queryWrapper、updateWrapper
 
 1.**QueryWrapper**： Entity 对象封装操作类
-2.**UpdateWrapper** ： Update 条件封装，用于Entity对象更新操作
+2.**UpdateWrapper** ： Update 条件封装，用于 Entity 对象更新操作
 3.条件构造器使用中的各个方法格式和说明
 
 ![image-20220620164733512](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620164733512.png)

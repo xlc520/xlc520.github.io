@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot中如何解决CORS跨域问题
+excerpt: 
 description: SpringBoot中如何解决CORS跨域问题
 date: 2022-04-07
 category: Java
@@ -10,17 +11,19 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot中如何解决CORS跨域问题
+# SpringBoot 中如何解决 CORS 跨域问题
 
-CORS（Cross-Origin Resource Sharing）"跨域资源共享"，是一个W3C标准，它允许浏览器向跨域服务器发送Ajax请求，打破了Ajax只能访问本站内的资源限制。
+CORS（Cross-Origin Resource Sharing）"跨域资源共享"，是一个 W3C 标准，它允许浏览器向跨域服务器发送 Ajax 请求，打破了 Ajax
+只能访问本站内的资源限制。
 
-在前后分离的架构下，我们经常会遇到跨域CORS问题，在浏览器上的表现就是出现如下一段错误提示：`No 'Access-Control-Allow-Origin' header is present on the requested resource.`
+在前后分离的架构下，我们经常会遇到跨域 CORS
+问题，在浏览器上的表现就是出现如下一段错误提示：`No 'Access-Control-Allow-Origin' header is present on the requested resource.`
 
-下面看一下如何让你的SpringBoot项目支持CORS跨域。
+下面看一下如何让你的 SpringBoot 项目支持 CORS 跨域。
 
-## SpringBoot处理跨域
+## SpringBoot 处理跨域
 
-在SpringBoot后端处理跨域比较简单，只需要在项目中添加如下一个配置类即可：
+在 SpringBoot 后端处理跨域比较简单，只需要在项目中添加如下一个配置类即可：
 
 ```java
 /**
@@ -62,13 +65,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 在这种情况下是不会继续执行后面的过滤器链的。
 
-**而在SpringBoot中自定义过滤器的优先级高于WebMvcConfigurer中定义的过滤器**，所以此时由于未经过CORS过滤器的处理还是会出现跨域现象。
+**而在 SpringBoot 中自定义过滤器的优先级高于 WebMvcConfigurer 中定义的过滤器**，所以此时由于未经过 CORS 过滤器的处理还是会出现跨域现象。
 
-这种时候我们就需要改写CorsFilter的写法，让其在自定义过滤器之前执行。
+这种时候我们就需要改写 CorsFilter 的写法，让其在自定义过滤器之前执行。
 
 ### 解决方法
 
-- 自定义Cors过滤器
+- 自定义 Cors 过滤器
 
 ```java
 public class CustomerCorsFilter extends CorsFilter {
@@ -148,4 +151,4 @@ public class FilterConfig {
 }
 ```
 
-通过setOrder()方法指定过滤器的执行顺序，用以保证CORS过滤器先入自定义过滤器执行。**注意：order的顺序越小优先级越高。**
+通过 setOrder()方法指定过滤器的执行顺序，用以保证 CORS 过滤器先入自定义过滤器执行。**注意：order 的顺序越小优先级越高。**

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 实用 shell 脚本
+excerpt: 
 description: 实用 shell 脚本，建议收藏！
 date: 2022-02-15
 category: Linux
@@ -132,7 +133,7 @@ disk
 tcp_status
 ```
 
-## 4、找出占用CPU 内存过高的进程
+## 4、找出占用 CPU 内存过高的进程
 
 ```shell
 #!/bin/bash
@@ -238,7 +239,7 @@ for IP in $(awk '/^[^#]/{print $1}' $HOST_INFO); do
 done
 ```
 
-## 9、一键部署LNMP网站平台脚本
+## 9、一键部署 LNMP 网站平台脚本
 
 ```shell
 #!/bin/bash
@@ -334,7 +335,7 @@ case $number in
 esac
 ```
 
-## 10、监控MySQL主从同步状态是否异常脚本
+## 10、监控 MySQL 主从同步状态是否异常脚本
 
 ```shell
 #!/bin/bash  
@@ -351,7 +352,7 @@ for i in $IO_SQL_STATUS; do
 done
 ```
 
-## 11、MySql数据库备份脚本
+## 11、MySql 数据库备份脚本
 
 ###### 分库备份
 
@@ -398,7 +399,7 @@ for DB in $DB_LIST; do
 done
 ```
 
-## 12、Nginx访问日志分析
+## 12、Nginx 访问日志分析
 
 ```shell
 #!/bin/bash
@@ -420,7 +421,7 @@ echo "统计访问页面状态码数量"
 awk '{a[$7" "$9]++}END{for(v in a){if(a[v]>5)print v,a[v]}}' $LOG_FILE |sort -k3 -nr
 ```
 
-## 13、Nginx访问日志自动按天（周、月）切割
+## 13、Nginx 访问日志自动按天（周、月）切割
 
 ```shell
 #!/bin/bash
@@ -441,7 +442,7 @@ done
 kill -USR1 $(cat $LOG_DIR/nginx.pid)
 ```
 
-## 14、自动发布Java项目（Tomcat）
+## 14、自动发布 Java 项目（Tomcat）
 
 ```shell
 #!/bin/bash
@@ -480,7 +481,7 @@ unzip $WORK_DIR/$PROJECT_NAME/target/*.war -d $ROOT
 $TOMCAT_DIR/bin/startup.sh
 ```
 
-## 15、自动发布PHP项目
+## 15、自动发布 PHP 项目
 
 ```shell
 #!/bin/bash
@@ -515,7 +516,7 @@ else
 fi
 ```
 
-## 16、DOS攻击防范（自动屏蔽攻击IP）
+## 16、DOS 攻击防范（自动屏蔽攻击 IP）
 
 ```shell
 #!/bin/bash
@@ -547,7 +548,7 @@ while read files; do
 done
 ```
 
-## 18、Dos攻击防范（自动屏蔽攻击IP）
+## 18、Dos 攻击防范（自动屏蔽攻击 IP）
 
 ```shell
 #!/bin/bash
@@ -562,7 +563,7 @@ for IP in $ABNORMAL_IP; do
 done
 ```
 
-## 19、Linux系统发送告警脚本
+## 19、Linux 系统发送告警脚本
 
 ```shell
 # yum install mailx
@@ -572,7 +573,7 @@ set smtp-auth-user=baojingtongzhi@163.com smtp-auth-password=123456
 set smtp-auth=login
 ```
 
-## 20、MySQL数据库备份单循环
+## 20、MySQL 数据库备份单循环
 
 ```shell
 #!/bin/bash
@@ -591,7 +592,7 @@ for DB in $DB_LIST; do
 done
 ```
 
-## 21、MySQL数据库备份多循环
+## 21、MySQL 数据库备份多循环
 
 ```shell
 #!/bin/bash
@@ -632,7 +633,7 @@ done
 kill -USR1 $(cat /var/run/nginx.pid)
 ```
 
-## 23、Nginx访问日志分析脚本
+## 23、Nginx 访问日志分析脚本
 
 ```shell
 #!/bin/bash
@@ -735,7 +736,7 @@ echo "0" > /proc/sys/vm/swappiness
 yum install gcc make autoconf vim sysstat net-tools iostat iftop iotp lrzsz -y
 ```
 
-## 26、监控100台服务器磁盘利用率脚本
+## 26、监控 100 台服务器磁盘利用率脚本
 
 ```shell
 #!/bin/bash
@@ -756,7 +757,7 @@ for IP in $(awk '/^[^#]/{print $1}' $HOST_INFO); do
 done
 ```
 
-## 27、监控MySQL主从同步状态是否异常脚本
+## 27、监控 MySQL 主从同步状态是否异常脚本
 
 ```shell
 #!/bin/bash  
@@ -786,7 +787,7 @@ while read files; do
 done
 ```
 
-## 29、批量创建100用户并设置密码脚本
+## 29、批量创建 100 用户并设置密码脚本
 
 ```shell
 #!/bin/bash
@@ -850,7 +851,7 @@ for IP in $(awk '/^[^#]/{print $1}' $HOST_INFO); do
 done
 ```
 
-## 32、一键部署LNMP网站平台脚本
+## 32、一键部署 LNMP 网站平台脚本
 
 ```shell
 #!/bin/bash
@@ -992,7 +993,7 @@ disk
 tcp_status
 ```
 
-## 34、找出占用CPU 内存过高的进程脚本
+## 34、找出占用 CPU 内存过高的进程脚本
 
 ```shell
 ps -eo user,pid,pcpu,pmem,args --sort=-pcpu  |head -n 10
@@ -1000,7 +1001,7 @@ ps -eo user,pid,pcpu,pmem,args --sort=-pcpu  |head -n 10
 ps -eo user,pid,pcpu,pmem,args --sort=-pmem  |head -n 10
 ```
 
-## 35、自动发布Java项目（Tomcat）
+## 35、自动发布 Java 项目（Tomcat）
 
 ```shell
 #!/bin/bash
@@ -1039,7 +1040,7 @@ unzip $WORK_DIR/$PROJECT_NAME/target/*.war -d $ROOT
 $TOMCAT_DIR/bin/startup.sh
 ```
 
-## 36、自动发布PHP项目脚本
+## 36、自动发布 PHP 项目脚本
 
 ```shell
 #!/bin/bash

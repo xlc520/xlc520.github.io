@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: openresty一键安装部署脚本
+excerpt: 
 description:
 date: 2023-04-10
 category: Linux
@@ -12,21 +13,18 @@ timeline: true
 icon: linux
 ---
 
-# openresty一键安装部署脚本
+# openresty 一键安装部署脚本
 
-**openresty的一些核心简介：**
+**openresty 的一些核心简介：**
 
-
-
-openresty是一个成熟的网络平台，它集成了标准的Nginx核心，LuaJIT，许多精心编写的Lua库，许多高质量的第三方Nginx模块以及大多数外部依赖项。
+openresty 是一个成熟的网络平台，它集成了标准的 Nginx 核心，LuaJIT，许多精心编写的 Lua 库，许多高质量的第三方 Nginx
+模块以及大多数外部依赖项。
 
 - 网站：http：//openresty.org/
-- Github组织：https：//github.com/openresty
+- Github 组织：https：//github.com/openresty
 - 首席开发人员：@agentzh
 - 国内最可利用的文档：
-- http://wiki.jikexueyuan.com/project/openresty/
-
-
+- <http://wiki.jikexueyuan.com/project/openresty/>
 
 **一键安装部署脚本如下：**
 
@@ -49,7 +47,7 @@ openresty是一个成熟的网络平台，它集成了标准的Nginx核心，Lua
 echo "OpenResty $VERSION 已安装到 $INSTALL_DIR，并已启动 OpenResty 服务"
 ```
 
-可以使用执行脚本后带版本号执行安装相应版本的openresty
+可以使用执行脚本后带版本号执行安装相应版本的 openresty
 
 ```sh
 sh install_openresty.sh 1.19.3.1

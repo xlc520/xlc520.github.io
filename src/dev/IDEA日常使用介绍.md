@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: IntelliJ IDEA 日常使用介绍
+excerpt: 
 description: IntelliJ IDEA 日常使用介绍
 date: 2022-05-07
 category: Java
@@ -12,11 +13,11 @@ icon: java
 
 # IntelliJ IDEA 日常使用介绍
 
-## 1. IDEA激活
+## 1. IDEA 激活
 
-不说其他的，先放大招，进行IDEA免费使用
+不说其他的，先放大招，进行 IDEA 免费使用
 
-步骤：打开plugins -> 打开Manage Plugin Repositories -> 添加 [https://zhile.io](https://zhile.io/) 网址 -> 下载 IDE Eval
+步骤：打开 plugins -> 打开 Manage Plugin Repositories -> 添加 [https://zhile.io](https://zhile.io/) 网址 -> 下载 IDE Eval
 Reset 插件 -> 安装重启 -> 设置每次打开都重置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/50e1d7b3d80c477ab422b3d02415a778.png)
@@ -35,19 +36,19 @@ Reset 插件 -> 安装重启 -> 设置每次打开都重置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ff29f5d710334eb6848197e0a4410407.png)
 
-## 4. 上方功能栏添加SSH
+## 4. 上方功能栏添加 SSH
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ee0fce3861ee495d89d5e36d48600ca9.png)
 
-## 5. IDEA右侧添加RemoteHost连接Linux的工具
+## 5. IDEA 右侧添加 RemoteHost 连接 Linux 的工具
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d38bc96c81924508b58454f8edaf749f.png)
 
-## 6. IDEA添加文件传输
+## 6. IDEA 添加文件传输
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/bcb6bb7000874e558976c14052b285f7.png)
 
-## 7. IDEA内部翻译
+## 7. IDEA 内部翻译
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5700b9665d1944239f310545fb2d1871.png)
 
@@ -65,7 +66,7 @@ Reset 插件 -> 安装重启 -> 设置每次打开都重置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/7f12f052e13540c5a4519870cbaaeb92.png)
 
-## 11. Scala代码匹配设置
+## 11. Scala 代码匹配设置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/60ea601c33b24ccaa0a102d18c252eaf.png)
 
@@ -73,17 +74,17 @@ Reset 插件 -> 安装重启 -> 设置每次打开都重置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/263e9d7177e249198d3ef15bbf5bdd8d.png)
 
-## 13. IDEA2020版本中Scala显示变量类型提示 设置位置
+## 13. IDEA2020 版本中 Scala 显示变量类型提示 设置位置
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/09262f00ddaf409c8e96a84006f52808.png)
 
-## 14. 设置Scala代码缩进大小
+## 14. 设置 Scala 代码缩进大小
 
-找到file>Settings>Editor>Code Style>Scala
+找到 file>Settings>Editor>Code Style>Scala
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/32cc19ff94ce4a39b24b9b64fa501506.png)
 
-## 15. 设置Scala的隐式转换加粗下划线
+## 15. 设置 Scala 的隐式转换加粗下划线
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0869bc28df204ee7abb5f1cb2009e593.png)
 
@@ -93,33 +94,33 @@ File -> Settings -> System Settings
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8d5070aab41a4404870618392adbb065.png)
 
-## 17. 设置通过鼠标滚动向左或向右移动IDEA界面
+## 17. 设置通过鼠标滚动向左或向右移动 IDEA 界面
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8330efdcb14042e69deb5d9b19552e02.png)
 
-## 18. IDEA中ctrl+h可以查看该类的继承图
+## 18. IDEA 中 ctrl+h 可以查看该类的继承图
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1a5427657bb64c1e8d48427995b5366b.png)
 
-## 19. Lombok插件使用注解解决常用代码块重写问题
+## 19. Lombok 插件使用注解解决常用代码块重写问题
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/843f948c81aa4a0caee5fcadd0b4cccf.png)
 
-## 20. IDEA上传代码到Git时需要忽略的文件
+## 20. IDEA 上传代码到 Git 时需要忽略的文件
 
-不需要上传的文件包括 后缀为iml的文件，.idea文件夹里的文件，target打包目录里的文件。
+不需要上传的文件包括 后缀为 iml 的文件，.idea 文件夹里的文件，target 打包目录里的文件。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/82474ba762a4463eb5411501c7284d5b.png)
 
-## 21. IDEA中查找当前类的方法、属性、内容的常用快捷键
+## 21. IDEA 中查找当前类的方法、属性、内容的常用快捷键
 
 Ctrl + F12
 
-## 22. IDEA字体颜色设置
+## 22. IDEA 字体颜色设置
 
 1、单行注释字体颜色：
 
-Settings---->Editor----->Colors Scheme ----->Language Defaults下设置：
+Settings---->Editor----->Colors Scheme ----->Language Defaults 下设置：
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ec188675ce3a48f7bb9efd4127a8ab16.png)
 
@@ -139,23 +140,23 @@ Settings---->Editor----->Colors Scheme ----->Language Defaults下设置：
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9219cfb1bafc456d991114e4b3f46cf2.png)
 
-## 23. Maven的依赖冲突检测插件
+## 23. Maven 的依赖冲突检测插件
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2190b135de374bbcb2afed71ee7047dd.png)
 
-## 24. IDEA切换大小写快捷键
+## 24. IDEA 切换大小写快捷键
 
 Ctrl+Shift+U
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/db9391f1e0454fe4a269fc2e1c10958b.png)
 
-## 25. idea中跳转到指定行数
+## 25. idea 中跳转到指定行数
 
-使用Ctrl + G能跳转到指定行数
+使用 Ctrl + G 能跳转到指定行数
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/045604c4c498496aacc76cffafc0313e.png)
 
-## 26. Codota代码智能提示插件
+## 26. Codota 代码智能提示插件
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/943f21a2217a4f809f90c0392cddbae3.png)
 
@@ -165,25 +166,25 @@ Ctrl+Shift+U
 
 ## 28. **Alibaba Java Coding Guidelines 阿里巴巴代码规范检查插件**
 
-会按照阿里Java开发手册上规范帮我们检查代码，然后对代码做不同颜色展示，鼠标放上去，会看到提示内容，帮助我们写出更规范的代码。
+会按照阿里 Java 开发手册上规范帮我们检查代码，然后对代码做不同颜色展示，鼠标放上去，会看到提示内容，帮助我们写出更规范的代码。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8f2767d6df9841a0a4ba34e10779678c.png)
 
 ## 29. CamelCase 驼峰命名和下划线命名转换
 
-这几种风格的命名方式，用快捷键 ⇧ + ⌥ + U / Shift + Alt + U可以进行快速转换，当我们需要修改大量变量名称的时候很方便。
+这几种风格的命名方式，用快捷键 ⇧ + ⌥ + U / Shift + Alt + U 可以进行快速转换，当我们需要修改大量变量名称的时候很方便。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/582f5bb9e2b940089c2aae547e006792.png)
 
 ## 30. SonarLint 代码质量检查插件
 
-提示我不要用System.out输出，要用logger输出，诸如此类，帮助我们提升代码质量。
+提示我不要用 System.out 输出，要用 logger 输出，诸如此类，帮助我们提升代码质量。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d3f81a3b546b4dbba99f6647eecd21fa.png)
 
 ## 31. Save Actions 格式化代码插件
 
-可以帮忙我们优化包导入，自动给没有修改的变量添加final修饰符，调用方法的时候自动添加this关键字等，使我们的代码更规范统一。
+可以帮忙我们优化包导入，自动给没有修改的变量添加 final 修饰符，调用方法的时候自动添加 this 关键字等，使我们的代码更规范统一。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8ffb8ec63a5e46239a5e39e4d91c6a55.png)
 
@@ -207,11 +208,11 @@ Ctrl+Shift+U
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/90fb39058ba642398f31c79a604c19ac.png)
 
-## 37. 自定义创建live template，快速写代码
+## 37. 自定义创建 live template，快速写代码
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/562bcd734622400abaae6ff8ba9f21f9.png)
 
-只要输入apr ，就能自动提示，并且生成Autowired 语句了。可以根据自己的代码习惯，自定义一些代码模板，帮助我们快速写代码。
+只要输入 apr ，就能自动提示，并且生成 Autowired 语句了。可以根据自己的代码习惯，自定义一些代码模板，帮助我们快速写代码。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5873cfc66dae431592bd040c85b03e97.png)
 
@@ -219,7 +220,7 @@ Ctrl+Shift+U
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2e53adb6d3444785805f81ad48fde448.png)
 
-## 39. 取消tab页单行显示
+## 39. 取消 tab 页单行显示
 
 多行显示更多的文件，方便查看。
 
@@ -253,13 +254,13 @@ Ctrl+Shift+U
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ff6f17a7479149498a99dfad04014ea7.png)
 
-## 46. 通过idea自带的profiler查看运行程序消耗的资源
+## 46. 通过 idea 自带的 profiler 查看运行程序消耗的资源
 
-1. 点击profiler找到运行的对应的程序
+1. 点击 profiler 找到运行的对应的程序
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/60b41584efa44dcb8cca04365afb65c0.png)
 
-2. 右击程序，打开CPU和内存等资源消耗
+2. 右击程序，打开 CPU 和内存等资源消耗
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/4fd6bb7f08a84dfda770b167dd302970.png)
 
@@ -267,11 +268,10 @@ Ctrl+Shift+U
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/7b1404023dd4400aae19a1c9ff5e97f5.png)
 
-4. 如果想要查看更详细的资源消耗情况，可以在win10上安装JProfiler，并在idea中安装JProfiler插件，可以查看更详细的信息
+4. 如果想要查看更详细的资源消耗情况，可以在 win10 上安装 JProfiler，并在 idea 中安装 JProfiler 插件，可以查看更详细的信息
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f74d6b06a9574bcf97336d8cb5669ac6.png)
 
-## 47. 个人的IDEA整体布局
+## 47. 个人的 IDEA 整体布局
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/cfb5fd62de70411dbceaae87dfdaad71.png)
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot-WebSocket实时监控异常
+excerpt: 
 description: SpringBoot-WebSocket实时监控异常
 date: 2022-05-15
 category: Java
@@ -10,25 +11,25 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot-WebSocket实时监控异常
+# SpringBoot-WebSocket 实时监控异常
 
 ## 需求
 
 消防的设备巡检，如果巡检发现异常，通过手机端提交，后台的实时监控页面实时获取到该设备的信息及位置，然后安排员工去处理。
 
-因为需要服务端主动向客户端发送消息，所以很容易的就想到了用WebSocket来实现这一功能。
+因为需要服务端主动向客户端发送消息，所以很容易的就想到了用 WebSocket 来实现这一功能。
 
-WebSocket就不做介绍了，上链接：https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket
+WebSocket 就不做介绍了，上链接：<https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket>
 
 前端略微复杂，需要在一张位置分布图上进行鼠标描点定位各个设备和根据不同屏幕大小渲染，本文不做介绍，只是简单地用页面样式进行效果呈现。
 
 **绿色代表正常，红色代表异常**
 
-预期效果，未接收到请求前----->id为3的提交了异常，id为3的王五变成了红色
+预期效果，未接收到请求前----->id 为 3 的提交了异常，id 为 3 的王五变成了红色
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015031414701-272219147.png)![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015031659597-188497867.png)
 
-## 实现-前端：
+## 实现-前端
 
 直接贴代码
 
@@ -152,17 +153,17 @@ WebSocket就不做介绍了，上链接：https://developer.mozilla.org/zh-CN/do
 </html>
 ```
 
-## 实现-后端：
+## 实现-后端
 
 项目结构是这样子的，后面的代码关键注释都有，就不重复描述了
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015032104670-873058355.png)
 
-1、新建SpringBoot工程，选择web和WebSockt依赖
+1、新建 SpringBoot 工程，选择 web 和 WebSockt 依赖
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015105941687-95294147.png)
 
-2、配置application.yml
+2、配置 application.yml
 
 ```yaml
 #端口
@@ -174,7 +175,7 @@ mySocket:
   myPwd: jae_123
 ```
 
-3、WebSocketConfig配置类
+3、WebSocketConfig 配置类
 
 ```java
 @Configuration
@@ -190,7 +191,7 @@ public class WebSocketConfig {
 }
 ```
 
-4、WebSocketServer类，用来进行服务端和客户端之间的交互
+4、WebSocketServer 类，用来进行服务端和客户端之间的交互
 
 ```java
 /**
@@ -264,7 +265,7 @@ public class WebSocketServer {
 }
 ```
 
-5、WebSocketController类，用于进行接口测试
+5、WebSocketController 类，用于进行接口测试
 
 ```java
 @RestController
@@ -295,7 +296,7 @@ public class WebSocketController {
 
 ## 测试
 
-1、打开前端页面，进行WebSocket连接
+1、打开前端页面，进行 WebSocket 连接
 
 控制台输出，连接成功
 
@@ -305,14 +306,14 @@ public class WebSocketController {
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113143733-1496142658.png)
 
-3、接下来，我们用接口测试工具Postman提交一个异常
+3、接下来，我们用接口测试工具 Postman 提交一个异常
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113458808-127776265.png)
 
-**注意id为3的这个数据的状态变化**
+**注意 id 为 3 的这个数据的状态变化**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113537561-246899024.png)
 
-我们可以看到，id为3的王五状态已经变成异常的了，实时通讯成功。
+我们可以看到，id 为 3 的王五状态已经变成异常的了，实时通讯成功。
 
-参考：https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket
+参考：<https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket>

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Ubuntu 安装和使用 Wine -运行 Windows 应用程序
+excerpt: 
 description: 
 date: 2023-03-20
 category: Linux
@@ -27,13 +28,13 @@ Windows 应用程序，而无需安装双系统或使用虚拟机。
 
 ### 步骤 1：准备工作
 
-1在安装 Wine 之前，请先更新系统，避免产生冲突：
+1 在安装 Wine 之前，请先更新系统，避免产生冲突：
 
 ```sh
 sudo apt update && sudo apt upgrade
 ```
 
-2为简化安装过程，请安装以下软件包：
+2 为简化安装过程，请安装以下软件包：
 
 ```sh
 sudo apt install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
@@ -52,19 +53,19 @@ sudo dpkg --add-architecture i386
 
 在安装 Wine 之前，需要导入 GPG 密钥和添加官方软件源：
 
-1导入 GPG 密钥：
+1 导入 GPG 密钥：
 
 ```sh
 curl -s https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
 ```
 
-2添加 WineHQ 官方软件源：
+2 添加 WineHQ 官方软件源：
 
 ```sh
 echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
 ```
 
-3更新软件包列表，以识别新添加的软件源：
+3 更新软件包列表，以识别新添加的软件源：
 
 ```sh
 sudo apt update
@@ -77,7 +78,7 @@ sudo apt update
 
 推荐从 WineHQ 安装 Wine 的最新稳定版（比直接使用 Ubuntu 软件源的版本更新、更可靠）：
 
-1安装 Wine 稳定版：
+1 安装 Wine 稳定版：
 
 ```sh
 sudo apt install --install-recommends winehq-stable
@@ -87,7 +88,7 @@ sudo apt install --install-recommends winehq-stable
 
 ![安装 Wine 稳定版](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p4.jpg)安装 Wine 稳定版
 
-2检查 Wine 版本和验证安装：
+2 检查 Wine 版本和验证安装：
 
 ```sh
 wine --version
@@ -99,30 +100,30 @@ wine --version
 
 ### 步骤 1：配置 Wine 环境
 
-1安装完成后，需要配置 Mono 等环境，以便让 Wine 能运行 .NET 应用：
+1 安装完成后，需要配置 Mono 等环境，以便让 Wine 能运行 .NET 应用：
 
 ```sh
 winecfg
 ```
 
-2按提示安装 Mono 及相关依赖。
+2 按提示安装 Mono 及相关依赖。
 
 ![安装 Mono 及相关依赖](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p6.jpg)安装 Mono 及相关依赖
 
 ### 步骤 2：配置 Wine 设置
 
-1配置完成后，会自动弹出「Wine 设置」对话框。在这里选择要模拟的 Windows 版本，默认为 Windows 10，可根据需求自行更改。
+1 配置完成后，会自动弹出「Wine 设置」对话框。在这里选择要模拟的 Windows 版本，默认为 Windows 10，可根据需求自行更改。
 
 ![选择要模拟的 Windows 版本](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p7.jpg)选择要模拟的
 Windows 版本
 
-1调整「音效」、「显示」等设置后，点击「确定」关闭对话框完成配置。
+1 调整「音效」、「显示」等设置后，点击「确定」关闭对话框完成配置。
 
 ### 步骤 3: 安装 Winetricks（优化 Wine 使用体验）
 
 Winetricks 是一个辅助脚本，可以帮助你轻松安装和管理 Windows 应用程序和库：
 
-1安装 Winetricks：
+1 安装 Winetricks：
 
 ```sh
 sudo apt install winetricks -y
@@ -130,7 +131,7 @@ sudo apt install winetricks -y
 
 ![安装 Winetricks](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p8.jpg)安装 Winetricks
 
-2使用 Winetricks 安装常用的附加组件，例如：
+2 使用 Winetricks 安装常用的附加组件，例如：
 
 - Visual C++ 运行库：
 
@@ -158,19 +159,19 @@ winetricks d3dx9 d3dx10 d3dx11
 
 1[下载 Noetpad ++](https://notepad-plus-plus.org/downloads/) 安装文件。
 
-2右键点击安装文件，选择「使用其它程序打开」。
+2 右键点击安装文件，选择「使用其它程序打开」。
 
-3选择使用「Wine Windows Program Loader」打开。
+3 选择使用「Wine Windows Program Loader」打开。
 
 ![使用 Wine 运行 Windows 应用程序](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p10.jpg)使用 Wine
 运行 Windows 应用程序
 
-4按向导提示完成安装。
+4 按向导提示完成安装。
 
 ![使用 Wine 安装 Notepad ++](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p11.jpg)使用 Wine 安装
 Notepad ++
 
-5安装完成后即可正常使用。
+5 安装完成后即可正常使用。
 
 ![使用 Wine 运行 Notepad ++](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ubuntu-wine-p12.jpg)使用 Wine 运行
 Notepad ++
@@ -237,19 +238,19 @@ winetricks riched20 riched30
 
 要从 Ubuntu 中卸载 Wine，可以使用以下步骤：
 
-1卸载 Wine 稳定版应用程序：
+1 卸载 Wine 稳定版应用程序：
 
 ```sh
 sudo apt remove winehq-stable
 ```
 
-2移除 WineHQ 仓库信息：
+2 移除 WineHQ 仓库信息：
 
 ```sh
 sudo rm /etc/apt/sources.list.d/winehq.list
 ```
 
-3删除 GPG 密钥：
+3 删除 GPG 密钥：
 
 ```sh
 sudo rm /usr/share/keyrings/winehq.gpg

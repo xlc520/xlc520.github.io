@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Docker搭建OnlyOffice
+excerpt: 
 description: 
 date: 2023-09-07
 category: Linux
@@ -10,17 +11,17 @@ timeline: true
 icon: linux
 ---
 
+# Docker 搭建 OnlyOffice
 
+## OnlyOffice 是什么
 
-# Docker搭建OnlyOffice
-
-## OnlyOffice是什么：
-
-> OnlyOffice 是一款开源的办公套件，提供了一系列用于文档管理、项目管理、客户关系管理（CRM）、邮件管理和社交网络的工具。它最初是由 Ascensio System SIA 公司于 2009 年发布的，旨在为小型和中型企业提供一种云办公的解决方案。
+> OnlyOffice 是一款开源的办公套件，提供了一系列用于文档管理、项目管理、客户关系管理（CRM）、邮件管理和社交网络的工具。它最初是由
+> Ascensio System SIA 公司于 2009 年发布的，旨在为小型和中型企业提供一种云办公的解决方案。
 >
 > OnlyOffice 包括以下主要组件：
 >
-> 1. 文档编辑器：OnlyOffice 提供了一个在线的文档编辑器，支持文本文档、电子表格和演示文稿。这些编辑器兼容 Microsoft Office 文件格式，并提供了丰富的格式化和协作功能。
+> 1. 文档编辑器：OnlyOffice 提供了一个在线的文档编辑器，支持文本文档、电子表格和演示文稿。这些编辑器兼容 Microsoft Office
+     文件格式，并提供了丰富的格式化和协作功能。
 > 2. 文档管理：OnlyOffice 包含了一个全功能的文档管理系统，支持版本控制、权限管理、在线查看和编辑文档等功能。
 > 3. 项目管理：OnlyOffice 提供了一套项目管理工具，支持任务分配、时间跟踪、报告和协作。
 > 4. 客户关系管理（CRM）：OnlyOffice 的 CRM 系统支持联系人管理、销售机会跟踪、报告和邮件营销。
@@ -29,7 +30,7 @@ icon: linux
 >
 > OnlyOffice 可以在云端运行，也可以部署在本地服务器上。它提供了一个开放的 API，允许开发者扩展其功能或将其集成到其他系统中。
 
-## 安装教程：
+## 安装教程
 
 1. **安装 Docker**
 
@@ -79,7 +80,8 @@ icon: linux
          - /root/onlyoffice/logs:/var/log/onlyoffice
    ```
 
-   这个配置文件会启动一个 OnlyOffice 文档服务器，它会监听 5545 和 2345 端口，并将数据和日志存储在 /root/onlyoffice/data 和 /root/onlyoffice/logs 目录下。
+   这个配置文件会启动一个 OnlyOffice 文档服务器，它会监听 5545 和 2345 端口，并将数据和日志存储在 /root/onlyoffice/data 和
+   /root/onlyoffice/logs 目录下。
 
    最后，进入到包含 docker-compose.yml 文件的目录，然后运行以下命令：
 
@@ -90,13 +92,14 @@ icon: linux
 
    这个命令会下载 OnlyOffice 的 Docker 镜像（如果本地没有的话），然后启动一个 OnlyOffice 的容器。
 
-现在，你应该可以通过浏览器访问 http://localhost:5545 来使用 OnlyOffice 了。如果你的 Docker 主机不在本地，那么你需要将 localhost 替换为 Docker 主机的 IP 地址。
+现在，你应该可以通过浏览器访问 <http://localhost:5545> 来使用 OnlyOffice 了。如果你的 Docker 主机不在本地，那么你需要将
+localhost 替换为 Docker 主机的 IP 地址。
 
-```
+```plain
 进去后，按照提示依次执行三个方框里的三行sudo命令，然后点GO TO TEST EXAMPLE就可以了
 ```
 
-## 以下是一些常用的 Docker 和 Docker Compose 命令：
+## 以下是一些常用的 Docker 和 Docker Compose 命令
 
 1. **重启服务**
 
@@ -127,7 +130,8 @@ icon: linux
    docker-compose down
    ```
 
-   注意：这个命令只会停止服务并删除容器，但不会删除你的数据和配置文件。如果你想要完全删除所有的数据和配置，你需要手动删除 `/root/onlyoffice` 目录。
+   注意：这个命令只会停止服务并删除容器，但不会删除你的数据和配置文件。如果你想要完全删除所有的数据和配置，你需要手动删除 `/root/onlyoffice`
+   目录。
 
 4. **查看服务状态**
 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Cloud Gateway - Oauth2 实现统一认证和鉴权
+excerpt: 
 description: 微服务权限终极解决方案，Spring Cloud Gateway + Oauth2 实现统一认证和鉴权
 date: 2022-04-09
 category: Java
@@ -10,39 +11,39 @@ timeline: true
 icon: java
 ---
 
-
-
 # Spring Cloud Gateway - Oauth2 实现统一认证和鉴权
 
 ## 摘要
 
-最近发现了一个很好的微服务权限解决方案，可以通过认证服务进行统一认证，然后通过网关来统一校验认证和鉴权。此方案为目前最新方案，仅支持Spring Boot 2.2.0、Spring Cloud Hoxton 以上版本，本文将详细介绍该方案的实现，希望对大家有所帮助！
+最近发现了一个很好的微服务权限解决方案，可以通过认证服务进行统一认证，然后通过网关来统一校验认证和鉴权。此方案为目前最新方案，仅支持
+Spring Boot 2.2.0、Spring Cloud Hoxton 以上版本，本文将详细介绍该方案的实现，希望对大家有所帮助！
 
 ## 前置知识
 
-> 我们将采用Nacos作为注册中心，Gateway作为网关，使用`nimbus-jose-jwt`JWT库操作JWT令牌
+> 我们将采用 Nacos 作为注册中心，Gateway 作为网关，使用`nimbus-jose-jwt`JWT 库操作 JWT 令牌
 
 ## 应用架构
 
-> 我们理想的解决方案应该是这样的，认证服务负责认证，网关负责校验认证和鉴权，其他API服务负责处理自己的业务逻辑。安全相关的逻辑只存在于认证服务和网关服务中，其他服务只是单纯地提供服务而没有任何安全相关逻辑。
+> 我们理想的解决方案应该是这样的，认证服务负责认证，网关负责校验认证和鉴权，其他 API
+> 服务负责处理自己的业务逻辑。安全相关的逻辑只存在于认证服务和网关服务中，其他服务只是单纯地提供服务而没有任何安全相关逻辑。
 
 相关服务划分：
 
-- micro-oauth2-gateway：网关服务，负责请求转发和鉴权功能，整合Spring Security+Oauth2；
-- micro-oauth2-auth：Oauth2认证服务，负责对登录用户进行认证，整合Spring Security+Oauth2；
-- micro-oauth2-api：受保护的API服务，用户鉴权通过后可以访问该服务，不整合Spring Security+Oauth2。
+- micro-oauth2-gateway：网关服务，负责请求转发和鉴权功能，整合 Spring Security+Oauth2；
+- micro-oauth2-auth：Oauth2 认证服务，负责对登录用户进行认证，整合 Spring Security+Oauth2；
+- micro-oauth2-api：受保护的 API 服务，用户鉴权通过后可以访问该服务，不整合 Spring Security+Oauth2。
 
 ## 方案实现
 
-> 下面介绍下这套解决方案的具体实现，依次搭建认证服务、网关服务和API服务。
+> 下面介绍下这套解决方案的具体实现，依次搭建认证服务、网关服务和 API 服务。
 
 ### micro-oauth2-auth
 
-> 我们首先来搭建认证服务，它将作为Oauth2的认证服务使用，并且网关服务的鉴权功能也需要依赖它。
+> 我们首先来搭建认证服务，它将作为 Oauth2 的认证服务使用，并且网关服务的鉴权功能也需要依赖它。
 
-- 在`pom.xml`中添加相关依赖，主要是Spring Security、Oauth2、JWT、Redis相关依赖；
+- 在`pom.xml`中添加相关依赖，主要是 Spring Security、Oauth2、JWT、Redis 相关依赖；
 
-```
+```plain
 <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -70,9 +71,9 @@ icon: java
 复制代码
 ```
 
-- 在`application.yml`中添加相关配置，主要是Nacos和Redis相关配置；
+- 在`application.yml`中添加相关配置，主要是 Nacos 和 Redis 相关配置；
 
-```
+```plain
 server:
   port: 9401
 spring:
@@ -99,16 +100,16 @@ management:
 复制代码
 ```
 
-- 使用`keytool`生成RSA证书`jwt.jks`，复制到`resource`目录下，在JDK的`bin`目录下使用如下命令即可；
+- 使用`keytool`生成 RSA 证书`jwt.jks`，复制到`resource`目录下，在 JDK 的`bin`目录下使用如下命令即可；
 
-```
+```plain
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
 复制代码
 ```
 
-- 创建`UserServiceImpl`类实现Spring Security的`UserDetailsService`接口，用于加载用户信息；
+- 创建`UserServiceImpl`类实现 Spring Security 的`UserDetailsService`接口，用于加载用户信息；
 
-```
+```plain
 /**
  * 用户管理业务类
  * Created by macro on 2020/6/19.
@@ -151,9 +152,9 @@ public class UserServiceImpl implements UserDetailsService {
 复制代码
 ```
 
-- 添加认证服务相关配置`Oauth2ServerConfig`，需要配置加载用户信息的服务`UserServiceImpl`及RSA的钥匙对`KeyPair`；
+- 添加认证服务相关配置`Oauth2ServerConfig`，需要配置加载用户信息的服务`UserServiceImpl`及 RSA 的钥匙对`KeyPair`；
 
-```
+```plain
 /**
  * 认证服务器配置
  * Created by macro on 2020/6/19.
@@ -215,9 +216,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 复制代码
 ```
 
-- 如果你想往JWT中添加自定义信息的话，比如说`登录用户的ID`，可以自己实现`TokenEnhancer`接口；
+- 如果你想往 JWT 中添加自定义信息的话，比如说`登录用户的ID`，可以自己实现`TokenEnhancer`接口；
 
-```
+```plain
 /**
  * JWT内容增强器
  * Created by macro on 2020/6/19.
@@ -237,9 +238,9 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 复制代码
 ```
 
-- 由于我们的网关服务需要RSA的公钥来验证签名是否合法，所以认证服务需要有个接口把公钥暴露出来；
+- 由于我们的网关服务需要 RSA 的公钥来验证签名是否合法，所以认证服务需要有个接口把公钥暴露出来；
 
-```
+```plain
 /**
  * 获取RSA公钥接口
  * Created by macro on 2020/6/19.
@@ -261,9 +262,9 @@ public class KeyPairController {
 复制代码
 ```
 
-- 不要忘了还需要配置Spring Security，允许获取公钥接口的访问；
+- 不要忘了还需要配置 Spring Security，允许获取公钥接口的访问；
 
-```
+```plain
 /**
  * SpringSecurity配置
  * Created by macro on 2020/6/19.
@@ -295,9 +296,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 复制代码
 ```
 
-- 创建一个资源服务`ResourceServiceImpl`，初始化的时候把资源与角色匹配关系缓存到Redis中，方便网关服务进行鉴权的时候获取。
+- 创建一个资源服务`ResourceServiceImpl`，初始化的时候把资源与角色匹配关系缓存到 Redis 中，方便网关服务进行鉴权的时候获取。
 
-```
+```plain
 /**
  * 资源与角色匹配关系管理业务类
  * Created by macro on 2020/6/19.
@@ -322,11 +323,11 @@ public class ResourceServiceImpl {
 
 ### micro-oauth2-gateway
 
-> 接下来我们就可以搭建网关服务了，它将作为Oauth2的资源服务、客户端服务使用，对访问微服务的请求进行统一的校验认证和鉴权操作。
+> 接下来我们就可以搭建网关服务了，它将作为 Oauth2 的资源服务、客户端服务使用，对访问微服务的请求进行统一的校验认证和鉴权操作。
 
-- 在`pom.xml`中添加相关依赖，主要是Gateway、Oauth2和JWT相关依赖；
+- 在`pom.xml`中添加相关依赖，主要是 Gateway、Oauth2 和 JWT 相关依赖；
 
-```
+```plain
 <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -361,9 +362,9 @@ public class ResourceServiceImpl {
 复制代码
 ```
 
-- 在`application.yml`中添加相关配置，主要是路由规则的配置、Oauth2中RSA公钥的配置及路由白名单的配置；
+- 在`application.yml`中添加相关配置，主要是路由规则的配置、Oauth2 中 RSA 公钥的配置及路由白名单的配置；
 
-```
+```plain
 server:
   port: 9201
 spring:
@@ -411,9 +412,9 @@ secure:
 复制代码
 ```
 
-- 对网关服务进行配置安全配置，由于Gateway使用的是`WebFlux`，所以需要使用`@EnableWebFluxSecurity`注解开启；
+- 对网关服务进行配置安全配置，由于 Gateway 使用的是`WebFlux`，所以需要使用`@EnableWebFluxSecurity`注解开启；
 
-```
+```plain
 /**
  * 资源服务器配置
  * Created by macro on 2020/6/19.
@@ -457,7 +458,7 @@ public class ResourceServerConfig {
 
 - 在`WebFluxSecurity`中自定义鉴权操作需要实现`ReactiveAuthorizationManager`接口；
 
-```
+```plain
 /**
  * 鉴权管理器，用于判断是否有资源的访问权限
  * Created by macro on 2020/6/19.
@@ -488,9 +489,10 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 复制代码
 ```
 
-- 这里我们还需要实现一个全局过滤器`AuthGlobalFilter`，当鉴权通过后将JWT令牌中的用户信息解析出来，然后存入请求的Header中，这样后续服务就不需要解析JWT令牌了，可以直接从请求的Header中获取到用户信息。
+- 这里我们还需要实现一个全局过滤器`AuthGlobalFilter`，当鉴权通过后将 JWT 令牌中的用户信息解析出来，然后存入请求的 Header
+  中，这样后续服务就不需要解析 JWT 令牌了，可以直接从请求的 Header 中获取到用户信息。
 
-```
+```plain
 /**
  * 将登录用户的JWT转化成用户信息的全局过滤器
  * Created by macro on 2020/6/17.
@@ -531,11 +533,11 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
 ### micro-oauth2-api
 
-> 最后我们搭建一个API服务，它不会集成和实现任何安全相关逻辑，全靠网关来保护它。
+> 最后我们搭建一个 API 服务，它不会集成和实现任何安全相关逻辑，全靠网关来保护它。
 
-- 在`pom.xml`中添加相关依赖，就添加了一个web依赖；
+- 在`pom.xml`中添加相关依赖，就添加了一个 web 依赖；
 
-```
+```plain
 <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -547,7 +549,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
 - 在`application.yml`添加相关配置，很常规的配置；
 
-```
+```plain
 server:
   port: 9501
 spring:
@@ -569,7 +571,7 @@ management:
 
 - 创建一个测试接口，网关验证通过即可访问；
 
-```
+```plain
 /**
  * 测试接口
  * Created by macro on 2020/6/19.
@@ -586,9 +588,9 @@ public class HelloController {
 复制代码
 ```
 
-- 创建一个`LoginUserHolder`组件，用于从请求的Header中直接获取登录用户信息；
+- 创建一个`LoginUserHolder`组件，用于从请求的 Header 中直接获取登录用户信息；
 
-```
+```plain
 /**
  * 获取登录用户信息
  * Created by macro on 2020/6/17.
@@ -614,7 +616,7 @@ public class LoginUserHolder {
 
 - 创建一个获取当前用户信息的接口。
 
-```
+```plain
 /**
  * 获取登录用户信息接口
  * Created by macro on 2020/6/19.
@@ -639,51 +641,31 @@ public class UserController{
 
 > 接下来我们来演示下微服务系统中的统一认证鉴权功能，所有请求均通过网关访问。
 
-- 在此之前先启动我们的Nacos和Redis服务，然后依次启动`micro-oauth2-auth`、`micro-oauth2-gateway`及`micro-oauth2-api`服务；
-
-
+- 在此之前先启动我们的 Nacos 和 Redis 服务，然后依次启动`micro-oauth2-auth`、`micro-oauth2-gateway`及`micro-oauth2-api`服务；
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da5ee93bd~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
 
-
-
-- 使用密码模式获取JWT令牌，访问地址：[http://localhost:9201/auth/oauth/token](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken)
-
-
+- 使用密码模式获取 JWT
+  令牌，访问地址：[http://localhost:9201/auth/oauth/token](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da61f640e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
 
-
-
-- 使用获取到的JWT令牌访问需要权限的接口，访问地址：[http://localhost:9201/api/hello](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello)
-
-
+- 使用获取到的 JWT
+  令牌访问需要权限的接口，访问地址：[http://localhost:9201/api/hello](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da5591caf~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
 
-
-
-- 使用获取到的JWT令牌访问获取当前登录用户信息的接口，访问地址：[http://localhost:9201/api/user/currentUser](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fuser%2FcurrentUser)
-
-
+- 使用获取到的 JWT
+  令牌访问获取当前登录用户信息的接口，访问地址：[http://localhost:9201/api/user/currentUser](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fuser%2FcurrentUser)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da6c59fd8~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
 
-
-
-- 当JWT令牌过期时，使用refresh_token获取新的JWT令牌，访问地址：[http://localhost:9201/auth/oauth/token](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken)
-
-
+- 当 JWT 令牌过期时，使用 refresh_token 获取新的 JWT
+  令牌，访问地址：[http://localhost:9201/auth/oauth/token](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fauth%2Foauth%2Ftoken)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da69ef4c1~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
 
-
-
-- 使用没有访问权限的`andy`账号登录，访问接口时会返回如下信息，访问地址：[http://localhost:9201/api/hello](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello)
-
-
+- 使用没有访问权限的`andy`
+  账号登录，访问接口时会返回如下信息，访问地址：[http://localhost:9201/api/hello](https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A9201%2Fapi%2Fhello)
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/12/17342f6da665d734~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
-
-
-

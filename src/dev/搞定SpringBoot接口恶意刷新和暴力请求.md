@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 搞定 SpringBoot 接口恶意刷新和暴力请求
+excerpt: 
 description: 
 date: 2022-06-05
 category: Java
@@ -10,13 +11,12 @@ timeline: true
 icon: java
 ---
 
-
-
 # 搞定 SpringBoot 接口恶意刷新和暴力请求
 
-在实际项目使用中，必须要考虑服务的安全性，当服务部署到互联网以后，就要考虑服务被恶意请求和暴力攻击的情况，下面的教程，通过`intercept`和`redis`针对`url+ip`在一定时间内访问的次数来将ip禁用，可以根据自己的需求进行相应的修改，来打打自己的目的；
+在实际项目使用中，必须要考虑服务的安全性，当服务部署到互联网以后，就要考虑服务被恶意请求和暴力攻击的情况，下面的教程，通过`intercept`
+和`redis`针对`url+ip`在一定时间内访问的次数来将 ip 禁用，可以根据自己的需求进行相应的修改，来打打自己的目的；
 
-首先工程为springboot框架搭建，不再详细叙述。
+首先工程为 springboot 框架搭建，不再详细叙述。
 
 首先创建一个自定义的拦截器类，也是最核心的代码：
 
@@ -128,9 +128,10 @@ public class IpUrlLimitInterceptor implements HandlerInterceptor {
 }
 ```
 
-代码中redis的使用的是分布式锁的形式，这样可以最大程度保证线程安全和功能的实现效果。代码中设置的是1S内同一个接口通过同一个ip访问5次，就将该ip禁用1个小时，根据自己项目需求可以自己适当修改，实现自己想要的功能；
+代码中 redis 的使用的是分布式锁的形式，这样可以最大程度保证线程安全和功能的实现效果。代码中设置的是 1S 内同一个接口通过同一个
+ip 访问 5 次，就将该 ip 禁用 1 个小时，根据自己项目需求可以自己适当修改，实现自己想要的功能；
 
-redis分布式锁的关键代码:
+redis 分布式锁的关键代码:
 
 ```java
 /**
@@ -212,4 +213,4 @@ public class MyWebAppConfig extends WebMvcConfigurerAdapter {
 }
 ```
 
-自己可以写一个for循环来测试方面的功能，这里就不详细介绍了。
+自己可以写一个 for 循环来测试方面的功能，这里就不详细介绍了。

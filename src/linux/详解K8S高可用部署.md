@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 详解 K8S 高可用部署
+excerpt: 
 description: 
 date: 2022-11-05
 category: Linux
@@ -49,8 +50,8 @@ icon: linux
 
 ### 一、前言
 
-官网：https://kubernetes.io/
-官方文档：https://kubernetes.io/zh-cn/docs/home/
+官网：<https://kubernetes.io/>
+官方文档：<https://kubernetes.io/zh-cn/docs/home/>
 
 ### 二、基础环境部署
 
@@ -60,7 +61,7 @@ icon: linux
 
 先部署 1master 和 2node 节点，后面再加一个 master 节点
 
-```
+```plain
 # 在192.168.0.113执行
 hostnamectl set-hostname  k8s-master-168-0-113
 # 在192.168.0.114执行
@@ -71,7 +72,7 @@ hostnamectl set-hostname k8s-node2-168-0-115
 
 配置 hosts
 
-```
+```plain
 cat >> /etc/hosts<<EOF
 192.168.0.113 k8s-master-168-0-113
 192.168.0.114 k8s-node1-168-0-114
@@ -81,7 +82,7 @@ EOF
 
 2、配置 ssh 互信
 
-```
+```plain
 # 直接一直回车就行
 ssh-keygen
 
@@ -92,7 +93,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@k8s-node2-168-0-115
 
 3、时间同步
 
-```
+```plain
 yum install chrony -y
 systemctl start chronyd
 systemctl enable chronyd
@@ -101,14 +102,14 @@ chronyc sources
 
 4、关闭防火墙
 
-```
+```plain
 systemctl stop firewalld
 systemctl disable firewalld
 ```
 
 5、关闭 swap
 
-```
+```plain
 # 临时关闭；关闭swap主要是为了性能考虑
 swapoff -a
 # 可以通过这个命令查看swap是否关闭了
@@ -119,7 +120,7 @@ sed -ri 's/.*swap.*/#&/' /etc/fstab
 
 6、禁用 SELinux
 
-```
+```plain
 # 临时关闭
 setenforce 0
 # 永久禁用
@@ -130,14 +131,14 @@ sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
 
 若要显式加载此模块，请运行 sudo modprobe br_netfilter，通过运行 lsmod | grep br_netfilter 来验证 br_netfilter 模块是否已加载。
 
-```
+```plain
 sudo modprobe br_netfilter
 lsmod | grep br_netfilter
 ```
 
 为了让 Linux 节点的 iptables 能够正确查看桥接流量，请确认 sysctl 配置中的 net.bridge.bridge-nf-call-iptables 设置为 1。例如：
 
-```
+```plain
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -163,7 +164,7 @@ sudo sysctl --system
 > Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你
 > 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
 
-```
+```plain
 # 配置yum源
 cd /etc/yum.repos.d ; mkdir bak; mv CentOS-Linux-* bak/
 # centos7
@@ -206,7 +207,7 @@ systemctl status docker containerd
 
 #### 3）配置 k8s yum 源（所有节点）
 
-```
+```plain
 cat > /etc/yum.repos.d/kubernetes.repo << EOF
 [k8s]
 name=k8s
@@ -218,7 +219,7 @@ EOF
 
 #### 4）将 sandbox_image 镜像源设置为阿里云 google_containers 镜像源（所有节点）
 
-```
+```plain
 # 导出默认配置，config.toml这个文件默认是不存在的
 containerd config default > /etc/containerd/config.toml
 grep sandbox_image  /etc/containerd/config.toml
@@ -234,7 +235,7 @@ grep sandbox_image  /etc/containerd/config.toml
 > docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是
 > containerd。
 
-```
+```plain
 sed -i 's#SystemdCgroup = false#SystemdCgroup = true#g' /etc/containerd/config.toml
 # 应用所有更改后,重新启动containerd
 systemctl restart containerd
@@ -242,7 +243,7 @@ systemctl restart containerd
 
 #### 6）开始安装 kubeadm，kubelet 和 kubectl（master 节点）
 
-```
+```plain
 # 不指定版本就是最新版本，当前最新版就是1.24.1
 yum install -y kubelet-1.24.1  kubeadm-1.24.1  kubectl-1.24.1 --disableexcludes=kubernetes
 # disableexcludes=kubernetes：禁掉除了这个kubernetes之外的别的仓库
@@ -266,7 +267,7 @@ systemctl status kubelet
 
 查看版本
 
-```
+```plain
 kubectl version
 yum info kubeadm
 ```
@@ -277,7 +278,7 @@ yum info kubeadm
 
 最好提前把镜像下载好，这样安装快
 
-```
+```plain
 docker pull registry.aliyuncs.com/google_containers/kube-apiserver:v1.24.1
 docker pull registry.aliyuncs.com/google_containers/kube-controller-manager:v1.24.1
 docker pull registry.aliyuncs.com/google_containers/kube-scheduler:v1.24.1
@@ -289,7 +290,7 @@ docker pull registry.aliyuncs.com/google_containers/coredns:v1.8.6
 
 集群初始化
 
-```
+```plain
 kubeadm init \
   --apiserver-advertise-address=192.168.0.113 \
   --image-repository registry.aliyuncs.com/google_containers \
@@ -309,7 +310,7 @@ kubeadm init \
 
 重置再初始化
 
-```
+```plain
 kubeadm reset
 rm -fr ~/.kube/  /etc/kubernetes/* var/lib/etcd/*
 kubeadm init \
@@ -329,7 +330,7 @@ kubeadm init \
 
 配置环境变量
 
-```
+```plain
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -356,7 +357,7 @@ source  ~/.bash_profile
 
 你必须部署一个基于 Pod 网络插件的 容器网络接口 (CNI)，以便你的 Pod 可以相互通信。
 
-```
+```plain
 # 最好提前下载镜像（所有节点）
 docker pull quay.io/coreos/flannel:v0.14.0
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -364,7 +365,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 如果上面安装失败，则下载我百度里的，离线安装
 
-> 链接：https://pan.baidu.com/s/1HB9xuO3bssAW7v5HzpXkeQ
+> 链接：<https://pan.baidu.com/s/1HB9xuO3bssAW7v5HzpXkeQ>
 > 提取码：8888
 
 再查看 node 节点，就已经正常了
@@ -375,7 +376,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 先安装 kubelet
 
-```
+```plain
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 # 设置为开机自启并现在立刻启动服务 --now：立刻启动服务
 systemctl enable --now kubelet
@@ -384,13 +385,13 @@ systemctl status kubelet
 
 如果没有令牌，可以通过在控制平面节点上运行以下命令来获取令牌：
 
-```
+```plain
 kubeadm token list
 ```
 
-默认情况下，令牌会在24小时后过期。如果要在当前令牌过期后将节点加入集群， 则可以通过在控制平面节点上运行以下命令来创建新令牌：
+默认情况下，令牌会在 24 小时后过期。如果要在当前令牌过期后将节点加入集群， 则可以通过在控制平面节点上运行以下命令来创建新令牌：
 
-```
+```plain
 kubeadm token create
 # 再查看
 kubeadm token list
@@ -398,20 +399,20 @@ kubeadm token list
 
 如果你没有 –discovery-token-ca-cert-hash 的值，则可以通过在控制平面节点上执行以下命令链来获取它：
 
-```
+```plain
 openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
 
 如果执行 kubeadm init 时没有记录下加入集群的命令，可以通过以下命令重新创建（推荐）一般不用上面的分别获取 token 和
 ca-cert-hash 方式，执行以下命令一气呵成：
 
-```
+```plain
 kubeadm token create --print-join-command
 ```
 
 这里需要等待一段时间，再查看节点节点状态，因为需要安装 kube-proxy 和 flannel。
 
-```
+```plain
 kubectl get pods -A
 kubectl get nodes
 ```
@@ -424,7 +425,7 @@ kubectl get nodes
 
 1、加载 ip_vs 相关内核模块
 
-```
+```plain
 modprobe -- ip_vs
 modprobe -- ip_vs_sh
 modprobe -- ip_vs_rr
@@ -433,19 +434,19 @@ modprobe -- ip_vs_wrr
 
 所有节点验证开启了 ipvs：
 
-```
+```plain
 lsmod |grep ip_vs
 ```
 
 2、安装 ipvsadm 工具
 
-```
+```plain
 yum install ipset ipvsadm -y
 ```
 
 3、编辑 kube-proxy 配置文件，mode 修改成 ipvs
 
-```
+```plain
 kubectl edit  configmap -n kube-system  kube-proxy
 ```
 
@@ -453,7 +454,7 @@ kubectl edit  configmap -n kube-system  kube-proxy
 
 4、重启 kube-proxy
 
-```
+```plain
 # 先查看
 kubectl get pod -n kube-system | grep kube-proxy
 # 再delete让它自拉起
@@ -466,7 +467,7 @@ kubectl get pod -n kube-system | grep kube-proxy
 
 5、查看 ipvs 转发规则
 
-```
+```plain
 ipvsadm -Ln
 ```
 
@@ -490,7 +491,7 @@ ipvsadm -Ln
 
 所有节点都统一如下配置：
 
-```
+```plain
 # 在192.168.0.113执行
 hostnamectl set-hostname  k8s-master-168-0-113
 # 在192.168.0.114执行
@@ -503,7 +504,7 @@ hostnamectl set-hostname k8s-master2-168-0-116
 
 配置 hosts
 
-```
+```plain
 cat >> /etc/hosts<<EOF
 192.168.0.113 k8s-master-168-0-113 cluster-endpoint
 192.168.0.114 k8s-node1-168-0-114
@@ -514,7 +515,7 @@ EOF
 
 2、配置 ssh 互信
 
-```
+```plain
 # 直接一直回车就行
 ssh-keygen
 
@@ -526,7 +527,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@k8s-master2-168-0-116
 
 3、时间同步
 
-```
+```plain
 yum install chrony -y
 systemctl start chronyd
 systemctl enable chronyd
@@ -535,7 +536,7 @@ chronyc sources
 
 关闭防火墙
 
-```
+```plain
 牛逼啊！接私活必备的 N 个开源项目！赶快收藏
 systemctl stop firewalld
 systemctl disable firewalld
@@ -543,7 +544,7 @@ systemctl disable firewalld
 
 4、关闭 swap
 
-```
+```plain
 # 临时关闭；关闭swap主要是为了性能考虑
 swapoff -a
 # 可以通过这个命令查看swap是否关闭了
@@ -554,7 +555,7 @@ sed -ri 's/.*swap.*/#&/' /etc/fstab
 
 5、禁用 SELinux
 
-```
+```plain
 # 临时关闭
 setenforce 0
 # 永久禁用
@@ -565,14 +566,14 @@ sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
 
 若要显式加载此模块，请运行 sudo modprobe br_netfilter，通过运行 lsmod | grep br_netfilter 来验证 br_netfilter 模块是否已加载，
 
-```
+```plain
 sudo modprobe br_netfilter
 lsmod | grep br_netfilter
 ```
 
 为了让 Linux 节点的 iptables 能够正确查看桥接流量，请确认 sysctl 配置中的 net.bridge.bridge-nf-call-iptables 设置为 1。例如：
 
-```
+```plain
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -598,7 +599,7 @@ sudo sysctl --system
 > Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你
 > 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
 
-```
+```plain
 # 配置yum源
 cd /etc/yum.repos.d ; mkdir bak; mv CentOS-Linux-* bak/
 # centos7
@@ -641,7 +642,7 @@ systemctl status docker containerd
 
 #### 8、配置 k8s yum 源（所有节点）
 
-```
+```plain
 cat > /etc/yum.repos.d/kubernetes.repo << EOF
 [k8s]
 name=k8s
@@ -653,7 +654,7 @@ EOF
 
 #### 9、将 sandbox_image 镜像源设置为阿里云 google_containers 镜像源（所有节点）
 
-```
+```plain
 # 导出默认配置，config.toml这个文件默认是不存在的
 containerd config default > /etc/containerd/config.toml
 grep sandbox_image  /etc/containerd/config.toml
@@ -667,7 +668,7 @@ grep sandbox_image  /etc/containerd/config.toml
 > docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是
 > containerd。
 
-```
+```plain
 sed -i 's#SystemdCgroup = false#SystemdCgroup = true#g' /etc/containerd/config.toml
 # 应用所有更改后,重新启动containerd
 systemctl restart containerd
@@ -675,7 +676,7 @@ systemctl restart containerd
 
 #### 11、开始安装 kubeadm，kubelet 和 kubectl（master 节点）
 
-```
+```plain
 # 不指定版本就是最新版本，当前最新版就是1.24.1
 yum install -y kubelet-1.24.1  kubeadm-1.24.1  kubectl-1.24.1 --disableexcludes=kubernetes
 # disableexcludes=kubernetes：禁掉除了这个kubernetes之外的别的仓库
@@ -693,7 +694,7 @@ yum info kubeadm
 
 #### 12、加入 k8s 集群
 
-```
+```plain
 # 证如果过期了，可以使用下面命令生成新证书上传，这里会打印出certificate key，后面会用到
 kubeadm init phase upload-certs --upload-certs
 # 你还可以在 【init】期间指定自定义的 --certificate-key，以后可以由 join 使用。 要生成这样的密钥，可以使用以下命令（这里不执行，就用上面那个自命令就可以了）：
@@ -711,7 +712,7 @@ kubeadm join cluster-endpoint:6443 --token wswrfw.fc81au4yvy6ovmhh --discovery-t
 
 根据提示执行如下命令：
 
-```
+```plain
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -719,7 +720,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 查看
 
-```
+```plain
 kubectl get nodes
 kubectl get pods -A -owide
 ```
@@ -735,7 +736,7 @@ master 节点。
 
 1、安装 Nginx 和 Keepalived
 
-```
+```plain
 # 在两个master节点上执行
 yum install nginx keepalived -y
 ```
@@ -744,7 +745,7 @@ yum install nginx keepalived -y
 
 在两个 master 节点配置
 
-```
+```plain
 cat > /etc/nginx/nginx.conf << "EOF"
 user nginx;
 worker_processes auto;
@@ -797,7 +798,7 @@ EOF
 
 3、Keepalived 配置（master）
 
-```
+```plain
 cat > /etc/keepalived/keepalived.conf << EOF
 global_defs {
    notification_email {
@@ -839,7 +840,7 @@ virtual_ipaddress：虚拟 IP（VIP）
 
 检查 nginx 状态脚本：
 
-```
+```plain
 cat > /etc/keepalived/check_nginx.sh  << "EOF"
 #!/bin/bash
 count=$(ps -ef |grep nginx |egrep -cv "grep|$$")
@@ -855,7 +856,7 @@ chmod +x /etc/keepalived/check_nginx.sh
 
 4、Keepalived 配置（backup）
 
-```
+```plain
 cat > /etc/keepalived/keepalived.conf << EOF
 global_defs {
    notification_email {
@@ -893,7 +894,7 @@ EOF
 
 检查 nginx 状态脚本：
 
-```
+```plain
 cat > /etc/keepalived/check_nginx.sh  << "EOF"
 #!/bin/bash
 count=$(ps -ef |grep nginx |egrep -cv "grep|$$")
@@ -909,7 +910,7 @@ chmod +x /etc/keepalived/check_nginx.sh
 
 5、启动并设置开机启动
 
-```
+```plain
 systemctl daemon-reload
 systemctl restart nginx && systemctl enable nginx && systemctl status nginx
 systemctl restart keepalived && systemctl enable keepalived && systemctl status keepalived
@@ -917,7 +918,7 @@ systemctl restart keepalived && systemctl enable keepalived && systemctl status 
 
 查看 VIP
 
-```
+```plain
 ip a
 ```
 
@@ -927,7 +928,7 @@ ip a
 
 将 cluster-endpoint 之前执行的 ip 修改执行现在的 VIP
 
-```
+```plain
 192.168.0.113 k8s-master-168-0-113
 192.168.0.114 k8s-node1-168-0-114
 192.168.0.115 k8s-node2-168-0-115
@@ -939,7 +940,7 @@ ip a
 
 查看版本（负载均衡测试验证）
 
-```
+```plain
 curl -k https://cluster-endpoint:16443/version
 ```
 
@@ -947,7 +948,7 @@ curl -k https://cluster-endpoint:16443/version
 
 高可用测试验证，将 k8s-master-168-0-113 节点关机
 
-```
+```plain
 shutdown -h now
 curl -k https://cluster-endpoint:16443/version
 kubectl get nodes -A
@@ -961,22 +962,22 @@ kubectl get pods -A
 
 #### 1）dashboard 部署
 
-GitHub 地址：https://github.com/kubernetes/dashboard
+GitHub 地址：<https://github.com/kubernetes/dashboard>
 
-```
+```plain
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.0/aio/deploy/recommended.yaml
 kubectl get pods -n kubernetes-dashboard
 ```
 
 但是这个只能内部访问，所以要外部访问，要么部署 ingress，要么就是设置 service NodePort 类型。这里选择 service 暴露端口。
 
-```
+```plain
 wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.0/aio/deploy/recommended.yaml
 ```
 
 修改后的内容如下：
 
-```
+```plain
 # Copyright 2017 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1291,7 +1292,7 @@ spec:
 
 重新部署
 
-```
+```plain
 kubectl delete -f recommended.yaml
 kubectl apply -f recommended.yaml
 kubectl get svc,pods -n kubernetes-dashboard
@@ -1301,7 +1302,7 @@ kubectl get svc,pods -n kubernetes-dashboard
 
 #### 2）创建登录用户
 
-```
+```plain
 cat >ServiceAccount.yaml<<EOF
 apiVersion: v1
 kind: ServiceAccount
@@ -1327,17 +1328,17 @@ kubectl apply -f ServiceAccount.yaml
 
 创建并获取登录 token
 
-```
+```plain
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
 #### 3）配置 hosts 登录 dashboard web
 
-```
+```plain
 192.168.0.120 cluster-endpoint
 ```
 
-登录：https://cluster-endpoint:31443
+登录：<https://cluster-endpoint:31443>
 
 ![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-20.png)
 
@@ -1347,12 +1348,12 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 ### 四、k8s 镜像仓库 harbor 环境部署
 
-GitHub 地址：https://github.com/helm/helm/releases
-这使用 helm 安装，所以得先安装 helm。另外，搜索公众号Java架构师技术后台回复“面试题”，获取一份惊喜礼包。
+GitHub 地址：<https://github.com/helm/helm/releases>
+这使用 helm 安装，所以得先安装 helm。另外，搜索公众号 Java 架构师技术后台回复“面试题”，获取一份惊喜礼包。
 
 #### 1）安装 helm
 
-```
+```plain
 mkdir -p /opt/k8s/helm && cd /opt/k8s/helm
 wget https://get.helm.sh/helm-v3.9.0-rc.1-linux-amd64.tar.gz
 tar -xf helm-v3.9.0-rc.1-linux-amd64.tar.gz
@@ -1363,13 +1364,13 @@ helm help
 
 #### 2）配置 hosts
 
-```
+```plain
 192.168.0.120 myharbor.com
 ```
 
 #### 3）创建 stl 证书
 
-```
+```plain
 mkdir /opt/k8s/helm/stl && cd /opt/k8s/helm/stl
 # 生成 CA 证书私钥
 openssl genrsa -out ca.key 4096
@@ -1408,13 +1409,13 @@ openssl x509 -req -sha512 -days 3650 \
 
 ### 4）安装 ingress
 
-ingress 官方网站：https://kubernetes.github.io/ingress-nginx/
-ingress 仓库地址：https://github.com/kubernetes/ingress-nginx
-部署文档：https://kubernetes.github.io/ingress-nginx/deploy/
+ingress 官方网站：<https://kubernetes.github.io/ingress-nginx/>
+ingress 仓库地址：<https://github.com/kubernetes/ingress-nginx>
+部署文档：<https://kubernetes.github.io/ingress-nginx/deploy/>
 
 1、通过 helm 部署
 
-```
+```plain
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace
@@ -1422,13 +1423,13 @@ helm upgrade --install ingress-nginx ingress-nginx \
 
 2、通过 YAML 文件安装（本章使用这个方式安装 ingress）
 
-```
+```plain
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 如果下载镜像失败，可以用以下方式修改镜像地址再安装
 
-```
+```plain
 # 可以先把镜像下载，再安装
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.2.0
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.1.1
@@ -1456,13 +1457,13 @@ kubectl apply -f deploy.yaml
 
 1、所有节点安装 nfs
 
-```
+```plain
 yum -y install  nfs-utils rpcbind
 ```
 
 2、在 master 节点创建共享目录并授权
 
-```
+```plain
 mkdir /opt/nfsdata
 # 授权共享目录
 chmod 666 /opt/nfsdata
@@ -1470,7 +1471,7 @@ chmod 666 /opt/nfsdata
 
 3、配置 exports 文件
 
-```
+```plain
 cat > /etc/exports<<EOF
 /opt/nfsdata *(rw,no_root_squash,no_all_squash,sync)
 EOF
@@ -1488,7 +1489,7 @@ exportfs 命令
 
 4、启动 rpc 和 nfs（客户端只需要启动 rpc 服务）（注意顺序）
 
-```
+```plain
 systemctl start rpcbind
 systemctl start nfs-server
 systemctl enable rpcbind
@@ -1497,7 +1498,7 @@ systemctl enable nfs-server
 
 查看
 
-```
+```plain
 showmount -e
 # VIP
 showmount -e 192.168.0.120
@@ -1509,7 +1510,7 @@ showmount -e 192.168.0.120
 
 5、客户端
 
-```
+```plain
 # 安装
 yum -y install  nfs-utils rpcbind
 # 启动rpc服务
@@ -1526,7 +1527,7 @@ mount -a
 
 【1】rsync 安装
 
-```
+```plain
 # 两端都得安装
 yum -y install rsync
 ```
@@ -1534,7 +1535,7 @@ yum -y install rsync
 【2】配置
 在/etc/rsyncd.conf 中添加
 
-```
+```plain
 cat >/etc/rsyncd.conf<<EOF
 uid = root
 gid = root
@@ -1599,7 +1600,7 @@ rsyncd.conf 参数
 
 【4】rsync 常用命令参数详解
 
-```
+```plain
 rsync --help
 
 rsync [选项]  原始位置   目标位置
@@ -1623,7 +1624,7 @@ rsync [选项]  原始位置   目标位置
 
 【5】启动服务（数据源机器）
 
-```
+```plain
 #rsync监听端口：873
 #rsync运行模式：C/S
 rsync --daemon --config=/etc/rsyncd.conf
@@ -1632,7 +1633,7 @@ netstat -tnlp|grep :873
 
 【6】执行命令同步数据
 
-```
+```plain
 # 在目的机器上执行
 # rsync -avz 用户名@源主机地址/源目录 目的目录
 rsync -avz root@192.168.0.113:/opt/nfsdata/* /opt/nfsdata/
@@ -1640,33 +1641,34 @@ rsync -avz root@192.168.0.113:/opt/nfsdata/* /opt/nfsdata/
 
 【7】crontab 定时同步
 
-```
+```plain
 # 配置crontab， 每五分钟同步一次，这种方式不好
 */5 * * * * rsync -avz root@192.168.0.113:/opt/nfsdata/* /opt/nfsdata/
 ```
 
-> 【温馨提示】crontab 定时同步数据不太好，可以使用rsync+inotify做数据实时同步，这里篇幅有点长了，先不讲，如果后面有时间会出一篇单独文章来讲。另外，搜索公众号后端架构师后台回复“架构整洁”，获取一份惊喜礼包。
+> 【温馨提示】crontab 定时同步数据不太好，可以使用 rsync+inotify
+> 做数据实时同步，这里篇幅有点长了，先不讲，如果后面有时间会出一篇单独文章来讲。另外，搜索公众号后端架构师后台回复“架构整洁”，获取一份惊喜礼包。
 
 ### 6）创建 nfs provisioner 和持久化存储 SC
 
 > 【温馨提示】这里跟我之前的文章有点不同，之前的方式也不适用新版本。
 
-GitHub 地址：https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+GitHub 地址：<https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner>
 
 helm 部署 nfs-subdir-external-provisioner
 
 1、添加 helm 仓库
 
-```
+```plain
 helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
 ```
 
 2、helm 安装 nfs provisioner
 
-> 【温馨提示】默认镜像是无法访问的，这里使用 dockerhub 搜索到的镜像willdockerhub/nfs-subdir-external-provisioner:
+> 【温馨提示】默认镜像是无法访问的，这里使用 dockerhub 搜索到的镜像 willdockerhub/nfs-subdir-external-provisioner:
 > v4.0.2，还有就是 StorageClass 不分命名空间，所有在所有命名空间下都可以使用。
 
-```
+```plain
 helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
   --namespace=nfs-provisioner \
   --create-namespace \
@@ -1683,7 +1685,7 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
 
 3、查看
 
-```
+```plain
 kubectl get pods,deploy,sc -n nfs-provisioner
 ```
 
@@ -1693,26 +1695,26 @@ kubectl get pods,deploy,sc -n nfs-provisioner
 
 1、创建 Namespace
 
-```
+```plain
 kubectl create ns harbor
 ```
 
 2、创建证书秘钥
 
-```
+```plain
 kubectl create secret tls myharbor.com --key myharbor.com.key --cert myharbor.com.crt -n harbor
 kubectl get secret myharbor.com -n harbor
 ```
 
 3、添加 Chart 库
 
-```
+```plain
 helm repo add harbor https://helm.goharbor.io
 ```
 
 4、通过 helm 安装 harbor
 
-```
+```plain
 helm install myharbor --namespace harbor harbor/harbor \
   --set expose.ingress.hosts.core=myharbor.com \
   --set expose.ingress.hosts.notary=notary.myharbor.com \
@@ -1731,7 +1733,7 @@ helm install myharbor --namespace harbor harbor/harbor \
 
 这里稍等一段时间在查看资源状态
 
-```
+```plain
 kubectl get ingress,svc,pods,pvc -n harbor
 ```
 
@@ -1741,7 +1743,7 @@ kubectl get ingress,svc,pods,pvc -n harbor
 
 【分析】，发现"error: endpoints “default-http-backend” not found"
 
-```
+```plain
 cat << EOF > default-http-backend.yaml
 ---
 
@@ -1807,7 +1809,7 @@ kubectl apply -f default-http-backend.yaml
 
 ### 6、卸载重新部署
 
-```
+```plain
 # 卸载
 helm uninstall myharbor -n harbor
 kubectl get pvc -n harbor| awk 'NR!=1{print $1}' | xargs kubectl delete pvc -n harbor
@@ -1833,7 +1835,7 @@ helm install myharbor --namespace harbor harbor/harbor \
 
 5、访问 harbor
 
-https://myharbor.com
+<https://myharbor.com>
 账号/密码：admin/Harbor12345
 
 ![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-26.png)
@@ -1844,21 +1846,21 @@ https://myharbor.com
 ![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-27.png)
 
 【2】配置私有仓库
-在文件/etc/docker/daemon.json添加如下内容：
+在文件/etc/docker/daemon.json 添加如下内容：
 
-```
+```plain
 "insecure-registries":["https://myharbor.com"]
 ```
 
 重启 docker
 
-```
+```plain
 systemctl restart docker
 ```
 
 【3】服务器上登录 harbor
 
-```
+```plain
 docker login https://myharbor.com
 #账号/密码：admin/Harbor12345
 ```
@@ -1867,7 +1869,7 @@ docker login https://myharbor.com
 
 【4】打标签并把镜像上传到 harbor
 
-```
+```plain
 docker tag rancher/pause:3.6 myharbor.com/bigdata/pause:3.6
 docker push myharbor.com/bigdata/pause:3.6
 ```
@@ -1881,14 +1883,14 @@ docker push myharbor.com/bigdata/pause:3.6
 
 创建域名目录
 
-```
+```plain
 mkdir /etc/containerd/myharbor.com
 cp ca.crt /etc/containerd/myharbor.com/
 ```
 
 配置文件：/etc/containerd/config.toml
 
-```
+```plain
 [plugins."io.containerd.grpc.v1.cri".registry]
       config_path = ""
 
@@ -1912,7 +1914,7 @@ cp ca.crt /etc/containerd/myharbor.com/
 
 重启 containerd
 
-```
+```plain
 #重新加载配置
 systemctl daemon-reload
 #重启containerd
@@ -1921,21 +1923,21 @@ systemctl restart containerd
 
 简单使用
 
-```
+```plain
 # 把docker换成crictl 就行，命令都差不多
 crictl pull myharbor.com/bigdata/mysql:5.7.38
 ```
 
 执行 crictl 报如下错误的解决办法
 
-```
+```plain
 WARN[0000] image connect using default endpoints: [unix:///var/run/dockershim.sock unix:///run/containerd/containerd.sock unix:///run/crio/crio.sock unix:///var/run/cri-dockerd.sock]. As the default settings are now deprecated, you should set the endpoint instead.
 ERRO[0000] unable to determine image API version: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial unix /var/run/dockershim.sock: connect: no such file or directory"
 ```
 
 这个报错是 docker 的报错，这里没使用，所以这个错误不影响使用，但是还是解决好点，解决方法如下：
 
-```
+```plain
 cat <<EOF> /etc/crictl.yaml
 runtime-endpoint: unix:///run/containerd/containerd.sock
 image-endpoint: unix:///run/containerd/containerd.sock
@@ -1946,7 +1948,7 @@ EOF
 
 再次拉取镜像
 
-```
+```plain
 crictl pull myharbor.com/bigdata/mysql:5.7.38
 ```
 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: JSP和JSTL获取服务器参数
+excerpt: 
 description:  JSP和JSTL获取服务器参数
 date: 2022-06-22
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# JSP和JSTL获取服务器参数
+# JSP 和 JSTL 获取服务器参数
 
 ```jsp
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -136,4 +137,3 @@ ${pageContext.request.remoteHost}|客户机名称<br>
 </body>
 </html>
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Event轻量级内部组件解耦
+excerpt: 
 description: 
 date: 2023-12-27
 category: Java
@@ -10,9 +11,7 @@ timeline: true
 icon: java
 ---
 
-# Spring Event轻量级内部组件解耦
-
-
+# Spring Event 轻量级内部组件解耦
 
 ## 版本
 
@@ -21,13 +20,14 @@ icon: java
 
 ## 登录事件示例
 
-- • 下面是一个使用Spring事件处理用户登录的简单示例。在此示例中，我们将创建一个Spring Boot应用程序，演示如何使用Spring事件来处理用户登录事件。
+- • 下面是一个使用 Spring 事件处理用户登录的简单示例。在此示例中，我们将创建一个 Spring Boot 应用程序，演示如何使用 Spring
+  事件来处理用户登录事件。
 
 ## 创建一个登录事件
 
-- • 创建一个自定义的事件类，用于表示用户登录事件，例如LogonEvent：
+- • 创建一个自定义的事件类，用于表示用户登录事件，例如 LogonEvent：
 
-```
+```plain
 public class LoginEvent extends ApplicationEvent {
 
     private final String userName;
@@ -47,7 +47,7 @@ public class LoginEvent extends ApplicationEvent {
 
 - • 创建一个事件发布者，用于发布用户登录事件：
 
-```
+```plain
 @Service
 public class LoginEventPublisher {
 
@@ -68,7 +68,7 @@ public class LoginEventPublisher {
 
 - • 创建事件监听器，用于处理用户登录事件，支持创建一个或者多个类似发布订阅模式，本示例中创建了两个时间监听器：
 
-```
+```plain
 // 日志处理事件监听器
 @Component
 public class LoginEventPrintLogListener {
@@ -96,9 +96,9 @@ public class LoginEventMessageNoticeListener {
 
 ## 模拟用户登录
 
-- • 这里为了方便测试，使用CommandLineRunner启动时模拟登录：
+- • 这里为了方便测试，使用 CommandLineRunner 启动时模拟登录：
 
-```
+```plain
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
@@ -122,7 +122,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
 ## 运行结果
 
-```
+```plain
 2023-10-13 16:04:02.021  INFO 5356 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1250 ms
 2023-10-13 16:04:02.382  INFO 5356 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-10-13 16:05:31.792  INFO 5356 --- [           main] c.e.s.SpringBootTestMavenApplication     : Started SpringBootTestMavenApplication in 200.49 seconds (JVM running for 201.165)
@@ -136,7 +136,7 @@ User logged in: 小王
 
 - • 上文示例中，我们使用多监听器实现了对登录事件的监听，如果我们实际业务中只需要一个监听器，那么使用单监听器即可。
 
-```
+```plain
 // 日志处理事件监听器
 @Component
 public class LoginEventPrintLogListener {
@@ -166,7 +166,7 @@ public class LoginEventMessageNoticeListener {
 
 - • 除了使用注解的方式实现监听器之外，我们也可以不使用注解实现：
 
-```
+```plain
 @Component
 public class LoginEventPrintLogListenerTest implements ApplicationListener<LoginEvent> {
 
@@ -181,7 +181,7 @@ public class LoginEventPrintLogListenerTest implements ApplicationListener<Login
 
 - • 默认情况下，事件监听器使用当前线程同步处理事件，当前线程阻塞直到事件处理完成，在一些事件监听器处理事件比较长的场景是不适合的，这时候我们可以使用异步进行处理。
 
-```
+```plain
 @SpringBootApplication
 // 开启 Async
 @EnableAsync
@@ -211,7 +211,7 @@ public class LoginEventPrintLogListener {
 - • Spring 还提供了根据特定标准有条件地处理事件的功能。这使我们能够很好地控制监听器对事件的处理。
 - • 比如在下面的示例中，仅当登录用户的 userName 等于小王时才会触发监听器执行：
 
-```
+```plain
 @Component
 public class LoginEventPrintLogListener {
 
@@ -229,16 +229,16 @@ public class LoginEventPrintLogListener {
 - • Spring 事件可以和事务一起使用，但是可能会出现下面这种异常情况，用户注册成功后发布登录事件，但在后续的事务处理中处理异常导致事务回滚，会出现用户收到注册成功短信但实际没有注册成功。
 - • 对于上述这种场景，我们一般有两种方案处理：
 
-```
+```plain
 方案一：将事务处理逻辑和事件发布拆分，避免上述异常场景（推荐）
 方案二：使用 TransactionalEventListener 指定和事务执行的顺序关系
 ```
 
 ### @TransactionalEventListener
 
-- • 在 Spring 4.2+，引入了 @TransactionalEventListener 对 @EventListener 进行增强。以便能够控制在事务的时候Event事件的处理方式。
+- • 在 Spring 4.2+，引入了 @TransactionalEventListener 对 @EventListener 进行增强。以便能够控制在事务的时候 Event 事件的处理方式。
 
-```
+```plain
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
@@ -278,7 +278,7 @@ public class RegisterEventPrintLogListener {
 
 - • 默认情况下，多个监听器对同一个事件的处理事未定的，我们可以使用 @Order 注解指定执行顺序。
 
-```
+```plain
 @Component
 public class LoginEventPrintLogListener {
 
@@ -306,9 +306,10 @@ public class LoginEventMessageNoticeListener {
 
 ## Generic Events（泛型事件）
 
-- • 我们也可以使用泛型来实现通用的事件处理。定义一个通用的事件类型，以处理不同类型的事件数据。以下是一个使用泛型的 Spring 事件处理示例：
+- • 我们也可以使用泛型来实现通用的事件处理。定义一个通用的事件类型，以处理不同类型的事件数据。以下是一个使用泛型的 Spring
+  事件处理示例：
 
-```
+```plain
 public class GenericEvent<T> extends ApplicationEvent {
 
     private T eventData;
@@ -358,7 +359,7 @@ public class GenericEventListener {
 
 - • 自定义 ErrorHandler 并绑定到 SimpleApplicationEventMulticaster 上。
 
-```
+```plain
 @Component
 public class MyErrorHandler implements ErrorHandler {
     @Override
@@ -387,7 +388,7 @@ public class EventListenerService {
 
 - • 使用 SimpleAsyncUncaughtExceptionHandler 来处理 @Async 抛出的异常
 
-```
+```plain
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
     @Override
@@ -406,7 +407,8 @@ public class AsyncConfig implements AsyncConfigurer {
 ### 监听器的事件处理并不可靠
 
 - • 监听器并不会保证事件会如预期一样的处理完成，比如同步处理时某个监听器处理异常会导致后序监听器无法执行；程序关闭时可能发生监听事件未处理完成等等。
-- • 虽然我们可以写一些附加的代码逻辑、技术手段去保证可靠性，但个人认为并不划算，因此建议 Spring Event 应仅使用在应用程序内部组件解耦且没有可靠性要求的场景，比如消息通知等。
+- • 虽然我们可以写一些附加的代码逻辑、技术手段去保证可靠性，但个人认为并不划算，因此建议 Spring Event
+  应仅使用在应用程序内部组件解耦且没有可靠性要求的场景，比如消息通知等。
 
 ### 保持监听器的逻辑尽可能小
 
@@ -414,9 +416,9 @@ public class AsyncConfig implements AsyncConfigurer {
 
 ### 不要依赖监听器执行顺序
 
-- • 最佳情况下，同一事件的各个监听器之间应该是独立的，虽然我们可以使用 @Order 来控制监听器之间的执行顺序，但是仅在同步执行的场景下有效，监听器异步执行的情况下实际执行顺序仍然是不可控的。
+- • 最佳情况下，同一事件的各个监听器之间应该是独立的，虽然我们可以使用 @Order
+  来控制监听器之间的执行顺序，但是仅在同步执行的场景下有效，监听器异步执行的情况下实际执行顺序仍然是不可控的。
 
 ### 谨慎使用条件监听器和事务监听器
 
 - • 虽然两者都是强大的工具，但过多的使用会导致我们的程序出现难以调试的问题。
-

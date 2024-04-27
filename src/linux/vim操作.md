@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: vim操作
+excerpt: 
 description: 
 date: 2024-03-06
 category: Linux
@@ -66,7 +67,7 @@ y p f h c i
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1709691062587-9.gif)
 
-####   
+####
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1709691062587-10.png)
 
@@ -78,17 +79,17 @@ GIF 中步骤如下：
 2. `kkk`向上移动 3 行，并进行选中
 3. `d`删除选中部分
 
-#### 块级删除「常用」di* da*
+#### 块级删除「常用」di* da
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1709691062588-12.gif)
 
-```
+```plain
 di"`删除`"`内的内容，个人感觉这个还是非常常用了。也是初步在效率上优于传统的 intellj idea 的操作方式。如果想要删除之后马上进入插入模式 可以使用`ci"
 ```
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1709691062588-13.gif)
 
-```
+```plain
 di(`删除`(`内的内容，如果想要删除之后马上进入插入模式 可以使用`ci(
 ```
 
@@ -167,7 +168,7 @@ di(`删除`(`内的内容，如果想要删除之后马上进入插入模式 可
 
 初步的介绍完`Intellj Idea`的`action`之后，下面分享我自己目前在用的几个比较常用的配置，通过快捷键 调用`action`
 
-```
+```plain
 "jk退出insert模式
 inoremap jk <ESC>
 

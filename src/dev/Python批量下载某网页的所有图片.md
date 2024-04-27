@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Python 批量下载某网页的所有图片
+excerpt: 
 description: Python 批量下载某网页的所有图片
 date: 2022-05-31
 category: Python
@@ -9,8 +10,6 @@ article: true
 timeline: true
 icon: python
 ---
-
-
 
 # Python 批量下载某网页的所有图片
 
@@ -81,4 +80,3 @@ while page_number < 8 :
 print('程序结束!')
 
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Cloud Alibaba
+excerpt: 
 description: Spring Cloud Alibaba
 date: 2022-03-23
 category: Java
@@ -21,11 +22,11 @@ icon: type
 那么微服务生态圈都有哪些模块？他们的作用分别是什么？
 
 - **服务的注册、发现** 。生产者启动时，会将自己的信息注册上报，这样调用方只需连接注册中心，根据一定的负载算法，就可以与服务提供方建立连接，从而实现应用间的解耦。
-- **服务调用** 。通过多种协议（如：HTTP等）实现目标服务的真正调用。
+- **服务调用** 。通过多种协议（如：HTTP 等）实现目标服务的真正调用。
 - **负载均衡** 。主要是提供多种负载算法，满足不同业务场景下的集群多实例的选择机制
 - **服务的稳定性** 。提供了服务熔断、限流、降级
 - **分布式配置中心** 。应用的配置项统一管理，修改后能动态生效
-- **消息队列** 。非核心逻辑从同步流程抽离，解耦，异步化处理，缩短RT时间
+- **消息队列** 。非核心逻辑从同步流程抽离，解耦，异步化处理，缩短 RT 时间
 - **网关** 。将一些通用的处理逻辑，如：限流、鉴权、黑白名单、灰度等抽取到一个单独的、前置化系统统一处理。
 - **监控** 。监控系统的健康状况
 - **分布式链路追踪** 。查看接口的调用链路，为性能优化、排查问题提供输入
@@ -40,13 +41,13 @@ icon: type
 
 ## 一、Spring Boot（服务基座）
 
-Spring Boot 是Spring框架的扩展，提供更加 `丰富的注解`，根据 **约定胜于配置** 原则，与市场主流的开源框架打通，
-设计了 `Starter` 和 `AutoConfiguration` 机制，简化配置流程，通过简单的jar包引入，快速具备组件集成能力。大大提高了程序员的开发效率。
+Spring Boot 是 Spring 框架的扩展，提供更加 `丰富的注解`，根据 **约定胜于配置** 原则，与市场主流的开源框架打通，
+设计了 `Starter` 和 `AutoConfiguration` 机制，简化配置流程，通过简单的 jar 包引入，快速具备组件集成能力。大大提高了程序员的开发效率。
 
 **特点：**
 
-- 提供了丰富的注解，不要在XML文件中定义各种繁琐的bean配置
-- 内嵌 Web容器，如：Tomcat（默认）、Jetty、Undertow
+- 提供了丰富的注解，不要在 XML 文件中定义各种繁琐的 bean 配置
+- 内嵌 Web 容器，如：Tomcat（默认）、Jetty、Undertow
 - 集成了主流开源框架，根据项目依赖自动配置
 
 ## 二、Nacos（注册中心、分布式配置中心）
@@ -59,7 +60,7 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos
 
 客户端语言方面目前支持 Java，go 、python、 C# 和 C++等主流语言
 
-> 开源地址：https://github.com/alibaba/nacos
+> 开源地址：<https://github.com/alibaba/nacos>
 
 Nacos 有一个控制台，可以帮助用户管理服务，监控服务状态、应用的配置管理。
 
@@ -71,11 +72,11 @@ Nacos 官方提供的集群部署架构图：
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184769926-3.jpeg)
 
-> https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html
+> <https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html>
 
-在nacos的解压目录`nacos/conf`目录下，有配置文件`cluster.conf`，每行配置成 ip:port。（一般配置3个或3个以上节点）
+在 nacos 的解压目录`nacos/conf`目录下，有配置文件`cluster.conf`，每行配置成 ip:port。（一般配置 3 个或 3 个以上节点）
 
-```
+```plain
 > 基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud Alibaba 。
 >
 > 项目地址：<https://github.com/YunaiV/onemall>
@@ -86,11 +87,11 @@ Nacos 官方提供的集群部署架构图：
 200.8.9.18:8848
 ```
 
-**这样保证客户端只需要写一次，由 Leader节点将数据同步到其他节点，保证各个节点的数据一致性**
+**这样保证客户端只需要写一次，由 Leader 节点将数据同步到其他节点，保证各个节点的数据一致性**
 
-对于上层的SLB，我们可以采用 `Nginx` 或者 `OpenResty`，在 upstream 模块里配置 Nacos 的集群IP 地址列表，实现负载均衡功能。
+对于上层的 SLB，我们可以采用 `Nginx` 或者 `OpenResty`，在 upstream 模块里配置 Nacos 的集群 IP 地址列表，实现负载均衡功能。
 
-另外，借助Nginx的心跳检测，当某台 Nacos 服务挂掉后，SLB 会自动屏蔽，将流量切换到其他 Nacos 实例。
+另外，借助 Nginx 的心跳检测，当某台 Nacos 服务挂掉后，SLB 会自动屏蔽，将流量切换到其他 Nacos 实例。
 
 当然 `OpenResty` 也可能成为单点故障，为了保证高可用，我们需要借助 `Keepalived`
 
@@ -100,9 +101,10 @@ Nacos 官方提供的集群部署架构图：
 
 > OpenResty 只有一个节点提供服务，另一个暂停状态，如果 master 节点宕机，那 backup 接替继续工作。从而解决了单点故障问题。
 
-Keepalived 作为一种高性能的服务器高可用或热备解决方案，用来防止服务器单点故障的发生。市面资料很多，下文链接是《Keepalived+Nginx部署方案》具体操作步骤
+Keepalived 作为一种高性能的服务器高可用或热备解决方案，用来防止服务器单点故障的发生。市面资料很多，下文链接是《Keepalived+Nginx
+部署方案》具体操作步骤
 
-> https://help.fanruan.com/finereport/doc-view-2905.html
+> <https://help.fanruan.com/finereport/doc-view-2905.html>
 
 ## 三、RestTemplate + Ribbon （远程调用）
 
@@ -112,7 +114,7 @@ Spring Cloud Ribbon 基于 Netflix Ribbon 封装的负载均衡框架。内部�
 
 > Ribbon 也提供了扩展接口，支持自定义负载均衡算法。
 
-```
+```plain
 public class CustomRule extends AbstractLoadBalancerRule {
     private AtomicInteger count = new AtomicInteger(0);
     @Override
@@ -146,7 +148,7 @@ public class CustomRule extends AbstractLoadBalancerRule {
 
 调用方每次发起远程服务调用时，都需要填写`远程目标地址`，还要配置各种参数，非常麻烦，不是很方便
 
-```
+```plain
 // 注册到Nacos的应用名称
 private final String SERVER_URL = "http://nacos-provider-demo"; 
 @Resource
@@ -166,11 +168,11 @@ RestTemplate + Ribbon 每次发起远程服务调用时，都需要填写`远程
 Feign 是一个轻量级的 Restful HTTP 客户端，**内嵌了 Ribbon 作为客户端的负载均衡**
 。面向接口编程，使用时只需要定义一个接口并加上`@FeignClient`注解，非常方便。
 
-OpenFeign 是 `Feign` 的增强版。对 Feign 进一步封装，支持 Spring MVC 的标准注解和HttpMessageConverts
+OpenFeign 是 `Feign` 的增强版。对 Feign 进一步封装，支持 Spring MVC 的标准注解和 HttpMessageConverts
 
 **依赖包：**
 
-```
+```plain
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -184,14 +186,14 @@ public interface OrderService {
 ```
 
 其中，`@FeignClient(value = "${provider.name}")` 定义了服务提供方的工程名，底层自动打通了注册中心，会拿到 `artifactId`
-对应的IP列表，根据一定的负载均衡算法，可以将请求打到目标服务器上。
+对应的 IP 列表，根据一定的负载均衡算法，可以将请求打到目标服务器上。
 
 OpenFeign 默认等待接口返回数据的时间是 1
 秒，超过这个时间就会报错。如果想调整这个时间，可以修改配置项 `feign.client.config.default.readTimeout`
 
 ## 五、Dubbo Spring Cloud（远程调用）
 
-`RestTemplate + Ribbon` 和 `OpenFeign` 都是基于HTTP协议调用远程接口。而 `Dubbo Spring Cloud` 是基于 TCP 协议来调用远程接口。相比
+`RestTemplate + Ribbon` 和 `OpenFeign` 都是基于 HTTP 协议调用远程接口。而 `Dubbo Spring Cloud` 是基于 TCP 协议来调用远程接口。相比
 HTTP 的大量的请求头，TCP 更轻量级。
 
 Dubbo Spring Cloud = Spring Cloud + Dubbo
@@ -205,7 +207,7 @@ Dubbo Spring Cloud = Spring Cloud + Dubbo
 
 **依赖包：**
 
-```
+```plain
 <dependency>
     <groupId>com.alibaba.cloud</groupId>
     <artifactId>spring-cloud-starter-dubbo</artifactId>
@@ -230,8 +232,8 @@ Dubbo Spring Cloud = Spring Cloud + Dubbo
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184784231-9.jpeg)
 
-Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区停止了维护。官方后来推出了 Spring Cloud Gateway，**其底层是基于
-WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。
+Spring Cloud 生态早期的网关是 Netflix 公司的 Zuul，后来 Zuul 社区停止了维护。官方后来推出了 Spring Cloud Gateway，**其底层是基于
+WebFlux 框架** ，而 WebFlux 框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。
 
 **核心组件：**
 
@@ -241,11 +243,11 @@ WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty�
 
 2、断言（Predicate）
 
-如果返回为true，当前路由才有效，才会路由到具体的服务。官方提供了很多`内置路由断言`
+如果返回为 true，当前路由才有效，才会路由到具体的服务。官方提供了很多`内置路由断言`
 ，如果满足不了你的诉求，也可以`自定义路由断言工厂`。
 
 所有的路由断言工厂都是继承自 `AbstractRoutePredicateFactory`，自定义类的命名也有固定规则，`“配置名”+RoutePredicateFactory`
-。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
+。这样，在 yaml 配置时，只需要写`前面定义的配置名`即可。
 
 3、过滤器（Filter）
 
@@ -254,14 +256,14 @@ WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty�
 跟上面的断言类似，除了官方提供的过滤器，也支持自定义。
 
 **局部过滤器** ：继承自 `AbstractGatewayFilterFactory`，自定义类的命名也有固定规则，`“配置名”+GatewayFilterFactory`
-。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
+。这样，在 yaml 配置时，只需要写`前面定义的配置名`即可。
 
 **全局过滤器** ：实现`GlobalFilter`,`Ordered` 两个接口，实现逻辑跟上面的局部过滤器类似。这里就不展开了。其中的 `Ordered`
 接口主要是负责优先级，数值越小，优先级越高。
 
 **依赖包：**
 
-```
+```plain
 <dependency>
  <groupId>org.springframework.cloud</groupId>
  <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -270,7 +272,7 @@ WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty�
 
 **yaml 的配置示例：**
 
-```
+```plain
 spring:
   cloud:
     gateway:
@@ -288,7 +290,8 @@ spring:
            
 ```
 
-当然，服务提供方的地址可能经常变化，为了动态感知，我们引入 Nacos 注册中心，用于服务的注册、发现，统一管理服务的IP地址。网关路由转发时，只需从
+当然，服务提供方的地址可能经常变化，为了动态感知，我们引入 Nacos 注册中心，用于服务的注册、发现，统一管理服务的 IP
+地址。网关路由转发时，只需从
 Nacos 动态获取即可。
 
 ## 七、Sentinel（熔断、限流、降级）
@@ -309,7 +312,7 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 
 - 资源名：唯一即可
 
-- 针对来源：对调用者限流，填写应用名称（Spring.application.name的值），只针对某个服务限流
+- 针对来源：对调用者限流，填写应用名称（Spring.application.name 的值），只针对某个服务限流
 
 - 阈值类型
 
@@ -321,7 +324,7 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 
 -
     - 直接：达到条件后，直接执行某个流控效果
-    - 关联：如果访问关联接口B达到了阈值，则让接口A返回失败
+    - 关联：如果访问关联接口 B 达到了阈值，则让接口 A 返回失败
     - 链路：记录从入口资源的流量，达到条件也只限流入口资源
 
 - 流控效果
@@ -349,12 +352,12 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 
 将粒度进一步细化，可以针对方法的参数做规则控制，为每个参数设置单独的阈值，也可以多个参数组合。从而实现单个方法的热点流量，按业务需求进一步控制。
 
-**@SentinelResource注解**
+**@SentinelResource 注解**
 
 `@SentinelResource` 注解可以根据实际情况定制化功能，跟 `Hystrix` 的 `@HystrixCommand`
 注解功能类似。达到阈值后，系统的默认提示是一段英文，很不友好，所以我们要`自定义兜底方法`。
 
-```
+```plain
 // 资源名称为handle1 
 @RequestMapping("/handle1")
 @SentinelResource(value = "handle1", blockHandler = "blockHandlerTestHandler")
@@ -394,17 +397,17 @@ Seata 是一款开源的分布式事务解决方案，致力于提供高性能�
 - 高性能：减少分布式事务解决方案所带来的性能消耗
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184804718-12.jpeg)
-**Seata有3个基本组成部分** ：
+**Seata 有 3 个基本组成部分** ：
 
 - 事务管理器（TM）：定义全局事务的范围：开始全局事务，提交或回滚全局事务。
 - 事务协调器（TC）：维护全局事务和分支事务的状态，驱动全局提交或回滚。
-- 资源管理器（RM）：管理正在处理的分支事务的资源，与TC对话以注册分支事务并报告分支事务的状态，并驱动分支事务的提交或回滚。
+- 资源管理器（RM）：管理正在处理的分支事务的资源，与 TC 对话以注册分支事务并报告分支事务的状态，并驱动分支事务的提交或回滚。
 
 **运行流程** ：
 
 - TM 向 TC 申请开启一个全局事务，全局事务创建成功并生成一个全局唯一的 XID
 - XID 在微服务调用链路的上下文中传播
-- RM 向 TC 注册分支事务，TC 返回分支事务ID ，并将其纳入 XID 对应全局事务的管辖
+- RM 向 TC 注册分支事务，TC 返回分支事务 ID ，并将其纳入 XID 对应全局事务的管辖
 - RM 执行本地业务表操作，并记录 `undo_log` 日志，提交本地事务
 - 当所有的 RM 都执行完后，TM 向 TC 发起针对 XID 的全局提交或回滚决议
 - TC 调度 XID 下管辖的全部分支事务完成提交或回滚请求。如果提交，删除 `undo_log` 日志就可以了。如果是回滚，根据 `undo_log`
@@ -412,13 +415,13 @@ Seata 是一款开源的分布式事务解决方案，致力于提供高性能�
 
 **关于 Seata 之前写过很多文章，这里就不展开了，感兴趣可以看看**
 
-- 业务无侵入框架Seata， 解决分布式事务问题
+- 业务无侵入框架 Seata， 解决分布式事务问题
 - 深度剖析 Seata TCC 模式【图解 + 源码分析】
 - 七种分布式事务的解决方案，一次讲给你听
 
 ## 九、Spring Cloud Stream （异步消息）
 
-Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底层消息中间件的差异。支持的MQ
+Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底层消息中间件的差异。支持的 MQ
 框架有 `RabbitMQ`、`Kafka`、`RocketMQ` 等
 
 **常用注解：**
@@ -430,7 +433,7 @@ Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底
 
 **依赖包：**
 
-```
+```plain
 <dependency>
  <groupId>com.alibaba.cloud</groupId>
  <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
@@ -439,7 +442,7 @@ Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底
 
 **绑定通道：**
 
-```
+```plain
 @SpringBootApplication
 @EnableBinding({CustomSource.class})
 public class StreamProduceApplication {
@@ -451,7 +454,7 @@ public class StreamProduceApplication {
 
 **定义输出信道：**
 
-```
+```plain
 public interface CustomSource {
     @Output("output1")
     MessageChannel output1();
@@ -460,7 +463,7 @@ public interface CustomSource {
 
 **yaml 配置：**
 
-```
+```plain
 spring:
   cloud:
     stream:
@@ -480,7 +483,7 @@ spring:
 
 **发送消息：**
 
-```
+```plain
 @Service
 public class SendMessageService {
     @Resource
@@ -518,13 +521,13 @@ SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云�
   SkyWalking 开发团队自己的生产环境采用 ES 为主。
 - 左部分 SkyWalking UI ：负责提供控台，查看链路等等。
 
-SkyWalking 部署起来还是很简单的，apache官网直接下载并解压即可。
+SkyWalking 部署起来还是很简单的，apache 官网直接下载并解压即可。
 
-> https://skywalking.apache.org/
+> <https://skywalking.apache.org/>
 
 SkyWalking 快速入门手册：
 
-> https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/
+> <https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/>
 
 ## 十一、XXL-JOB（分布式任务调度）
 
@@ -555,7 +558,7 @@ MySQL），开箱即用。并提供了可视化界面，统计任务数据，动
 
 **依赖包：**
 
-```
+```plain
 <dependency>
  <groupId>com.xuxueli</groupId>
  <artifactId>xxl-job-core</artifactId>
@@ -565,7 +568,7 @@ MySQL），开箱即用。并提供了可视化界面，统计任务数据，动
 
 **yaml 配置：**
 
-```
+```plain
 server:
   port: 8082  #程序端口
 xxl:
@@ -584,7 +587,7 @@ xxl:
 
 **XxlJobSpringExecutor 初始化：**
 
-```
+```plain
 @Bean
 public XxlJobSpringExecutor xxlJobExecutor() { // XXL-JOB执行器初始化
     XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
@@ -606,7 +609,7 @@ public XxlJobSpringExecutor xxlJobExecutor() { // XXL-JOB执行器初始化
 
 如果要处理的数据量较大时，我们可以采用`分片`处理机制，将任务均摊到每个节点，从而减轻单个节点的压力。
 
-```
+```plain
 shardingVO.getIndex() # 当前执行器的分片序号（从0开始）
 shardingVO.getTotal() # 总分片数，执行器集群的数量
 
@@ -620,4 +623,4 @@ for (Integer val : dataSource) { // 遍历代理
 
 XXL-JOB 快速入门手册：
 
-> https://www.xuxueli.com/xxl-job/
+> <https://www.xuxueli.com/xxl-job/>

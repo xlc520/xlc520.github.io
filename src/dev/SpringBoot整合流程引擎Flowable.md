@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Boot 整合流程引擎 Flowable
+excerpt: 
 description: 
 date: 2022-07-04
 category: Java
@@ -155,7 +156,7 @@ Activity 是流程标准规范 BPMN2.0 里面的规范，流程中的每一个�
 
 - Execution
 
-Execution 的含义是流程的执行线路，通过 Execution 可以获得当前 ProcessInstance 当前执行到哪个 Activity了。
+Execution 的含义是流程的执行线路，通过 Execution 可以获得当前 ProcessInstance 当前执行到哪个 Activity 了。
 
 - Task
 
@@ -406,7 +407,7 @@ public class AskForLeaveFail implements JavaDelegate {
 
 ## 启动报错解决
 
-### flowable启动自动建表失败Table ‘mes_design_test.act_ge_property‘ doesn‘t exist
+### flowable 启动自动建表失败 Table ‘mes_design_test.act_ge_property‘ doesn‘t exist
 
 ```java
 --- [           main] o.f.c.e.impl.db.CommonDbSchemaManager    : Could not get property from table ACT_GE_PROPERTY
@@ -416,13 +417,13 @@ java.sql.SQLSyntaxErrorException: Table 'mes_design_test.act_ge_property' doesn'
 
 **解决**
 
-我的数据库是MySQL8。
+我的数据库是 MySQL8。
 
-​ 经过查询和尝试，原因是：在这个数据库里面，已经有一个数据库里面有activiti的这些表了，它检索的时候全库检索查到它了，所以flowable不去建表了，但是我们指定的这个schema里卖弄还是空的，所以它报了找不到表。
+​ 经过查询和尝试，原因是：在这个数据库里面，已经有一个数据库里面有 activiti 的这些表了，它检索的时候全库检索查到它了，所以
+flowable 不去建表了，但是我们指定的这个 schema 里卖弄还是空的，所以它报了找不到表。
 
-​ 解决方法：mysql的链接上加上参数如下，让本schema成为默认的schema。
+​ 解决方法：mysql 的链接上加上参数如下，让本 schema 成为默认的 schema。
 
 ```javascript
 &nullCatalogMeansCurrent=true
 ```
-

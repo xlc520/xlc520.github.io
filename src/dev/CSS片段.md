@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: CSS片段
+excerpt: 
 description: 
 date: 2024-04-12
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# CSS片段
+# CSS 片段
 
 **一键换主题色**
 
@@ -20,7 +21,7 @@ icon: java
  }
 ```
 
-给body标签设置这个属性样式，改变角度看看效果吧。
+给 body 标签设置这个属性样式，改变角度看看效果吧。
 
 **弧形盒子（背景）**
 
@@ -60,17 +61,15 @@ icon: java
 
 **网页一键变灰**
 
-
-
 ```css
 body{
   filter: grayscale(1);
 }
 ```
 
-一般用于特殊时期，网页变灰，只需要给body标签添加这行样式代码。
+一般用于特殊时期，网页变灰，只需要给 body 标签添加这行样式代码。
 
-**网页css波浪**
+**网页 css 波浪**
 
 ```css
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -105,8 +104,6 @@ body{
 </svg>
 ```
 
-
-
 ```css
 svg {
     position: absolute;
@@ -136,7 +133,7 @@ p{
 
 一般用于文本的超出隐藏显示省略号效果，应用很广泛。
 
--webkit-line-clamp属性为需要显示的行数，例子中为2行。
+-webkit-line-clamp 属性为需要显示的行数，例子中为 2 行。
 
 **设置字母大小写**
 
@@ -147,7 +144,7 @@ p {text-transform: capitalize} /* 首字母大写*/
 p {font-variant: small-caps} /* 字体变成小型的大写字母*/
 ```
 
-**设置placeholder样式**
+**设置 placeholder 样式**
 
 ```css
 input::-webkit-input-placeholder {
@@ -183,4 +180,3 @@ div::-webkit-scrollbar {
     <input type="search" placeholder="请输入..." name="search" />
 </form>
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot定时任务动态管理
+excerpt: 
 description: SpringBoot定时任务动态管理
 date: 2022-03-26
 category: Java
@@ -10,17 +11,17 @@ timeline: true
 icon: type
 ---
 
-# SpringBoot定时任务动态管理
+# SpringBoot 定时任务动态管理
 
 ## **一、功能说明**
 
-SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改
+SpringBoot 的定时任务的加强工具，实现对 SpringBoot 原生的定时任务进行动态管理,完全兼容原生@Scheduled 注解,无需对原本的定时任务进行修改
 
 ## **二、快速使用**
 
-具体的功能已经封装成SpringBoot-starter即插即用
+具体的功能已经封装成 SpringBoot-starter 即插即用
 
-```
+```plain
 <dependency>
     <groupId>com.github.guoyixing</groupId>
     <artifactId>spring-boot-starter-super-scheduled</artifactId>
@@ -30,9 +31,9 @@ SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任
 
 使用方法和源码：
 
-> **码云：**https://gitee.com/qiaodaimadewangcai/super-scheduled
+> **码云：**<https://gitee.com/qiaodaimadewangcai/super-scheduled>
 >
-> **github：**https://github.com/guoyixing/super-scheduled
+> **github：**<https://github.com/guoyixing/super-scheduled>
 
 ## **三、实现原理**
 
@@ -40,7 +41,7 @@ SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任
 
 (1) 配置管理介绍
 
-```
+```plain
 @Component("superScheduledConfig")
 public class SuperScheduledConfig {
     /**
@@ -66,17 +67,18 @@ public class SuperScheduledConfig {
 }
 ```
 
-(2) 使用后处理器拦截SpringBoot原本的定时任务
+(2) 使用后处理器拦截 SpringBoot 原本的定时任务
 
-- 实现ApplicationContextAware接口拿到SpringBoot的上下文
+- 实现 ApplicationContextAware 接口拿到 SpringBoot 的上下文
 
-- 实现BeanPostProcessor接口，将这个类标记为后处理器，后处理器会在每个bean实例化之后执行
+- 实现 BeanPostProcessor 接口，将这个类标记为后处理器，后处理器会在每个 bean 实例化之后执行
 
-- 使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
+- 使用@DependsOn 注解强制依赖 SuperScheduledConfig 类，让 SpringBoot 实例化 SuperScheduledPostProcessor 类之前先实例化
+  SuperScheduledConfig 类
 
-- 主要实现逻辑在postProcessAfterInitialization()方法中
+- 主要实现逻辑在 postProcessAfterInitialization()方法中
 
-```
+```plain
 @DependsOn({"superScheduledConfig"})
 @Component
 @Order
@@ -167,16 +169,16 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
 }
 ```
 
-(3) 使用ApplicationRunner初始化自定义的定时任务运行器
+(3) 使用 ApplicationRunner 初始化自定义的定时任务运行器
 
-- 实现ApplicationContextAware接口拿到SpringBoot的上下文
-- 使用@DependsOn注解强制依赖threadPoolTaskScheduler类
-- 实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
-- 主要实现逻辑在run()方法中
+- 实现 ApplicationContextAware 接口拿到 SpringBoot 的上下文
+- 使用@DependsOn 注解强制依赖 threadPoolTaskScheduler 类
+- 实现 ApplicationRunner 接口，在所有 bean 初始化结束之后，运行自定义逻辑
+- 主要实现逻辑在 run()方法中
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184414412-0.jpeg)
 
-```
+```plain
 @DependsOn("threadPoolTaskScheduler")
 @Component
 public class SuperScheduledApplicationRunner implements ApplicationRunner, ApplicationContextAware {
@@ -250,7 +252,7 @@ public class SuperScheduledApplicationRunner implements ApplicationRunner, Appli
 
 (4) 进行动态管理
 
-```
+```plain
 @Component
 public class SuperScheduledManager {
     protected final Log logger = LogFactory.getLog(getClass());
@@ -427,11 +429,11 @@ public class SuperScheduledManager {
 
 #### **2、增强接口实现**
 
-增强器实现的整体思路与SpringAop的思路一致，实现没有Aop复杂
+增强器实现的整体思路与 SpringAop 的思路一致，实现没有 Aop 复杂
 
 (1) 增强接口
 
-```
+```plain
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public interface BaseStrengthen {
     /**
@@ -476,7 +478,7 @@ public interface BaseStrengthen {
 
 (2) 代理抽象类
 
-```
+```plain
 public abstract class Point {
     /**
      * 定时任务名
@@ -495,7 +497,7 @@ public abstract class Point {
 
 (3) 调用链类
 
-```
+```plain
 public class Chain {
     private List<Point> list;
     private int index = -1;
@@ -515,11 +517,11 @@ public class Chain {
 }
 ```
 
-(4) cglib动态代理实现
+(4) cglib 动态代理实现
 
-使用cglib代理增强器，将增强器全部代理成调用链节点Point
+使用 cglib 代理增强器，将增强器全部代理成调用链节点 Point
 
-```
+```plain
 public class RunnableBaseInterceptor implements MethodInterceptor {
     /**
      * 定时任务执行器
@@ -575,7 +577,7 @@ public class RunnableBaseInterceptor implements MethodInterceptor {
 
 (5) 定时任务执行器实现
 
-```
+```plain
 public class SuperScheduledRunnable {
     /**
      * 原始的方法
@@ -622,7 +624,7 @@ public class SuperScheduledRunnable {
 
 `com.gyx.superscheduled.core.SuperScheduledApplicationRunner`类中的代码片段
 
-```
+```plain
 //创建执行控制器
 SuperScheduledRunnable runnable = new SuperScheduledRunnable();
 runnable.setMethod(scheduledSource.getMethod());

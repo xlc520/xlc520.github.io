@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Ubuntu配置中文
+excerpt: 
 description: 
 date: 2023-04-13
 category: Linux
@@ -10,7 +11,7 @@ timeline: true
 icon: linux
 ---
 
-# Ubuntu配置中文
+# Ubuntu 配置中文
 
 1.查看当前语言
 
@@ -75,8 +76,6 @@ cat /etc/default/locale
 source /etc/default/locale
 ```
 
-
-
 5.编辑配置文件 (可不做)
 
 ```shell
@@ -106,7 +105,7 @@ LC_ALL="zh_CN.UTF-8"
 cat /etc/environment
 ```
 
-6.1重新启动电脑生效
+6.1 重新启动电脑生效
 
 ```shell
 sudo reboot

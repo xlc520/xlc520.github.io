@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Oracle重要物理文件全部视图
+excerpt: 
 description: 
 date: 2024-04-18
 category: Java
@@ -10,9 +11,7 @@ timeline: true
 icon: java
 ---
 
-
-
-# Oracle重要物理文件全部视图
+# Oracle 重要物理文件全部视图
 
 ```sql
 -- 数据文件视图
@@ -38,4 +37,3 @@ SELECT * FROM V$PARAMETER;
 SELECT * FROM V$PARAMETER2;
 SELECT * FROM V$SPPARAMETER;
 ```
-

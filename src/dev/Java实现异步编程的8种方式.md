@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java实现异步编程的8种方式
+excerpt: 
 description: 
 date: 2023-03-01
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# Java实现异步编程的8种方式
+# Java 实现异步编程的 8 种方式
 
 ## 一、🌈前言
 
@@ -19,14 +20,14 @@ icon: java
 
 ## 二、异步的八种实现方式
 
-1. 线程Thread
+1. 线程 Thread
 2. Future
-3. 异步框架CompletableFuture
-4. Spring注解@Async
-5. Spring ApplicationEvent事件
+3. 异步框架 CompletableFuture
+4. Spring 注解@Async
+5. Spring ApplicationEvent 事件
 6. 消息队列
-7. 第三方异步框架，比如Hutool的ThreadUtil
-8. Guava异步
+7. 第三方异步框架，比如 Hutool 的 ThreadUtil
+8. Guava 异步
 
 ## 三、什么是异步？
 
@@ -81,7 +82,7 @@ public void fun() {
 
 可以将业务逻辑封装到`Runnable`或`Callable`中，交由线程池来执行。
 
-## 4.2 Future异步
+## 4.2 Future 异步
 
 ```java
 @Slf4j
@@ -125,16 +126,20 @@ public class FutureManager {
 复制代码
 ```
 
-### 4.2.1 Future的不足之处
+### 4.2.1 Future 的不足之处
 
-Future的不足之处的包括以下几点：
+Future 的不足之处的包括以下几点：
 
-1️⃣ 无法被动接收异步任务的计算结果：虽然我们可以主动将异步任务提交给线程池中的线程来执行，但是待异步任务执行结束之后，主线程无法得到任务完成与否的通知，它需要通过get方法主动获取任务执行的结果。
+1️⃣ 无法被动接收异步任务的计算结果：虽然我们可以主动将异步任务提交给线程池中的线程来执行，但是待异步任务执行结束之后，主线程无法得到任务完成与否的通知，它需要通过
+get 方法主动获取任务执行的结果。
 2️⃣
-Future件彼此孤立：有时某一个耗时很长的异步任务执行结束之后，你想利用它返回的结果再做进一步的运算，该运算也会是一个异步任务，两者之间的关系需要程序开发人员手动进行绑定赋予，Future并不能将其形成一个任务流（pipeline），每一个Future都是彼此之间都是孤立的，所以才有了后面的CompletableFuture，CompletableFuture就可以将多个Future串联起来形成任务流。
-3️⃣ Futrue没有很好的错误处理机制：截止目前，如果某个异步任务在执行发的过程中发生了异常，调用者无法被动感知，必须通过捕获get方法的异常才知晓异步任务执行是否出现了错误，从而在做进一步的判断处理。
+Future 件彼此孤立：有时某一个耗时很长的异步任务执行结束之后，你想利用它返回的结果再做进一步的运算，该运算也会是一个异步任务，两者之间的关系需要程序开发人员手动进行绑定赋予，Future
+并不能将其形成一个任务流（pipeline），每一个 Future 都是彼此之间都是孤立的，所以才有了后面的
+CompletableFuture，CompletableFuture 就可以将多个 Future 串联起来形成任务流。
+3️⃣ Futrue 没有很好的错误处理机制：截止目前，如果某个异步任务在执行发的过程中发生了异常，调用者无法被动感知，必须通过捕获
+get 方法的异常才知晓异步任务执行是否出现了错误，从而在做进一步的判断处理。
 
-## 4.3 CompletableFuture实现异步
+## 4.3 CompletableFuture 实现异步
 
 ```csharp
 public class CompletableFutureCompose {
@@ -164,9 +169,9 @@ public class CompletableFutureCompose {
 复制代码
 ```
 
-我们不需要显式使用ExecutorService，CompletableFuture 内部使用了`ForkJoinPool`来处理异步任务，如果在某些业务场景我们想自定义自己的异步线程池也是可以的。
+我们不需要显式使用 ExecutorService，CompletableFuture 内部使用了`ForkJoinPool`来处理异步任务，如果在某些业务场景我们想自定义自己的异步线程池也是可以的。
 
-## 4.4 Spring的@Async异步
+## 4.4 Spring 的@Async 异步
 
 ### 4.4.1 自定义异步线程池
 
@@ -262,9 +267,10 @@ public class AsyncServiceImpl implements AsyncService {
 ```
 
 在实际项目中， 使用`@Async`
-调用线程池，推荐等方式是是使用自定义线程池的模式，不推荐直接使用@Async直接实现异步，具体说明可以参考博主之前发表的文章[为什么都不建议直接使用@Async注解实现异步?](https://juejin.cn/post/7099328896142671903)。
+调用线程池，推荐等方式是是使用自定义线程池的模式，不推荐直接使用@Async
+直接实现异步，具体说明可以参考博主之前发表的文章[为什么都不建议直接使用@Async 注解实现异步?](https://juejin.cn/post/7099328896142671903)。
 
-## 4.5 Spring ApplicationEvent事件实现异步
+## 4.5 Spring ApplicationEvent 事件实现异步
 
 ### 4.5.1 定义事件
 
@@ -322,8 +328,9 @@ public class AsyncSendEmailEventHandler implements ApplicationListener<AsyncSend
 复制代码
 ```
 
-另外，可能有些时候采用ApplicationEvent实现异步的使用，当程序出现异常错误的时候，需要考虑补偿机制，那么这时候可以结合Spring
-Retry重试来帮助我们避免这种异常造成数据不一致问题。
+另外，可能有些时候采用 ApplicationEvent 实现异步的使用，当程序出现异常错误的时候，需要考虑补偿机制，那么这时候可以结合
+Spring
+Retry 重试来帮助我们避免这种异常造成数据不一致问题。
 
 ## 4.6 消息队列
 
@@ -391,7 +398,7 @@ public class CallbackConsumer {
 复制代码
 ```
 
-## 4.7 ThreadUtil异步工具类
+## 4.7 ThreadUtil 异步工具类
 
 ```ini
 @Slf4j
@@ -413,16 +420,17 @@ public class ThreadUtils {
 复制代码
 ```
 
-## 4.8 Guava异步
+## 4.8 Guava 异步
 
 `Guava`的`ListenableFuture`顾名思义就是可以监听的`Future`
-，是对java原生Future的扩展增强。我们知道Future表示一个异步计算任务，当任务完成时可以得到计算结果。如果我们希望一旦计算完成就拿到结果展示给用户或者做另外的计算，就必须使用另一个线程不断的查询计算状态。这样做，代码复杂，而且效率低下。使用
-**Guava ListenableFuture**可以帮我们检测Future是否完成了，不需要再通过get()方法苦苦等待异步的计算结果，如果完成就自动调用回调函数，这样可以减少并发程序的复杂度。
+，是对 java 原生 Future 的扩展增强。我们知道 Future
+表示一个异步计算任务，当任务完成时可以得到计算结果。如果我们希望一旦计算完成就拿到结果展示给用户或者做另外的计算，就必须使用另一个线程不断的查询计算状态。这样做，代码复杂，而且效率低下。使用
+**Guava ListenableFuture**可以帮我们检测 Future 是否完成了，不需要再通过 get()方法苦苦等待异步的计算结果，如果完成就自动调用回调函数，这样可以减少并发程序的复杂度。
 
 `ListenableFuture`是一个接口，它从`jdk`的`Future`接口继承，添加了`void addListener(Runnable listener, Executor executor)`
 方法。
 
-我们看下如何使用ListenableFuture。首先需要定义ListenableFuture的实例:
+我们看下如何使用 ListenableFuture。首先需要定义 ListenableFuture 的实例:
 
 ```java
  ListeningExecutorService executorService = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
@@ -440,7 +448,8 @@ public class ThreadUtils {
 首先通过`MoreExecutors`类的静态方法`listeningDecorator`方法初始化一个`ListeningExecutorService`
 的方法，然后使用此实例的`submit`方法即可初始化`ListenableFuture`对象。
 
-`ListenableFuture`要做的工作，在Callable接口的实现类中定义，这里只是休眠了1秒钟然后返回一个数字1，有了ListenableFuture实例，可以执行此Future并执行Future完成之后的回调函数。
+`ListenableFuture`要做的工作，在 Callable 接口的实现类中定义，这里只是休眠了 1 秒钟然后返回一个数字 1，有了
+ListenableFuture 实例，可以执行此 Future 并执行 Future 完成之后的回调函数。
 
 ```typescript
  Futures.addCallback(listenableFuture, new FutureCallback<Integer>() {
@@ -459,4 +468,4 @@ public class ThreadUtils {
 复制代码
 ```
 
-以上就是实现异步的8种方式
+以上就是实现异步的 8 种方式

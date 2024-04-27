@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Linux使用safe-rm防止误删系统文件
+excerpt: 
 description: 
 date: 2024-01-26
 category: Linux
@@ -10,17 +11,17 @@ timeline: true
 icon: linux
 ---
 
-# Linux使用safe-rm防止误删系统文件
+# Linux 使用 safe-rm 防止误删系统文件
 
 ## 原理
 
-通过维护safe-rm的配置文件(/etc/safe-rm.conf)，从而使配置文件中的规则目录不会被rm所删除
+通过维护 safe-rm 的配置文件(/etc/safe-rm.conf)，从而使配置文件中的规则目录不会被 rm 所删除
 
-## 安装safe-rm
+## 安装 safe-rm
 
-这里我安装的目前最新的版本1.1.0，因为最新的版本也是2021年的，也足够稳定了。
+这里我安装的目前最新的版本 1.1.0，因为最新的版本也是 2021 年的，也足够稳定了。
 
-官网下载https://launchpad.net/safe-rm/+download
+官网下载<https://launchpad.net/safe-rm/+download>
 
 ```bash
 cd /tmp
@@ -44,8 +45,6 @@ ln -s /usr/local/bin/safe-rm /usr/local/bin/rm
 echo 'PATH=/usr/local/bin:$PATH' >>  /etc/profile
 source /etc/profile
 ```
-
-
 
 ## 设置过滤目录
 
@@ -89,10 +88,6 @@ vim /etc/safe-rm.conf 文件
 /var/*
 ```
 
-
-
-编辑完毕后,为了让环境变量在整个系统全局生效,建议重启操作系统.重启之后执行rm命令就相当于执行safe-rm了
-
-
+编辑完毕后,为了让环境变量在整个系统全局生效,建议重启操作系统.重启之后执行 rm 命令就相当于执行 safe-rm 了
 
 /etc/safe-rm.conf 文件可随便去更改，即时见效，可以在自己的临时目录去测试下这个功能

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Docker 镜像库国内加速的几种方法
+excerpt: 
 description: 
 date: 2023-10-23
 category: Java
@@ -41,8 +42,8 @@ icon: java
 > 这里以 Docker 举例说明。 Containerd/Podman/cri-o 等请举一反三。
 
 1.配置国内可用/速度尚可的 Docker Registry Mirrors1.阿里云 Docker 加速：类似 `xxxxxx.mirror.aliyuncs.com`
-的个人专属加速地址；2.DockerProxy 代理加速：`dockerproxy.com`3.百度云 Mirror: `mirror.baidubce.com`4....2.自建 Docker
-Registry Mirror/Proxy, 并配置为 Mirror1.这里使用 Cloudflare Worker - cloudflare-docker-proxy[1] 搭建3.Docker Daemon
+的个人专属加速地址；2.DockerProxy 代理加速：`dockerproxy.com`3.百度云 Mirror: `mirror.baidubce.com`4……2.自建 Docker
+Registry Mirror/Proxy, 并配置为 Mirror1.这里使用 Cloudflare Worker - cloudflare-docker-proxy[1] 搭建 3.Docker Daemon
 配置 `proxies`, 具体包括：`http-proxy` `https-proxy` `no-proxy`4.注册各个镜像库账号并 `docker login` 登录
 
 ## 方案实施细节
@@ -62,9 +63,7 @@ Mirror: `mirror.baidubce.com`4.DaoCloud: `docker.m.daocloud.io`5.南京大学：
 
 可以自行测试验证，手动测试方法是拉取镜像，这里以测试 `dockerproxy.com` 为例：
 
--
-
-```
+```plain
 docker pull dockerproxy.com/library/nginx
 ```
 
@@ -108,7 +107,7 @@ result
 
 创建或修改 `/etc/docker/daemon.json`:
 
-```
+```plain
 sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json <<-EOF{    
 "registry-mirrors": [
     "https://<changme>.mirror.aliyuncs.com",
@@ -138,7 +137,7 @@ restart docker
 
 1.Fork Repo2.Deploy 按钮对应 URL 调整为您自己的 repo url3.修改 `src/index.js` 的 `const routes` 块的内容
 
-```
+```plain
 const routes = {``  "docker.your-domain.com": "https://registry-1.docker.io",``  "quay.your-domain.com": "https://quay.io",``  "gcr.your-domain.com": "https://k8s.gcr.io",``  "k8s-gcr.your-domain.com": "https://k8s.gcr.io",``  "ghcr.your-domain.com": "https://ghcr.io",``};
 ```
 
@@ -171,7 +170,7 @@ Cloudflare Worker Routes
 
 `vi /etc/docker/daemon.json`, 添加如下内容：
 
-```
+```plain
 sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json <<-EOF{    "proxies": {        "http-proxy": "http://<proxy-ip>:7890",        "https-proxy": "http://<proxy-ip>:7890",        "no-proxy": "*.cn,127.0.0.0/8,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8"    }}EOFsudo systemctl daemon-reloadsudo systemctl restart docker
 ```
 
@@ -195,25 +194,25 @@ sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json <<-EOF{    "proxies": 
 
 Docker Hub 登录：
 
-```
+```plain
 echo "<password>" | docker login --username <username> --password-stdin'
 ```
 
 其他 Docker Registry 登录：
 
-```
+```plain
 echo "<password>" | docker login quay.io --username <username> --password-stdinecho "<password>" | docker login ghcr.io --username <username> --password-stdinecho "<password>" | docker login gcr.io --username <username> --password-stdin
 ```
 
 或者，也可以直接写入 `~/.docker/config.json` 文件：
 
-```
+```plain
 {  "auths": {    "ghcr.io": {      "auth": "<auth>"    },    "https://index.docker.io/v1/": {      "auth": "<auth>"    },    "quay.io": {      "auth": "<auth>"    }  }}
 ```
 
 `<auth>` 通过如下方式获得：
 
-```
+```plain
 echo -n '<username>:<password>' | base64
 ```
 
@@ -225,10 +224,10 @@ echo -n '<username>:<password>' | base64
 
 ### References
 
-`[1]` cloudflare-docker-proxy: *https://github.com/ciiiii/cloudflare-docker-proxy*
+`[1]` cloudflare-docker-proxy: *<https://github.com/ciiiii/cloudflare-docker-proxy>*
 `[2]` docker-practice/docker-registry-cn-mirror-test:
-*https://github.com/docker-practice/docker-registry-cn-mirror-test/actions*
+*<https://github.com/docker-practice/docker-registry-cn-mirror-test/actions>*
 `[3]` 阿里云加速器（点击管理控制台 -> 登录账号 -> 右侧镜像工具 -> 镜像加速器 -> 复制加速器地址）:
-*https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors*
-`[4]` cloudflare-docker-proxy: *https://github.com/ciiiii/cloudflare-docker-proxy*
-`[5]` README.md: *https://github.com/east4ming/cloudflare-docker-proxy*
+*<https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors>*
+`[4]` cloudflare-docker-proxy: *<https://github.com/ciiiii/cloudflare-docker-proxy>*
+`[5]` README.md: *<https://github.com/east4ming/cloudflare-docker-proxy>*

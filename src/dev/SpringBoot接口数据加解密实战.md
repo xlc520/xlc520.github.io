@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 接口数据加解密实战
+excerpt: 
 description: 
 date: 2022-07-06
 category: Java
@@ -10,14 +11,12 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot 接口数据加解密实战
 
 需求解析：
 
-1. 服务端、客户端和H5统一拦截加解密，网上有成熟方案，也可以按其他服务中实现的加解密流程来搞；
-2. 使用AES放松加密，考虑到H5端存储密钥安全性相对来说会低一些，故分针对H5和安卓、IOS分配两套密钥；
+1. 服务端、客户端和 H5 统一拦截加解密，网上有成熟方案，也可以按其他服务中实现的加解密流程来搞；
+2. 使用 AES 放松加密，考虑到 H5 端存储密钥安全性相对来说会低一些，故分针对 H5 和安卓、IOS 分配两套密钥；
 3. 本次涉及客户端和服务端的整体改造，经讨论，新接口统一加 /secret/ 前缀来区分
 
 按本次需求来简单还原问题，定义两个对象，后面用得着，
@@ -83,25 +82,27 @@ public class UserController {
 
 ```json
 {
-	"code": 200,
-	"data": [{
-		"id": 1,
-		"name": "boyka",
-		"userType": {
-			"code": "COMMON",
-			"type": "普通用户"
-		},
-		"registerTime": "2022-03-24 23:58:39"
-	}],
-	"msg": "用户列表查询成功"
+ "code": 200,
+ "data": [{
+  "id": 1,
+  "name": "boyka",
+  "userType": {
+   "code": "COMMON",
+   "type": "普通用户"
+  },
+  "registerTime": "2022-03-24 23:58:39"
+ }],
+ "msg": "用户列表查询成功"
 }
 ```
 
-目前主要是利用ControllerAdvice来对请求和响应体进行拦截，主要定义SecretRequestAdvice对请求进行加密和SecretResponseAdvice对响应进行加密(实际情况会稍微复杂一点，项目中又GET类型请求，自定义了一个Filter进行不同的请求解密处理)。
+目前主要是利用 ControllerAdvice 来对请求和响应体进行拦截，主要定义 SecretRequestAdvice 对请求进行加密和
+SecretResponseAdvice 对响应进行加密(实际情况会稍微复杂一点，项目中又 GET 类型请求，自定义了一个 Filter
+进行不同的请求解密处理)。
 
-好了，网上的ControllerAdvice使用示例非常多，我这把两个核心方法给大家展示看看，相信大佬们一看就晓得了，不需多言。上代码：
+好了，网上的 ControllerAdvice 使用示例非常多，我这把两个核心方法给大家展示看看，相信大佬们一看就晓得了，不需多言。上代码：
 
-SecretRequestAdvice请求解密：
+SecretRequestAdvice 请求解密：
 
 ```java
 /**
@@ -178,7 +179,7 @@ public class SecretRequestAdvice extends RequestBodyAdviceAdapter {
 }
 ```
 
-SecretResponseAdvice响应加密：
+SecretResponseAdvice 响应加密：
 
 ```java
 @ControllerAdvice
@@ -224,7 +225,7 @@ public class SecretResponseAdvice implements ResponseBodyAdvice {
 }
 ```
 
-OK， 代码Demo撸好了，试运行一波：
+OK， 代码 Demo 撸好了，试运行一波：
 
 ```json
 请求方法：
@@ -240,12 +241,12 @@ clientType:ANDORID
 body体:
 // 原始请求体
 {
-	"page": 1,
-	"size": 10
+ "page": 1,
+ "size": 10
 }
 // 加密后的请求体
 {
-	"data": "1ZBecdnDuMocxAiW9UtBrJzlvVbueP9K0MsIxQccmU3OPG92oRinVm0GxBwdlXXJ"
+ "data": "1ZBecdnDuMocxAiW9UtBrJzlvVbueP9K0MsIxQccmU3OPG92oRinVm0GxBwdlXXJ"
 }
 
 // 加密响应体：
@@ -260,35 +261,40 @@ body体:
 
 // 解密后的响应体：
 {
-	"code": 200,
-	"data": [{
-		"id": 1,
-		"name": "boyka",
-		"registerTime": "2022-03-27T00:19:43.699",
-		"userType": "COMMON"
-	}],
-	"msg": "用户列表查询成功",
-	"salt": 0
+ "code": 200,
+ "data": [{
+  "id": 1,
+  "name": "boyka",
+  "registerTime": "2022-03-27T00:19:43.699",
+  "userType": "COMMON"
+ }],
+ "msg": "用户列表查询成功",
+ "salt": 0
 }
 ```
 
-OK，客户端请求加密-》发起请求-》服务端解密-》业务处理-》服务端响应加密-》客户端解密展示，看起来没啥问题，实际是头天下午花了2小时碰需求，差不多花1小时写好demo测试，然后对所有接口统一进行了处理，整体一下午赶脚应该行了吧，告诉H5和安卓端同学明儿上午联调（不小的大家到这个时候发现猫腻没有，当时确实疏忽了，翻了大车......）
+OK，客户端请求加密-》发起请求-》服务端解密-》业务处理-》服务端响应加密-》客户端解密展示，看起来没啥问题，实际是头天下午花了 2
+小时碰需求，差不多花 1 小时写好 demo 测试，然后对所有接口统一进行了处理，整体一下午赶脚应该行了吧，告诉 H5
+和安卓端同学明儿上午联调（不小的大家到这个时候发现猫腻没有，当时确实疏忽了，翻了大车……）
 
-次日，安卓端反馈，你这个加解密有问题，解密后的数据格式和之前不一样，仔细一看，擦，这个userType和registerTime是不对劲，开始思考：这个能是哪儿的问题呢？1s之后，初步定位，应该是响应体的JSON.toJSONString的问题：
+次日，安卓端反馈，你这个加解密有问题，解密后的数据格式和之前不一样，仔细一看，擦，这个 userType 和 registerTime
+是不对劲，开始思考：这个能是哪儿的问题呢？1s 之后，初步定位，应该是响应体的 JSON.toJSONString 的问题：
 
-```
+```plain
 String data = EncryptUtils.aesEncrypt(JSON.toJSONString(o)),
 ```
 
-Debug断点调试，果然，是JSON.toJSONString(o)这一步骤转换出了问题，那JSON转换时是不是有高级属性可以配置生成想要的序列化格式呢？FastJson在序列化时提供重载方法，找到其中一个"SerializerFeature"参数可以琢磨一下，这个参数是可以对序列化进行配置的，它提供了很多配置类型，其中感觉这几个比较沾边：
+Debug 断点调试，果然，是 JSON.toJSONString(o)这一步骤转换出了问题，那 JSON 转换时是不是有高级属性可以配置生成想要的序列化格式呢？FastJson
+在序列化时提供重载方法，找到其中一个"SerializerFeature"参数可以琢磨一下，这个参数是可以对序列化进行配置的，它提供了很多配置类型，其中感觉这几个比较沾边：
 
-```
+```plain
 WriteEnumUsingToString,
 WriteEnumUsingName,
 UseISO8601DateFormat
 ```
 
-对枚举类型来说，默认是使用的WriteEnumUsingName(枚举的Name)， 另一种WriteEnumUsingToString是重新toString方法，理论上可以转换成想要的样子，即这个样子：
+对枚举类型来说，默认是使用的 WriteEnumUsingName(枚举的 Name)， 另一种 WriteEnumUsingToString 是重新 toString
+方法，理论上可以转换成想要的样子，即这个样子：
 
 ```java
 @Getter
@@ -314,7 +320,9 @@ public enum UserType {
 }
 ```
 
-结果转换出来的数据是字符串类型"{"code":"COMMON", "type":"普通用户"}"，这个方法好像行不通，还有什么好办法呢？思前想后，看文章开始定义的User和UserType类，标记数据序列化格式@JsonFormat，再突然想起之前看到过的一些文章，SpringMVC底层默认是使用Jackson进行序列化的，那好了，就用Jacksong实施呗，将SecretResponseAdvice中的序列化方法替换一下：
+结果转换出来的数据是字符串类型"{"code":"COMMON", "type":"普通用户"}"，这个方法好像行不通，还有什么好办法呢？思前想后，看文章开始定义的
+User 和 UserType 类，标记数据序列化格式@JsonFormat，再突然想起之前看到过的一些文章，SpringMVC 底层默认是使用 Jackson
+进行序列化的，那好了，就用 Jacksong 实施呗，将 SecretResponseAdvice 中的序列化方法替换一下：
 
 ```java
  String data = EncryptUtils.aesEncrypt(JSON.toJSONString(o), secretKey);
@@ -326,36 +334,40 @@ public enum UserType {
 
 ```json
 {
-	"code": 200,
-	"data": [{
-		"id": 1,
-		"name": "boyka",
-		"userType": {
-			"code": "COMMON",
-			"type": "普通用户"
-		},
-		"registerTime": {
-			"month": "MARCH",
-			"year": 2022,
-			"dayOfMonth": 29,
-			"dayOfWeek": "TUESDAY",
-			"dayOfYear": 88,
-			"monthValue": 3,
-			"hour": 22,
-			"minute": 30,
-			"nano": 453000000,
-			"second": 36,
-			"chronology": {
-				"id": "ISO",
-				"calendarType": "iso8601"
-			}
-		}
-	}],
-	"msg": "用户列表查询成功"
+ "code": 200,
+ "data": [{
+  "id": 1,
+  "name": "boyka",
+  "userType": {
+   "code": "COMMON",
+   "type": "普通用户"
+  },
+  "registerTime": {
+   "month": "MARCH",
+   "year": 2022,
+   "dayOfMonth": 29,
+   "dayOfWeek": "TUESDAY",
+   "dayOfYear": 88,
+   "monthValue": 3,
+   "hour": 22,
+   "minute": 30,
+   "nano": 453000000,
+   "second": 36,
+   "chronology": {
+    "id": "ISO",
+    "calendarType": "iso8601"
+   }
+  }
+ }],
+ "msg": "用户列表查询成功"
 }
 ```
 
-解密后的userType枚举类型和非加密版本一样了，舒服了，== 好像还不对，registerTime怎么变成这个样子了？原本是"2022-03-24 23:58:39"这种格式的，[Jackson之LocalDateTime转换，无需改实体类](https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fyzeng%2Fp%2F11522411.html)这篇文章讲到了这个问题，并提出了一种解决方案，不过用在我们目前这个需求里面，就是有损改装了啊，不太可取，遂去Jackson官网上查找一下相关文档，当然Jackson也提供了ObjectMapper的序列化配置，重新再初始化配置ObjectMpper对象：
+解密后的 userType 枚举类型和非加密版本一样了，舒服了，== 好像还不对，registerTime 怎么变成这个样子了？原本是"2022-03-24 23:
+58:39"
+这种格式的，[Jackson 之 LocalDateTime 转换，无需改实体类](https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fyzeng%2Fp%2F11522411.html)
+这篇文章讲到了这个问题，并提出了一种解决方案，不过用在我们目前这个需求里面，就是有损改装了啊，不太可取，遂去 Jackson
+官网上查找一下相关文档，当然 Jackson 也提供了 ObjectMapper 的序列化配置，重新再初始化配置 ObjectMpper 对象：
 
 ```java
 String DATE_TIME_FORMATTER = "yyyy-MM-dd HH:mm:ss";
@@ -372,95 +384,100 @@ ObjectMapper objectMapper = new Jackson2ObjectMapperBuilder()
 
 ```json
 {
-	"code": 200,
-	"data": [{
-		"id": 1,
-		"name": "boyka",
-		"userType": {
-			"code": "COMMON",
-			"type": "普通用户"
-		},
-		"registerTime": "2022-03-29 22:57:33"
-	}],
-	"msg": "用户列表查询成功"
+ "code": 200,
+ "data": [{
+  "id": 1,
+  "name": "boyka",
+  "userType": {
+   "code": "COMMON",
+   "type": "普通用户"
+  },
+  "registerTime": "2022-03-29 22:57:33"
+ }],
+ "msg": "用户列表查询成功"
 }
 ```
 
-OK，和非加密版的终于一致了，完了吗？感觉还是可能存在些什么问题，首先业务代码的时间序列化需求不一样，有"yyyy-MM-dd hh:mm:ss"的，也有"yyyy-MM-dd"的，还可能其他配置思考不到位的，导致和之前非加密版返回数据不一致的问题，到时候联调测出来了也麻烦，有没有一劳永逸的办法呢？同事一句话点亮我，看一下spring框架自身是怎么序列化的，照着配置应该就行嘛，好像有点道理，不从0开始分析源码了，敢兴趣的朋友可以看看这篇文章源码分析[Spring MVC源码(三) ----- @RequestBody和@ResponseBody原理解析](https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fjava-chen-hao%2Fp%2F11187914.html)，感觉写可以。
+OK，和非加密版的终于一致了，完了吗？感觉还是可能存在些什么问题，首先业务代码的时间序列化需求不一样，有"yyyy-MM-dd hh:mm:ss"
+的，也有"yyyy-MM-dd"的，还可能其他配置思考不到位的，导致和之前非加密版返回数据不一致的问题，到时候联调测出来了也麻烦，有没有一劳永逸的办法呢？同事一句话点亮我，看一下
+spring 框架自身是怎么序列化的，照着配置应该就行嘛，好像有点道理，不从 0
+开始分析源码了，敢兴趣的朋友可以看看这篇文章源码分析[Spring MVC 源码(三) ----- @RequestBody 和@ResponseBody 原理解析](https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fjava-chen-hao%2Fp%2F11187914.html)
+，感觉写可以。
 
-跟着执行链路，找到具体的响应序列化，重点就是RequestResponseBodyMethodProcessor，
+跟着执行链路，找到具体的响应序列化，重点就是 RequestResponseBodyMethodProcessor，
 
 ```java
 protected <T> void writeWithMessageConverters(@Nullable T value, MethodParameter returnType, ServletServerHttpRequest inputMessage, ServletServerHttpResponse outputMessage) throws IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException {
         // 获取响应的拦截器链并执行beforeBodyWrite方法，也就是执行了我们自定义的SecretResponseAdvice中的beforeBodyWrite啦
-		body = this.getAdvice().beforeBodyWrite(body, returnType, selectedMediaType, converter.getClass(), inputMessage, outputMessage);
-		if (body != null) {
-		    // 执行响应体序列化工作
-			if (genericConverter != null) {
-				genericConverter.write(body, (Type)targetType, selectedMediaType, outputMessage);
-			} else {
-				converter.write(body, selectedMediaType, outputMessage);
-			}
+  body = this.getAdvice().beforeBodyWrite(body, returnType, selectedMediaType, converter.getClass(), inputMessage, outputMessage);
+  if (body != null) {
+      // 执行响应体序列化工作
+   if (genericConverter != null) {
+    genericConverter.write(body, (Type)targetType, selectedMediaType, outputMessage);
+   } else {
+    converter.write(body, selectedMediaType, outputMessage);
+   }
     }
 ```
 
-进而通过实例化的AbstractJackson2HttpMessageConverter对象找到执行序列化的核心方法
+进而通过实例化的 AbstractJackson2HttpMessageConverter 对象找到执行序列化的核心方法
 
 ```java
 -> AbstractGenericHttpMessageConverter:
-	
-	public final void write(T t, @Nullable Type type, @Nullable MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+ 
+ public final void write(T t, @Nullable Type type, @Nullable MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         ...
-		this.writeInternal(t, type, outputMessage);
-		outputMessage.getBody().flush();
+  this.writeInternal(t, type, outputMessage);
+  outputMessage.getBody().flush();
      
     }
-	-> 找到Jackson序列化 AbstractJackson2HttpMessageConverter:
-	// 从spring容器中获取并设置的ObjectMapper实例
-	protected ObjectMapper objectMapper;
-	
-	protected void writeInternal(Object object, @Nullable Type type, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+ -> 找到Jackson序列化 AbstractJackson2HttpMessageConverter:
+ // 从spring容器中获取并设置的ObjectMapper实例
+ protected ObjectMapper objectMapper;
+ 
+ protected void writeInternal(Object object, @Nullable Type type, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         MediaType contentType = outputMessage.getHeaders().getContentType();
         JsonEncoding encoding = this.getJsonEncoding(contentType);
         JsonGenerator generator = this.objectMapper.getFactory().createGenerator(outputMessage.getBody(), encoding);
 
-		this.writePrefix(generator, object);
-		Object value = object;
-		Class<?> serializationView = null;
-		FilterProvider filters = null;
-		JavaType javaType = null;
-		if (object instanceof MappingJacksonValue) {
-			MappingJacksonValue container = (MappingJacksonValue)object;
-			value = container.getValue();
-			serializationView = container.getSerializationView();
-			filters = container.getFilters();
-		}
+  this.writePrefix(generator, object);
+  Object value = object;
+  Class<?> serializationView = null;
+  FilterProvider filters = null;
+  JavaType javaType = null;
+  if (object instanceof MappingJacksonValue) {
+   MappingJacksonValue container = (MappingJacksonValue)object;
+   value = container.getValue();
+   serializationView = container.getSerializationView();
+   filters = container.getFilters();
+  }
 
-		if (type != null && TypeUtils.isAssignable(type, value.getClass())) {
-			javaType = this.getJavaType(type, (Class)null);
-		}
+  if (type != null && TypeUtils.isAssignable(type, value.getClass())) {
+   javaType = this.getJavaType(type, (Class)null);
+  }
 
-		ObjectWriter objectWriter = serializationView != null ? this.objectMapper.writerWithView(serializationView) : this.objectMapper.writer();
-		if (filters != null) {
-			objectWriter = objectWriter.with(filters);
-		}
+  ObjectWriter objectWriter = serializationView != null ? this.objectMapper.writerWithView(serializationView) : this.objectMapper.writer();
+  if (filters != null) {
+   objectWriter = objectWriter.with(filters);
+  }
 
-		if (javaType != null && javaType.isContainerType()) {
-			objectWriter = objectWriter.forType(javaType);
-		}
+  if (javaType != null && javaType.isContainerType()) {
+   objectWriter = objectWriter.forType(javaType);
+  }
 
-		SerializationConfig config = objectWriter.getConfig();
-		if (contentType != null && contentType.isCompatibleWith(MediaType.TEXT_EVENT_STREAM) && config.isEnabled(SerializationFeature.INDENT_OUTPUT)) {
-			objectWriter = objectWriter.with(this.ssePrettyPrinter);
-		}
+  SerializationConfig config = objectWriter.getConfig();
+  if (contentType != null && contentType.isCompatibleWith(MediaType.TEXT_EVENT_STREAM) && config.isEnabled(SerializationFeature.INDENT_OUTPUT)) {
+   objectWriter = objectWriter.with(this.ssePrettyPrinter);
+  }
         // 重点进行序列化
-		objectWriter.writeValue(generator, value);
-		this.writeSuffix(generator, object);
-		generator.flush();
+  objectWriter.writeValue(generator, value);
+  this.writeSuffix(generator, object);
+  generator.flush();
     }
 ```
 
-那么，可以看出SpringMVC在进行响应序列化的时候是从容器中获取的ObjectMapper实例对象，并会根据不同的默认配置条件进行序列化，那处理方法就简单了，我也可以从Spring容器拿数据进行序列化啊。SecretResponseAdvice进行如下进一步改造：
+那么，可以看出 SpringMVC 在进行响应序列化的时候是从容器中获取的 ObjectMapper 实例对象，并会根据不同的默认配置条件进行序列化，那处理方法就简单了，我也可以从
+Spring 容器拿数据进行序列化啊。SecretResponseAdvice 进行如下进一步改造：
 
 ```java
 @ControllerAdvice
@@ -479,7 +496,6 @@ public class SecretResponseAdvice implements ResponseBodyAdvice {
  }
 ```
 
-经测试，响应数据和非加密版万全一致啦，还有GET部分的请求加密，以及后面加解密惨遭跨域问题，后面有空再和大家聊聊。
+经测试，响应数据和非加密版万全一致啦，还有 GET 部分的请求加密，以及后面加解密惨遭跨域问题，后面有空再和大家聊聊。
 
-[git的demo地址](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fboykait%2Fencrypt-demo)
-
+[git 的 demo 地址](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fboykait%2Fencrypt-demo)

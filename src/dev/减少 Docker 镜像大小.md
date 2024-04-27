@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 10 个优化技巧，减少 Docker 镜像大小
+excerpt: 
 description: 
 date: 2023-03-21
 category: Java
@@ -60,8 +61,8 @@ apt install python3 -y
 从下图中可以看出，通过减少层数，可以减少一些 MB 的大小。
 
 ![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
-1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
-xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+1' version='1.1' xmlns='<http://www.w3.org/2000/svg>' xmlns:
+xlink='<http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg> stroke='none' stroke-width='1' fill='none'
 fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
 x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
@@ -82,8 +83,8 @@ docker-squash image:old -t image:new
 ```
 
 ![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
-1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
-xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+1' version='1.1' xmlns='<http://www.w3.org/2000/svg>' xmlns:
+xlink='<http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg> stroke='none' stroke-width='1' fill='none'
 fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
 x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
@@ -146,7 +147,7 @@ apt install python3 -y --no-install-recommends
 
 您可以在 apk add 命令中添加 --no-cache。
 
-## 6：在 apt install 命令后添加 rm -rf /var/lib/apt/lists/*
+## 6：在 apt install 命令后添加 rm -rf /var/lib/apt/lists/
 
 我们可以在 apt install 之后添加这个命令来减少 docker 镜像的大小。
 
@@ -229,12 +230,12 @@ rm awscliv2.zip
 
 1. **Dive**：Dive 是一个开源工具，用于探索 Docker 镜像及其层内容，然后发现缩小 Docker/OCI 镜像大小的方法。
 
-   https://github.com/wagoodman/dive
+   <https://github.com/wagoodman/dive>
 
 2. **fromlatest.io**：此工具将检查您的 Dockerfile 并检查可以执行的更多步骤以减小镜像大小。
 
-   https://www.fromlatest.io/
+   <https://www.fromlatest.io/>
 
 3. Docker Slim：它让你的容器更好、更小、更安全。您可以使用**dockerslim 来最小化容器镜像**。
 
-   https://github.com/slimtoolkit/slim
+   <https://github.com/slimtoolkit/slim>

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringCloud Gateway API接口安全设计（加密 、签名）
+excerpt: 
 description: 
 date: 2022-07-13
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# SpringCloud Gateway API接口安全设计（加密 、签名）
+# SpringCloud Gateway API 接口安全设计（加密 、签名）
 
 ## 1 防止数据抓包窃取
 
@@ -21,24 +22,28 @@ icon: java
 
 ### 1.2 RSA 非对称加密
 
-#### 1.2.1 RSA简介4
+#### 1.2.1 RSA 简介 4
 
-RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron
-Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。
+RSA 加密算法是一种非对称加密算法。在公开密钥加密和电子商业中 RSA 被广泛使用。RSA 是 1977 年由罗纳德·李维斯特（Ron
+Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA
+就是他们三人姓氏开头字母拼在一起组成的。
 
-1973年，在英国政府通讯总部工作的数学家克利福德·柯克斯（Clifford
-Cocks）在一个内部文件中提出了一个相同的算法，但他的发现被列入机密，一直到1997年才被发表。对极大整数做因数分解的难度决定了RSA算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用RSA加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的RSA钥匙才可能被强力方式解破。到目前为止，世界上还没有任何可靠的攻击RSA算法的方式。只要其钥匙的长度足够长，用RSA加密的信息实际上是不能被解破的。
+1973 年，在英国政府通讯总部工作的数学家克利福德·柯克斯（Clifford
+Cocks）在一个内部文件中提出了一个相同的算法，但他的发现被列入机密，一直到 1997 年才被发表。对极大整数做因数分解的难度决定了
+RSA 算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA 算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用 RSA
+加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的 RSA 钥匙才可能被强力方式解破。到目前为止，世界上还没有任何可靠的攻击
+RSA 算法的方式。只要其钥匙的长度足够长，用 RSA 加密的信息实际上是不能被解破的。
 
-1983年麻省理工学院在美国为RSA算法申请了专利。这个专利2000年9月21日失效。由于该算法在申请专利前就已经被发表了，在世界上大多数其它地区这个专利权不被承认。
+1983 年麻省理工学院在美国为 RSA 算法申请了专利。这个专利 2000 年 9 月 21 日失效。由于该算法在申请专利前就已经被发表了，在世界上大多数其它地区这个专利权不被承认。
 
-#### 1.2.2 RSA应用过程4
+#### 1.2.2 RSA 应用过程 4
 
 非对称算法的在应用的过程如下:
 (1) 接收方生成公钥和私钥，公钥公开，私钥保留；
 (2) 发送方将要发送的消息采用公钥加密，得到密文，然后将密文发送给接收方；
 (3) 接收方收到密文后，用自己的私钥进行解密，获得明文。
 
-#### 1.2.3 RSA工具类4
+#### 1.2.3 RSA 工具类 4
 
 ```java
 package com.demo.utils;
@@ -286,7 +291,7 @@ SpringCloud Gateway + SpringBoot + Nacos+redis
 
 #### 1.3.2 前端查询代码
 
-**设定公钥、token，token是登录成功后返回的值**
+**设定公钥、token，token 是登录成功后返回的值**
 
 ```html
 <!DOCTYPE html>
@@ -607,7 +612,7 @@ public class GatewayExceptionHandler extends AbstractExceptionHandler implements
 
 ```
 
-#### 1.3.5 JAVA业务代码
+#### 1.3.5 JAVA 业务代码
 
 ```java
 @RestController
@@ -675,7 +680,7 @@ public class UserService {
 
 #### 1.3.6 测试
 
-**登录：返回token**
+**登录：返回 token**
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/4b616048f06847b281fa138fee22fce2.png)
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9f37befbcec5431f936c0f95a0435e35.png)
@@ -683,13 +688,13 @@ public class UserService {
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/cacc9233186d40829f143319b6638f0c.png)
 
-## 2 设置URL有效时长
+## 2 设置 URL 有效时长
 
-**为了增强URL安全性，前端在header中添加时间戳。**
+**为了增强 URL 安全性，前端在 header 中添加时间戳。**
 
 ### 2.1 前端代码
 
-**在header中添加时间戳**
+**在 header 中添加时间戳**
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c608c6d808fa4d30a5318638e56eb520.png)
 
 ### 2.2 后端验证时间戳
@@ -717,15 +722,15 @@ public class UserService {
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/34c5e25305384149b8cb25236dcdfe9a.png)
 
-## 3 确保URL唯一性
+## 3 确保 URL 唯一性
 
-**确保URL唯一性，前端请求中增加UUID，后端存入redis，有效时长为5分钟，5分钟重复提交拒绝服务**
+**确保 URL 唯一性，前端请求中增加 UUID，后端存入 redis，有效时长为 5 分钟，5 分钟重复提交拒绝服务**
 
 ### 3.1 修改前端请求参数
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/a7a2c3ad23d74f6a93a98738776f1568.png)
 
-### 3.2 后端增加验证RequestId
+### 3.2 后端增加验证 RequestId
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/14ff62fc309947d19b859c4311502c0a.png)
 
@@ -753,7 +758,7 @@ private String getRequestId(HttpHeaders headers) {
 
 ### 4.1 前端增加签名
 
-跟前端约定好，json数据按照ASCII升序排序。
+跟前端约定好，json 数据按照 ASCII 升序排序。
 
 登录页面：
 
@@ -856,7 +861,7 @@ private String getRequestId(HttpHeaders headers) {
 
 ```
 
-### 4.2 增强读取Body类
+### 4.2 增强读取 Body 类
 
 ```java
 /**
@@ -906,7 +911,7 @@ public class MyCachedBodyOutputMessage extends CachedBodyOutputMessage {
 
 ```
 
-### 4.3 修改GatewayFilterConfig
+### 4.3 修改 GatewayFilterConfig
 
 ```java
 package com.demo.gateway.config;
@@ -1129,4 +1134,4 @@ public class GatewayFilterConfig implements GlobalFilter, Ordered {
 
 ## 5 码云地址
 
-https://gitee.com/zhurongsheng/springcloud-gateway-rsa
+<https://gitee.com/zhurongsheng/springcloud-gateway-rsa>

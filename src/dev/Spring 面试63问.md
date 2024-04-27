@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring 面试63问
+excerpt: 
 description: Spring 面试63问
 date: 2022-02-13
 category: Java
@@ -10,25 +11,29 @@ timeline: true
 icon: type
 ---
 
-# Spring 面试63问
+# Spring 面试 63 问
 
-## Sping原理
+## Sping 原理
 
-Spring是一个轻量级Java开发框架，最早有Rod Johnson创建，目的是为了解决企业级应用开发的业务逻辑层和其他各层的耦合问题。它是一个分层的JavaSE/JavaEE
-full-stack（一站式）轻量级开源框架，为开发Java应用程序提供全面的基础架构支持。Spring负责基础架构，因此Java开发者可以专注于应用程序的开发。
+Spring 是一个轻量级 Java 开发框架，最早有 Rod Johnson 创建，目的是为了解决企业级应用开发的业务逻辑层和其他各层的耦合问题。它是一个分层的
+JavaSE/JavaEE
+full-stack（一站式）轻量级开源框架，为开发 Java 应用程序提供全面的基础架构支持。Spring 负责基础架构，因此 Java
+开发者可以专注于应用程序的开发。
 
-Spring是一个全面的、企业应用开发一站式的解决方案，贯穿表现层、业务层、持久层。但是它仍然可以和其他的框架无缝整合。
+Spring 是一个全面的、企业应用开发一站式的解决方案，贯穿表现层、业务层、持久层。但是它仍然可以和其他的框架无缝整合。
 
 ## Spring 特点
 
 **轻量级：**
-组件大小与开销两方面而言Spring都是轻量的。完整的Spring框架可以在一个大小只有1M多的JAR文件中发布，并且Spring所需的处理开销也是微不足道的。此外，Spring是非侵入式，典型案例，Spring应用中的对象不依赖于Spring特定的类
+组件大小与开销两方面而言 Spring 都是轻量的。完整的 Spring 框架可以在一个大小只有 1M 多的 JAR 文件中发布，并且 Spring
+所需的处理开销也是微不足道的。此外，Spring 是非侵入式，典型案例，Spring 应用中的对象不依赖于 Spring 特定的类
 
-**控制反转：** Spring通过控制反转（IOC）技术实现解耦。一个对象依赖的其他对象会通过被动的方式传递进来，而不需要对象自己创建或者查找依赖。
+**控制反转：** Spring 通过控制反转（IOC）技术实现解耦。一个对象依赖的其他对象会通过被动的方式传递进来，而不需要对象自己创建或者查找依赖。
 
 **面向切面：** 支持切面（AOP）编程，并且吧应用业务逻辑和系统服务区分开。
 
-**容器：** Spring包含并管理应用对象的配置和生命周期，在这个意义上它是一种容器。可以配置每个bean如何被创建、销毁，bean的作用范围是单例还是每次都生成一个新的实例，以及他们是如何相互关联。
+**容器：** Spring 包含并管理应用对象的配置和生命周期，在这个意义上它是一种容器。可以配置每个 bean 如何被创建、销毁，bean
+的作用范围是单例还是每次都生成一个新的实例，以及他们是如何相互关联。
 
 **框架集合：** 将简单的组件配置，组合成为复杂的框架；应用对象被申明式组合；提供许多基础功能（事务管理、持久化框架继承），提供应用逻辑开发接口
 
@@ -36,17 +41,19 @@ Spring是一个全面的、企业应用开发一站式的解决方案，贯穿�
 
 ### 优点
 
-- 方便解耦，简化开发：Spring就是一个大工厂，可以将所有对象的创建和依赖关系的维护，交给Spring管理。
-- AOP编程的支持：Spring提供面向切面编程，可以方便的实现对程序进行权限拦截、运行监控等功能。
+- 方便解耦，简化开发：Spring 就是一个大工厂，可以将所有对象的创建和依赖关系的维护，交给 Spring 管理。
+- AOP 编程的支持：Spring 提供面向切面编程，可以方便的实现对程序进行权限拦截、运行监控等功能。
 - 声明式事务的支持：只需要通过配置就可以完成对事务的管理，而无需手动编程。
-- 方便程序的测试：Spring对Junit4支持，可以通过注解方便的测试Spring程序。
-- 方便集成各种优秀框架：Spring不排斥各种优秀的开源框架，其内部提供了对各种优秀框架的直接支持（如：Struts、Hibernate、MyBatis等）。
-- 降低JavaEE API的使用难度：Spring对JavaEE开发中非常难用的一些API（JDBC、JavaMail、远程调用等），都提供了封装，使这些API应用难度大大降低。
+- 方便程序的测试：Spring 对 Junit4 支持，可以通过注解方便的测试 Spring 程序。
+- 方便集成各种优秀框架：Spring 不排斥各种优秀的开源框架，其内部提供了对各种优秀框架的直接支持（如：Struts、Hibernate、MyBatis
+  等）。
+- 降低 JavaEE API 的使用难度：Spring 对 JavaEE 开发中非常难用的一些 API（JDBC、JavaMail、远程调用等），都提供了封装，使这些 API
+  应用难度大大降低。
 
 ### 缺点
 
-- Spring依赖反射，反射影响性能
-- 使用门槛升高，入门Spring需要较长时间
+- Spring 依赖反射，反射影响性能
+- 使用门槛升高，入门 Spring 需要较长时间
 
 ## Spring 框架中都用到了哪些设计模式
 
@@ -60,30 +67,31 @@ Spring 框架中使用到了大量的设计模式，下面列举了比较有代�
 - `依赖注入`—贯穿于 BeanFactory / ApplicationContext 接口的核心理念。
 - `工厂模式`—BeanFactory 用来创建对象的实例
 
-## Spring核心组件
+## Spring 核心组件
 
 Spring 总共大约有 20 个模块， 由 1300 多个不同的文件构成。而这些组件被分别整合在核心容器（Core Container） 、 AOP（Aspect
-Oriented Programming）和设备支持（Instrmentation） 、数据访问与集成（Data Access/Integeration） 、 Web、 消息（Messaging） 、 Test等
+Oriented Programming）和设备支持（Instrmentation） 、数据访问与集成（Data Access/Integeration） 、 Web、 消息（Messaging） 、 Test
+等
 6 个模块中。以下是 Spring 5 的模块结构图：
 
 ![893a32f9ecd60a71e72fd247e0d7bc1c.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/893a32f9ecd60a71e72fd247e0d7bc1c.png)
 
 - `spring core`：提供了框架的基本组成部分，包括控制反转（Inversion of Control，IOC）和依赖注入（Dependency Injection，DI）功能。
-- `spring beans`：提供了BeanFactory，是工厂模式的一个经典实现，Spring将管理对象称为Bean。
+- `spring beans`：提供了 BeanFactory，是工厂模式的一个经典实现，Spring 将管理对象称为 Bean。
 - `spring context`：构建于 core 封装包基础上的 context 封装包，提供了一种框架式的对象访问方法。
-- `spring jdbc`：提供了一个JDBC的抽象层，消除了烦琐的JDBC编码和数据库厂商特有的错误代码解析， 用于简化JDBC。
+- `spring jdbc`：提供了一个 JDBC 的抽象层，消除了烦琐的 JDBC 编码和数据库厂商特有的错误代码解析， 用于简化 JDBC。
 - `spring aop`：提供了面向切面的编程实现，让你可以自定义拦截器、切点等。
 - `spring Web`：提供了针对 Web 开发的集成特性，例如文件上传，利用 servlet listeners 进行 ioc 容器初始化和针对 Web 的
   ApplicationContext。
-- `spring test`：主要为测试提供支持的，支持使用JUnit或TestNG对Spring组件进行单元测试和集成测试。
+- `spring test`：主要为测试提供支持的，支持使用 JUnit 或 TestNG 对 Spring 组件进行单元测试和集成测试。
 
 ## Spring 控制反转（IOC）
 
 ### 控制反转（IOC）概念
 
-控制反转即IOC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。
+控制反转即 IOC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。
 
-Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系，利用 Java 语言的反射功能(依赖注入DI)实例化 Bean 并建立 Bean
+Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系，利用 Java 语言的反射功能(依赖注入 DI)实例化 Bean 并建立 Bean
 之间的依赖关系。Spring 的 IoC 容器在完成这些底层工作的基础上，还提供 了 Bean 实例缓存、生命周期管理、 Bean
 实例代理、事件发布、资源装载等高级服务。
 
@@ -103,27 +111,28 @@ Spring 启动时读取应用程序提供的 Bean 配置信息，并在 Spring �
 
 BeanFactory 是 Spring 框架的基础设施，面向 Spring 本身；
 
-ApplicationContext 面向使用Spring 框架的开发者，几乎所有的应用场合我们都直接使用 ApplicationContext 而非底层的
+ApplicationContext 面向使用 Spring 框架的开发者，几乎所有的应用场合我们都直接使用 ApplicationContext 而非底层的
 BeanFactory。
 
 ![ca21e934e8b5c9738300fa4c8003c789.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/ca21e934e8b5c9738300fa4c8003c789.png)
 
 - **BeanDefinitionRegistry 注册表**：Spring 配置文件中每一个节点元素在 Spring 容器里都通过一个 BeanDefinition 对象表示，它描述了
-  Bean 的配置信息。而 BeanDefinitionRegistry 接口提供了向容器手工注册BeanDefinition 对象的方法。
+  Bean 的配置信息。而 BeanDefinitionRegistry 接口提供了向容器手工注册 BeanDefinition 对象的方法。
 - **BeanFactory 顶层接口**：位于类结构树的顶端 ，它最主要的方法就是 getBean(String beanName)，该方法从容器中返回特定名称的
   Bean，BeanFactory 的功能通过其他的接口得到不断扩展：
-- **ListableBeanFactory**：该接口定义了访问容器中 Bean 基本信息的若干方法，如查看 Bean 的个数、获取某一类型Bean
+- **ListableBeanFactory**：该接口定义了访问容器中 Bean 基本信息的若干方法，如查看 Bean 的个数、获取某一类型 Bean
   的配置名、查看容器中是否包括某一 Bean 等方法；
-- **HierarchicalBeanFactory 父子级**：父子级联 IoC 容器的接口，子容器可以通过接口方法访问父容器；通过HierarchicalBeanFactory
+- **HierarchicalBeanFactory 父子级**：父子级联 IoC 容器的接口，子容器可以通过接口方法访问父容器；通过
+  HierarchicalBeanFactory
   接口， Spring 的 IoC 容器可以建立父子层级关联的容器体系，子容器可以访问父容器中的 Bean，但父容器不能访问子容器的
   Bean。Spring 使用父子容器实现了很多功能，比如在 Spring MVC 中，展现层 Bean 位于一个子容器中，而业务层和持久层的 Bean
   位于父容器中。这样，展现层 Bean 就可以引用业务层和持久层的 Bean，而业务层和持久层的 Bean 则看不到展现层的 Bean。
 - **ConfigurableBeanFactory**：是一个重要的接口，增强了 IoC 容器的可定制性，它定义了设置类装载器、属性编辑器、容器初始化后置处理器等方法；
 - **AutowireCapableBeanFactory 自动装配**：定义了将容器中的 Bean 按某种规则（如按名字匹配、按类型匹配等）进行自动装配的方法；
 - **SingletonBeanRegistry 运行期间注册单例 Bean**：定义了允许在运行期间向容器注册单实例 Bean 的方法；对于单实例（
-  singleton）的 Bean 来说，BeanFactory 会缓存 Bean 实例，所以第二次使用 getBean() 获取 Bean 时将直接从IoC 容器的缓存中获取
+  singleton）的 Bean 来说，BeanFactory 会缓存 Bean 实例，所以第二次使用 getBean() 获取 Bean 时将直接从 IoC 容器的缓存中获取
   Bean 实例。Spring 在 DefaultSingletonBeanRegistry 类中提供了一个用于缓存单实例 Bean 的缓存器，它是一个用 HashMap
-  实现的缓存器，单实例的 Bean 以beanName 为键保存在这个 HashMap 中。
+  实现的缓存器，单实例的 Bean 以 beanName 为键保存在这个 HashMap 中。
 - **依赖日志框架**：在初始化 BeanFactory 时，必须为其提供一种日志框架，比如使用 Log4J， 即在类路径下提供 Log4J 配置文件，这样启动
   Spring 容器才不会报错。
 
@@ -144,127 +153,142 @@ ApplicationContext 继承了 HierarchicalBeanFactory 和 ListableBeanFactory 接
 - ResourcePatternResolver ：所有 ApplicationContext 实现类都实现了类似于
 - PathMatchingResourcePatternResolver：通过带前缀的 Ant 风格的资源文件路径装载 Spring 的配置文件。
 - LifeCycle：该接口是 Spring 2.0 加入的，该接口提供了 start()和 stop()两个方法，主要用于控制异步处理过程。在具体使用时，该接口同时被
-  ApplicationContext 实现及具体Bean 实现， ApplicationContext 会将 start/stop 的信息传递给容器中所有实现了该接口的
+  ApplicationContext 实现及具体 Bean 实现， ApplicationContext 会将 start/stop 的信息传递给容器中所有实现了该接口的
   Bean，以达到管理和控制 JMX、任务调度等目的。
 - ConfigurableApplicationContext ：扩展于 ApplicationContext，它新增加了两个主要的方法：refresh()和 close()，让
   ApplicationContext 具有启动、刷新和关闭应用上下文的能力。在应用上下文关闭的情况下调用 refresh()即可启动应用上下文，在已经启动的状态下，调用
   refresh()则清除缓存并重新装载配置信息，而调用 close()则可关闭应用上下文。
 
-## BeanFactory 和 ApplicationContext有什么区别？
+## BeanFactory 和 ApplicationContext 有什么区别？
 
-BeanFactory和ApplicationContext是Spring的两大核心接口，都可以当做Spring的容器。其中ApplicationContext是BeanFactory的子接口。
+BeanFactory 和 ApplicationContext 是 Spring 的两大核心接口，都可以当做 Spring 的容器。其中 ApplicationContext 是
+BeanFactory 的子接口。
 
 ### 依赖关系
 
-BeanFactory：是Spring里面最底层的接口，包含了各种Bean的定义，读取bean配置文档，管理bean的加载、实例化，控制bean的生命周期，维护bean之间的依赖关系。
+BeanFactory：是 Spring 里面最底层的接口，包含了各种 Bean 的定义，读取 bean 配置文档，管理 bean 的加载、实例化，控制 bean
+的生命周期，维护 bean 之间的依赖关系。
 
-ApplicationContext：接口作为BeanFactory的派生，除了提供BeanFactory所具有的功能外，还提供了更完整的框架功能：
+ApplicationContext：接口作为 BeanFactory 的派生，除了提供 BeanFactory 所具有的功能外，还提供了更完整的框架功能：
 
-- 继承MessageSource，因此支持国际化。
+- 继承 MessageSource，因此支持国际化。
 - 统一的资源文件访问方式。
-- 提供在监听器中注册bean的事件。
+- 提供在监听器中注册 bean 的事件。
 - 同时加载多个配置文件。
-- 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层。
+- 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的 web 层。
 
 ### 加载方式
 
-BeanFactroy：采用的是延迟加载形式来注入Bean的，即只有在使用到某个Bean时(调getBean())
-，才对该Bean进行加载实例化。这样，我们就不能发现一些存在的Spring的配置问题。如果Bean的某一个属性没有注入，BeanFacotry加载后，直至第一次使用调用getBean方法才会抛出异常。
+BeanFactroy：采用的是延迟加载形式来注入 Bean 的，即只有在使用到某个 Bean 时(调 getBean())
+，才对该 Bean 进行加载实例化。这样，我们就不能发现一些存在的 Spring 的配置问题。如果 Bean 的某一个属性没有注入，BeanFacotry
+加载后，直至第一次使用调用 getBean 方法才会抛出异常。
 
-ApplicationContext：它是在容器启动时，一次性创建了所有的Bean。这样，在容器启动时，我们就可以发现Spring中存在的配置错误，这样有利于检查所依赖属性是否注入。ApplicationContext启动后预载入所有的单实例Bean，通过预载入单实例bean
+ApplicationContext：它是在容器启动时，一次性创建了所有的 Bean。这样，在容器启动时，我们就可以发现 Spring
+中存在的配置错误，这样有利于检查所依赖属性是否注入。ApplicationContext 启动后预载入所有的单实例 Bean，通过预载入单实例 bean
 ,确保当你需要的时候，你就不用等待，因为它们已经创建好了。
 
-相对于基本的BeanFactory，ApplicationContext 唯一的不足是占用内存空间。当应用程序配置Bean较多时，程序启动较慢。
+相对于基本的 BeanFactory，ApplicationContext 唯一的不足是占用内存空间。当应用程序配置 Bean 较多时，程序启动较慢。
 
 ### 创建方式
 
-BeanFactory通常以编程的方式被创建，ApplicationContext还能以声明的方式创建，如使用ContextLoader。
+BeanFactory 通常以编程的方式被创建，ApplicationContext 还能以声明的方式创建，如使用 ContextLoader。
 
 ### 注册方式
 
-BeanFactory和ApplicationContext都支持BeanPostProcessor、BeanFactoryPostProcessor的使用，但两者之间的区别是：BeanFactory需要手动注册，而ApplicationContext则是自动注册。
+BeanFactory 和 ApplicationContext 都支持 BeanPostProcessor、BeanFactoryPostProcessor 的使用，但两者之间的区别是：BeanFactory
+需要手动注册，而 ApplicationContext 则是自动注册。
 
-### ApplicationContext通常的实现
+### ApplicationContext 通常的实现
 
-- FileSystemXmlApplicationContext ：此容器从一个XML文件中加载beans的定义，XML Bean 配置文件的全路径名必须提供给它的构造函数。
-- ClassPathXmlApplicationContext：此容器也从一个XML文件中加载beans的定义，这里，你需要正确设置classpath因为这个容器将在classpath里找bean配置。
-- WebXmlApplicationContext：此容器加载一个XML文件，此文件定义了一个WEB应用的所有bean。
+- FileSystemXmlApplicationContext ：此容器从一个 XML 文件中加载 beans 的定义，XML Bean 配置文件的全路径名必须提供给它的构造函数。
+- ClassPathXmlApplicationContext：此容器也从一个 XML 文件中加载 beans 的定义，这里，你需要正确设置 classpath 因为这个容器将在
+  classpath 里找 bean 配置。
+- WebXmlApplicationContext：此容器加载一个 XML 文件，此文件定义了一个 WEB 应用的所有 bean。
 
-## Spring的依赖注入
+## Spring 的依赖注入
 
 其主要实现方式有两种：依赖注入和依赖查找。
 
-**依赖注入：** 相对于IoC而言，依赖注入(DI)更加准确地描述了IoC的设计理念。所谓依赖注入（Dependency
-Injection），即组件之间的依赖关系由容器在应用系统运行期来决定，也就是由容器动态地将某种依赖关系的目标对象实例注入到应用系统中的各个关联的组件之中。组件不做定位查询，只提供普通的Java方法让容器去决定依赖关系。
+**依赖注入：** 相对于 IoC 而言，依赖注入(DI)更加准确地描述了 IoC 的设计理念。所谓依赖注入（Dependency
+Injection），即组件之间的依赖关系由容器在应用系统运行期来决定，也就是由容器动态地将某种依赖关系的目标对象实例注入到应用系统中的各个关联的组件之中。组件不做定位查询，只提供普通的
+Java 方法让容器去决定依赖关系。
 
 ### 依赖注入的基本原则
 
-应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由IoC容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给IoC容器负责。容器全权负责组件的装配，它会把符合依赖关系的对象通过属性（JavaBean中的setter）或者是构造器传递给需要的对象。
+应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由 IoC 容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给
+IoC 容器负责。容器全权负责组件的装配，它会把符合依赖关系的对象通过属性（JavaBean 中的 setter）或者是构造器传递给需要的对象。
 
 **依赖注入优势**
 
-依赖注入之所以更流行是因为它是一种更可取的方式：让容器全权负责依赖查询，受管组件只需要暴露JavaBean的setter方法或者带参数的构造器或者接口，使容器可以在初始化时组装对象的依赖关系。其与依赖查找方式相比，主要优势为：
+依赖注入之所以更流行是因为它是一种更可取的方式：让容器全权负责依赖查询，受管组件只需要暴露 JavaBean 的 setter
+方法或者带参数的构造器或者接口，使容器可以在初始化时组装对象的依赖关系。其与依赖查找方式相比，主要优势为：
 
 - 查找定位操作与应用代码完全无关
-- 不依赖于容器的API，可以很容易地在任何容器以外使用应用对象
+- 不依赖于容器的 API，可以很容易地在任何容器以外使用应用对象
 - 不需要特殊的接口，绝大多数对象可以做到完全不必依赖容器
 
 **依赖注入实现方式**
 
-依赖注入是时下最流行的IoC实现方式，依赖注入分为接口注入（Interface Injection），Setter方法注入（Setter
-Injection）和构造器注入（Constructor Injection）三种方式。其中接口注入由于在灵活性和易用性比较差，现在从Spring4开始已被废弃。
+依赖注入是时下最流行的 IoC 实现方式，依赖注入分为接口注入（Interface Injection），Setter 方法注入（Setter
+Injection）和构造器注入（Constructor Injection）三种方式。其中接口注入由于在灵活性和易用性比较差，现在从 Spring4 开始已被废弃。
 
 - 构造器依赖注入：构造器依赖注入通过容器触发一个类的构造器来实现的，该类有一系列参数，每个参数代表一个对其他类的依赖
-- Setter方法注入：Setter方法注入是容器通过调用无参构造器或无参static工厂 方法实例化bean之后，调用该bean的setter方法，即实现了基于setter的依赖注入
+- Setter 方法注入：Setter 方法注入是容器通过调用无参构造器或无参 static 工厂 方法实例化 bean 之后，调用该 bean 的 setter
+  方法，即实现了基于 setter 的依赖注入
 
-## 构造器依赖注入和 Setter方法注入的区别
+## 构造器依赖注入和 Setter 方法注入的区别
 
 ![59c181416a4997b4f05d2446e3ff6f08.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/59c181416a4997b4f05d2446e3ff6f08.png)
 
-两种依赖方式都可以使用，构造器注入和Setter方法注入。最好的解决方案是用构造器参数实现强制依赖，setter方法实现可选依赖。
+两种依赖方式都可以使用，构造器注入和 Setter 方法注入。最好的解决方案是用构造器参数实现强制依赖，setter 方法实现可选依赖。
 
 ## WebApplication 体系架构
 
 WebApplicationContext 是专门为 Web 应用准备的，它允许从相对于 Web 根目录的路径中装载配置文件完成初始化工作。从
-WebApplicationContext 中可以获得ServletContext 的引用，整个 Web 应用上下文对象将作为属性放置到 ServletContext 中，以便 Web
+WebApplicationContext 中可以获得 ServletContext 的引用，整个 Web 应用上下文对象将作为属性放置到 ServletContext 中，以便
+Web
 应用环境可以访问 Spring 应用上下文。
 
 ![0d58667ed73f47e65be170d3a114d94c.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0d58667ed73f47e65be170d3a114d94c.png)
 
 ## Spring Bean 定义
 
-一个Spring Bean 的定义包含容器必知的所有配置元数据，包括如何创建一个bean，它的生命周期详情及它的依赖。
+一个 Spring Bean 的定义包含容器必知的所有配置元数据，包括如何创建一个 bean，它的生命周期详情及它的依赖。
 
-- Spring元数据配置方式
-- XML配置文件
+- Spring 元数据配置方式
+- XML 配置文件
 - 基于注解的配置
-- 基于java的配置
+- 基于 java 的配置
 
 ## Spring Bean 作用域
 
 Spring 3 中为 Bean 定义了 5 中作用域，分别为 singleton（单例）、prototype（原型）、request、session 和 global session，5
 种作用域说明如下：
 
-- **singleton**：单例模式（多线程下不安全）。Spring IoC 容器中只会存在一个共享的 Bean 实例，无论有多少个Bean
-  引用它，始终指向同一对象。该模式在多线程下是不安全的。Singleton 作用域是Spring 中的缺省作用域，也可以显示的将 Bean 定义为
+- **singleton**：单例模式（多线程下不安全）。Spring IoC 容器中只会存在一个共享的 Bean 实例，无论有多少个 Bean
+  引用它，始终指向同一对象。该模式在多线程下是不安全的。Singleton 作用域是 Spring 中的缺省作用域，也可以显示的将 Bean 定义为
   singleton 模式，配置为：
 - **prototype**:原型模式每次使用时创建。每次通过 Spring 容器获取 prototype 定义的 bean 时，容器都将创建一个新的 Bean 实例，每个
-  Bean 实例都有自己的属性和状态，而 singleton 全局只有一个对象。根据经验，对有状态的bean使用prototype作用域，而对无状态的bean使用singleton
+  Bean 实例都有自己的属性和状态，而 singleton 全局只有一个对象。根据经验，对有状态的 bean 使用 prototype 作用域，而对无状态的
+  bean 使用 singleton
   作用域。
 - **Request**：一次 request 一个实例。在一次 Http 请求中，容器会返回该 Bean 的同一实例。而对不同的 Http 请求则会产生新的
-  Bean，而且该 bean 仅在当前 Http Request 内有效,当前 Http 请求结束，该 bean实例也将会被销毁。
+  Bean，而且该 bean 仅在当前 Http Request 内有效,当前 Http 请求结束，该 bean 实例也将会被销毁。
 - **session**：在一次 Http Session 中，容器会返回该 Bean 的同一实例。而对不同的 Session 请求则会创建新的实例，该 bean 实例仅在当前
-  Session 内有效。同 Http 请求相同，每一次session 请求创建新的实例，而不同的实例之间不共享属性，且实例仅在自己的 session
+  Session 内有效。同 Http 请求相同，每一次 session 请求创建新的实例，而不同的实例之间不共享属性，且实例仅在自己的 session
   请求内有效，请求结束，则实例将被销毁。
 - **global Session**：在一个全局的 Http Session 中，容器会返回该 Bean 的同一个实例，仅在使用 portlet context 时有效。
 
-## Spring处理线程并发问题
+## Spring 处理线程并发问题
 
-在一般情况下，只有无状态的Bean才可以在多线程环境下共享，在Spring中，绝大部分Bean都可以声明为singleton作用域，因为Spring对一些Bean中非线程安全状态采用ThreadLocal进行处理，解决线程安全问题。
+在一般情况下，只有无状态的 Bean 才可以在多线程环境下共享，在 Spring 中，绝大部分 Bean 都可以声明为 singleton 作用域，因为
+Spring 对一些 Bean 中非线程安全状态采用 ThreadLocal 进行处理，解决线程安全问题。
 
-ThreadLocal和线程同步机制都是为了解决多线程中相同变量的访问冲突问题。同步机制采用了“时间换空间”的方式，仅提供一份变量，不同的线程在访问前需要获取锁，没获得锁的线程则需要排队。而ThreadLocal采用了“空间换时间”的方式。
+ThreadLocal 和线程同步机制都是为了解决多线程中相同变量的访问冲突问题。同步机制采用了“时间换空间”的方式，仅提供一份变量，不同的线程在访问前需要获取锁，没获得锁的线程则需要排队。而
+ThreadLocal 采用了“空间换时间”的方式。
 
-ThreadLocal会为每一个线程提供一个独立的变量副本，从而隔离了多个线程对数据的访问冲突。因为每一个线程都拥有自己的变量副本，从而也就没有必要对该变量进行同步了。ThreadLocal提供了线程安全的共享对象，在编写多线程代码时，可以把不安全的变量封装进ThreadLocal。
+ThreadLocal 会为每一个线程提供一个独立的变量副本，从而隔离了多个线程对数据的访问冲突。因为每一个线程都拥有自己的变量副本，从而也就没有必要对该变量进行同步了。ThreadLocal
+提供了线程安全的共享对象，在编写多线程代码时，可以把不安全的变量封装进 ThreadLocal。
 
 ## Spring Bean 生命周期
 
@@ -319,7 +343,7 @@ Bean 就可以）。
 
 1. 最后，如果这个 Bean 的 Spring 配置中配置了 `destroy-method` 属性，会自动调用其配置的销毁方法。
 
-## bean生命周期方法
+## bean 生命周期方法
 
 bean 标签有两个重要的属性（`init-method` 和 `destroy-method`）。用它们你可以自己定制
 
@@ -329,11 +353,12 @@ bean 标签有两个重要的属性（`init-method` 和 `destroy-method`）。�
   <bean id="" class="" init-method="初始化方法" destroy-method="销毁方法">
   ```
 
-## 什么是Spring的内部bean？什么是Spring inner beans？
+## 什么是 Spring 的内部 bean？什么是 Spring inner beans？
 
-在Spring框架中，当一个bean仅被用作另一个bean的属性时，它能被声明为一个内部bean。
+在 Spring 框架中，当一个 bean 仅被用作另一个 bean 的属性时，它能被声明为一个内部 bean。
 
-内部bean可以用setter注入“属性”和构造方法注入“构造参数”的方式来实现，内部bean通常是匿名的，它们的Scope一般是prototype。
+内部 bean 可以用 setter 注入“属性”和构造方法注入“构造参数”的方式来实现，内部 bean 通常是匿名的，它们的 Scope 一般是
+prototype。
 
 Spring 依赖注入四种方式构造器注入
 
@@ -479,21 +504,21 @@ Spring 提供了以下四种集合类的配置元素：
   </beans>
   ```
 
-## 使用@Autowired注解自动装配的过程
+## 使用@Autowired 注解自动装配的过程
 
-在使用@Autowired注解之前需要在Spring配置文件进行配置，`<context:annotation-config />`。
+在使用@Autowired 注解之前需要在 Spring 配置文件进行配置，`<context:annotation-config />`。
 
-在启动spring IoC时，容器自动装载了一个`AutowiredAnnotationBeanPostProcessor`
+在启动 spring IoC 时，容器自动装载了一个`AutowiredAnnotationBeanPostProcessor`
 后置处理器，当容器扫描到`@Autowied`、`@Resource`或`@Inject`
-时，就会在IoC容器自动查找需要的bean，并装配给该对象的属性。在使用`@Autowired`时，首先在容器中查询对应类型的bean：
+时，就会在 IoC 容器自动查找需要的 bean，并装配给该对象的属性。在使用`@Autowired`时，首先在容器中查询对应类型的 bean：
 
-- 如果查询结果刚好为一个，就将该bean装配给`@Autowired`指定的数据；
+- 如果查询结果刚好为一个，就将该 bean 装配给`@Autowired`指定的数据；
 - 如果查询的结果不止一个，那么`@Autowired`会根据名称来查找；
 - 如果上述查找的结果为空，那么会抛出异常。解决方法时，使用`required=false`。
 
 ## Spring AOP
 
-## AOP原理
+## AOP 原理
 
 OOP(Object-Oriented Programming)面向对象编程，允许开发者定义纵向的关系，但并适用于定义横向的关系，导致了大量代码的重复，而不利于各个模块的重用。
 
@@ -519,14 +544,16 @@ AOP 主要应用场景有
 
 - 切面（aspect）：类是对物体特征的抽象，切面就是对横切关注点的抽象
 - 横切关注点：对哪些方法进行拦截，拦截后怎么处理，这些关注点称之为横切关注点
-- 连接点（joinpoint）：被拦截到的点，因为 Spring 只支持方法类型的连接点，所以在 Spring中连接点指的就是被拦截到的方法，实际上连接点还可以是字段或者构造器
+- 连接点（joinpoint）：被拦截到的点，因为 Spring 只支持方法类型的连接点，所以在 Spring 中连接点指的就是被拦截到的方法，实际上连接点还可以是字段或者构造器
 - 切入点（pointcut）：对连接点进行拦截的定义
 - 通知（advice）：所谓通知指的就是指拦截到连接点之后要执行的代码，通知分为前置、后置、异常、最终、环绕通知五类
 - 目标对象：代理的目标对象
 - 织入（weave）：将切面应用到目标对象并导致代理对象创建的过程
-    - 编译期：切面在目标类编译时被织入。AspectJ的织入编译器是以这种方式织入切面的；
-    - 类加载期：切面在目标类加载到JVM时被织入。需要特殊的类加载器，它可以在目标类被引入应用之前增强该目标类的字节码。AspectJ5的加载时织入就支持以这种方式织入切面；
-    - 运行期：切面在应用运行的某个时刻被织入。一般情况下，在织入切面时，AOP容器会为目标对象动态地创建一个代理对象。SpringAOP就是以这种方式织入切面。
+    - 编译期：切面在目标类编译时被织入。AspectJ 的织入编译器是以这种方式织入切面的；
+    - 类加载期：切面在目标类加载到 JVM 时被织入。需要特殊的类加载器，它可以在目标类被引入应用之前增强该目标类的字节码。AspectJ5
+      的加载时织入就支持以这种方式织入切面；
+    - 运行期：切面在应用运行的某个时刻被织入。一般情况下，在织入切面时，AOP 容器会为目标对象动态地创建一个代理对象。SpringAOP
+      就是以这种方式织入切面。
 - 引入（introduction）：在不修改代码的前提下，引入可以在运行期为类动态地添加一些方法或字段
 
 ## Spring 中的代理
@@ -537,22 +564,24 @@ AOP 主要应用场景有
 
 ## AOP 实现方式
 
-AOP实现的关键在于代理模式，AOP代理主要分为静态代理和动态代理。
+AOP 实现的关键在于代理模式，AOP 代理主要分为静态代理和动态代理。
 
-- AspectJ 静态代理的增强，所谓静态代理，就是AOP框架会在编译阶段生成AOP代理类，因此也称为编译时增强，他会在编译阶段将AspectJ(
-  切面)织入到Java字节码中，运行的时候就是增强之后的AOP对象。
-- Spring AOP使用的动态代理，所谓的动态代理就是说AOP框架不会去修改字节码，而是每次运行时在内存中临时为方法生成一个AOP对象，这个AOP对象包含了目标对象的全部方法，并且在特定的切点做了增强处理，并回调原对象的方法。
+- AspectJ 静态代理的增强，所谓静态代理，就是 AOP 框架会在编译阶段生成 AOP 代理类，因此也称为编译时增强，他会在编译阶段将
+  AspectJ(
+  切面)织入到 Java 字节码中，运行的时候就是增强之后的 AOP 对象。
+- Spring AOP 使用的动态代理，所谓的动态代理就是说 AOP 框架不会去修改字节码，而是每次运行时在内存中临时为方法生成一个 AOP
+  对象，这个 AOP 对象包含了目标对象的全部方法，并且在特定的切点做了增强处理，并回调原对象的方法。
 
 ## AOP 两种代理方式
 
-Spring 提供了两种方式来生成代理对象: JDK Proxy 和 Cglib，具体使用哪种方式生成由AopProxyFactory 根据 AdvisedSupport
+Spring 提供了两种方式来生成代理对象: JDK Proxy 和 Cglib，具体使用哪种方式生成由 AopProxyFactory 根据 AdvisedSupport
 对象的配置来决定。默认的策略是如果目标类是接口，则使用 JDK 动态代理技术，否则使用 Cglib 来生成代理。
 
 ## JDK 动态接口代理
 
 JDK 动态代理主要涉及到 java.lang.reflect 包中的两个类：Proxy 和 InvocationHandler。
 
-InvocationHandler是一个接口，通过实现该接口定义横切逻辑，并通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编制在一起。
+InvocationHandler 是一个接口，通过实现该接口定义横切逻辑，并通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编制在一起。
 
 Proxy 利用 InvocationHandler 动态创建一个符合某一接口的实例，生成目标类的代理对象。
 
@@ -587,25 +616,29 @@ CGLib 全称为 Code Generation Library，是一个强大的高性能，高质�
  } }
   ```
 
-## Spring在运行时通知对象
+## Spring 在运行时通知对象
 
-通过在代理类中包裹切面，Spring在运行期把切面织入到Spring管理的bean中。代理封装了目标类，并拦截被通知方法的调用，再把调用转发给真正的目标bean。当代理拦截到方法调用时，在调用目标bean方法之前，会执行切面逻辑。
+通过在代理类中包裹切面，Spring 在运行期把切面织入到 Spring 管理的 bean 中。代理封装了目标类，并拦截被通知方法的调用，再把调用转发给真正的目标
+bean。当代理拦截到方法调用时，在调用目标 bean 方法之前，会执行切面逻辑。
 
-直到应用需要被代理的bean时，Spring才创建代理对象。如果使用的是ApplicationContext的话，在ApplicationContext从BeanFactory中加载所有bean的时候，Spring才会创建被代理的对象。因为Spring运行时才创建代理对象，所以我们不需要特殊的编译器来织入SpringAOP的切面。
+直到应用需要被代理的 bean 时，Spring 才创建代理对象。如果使用的是 ApplicationContext 的话，在 ApplicationContext 从
+BeanFactory 中加载所有 bean 的时候，Spring 才会创建被代理的对象。因为 Spring 运行时才创建代理对象，所以我们不需要特殊的编译器来织入
+SpringAOP 的切面。
 
-## Spring只支持方法级别的连接点
+## Spring 只支持方法级别的连接点
 
-因为Spring基于动态代理，所以Spring只支持方法连接点。Spring缺少对字段连接点的支持，而且它不支持构造器连接点。方法之外的连接点拦截功能，我们可以利用Aspect来补充。
+因为 Spring 基于动态代理，所以 Spring 只支持方法连接点。Spring 缺少对字段连接点的支持，而且它不支持构造器连接点。方法之外的连接点拦截功能，我们可以利用
+Aspect 来补充。
 
-在Spring AOP 中，关注点和横切关注的区别是什么？在 spring aop 中 concern 和 cross-cutting concern 的不同之处
+在 Spring AOP 中，关注点和横切关注的区别是什么？在 spring aop 中 concern 和 cross-cutting concern 的不同之处
 
 关注点（concern）是应用中一个模块的行为，一个关注点可能会被定义成一个我们想实现的一个功能。
 
 横切关注点（cross-cutting concern）是一个关注点，此关注点是整个应用都会使用的功能，并影响整个应用，比如日志，安全和数据传输，几乎应用的每个模块都需要的功能。因此这些都属于横切关注点。
 
-## Spring通知类型
+## Spring 通知类型
 
-在AOP术语中，切面的工作被称为通知，实际上是程序执行时要通过SpringAOP框架触发的代码段。Spring切面可以应用5种类型的通知：
+在 AOP 术语中，切面的工作被称为通知，实际上是程序执行时要通过 SpringAOP 框架触发的代码段。Spring 切面可以应用 5 种类型的通知：
 
 - 前置通知（Before）：在目标方法被调用之前调用通知功能；
 - 后置通知（After）：在目标方法完成之后调用通知，此时不会关心方法的输出是什么；
@@ -613,7 +646,7 @@ CGLib 全称为 Code Generation Library，是一个强大的高性能，高质�
 - 异常通知（After-throwing）：在目标方法抛出异常后调用通知；
 - 环绕通知（Around）：通知包裹了被通知的方法，在被通知的方法调用之前和调用之后执行自定义的行为。
 
-### 同一个aspect，不同advice的执行顺序：
+### 同一个 aspect，不同 advice 的执行顺序
 
 没有异常情况下的执行顺序：
 
@@ -639,7 +672,7 @@ CGLib 全称为 Code Generation Library，是一个强大的高性能，高质�
 ## Spring MVC 原理
 
 Spring 的模型-视图-控制器（MVC）框架是围绕一个 DispatcherServlet 来设计的，这个
-Servlet会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。
+Servlet 会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。
 
 ![73ee5a65e7e6e8a0733e3730a486a6e8.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/73ee5a65e7e6e8a0733e3730a486a6e8.png)
 
@@ -649,7 +682,7 @@ Servlet会把请求分发给各个处理器，并支持可配置的处理器映�
 
 **HandlerMapping 寻找处理器**
 
-(2) 由 DispatcherServlet 控制器查询一个或多个 HandlerMapping，找到处理请求的Controller。
+(2) 由 DispatcherServlet 控制器查询一个或多个 HandlerMapping，找到处理请求的 Controller。
 
 **调用处理器 Controller**
 
@@ -669,15 +702,17 @@ Servlet会把请求分发给各个处理器，并支持可配置的处理器映�
 
 ## Spring DATA
 
-## Spring ORM理解
+## Spring ORM 理解
 
-Spring 通过提供ORM模块，支持我们在直接JDBC之上使用一个对象/关系映射映射(ORM)工具，Spring 支持集成主流的ORM框架，如Hiberate，JDO和
-iBATIS，JPA，TopLink，JDO，OJB 。Spring的事务管理同样支持以上所有ORM框架及JDBC。
+Spring 通过提供 ORM 模块，支持我们在直接 JDBC 之上使用一个对象/关系映射映射(ORM)工具，Spring 支持集成主流的 ORM 框架，如
+Hiberate，JDO 和
+iBATIS，JPA，TopLink，JDO，OJB 。Spring 的事务管理同样支持以上所有 ORM 框架及 JDBC。
 
-**解释JDBC抽象和DAO模块**
+**解释 JDBC 抽象和 DAO 模块**
 
-通过使用JDBC抽象和DAO模块，保证数据库代码的简洁，并能避免数据库资源错误关闭导致的问题，它在各种不同的数据库的错误信息之上，提供了一个统一的异常访问层。它还利用Spring的AOP
-模块给Spring应用中的对象提供事务管理服务。
+通过使用 JDBC 抽象和 DAO 模块，保证数据库代码的简洁，并能避免数据库资源错误关闭导致的问题，它在各种不同的数据库的错误信息之上，提供了一个统一的异常访问层。它还利用
+Spring 的 AOP
+模块给 Spring 应用中的对象提供事务管理服务。
 
 ## Spring DAO 的支持
 
@@ -692,13 +727,13 @@ Spring DAO（数据访问对象） 使得 JDBC，Hibernate 或 JDO
 - SimpleJdbcInsert
 - SimpleJdbcCall
 
-## JdbcTemplate是什么
+## JdbcTemplate 是什么
 
 JdbcTemplate 类提供了很多便利的方法解决诸如把数据库数据转变成基本数据类型或对象，执行写好的或可调用的数据库操作语句，提供自定义的数据错误处理。
 
-## 使用Spring通过什么方式访问Hibernate？
+## 使用 Spring 通过什么方式访问 Hibernate？
 
-有两种方式访问Hibernate：
+有两种方式访问 Hibernate：
 
 - 使用 Hibernate 模板和回调进行控制反转
 - 扩展 HibernateDAOSupport 并应用 AOP 拦截器节点
@@ -740,9 +775,9 @@ Spring 支持两种类型的事务管理：
 大多数 Spring 框架的用户选择声明式事务管理，因为它对应用代码的影响最小，因 此更符合一个无侵入的轻量级容器的思想。声明式事务管理要优于编程式事务管理，
 虽然比编程式事务管理（这种方式允许你通过代码控制事务）少了一点灵活性。
 
-## Spring常用注解
+## Spring 常用注解
 
-### 声明bean的注解
+### 声明 bean 的注解
 
 - `@Component` ：组件，没有明确的角色
 - `@Service` ：在业务逻辑层使用
@@ -750,61 +785,63 @@ Spring 支持两种类型的事务管理：
 - `@Controller` ：在展现层使用，控制层的声明
     - `@RestController` ：`@Controller`和`@ResponseBody`组合，，控制层的声明
 
-  ### 注入bean的注解
+### 注入 bean 的注解
 
-    - `@Autowired`：
+- `@Autowired`：
 
-  Spring自带的注解，通过`AutowiredAnnotationBeanPostProcessor`
-  类实现的依赖注入，作用在CONSTRUCTOR、METHOD、PARAMETER、FIELD、ANNOTATION_TYPE。默认是根据类型（byType
-  ）进行自动装配的。如果有多个类型一样的Bean候选者，需要指定按照名称（byName ）进行装配，则需要配合@Qualifier。
+Spring 自带的注解，通过`AutowiredAnnotationBeanPostProcessor`
+类实现的依赖注入，作用在 CONSTRUCTOR、METHOD、PARAMETER、FIELD、ANNOTATION_TYPE。默认是根据类型（byType
+）进行自动装配的。如果有多个类型一样的 Bean 候选者，需要指定按照名称（byName ）进行装配，则需要配合@Qualifier。
 
-  指定名称后，如果Spring
-  IOC容器中没有对应的组件bean抛出NoSuchBeanDefinitionException。也可以将@Autowired中required配置为false，如果配置为false之后，当没有找到相应bean的时候，系统不会抛异常
+指定名称后，如果 Spring
+IOC 容器中没有对应的组件 bean 抛出 NoSuchBeanDefinitionException。也可以将@Autowired 中 required 配置为 false，如果配置为
+false 之后，当没有找到相应 bean 的时候，系统不会抛异常
 
-    - `@Inject`：
+- `@Inject`：
 
-  JSR330 (Dependency Injection for Java)中的规范，需要导入javax.inject.Inject jar包 ，才能实现注入
-  作用CONSTRUCTOR、METHOD、FIELD上
+JSR330 (Dependency Injection for Java)中的规范，需要导入 javax.inject.Inject jar 包 ，才能实现注入
+作用 CONSTRUCTOR、METHOD、FIELD 上
 
-  根据类型进行自动装配的，如果需要按名称进行装配，则需要配合@Named
+根据类型进行自动装配的，如果需要按名称进行装配，则需要配合@Named
 
-    - `@Resource`：
+- `@Resource`：
 
-  JSR250规范的实现，在javax.annotation包下，作用TYPE、FIELD、METHOD上。
+JSR250 规范的实现，在 javax.annotation 包下，作用 TYPE、FIELD、METHOD 上。
 
-  默认根据属性名称进行自动装配的，如果有多个类型一样的Bean候选者，则可以通过name进行指定进行注入
+默认根据属性名称进行自动装配的，如果有多个类型一样的 Bean 候选者，则可以通过 name 进行指定进行注入
 
-  ### java配置类相关注解
+### java 配置类相关注解
 
-- `@Configuration` ：声明当前类为配置类，相当于xml形式的Spring配置（类上），声明当前类为配置类，其中内部组合了@Component注解，表明这个类是一个bean（类上）
-    - `@Bean` ：注解在方法上，声明当前方法的返回值为一个bean，替代xml中的方式（方法上）
-- `@ComponentScan` ：用于对Component进行扫描，相当于xml中的（类上）
-    - `@WishlyConfiguration` ：为@Configuration与@ComponentScan的组合注解，可以替代这两个注解
+- `@Configuration` ：声明当前类为配置类，相当于 xml 形式的 Spring 配置（类上），声明当前类为配置类，其中内部组合了@Component
+  注解，表明这个类是一个 bean（类上）
+    - `@Bean` ：注解在方法上，声明当前方法的返回值为一个 bean，替代 xml 中的方式（方法上）
+- `@ComponentScan` ：用于对 Component 进行扫描，相当于 xml 中的（类上）
+    - `@WishlyConfiguration` ：为@Configuration 与@ComponentScan 的组合注解，可以替代这两个注解
 
-  ### 切面（AOP）相关注解
+### 切面（AOP）相关注解
 
-  Spring支持AspectJ的注解式切面编程
+Spring 支持 AspectJ 的注解式切面编程
 
-    - `@Aspect`：声明一个切面（类上），使用@After、@Before、@Around定义建言（advice），可直接将拦截规则（切点）作为参数。
+- `@Aspect`：声明一个切面（类上），使用@After、@Before、@Around 定义建言（advice），可直接将拦截规则（切点）作为参数。
 - `@After` ：在方法执行之后执行（方法上）
     - `@Before` ：在方法执行之前执行（方法上）
 - `@Around` ：在方法执行之前与之后执行（方法上）
-    - `@PointCut` ：声明切点在java配置类中使用@EnableAspectJAutoProxy注解开启Spring对AspectJ代理的支持（类上）
+    - `@PointCut` ：声明切点在 java 配置类中使用@EnableAspectJAutoProxy 注解开启 Spring 对 AspectJ 代理的支持（类上）
 
-  ## @Bean的属性支持
+## @Bean 的属性支持
 
-  @Scope 设置Spring容器如何新建Bean实例（方法上，得有@Bean），其设置类型包括：
+@Scope 设置 Spring 容器如何新建 Bean 实例（方法上，得有@Bean），其设置类型包括：
 
-    - `Singleton`：单例,一个Spring容器中只有一个bean实例，默认模式
-- `Protetype`：每次调用新建一个bean
-    - `Request`：web项目中，给每个http request新建一个bean
-- `Session` ：web项目中，给每个http session新建一个bean
-    - `Global`：Session给每一个 global http session新建一个Bean实例
-- `@StepScope`：在Spring Batch中还有涉及(Spring Batch 之 背景框架简介_vincent-CSDN博客)
-    - `@PostConstruct` ：由JSR-250提供，在构造函数执行完之后执行，等价于xml配置文件中bean的initMethod
-- `@PreDestory` ：由JSR-250提供，在Bean销毁之前执行，等价于xml配置文件中bean的destroyMethod
+- `Singleton`：单例,一个 Spring 容器中只有一个 bean 实例，默认模式
+- `Protetype`：每次调用新建一个 bean
+    - `Request`：web 项目中，给每个 http request 新建一个 bean
+- `Session` ：web 项目中，给每个 http session 新建一个 bean
+    - `Global`：Session 给每一个 global http session 新建一个 Bean 实例
+- `@StepScope`：在 Spring Batch 中还有涉及(Spring Batch 之 背景框架简介_vincent-CSDN 博客)
+    - `@PostConstruct` ：由 JSR-250 提供，在构造函数执行完之后执行，等价于 xml 配置文件中 bean 的 initMethod
+- `@PreDestory` ：由 JSR-250 提供，在 Bean 销毁之前执行，等价于 xml 配置文件中 bean 的 destroyMethod
 
-## @Value注解
+## @Value 注解
 
 为属性注入值,支持如下方式的注入：
 
@@ -820,7 +857,7 @@ Spring 支持两种类型的事务管理：
 
 ![0a1da82128f379c30ad8a617633e8dbe.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0a1da82128f379c30ad8a617633e8dbe.png)
 
-注入其它bean属性
+注入其它 bean 属性
 
 ![73e51190ca79d307501ca874efee2e3b.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/73e51190ca79d307501ca874efee2e3b.png)
 
@@ -836,54 +873,60 @@ Spring 支持两种类型的事务管理：
 
 ![08a820d9676736e45563568e57f708da.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/08a820d9676736e45563568e57f708da.png)
 
-`@PropertySource` 加载配置文件(类上)，还需配置一个`PropertySourcesPlaceholderConfigurer`的bean。
+`@PropertySource` 加载配置文件(类上)，还需配置一个`PropertySourcesPlaceholderConfigurer`的 bean。
 
 ## 环境切换
 
-- `@Profile` ：通过设定Environment的ActiveProfiles来设定当前context需要使用的配置环境。（类或方法上）
-    - `@Conditional`：Spring4中可以使用此注解定义条件话的bean，通过实现Condition接口，并重写matches方法，从而决定该bean是否被实例化。（方法上）
+- `@Profile` ：通过设定 Environment 的 ActiveProfiles 来设定当前 context 需要使用的配置环境。（类或方法上）
+    - `@Conditional`：Spring4 中可以使用此注解定义条件话的 bean，通过实现 Condition 接口，并重写 matches 方法，从而决定该
+      bean 是否被实例化。（方法上）
 
-  ## 异步相关
+## 异步相关
 
-    - `@EnableAsync`：配置类中，通过此注解开启对异步任务的支持，叙事性AsyncConfigurer接口（类上）
-- `@Async`：在实际执行的bean方法使用该注解来申明其是一个异步任务（方法上或类上所有的方法都将异步，需要@EnableAsync开启异步任务）
+- `@EnableAsync`：配置类中，通过此注解开启对异步任务的支持，叙事性 AsyncConfigurer 接口（类上）
+- `@Async`：在实际执行的 bean 方法使用该注解来申明其是一个异步任务（方法上或类上所有的方法都将异步，需要@EnableAsync
+  开启异步任务）
 
 ## 定时任务相关
 
 - `@EnableScheduling` ：在配置类上使用，开启计划任务的支持（类上）
-- `@Scheduled` ：来申明这是一个任务，包括cron,fixDelay,fixRate等类型（方法上，需先开启计划任务的支持）
+- `@Scheduled` ：来申明这是一个任务，包括 cron,fixDelay,fixRate 等类型（方法上，需先开启计划任务的支持）
 
 ## @Enable 注解说明
 
-这些注解主要用来开启对xxx的支持。
+这些注解主要用来开启对 xxx 的支持。
 
-- `@EnableAspectJAutoProxy` ：开启对AspectJ自动代理的支持
+- `@EnableAspectJAutoProxy` ：开启对 AspectJ 自动代理的支持
 - `@EnableAsync` ：开启异步方法的支持
 - `@EnableScheduling` ：开启计划任务的支持
-- `@EnableWebMvc` ：开启Web MVC的配置支持
-- `@EnableConfigurationProperties` ：开启对@ConfigurationProperties注解配置Bean的支持
-- `@EnableJpaRepositories` ：开启对SpringData JPA Repository的支持
+- `@EnableWebMvc` ：开启 Web MVC 的配置支持
+- `@EnableConfigurationProperties` ：开启对@ConfigurationProperties 注解配置 Bean 的支持
+- `@EnableJpaRepositories` ：开启对 SpringData JPA Repository 的支持
     - `@EnableTransactionManagement` ：开启注解式事务的支持
 - `@EnableCaching` ：开启注解式的缓存支持
 
 ## 测试相关注解
 
-- `@RunWith` ：运行器，Spring中通常用于对JUnit的支持
-- `@ContextConfiguration`：用来加载配置ApplicationContext，其中classes属性用来加载配置类
+- `@RunWith` ：运行器，Spring 中通常用于对 JUnit 的支持
+- `@ContextConfiguration`：用来加载配置 ApplicationContext，其中 classes 属性用来加载配置类
 
-## SpringMVC部分
+## SpringMVC 部分
 
-- `@EnableWebMvc` ：在配置类中开启Web
-  MVC的配置支持，如一些ViewResolver或者MessageConverter等，若无此句，重写WebMvcConfigurerAdapter方法（用于对SpringMVC的配置）。
-- `@Controller` ：声明该类为SpringMVC中的Controller
-    - `@RequestMapping` ：用于映射Web请求，包括访问路径和参数（类或方法上）
-    - `@ResponseBody` ：支持将返回值放在response内，而不是一个页面，通常用户返回json数据（返回值旁或方法上）
-- `@RequestBody` ：允许request的参数在request体中，而不是在直接连接在地址后面。（放在参数前）
-    - `@PathVariable` ：用于接收路径参数，比如@RequestMapping(“/hello/{name}”)申明的路径，将注解放在参数中前，即可获取该值，通常作为Restful的接口实现方法。
-- `@RestController` ：该注解为一个组合注解，相当于@Controller和@ResponseBody的组合，注解在类上，意味着，该Controller的所有方法都默认加上了@ResponseBody。
+- `@EnableWebMvc` ：在配置类中开启 Web
+  MVC 的配置支持，如一些 ViewResolver 或者 MessageConverter 等，若无此句，重写 WebMvcConfigurerAdapter 方法（用于对
+  SpringMVC 的配置）。
+- `@Controller` ：声明该类为 SpringMVC 中的 Controller
+    - `@RequestMapping` ：用于映射 Web 请求，包括访问路径和参数（类或方法上）
+    - `@ResponseBody` ：支持将返回值放在 response 内，而不是一个页面，通常用户返回 json 数据（返回值旁或方法上）
+- `@RequestBody` ：允许 request 的参数在 request 体中，而不是在直接连接在地址后面。（放在参数前）
+    - `@PathVariable` ：用于接收路径参数，比如@RequestMapping(“/hello/{name}”)申明的路径，将注解放在参数中前，即可获取该值，通常作为
+      Restful 的接口实现方法。
+- `@RestController` ：该注解为一个组合注解，相当于@Controller 和@ResponseBody 的组合，注解在类上，意味着，该 Controller
+  的所有方法都默认加上了@ResponseBody。
     - `@ControllerAdvice`
-      ：通过该注解，我们可以将对于控制器的全局配置放置在同一个位置，注解了@Controller的类的方法可使用@ExceptionHandler、@InitBinder、@ModelAttribute注解到方法上，这对所有注解了
-      @RequestMapping的控制器内的方法有效。
+      ：通过该注解，我们可以将对于控制器的全局配置放置在同一个位置，注解了@Controller
+      的类的方法可使用@ExceptionHandler、@InitBinder、@ModelAttribute 注解到方法上，这对所有注解了
+      @RequestMapping 的控制器内的方法有效。
 - `@ExceptionHandler` ：用于全局处理控制器里的异常
-    - `@InitBinder` ：用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model中。
-- `@ModelAttribute` ：本来的作用是绑定键值对到Model里，在@ControllerAdvice中是让全局的@RequestMapping：都能获得在此处设置的键值对。
+    - `@InitBinder` ：用来设置 WebDataBinder，WebDataBinder 用来自动绑定前台请求参数到 Model 中。
+- `@ModelAttribute` ：本来的作用是绑定键值对到 Model 里，在@ControllerAdvice 中是让全局的@RequestMapping：都能获得在此处设置的键值对。

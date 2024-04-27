@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 使用CloudFlareWorkers反代网站
+excerpt: 
 description: 
 date: 2022-06-09
 category: Script
@@ -12,7 +13,7 @@ dateline: true
 icon: script
 ---
 
-# 使用CloudFlareWorkers反代网站
+# 使用 CloudFlareWorkers 反代网站
 
 给出三种反代源码。
 
@@ -487,19 +488,18 @@ async function device_status(user_agent_info) {
 }
 ```
 
-## 注意：
+## 注意
 
 如果出现：
 
 “需要网站所有者处理的错误:网站密钥的网域无效”
 
-Google reCAPTCHA V3.0无效. “网站所有者的错误：密钥类型无效”
+Google reCAPTCHA V3.0 无效. “网站所有者的错误：密钥类型无效”
 
-### 解决方法：
+### 解决方法
 
 在代码中修改`new_request_headers.set('Referer'.......`，为对应的反代网站
 
 ```javascript
 new_request_headers.set('Referer', 'https://github.com');
 ```
-

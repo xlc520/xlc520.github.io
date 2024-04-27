@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据
+excerpt: 
 description: Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据
 date: 2022-06-10
 category: Java
@@ -12,19 +13,19 @@ timeline: true
 icon: java
 ---
 
-# Springboot利用ThreadPoolTaskExecutor多线程批量插入百万级数据
+# Springboot 利用 ThreadPoolTaskExecutor 多线程批量插入百万级数据
 
 ## 前言
 
 开发目的：提高百万级数据插入效率。
 
-采取方案：利用ThreadPoolTaskExecutor多线程批量插入。
+采取方案：利用 ThreadPoolTaskExecutor 多线程批量插入。
 
-采用技术：springboot2.1.1+mybatisPlus3.0.6+swagger2.5.0+Lombok1.18.4+postgresql+ThreadPoolTaskExecutor等。
+采用技术：springboot2.1.1+mybatisPlus3.0.6+swagger2.5.0+Lombok1.18.4+postgresql+ThreadPoolTaskExecutor 等。
 
 ## **具体实现细节**
 
-### application-dev.properties添加线程池配置信息
+### application-dev.properties 添加线程池配置信息
 
 ```html
 # 异步线程配置
@@ -38,7 +39,7 @@ async.executor.thread.queue_capacity = 99988
 async.executor.thread.name.prefix = async-importDB-
 ```
 
-### spring容器注入线程池bean对象
+### spring 容器注入线程池 bean 对象
 
 ```java
 @Configuration
@@ -125,33 +126,33 @@ public class AsyncServiceImpl implements AsyncService {
     }
 ```
 
-### 模拟2000003 条数据进行测试
+### 模拟 2000003 条数据进行测试
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225121702208.png)
 
-多线程 测试 2000003 耗时如下：耗时1.67分钟
+多线程 测试 2000003 耗时如下：耗时 1.67 分钟
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2019122512171971.png)
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225121745132.png)
 
-本次开启30个线程，截图如下：
+本次开启 30 个线程，截图如下：
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225121812550.png)
 
-单线程测试2000003 耗时如下：耗时5.75分钟
+单线程测试 2000003 耗时如下：耗时 5.75 分钟
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225121832495.png)
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225121848593.png)
 
-### 检查多线程入库的数据，检查是否存在重复入库的问题：
+### 检查多线程入库的数据，检查是否存在重复入库的问题
 
-根据id分组，查看是否有id重复的数据，通过sql语句检查，没有发现重复入库的问题
+根据 id 分组，查看是否有 id 重复的数据，通过 sql 语句检查，没有发现重复入库的问题
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2019122512191274.png)
 
-检查数据完整性： 通过sql语句查询，多线程录入数据完整
+检查数据完整性： 通过 sql 语句查询，多线程录入数据完整
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20191225122051393.png)
 
 ## 测试结果
@@ -164,7 +165,5 @@ public class AsyncServiceImpl implements AsyncService {
 
 ## 总结
 
-通过以上测试案列，同样是导入2000003 条数据，多线程耗时1.67分钟，单线程耗时5.75分钟。通过对不同线程数的测试，发现不是线程数越多越好，具体多少合适，网上有一个不成文的算法：
-
-
- 
+通过以上测试案列，同样是导入 2000003 条数据，多线程耗时 1.67 分钟，单线程耗时 5.75
+分钟。通过对不同线程数的测试，发现不是线程数越多越好，具体多少合适，网上有一个不成文的算法：

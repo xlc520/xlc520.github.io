@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Guava中Map的骚操作
+excerpt: 
 description: 
 date: 2023-01-08
 category: Java
@@ -12,13 +13,13 @@ timeline: true
 icon: java
 ---
 
+# Guava 中 Map 的骚操作
 
+Guava 是 google 公司开发的一款 Java 类库扩展工具包，内含了丰富的 API，涵盖了集合、缓存、并发、I/O 等多个方面。使用这些 API
+一方面可以简化我们代码，使代码更为优雅，另一方面它补充了很多 jdk 中没有的功能，能让我们开发中更为高效。
 
-# Guava中Map的骚操作
-
-Guava是google公司开发的一款Java类库扩展工具包，内含了丰富的API，涵盖了集合、缓存、并发、I/O等多个方面。使用这些API一方面可以简化我们代码，使代码更为优雅，另一方面它补充了很多jdk中没有的功能，能让我们开发中更为高效。
-
-今天Hydra要给大家分享的就是Guava中封装的一些关于`Map`的骚操作，在使用了这些功能后，不得不说一句真香。先引入依赖坐标，然后开始我们的正式体验吧~
+今天 Hydra 要给大家分享的就是 Guava 中封装的一些关于`Map`
+的骚操作，在使用了这些功能后，不得不说一句真香。先引入依赖坐标，然后开始我们的正式体验吧~
 
 ```xml
 <dependency>
@@ -29,11 +30,12 @@ Guava是google公司开发的一款Java类库扩展工具包，内含了丰富�
 
 ```
 
-## Table - 双键Map
+## Table - 双键 Map
 
-java中的`Map`只允许有一个`key`和一个`value`存在，但是guava中的`Table`允许一个`value`存在两个`key`。`Table`中的两个`key`分别被称为`rowKey`和`columnKey`，也就是行和列。（但是个人感觉将它们理解为行和列并不是很准确，看作两列的话可能会更加合适一些）
+java 中的`Map`只允许有一个`key`和一个`value`存在，但是 guava 中的`Table`允许一个`value`存在两个`key`。`Table`中的两个`key`
+分别被称为`rowKey`和`columnKey`，也就是行和列。（但是个人感觉将它们理解为行和列并不是很准确，看作两列的话可能会更加合适一些）
 
-举一个简单的例子，假如要记录员工每个月工作的天数。用java中普通的`Map`实现的话就需要两层嵌套：
+举一个简单的例子，假如要记录员工每个月工作的天数。用 java 中普通的`Map`实现的话就需要两层嵌套：
 
 ```java
 Map<String,Map<String,Integer>> map=new HashMap<>();
@@ -66,7 +68,7 @@ Integer dayCount = table.get("Hydra", "Feb");
 
 我们不需要再构建复杂的双层`Map`，直接一层搞定。除了元素的存取外，下面再看看其他的实用操作。
 
-### 1、获得key或value的集合
+### 1、获得 key 或 value 的集合
 
 ```java
 //rowKey或columnKey的集合
@@ -87,7 +89,7 @@ Collection<Integer> values = table.values();
 
 ```
 
-### 2、计算key对应的所有value的和
+### 2、计算 key 对应的所有 value 的和
 
 以统计所有`rowKey`对应的`value`之和为例：
 
@@ -111,7 +113,7 @@ Trunks: 44
 
 ```
 
-### 3、转换rowKey和columnKey
+### 3、转换 rowKey 和 columnKey
 
 这一操作也可以理解为行和列的转置，直接调用`Tables`的静态方法`transpose`：
 
@@ -134,9 +136,10 @@ Feb,Trunks:16
 
 ```
 
-### 4、转为嵌套的Map
+### 4、转为嵌套的 Map
 
-还记得我们在没有使用`Table`前存储数据的格式吗，如果想要将数据还原成嵌套`Map`的那种形式，使用`Table`的`rowMap`或`columnMap`方法就可以实现了：
+还记得我们在没有使用`Table`前存储数据的格式吗，如果想要将数据还原成嵌套`Map`的那种形式，使用`Table`的`rowMap`或`columnMap`
+方法就可以实现了：
 
 ```java
 Map<String, Map<String, Integer>> rowMap = table.rowMap();
@@ -152,9 +155,10 @@ Map<String, Map<String, Integer>> columnMap = table.columnMap();
 
 ```
 
-## BiMap - 双向Map
+## BiMap - 双向 Map
 
-在普通`Map`中，如果要想根据`value`查找对应的`key`，没什么简便的办法，无论是使用`for`循环还是迭代器，都需要遍历整个`Map`。以循环`keySet`的方式为例：
+在普通`Map`中，如果要想根据`value`查找对应的`key`，没什么简便的办法，无论是使用`for`循环还是迭代器，都需要遍历整个`Map`
+。以循环`keySet`的方式为例：
 
 ```java
 public List<String> findKey(Map<String, String> map, String val){
@@ -168,7 +172,7 @@ public List<String> findKey(Map<String, String> map, String val){
 
 ```
 
-而guava中的`BiMap`提供了一种`key`和`value`双向关联的数据结构，先看一个简单的例子：
+而 guava 中的`BiMap`提供了一种`key`和`value`双向关联的数据结构，先看一个简单的例子：
 
 ```java
 HashBiMap<String, String> biMap = HashBiMap.create();
@@ -196,7 +200,8 @@ Thanos
 
 ### 1、反转后操作的影响
 
-上面我们用`inverse`方法反转了原来`BiMap`的键值映射，但是这个反转后的`BiMap`并不是一个新的对象，它实现了一种视图的关联，所以对反转后的`BiMap`执行的所有操作会作用于原先的`BiMap`上。
+上面我们用`inverse`方法反转了原来`BiMap`的键值映射，但是这个反转后的`BiMap`
+并不是一个新的对象，它实现了一种视图的关联，所以对反转后的`BiMap`执行的所有操作会作用于原先的`BiMap`上。
 
 ```java
 HashBiMap<String, String> biMap = HashBiMap.create();
@@ -219,9 +224,10 @@ System.out.println(biMap);
 
 可以看到，原先值为`IronMan`时对应的键是`Tony`，虽然没有直接修改，但是现在键变成了`Stark`。
 
-### 2、value不可重复
+### 2、value 不可重复
 
-`BiMap`的底层继承了`Map`，我们知道在`Map`中`key`是不允许重复的，而双向的`BiMap`中`key`和`value`可以认为处于等价地位，因此在这个基础上加了限制，`value`也是不允许重复的。看一下下面的代码：
+`BiMap`的底层继承了`Map`，我们知道在`Map`中`key`是不允许重复的，而双向的`BiMap`中`key`和`value`
+可以认为处于等价地位，因此在这个基础上加了限制，`value`也是不允许重复的。看一下下面的代码：
 
 ```java
 HashBiMap<String, String> biMap = HashBiMap.create();
@@ -255,9 +261,9 @@ Set<String> values = biMap.values();
 
 ```
 
-## Multimap - 多值Map
+## Multimap - 多值 Map
 
-java中的`Map`维护的是键值一对一的关系，如果要将一个键映射到多个值上，那么就只能把值的内容设为集合形式，简单实现如下：
+java 中的`Map`维护的是键值一对一的关系，如果要将一个键映射到多个值上，那么就只能把值的内容设为集合形式，简单实现如下：
 
 ```java
 Map<String, List<Integer>> map=new HashMap<>();
@@ -268,7 +274,8 @@ map.put("day",list);
 
 ```
 
-guava中的`Multimap`提供了将一个键映射到多个值的形式，使用起来无需定义复杂的内层集合，可以像使用普通的`Map`一样使用它，定义及放入数据如下：
+guava 中的`Multimap`提供了将一个键映射到多个值的形式，使用起来无需定义复杂的内层集合，可以像使用普通的`Map`
+一样使用它，定义及放入数据如下：
 
 ```java
 Multimap<String, Integer> multimap = ArrayListMultimap.create();
@@ -323,9 +330,10 @@ System.out.println(year);
 
 ```
 
-### 2、操作get后的集合
+### 2、操作 get 后的集合
 
-和`BiMap`的使用类似，使用`get`方法返回的集合也不是一个独立的对象，可以理解为集合视图的关联，对这个新集合的操作仍然会作用于原始的`Multimap`上，看一下下面的例子：
+和`BiMap`的使用类似，使用`get`
+方法返回的集合也不是一个独立的对象，可以理解为集合视图的关联，对这个新集合的操作仍然会作用于原始的`Multimap`上，看一下下面的例子：
 
 ```java
 ArrayListMultimap<String, Integer> multimap = ArrayListMultimap.create();
@@ -350,9 +358,10 @@ System.out.println(multimap);
 
 ```
 
-### 3、转换为Map
+### 3、转换为 Map
 
-使用`asMap`方法，可以将`Multimap`转换为`Map<K,Collection>`的形式，同样这个`Map`也可以看做一个关联的视图，在这个`Map`上的操作会作用于原始的`Multimap`。
+使用`asMap`方法，可以将`Multimap`转换为`Map<K,Collection>`的形式，同样这个`Map`也可以看做一个关联的视图，在这个`Map`
+上的操作会作用于原始的`Multimap`。
 
 ```java
 Map<String, Collection<Integer>> map = multimap.asMap();
@@ -398,7 +407,8 @@ day,8
 
 ```
 
-这是因为`size()`方法返回的是所有`key`到单个`value`的映射，因此结果为4，`entries()`方法同理，返回的是`key`和单个`value`的键值对集合。但是它的`keySet`中保存的是不同的`key`的个数，例如下面这行代码打印的结果就会是2。
+这是因为`size()`方法返回的是所有`key`到单个`value`的映射，因此结果为 4，`entries()`方法同理，返回的是`key`和单个`value`
+的键值对集合。但是它的`keySet`中保存的是不同的`key`的个数，例如下面这行代码打印的结果就会是 2。
 
 ```java
 System.out.println(multimap.keySet().size());
@@ -413,9 +423,9 @@ System.out.println(entries.size());
 
 ```
 
-代码运行结果是2，因为它得到的是`key`到`Collection`的映射关系。
+代码运行结果是 2，因为它得到的是`key`到`Collection`的映射关系。
 
-## RangeMap - 范围Map
+## RangeMap - 范围 Map
 
 先看一个例子，假设我们要根据分数对考试成绩进行分类，那么代码中就会出现这样丑陋的`if-else`：
 
@@ -432,7 +442,8 @@ public static String getRank(int score){
 
 ```
 
-而guava中的`RangeMap`描述了一种从区间到特定值的映射关系，让我们能够以更为优雅的方法来书写代码。下面用`RangeMap`改造上面的代码并进行测试：
+而 guava 中的`RangeMap`描述了一种从区间到特定值的映射关系，让我们能够以更为优雅的方法来书写代码。下面用`RangeMap`
+改造上面的代码并进行测试：
 
 ```java
 RangeMap<Integer, String> rangeMap = TreeRangeMap.create();
@@ -465,9 +476,10 @@ System.out.println(rangeMap.get(75));
 
 ```
 
-## ClassToInstanceMap - 实例Map
+## ClassToInstanceMap - 实例 Map
 
-`ClassToInstanceMap`是一个比较特殊的`Map`，它的键是`Class`，而值是这个`Class`对应的实例对象。先看一个简单使用的例子，使用`putInstance`方法存入对象：
+`ClassToInstanceMap`是一个比较特殊的`Map`，它的键是`Class`，而值是这个`Class`
+对应的实例对象。先看一个简单使用的例子，使用`putInstance`方法存入对象：
 
 ```java
 ClassToInstanceMap<Object> instanceMap = MutableClassToInstanceMap.create();
@@ -502,7 +514,8 @@ map.put(Dept.class,dept);
 
 那么，使用`ClassToInstanceMap`这种方式有什么好处呢？
 
-首先，这里最明显的就是在取出对象时省去了复杂的强制类型转换，避免了手动进行类型转换的错误。其次，我们可以看一下`ClassToInstanceMap`接口的定义，它是带有泛型的：
+首先，这里最明显的就是在取出对象时省去了复杂的强制类型转换，避免了手动进行类型转换的错误。其次，我们可以看一下`ClassToInstanceMap`
+接口的定义，它是带有泛型的：
 
 ```java
 public interface ClassToInstanceMap<B> extends Map<Class<? extends B>, B>{...}
@@ -522,4 +535,6 @@ instanceMap.putInstance(TreeMap.class,treeMap);
 
 ```
 
-这样是可以正常执行的，因为`HashMap`和`TreeMap`都集成了`Map`父类，但是如果想放入其他类型，就会编译报错，所以，如果你想缓存对象，又不想做复杂的类型校验，那么使用方便的`ClassToInstanceMap`就可以了。
+这样是可以正常执行的，因为`HashMap`和`TreeMap`都集成了`Map`
+父类，但是如果想放入其他类型，就会编译报错，所以，如果你想缓存对象，又不想做复杂的类型校验，那么使用方便的`ClassToInstanceMap`
+就可以了。

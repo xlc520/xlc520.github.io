@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 自建KMS服务-激活Windows和Office
+excerpt: 
 description: 
 date: 2023-04-12
 category: pc
@@ -10,42 +11,44 @@ timeline: true
 icon: computer
 ---
 
-# 自建KMS服务-激活Windows和Office
+# 自建 KMS 服务-激活 Windows 和 Office
 
 ## 前言
 
-KMS服务是一种密钥管理服务，KMS是“Key Management
-Service”的缩写,KMS服务可以用于激活Windows和Office等产品，自建KMS服务有安全性高，方便快捷，保密性，稳定性，完全的控制权等优点，微软官方还贴心的给出了教程与秘钥，在本文中，我将介绍如何搭建自己的KMS服务。搭建方式有很多，本文主要是演示如何在自己的linux服务器中搭建自己的KMS服务
+KMS 服务是一种密钥管理服务，KMS 是“Key Management
+Service”的缩写,KMS 服务可以用于激活 Windows 和 Office 等产品，自建 KMS
+服务有安全性高，方便快捷，保密性，稳定性，完全的控制权等优点，微软官方还贴心的给出了教程与秘钥，在本文中，我将介绍如何搭建自己的
+KMS 服务。搭建方式有很多，本文主要是演示如何在自己的 linux 服务器中搭建自己的 KMS 服务
 
 ## 准备
 
-### 1.一台服务器VPS
+### 1.一台服务器 VPS
 
 ### 2.域名
 
 ### 3.本教程参考的微软官方教程
 
-https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-create-host
+<https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-create-host>
 
-### 4 系统支持：
+### 4 系统支持
 
 ```none
 CentOS 6+，Debian 7+，Ubuntu 12+
 ```
 
-> 若没有服务器，无法自行搭建，可以从网络中自行搜索一个kms服务地址（域名或者IP），也有不少，例如kms.v0v.bid、kms.mogeko.me
+> 若没有服务器，无法自行搭建，可以从网络中自行搜索一个 kms 服务地址（域名或者 IP），也有不少，例如 kms.v0v.bid、kms.mogeko.me
 
 ## Docker 搭建
 
-```
+```plain
  docker run -d -p 1688:1688 --restart=always --name vlmcsd mikolatero/vlmcsd
 ```
 
 ## 本机搭建
 
-### 一、域名绑定IP
+### 一、域名绑定 IP
 
-首先将自己的域名A记录到VPS的ip
+首先将自己的域名 A 记录到 VPS 的 ip
 
 ### 二、执行一键脚本
 
@@ -96,16 +99,16 @@ netstat -tunlp | grep 1688
 如下图代表运行成功
 ![image-1680614199864](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680614199864.png)
 
-### 三、激活自己的windows和office
+### 三、激活自己的 windows 和 office
 
 下面列表里面含有的产品的 VL 版本或者能使用 key 进入 KMS 通道的产品，都支持使用 KMS 激活。
-Office 2019 & Office 2016：https://docs.microsoft.com/en-us/DeployOffice/vlactivation/gvlks
+Office 2019 & Office 2016：<https://docs.microsoft.com/en-us/DeployOffice/vlactivation/gvlks>
 
-Office 2013：https://technet.microsoft.com/zh-cn/library/dn385360.aspx
-Office 2010：https://technet.microsoft.com/zh-cn/library/ee624355(v=office.14).aspx
-Windows：https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys
+Office 2013：<https://technet.microsoft.com/zh-cn/library/dn385360.aspx>
+Office 2010：<https://technet.microsoft.com/zh-cn/library/ee624355(v=office.14).aspx>
+Windows：<https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys>
 
-### 1)激活自己的windows
+### 1)激活自己的 windows
 
 此时
 
@@ -113,11 +116,11 @@ Windows：https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientk
 kms.a.com  #这个域名就是kms服务
 ```
 
-首先确认你的Windows版本
+首先确认你的 Windows 版本
 可以打开
 此电脑-属性-关于
 ![image-1680615623446](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680615623446.png)
-如我的电脑Windows版本是：
+如我的电脑 Windows 版本是：
 Windows Server 2022 Datacenter
 他所对应的密钥是
 WX4NM-KYWYW-QJJR4-XV3QB-6VM33
@@ -149,7 +152,7 @@ slmgr -ato
 
 ![image-1680615978478](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680615978478.png)
 
-#### 4.确认KMS服务是否已成功激活
+#### 4.确认 KMS 服务是否已成功激活
 
 ```shell
 slmgr.vbs /dlv #以获取有关KMS服务状态的详细信息
@@ -165,12 +168,12 @@ slmgr /xpr   #当前汻可证状态的截止日期
 
 ![image-1680918310917](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680918310917.png)
 
-以上是Windows激活过程
+以上是 Windows 激活过程
 
-### 2)激活自己的office
+### 2)激活自己的 office
 
 ![image-1680616885520](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680616885520.png)
-查看自己的office版本(注意必须是VL/LTSC 批量授权版本的才可以激活)
+查看自己的 office 版本(注意必须是 VL/LTSC 批量授权版本的才可以激活)
 我的是
 Office 21, Office21ProjectPro2021VL_KMS_Client_AE edition
 
@@ -185,7 +188,7 @@ Office 21, Office21ProjectPro2021VL_KMS_Client_AE edition
 \- **Office15** 是 **Office 2013**
 \- **Office14** 是 **Office 2010**
 \- 打开以上所说的目录，应该有个 `OSPP.VBS` 文件
-如我的是64位的系统运行以下命令
+如我的是 64 位的系统运行以下命令
 
 ```powershell
 cd "C:\Program Files\Microsoft Office\Office16"  #进入此目录
@@ -210,7 +213,7 @@ cscript ospp.vbs /act #激活 Office
 
 ![image-1680617165146](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680617165146.png)
 
-#### 4.查看office激活状态
+#### 4.查看 office 激活状态
 
 ![image-1680617302781](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-1680617302781.png)
 
@@ -218,7 +221,7 @@ cscript ospp.vbs /act #激活 Office
 
 ### 密钥
 
-https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys
+<https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys>
 
 [kms-client-activation-keys.md](https://github.com/MicrosoftDocs/windowsserverdocs/blob/main/WindowsServerDocs/get-started/kms-client-activation-keys.md)
 
@@ -396,7 +399,7 @@ https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activati
 
 参考官网
 
-- https://docs.microsoft.com/en-us/DeployOffice/vlactivation/gvlks
+- <https://docs.microsoft.com/en-us/DeployOffice/vlactivation/gvlks>
 
 #### GVLKs for Office LTSC 2021
 
@@ -511,9 +514,9 @@ cscript ospp.vbs /act
 cscript ospp.vbs /dstatus
 ```
 
-### 零售版本修改为批量版本（以2016版本为例）
+### 零售版本修改为批量版本（以 2016 版本为例）
 
-###### Office 2016（写到 .bat文件里执行）
+###### Office 2016（写到 .bat 文件里执行）
 
 ```bash
 echo 进入目录
@@ -530,7 +533,7 @@ echo 安装 MAK 许可证...
 for /f %%x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul
 ```
 
-### Office 2109（写到 .bat文件里执行）
+### Office 2109（写到 .bat 文件里执行）
 
 ```bash
 if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" cd /d "%ProgramFiles%\Microsoft Office\Office16"
@@ -553,7 +556,7 @@ pause >nul
 exit
 ```
 
-### Visio（写到 .bat文件里执行）
+### Visio（写到 .bat 文件里执行）
 
 ```bash
 echo 进入目录
@@ -570,7 +573,7 @@ echo 安装 MAK 许可证...
 for /f %%x in ('dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul
 ```
 
-### Project（写到 .bat文件里执行）
+### Project（写到 .bat 文件里执行）
 
 ```bash
 echo 进入目录

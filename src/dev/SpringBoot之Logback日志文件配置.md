@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot之Logback日志文件配置
+excerpt: 
 description: 
 date: 2023-03-03
 category: Java
@@ -10,34 +11,36 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot之Logback日志文件配置
+# SpringBoot 之 Logback 日志文件配置
 
 ## 概述
 
-Logback是一个日志框架，Logback和Log4j都是开源的日志工具库，Logback是Log4j的改良版本，内置实现了slf4j，比Log4j拥有更多的特性，性能也带来很大提升。SpringBoot默认内置了Logback日志框架，Spring
-Boot 集成logback需要添加 `spring-boot-starter-logging` 依赖，而此依赖已经在 `spring-boot-starter`
+Logback 是一个日志框架，Logback 和 Log4j 都是开源的日志工具库，Logback 是 Log4j 的改良版本，内置实现了 slf4j，比 Log4j
+拥有更多的特性，性能也带来很大提升。SpringBoot 默认内置了 Logback 日志框架，Spring
+Boot 集成 logback 需要添加 `spring-boot-starter-logging` 依赖，而此依赖已经在 `spring-boot-starter`
 中添加过了，所以不用再添加此依赖了(如下图) ：
 [![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6123ac4244eaada7399e7576.jpg)](https://pic.imgdb.cn/item/6123ac4244eaada7399e7576.jpg)
 
-Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG，优先级高的将被打印出来。（logback通用）
+Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG，优先级高的将被打印出来。（logback 通用）
 通过定义级别，可以作为应用程序中相应级别的日志信息的开关。
 
-- 比如在这里定义了INFO级别，则应用程序中所有DEBUG级别的日志信息将不被打印出来。（设置INFO级别，即：>=INFO 生效*
+- 比如在这里定义了 INFO 级别，则应用程序中所有 DEBUG 级别的日志信息将不被打印出来。（设置 INFO 级别，即：>=INFO 生效*
 
-*项目上生产环境的时候一定得把debug的日志级别重新调为warn或者更高，避免产生大量日志。*
+*项目上生产环境的时候一定得把 debug 的日志级别重新调为 warn 或者更高，避免产生大量日志。*
 
 ## 配置详解
 
-默认情况下，SpringBoot会用Logback来记录日志，并用INFO级别输出到控制台。 配置Logback常用节点结构图：
+默认情况下，SpringBoot 会用 Logback 来记录日志，并用 INFO 级别输出到控制台。 配置 Logback 常用节点结构图：
 [![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6123ae6e44eaada739a38bd4.png)](https://pic.imgdb.cn/item/6123ae6e44eaada739a38bd4.png)
 
 ### configuration
 
 根节点 `<configuration>` 下面包含三个属性：
 
-- scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
-- scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
-- debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。示例：
+- scan: 当此属性设置为 true 时，配置文件如果发生改变，将会被重新加载，默认值为 true。
+- scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当 scan 为 true 时，此属性生效。默认的时间间隔为
+  1 分钟。
+- debug: 当此属性设置为 true 时，将打印出 logback 内部日志信息，实时查看 logback 运行状态。默认值为 false。示例：
 
 ```xml
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
@@ -47,7 +50,7 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 
 ### appender
 
-`<appender>`：负责谢日志的组件，它有两个必要属性name和class。name指定appender名称，class指定appender的全限定名。
+`<appender>`：负责谢日志的组件，它有两个必要属性 name 和 class。name 指定 appender 名称，class 指定 appender 的全限定名。
 
 #### ConsoleAppender
 
@@ -55,7 +58,7 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 
 `<encoder>` ：对日志进行格式化
 
-`<target>`：字符串System.out（默认）或者System.err
+`<target>`：字符串 System.out（默认）或者 System.err
 
 示例：把 >=DEBUG 级别的日志都输出到控制台
 
@@ -78,9 +81,9 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 `<FileAppender>`：把日志添加到文件，有以下子节点：
 
 - `<file>`：被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。
-- `<append>` ：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。
+- `<append>` ：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是 true。
 - `<encoder>` ：对记录事件进行格式化。（具体参数稍后讲解 ）
-- `<prudent>` ：如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。
+- `<prudent>` ：如果是 true，日志会被安全的写入文件，即使其他的 FileAppender 也在向此文件做写入操作，效率低，默认是 false。
 
 示例：把 >= DEBUG 级别的日志都输出到 testFile.log 文件：
 
@@ -105,26 +108,30 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 `<RollingFileAppender>` ：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其它文件。有以下子节点：
 
 - `<file>` ：被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。
-- `<append>` ：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。
-- `<rollingPolicy>` : 当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类
+- `<append>` ：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是 true。
+- `<rollingPolicy>` : 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。属性 class 定义具体的滚动策略类
 
 ##### TimeBasedRollingPolicy
 
 `class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy`： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。有以下子节点：
 
-- ：必要节点，包含文件名及“%d”转换符，“%d”可以包含一个java.text.SimpleDateFormat指定的时间格式，如：%d{yyyy-MM}。
+- ：必要节点，包含文件名及“%d”转换符，“%d”可以包含一个 java.text.SimpleDateFormat 指定的时间格式，如：%d{yyyy-MM}。
   如果直接使用 %d，默认格式是
-  yyyy-MM-dd。RollingFileAppender的file字节点可有可无，通过设置file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到file指定的文件（活动文件），活动文件的名字不会改变；
-  如果没设置file，活动文件的名字会根据fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。
-- : 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，且是6，则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。
+  yyyy-MM-dd。RollingFileAppender 的 file 字节点可有可无，通过设置 file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到
+  file 指定的文件（活动文件），活动文件的名字不会改变；
+  如果没设置 file，活动文件的名字会根据 fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。
+- : 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，且是 6，则只保存最近 6
+  个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。
 
 ##### SizeBasedTriggeringPolicy
 
-`class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy` ： 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender
+`class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy` ： 查看当前活动文件的大小，如果超过指定大小会告知
+RollingFileAppender
 触发当前活动文件滚动。只有一个节点:
 
-- : 这是活动文件的大小，默认值是10MB。
-- ：当为true时，不支持FixedWindowRollingPolicy。支持TimeBasedRollingPolicy，但是有两个限制，1不支持也不允许文件压缩，2不能设置file属性，必须留空。
+- : 这是活动文件的大小，默认值是 10MB。
+- ：当为 true 时，不支持 FixedWindowRollingPolicy。支持 TimeBasedRollingPolicy，但是有两个限制，1 不支持也不允许文件压缩，2
+  不能设置 file 属性，必须留空。
 - : 告知 RollingFileAppender 合适激活滚动。
 
 ##### FixedWindowRollingPolicy
@@ -132,11 +139,11 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 `class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy` 根据固定窗口算法重命名文件的滚动策略。有以下子节点：
 
 - : 窗口索引最小值
-- : 窗口索引最大值，当用户指定的窗口过大时，会自动将窗口设置为12。
-- : 必须包含“%i”例如，假设最小值和最大值分别为1和2，命名模式为
-  mylog%i.log,会产生归档文件mylog1.log和mylog2.log。还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有log%i.log.zip
+- : 窗口索引最大值，当用户指定的窗口过大时，会自动将窗口设置为 12。
+- : 必须包含“%i”例如，假设最小值和最大值分别为 1 和 2，命名模式为
+  mylog%i.log,会产生归档文件 mylog1.log 和 mylog2.log。还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有 log%i.log.zip
 
-示例：每天生成一个日志文件，保存30天的日志文件：
+示例：每天生成一个日志文件，保存 30 天的日志文件：
 
 ```xml
 <configuration>
@@ -160,25 +167,25 @@ Log4j建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 
 `<logger>` ：用来设置某一个包或具体的某一个类的日志打印级别、以及指定。
 
-\```： 仅有一个name属性，一个可选的level和一个可选的addtivity属性。
+```： 仅有一个 name 属性，一个可选的 level 和一个可选的 addtivity 属性。
 
-可以包含零个或多个元素，标识这个appender将会添加到这个logger。
+可以包含零个或多个元素，标识这个 appender 将会添加到这个 logger。
 
-- name: 用来指定受此loger约束的某一个包或者具体的某一个类。
-- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL和OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。
-  如果未设置此属性，那么当前loger将会继承上级的级别。
-- addtivity: 是否向上级logger传递打印信息。默认是true。可以包含零个或多个元素，标识这个appender将会添加到这个logger。
+- name: 用来指定受此 loger 约束的某一个包或者具体的某一个类。
+- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值 INHERITED 或者同义词 NULL，代表强制执行上级的级别。
+如果未设置此属性，那么当前 loger 将会继承上级的级别。
+- addtivity: 是否向上级 logger 传递打印信息。默认是 true。可以包含零个或多个元素，标识这个 appender 将会添加到这个 logger。
 
 ### `<root>`
 
-子节点:它也是元素，但是它是根loger,是所有的上级。只有一个level属性，因为name已经被命名为"root",且已经是最上级了。
+子节点:它也是元素，但是它是根 loger,是所有的上级。只有一个 level 属性，因为 name 已经被命名为"root",且已经是最上级了。
 
-level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL和OFF，不能设置为INHERITED或者同义词NULL。
-默认是DEBUG。
+level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为 INHERITED 或者同义词 NULL。
+默认是 DEBUG。
 
-同一样，可以包含零个或多个元素，标识这个appender将会添加到这个logger。
+同一样，可以包含零个或多个元素，标识这个 appender 将会添加到这个 logger。
 
-示例：常用logger配置：
+示例：常用 logger 配置：
 
 ```xml
 <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
@@ -197,7 +204,8 @@ level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ER
 
 ### `<contextName>`
 
-子节点：用来设置上下文名称，每个logger都关联到logger上下文，默认上下文名称为default。但可以使用设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改。
+子节点：用来设置上下文名称，每个 logger 都关联到 logger 上下文，默认上下文名称为
+default。但可以使用设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改。
 
 示例：
 
@@ -210,7 +218,7 @@ level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ER
 
 ### `<property>`
 
-子节点 ：用来定义变量值，它有两个属性name和value，通过定义的值会被插入到 logger 上下文中，可以通过 `${}` 来使用变量。
+子节点 ：用来定义变量值，它有两个属性 name 和 value，通过定义的值会被插入到 logger 上下文中，可以通过 `${}` 来使用变量。
 
 name: 变量的名称
 value: 的值时变量定义的值
@@ -227,9 +235,10 @@ value: 的值时变量定义的值
 
 ### `<timestamp>`
 
-子节点 ：获取时间戳字符串，他有两个属性key和datePattern。
+子节点 ：获取时间戳字符串，他有两个属性 key 和 datePattern。
 
-key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循java.txt.SimpleDateFormat的格式。
+key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循 java.txt.SimpleDateFormat
+的格式。
 
 示例：
 
@@ -241,7 +250,7 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
     </configuration>
 ```
 
-## 完整配置demo
+## 完整配置 demo
 
 ### 示例一
 
@@ -305,7 +314,7 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 
 ### 示例二：过滤掉某些级别的信息
 
-我们把debug，error，info等级别的日志，都分开，分别打印输出在不同的文件中。
+我们把 debug，error，info 等级别的日志，都分开，分别打印输出在不同的文件中。
 
 需要做的就是，在不同的 日志级别中 过滤掉即可。
 
@@ -569,5 +578,4 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 </configuration>
 ```
 
-在application.properties中通过 `logging.config=classpath:xxx.xml` 来指定配置文件。
-
+在 application.properties 中通过 `logging.config=classpath:xxx.xml` 来指定配置文件。

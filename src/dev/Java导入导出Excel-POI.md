@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java导入导出Excel-POI
+excerpt: 
 description: Java导入导出Excel-POI
 date: 2022-04-29
 category: Java
@@ -10,26 +11,27 @@ timeline: true
 icon: java
 ---
 
-# Java导入导出Excel-POI
+# Java 导入导出 Excel-POI
 
 ## 一、介绍
 
-当前B/S模式已成为应用开发的主流，而在企业办公系统中，常常有客户这样子要求：你要把我们的报表直接用Excel打开(
-电信系统、银行系统)。或者是：我们已经习惯用Excel打印。这样在我们实际的开发中，很多时候需要实现导入、导出Excel的应用。
+当前 B/S 模式已成为应用开发的主流，而在企业办公系统中，常常有客户这样子要求：你要把我们的报表直接用 Excel 打开(
+电信系统、银行系统)。或者是：我们已经习惯用 Excel 打印。这样在我们实际的开发中，很多时候需要实现导入、导出 Excel 的应用。
 
-目前，比较常用的实现Java导入、导出Excel的技术有两种Jakarta POI和Java Excel
+目前，比较常用的实现 Java 导入、导出 Excel 的技术有两种 Jakarta POI 和 Java Excel
 
-下面我就分别讲解一下如何使用这两个技术实现导入、导出Excel
+下面我就分别讲解一下如何使用这两个技术实现导入、导出 Excel
 
-## 二、使用Jakarta POI导入、导出Excel
+## 二、使用 Jakarta POI 导入、导出 Excel
 
-Jakarta POI 是一套用于访问微软格式文档的Java API。Jakarta
-POI有很多组件组成，其中有用于操作Excel格式文件的HSSF和用于操作Word的HWPF，在各种组件中目前只有用于操作Excel的HSSF相对成熟。官方主页http:
-//poi.apache.org/index.html，API文档http://poi.apache.org/apidocs/index.html
+Jakarta POI 是一套用于访问微软格式文档的 Java API。Jakarta
+POI 有很多组件组成，其中有用于操作 Excel 格式文件的 HSSF 和用于操作 Word 的 HWPF，在各种组件中目前只有用于操作 Excel 的
+HSSF 相对成熟。官方主页 http:
+//poi.apache.org/index.html，API 文档<http://poi.apache.org/apidocs/index.html>
 
 **例子：**
 
-pom文件导入：
+pom 文件导入：
 
 ```xml
 <dependency>
@@ -112,39 +114,42 @@ void testExport(){
 
 ### 2.1 环境配置
 
-### 　　2.1.1下载jar
+### 　　2.1.1 下载 jar
 
-官方下载：http://poi.apache.org/download.html这里可以下载到它的最新版本和文档，目前最新版本是3.7，这里使用比较稳定的3.6版。
+官方下载：<http://poi.apache.org/download.html> 这里可以下载到它的最新版本和文档，目前最新版本是 3.7，这里使用比较稳定的
+3.6 版。
 
-### 　　2.1.2加入jar包
+### 　　2.1.2 加入 jar 包
 
-将根目录下的poi-3.6-20091214.jar和Lib目录下三个通用包 commons-logging-1.1.jar junit-3.8.1.jar log4j-1.2.13.jar拷贝到项目的Lib下
+将根目录下的 poi-3.6-20091214.jar 和 Lib 目录下三个通用包 commons-logging-1.1.jar junit-3.8.1.jar log4j-1.2.13.jar
+拷贝到项目的 Lib 下
 
-### 2.2 Jakarta POI HSSF API组件
+### 2.2 Jakarta POI HSSF API 组件
 
-HSSF（用于操作Excel的组件）提供给用户使用的对象在rg.apache.poi.hssf.usermodel包中,主要部分包括Excel对象，样式和格式，还有辅助操作。有以下几种对象：
+HSSF（用于操作 Excel 的组件）提供给用户使用的对象在 rg.apache.poi.hssf.usermodel 包中,主要部分包括 Excel
+对象，样式和格式，还有辅助操作。有以下几种对象：
 
 > **常用组件：**
 >
-> HSSFWorkbook excel的文档对象
+> HSSFWorkbook excel 的文档对象
 >
-> HSSFSheet excel的表单
+> HSSFSheet excel 的表单
 >
-> HSSFRow excel的行
+> HSSFRow excel 的行
 >
-> HSSFCell excel的格子单元
+> HSSFCell excel 的格子单元
 >
-> HSSFFont excel字体
+> HSSFFont excel 字体
 >
 > HSSFDataFormat 日期格式
 >
-> HSSFHeader sheet头
+> HSSFHeader sheet 头
 >
-> HSSFFooter sheet尾（只有打印的时候才能看到效果）
+> HSSFFooter sheet 尾（只有打印的时候才能看到效果）
 >
 > **样式：**
 >
-> HSSFCellStyle cell样式
+> HSSFCellStyle cell 样式
 >
 > **辅助操作包括：**
 >
@@ -156,22 +161,22 @@ HSSF（用于操作Excel的组件）提供给用户使用的对象在rg.apache.p
 
 ### 2.3 基本操作步骤
 
-首先，理解一下一个Excel的文件的组织形式，一个Excel文件对应于一个workbook(HSSFWorkbook)
-，一个workbook可以有多个sheet（HSSFSheet）组成，一个sheet是由多个row（HSSFRow）组成，一个row是由多个cell（HSSFCell）组成。
+首先，理解一下一个 Excel 的文件的组织形式，一个 Excel 文件对应于一个 workbook(HSSFWorkbook)
+，一个 workbook 可以有多个 sheet（HSSFSheet）组成，一个 sheet 是由多个 row（HSSFRow）组成，一个 row 是由多个 cell（HSSFCell）组成。
 
 **基本操作步骤：**
 
-> 1、用HSSFWorkbook打开或者创建“Excel文件对象”
+> 1、用 HSSFWorkbook 打开或者创建“Excel 文件对象”
 >
-> 2、用HSSFWorkbook对象返回或者创建Sheet对象
+> 2、用 HSSFWorkbook 对象返回或者创建 Sheet 对象
 >
-> 3、用Sheet对象返回行对象，用行对象得到Cell对象
+> 3、用 Sheet 对象返回行对象，用行对象得到 Cell 对象
 >
-> 4、对Cell对象读写。
+> 4、对 Cell 对象读写。
 
-下面来看一个动态生成Excel文件的例子：
+下面来看一个动态生成 Excel 文件的例子：
 
-```
+```plain
 //创建HSSFWorkbook对象
 HSSFWorkbook wb = new HSSFWorkbook();
 //创建HSSFSheet对象
@@ -188,17 +193,19 @@ wkb.write(output);
 output.flush();
 ```
 
-HSSF读取文件同样还是使用这几个对象，只是把相应的createXXX方法变成了getXXX方法即可。可见只要理解了其中原理，不管是读还是写亦或是特定格式都可以轻松实现，正所谓知其然更要知其所以然。
+HSSF 读取文件同样还是使用这几个对象，只是把相应的 createXXX 方法变成了 getXXX
+方法即可。可见只要理解了其中原理，不管是读还是写亦或是特定格式都可以轻松实现，正所谓知其然更要知其所以然。
 
-### 2.4 导出Excel应用实例
+### 2.4 导出 Excel 应用实例
 
-在2.3中我们寥寥几行代码实际上就已经就是实现了导出Excel一个简单示例，下面我们在看如何实现导出如图所示的Excel表格？
+在 2.3 中我们寥寥几行代码实际上就已经就是实现了导出 Excel 一个简单示例，下面我们在看如何实现导出如图所示的 Excel 表格？
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/170838550954408.png)
 
-代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如Servlet的doGet/doPost方法或Struts框架的execute方法中）
+代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如 Servlet 的 doGet/doPost 方法或
+Struts 框架的 execute 方法中）
 
-```
+```plain
 //创建HSSFWorkbook对象(excel的文档对象)
       HSSFWorkbook wb = new HSSFWorkbook();
 //建立新的sheet对象（excel的表单）
@@ -237,31 +244,32 @@ row2.createCell(3).setCellValue("机试成绩");
 retrun null;
 ```
 
-加下划线这部分代码是B/S模式中采用的输出方式，而不是输出到本地指定的磁盘目录。该代码表示将details.xls的Excel文件通过应答实体（response）输出给请求的客户端浏览器，客户端可保存或直接打开。
+加下划线这部分代码是 B/S 模式中采用的输出方式，而不是输出到本地指定的磁盘目录。该代码表示将 details.xls 的 Excel
+文件通过应答实体（response）输出给请求的客户端浏览器，客户端可保存或直接打开。
 
 ### 2.5 样式设置
 
-在实际应用中导出的Excel文件往往需要阅读和打印的，这就需要对输出的Excel文档进行排版和样式的设置，主要操作有合并单元格、设置单元格样式、设置字体样式等。
+在实际应用中导出的 Excel 文件往往需要阅读和打印的，这就需要对输出的 Excel 文档进行排版和样式的设置，主要操作有合并单元格、设置单元格样式、设置字体样式等。
 
-### 　　2.5.1单元格合并
+### 　　2.5.1 单元格合并
 
-使用HSSFSheet的addMergedRegion()方法
+使用 HSSFSheet 的 addMergedRegion()方法
 
-```
+```plain
 public int addMergedRegion(CellRangeAddress region)
 ```
 
-参数CellRangeAddress 表示合并的区域，构造方法如下：
+参数 CellRangeAddress 表示合并的区域，构造方法如下：
 
-```
+```plain
 CellRangeAddress(int firstRow, int lastRow, int firstCol, int lastCol)
 ```
 
-构造参数依次表示起始行，截至行，起始列， 截至列。示例代码参照2.4部分
+构造参数依次表示起始行，截至行，起始列， 截至列。示例代码参照 2.4 部分
 
-### 2.5.2设置单元格的行高、列宽
+### 2.5.2 设置单元格的行高、列宽
 
-```
+```plain
 HSSFSheet sheet=wb.createSheet();
 
 sheet.setDefaultRowHeightInPoints(10);//设置缺省列高sheet.setDefaultColumnWidth(20);//设置缺省列宽
@@ -271,17 +279,17 @@ sheet.setDefaultRowHeightInPoints(10);//设置缺省列高sheet.setDefaultColumn
 sheet.setColumnWidth(cell.getColumnIndex(), 256 * 50);
 ```
 
-### 　　2.5.2单元格样式
+### 　　2.5.2 单元格样式
 
-1、创建HSSFCellStyle
+1、创建 HSSFCellStyle
 
-```
+```plain
  HSSFCellStyle cellStyle=wkb.createCellStyle();
 ```
 
 2、设置样式
 
-```
+```plain
  // 设置单元格的横向和纵向对齐方式，具体参数就不列了，参考HSSFCellStyle
 
   cellStyle.setAlignment(HSSFCellStyle.ALIGN_JUSTIFY);
@@ -327,7 +335,7 @@ sheet.setColumnWidth(cell.getColumnIndex(), 256 * 50);
 
 3、将样式应用于单元格
 
-```
+```plain
   cell.setCellStyle(cellStyle);
 
   //将样式应用到行，但有些样式只对单元格起作用
@@ -335,11 +343,11 @@ sheet.setColumnWidth(cell.getColumnIndex(), 256 * 50);
   row.setRowStyle(cellStyle);
 ```
 
-### 　　2.5.2设置字体样式
+### 　　2.5.2 设置字体样式
 
-1、创建HSSFFont对象（调用HSSFWorkbook 的createFont方法）
+1、创建 HSSFFont 对象（调用 HSSFWorkbook 的 createFont 方法）
 
-```
+```plain
 HSSFWorkbook wb=new HSSFWorkbook();
 
 HSSFFont  fontStyle=wb.createFont();
@@ -349,7 +357,7 @@ HSSFWorkbook wb=new HSSFWorkbook ();
 
 2、设置字体各种样式
 
-```
+```plain
   //设置字体样式
 
   fontStyle.setFontName("宋体");  
@@ -377,7 +385,7 @@ font.setUnderline(HSSFFont.U_SINGLE);
 
 3、将字体设置到单元格样式
 
-```
+```plain
 //字体也是单元格格式的一部分，所以从属于HSSFCellStyle
 
 // 将字体对象赋值给单元格样式对象
@@ -389,12 +397,16 @@ cellStyle.setFont(font);
 cell.setCellStyle(cellStyle);
 ```
 
-### 2.6 导入Excel应用实例
+### 2.6 导入 Excel 应用实例
 
-实现将已存在的Excel文件中的数据导入到系统中的基本步骤同导出十分的类似，关键在于要了解要导入Excel文件的结构，比如数据有哪些列、读取数据起始位置（有效数据从第几行几列开始）等。在实际项目中由于这些数据（Excel文件）往往来自于日常办公人员或其他系统平台产生的业务数据，因此这些Excel文件的数据格式要有统一的要求，并提供访问接口（指访问途径），这样在所需数据的系统中就可通过提供这个访问接口调用方法，从而获得数据。解决方案采用Web
-Service是不错的选择。这里，我们就以导入2..4所产生的excel表为例，重点掌握如何编写导入Excel代码
+实现将已存在的 Excel 文件中的数据导入到系统中的基本步骤同导出十分的类似，关键在于要了解要导入 Excel
+文件的结构，比如数据有哪些列、读取数据起始位置（有效数据从第几行几列开始）等。在实际项目中由于这些数据（Excel
+文件）往往来自于日常办公人员或其他系统平台产生的业务数据，因此这些 Excel
+文件的数据格式要有统一的要求，并提供访问接口（指访问途径），这样在所需数据的系统中就可通过提供这个访问接口调用方法，从而获得数据。解决方案采用
+Web
+Service 是不错的选择。这里，我们就以导入 2..4 所产生的 excel 表为例，重点掌握如何编写导入 Excel 代码
 
-```
+```plain
 public List<ScoreInfo> loadScoreInfo(String xlsPath) throws IOException{
     List temp = new ArrayList();
 FileInputStream fileIn = new FileInputStream(xlsPath);
@@ -422,13 +434,14 @@ temp.add(info);
     }
 ```
 
-***\*三、使用java Excel操作Excel文件\****
+****三、使用 java Excel 操作 Excel 文件****
 
-Java Excel是一开放源码项目，通过它Java开发人员可以读取Excel文件的内容、创建新的Excel文件、更新已经存在的Excel文件。jxl 由于其小巧
-易用的特点, 逐渐已经取代了 POI-excel的地位, 成为了越来越多的java开发人员生成excel文件的首选。Java Excel的特征：
+Java Excel 是一开放源码项目，通过它 Java 开发人员可以读取 Excel 文件的内容、创建新的 Excel 文件、更新已经存在的 Excel
+文件。jxl 由于其小巧
+易用的特点, 逐渐已经取代了 POI-excel 的地位, 成为了越来越多的 java 开发人员生成 excel 文件的首选。Java Excel 的特征：
 
-> ● 支持Excel 95-2000的所有版本
-> ● 生成Excel 2000标准格式
+> ● 支持 Excel 95-2000 的所有版本
+> ● 生成 Excel 2000 标准格式
 > ● 支持字体、数字、日期格式化操作
 > ● 支持对单元格加阴影和加色彩；
 >
@@ -439,29 +452,31 @@ Java Excel是一开放源码项目，通过它Java开发人员可以读取Excel�
 >
 > ● 更小更快更省内存
 
-应该说以上功能已经能够大致满足我们的需要。最关键的是这套API是纯Java的，并不依赖Windows系统，即使运行在Linux下，它同样能够正确
-的处理Excel文件。另外需要说明的是，这套API对图形和图表的支持很有限，而且仅仅识别PNG格式。 在线帮助文档http:
+应该说以上功能已经能够大致满足我们的需要。最关键的是这套 API 是纯 Java 的，并不依赖 Windows 系统，即使运行在 Linux
+下，它同样能够正确
+的处理 Excel 文件。另外需要说明的是，这套 API 对图形和图表的支持很有限，而且仅仅识别 PNG 格式。 在线帮助文档 http:
 //jexcelapi.sourceforge.net/resources/javadocs/2_6_10/docs/index.html
 
 在这里我们将通过一些实例，学习掌握读取、新建、更新，其中也包括常见格式的设置:字体、颜色、背景、合并单元格等操作，有这些其实已经基本足够应付大部分问题了。
 
-### 3.1环境配置
+### 3.1 环境配置
 
-### 　　3.1.1下载
+### 　　3.1.1 下载
 
-下载地址  http://www.andykhan.com/jexcelapi/
+下载地址  <http://www.andykhan.com/jexcelapi/>
 
-### 　　3.1.2 加入jar包
+### 　　3.1.2 加入 jar 包
 
-将jxl.jar拷贝到项目的Lib下
+将 jxl.jar 拷贝到项目的 Lib 下
 
-### 3.2 使用Java Excel Api 导出 Excel文件
+### 3.2 使用 Java Excel Api 导出 Excel 文件
 
-下面我们在看如何使用Java Excel实现导出Excel表格？
+下面我们在看如何使用 Java Excel 实现导出 Excel 表格？
 
-代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如Servlet的doGet/doPost方法或Struts框架的execute方法中）
+代码如下：（实际开发中应封装到业务层组件中，然后在控制层中调用。这里直接写在控制层组件，如 Servlet 的 doGet/doPost 方法或
+Struts 框架的 execute 方法中）
 
-```
+```plain
 //获得输出流，该输出流的输出介质是客户端浏览器
 
   OutputStream output=response.getOutputStream();
@@ -588,20 +603,21 @@ wk.write();
 wk.close();
 ```
 
-加下划线这部分代码是B/S模式中采用的输出方式，而不是输出到本地指定的磁盘目录。该代码表示将temp.xls的Excel文件通过应答实体（response）输出给请求的客户端浏览器，下载到客户端本地（保存或直接打开）。若要直接输出到磁盘文件可采用下列代码替换加下划线这部分代码
+加下划线这部分代码是 B/S 模式中采用的输出方式，而不是输出到本地指定的磁盘目录。该代码表示将 temp.xls 的 Excel
+文件通过应答实体（response）输出给请求的客户端浏览器，下载到客户端本地（保存或直接打开）。若要直接输出到磁盘文件可采用下列代码替换加下划线这部分代码
 
-```
+```plain
 File file=new File("D://temp.xls");
 WritableWorkbook wwb = Workbook.createWorkbook(file); 
 ```
 
-### 3.3高级操作
+### 3.3 高级操作
 
-### 　　3.3.1数据格式化
+### 　　3.3.1 数据格式化
 
-在Excel中不涉及复杂的数据类型，能够比较好的处理字串、数字和日期已经能够满足一般的应用即可。
+在 Excel 中不涉及复杂的数据类型，能够比较好的处理字串、数字和日期已经能够满足一般的应用即可。
 
-数据的格式化涉及到的是字体、粗细、字号等元素，这些功能主要由 WritableFont和WritableCellFormat类来负责。例如：
+数据的格式化涉及到的是字体、粗细、字号等元素，这些功能主要由 WritableFont 和 WritableCellFormat 类来负责。例如：
 
 > ① WritableFont font=new WritableFont(WritableFont.createFont("宋体"),12,WritableFont.NO_BOLD );
 >
@@ -611,21 +627,24 @@ WritableWorkbook wwb = Workbook.createWorkbook(file);
 
 其中
 
-> I.指定了字串格式：字体为宋体，字号16，加粗显示。WritableFont有非常丰富的构造子，供不同情况下使用，jExcelAPI的java-doc中有详细列表，这里不再列出。
+> I.指定了字串格式：字体为宋体，字号 16，加粗显示。WritableFont 有非常丰富的构造子，供不同情况下使用，jExcelAPI 的 java-doc
+> 中有详细列表，这里不再列出。
 >
-> II. 处代码使用了WritableCellFormat类，这个类非常重要，通过它可以指定单元格的各种属性，如上例代码所示。
+> II. 处代码使用了 WritableCellFormat 类，这个类非常重要，通过它可以指定单元格的各种属性，如上例代码所示。
 >
-> III. 处使用了Label类的构造子，指定了显示的位置，文本内容，字串被赋予的格式。
+> III. 处使用了 Label 类的构造子，指定了显示的位置，文本内容，字串被赋予的格式。
 >
-> 与Label类似的Number、DateTime，区别Label表示文本数据；Number表示数值数据，可使NumberFormat格式化数据；用DateTime表示日期型数据，可应用DateFormat格式化数据。
+> 与 Label 类似的 Number、DateTime，区别 Label 表示文本数据；Number 表示数值数据，可使 NumberFormat 格式化数据；用 DateTime
+> 表示日期型数据，可应用 DateFormat 格式化数据。
 
-### 　　3.3.2单元格操作
+### 　　3.3.2 单元格操作
 
-Excel中很重要的一部分是对单元格的操作，比如行高、列宽、单元格合并等，所幸jExcelAPI提供了这些支持。这些操作相对比较简单，下面只介绍一下相关的API。
+Excel 中很重要的一部分是对单元格的操作，比如行高、列宽、单元格合并等，所幸 jExcelAPI 提供了这些支持。这些操作相对比较简单，下面只介绍一下相关的
+API。
 
 **1****、** **合并单元格**
 
-```
+```plain
 WritableSheet.mergeCells(int m,int n,int p,int q);
 
 //作用是从(m,n)到(p,q)的单元格全部合并，比如：
@@ -641,7 +660,7 @@ sheet.mergeCells(0,0,5,0);
 
 **2****、** **行高和列宽**
 
-```
+```plain
  writableSheet.setRowView(int i,int height);
 
 //作用是指定第i+1行的高度，比如：
@@ -659,11 +678,11 @@ WritableSheet.setColumnView(int i,int width);
 sheet.setColumnView(0,30); 
 ```
 
-### 3.4 　从Excel文件读取数据表
+### 3.4 　从 Excel 文件读取数据表
 
-我们就以导入3.2所产生的excel表为例，掌握如何编写导入Excel代码(该代码封装在业务层方法)
+我们就以导入 3.2 所产生的 excel 表为例，掌握如何编写导入 Excel 代码(该代码封装在业务层方法)
 
-```
+```plain
 public List<ScoreInfo> loadScoreInfo(String xlsPath) throws IOException, BiffException{
 
 //导入已存在的Excel文件，获得只读的工作薄对象
@@ -705,11 +724,11 @@ info.setDate(dateCell.getDate());
 }
 ```
 
-### 3.4 　更新已存在的Excel文件
+### 3.4 　更新已存在的 Excel 文件
 
-将3.2所产生的excel表（temp.xls）的第一条记录（excel文件的指第三行）的班级名称改为As179，代码如下：
+将 3.2 所产生的 excel 表（temp.xls）的第一条记录（excel 文件的指第三行）的班级名称改为 As179，代码如下：
 
-```
+```plain
 File file=new File("d://temp.xls");
 //导入已存在的Excel文件，获得只读的工作薄对象
 Workbook wk=Workbook.getWorkbook(file);
@@ -730,5 +749,6 @@ lable.setString("As179");
     wk.close(); 
 ```
 
-对于更新已存在的Excel文件实际上就是获取已有工作薄对象（但是只读的），然后将获取的只读的工作薄对象转化为可写入的Excel工作薄对象（WritableWorkbook
-），其他部分就是通过可写入WritableSheet 对象和可写入WritableCell 对象进行编辑。
+对于更新已存在的 Excel 文件实际上就是获取已有工作薄对象（但是只读的），然后将获取的只读的工作薄对象转化为可写入的 Excel
+工作薄对象（WritableWorkbook
+），其他部分就是通过可写入 WritableSheet 对象和可写入 WritableCell 对象进行编辑。

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Vue开发报错问题解决
+excerpt: 
 description: 
 date: 2022-07-17
 category: Java
@@ -10,15 +11,14 @@ timeline: true
 icon: java
 ---
 
-
-
-# Vue开发报错问题解决
+# Vue 开发报错问题解决
 
 ## 2.同组件新增修改出现数据查询是上一次
 
-> 2022年7月5日09:22:16
+> 2022 年 7 月 5 日 09:22:16
 
-关闭组件时清空数据，新增时最好也清空,methods方法中可以添加该方法，下半部分IDE插件可能会报错，但不影响使用，也可以使用上半部分，但是效果不好。如果tab中有列表，有列表的那项可以设置lazy为true，方法中不清空数据。
+关闭组件时清空数据，新增时最好也清空,methods 方法中可以添加该方法，下半部分 IDE 插件可能会报错，但不影响使用，也可以使用上半部分，但是效果不好。如果
+tab 中有列表，有列表的那项可以设置 lazy 为 true，方法中不清空数据。
 
 ```typescript
 clearData(){
@@ -49,11 +49,12 @@ clearData(){
 }
 ```
 
-## 1.tab中表单也有列表，列表显示和查询问题
+## 1.tab 中表单也有列表，列表显示和查询问题
 
->2022年7月4日14:41:48
+> 2022 年 7 月 4 日 14:41:48
 
-`el-tab-pane`设置`lazy="true"`,否则页面在数据加载完之前渲染完毕就无法查询该id的数据，也不需要新增时置空`this.$refs.basic.dataForm={};`
+`el-tab-pane`设置`lazy="true"`,否则页面在数据加载完之前渲染完毕就无法查询该 id
+的数据，也不需要新增时置空`this.$refs.basic.dataForm={};`
 
 ```vue
 <el-dialog v-model="visible" v-if="visible" :visible.sync="visible" destroy-on-close @closed="onClosed" :title="!addDisable?$t('add'):$t('update')" :close-on-click-modal="false" :close-on-press-escape="true" :fullscreen="true">
@@ -68,7 +69,7 @@ clearData(){
 </el-dialog>
 ```
 
-如果列表页面需要查询指定id，在新增时不显示可以设置列表组件创建时：
+如果列表页面需要查询指定 id，在新增时不显示可以设置列表组件创建时：
 
 ```typescript
 created(){
@@ -77,4 +78,3 @@ created(){
     }
   },
 ```
-

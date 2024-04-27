@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Quartz - 任务调度框架整合使用
+excerpt: 
 description: 
 date: 2022-06-01
 category: Java
@@ -14,33 +15,33 @@ icon: java
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548287.png)
 
-各种实现自定义定时任务的方案，从Quartz到Xxl-job，再到Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz
+各种实现自定义定时任务的方案，从 Quartz 到 Xxl-job，再到 Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz
 的保姆级教程，在这里分享给大家；
 
-## 1前言
+## 1 前言
 
 项目中遇到一个，需要 客户自定任务启动时间 的需求。原来一直都是在项目里硬编码一些定时器，所以没有学习过。
 
 很多开源的项目管理框架都已经做了 Quartz 的集成。我们居然连这么常用得东西居然没有做成模块化，实在是不应该。
 
-Quartz是`OpenSymphony`开源组织在`Job scheduling`
-领域又一个开源项目，完全由Java开发，可以用来执行定时任务，类似于`java.util.Timer`。但是相较于Timer， Quartz增加了很多功能：
+Quartz 是`OpenSymphony`开源组织在`Job scheduling`
+领域又一个开源项目，完全由 Java 开发，可以用来执行定时任务，类似于`java.util.Timer`。但是相较于 Timer， Quartz 增加了很多功能：
 
 - 持久性作业 - 就是保持调度定时的状态;
 - 作业管理 - 对调度作业进行有效的管理;
 
 官方文档：
 
-- http://www.quartz-scheduler.org/documentation/
-- http://www.quartz-scheduler.org/api/2.3.0/index.html
+- <http://www.quartz-scheduler.org/documentation/>
+- <http://www.quartz-scheduler.org/api/2.3.0/index.html>
 
-## 2基础使用
+## 2 基础使用
 
 Quartz 的核心类有以下三部分：
 
 - **任务 Job ：** 需要实现的任务类，实现 `execute()` 方法，执行后完成任务。
 - **触发器 Trigger ：** 包括 `SimpleTrigger` 和 `CronTrigger`。
-- **调度器 Scheduler ：** 任务调度器，负责基于 `Trigger`触发器，来执行 Job任务。
+- **调度器 Scheduler ：** 任务调度器，负责基于 `Trigger`触发器，来执行 Job 任务。
 
 主要关系如下：
 
@@ -120,16 +121,16 @@ JobDetail 的作用是绑定 Job，是一个任务实例，它为 Job 添加了�
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548293.png)
 
-每次`Scheduler`调度执行一个Job的时候，首先会拿到对应的Job，然后创建该Job实例，再去执行Job中的`execute()`
-的内容，任务执行结束后，关联的Job对象实例会被释放，且会被JVM GC清除。
+每次`Scheduler`调度执行一个 Job 的时候，首先会拿到对应的 Job，然后创建该 Job 实例，再去执行 Job 中的`execute()`
+的内容，任务执行结束后，关联的 Job 对象实例会被释放，且会被 JVM GC 清除。
 
-**为什么设计成JobDetail + Job，不直接使用Job？**
+**为什么设计成 JobDetail + Job，不直接使用 Job？**
 
-JobDetail 定义的是任务数据，而真正的执行逻辑是在Job中。
+JobDetail 定义的是任务数据，而真正的执行逻辑是在 Job 中。
 
-这是因为任务是有可能并发执行，如果Scheduler直接使用Job，就会存在对同一个Job实例并发访问的问题。
+这是因为任务是有可能并发执行，如果 Scheduler 直接使用 Job，就会存在对同一个 Job 实例并发访问的问题。
 
-而`JobDetail & Job` 方式，Sheduler每次执行，都会根据JobDetail创建一个新的Job实例，这样就可以 规避并发访问 的问题。
+而`JobDetail & Job` 方式，Sheduler 每次执行，都会根据 JobDetail 创建一个新的 Job 实例，这样就可以 规避并发访问 的问题。
 
 ## 5JobExecutionContext
 
@@ -160,7 +161,7 @@ context.getJobDetail().getJobDataMap().get("tiggerDataMap");
 
 ## 6Job 状态参数
 
-有状态的 job 可以理解为多次 job调用期间可以持有一些状态信息，这些状态信息存储在 `JobDataMap` 中。
+有状态的 job 可以理解为多次 job 调用期间可以持有一些状态信息，这些状态信息存储在 `JobDataMap` 中。
 
 而默认的无状态 job，每次调用时都会创建一个新的 `JobDataMap`。
 
@@ -277,7 +278,7 @@ Sat Oct 02 12:36:26 CST 2021
 
 使用方式就是绑定调度器时换一下：
 
-```
+```plain
 TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("* * * * * ?"))
 ```
 
@@ -285,7 +286,8 @@ Cron 表达式这里不介绍，贴个图跳过
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548294.png)
 
-顺便推荐一个非常好用的Cron 表达式在线生成，反解析的工具：www.matools.com/cron 非常好用，点几下，就能得到自己想要的cron表达式；
+顺便推荐一个非常好用的 Cron 表达式在线生成，反解析的工具：www.matools.com/cron 非常好用，点几下，就能得到自己想要的 cron
+表达式；
 
 ## 10SpringBoot 整合
 
@@ -295,7 +297,7 @@ Cron 表达式这里不介绍，贴个图跳过
 
 从上面的截图中，可以看到这个定时任务模块实现了：
 
-- cron表达式定时执行
+- cron 表达式定时执行
 - 并发执行
 - 错误策略
 - 启动执行、暂停执行
@@ -308,9 +310,9 @@ Cron 表达式这里不介绍，贴个图跳过
 
 已完成代码示例：
 
-> https://gitee.com/qianwei4712/code-of-shiva/tree/master/quartz
+> <https://gitee.com/qianwei4712/code-of-shiva/tree/master/quartz>
 
-## 11环境准备
+## 11 环境准备
 
 从 springboot 2.4.10 开始，添加 quartz 的 maven 依赖：
 
@@ -367,7 +369,7 @@ Quartz 自带有数据库模式，脚本都是现成的：
 
 下载这个脚本：
 
-> https://gitee.com/qianwei4712/code-of-shiva/blob/master/quartz/quartz.sql
+> <https://gitee.com/qianwei4712/code-of-shiva/blob/master/quartz/quartz.sql>
 
 保存任务的数据库表：
 
@@ -399,7 +401,7 @@ public class MysqlJob {
 }
 ```
 
-## 12核心代码
+## 12 核心代码
 
 `ScheduleConfig` 配置代码类：
 
@@ -765,12 +767,12 @@ public class JobInvokeUtil {
 
 启动程序后可以看到，调度器已经启动：
 
-```
+```plain
 2021-10-06 16:26:05.162  INFO 10764 --- [shivaScheduler]] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now, after delay of 1 seconds
 2021-10-06 16:26:05.306  INFO 10764 --- [shivaScheduler]] org.quartz.core.QuartzScheduler          : Scheduler shivaScheduler_$_DESKTOP-OKMJ1351633508761366 started.
 ```
 
-## 13新增调度任务
+## 13 新增调度任务
 
 添加任务，使用如下 json 进行请求：
 
@@ -842,7 +844,7 @@ public int resumeJob(QuartzJob job) throws SchedulerException {
 
 调用启动后可以看到控制台打印日志：
 
-```
+```plain
 2021-10-06 20:36:30.018  INFO 8536 --- [eduler_Worker-3] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:30，任务参数：got it!!!
 2021-10-06 20:36:40.016  INFO 8536 --- [eduler_Worker-4] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:40，任务参数：got it!!!
 2021-10-06 20:36:50.017  INFO 8536 --- [eduler_Worker-5] cn.shiva.quartz.job.MysqlJob             : 执行 Mysql Job，当前时间：2021-10-06 20:36:50，任务参数：got it!!!
@@ -868,29 +870,30 @@ public void init() throws Exception {
 }
 ```
 
-## 14其他说明
+## 14 其他说明
 
 ### 并发执行
 
 上面有并发和非并发的区别，通过 `@DisallowConcurrentExecution` 注解来实现阻止并发。
 
-Quartz定时任务默认都是并发执行的，不会等待上一次任务执行完毕，只要间隔时间到就会执行, 如果定时任执行太长，会长时间占用资源，导致其它任务堵塞。
+Quartz 定时任务默认都是并发执行的，不会等待上一次任务执行完毕，只要间隔时间到就会执行, 如果定时任执行太长，会长时间占用资源，导致其它任务堵塞。
 
-`@DisallowConcurrentExecution` 禁止并发执行多个相同定义的JobDetail, 这个注解是加在Job类上的, 但意思并不是不能同时执行多个Job,
-而是不能并发执行同一个`Job Definition`(由JobDetail定义), 但是可以同时执行多个不同的JobDetail。
+`@DisallowConcurrentExecution` 禁止并发执行多个相同定义的 JobDetail, 这个注解是加在 Job 类上的, 但意思并不是不能同时执行多个
+Job,
+而是不能并发执行同一个`Job Definition`(由 JobDetail 定义), 但是可以同时执行多个不同的 JobDetail。
 
-举例说明，我们有一个Job类,叫做SayHelloJob, 并在这个Job上加了这个注解,
-然后在这个Job上定义了很多个`JobDetail`, `如sayHelloToJoeJobDetail`, `sayHelloToMikeJobDetail`, 那么当scheduler启动时,
+举例说明，我们有一个 Job 类,叫做 SayHelloJob, 并在这个 Job 上加了这个注解,
+然后在这个 Job 上定义了很多个`JobDetail`, `如sayHelloToJoeJobDetail`, `sayHelloToMikeJobDetail`, 那么当 scheduler 启动时,
 不会并发执行多个`sayHelloToJoeJobDetail`或者`sayHelloToMikeJobDetail`, 但可以同时执行`sayHelloToJoeJobDetail`
 跟`sayHelloToMikeJobDetail`
 
-`@PersistJobDataAfterExecution` 同样, 也是加在Job上。表示当正常执行完Job后, JobDataMap中的数据应该被改动, 以被下一次调用时用。
+`@PersistJobDataAfterExecution` 同样, 也是加在 Job 上。表示当正常执行完 Job 后, JobDataMap 中的数据应该被改动, 以被下一次调用时用。
 
 当使用 `@PersistJobDataAfterExecution` 注解时, 为了避免并发时, 存储数据造成混乱,
 强烈建议把 `@DisallowConcurrentExecution` 注解也加上。
 
-测试代码，设定的时间间隔为3秒,但job执行时间是5秒,设置 `@DisallowConcurrentExecution`以
-后程序会等任务执行完毕以后再去执行,否则会在3秒时再启用新的线程执行。
+测试代码，设定的时间间隔为 3 秒,但 job 执行时间是 5 秒,设置 `@DisallowConcurrentExecution`以
+后程序会等任务执行完毕以后再去执行,否则会在 3 秒时再启用新的线程执行。
 
 ### 阻止特定时间运行
 

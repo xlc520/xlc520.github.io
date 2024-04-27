@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java实现gz压缩与解压缩
+excerpt: 
 description: 
 date: 2022-11-14
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# Java实现gz压缩与解压缩
+# Java 实现 gz 压缩与解压缩
 
 ## 压缩
 

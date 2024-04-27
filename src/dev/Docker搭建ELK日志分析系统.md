@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Docker搭建ELK日志分析系统
+excerpt: 
 description: 
 date: 2022-09-05
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# Docker搭建ELK日志分析系统
+# Docker 搭建 ELK 日志分析系统
 
 ## 方法一
 
@@ -18,36 +19,38 @@ icon: java
   有强大的搜索功能的无模式数据库，可以简单的很想扩展，索引每一个字段，可以聚合分组数据。
 
 - Logstash
-  用Ruby编写的，我们可以使用管道输入和输出数据到任何位置。一个可以抓取，转换，存储事件到ElasticSearch的ETL管道。打包版本在JRuby上运行，并使用几十个线程进行并行的数据处理，利用了JVM的线程功能。
-
+  用 Ruby 编写的，我们可以使用管道输入和输出数据到任何位置。一个可以抓取，转换，存储事件到 ElasticSearch 的 ETL 管道。打包版本在
+  JRuby 上运行，并使用几十个线程进行并行的数据处理，利用了 JVM 的线程功能。
 
 - Kibana
-  基于web的数据分析，为ElasticSearch仪表板的工具。充分利用ElasticSearch的搜索功能，以秒为单位可视化数据。支持Lucene的查询字符串的语法和Elasticsearch的过滤功能。
+  基于 web 的数据分析，为 ElasticSearch 仪表板的工具。充分利用 ElasticSearch 的搜索功能，以秒为单位可视化数据。支持 Lucene
+  的查询字符串的语法和 Elasticsearch 的过滤功能。
 
 ### 前提
 
-- 本文中架构基于docker搭建，需要您了解docker的基本概念，基本操作和docker1.9之后的自定义overlay网络
+- 本文中架构基于 docker 搭建，需要您了解 docker 的基本概念，基本操作和 docker1.9 之后的自定义 overlay 网络
 
 > 本文只介绍了最简化搭建。如果您用于生产，还需要在如下方面完善
 >
-1.elastic是有存储目录，需要在docker中进行数据卷映射。配置文件elasticsearch.yml需要根据自己需求自行配置。请参考：https://hub.docker.com/_/elasticsearch/
-> 2.Dockerhub官方提供的镜像基于不同的基础镜像，不利于网络传输！建议根据自己组织内部镜像重新创建！
+1.elastic 是有存储目录，需要在 docker 中进行数据卷映射。配置文件 elasticsearch.yml
+需要根据自己需求自行配置。请参考：<https://hub.docker.com/_/elasticsearch/>
+> 2.Dockerhub 官方提供的镜像基于不同的基础镜像，不利于网络传输！建议根据自己组织内部镜像重新创建！
 
-### Docker搭建ELK的javaweb应用日志收集存储分析系统
+### Docker 搭建 ELK 的 javaweb 应用日志收集存储分析系统
 
-### 第一步：启动elasticsearch
+### 第一步：启动 elasticsearch
 
-```
+```plain
 docker run -d --name myes  \
            --net=multihost --ip=192.168.2.51 \
            elasticsearch:2.3
 ```
 
-- 采用docker自定义overlay网络multihost，设置容器ip为192.168.2.51
+- 采用 docker 自定义 overlay 网络 multihost，设置容器 ip 为 192.168.2.51
 
-### 第二步：启动kibana
+### 第二步：启动 kibana
 
-```
+```plain
 docker run --name mykibana \
       -e ELASTICSEARCH_URL=http://192.168.2.51:9200 \
       --net=multihost \
@@ -55,15 +58,15 @@ docker run --name mykibana \
       -d kibana:4.5
 ```
 
-- 采用自定义网络multihost，ip随机分配
-- 在宿主机启动kibana，容器端口5601映射到宿主机端口5601，可以通过http://<宿主机ip>:5601访问kibana
-- 参数ELASTICSEARCH_URL指向第一步中启动的elasticsearch
+- 采用自定义网络 multihost，ip 随机分配
+- 在宿主机启动 kibana，容器端口 5601 映射到宿主机端口 5601，可以通过 http://<宿主机 ip>:5601 访问 kibana
+- 参数 ELASTICSEARCH_URL 指向第一步中启动的 elasticsearch
 
-### 第三步：logstash配置文件
+### 第三步：logstash 配置文件
 
 - logstash.conf,这个文件名字可以随便起
 
-```
+```plain
 input { 
   log4j {
     mode => "server"
@@ -77,11 +80,11 @@ output {
 }
 ```
 
-- 输入模式log4j的服务，监听于当前容器的3456端口。也就是数据源需要向容器的3456端口发送日志。
+- 输入模式 log4j 的服务，监听于当前容器的 3456 端口。也就是数据源需要向容器的 3456 端口发送日志。
 
-### 第四步：启动logstash
+### 第四步：启动 logstash
 
-```
+```plain
 docker run  -d \
             -v "$PWD":/config-dir \
             -p 3456:3456 \
@@ -90,16 +93,18 @@ docker run  -d \
             logstash -f /config-dir/logstash.conf
 ```
 
-- 采用自定义网络multihost，ip随机分配
-- 在宿主机启动logstash，容器端口3456映射到宿主机端口3456.(
-  这么做是假设您的应用不是docker化的，所以ip不在自定义网络multihost内.如果web应用docker化，并与logstash共同使用同一个自定义网络，则端口不需要对外映射)
-- 容器配置文件/config-dir/logstash.conf映射到宿主机当前目录下面。即你需要将logstash.conf放到当前目录"$PWD"下启动。（这个目录可以调整）
+- 采用自定义网络 multihost，ip 随机分配
+- 在宿主机启动 logstash，容器端口 3456 映射到宿主机端口 3456.(
+  这么做是假设您的应用不是 docker 化的，所以 ip 不在自定义网络 multihost 内.如果 web 应用 docker 化，并与 logstash
+  共同使用同一个自定义网络，则端口不需要对外映射)
+- 容器配置文件/config-dir/logstash.conf 映射到宿主机当前目录下面。即你需要将 logstash.conf 放到当前目录"$PWD"
+  下启动。（这个目录可以调整）
 
-### 第五步：web应用log4j日志TCP输出
+### 第五步：web 应用 log4j 日志 TCP 输出
 
-- 为log4j.properties添加tcp输出，代码片段如下：
+- 为 log4j.properties 添加 tcp 输出，代码片段如下：
 
-```
+```plain
 log4j.rootLogger = DEBUG,tcp
 
 log4j.appender.tcp=org.apache.log4j.net.SocketAppender
@@ -109,19 +114,19 @@ log4j.appender.tcp.ReconnectionDelay=10000
 log4j.appender.tcp.Application=ssmm
 ```
 
-- RemoteHost是logstash所在的宿主机ip.如果您的web应用docker化，可以是容器ip
-- 发送日志到3456端口
+- RemoteHost 是 logstash 所在的宿主机 ip.如果您的 web 应用 docker 化，可以是容器 ip
+- 发送日志到 3456 端口
 
-> 最重要的事不要忘了，启动您的web应用。日志才能发过去！
+> 最重要的事不要忘了，启动您的 web 应用。日志才能发过去！
 
 ## 方法二
 
 ### 写在前面
 
-为了方便搭建，我们使用 https://github.com/deviantony/docker-elk 这个开源项目，这个项目维护了 ELK 技术栈最近的三个版本，也就是
+为了方便搭建，我们使用 <https://github.com/deviantony/docker-elk> 这个开源项目，这个项目维护了 ELK 技术栈最近的三个版本，也就是
 7.x、6.x、5.x ，本文将使用最新版本。
 
-用于开发测试的基础环境使用一台1c2g的虚拟机即可，当然机器资源越多我们的服务运行效率也会越高、相同时间内数据处理能力也就越大。而用于一般生产环境建议根据自己具体情况给予更多资源。
+用于开发测试的基础环境使用一台 1c2g 的虚拟机即可，当然机器资源越多我们的服务运行效率也会越高、相同时间内数据处理能力也就越大。而用于一般生产环境建议根据自己具体情况给予更多资源。
 
 先聊聊测试环境搭建。
 
@@ -285,11 +290,11 @@ Restarting docker-elk_elasticsearch_1 ... done
 
 ### 使用 Kibana 控制台
 
-启动之后，我们使用浏览器访问服务器IP+端口5601，打开 kibana 控制台。
+启动之后，我们使用浏览器访问服务器 IP+端口 5601，打开 kibana 控制台。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-6e81c345d57b1ed67e834c655a3082e0_r.jpg)
 
-使用elastic 账号和密码登录后，就能够看到 Kibana 的界面了，如果第一次使用，会看到欢迎界面。
+使用 elastic 账号和密码登录后，就能够看到 Kibana 的界面了，如果第一次使用，会看到欢迎界面。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-30151461a0b7a7412a7063e446439074_r.jpg)
 
@@ -624,7 +629,7 @@ networks:
 
 ### 其他
 
-官网文档对于配置的内容描述有不少，感兴趣的同学可以进一步了解，比如这篇[ Important System Configuration ](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html)
+官网文档对于配置的内容描述有不少，感兴趣的同学可以进一步了解，比如这篇[Important System Configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html)
 ，原理同样适用于一些其他的应用。
 
 关于如何使用各种 beat
@@ -633,4 +638,3 @@ networks:
 ### 最后
 
 接下来我会围绕日志写一些有趣又简单易用的内容，本篇是第一篇内容。
-

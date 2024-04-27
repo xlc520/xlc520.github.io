@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 免费VPS
+excerpt: 
 description: 免费VPS
 date: 2022-01-26
 category: other
@@ -9,9 +10,10 @@ article: true
 timeline: true
 icon: type
 ---
-# 免费VPS
 
-## Oracle Cloud 甲骨文云：
+# 免费 VPS
+
+## Oracle Cloud 甲骨文云
 
 永久免费两个 1h1g 的小鸡
 
@@ -23,7 +25,7 @@ icon: type
 
 网络 48~60M 每月 10T
 
-https://www.oracle.com/cloud/
+<https://www.oracle.com/cloud/>
 
 不要挂梯子，一张自己的双币信用卡过验证即可
 
@@ -45,7 +47,7 @@ https://www.oracle.com/cloud/
 
 G 口，推荐使用香港地区
 
-https://cloud.google.com/
+<https://cloud.google.com/>
 
 必须要一张实体信用卡过验证，所以十分难薅，不过只要是自己的即可轻松过
 
@@ -55,7 +57,7 @@ https://cloud.google.com/
 
 每月 15G 流量，所以一般是月抛，自己用不合算
 
-https://aws.amazon.com/
+<https://aws.amazon.com/>
 
 ## AZURE 微软云
 
@@ -67,7 +69,7 @@ https://aws.amazon.com/
 
 学生 100 刀不用信用卡验证，需要过手机号验证，建议使用专业接码网站和学生邮箱账户，基本也是月抛
 
-https://azure.microsoft.com/en-us/
+<https://azure.microsoft.com/en-us/>
 
 ## CIVO
 
@@ -85,7 +87,7 @@ https://azure.microsoft.com/en-us/
 2. 频繁删机重开
 3. 大流量占用
 
-https://linuxone.cloud.marist.edu/#/login
+<https://linuxone.cloud.marist.edu/#/login>
 
 ## Hax VPS
 
@@ -103,7 +105,7 @@ https://linuxone.cloud.marist.edu/#/login
 
 免费试用 1500 小时
 
-https://activity.huaweicloud.com/intl/zh-cn/free_packages/
+<https://activity.huaweicloud.com/intl/zh-cn/free_packages/>
 
 ## 阿里云
 
@@ -111,7 +113,7 @@ https://activity.huaweicloud.com/intl/zh-cn/free_packages/
 
 免费试用 12 个月 1H1G 或者 3 个月 2H2G
 
-https://www.alibabacloud.com/zh/campaign/free-trial
+<https://www.alibabacloud.com/zh/campaign/free-trial>
 
 ## Vultr
 
@@ -119,13 +121,13 @@ https://www.alibabacloud.com/zh/campaign/free-trial
 
 注册送 100 美元，一个月时限
 
-https://www.vultr.com/?ref=8971645-8H
+<https://www.vultr.com/?ref=8971645-8H>
 
 ## Linode
 
 注册免费送两个月有效的 100 刀，需要信用卡，配置 1H1G 等
 
-https://www.linode.com/lp/brand-free-credit-short/
+<https://www.linode.com/lp/brand-free-credit-short/>
 
 ## Ditital Ocean
 
@@ -133,11 +135,11 @@ https://www.linode.com/lp/brand-free-credit-short/
 
 注册送 100 美元
 
-https://www.digitalocean.com/?refcode=492076b14fb2&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=CopyPaste
+<https://www.digitalocean.com/?refcode=492076b14fb2&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=CopyPaste>
 
 有学生邮箱的建议开通 GitHub 学生包然后用 DO 的激活码来激活免费的 100 刀，需要过信用卡验证
 
-GitHub 学生包：https://education.github.com/pack
+GitHub 学生包：<https://education.github.com/pack>
 
 这个包里还有包括域名在内等其他很多免费学生专属福利
 
@@ -147,7 +149,7 @@ GitHub 学生包：https://education.github.com/pack
 
 1H1G 配置一般，邻居容易搞事
 
-https://euserv.com/
+<https://euserv.com/>
 
 参考教程 [白嫖 Euserv VPS（理论永久）](https://ednovas.xyz/2021/01/16/euserv/)
 
@@ -157,7 +159,7 @@ warp 添加 ipv4/ipv6（/2021/04/15/warpipv6/）
 
 ## Kamatera
 
-https://www.kamatera.com/express/compute/
+<https://www.kamatera.com/express/compute/>
 
 绑卡扣除 2 美刀验证，支持 +86 手机和 googlevoice 验证
 
@@ -167,7 +169,8 @@ https://www.kamatera.com/express/compute/
 
 CPU 类型 B 是通用型，性能一般。D 是专用型，性能最强。T 是突发型，性能较强。A 是可用型，性能最弱。
 
-可选美国（纽约、达拉斯、圣塔克拉拉）、加拿大（多伦多）、欧洲（阿姆斯特丹、法兰克福、伦敦）、以色列（皮塔赫。提克瓦、罗什。海因 1/2、特拉维夫、耶路撒冷）、中国（香港）等地区
+可选美国（纽约、达拉斯、圣塔克拉拉）、加拿大（多伦多）、欧洲（阿姆斯特丹、法兰克福、伦敦）、以色列（皮塔赫。提克瓦、罗什。海因
+1/2、特拉维夫、耶路撒冷）、中国（香港）等地区
 
 香港并非三网直连，速度很慢，美国地区是很干净的原生 ip
 
@@ -175,11 +178,11 @@ CPU 类型 B 是通用型，性能一般。D 是专用型，性能最强。T 是
 
 Yandex 云新注册用户赠送价值 4000 卢布 (大概 350 人民币), 有效期 60 天的免费试用。其中 1000 卢布用于云主机，3000 用于其他云计算服务
 
-https://concole.cloud.yandex.ru/
+<https://concole.cloud.yandex.ru/>
 
 需要绑定银行卡，必须支持 3D 安全验证。可以使用 yandex.money 虚拟卡，国家建议选俄罗斯
 
-yandex.money: https://yoomoney.ru/
+yandex.money: <https://yoomoney.ru/>
 
 yandex.money 哪国手机号都可接码，虚拟身份认证一下即可
 
@@ -187,4 +190,4 @@ yandex.money 哪国手机号都可接码，虚拟身份认证一下即可
 
 需要有一个有流利的博客才可申请，然后博客首页放上他们的广告即可白嫖
 
-https://evolution-host.com/free-vps.php
+<https://evolution-host.com/free-vps.php>

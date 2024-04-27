@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Backblaze(B2)套用CloudFlare静态文件存储
+excerpt: 
 description: 
 date: 2022-10-10
 category: other
@@ -12,11 +13,11 @@ timeline: true
 icon: others
 ---
 
-# Backblaze(B2)套用CloudFlare静态文件存储
+# Backblaze(B2)套用 CloudFlare 静态文件存储
 
 ## 官方网址
 
-https://www.backblaze.com
+<https://www.backblaze.com>
 
 ## 免费额度
 
@@ -30,7 +31,7 @@ https://www.backblaze.com
 
 上传请求数：**2500**次/天
 
-BUCKET(桶)：100个
+BUCKET(桶)：100 个
 
 BUCKET(桶)文件数：无限
 
@@ -38,32 +39,33 @@ BUCKET(桶)文件数：无限
 
 这点流量能干点啥？
 
-不过Backblaze加入了CloudFlare的 带宽联盟（ Bandwidth Alliance） ，所以Backblaze与CloudFlare之间的流量直接免费，也就是每天*
+不过 Backblaze 加入了 CloudFlare 的 带宽联盟（ Bandwidth Alliance） ，所以 Backblaze 与 CloudFlare
+之间的流量直接免费，也就是每天*
 *无限量**下行流量。
 
-配上CloudFlare配置缓存时间更久一些，辣么下载请求无限次免费啦。看看联盟有没有你熟悉的LOGO？
+配上 CloudFlare 配置缓存时间更久一些，辣么下载请求无限次免费啦。看看联盟有没有你熟悉的 LOGO？
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c57394926b319339.png)
 
 ## 注册账号
 
-https://www.backblaze.com/b2/sign-up.html
+<https://www.backblaze.com/b2/sign-up.html>
 
 填写邮箱，密码即可注册。
 
-登陆平台 - My Account - 我的设置 - 验证Email
+登陆平台 - My Account - 我的设置 - 验证 Email
 
 **提醒一下，界面右下角可以切换到简体中文**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6aa0b5180f158c7a.png)
 
-## 创建BUCKET
+## 创建 BUCKET
 
 1）登陆平台 - 创作一个桶
 
 名称随意，桶里面的档案选择公众，其他保持默认即可
 
-**特别提醒：桶名称要复杂一些，小心被刷流量！建议生成UUID**
+**特别提醒：桶名称要复杂一些，小心被刷流量！建议生成 UUID**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6bcae128a5aae3f2.png)
 
@@ -73,25 +75,25 @@ https://www.backblaze.com/b2/sign-up.html
 
 3）上传成功后，单机文件可以看见文件详情内容
 
-特别要记住友好URL中的域名，如图是 **f004.backblazeb2.com**
+特别要记住友好 URL 中的域名，如图是 **f004.backblazeb2.com**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5080cc13667c7a8b.png)
 
-## 配置CF
+## 配置 CF
 
 ### 解析域名
 
-1）登陆Cloudflare，添加一个域名。定义一个前缀CNAME到 **f004.backblazeb2.com**
+1）登陆 Cloudflare，添加一个域名。定义一个前缀 CNAME 到 **f004.backblazeb2.com**
 
-**没有域名？参考文章：[人人都可申请拥有EU.org免费域名](https://51.ruyo.net/17863.html)**
+**没有域名？参考文章：[人人都可申请拥有 EU.org 免费域名](https://51.ruyo.net/17863.html)**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f7fe01ec953be195.png)
 
-2）解析完成后，浏览器打开地址 https://b2.i0lo1o.eu.org/file/ruyonet123/default.png
+2）解析完成后，浏览器打开地址 <https://b2.i0lo1o.eu.org/file/ruyonet123/default.png>
 
 格式 `https://域名/file/桶名称/文件名`
 
-经过一波骚操作，访问URL提示：Error 522 错误？？
+经过一波骚操作，访问 URL 提示：Error 522 错误？？
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d8f4f762cf8bb6a5.png)
 
@@ -99,7 +101,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 Cloudflare 通过纯 HTTP 而不是 HTTPS 访问上游服务器。
 
-但是Backblaze 仅支持安全的 HTTPS 连接，因此 HTTP 请求失败。
+但是 Backblaze 仅支持安全的 HTTPS 连接，因此 HTTP 请求失败。
 
 为了解决这个问题，在 Cloudflare 仪表板的 【SSL/TLS 部分】，将加密模式从“灵活”更改为“完全（严格）”，以便 Cloudflare 通过 HTTPS
 连接到 Backblaze，并且需要 CA 颁发的证书。
@@ -118,35 +120,35 @@ B2 桶 - 自己创建的桶 - 桶设定
 
 **Cloudflare 域名仪表盘 - 规则 - 页面规则 - 创建页面规则**
 
-URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
+URL 输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
-设置选择： 缓存级别 - 标准，边缘缓存TTL - 1个月
+设置选择： 缓存级别 - 标准，边缘缓存 TTL - 1 个月
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/370cfd749d6b3126.png)
 
 ### 隐藏桶名
 
-由于URL中暴露了桶名，CNAME的域名又很容易被猜到，怎么防止其他童鞋恶意刷你的免费额度呢？
+由于 URL 中暴露了桶名，CNAME 的域名又很容易被猜到，怎么防止其他童鞋恶意刷你的免费额度呢？
 
 下面介绍一下，怎么隐藏桶名~
 
-**Cloudflare 域名仪表盘 - 规则 - 转换规则- 创建转换规则 - 重写URL**
+**Cloudflare 域名仪表盘 - 规则 - 转换规则- 创建转换规则 - 重写 URL**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/238a2376952d1ca8.png)
 
 传入请求匹配时：`b2.i0lo1o.eu.org`
 
-路径重写到：选择 Dynamic动态，`concat("/file/ruyonet123", http.request.uri.path)`
+路径重写到：选择 Dynamic 动态，`concat("/file/ruyonet123", http.request.uri.path)`
 
 这里一定要填写你自己的域名哈~~ 举一反三噢~
 
-**然后浏览器打开URL：https://b2.i0lo1o.eu.org/default.png**
+**然后浏览器打开 URL：<https://b2.i0lo1o.eu.org/default.png>**
 
-## API密钥
+## API 密钥
 
 路径：My Account - 应用程序键 - 添加新的应用程序密钥
 
-名称随意，允许访问桶 建议选择1个，其他默认即可
+名称随意，允许访问桶 建议选择 1 个，其他默认即可
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/542c803a7f301bc8.png)
 
@@ -160,9 +162,9 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 直接登陆官网，在桶里直接上传！
 
-### WP插件
+### WP 插件
 
-支持Backblaze的Wordpress插件不少呢，比如下面2个！填写API密钥即可！
+支持 Backblaze 的 Wordpress 插件不少呢，比如下面 2 个！填写 API 密钥即可！
 
 wordpress.org/plugins/updraftplus/
 
@@ -170,9 +172,9 @@ wordpress.org/plugins/ilab-media-tools/
 
 ### SDK
 
-官方提供多种语音的SDK
+官方提供多种语音的 SDK
 
-https://github.com/Backblaze/
+<https://github.com/Backblaze/>
 
 ### 其他
 
@@ -184,4 +186,4 @@ Cloudflare 在国内的访问情况不太稳定。如果仅作为境外用户访
 
 Cloudflare 规则中可以支持防盗链等等配置，这里就不多介绍了。
 
-B2免费额度用光，静态文件将无法访问，第二天恢复。
+B2 免费额度用光，静态文件将无法访问，第二天恢复。

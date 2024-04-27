@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Docker Desktop安装到D盘
+excerpt: 
 description: 
 date: 2023-10-15
 category: Java
@@ -10,16 +11,14 @@ timeline: true
 icon: java
 ---
 
-
-
-# Docker Desktop安装到D盘
+# Docker Desktop 安装到 D 盘
 
 ## 安装
 
-- docker官网下载docker desktop installer.exe安装程序。
-- 进入下载目录，使用cmd直接执行以下命令(powershell官方给出的不知道为啥报错)。
+- docker 官网下载 docker desktop installer.exe 安装程序。
+- 进入下载目录，使用 cmd 直接执行以下命令(powershell 官方给出的不知道为啥报错)。
 
-```
+```plain
 start /w "" "Docker Desktop Installer.exe" install --installation-dir=D:\Docker
 C:\Users\Dell\Downloads>start /w "" "Docker Desktop Installer.exe" install --installation-dir=D:\Docker
 -------------------------------------------------------------------------------->8
@@ -68,15 +67,13 @@ You can send feedback, including this log file, at https://github.com/docker/for
 [2023-09-22T08:34:46.186837900Z][InstallWorkflow][I] Installation succeeded
 ```
 
-
-
-## 设置镜像地址到D盘
+## 设置镜像地址到 D 盘
 
 - 如果你想要将 Docker Desktop 的默认虚拟磁盘镜像(Disk image)位置更改至 D 盘，可以按照以下步骤进行操作：
 - 在系统托盘中找到 Docker Desktop 图标，右键单击并选择“Settings”。
 - 在左侧导航栏中选择“Resources”选项卡。
 - 找到“Disk image location”选项，并点击它右侧的“Edit”按钮。
-- 在打开的对话框中输入 D 盘的路径，例如D:\Docker\disk。
+- 在打开的对话框中输入 D 盘的路径，例如 D:\Docker\disk。
 - 点击 “Apply & Restart” 按钮保存更改并重启 Docker Desktop。
 - 现在，Docker Desktop 的默认虚拟磁盘镜像位置就被更改为了 D 盘，你可以在此路径下查看和管理 Docker Desktop 的虚拟磁盘镜像了。
 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Linux开机卡在 A start job is runing解决
+excerpt: 
 description: 
 date: 2024-01-07
 category: Linux
@@ -10,11 +11,10 @@ timeline: true
 icon: linux
 ---
 
+# Linux 开机卡在 A start job is runing 解决
 
-
-# Linux开机卡在 A start job is runing解决
-
-安装ubuntu20.04 LTS系统后，开机卡在“A start job is running for wait for network to be Configured”等待连接两分多钟。（启动作业正在运行，等待配置网络）
+安装 ubuntu20.04 LTS 系统后，开机卡在“A start job is running for wait for network to be
+Configured”等待连接两分多钟。（启动作业正在运行，等待配置网络）
 
 ## 启动作业正在运行，等待配置网络解决办法
 
@@ -24,7 +24,7 @@ icon: linux
 cd /etc/systemd/system/network-online.target.wants/
 ```
 
-2、在[Service]下添加 TimeoutStartSec=2sec，（设置超时时间为2秒）如下：
+2、在[Service]下添加 TimeoutStartSec=2sec，（设置超时时间为 2 秒）如下：
 
 ```shell
 /etc/systemd/system/network-online.target.wants
@@ -43,15 +43,13 @@ TimeoutStartSec=2sec
 sudo reboot
 ```
 
+## swap 相关报错，启动必须等 1 分 30 秒
 
-
-## swap相关报错，启动必须等1分30秒。
-
-```
+```plain
 a start job is running for /dev/disk/by-uuid/xxxxx.(20s / 1 min 30 s )
 ```
 
-### **1、解决1**
+### **1、解决 1**
 
 1.1 查看交换分区挂载情况：
 
@@ -59,35 +57,29 @@ a start job is running for /dev/disk/by-uuid/xxxxx.(20s / 1 min 30 s )
 swapon --show
 ```
 
-
-
 1.2 查看交换分区情况：
 
 ```sh
 sudo blkid
 ```
 
-
-
-1.3 然后再查看/etc/fstab文件中swap分区的UUID。
+1.3 然后再查看/etc/fstab 文件中 swap 分区的 UUID。
 
 ```sh
 sudo cat /etc/fstab
 ```
 
+两个 UUID 不同，正好解释了为什么 swap 分区会挂载失败。
 
+解决方法是删除/etc/fstab 文件中 swap 分区的 UUID，
 
-两个UUID不同，正好解释了为什么swap分区会挂载失败。
+再用 sudo blkid 命令得出的 swap 分区 UUID 替换。保存文件，重启系统后 a start job is running for
 
-解决方法是删除/etc/fstab文件中swap分区的UUID，
+dev-disk-by 这个错误就消失了。
 
-再用sudo blkid命令得出的swap分区UUID替换。保存文件，重启系统后a start job is running for
+### **2、解决 2**
 
-dev-disk-by这个错误就消失了。
-
-### **2、解决2**
-
-2.1 修改/etc/fstab文件，注掉swap那一行
+2.1 修改/etc/fstab 文件，注掉 swap 那一行
 
 ```shell
 sudo cat /etc/fstab
@@ -97,7 +89,7 @@ sudo cat /etc/fstab
 # / was on /dev/sda2 during curtin installation/dev/disk/by-uuid/cxxxx06-xxxxc-4xxxx0-xxxxx80-xxxxxxxaac / ext4 defaults 0 1#/swap.img      none    swap    sw      0       0    
 ```
 
-2.2 重启不让加载swap分区，即可解决此报错
+2.2 重启不让加载 swap 分区，即可解决此报错
 
 ```sh
 sudo reboot

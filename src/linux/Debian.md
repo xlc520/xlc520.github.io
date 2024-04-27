@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Debian
+excerpt: 
 description: Debian使用
 date: 2023-11-15
 category: Linux
@@ -10,15 +11,13 @@ timeline: true
 icon: linux
 ---
 
+## 1.debin 系统使用 vi 编辑出现无法正常使用
 
-
-## 1.debin系统使用vi编辑出现无法正常使用
-
-发现Debian下Vi编辑器在文本输入模式时，不能正确使用方向键和退格键，或者是输入内容无法正常的内容，解决方法：
+发现 Debian 下 Vi 编辑器在文本输入模式时，不能正确使用方向键和退格键，或者是输入内容无法正常的内容，解决方法：
 
 ### 解决方法一
 
-用vi 打开/etc/vim/vimrc.tiny，输入以下两行：
+用 vi 打开/etc/vim/vimrc.tiny，输入以下两行：
 
 ```shell
 set nocompatible
@@ -30,7 +29,7 @@ set backspace=2
 
 ### 解决方法二
 
-vi 用不了自然编辑不了/etc/vim/vimrc.tiny。所以我们用sed插入。
+vi 用不了自然编辑不了/etc/vim/vimrc.tiny。所以我们用 sed 插入。
 
 ```shell
 sed -i '$a\set nocompatible' /etc/vim/vimrc.tiny
@@ -38,11 +37,9 @@ sed -i '$a\set nocompatible' /etc/vim/vimrc.tiny
 sed -i '$a\set backspace=2' /etc/vim/vimrc.tiny
 ```
 
-执行上面这2条。
+执行上面这 2 条。
 
-
-
-## 2.Vim安装步骤
+## 2.Vim 安装步骤
 
 步骤一、首先使用下面命令更新一下系统，确保您的系统是最新的，这一步很重要。
 
@@ -50,19 +47,17 @@ sed -i '$a\set backspace=2' /etc/vim/vimrc.tiny
 apt-get update
 ```
 
-步骤二、运行以下命令安装Vim。
+步骤二、运行以下命令安装 Vim。
 
 ```shell
 apt-get install vim
 ```
 
-它将显示将与 Vim 一起安装的所有软件包。出现提示时按Y或 Enter，您应该会在几秒钟内安装 Vim。
+它将显示将与 Vim 一起安装的所有软件包。出现提示时按 Y 或 Enter，您应该会在几秒钟内安装 Vim。
 
+## 3.Debian 12 网络问题
 
-
-## 3.Debian 12网络问题
-
-配置静态IP
+配置静态 IP
 1、interfaces 配置
 文件路径： /etc/network/interfaces
 
@@ -103,11 +98,7 @@ dns-nameservers 119.29.29.29
 /etc/init.d/networking restart && dhclient
 ```
 
-
-
-
-
-## 4.关闭linux（Debian kali）的蜂鸣声（beebe）
+## 4.关闭 linux（Debian kali）的蜂鸣声（beebe）
 
 1：create the file `/etc/modprobe.d/pcspkr-blacklist.conf`
 2：add the following line: `blacklist pcspkr`
@@ -128,4 +119,3 @@ update-initramfs -u
 ```shell
 echo "alias pcspkr off" >> /etc/modprobe.conf
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 10个最常用的Python运维自动化脚本
+excerpt: 
 description: 
 date: 2023-03-30
 category: Linux
@@ -12,7 +13,7 @@ timeline: true
 icon: linux
 ---
 
-# 10个最常用的Python运维自动化脚本
+# 10 个最常用的 Python 运维自动化脚本
 
 **1、自动备份脚本：**备份指定目录或文件并定期执行自动备份。
 
@@ -30,7 +31,7 @@ name = 'backup_' + now.strftime('%Y-%m-%d_%H-%M-%S') + '.zip'
 shutil.make_archive(os.path.join(backup, name), 'zip', source)
 ```
 
-**2、监控系统性能脚本：**监控CPU，内存，磁盘使用率等系统性能指标并发送邮件报警。
+**2、监控系统性能脚本：**监控 CPU，内存，磁盘使用率等系统性能指标并发送邮件报警。
 
 ```python
 
@@ -138,7 +139,7 @@ container = client.containers.run(
      sock.close()
  ```
 
-**7、自动化邮件发送脚本：**从Excel或CSV文件中读取收件人列表，并自动发送电子邮件。
+**7、自动化邮件发送脚本：**从 Excel 或 CSV 文件中读取收件人列表，并自动发送电子邮件。
 
 ```python
 import smtplib
@@ -162,7 +163,7 @@ for index, row in data.iterrows():
     server.quit()
 ```
 
-**8、自动化服务器监控脚本：**使用psutil模块监控服务器的各种指标，如CPU、内存、磁盘使用情况
+**8、自动化服务器监控脚本：**使用 psutil 模块监控服务器的各种指标，如 CPU、内存、磁盘使用情况
 
 ```python
 import psutil
@@ -176,7 +177,7 @@ print(f'Memory: {memory_percent}%')
 print(f'Disk: {disk_percent}%')
 ```
 
-**9、自动化SSH登录脚本：**使用paramiko模块自动化SSH登录远程服务器。
+**9、自动化 SSH 登录脚本：**使用 paramiko 模块自动化 SSH 登录远程服务器。
 
 ```python
 import paramiko
@@ -219,4 +220,3 @@ with open(log_file) as f:
             send_mail(f'Log line matched: {line}')
 
 ```
-

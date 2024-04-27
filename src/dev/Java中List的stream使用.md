@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java中List的stream使用
+excerpt: 
 description: 
 date: 2022-09-11
 category: Java
@@ -10,15 +11,13 @@ timeline: true
 icon: java
 ---
 
+# Java 中 List 的 stream 使用
 
-
-# Java中List的stream使用
-
-对比起for循环操作list，最大的弊端就是代码太长太乱了，如果涉及3-4张表的操作，也就是涉及多个PO操作
+对比起 for 循环操作 list，最大的弊端就是代码太长太乱了，如果涉及 3-4 张表的操作，也就是涉及多个 PO 操作
 
 **流**
 
-```
+```plain
 +--------------------+ +------+ +------+ +---+ +-------+| stream of elements +-----> |filter+-> |sorted+-> |map+-> |collect|+--------------------+ +------+ +------+ +---+ +-------+
 ```
 
@@ -153,4 +152,3 @@ public class StreamTest {
 
 }
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 思科、华为、H3C命令对照表
+excerpt: 
 description: 
 date: 2024-04-07
 category: Linux
@@ -10,9 +11,7 @@ timeline: true
 icon: linux
 ---
 
-
-
-# 思科、华为、H3C命令对照表
+# 思科、华为、H3C 命令对照表
 
 ### 取消/关闭 当前设置
 
@@ -118,7 +117,7 @@ h3c:display saved-configuration
 h3c:display current-configuration
 ```
 
-### 取消所有debug命令
+### 取消所有 debug 命令
 
 ```sh
 思科:no debug all
@@ -183,7 +182,7 @@ h3c:saved-configuration
 h3c:current-configuration
 ```
 
-### host名字和ip地址对应
+### host 名字和 ip 地址对应
 
 ```sh
 思科:host
@@ -191,7 +190,7 @@ h3c:current-configuration
 h3c:ip host
 ```
 
-## 交换部分：
+## 交换部分
 
 ### 配置明文密码
 
@@ -209,7 +208,7 @@ h3c:set authentication password simple
 h3c:port type/number
 ```
 
-### 进入vlan配置vlan管理地址
+### 进入 vlan 配置 vlan 管理地址
 
 ```sh
 思科:interface vlan 1  
@@ -249,7 +248,7 @@ h3c:duplex (half|full|auto)
 h3c:speed (10/100/1000)
 ```
 
-### 配置trunk
+### 配置 trunk
 
 ```sh
 思科:switchport mode trunk
@@ -257,7 +256,7 @@ h3c:speed (10/100/1000)
 h3c:port link-type trunk
 ```
 
-### 添加、删除vlan
+### 添加、删除 vlan
 
 ```sh
 思科:vlan ID  /no vlan ID
@@ -265,7 +264,7 @@ h3c:port link-type trunk
 h3c:vlan ID  /no vlan ID
 ```
 
-### 将端口接入vlan
+### 将端口接入 vlan
 
 ```sh
 思科:switchport access vlan ID
@@ -281,7 +280,7 @@ h3c:port vlan ID
 h3c:display interface
 ```
 
-### 查看vlan
+### 查看 vlan
 
 ```sh
 思科:show vlan ID
@@ -321,7 +320,7 @@ h3c:默认开启
 h3c:不支持
 ```
 
-### 对跨以太网交换机的VLAN进行动态注册和删除
+### 对跨以太网交换机的 VLAN 进行动态注册和删除
 
 ```sh
 思科:vtp domain
@@ -329,7 +328,7 @@ h3c:不支持
 h3c:GVRP
 ```
 
-### STP配置根网桥
+### STP 配置根网桥
 
 ```sh
 思科:spanning-tree vlan ID root primary
@@ -345,7 +344,7 @@ h3c:stp root primary
 h3c:stp priority priorityNumber
 ```
 
-### 查看STP配置
+### 查看 STP 配置
 
 ```sh
 思科:show spanning-tree
@@ -353,7 +352,7 @@ h3c:stp priority priorityNumber
 h3c:display stp brief
 ```
 
-## 路由部分：
+## 路由部分
 
 ### 配置默认路由
 
@@ -379,7 +378,7 @@ h3c:ip route-static 目标网段+掩码 下一跳
 h3c:display ip routing-table
 ```
 
-### 启用RIP、并宣告网段
+### 启用 RIP、并宣告网段
 
 ```sh
 思科:router rip /network 网段
@@ -387,7 +386,7 @@ h3c:display ip routing-table
 h3c:rip /network 网段
 ```
 
-### 启用OSPF
+### 启用 OSPF
 
 ```sh
 思科:router ospf
@@ -395,7 +394,7 @@ h3c:rip /network 网段
 h3c:ospf enable
 ```
 
-### 配置OSPF区域
+### 配置 OSPF 区域
 
 ```sh
 思科:network ip 反码 area <area-id> 
@@ -403,7 +402,7 @@ h3c:ospf enable
 h3c:ospf enable area <area-id>
 ```
 
-### 配置RIP V2水平分割
+### 配置 RIP V2 水平分割
 
 ```sh
 思科:no auto-summary
@@ -435,7 +434,7 @@ h3c:rule normal permit source IP
 h3c:rule {normal|special}{permit|deny}{tcp|udp}sour
 ```
 
-### 配置HSRP组
+### 配置 HSRP 组
 
 ```sh
 思科:standby group-number ip virtual-ip
@@ -443,7 +442,7 @@ h3c:rule {normal|special}{permit|deny}{tcp|udp}sour
 h3c:vrrp vrid number virtual-ip
 ```
 
-### 配置HSRP优先级
+### 配置 HSRP 优先级
 
 ```sh
 思科:standby group-number priority
@@ -451,7 +450,7 @@ h3c:vrrp vrid number virtual-ip
 h3c:vrrp vrid number priority
 ```
 
-### 配置HSRP占先权
+### 配置 HSRP 占先权
 
 ```sh
 思科:standby group-number preempt

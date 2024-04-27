@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 引入线程池-Queue缓冲队列实现高并发下单业务
+excerpt: 
 description: 
 date: 2022-05-26
 category: Java
@@ -10,26 +11,27 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot 引入线程池-Queue缓冲队列实现高并发下单业务
+# SpringBoot 引入线程池-Queue 缓冲队列实现高并发下单业务
 
-- 1.首先是springBoot的项目框架如下：
+- 1.首先是 springBoot 的项目框架如下：
 - 2.业务测试流程涉及的类，如下
-- 3.使用JMeter模拟并发下单请求
+- 3.使用 JMeter 模拟并发下单请求
 - 4.结果
 
 ------
 
-主要是自己在项目中(中小型项目) 有支付下单业务(只是办理VIP，没有涉及到商品库存)
-，目前用户量还没有上来，目前没有出现问题，但是想到如果用户量变大，下单并发量变大，可能会出现一系列的问题，趁着空闲时间，做了这个demo测试相关问题。
+主要是自己在项目中(中小型项目) 有支付下单业务(只是办理 VIP，没有涉及到商品库存)
+，目前用户量还没有上来，目前没有出现问题，但是想到如果用户量变大，下单并发量变大，可能会出现一系列的问题，趁着空闲时间，做了这个
+demo 测试相关问题。
 
 可能遇到的问题如下：
 
 1. 订单重复
 2. 高并发下，性能变慢
 
-解决方式：`ThreadPoolExecutor`线程池 + Queue队列
+解决方式：`ThreadPoolExecutor`线程池 + Queue 队列
 
-## 1.首先是springBoot的项目框架如下：
+## 1.首先是 springBoot 的项目框架如下
 
 ![image-20220524225159288](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220524225159288.png)
 
@@ -37,7 +39,7 @@ icon: java
 
 - BusinessThread 类
 
-```
+```plain
 package com.springboot.demo.Threads;
 
 import org.springframework.context.annotation.Scope;
@@ -79,7 +81,7 @@ public class BusinessThread implements Runnable{
 
 - TestThreadPoolManager 类
 
-```
+```plain
 package com.springboot.demo.Threads;
 
 import org.springframework.beans.BeansException;
@@ -195,7 +197,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
 
 - TestController 类
 
-```
+```plain
 package com.springboot.demo;
 
 import com.springboot.demo.Threads.TestThreadPoolManager;
@@ -251,16 +253,16 @@ public class TestController {
 > 基于微服务的思想，构建在 B2C 电商场景下的项目实战。核心技术栈，是 Spring Boot + Dubbo 。未来，会重构成 Spring Cloud
 > Alibaba 。
 >
-> 项目地址：https://github.com/YunaiV/onemall
+> 项目地址：<https://github.com/YunaiV/onemall>
 
-## 3.使用JMeter模拟并发下单请求
+## 3.使用 JMeter 模拟并发下单请求
 
 [![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16533988082341.png)]
 
 ## 4.结果
 
 打印的日志说明，开始的订单直接执行插入到系统，当线程池的容量已经满了，则使用`RejectedExecutionHandler`方法把后面的订单添加到
-Queue缓冲队列，使用`ScheduledFuture`方法定时(我这里是每秒一次)检查Queue队列，重新把队列里面的订单添加到线程池，执行后面的插入任务。
+Queue 缓冲队列，使用`ScheduledFuture`方法定时(我这里是每秒一次)检查 Queue 队列，重新把队列里面的订单添加到线程池，执行后面的插入任务。
 
 部分日志如下
 

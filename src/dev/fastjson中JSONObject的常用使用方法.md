@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: fastjson 中JSONObject的常用使用方法
+excerpt: 
 description: fastjson 中JSONObject的常用使用方法
 date: 2022-04-10
 category: Java
@@ -10,12 +11,12 @@ timeline: true
 icon: java
 ---
 
-# fastjson 中JSONObject的常用使用方法
+# fastjson 中 JSONObject 的常用使用方法
 
-### 1、导入需要的jar包
+### 1、导入需要的 jar 包
 
 ```xml
-		<dependency>
+  <dependency>
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27.0.0</version>
@@ -74,4 +75,3 @@ public class Test {
     }
 }
 ```
-

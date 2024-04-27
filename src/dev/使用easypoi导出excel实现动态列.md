@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 使用 easypoi 导出 excel 实现动态列
+excerpt: 
 description: 使用 easypoi 导出 excel 实现动态列
 date: 2022-04-26
 category: Java
@@ -14,9 +15,9 @@ icon: java
 
 ### 说明
 
-- 使用的是easypoi进行导出
+- 使用的是 easypoi 进行导出
 - 行头是动态生成
-- 依据key进行列匹配，进行数据填充
+- 依据 key 进行列匹配，进行数据填充
 - 第一列进行纵向动态合并
 
 ### 工具依赖
@@ -113,7 +114,7 @@ private List<Map<String, Object>> dynamicListDataByKey(List<PlatformIncomeRespDT
   }
 ```
 
-##### excel的导出
+##### excel 的导出
 
 ```java
 //statisData就是我们查询出来的数据
@@ -140,7 +141,7 @@ public void downloadPlatformIncomeContrast(List<PlatformIncomeRespDTO> statisDat
   }
 ```
 
-EasypoiUtil工具类
+EasypoiUtil 工具类
 
 ```java
 public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
@@ -268,7 +269,7 @@ public class BiPlatformStatisRespDTO implements Serializable {
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184521222-6.png)
 
-##### 测试数据json示例
+##### 测试数据 json 示例
 
 ```json
 [

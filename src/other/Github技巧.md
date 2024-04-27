@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Github技巧
+excerpt: 
 description: 
 date: 2022-06-24
 category: other
@@ -10,11 +11,11 @@ timeline: true
 icon: others
 ---
 
-# Github技巧
+# Github 技巧
 
 ## 1.搜索
 
-github高级搜索功能
+github 高级搜索功能
 
 直接打开这里[GitHub · Where software is built](https://github.com/search/advanced)
 
@@ -64,7 +65,7 @@ github高级搜索功能
 代码跳转：
 
 1. 下载到本地
-2. 在线vscode：仓库详情界面按下“。”键，
+2. 在线 vscode：仓库详情界面按下“。”键，
 
 ![image-20220504230504057](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220504230504057-165500134905021.png)
 
@@ -74,7 +75,7 @@ github高级搜索功能
 
 在项目地址前加上`gitpod.io/#/`前缀
 
-https://github.com/nginx/nginx => https://gitpod.io/#/github.com/nginx/nginx
+<https://github.com/nginx/nginx> => <https://gitpod.io/#/github.com/nginx/nginx>
 
 登陆：
 

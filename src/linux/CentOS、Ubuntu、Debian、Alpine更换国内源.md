@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: CentOS、Ubuntu、Debian、Alpine更换国内源
+excerpt: 
 description: 
 date: 2023-12-15
 category: Linux
@@ -10,11 +11,11 @@ timeline: true
 icon: linux
 ---
 
-# CentOS、Ubuntu、Debian、Alpine更换国内源
+# CentOS、Ubuntu、Debian、Alpine 更换国内源
 
 国内的源通常是由国内的各大云服务商提供的，这些云服务商在本地都有自己的加速服务器和缓存系统，可以更快地下载镜像。另外，由于地理位置的原因，国内的源通常比国外的源更稳定，也更容易受到国内用户的访问。因此，更换国内源可以提高开发效率和稳定性，减少不必要的网络问题。
 
-## **CentOS换源**
+## **CentOS 换源**
 
 ```sh
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
@@ -26,11 +27,9 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
+## **Debian 换源**
 
-
-## **Debian换源**
-
-### debian-9归档源
+### debian-9 归档源
 
 ```sh
 echo "deb http://archive.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list \  && echo "deb http://archive.debian.org/debian/ stretch-proposed-updates main contrib non-free" >> /etc/apt/sources.list \  && echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.list
@@ -72,9 +71,7 @@ sed -i "s@http://\(deb\|security\).debian.org@http://mirrors.tuna.tsinghua.edu.c
 sed -i "s@http://\(deb\|security\).debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 ```
 
-
-
-## **Ubuntu换源**
+## **Ubuntu 换源**
 
 ### 阿里云镜像站
 
@@ -112,9 +109,7 @@ sed -i "s@\(archive\|security\).ubuntu.com@mirrors.tuna.tsinghua.edu.cn@g" /etc/
 sed -i "s@\(archive\|security\).ubuntu.com@mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 ```
 
-
-
-## **Alpine linux换源**
+## **Alpine linux 换源**
 
 ### 阿里云镜像站
 
@@ -128,9 +123,7 @@ sed -i "s@dl-cdn.alpinelinux.org@mirrors.aliyun.com@g" /etc/apk/repositories
 sed -i "s@dl-cdn.alpinelinux.org/@repo.huaweicloud.com/@g" /etc/apk/repositories
 ```
 
-
-
-## **Pip换源**
+## **Pip 换源**
 
 ### 阿里云
 
@@ -168,17 +161,13 @@ pip config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple/
 pip config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple
 ```
 
-### Conda添加源
+### Conda 添加源
 
 ```sh
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ \ && conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ \ && conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ \ && conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/linux-64/
 ```
 
-
-
-
-
-## **Npm换源**
+## **Npm 换源**
 
 ### 淘宝
 
@@ -198,9 +187,7 @@ npm config set registry https://repo.huaweicloud.com/repository/npm/
 npm config set registry http://r.cnpmjs.org
 ```
 
-
-
-## **GO换源**
+## **GO 换源**
 
 ### 阿里云
 
@@ -220,15 +207,14 @@ go env -w GO111MODULE=on GOPROXY=https://goproxy.cn,direct GONOSUMDB=*
 go env -w GO111MODULE=on GOPROXY=https://repo.huaweicloud.com/repository/goproxy/ GONOSUMDB=*
 ```
 
-### Dockerfile非交互，修改时区
+### Dockerfile 非交互，修改时区
 
 ```sh
 ENV TIME_ZONE Asia/ShanghaiRUN apt-get update \&& DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata \    && ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone \    && dpkg-reconfigure -f noninteractive tzdata
 ```
 
-### Github访问加速，URL前缀添加
+### Github 访问加速，URL 前缀添加
 
 ```sh
 https://ghproxy.com/
 ```
-

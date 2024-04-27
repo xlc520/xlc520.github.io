@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 手写组合API
+excerpt: 
 description: 
 date: 2022-08-01
 category: Vue
@@ -9,7 +10,8 @@ article: true
 dateline: true
 icon: vue
 ---
-# 3. 手写组合API
+
+# 3. 手写组合 API
 
 ## 1) shallowReactive 与 reactive
 
@@ -89,8 +91,6 @@ proxy.b[0].x += 1
 proxy.c.x[0] += 1
 ```
 
-
-
 ## 2) shallowRef 与 ref
 
 ```js
@@ -155,8 +155,6 @@ ref1.value++
 ref2.value.b[0].x++
 console.log(ref1, ref2)
 ```
-
-
 
 ## 3) shallowReadonly 与 readonly
 
@@ -226,8 +224,6 @@ objReadOnly.a.b = 2
 objReadOnly2.a = 1
 objReadOnly2.a.b = 2
 ```
-
-
 
 ## 4) isRef, isReactive 与 isReadonly
 

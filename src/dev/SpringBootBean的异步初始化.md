@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBootBean的异步初始化
+excerpt: 
 description: SpringBootBean的异步初始化
 date: 2023-07-06
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# SpringBootBean的异步初始化
+# SpringBootBean 的异步初始化
 
 AsyncTaskExecutionListener：
 
@@ -90,7 +91,7 @@ public class AsyncTaskExecutor {
 }
 ```
 
-把这两个类,一共 68 行代码，粘到你的项目中，然后把 
+把这两个类,一共 68 行代码，粘到你的项目中，然后把
 
 AsyncTaskExecutionListener 以 @Bean 的方式注入：
 
@@ -100,6 +101,3 @@ public AsyncTaskExecutionListener asyncTaskExecutionListener() {
     return new AsyncTaskExecutionListener();
 }
 ```
-
-
-

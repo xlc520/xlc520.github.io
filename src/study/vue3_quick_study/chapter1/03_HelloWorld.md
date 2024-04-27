@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 第一个 TypeScript 程序
+excerpt: 
 description: 
 date: 2022-07-20
 category: Vue
@@ -9,9 +10,11 @@ article: true
 dateline: true
 icon: vue
 ---
+
 # 3. 第一个 TypeScript 程序
 
 ## 编写 TS 程序
+
 src/helloworld.ts
 
 ```typescript
@@ -44,19 +47,19 @@ node helloworld.js
 
 控制台输出：
 
-```
+```plain
 Hello, Yee
 ```
 
-## vscode自动编译
+## vscode 自动编译
 
-    1). 生成配置文件tsconfig.json
-        tsc --init
-    2). 修改tsconfig.json配置
-        "outDir": "./js",
-        "strict": false,    
-    3). 启动监视任务: 
-        终端 -> 运行任务 -> 监视tsconfig.json
+plain 1). 生成配置文件 tsconfig.json
+tsc --init
+2). 修改 tsconfig.json 配置
+"outDir": "./js",
+"strict": false,
+3). 启动监视任务:
+终端 -> 运行任务 -> 监视 tsconfig.json
 
 ## 类型注解
 
@@ -72,7 +75,8 @@ let user = 'Yee'
 console.log(greeter(user))
 ```
 
-TypeScript 里的类型注解是一种轻量级的为函数或变量添加约束的方式。 在这个例子里，我们希望 `greeter` 函数接收一个字符串参数。 然后尝试把 `greeter` 的调用改成传入一个数组：
+TypeScript 里的类型注解是一种轻量级的为函数或变量添加约束的方式。 在这个例子里，我们希望 `greeter` 函数接收一个字符串参数。
+然后尝试把 `greeter` 的调用改成传入一个数组：
 
 ```typescript
 function greeter (person: string) {
@@ -86,17 +90,21 @@ console.log(greeter(user))
 
 重新编译，你会看到产生了一个错误：
 
-```
+```plain
 error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.
 ```
 
-类似地，尝试删除 `greeter` 调用的所有参数。 TypeScript 会告诉你使用了非期望个数的参数调用了这个函数。 在这两种情况中，TypeScript提供了静态的代码分析，它可以分析代码结构和提供的类型注解。
+类似地，尝试删除 `greeter` 调用的所有参数。 TypeScript 会告诉你使用了非期望个数的参数调用了这个函数。 在这两种情况中，TypeScript
+提供了静态的代码分析，它可以分析代码结构和提供的类型注解。
 
-要注意的是尽管有错误，`greeter.js` 文件还是被创建了。 就算你的代码里有错误，你仍然可以使用 TypeScript。但在这种情况下，TypeScript 会警告你代码可能不会按预期执行。
+要注意的是尽管有错误，`greeter.js` 文件还是被创建了。 就算你的代码里有错误，你仍然可以使用 TypeScript。但在这种情况下，TypeScript
+会警告你代码可能不会按预期执行。
 
 ## 接口
 
-让我们继续扩展这个示例应用。这里我们使用接口来描述一个拥有 `firstName` 和 `lastName` 字段的对象。 在 `TypeScript` 里，只在两个类型内部的结构兼容，那么这两个类型就是兼容的。 这就允许我们在实现接口时候只要保证包含了接口要求的结构就可以，而不必明确地使用 `implements` 语句。
+让我们继续扩展这个示例应用。这里我们使用接口来描述一个拥有 `firstName` 和 `lastName` 字段的对象。 在 `TypeScript`
+里，只在两个类型内部的结构兼容，那么这两个类型就是兼容的。
+这就允许我们在实现接口时候只要保证包含了接口要求的结构就可以，而不必明确地使用 `implements` 语句。
 
 ```typescript
 interface Person {
@@ -156,7 +164,3 @@ console.log(greeter(user))
 ## 总结
 
 到这里，你已经对 TypeScript 有了一个大致的印象，那么下一章让我们来一起学习 TypeScript 的一些常用语法吧。
-
-
-
-

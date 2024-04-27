@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 24 个常见的 Docker 疑难杂症处理技巧
+excerpt: 
 description: 
 date: 2022-09-04
 category: Java
@@ -14,17 +15,13 @@ icon: java
 
 > **这里主要是为了记录在使用 Docker 的时候遇到的问题及其处理解决方法。**
 
-
-
 ![Docker疑难杂症汇总](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble.png)
 
-**Docker疑难杂症汇总**
+**Docker 疑难杂症汇总**
 
 ![Docker疑难杂症汇总](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-1.png)
 
-**Docker疑难杂症汇总**
-
-
+**Docker 疑难杂症汇总**
 
 ------
 
@@ -107,9 +104,7 @@ $ sudo cp -arv /data/docker /data2/docker
 
 ![Docker迁移存储目录](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-3.png)
 
-**Docker迁移存储目录**
-
-
+**Docker 迁移存储目录**
 
 ------
 
@@ -668,7 +663,7 @@ NFS clients support flock() locks by emulating them as byte-range locks on the e
 
 ![Docker默认使用网段](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-2.png)
 
-**Docker默认使用网段**
+**Docker 默认使用网段**
 
 - **[解决方法]** 上述问题的处理方式，就是手动指定 `Docker` 服务的启动网段，二选一就可以了。
 
@@ -717,7 +712,7 @@ B: /data2/app/docker-compose.yml
 
 ![Docker服务启动串台](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-4.png)
 
-**Docker服务启动串台**
+**Docker 服务启动串台**
 
 bash
 
@@ -750,7 +745,7 @@ $ docker-compose -f ./docker-compose.yml -p app1 up -d
 
 ![Docker命令调用报错](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-5.png)
 
-**Docker命令调用报错**
+**Docker 命令调用报错**
 
 - 随即，查看了脚本发现报错地方是执行了一个 `exec` 的 `docker`
   命令，大致如下所示。很奇怪的是，手动执行或直接调脚本的时候，怎么都是没有问题的，但是等到 `CI`
@@ -777,9 +772,7 @@ docker exec -it <container_name> psql -Upostgres ......
 
 ![Docker命令调用报错](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-6.png)
 
-**Docker命令调用报错**
-
-
+**Docker 命令调用报错**
 
 ------
 
@@ -816,7 +809,6 @@ bash
 
 - **[问题起因]** 使用过 `compose`
   的朋友可能都遇到过，在编写启服务启动配置文件的时候，添加环境变量时到底是使用单引号、双引号还是不使用引号的问题？时间长了，我们可能会将三者混用，认为其效果是一样的。但是后来，发现的坑越来越多，才发现其越来越隐晦。
--
 
 反正我是遇到过很多问题，都是因为添加引号导致的服务启动异常的，后来得出的结论就是一律不使引号。裸奔，体验前所未有的爽快！直到现在看到了 `Github`
 中对应的 [issus](https://github.com/docker/compose/issues/2854) 之后，才终于破案了。
@@ -1252,8 +1244,6 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 Connection to 172.16.100.12 8000 port [tcp/*] succeeded!
 ```
 
--
-
 既然问题已经知道了，现在需要做的就是非常简单了：不适用默认网段！通过 [『mirantis』](https://docs.mirantis.com/mke/3.4/install/plan-deployment/mcr-considerations/default-address-pools.html)
 里面，我们可以选择进行设置，然后重启服务 `dockerd` 服务，即可。
 
@@ -1277,8 +1267,6 @@ $ docker network inspect app | grep Subnet
 ![Docker 不使用默认网段](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-7.png)
 
 **Docker 不使用默认网段**
-
--
 
 这时，就到了考验我们网络的子网划分的能力了：如何在给定的网段下面合理且高效的进行划分呢？咳咳，确实难倒我了，这时我们可以再这个在线网站上面 [JSON 在线解析](https://www.sojson.com/convert/subnetmask.html)
 进行划分，然后选定合理的 `base` 和 `size` 就可以了。
@@ -1305,8 +1293,6 @@ $ sudo cat /etc/docker/daemon.json
 ![Docker 不使用默认网段](https://bitbucket.org/xlc520/blogasset/raw/main/images3/docker-have-some-trouble-8.png)
 
 **Docker 不使用默认网段**
-
-
 
 ------
 
@@ -1419,13 +1405,13 @@ $ sudo du -sh /var/lib/docker/overlay2
 如果我们临时启动了一个服务，当时只是打算只是临时使用，但是后续因为某些原因导致长期使用。同时因为运行中产生的数据或者文件并没有挂载映射到宿主机，导致写入容器内本地的文件最终到了一个很大的量级(
 比如容器产生的日志文件、数据文件)。这就导致我们看到，对应层下面
 
-  ```
+  ```plain
   diff
   ```
 
 和
 
-  ```
+  ```plain
   merged
   ```
 

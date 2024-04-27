@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 50条MySQL常用脚本
+excerpt: 
 description: 50条MySQL常用脚本
 date: 2024-04-20
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# 50条MySQL常用脚本
+# 50 条 MySQL 常用脚本
 
 ```sql
 -- 1、插入数据
@@ -217,4 +218,3 @@ SET NEW.age = NEW.age + 1
 -- 50、监控数据库性能
 SHOW PROCESSLIST;
 ```
-

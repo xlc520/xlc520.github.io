@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Vue3 + setup + ts 使用技巧
+excerpt: 
 description: 
 date: 2023-11-10
 category: Java
@@ -9,8 +10,6 @@ article: true
 timeline: true
 icon: java
 ---
-
-
 
 # Vue3 + setup + ts 使用技巧
 
@@ -85,9 +84,10 @@ const emit = defineEmits(["dosth"])
 
 ## 4. 使用 useAttrs 和 useSlots
 
-`useAttrs` 可以获取父组件传过来的 `id` 、`class` 等值。`useSlots` 可以获得插槽的内容。例子中，我们使用 `useAttrs` 获取父组件传过来的 `id` 、`class`、`useSlots` 获取插槽的内容。
+`useAttrs` 可以获取父组件传过来的 `id` 、`class` 等值。`useSlots` 可以获得插槽的内容。例子中，我们使用 `useAttrs`
+获取父组件传过来的 `id` 、`class`、`useSlots` 获取插槽的内容。
 
-### 父组件：
+### 父组件
 
 ```typescript
 <template>
@@ -123,7 +123,7 @@ function changeVal(val: string) {
 </style>
 ```
 
-### 子组件：
+### 子组件
 
 ```typescript
 <template>
@@ -393,9 +393,9 @@ const inputVal = computed({
 
 ### 8.2 可以从父组件传递值和改变值的方法，然后子组件也可以使用 v-model
 
-例子中父组件传递 `modelValue` 和 `update:modelValue` 方法 
+例子中父组件传递 `modelValue` 和 `update:modelValue` 方法
 
-### 父组件：
+### 父组件
 
 ```typescript
 <template>
@@ -429,7 +429,7 @@ function changeVal(val: number) {
 </style>
 ```
 
-### 子组件：
+### 子组件
 
 ```typescript
 <template>
@@ -454,7 +454,8 @@ const props = defineProps<{
 
 ## 9. 递归组件
 
-组件本身是可以调用组件自身的，也就是递归。vue3 中使用文件名称自动注册为组件的名称，比如名为  `Child.vue` 的组件可以在其模板中用  `<Child/>` 引用它自己。这里需要注意的是需要设置条件语句，用来中断递归，不然递归会无限递归下去。
+组件本身是可以调用组件自身的，也就是递归。vue3 中使用文件名称自动注册为组件的名称，比如名为  `Child.vue`
+的组件可以在其模板中用  `<Child/>` 引用它自己。这里需要注意的是需要设置条件语句，用来中断递归，不然递归会无限递归下去。
 
 ### 父组件
 
@@ -518,7 +519,7 @@ function changeTest(val: number) {
 
 ## 10. vue3 ts 获取组件 ref 实例
 
-- ### 通过ref直接拿到dom引用
+- ### 通过 ref 直接拿到 dom 引用
 
 ```typescript
 <template>
@@ -533,9 +534,10 @@ const sectionRef = ref()
 </script>
 ```
 
-通过对div元素添加了ref属性，为了获取到这个元素，我们声明了一个与ref属性名称相同的变量`sectionRef`，然后我们通过 `sectionRef.value `的形式即可获取该div元素
+通过对 div 元素添加了 ref 属性，为了获取到这个元素，我们声明了一个与 ref 属性名称相同的变量`sectionRef`
+，然后我们通过 `sectionRef.value`的形式即可获取该 div 元素
 
-- ### 通过父容器的ref遍历拿到dom引用
+- ### 通过父容器的 ref 遍历拿到 dom 引用
 
 ```typescript
 <template>
@@ -554,9 +556,10 @@ const listRef = ref()
 </script>
 ```
 
-通过对父元素添加了ref属性，并声明了一个与ref属性名称相同的变量listRef，此时通过listRef.value会获得包含子元素的dom对象 此时可以通过`listRef.value.children[index]`的形式获取子元素dom
+通过对父元素添加了 ref 属性，并声明了一个与 ref 属性名称相同的变量 listRef，此时通过 listRef.value 会获得包含子元素的 dom
+对象 此时可以通过`listRef.value.children[index]`的形式获取子元素 dom
 
-- ### 通过:ref将dom引用放到数组中
+- ### 通过:ref将 dom 引用放到数组中
 
   ```typescript
   <template>
@@ -584,9 +587,10 @@ const listRef = ref()
     </script>
   ```
 
-  通过:ref循环调用`setRefAction`方法，该方法会默认接收一个el参数，这个参数就是我们需要获取的div元素 此时可以通过`state.refList[index]`的形式获取子元素dom
+  通过:ref循环调用`setRefAction`方法，该方法会默认接收一个 el 参数，这个参数就是我们需要获取的 div 元素
+  此时可以通过`state.refList[index]`的形式获取子元素 dom
 
-- ### 通过子组件emit传递ref
+- ### 通过子组件 emit 传递 ref
 
 ```typescript
 <template>
@@ -609,7 +613,8 @@ const cellAction = () => {
 </script>
 ```
 
-通过对子组件添加了ref属性，并声明了一个与ref属性名称相同的变量cellRef，此时可以通过emit将`cellRef.value`作为一个dom引用传递出去
+通过对子组件添加了 ref 属性，并声明了一个与 ref 属性名称相同的变量 cellRef，此时可以通过 emit 将`cellRef.value`作为一个
+dom 引用传递出去
 
 - ### tsx 等 render 组件中获取的方式更简单
 
@@ -630,7 +635,7 @@ export default defineComponent({
 });
 ```
 
-需要注意的是，如果使用 expose 暴露方法出去，无法获取到对应的类型，您需要自定义类型 **github.com/vuejs/rfcs/…**
+需要注意的是，如果使用 expose 暴露方法出去，无法获取到对应的类型，您需要自定义类型 **github.com/vuejs/rfcs/……**
 
 ```typescript
 // 组件 MyForm
@@ -678,4 +683,3 @@ export default defineComponent({
 })
 </script>
 ```
-

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: QQ动态群聊昵称代码
+excerpt: 
 description: 
 date: 2022-06-02
 category: other
@@ -12,7 +13,7 @@ timeline: true
 icon: others
 ---
 
-# QQ动态群聊昵称代码
+# QQ 动态群聊昵称代码
 
 ## 代码
 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Nginx一网打尽：动静分离、压缩、缓存、黑白名单、跨域、高可用、性能优化
+excerpt: 
 description: 
 date: 2023-01-20
 category: Linux
@@ -10,23 +11,23 @@ timeline: true
 icon: linux
 ---
 
-# Nginx一网打尽：动静分离、压缩、缓存、黑白名单、跨域、高可用、性能优化
+# Nginx 一网打尽：动静分离、压缩、缓存、黑白名单、跨域、高可用、性能优化
 
 - 引言
-- 一、性能怪兽-Nginx概念深入浅出
-- 二、Nginx环境搭建
-- 三、Nginx反向代理-负载均衡
-- 四、Nginx动静分离
-- 五、Nginx资源压缩
-- 六、Nginx缓冲区
-- 七、Nginx缓存机制
-- 八、Nginx实现IP黑白名单
-- 九、Nginx跨域配置
-- 十、Nginx防盗链设计
-- 十一、Nginx大文件传输配置
-- 十二、Nginx配置SLL证书
-- 十三、Nginx的高可用
-- 十四、Nginx性能优化
+- 一、性能怪兽-Nginx 概念深入浅出
+- 二、Nginx 环境搭建
+- 三、Nginx 反向代理-负载均衡
+- 四、Nginx 动静分离
+- 五、Nginx 资源压缩
+- 六、Nginx 缓冲区
+- 七、Nginx 缓存机制
+- 八、Nginx 实现 IP 黑白名单
+- 九、Nginx 跨域配置
+- 十、Nginx 防盗链设计
+- 十一、Nginx 大文件传输配置
+- 十二、Nginx 配置 SLL 证书
+- 十三、Nginx 的高可用
+- 十四、Nginx 性能优化
 - 十五、放在最后的结尾
 
 ## 引言
@@ -56,14 +57,14 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 >
 > ❞
 
-## 一、性能怪兽-Nginx概念深入浅出
+## 一、性能怪兽-Nginx 概念深入浅出
 
 `Nginx`是目前负载均衡技术中的主流方案，几乎绝大部分项目都会使用它，`Nginx`是一个轻量级的高性能`HTTP`
 反向代理服务器，同时它也是一个通用类型的代理服务器，支持绝大部分协议，如`TCP、UDP、SMTP、HTTPS`等。
 
 ![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-0.jpeg)
 
-`Nginx`与Redis相同，都是基于多路复用模型构建出的产物，因此它与`Redis`同样具备 **「「资源占用少、并发支持高」」**
+`Nginx`与 Redis 相同，都是基于多路复用模型构建出的产物，因此它与`Redis`同样具备 **「「资源占用少、并发支持高」」**
 的特点，在理论上单节点的`Nginx`同时支持`5W`并发连接，而实际生产环境中，硬件基础到位再结合简单调优后确实能达到该数值。
 
 先来看看`Nginx`引入前后，客户端请求处理流程的对比：
@@ -76,36 +77,36 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 了解了`Nginx`的基本概念后，再来快速搭建一下环境，以及了解一些`Nginx`的高级特性，如动静分离、资源压缩、缓存配置、`IP`
 黑名单、高可用保障等。
 
-## 二、Nginx环境搭建
+## 二、Nginx 环境搭建
 
 ❶首先创建`Nginx`的目录并进入：
 
-```
+```plain
 [root@localhost]# mkdir /soft && mkdir /soft/nginx/  
 [root@localhost]# cd /soft/nginx/  
 ```
 
 ❷下载`Nginx`的安装包，可以通过`FTP`工具上传离线环境包，也可通过`wget`命令在线获取安装包：
 
-```
+```plain
 [root@localhost]# wget https://nginx.org/download/nginx-1.21.6.tar.gz  
 ```
 
 没有`wget`命令的可通过`yum`命令安装：
 
-```
+```plain
 [root@localhost]# yum -y install wget  
 ```
 
 ❸解压`Nginx`的压缩包：
 
-```
+```plain
 [root@localhost]# tar -xvzf nginx-1.21.6.tar.gz  
 ```
 
 ❹下载并安装`Nginx`所需的依赖库和包：
 
-```
+```plain
 [root@localhost]# yum install --downloadonly --downloaddir=/soft/nginx/ gcc-c++  
 [root@localhost]# yum install --downloadonly --downloaddir=/soft/nginx/ pcre pcre-devel4  
 [root@localhost]# yum install --downloadonly --downloaddir=/soft/nginx/ zlib zlib-devel  
@@ -114,7 +115,7 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 
 也可以通过`yum`命令一键下载（推荐上面哪种方式）：
 
-```
+```plain
 [root@localhost]# yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel  
 ```
 
@@ -124,20 +125,20 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 
 紧接着通过`rpm`命令依次将依赖包一个个构建，或者通过如下指令一键安装所有依赖包：
 
-```
+```plain
 [root@localhost]# rpm -ivh --nodeps *.rpm  
 ```
 
 ❺进入解压后的`nginx`目录，然后执行`Nginx`的配置脚本，为后续的安装提前配置好环境，默认位于`/usr/local/nginx/`目录下（可自定义目录）：
 
-```
+```plain
 [root@localhost]# cd nginx-1.21.6  
 [root@localhost]# ./configure --prefix=/soft/nginx/  
 ```
 
 ❻编译并安装`Nginx`：
 
-```
+```plain
 [root@localhost]# make && make install  
 ```
 
@@ -145,7 +146,7 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 
 ❽修改安装后生成的`conf`目录下的`nginx.conf`配置文件：
 
-```
+```plain
 [root@localhost]# vi conf/nginx.conf  
     修改端口号：listen    80;  
  修改IP地址：server_name  你当前机器的本地IP(线上配置域名);  
@@ -153,14 +154,14 @@ OK~，既然引入负载均衡技术可给我们带来如此巨大的好处，�
 
 ❾制定配置文件并启动`Nginx`：
 
-```
+```plain
 [root@localhost]# sbin/nginx -c conf/nginx.conf  
 [root@localhost]# ps aux | grep nginx  
 ```
 
 `Nginx`其他操作命令：
 
-```
+```plain
 sbin/nginx -t -c conf/nginx.conf # 检测配置文件是否正常  
 sbin/nginx -s reload -c conf/nginx.conf # 修改配置后平滑重启  
 sbin/nginx -s quit # 优雅关闭Nginx，会在执行完当前的任务后再退出  
@@ -169,7 +170,7 @@ sbin/nginx -s stop # 强制终止Nginx，不管当前是否有任务在执行
 
 ❿开放`80`端口，并更新防火墙：
 
-```
+```plain
 [root@localhost]# firewall-cmd --zone=public --add-port=80/tcp --permanent  
 [root@localhost]# firewall-cmd --reload  
 [root@localhost]# firewall-cmd --zone=public --list-ports  
@@ -179,12 +180,12 @@ sbin/nginx -s stop # 强制终止Nginx，不管当前是否有任务在执行
 
 最终看到如上的`Nginx`欢迎界面，代表`Nginx`安装完成。
 
-## 三、Nginx反向代理-负载均衡
+## 三、Nginx 反向代理-负载均衡
 
 首先通过`SpringBoot+Freemarker`快速搭建一个`WEB`
 项目：springboot-web-nginx，然后在该项目中，创建一个`IndexNginxController.java`文件，逻辑如下：
 
-```
+```plain
 @Controller  
 public class IndexNginxController {  
     @Value("${server.port}")  
@@ -205,7 +206,7 @@ public class IndexNginxController {
 
 前端的`index.ftl`文件代码如下：
 
-```
+```plain
 <html>  
     <head>  
         <title>Nginx演示页面</title>  
@@ -225,7 +226,7 @@ public class IndexNginxController {
 
 OK~，前提工作准备就绪后，再简单修改一下`nginx.conf`的配置即可：
 
-```
+```plain
 upstream nginx_boot{  
    # 30s内检查心跳发送两次包，未回复就代表该机器宕机，请求分发权重比为1:2  
    server 192.168.0.000:8080 weight=100 max_fails=2 fail_timeout=30s;   
@@ -259,9 +260,9 @@ server {
 ![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929661-3.gif)负载均衡效果-动图演示
 
 因为配置了请求分发的权重，`8080、8090`的权重比为`2:1`，因此请求会根据权重比均摊到每台机器，也就是`8080`一次、`8090`
-两次、`8080`一次......
+两次、`8080`一次……
 
-#### Nginx请求分发原理
+#### Nginx 请求分发原理
 
 客户端发出的请求`192.168.12.129`最终会转变为：`http://192.168.12.129:80/`，然后再向目标`IP`发起请求，流程如下：
 
@@ -273,7 +274,7 @@ server {
 - 最后根据`upstream`中的配置信息，将请求转发到运行`WEB`服务的机器处理，由于配置了多个`WEB`服务，且配置了权重值，因此`Nginx`
   会依次根据权重比分发请求。
 
-## 四、Nginx动静分离
+## 四、Nginx 动静分离
 
 动静分离应该是听的次数较多的性能优化方案，那先思考一个问题：**「「为什么需要做动静分离呢？它带来的好处是什么？」」**
 其实这个问题也并不难回答，当你搞懂了网站的本质后，自然就理解了动静分离的重要性。先来以淘宝为例分析看看：
@@ -284,8 +285,8 @@ server {
 的请求数，而正常项目开发时，静态资源一般会放入到`resources/static/`目录下：
 
 ![Nginx](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
-1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
-xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+1' version='1.1' xmlns='<http://www.w3.org/2000/svg>' xmlns:
+xlink='<http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg> stroke='none' stroke-width='1' fill='none'
 fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
 x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)IDEA 工程结构
 
@@ -310,7 +311,7 @@ OK~，搞清楚动静分离的必要性之后，如何实现动静分离呢？�
 
 ①先在部署`Nginx`的机器，`Nginx`目录下创建一个目录`static_resources`：
 
-```
+```plain
 mkdir static_resources  
 ```
 
@@ -318,7 +319,7 @@ mkdir static_resources
 
 ③稍微修改一下`nginx.conf`的配置，增加一条`location`匹配规则：
 
-```
+```plain
 location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){  
     root   /soft/nginx/static_resources;  
     expires 7d;  
@@ -332,14 +333,14 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){
 其中`static`目录下的`nginx_style.css`文件已被移除，但效果依旧存在（绿色字体+蓝色大边框)：
 
 ![Nginx](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
-1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
-xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+1' version='1.1' xmlns='<http://www.w3.org/2000/svg>' xmlns:
+xlink='<http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg> stroke='none' stroke-width='1' fill='none'
 fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
 x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)移除后效果动图
 
-最后解读一下那条location规则：
+最后解读一下那条 location 规则：
 
-```
+```plain
 location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css)
 ```
 
@@ -352,7 +353,7 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css)
 
 **「最后提一嘴，也可以将静态资源上传到文件服务器中，然后`location`中配置一个新的`upstream`指向。」**
 
-## 五、Nginx资源压缩
+## 五、Nginx 资源压缩
 
 建立在动静分离的基础之上，如果一个静态资源的`Size`
 越小，那么自然传输速度会更快，同时也会更节省带宽，因此我们在部署项目时，也可以通过`Nginx`
@@ -365,7 +366,7 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css)
 
 了解了`Nginx`中的基本压缩配置后，接下来可以在`Nginx`中简单配置一下：
 
-```
+```plain
 http{
     # 开启压缩机制
     gzip on;
@@ -402,7 +403,7 @@ http{
 
 OK~，简单修改好了`Nginx`的压缩配置后，可以在原本的`index`页面中引入一个`jquery-3.6.0.js`文件：
 
-```
+```plain
 <script type="text/javascript" src="jquery-3.6.0.js"></script>  
 ```
 
@@ -420,7 +421,7 @@ OK~，简单修改好了`Nginx`的压缩配置后，可以在原本的`index`页
 >
 > ❞
 
-## 六、Nginx缓冲区
+## 六、Nginx 缓冲区
 
 先来思考一个问题，接入`Nginx`的项目一般请求流程为：“客户端→`Nginx`
 →服务端”，在这个过程中存在两个连接：“客户端→`Nginx`、`Nginx`→服务端”，那么两个不同的连接速度不一致，就会影响用户的体验（比如浏览器的加载速度跟不上服务端的响应速度）。
@@ -445,7 +446,7 @@ OK~，简单修改好了`Nginx`的压缩配置后，可以在原本的`index`页
 - `path`是临时目录的路径。
 
 -
-    - 语法：`proxy_temp_path path;` path是临时目录的路径
+    - 语法：`proxy_temp_path path;` path 是临时目录的路径
 
 - `proxy_temp_file_write_size`：设置每次写数据到临时文件的大小限制。
 
@@ -460,7 +461,7 @@ OK~，简单修改好了`Nginx`的压缩配置后，可以在原本的`index`页
 
 具体的`nginx.conf`配置如下：
 
-```
+```plain
 http{  
     proxy_connect_timeout 10;  
     proxy_read_timeout 120;  
@@ -483,7 +484,7 @@ http{
 >
 > ❞
 
-## 七、Nginx缓存机制
+## 七、Nginx 缓存机制
 
 对于性能优化而言，缓存是一种能够大幅度提升性能的方案，因此几乎可以在各处都能看见缓存，如客户端缓存、代理缓存、服务器缓存等等，`Nginx`
 的缓存则属于代理缓存的一种。对于整个系统而言，加入缓存带来的优势额外明显：
@@ -498,25 +499,26 @@ http{
 
 语法：
 
-```
+```plain
 proxy_cache_path path [levels=levels] [use_temp_path=on|off] keys_zone=name:size [inactive=time] [max_size=size] [manager_files=number] [manager_sleep=time] [manager_threshold=time] [loader_files=number] [loader_sleep=time] [loader_threshold=time] [purger=on|off] [purger_files=number] [purger_sleep=time] [purger_threshold=time];
 ```
 
-是的，你没有看错，就是这么长....，解释一下每个参数项的含义：
+是的，你没有看错，就是这么长……，解释一下每个参数项的含义：
 
 - `path`：缓存的路径地址。
 - `levels`：缓存存储的层次结构，最多允许三层目录。
 - `use_temp_path`：是否使用临时目录。
-- `keys_zone`：指定一个共享内存空间来存储热点Key(1M可存储8000个Key)。
+- `keys_zone`：指定一个共享内存空间来存储热点 Key(1M 可存储 8000 个 Key)。
 - `inactive`：设置缓存多长时间未被访问后删除（默认是十分钟）。
-- `max_size`：允许缓存的最大存储空间，超出后会基于LRU算法移除缓存，Nginx会创建一个Cache manager的进程移除数据，也可以通过purge方式。
-- `manager_files`：manager进程每次移除缓存文件数量的上限。
-- `manager_sleep`：manager进程每次移除缓存文件的时间上限。
-- `manager_threshold`：manager进程每次移除缓存后的间隔时间。
-- `loader_files`：重启Nginx载入缓存时，每次加载的个数，默认100。
-- `loader_sleep`：每次载入时，允许的最大时间上限，默认200ms。
-- `loader_threshold`：一次载入后，停顿的时间间隔，默认50ms。
-- `purger`：是否开启purge方式移除数据。
+- `max_size`：允许缓存的最大存储空间，超出后会基于 LRU 算法移除缓存，Nginx 会创建一个 Cache manager 的进程移除数据，也可以通过
+  purge 方式。
+- `manager_files`：manager 进程每次移除缓存文件数量的上限。
+- `manager_sleep`：manager 进程每次移除缓存文件的时间上限。
+- `manager_threshold`：manager 进程每次移除缓存后的间隔时间。
+- `loader_files`：重启 Nginx 载入缓存时，每次加载的个数，默认 100。
+- `loader_sleep`：每次载入时，允许的最大时间上限，默认 200ms。
+- `loader_threshold`：一次载入后，停顿的时间间隔，默认 50ms。
+- `purger`：是否开启 purge 方式移除数据。
 - `purger_files`：每次移除缓存文件时的数量。
 - `purger_sleep`：每次移除时，允许消耗的最大时间。
 - `purger_threshold`：每次移除完成后，停顿的间隔时间。
@@ -525,31 +527,31 @@ proxy_cache_path path [levels=levels] [use_temp_path=on|off] keys_zone=name:size
 
 语法：
 
-```
+```plain
 proxy_cache zone | off;
 ```
 
-zone为内存区域的名称，即上面中keys_zone设置的名称。
+zone 为内存区域的名称，即上面中 keys_zone 设置的名称。
 
 **「proxy_cache_key」**：定义如何生成缓存的键。
 
 语法：
 
-```
+```plain
 proxy_cache_key string;
 ```
 
-string为生成Key的规则，如`$scheme$proxy_host$request_uri`。
+string 为生成 Key 的规则，如`$scheme$proxy_host$request_uri`。
 
 **「proxy_cache_valid」**：缓存生效的状态码与过期时间。
 
 语法：
 
-```
+```plain
 proxy_cache_valid [code ...] time;
 ```
 
-code为状态码，time为有效时间，可以根据状态码设置不同的缓存时间。
+code 为状态码，time 为有效时间，可以根据状态码设置不同的缓存时间。
 
 例如：`proxy_cache_valid 200 302 30m;`
 
@@ -557,61 +559,61 @@ code为状态码，time为有效时间，可以根据状态码设置不同的缓
 
 语法：
 
-```
+```plain
 proxy_cache_min_uses number;
 ```
 
-number为次数，默认为1。
+number 为次数，默认为 1。
 
-**「proxy_cache_use_stale」**：当后端出现异常时，是否允许Nginx返回缓存作为响应。
+**「proxy_cache_use_stale」**：当后端出现异常时，是否允许 Nginx 返回缓存作为响应。
 
 语法：
 
-```
+```plain
 proxy_cache_use_stale error;
 ```
 
-error为错误类型，可配置`timeout|invalid_header|updating|http_500...`。
+error 为错误类型，可配置`timeout|invalid_header|updating|http_500...`。
 
 **「proxy_cache_lock」**：对于相同的请求，是否开启锁机制，只允许一个请求发往后端。
 
 语法：
 
-```
+```plain
 proxy_cache_lock on | off;
 ```
 
 **「proxy_cache_lock_timeout」**：配置锁超时机制，超出规定时间后会释放请求。
 
-```
+```plain
 proxy_cache_lock_timeout time;
 ```
 
-**「proxy_cache_methods」**：设置对于那些HTTP方法开启缓存。
+**「proxy_cache_methods」**：设置对于那些 HTTP 方法开启缓存。
 
 语法：
 
-```
+```plain
 proxy_cache_methods method;
 ```
 
-method为请求方法类型，如GET、HEAD等。
+method 为请求方法类型，如 GET、HEAD 等。
 
 **「proxy_no_cache」**：定义不存储缓存的条件，符合时不会保存。
 
 语法：
 
-```
+```plain
 proxy_no_cache string...;
 ```
 
-string为条件，例如`$cookie_nocache $arg_nocache $arg_comment;`
+string 为条件，例如`$cookie_nocache $arg_nocache $arg_comment;`
 
 **「proxy_cache_bypass」**：定义不读取缓存的条件，符合时不会从缓存中读取。
 
 语法：
 
-```
+```plain
 proxy_cache_bypass string...;
 ```
 
@@ -621,7 +623,7 @@ proxy_cache_bypass string...;
 
 语法：
 
-```
+```plain
 add_header fieldName fieldValue;
 ```
 
@@ -631,19 +633,19 @@ add_header fieldName fieldValue;
 - `HIT`：请求命中缓存。
 - `EXPIRED`：请求命中缓存但缓存已过期。
 - `STALE`：请求命中了陈旧缓存。
-- `REVALIDDATED`：Nginx验证陈旧缓存依然有效。
+- `REVALIDDATED`：Nginx 验证陈旧缓存依然有效。
 - `UPDATING`：命中的缓存内容陈旧，但正在更新缓存。
 - `BYPASS`：响应结果是从原始服务器获取的。
 
 > ❝
 >
-> PS：这个和之前的不同，之前的都是参数项，这个是一个Nginx内置变量。
+> PS：这个和之前的不同，之前的都是参数项，这个是一个 Nginx 内置变量。
 >
 > ❞
 
 OK~，对于`Nginx`中的缓存配置项大概了解后，接着来配置一下`Nginx`代理缓存：
 
-```
+```plain
 http{  
     # 设置缓存的目录，并且内存中缓存区名为hot_cache，大小为128m，  
     # 三天未被访问过的缓存自动清楚，磁盘中缓存的最大容量为2GB。  
@@ -690,50 +692,50 @@ http{
 不过天无绝人之路，我们可以通过强大的第三方模块`ngx_cache_purge`来替代，先来安装一下该插件：①首先去到`Nginx`
 的安装目录下，创建一个`cache_purge`目录：
 
-```
+```plain
 [root@localhost]# mkdir cache_purge && cd cache_purge  
 ```
 
 ②通过`wget`指令从`github`上拉取安装包的压缩文件并解压：
 
-```
+```plain
 [root@localhost]# wget https://github.com/FRiCKLE/ngx_cache_purge/archive/2.3.tar.gz  
 [root@localhost]# tar -xvzf 2.3.tar.gz  
 ```
 
 ③再次去到之前`Nginx`的解压目录下：
 
-```
+```plain
 [root@localhost]# cd /soft/nginx/nginx1.21.6  
 ```
 
 ④重新构建一次`Nginx`，通过`--add-module`的指令添加刚刚的第三方模块：
 
-```
+```plain
 [root@localhost]# ./configure --prefix=/soft/nginx/ --add-module=/soft/nginx/cache_purge/ngx_cache_purge-2.3/  
 ```
 
 ⑤重新根据刚刚构建的`Nginx`，再次编译一下，**「但切记不要`make install`」** ：
 
-```
+```plain
 [root@localhost]# make  
 ```
 
 ⑥删除之前`Nginx`的启动文件，不放心的也可以移动到其他位置：
 
-```
+```plain
 [root@localhost]# rm -rf /soft/nginx/sbin/nginx  
 ```
 
 ⑦从生成的`objs`目录中，重新复制一个`Nginx`的启动文件到原来的位置：
 
-```
+```plain
 [root@localhost]# cp objs/nginx /soft/nginx/sbin/nginx  
 ```
 
 至此，第三方缓存清除模块`ngx_cache_purge`就安装完成了，接下来稍微修改一下`nginx.conf`配置，再添加一条`location`规则：
 
-```
+```plain
 location ~ /purge(/.*) {  
   # 配置可以执行清除操作的IP（线上可以配置成内网机器）  
   # allow 127.0.0.1; # 代表本机  
@@ -744,7 +746,7 @@ location ~ /purge(/.*) {
 
 然后再重启`Nginx`，接下来即可通过`http://xxx/purge/xx`的方式清除缓存。
 
-## 八、Nginx实现IP黑白名单
+## 八、Nginx 实现 IP 黑白名单
 
 有时候往往有些需求，可能某些接口只能开放给对应的合作商，或者购买/接入`API`的合作伙伴，那么此时就需要实现类似于`IP`
 白名单的功能。而有时候有些恶意攻击者或爬虫程序，被识别后需要禁止其再次访问网站，因此也需要实现`IP`
@@ -752,7 +754,7 @@ location ~ /purge(/.*) {
 
 `Nginx`做黑白名单机制，主要是通过`allow、deny`配置项来实现：
 
-```
+```plain
 allow xxx.xxx.xxx.xxx; # 允许指定的IP访问，可以用于实现白名单。  
 deny xxx.xxx.xxx.xxx; # 禁止指定的IP访问，可以用于实现黑名单。  
 ```
@@ -760,7 +762,7 @@ deny xxx.xxx.xxx.xxx; # 禁止指定的IP访问，可以用于实现黑名单。
 要同时屏蔽/开放多个`IP`访问时，如果所有`IP`全部写在`nginx.conf`
 文件中定然是不显示的，这种方式比较冗余，那么可以新建两个文件`BlocksIP.conf、WhiteIP.conf`：
 
-```
+```plain
 # --------黑名单：BlocksIP.conf---------  
 deny 192.177.12.222; # 屏蔽192.177.12.222访问  
 deny 192.177.44.201; # 屏蔽192.177.44.201访问  
@@ -775,7 +777,7 @@ deny all; # 除开上述IP外，其他IP全部禁止访问
 
 分别将要禁止/开放的`IP`添加到对应的文件后，可以再将这两个文件在`nginx.conf`中导入：
 
-```
+```plain
 http{  
     # 屏蔽该文件中的所有IP  
     include /soft/nginx/IP/BlocksIP.conf;   
@@ -798,10 +800,10 @@ http{
 >
 > ❞
 
-## 九、Nginx跨域配置
+## 九、Nginx 跨域配置
 
 跨域问题在之前的单体架构开发中，其实是比较少见的问题，除非是需要接入第三方`SDK`
-时，才需要处理此问题。但随着现在前后端分离、分布式架构的流行，跨域问题也成为了每个Java开发必须要懂得解决的一个问题。
+时，才需要处理此问题。但随着现在前后端分离、分布式架构的流行，跨域问题也成为了每个 Java 开发必须要懂得解决的一个问题。
 
 #### 跨域问题产生的原因
 
@@ -811,11 +813,11 @@ http{
 
 同源策略主要是指三点相同，**「「协议+域名+端口」」** 相同的两个请求，则可以被看做是同源的，但如果其中任意一点存在不同，则代表是两个不同源的请求，同源策略会限制了不同源之间的资源交互。
 
-#### Nginx解决跨域问题
+#### Nginx 解决跨域问题
 
 弄明白了跨域问题的产生原因，接下来看看`Nginx`中又该如何解决跨域呢？其实比较简单，在`nginx.conf`中稍微添加一点配置即可：
 
-```
+```plain
 location / {  
     # 允许跨域的请求，可以自定义变量$http_origin，*表示所有  
     add_header 'Access-Control-Allow-Origin' *;  
@@ -844,12 +846,13 @@ location / {
 > ❝
 >
 >
-但如果后端是采用分布式架构开发的，有时候RPC调用也需要解决跨域问题，不然也同样会出现无法跨域请求的异常，因此可以在你的后端项目中，通过继承`HandlerInterceptorAdapter`
+但如果后端是采用分布式架构开发的，有时候 RPC
+调用也需要解决跨域问题，不然也同样会出现无法跨域请求的异常，因此可以在你的后端项目中，通过继承`HandlerInterceptorAdapter`
 类、实现`WebMvcConfigurer`接口、添加`@CrossOrgin`注解的方式实现接口之间的跨域配置。
 >
 > ❞
 
-## 十、Nginx防盗链设计
+## 十、Nginx 防盗链设计
 
 首先了解一下何谓盗链：**「「盗链即是指外部网站引入当前网站的资源对外展示」」** ，来举个简单的例子理解：
 
@@ -866,7 +869,7 @@ location / {
 中就可获取该值，然后判断是否为本站的资源引用请求，如果不是则不允许访问。`Nginx`中存在一个配置项为`valid_referers`
 ，正好可以满足前面的需求，语法如下：
 
-```
+```plain
 valid_referers none | blocked | server_names | string ...;
 ```
 
@@ -877,7 +880,7 @@ valid_referers none | blocked | server_names | string ...;
 
 简单了解语法后，接下来的实现如下：
 
-```
+```plain
 # 在动静分离的location中开启防盗链机制  
 location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){  
     # 最后面的值在上线前可配置为允许的域名地址  
@@ -904,12 +907,12 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){
 >
 > ❞
 
-## 十一、Nginx大文件传输配置
+## 十一、Nginx 大文件传输配置
 
 在某些业务场景中需要传输一些大文件，但大文件传输时往往都会会出现一些`Bug`
 ，比如文件超出限制、文件传输过程中请求超时等，那么此时就可以在`Nginx`稍微做一些配置，先来了解一些关于大文件传输时可能会用的配置项：
 
-```
+```plain
 牛逼啊！接私活必备的 N 个开源项目！赶快收藏
 ```
 
@@ -928,13 +931,13 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){
 >
 > ❞
 
-## 十二、Nginx配置SLL证书
+## 十二、Nginx 配置 SLL 证书
 
 随着越来越多的网站接入`HTTPS`，因此`Nginx`中仅配置`HTTP`还不够，往往还需要监听`443`端口的请求，`HTTPS`
 为了确保通信安全，所以服务端需配置对应的数字证书，当项目使用`Nginx`作为网关时，那么证书在`Nginx`
 中也需要配置，接下来简单聊一下关于`SSL`证书配置过程：
 
-①先去CA机构或从云控制台中申请对应的`SSL`证书，审核通过后下载`Nginx`版本的证书。
+①先去 CA 机构或从云控制台中申请对应的`SSL`证书，审核通过后下载`Nginx`版本的证书。
 
 ②下载数字证书后，完整的文件总共有三个：`.crt、.key、.pem`：
 
@@ -946,7 +949,7 @@ location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css){
 
 ④最后修改一下`nginx.conf`文件即可，如下：
 
-```
+```plain
 # ----------HTTPS配置-----------  
 server {  
     # 监听HTTPS默认的443端口  
@@ -991,10 +994,10 @@ server {
 OK~，根据如上配置了`Nginx`后，你的网站即可通过`https://`的方式访问，并且当客户端使用`http://`
 的方式访问时，会自动将其改写为`HTTPS`请求。
 
-## 十三、Nginx的高可用
+## 十三、Nginx 的高可用
 
 线上如果采用单个节点的方式部署`Nginx`
-，难免会出现天灾人祸，比如系统异常、程序宕机、服务器断电、机房爆炸、地球毁灭....哈哈哈，夸张了。但实际生产环境中确实存在隐患问题，由于`Nginx`
+，难免会出现天灾人祸，比如系统异常、程序宕机、服务器断电、机房爆炸、地球毁灭……哈哈哈，夸张了。但实际生产环境中确实存在隐患问题，由于`Nginx`
 作为整个系统的网关层接入外部流量，所以一旦`Nginx`
 宕机，最终就会导致整个系统不可用，这无疑对于用户的体验感是极差的，因此也得保障`Nginx`高可用的特性。
 
@@ -1011,7 +1014,7 @@ OK~，根据如上配置了`Nginx`后，你的网站即可通过`https://`的方
 
 ①首先创建一个对应的目录并下载`keepalived`到`Linux`中并解压：
 
-```
+```plain
 [root@localhost]# mkdir /soft/keepalived && cd /soft/keepalived  
 [root@localhost]# wget https://www.keepalived.org/software/keepalived-2.2.4.tar.gz  
 [root@localhost]# tar -zxvf keepalived-2.2.4.tar.gz  
@@ -1019,7 +1022,7 @@ OK~，根据如上配置了`Nginx`后，你的网站即可通过`https://`的方
 
 ②进入解压后的`keepalived`目录并构建安装环境，然后编译并安装：
 
-```
+```plain
 [root@localhost]# cd keepalived-2.2.4  
 [root@localhost]# ./configure --prefix=/soft/keepalived/  
 [root@localhost]# make && make install  
@@ -1027,14 +1030,14 @@ OK~，根据如上配置了`Nginx`后，你的网站即可通过`https://`的方
 
 ③进入安装目录的`/soft/keepalived/etc/keepalived/`并编辑配置文件：
 
-```
+```plain
 [root@localhost]# cd /soft/keepalived/etc/keepalived/  
 [root@localhost]# vi keepalived.conf  
 ```
 
 ④编辑主机的`keepalived.conf`核心配置文件，如下：
 
-```
+```plain
 global_defs {  
     # 自带的邮件提醒服务，建议用独立的监控或第三方SMTP，也可选择配置邮件发送。  
     notification_email {  
@@ -1092,7 +1095,7 @@ vrrp_instance VI_1 {
 
 ⑤克隆一台之前的虚拟机作为从（备）机，编辑从机的`keepalived.conf`文件，如下：
 
-```
+```plain
 global_defs {  
     # 自带的邮件提醒服务，建议用独立的监控或第三方SMTP，也可选择配置邮件发送。  
     notification_email {  
@@ -1150,7 +1153,7 @@ vrrp_instance VI_1 {
 
 ⑥新建`scripts`目录并编写`Nginx`的重启脚本，`check_nginx_pid_restart.sh`：
 
-```
+```plain
 [root@localhost]# mkdir /soft/scripts /soft/scripts/keepalived  
 [root@localhost]# touch /soft/scripts/keepalived/check_nginx_pid_restart.sh  
 [root@localhost]# vi /soft/scripts/keepalived/check_nginx_pid_restart.sh  
@@ -1174,7 +1177,7 @@ fi
 
 ⑦编写的脚本文件需要更改编码格式，并赋予执行权限，否则可能执行失败：
 
-```
+```plain
 [root@localhost]# vi /soft/scripts/keepalived/check_nginx_pid_restart.sh  
   
 :set fileformat=unix # 在vi命令里面执行，修改编码格式  
@@ -1185,7 +1188,7 @@ fi
 
 ⑧由于安装`keepalived`时，是自定义的安装位置，因此需要拷贝一些文件到系统目录中：
 
-```
+```plain
 [root@localhost]# mkdir /etc/keepalived/  
 [root@localhost]# cp /soft/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/  
 [root@localhost]# cp /soft/keepalived/keepalived-2.2.4/keepalived/etc/init.d/keepalived /etc/init.d/  
@@ -1194,7 +1197,7 @@ fi
 
 ⑨将`keepalived`加入系统服务并设置开启自启动，然后测试启动是否正常：
 
-```
+```plain
 [root@localhost]# chkconfig keepalived on  
 [root@localhost]# systemctl daemon-reload  
 [root@localhost]# systemctl enable keepalived.service  
@@ -1203,7 +1206,7 @@ fi
 
 其他命令：
 
-```
+```plain
 systemctl disable keepalived.service # 禁止开机自动启动  
 systemctl restart keepalived.service # 重启keepalived  
 systemctl stop keepalived.service # 停止keepalived  
@@ -1212,11 +1215,11 @@ tail -f /var/log/messages # 查看keepalived运行时日志
 
 ⑩最后测试一下`VIP`是否生效，通过查看本机是否成功挂载虚拟`IP`：
 
-```
+```plain
 [root@localhost]# ip addr  
 ```
 
-![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-11.jpeg)虚拟IP-VIP
+![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-11.jpeg)虚拟 IP-VIP
 
 > ❝
 >
@@ -1230,7 +1233,7 @@ tail -f /var/log/messages # 查看keepalived运行时日志
 
 外部通过`VIP`通信时，也可以正常`Ping`通，代表虚拟`IP`配置成功。
 
-#### Nginx高可用性测试
+#### Nginx 高可用性测试
 
 经过上述步骤后，`keepalived`的`VIP`机制已经搭建成功，在上个阶段中主要做了几件事：
 
@@ -1240,7 +1243,7 @@ tail -f /var/log/messages # 查看keepalived运行时日志
 
 由于前面没有域名的原因，因此最初`server_name`配置的是当前机器的`IP`，所以需稍微更改一下`nginx.conf`的配置：
 
-```
+```plain
 sever{  
     listen    80;  
     # 这里从机器的本地IP改为虚拟IP  
@@ -1251,7 +1254,7 @@ sever{
 
 最后来实验一下效果：
 
-![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-13.png)Nginx宕机
+![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-13.png)Nginx 宕机
 
 > ❝
 >
@@ -1273,11 +1276,11 @@ sever{
 
 现在再切换到另外一台机器：`192.168.12.130`来看看情况：
 
-![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-15.png)130的IP情况
+![Nginx](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674181929662-15.png)130 的 IP 情况
 
 > ❝
 >
-> 此刻我们会发现，在主机`192.168.12.129`宕机后，VIP自动从主机飘移到了从机`192.168.12.130`
+> 此刻我们会发现，在主机`192.168.12.129`宕机后，VIP 自动从主机飘移到了从机`192.168.12.130`
 > 上，而此时客户端的请求就最终会来到`130`这台机器的`Nginx`上。
 >
 > ❞
@@ -1285,16 +1288,16 @@ sever{
 **「「最终，利用`Keepalived`对`Nginx`
 做了主从热备之后，无论是遇到线上宕机还是机房断电等各类故障时，都能够确保应用系统能够为用户提供`7x24`小时服务。」」**
 
-## 十四、Nginx性能优化
+## 十四、Nginx 性能优化
 
 到这里文章的篇幅较长了，最后再来聊一下关于`Nginx`
 的性能优化，主要就简单说说收益最高的几个优化项，在这块就不再展开叙述了，毕竟影响性能都有多方面原因导致的，比如网络、服务器硬件、操作系统、后端服务、程序自身、数据库服务等。
 
 #### 优化一：打开长连接配置
 
-通常Nginx作为代理服务，负责分发客户端的请求，那么建议开启`HTTP`长连接，用户减少握手的次数，降低服务器损耗，具体如下：
+通常 Nginx 作为代理服务，负责分发客户端的请求，那么建议开启`HTTP`长连接，用户减少握手的次数，降低服务器损耗，具体如下：
 
-```
+```plain
 upstream xxx {  
     # 长连接数  
     keepalive 32;  
@@ -1309,7 +1312,7 @@ upstream xxx {
 
 零拷贝这个概念，在大多数性能较为不错的中间件中都有出现，例如`Kafka、Netty`等，而`Nginx`中也可以配置数据零拷贝技术，如下：
 
-```
+```plain
 sendfile on; # 开启零拷贝机制  
 ```
 
@@ -1324,12 +1327,13 @@ sendfile on; # 开启零拷贝机制
 
 在`Nginx`中有两个较为关键的性能参数，即`tcp_nodelay、tcp_nopush`，开启方式如下：
 
-```
+```plain
 tcp_nodelay on;  
 tcp_nopush on;  
 ```
 
-`TCP/IP`协议中默认是采用了Nagle算法的，即在网络数据传输过程中，每个数据报文并不会立马发送出去，而是会等待一段时间，将后面的几个数据包一起组合成一个数据报文发送，但这个算法虽然提高了网络吞吐量，但是实时性却降低了。
+`TCP/IP`协议中默认是采用了 Nagle
+算法的，即在网络数据传输过程中，每个数据报文并不会立马发送出去，而是会等待一段时间，将后面的几个数据包一起组合成一个数据报文发送，但这个算法虽然提高了网络吞吐量，但是实时性却降低了。
 
 > ❝
 >
@@ -1357,24 +1361,24 @@ tcp_nopush on;
 >
 > ❞
 
-#### 优化四、调整Worker工作进程
+#### 优化四、调整 Worker 工作进程
 
-`Nginx`启动后默认只会开启一个`Worker`工作进程处理客户端请求，而我们可以根据机器的CPU核数开启对应数量的工作进程，以此来提升整体的并发量支持，如下：
+`Nginx`启动后默认只会开启一个`Worker`工作进程处理客户端请求，而我们可以根据机器的 CPU 核数开启对应数量的工作进程，以此来提升整体的并发量支持，如下：
 
-```
+```plain
 # 自动根据CPU核心数调整Worker进程数量  
 worker_processes auto;  
 ```
 
 > ❝
 >
-> 工作进程的数量最高开到`8`个就OK了，`8`个之后就不会有再大的性能提升。
+> 工作进程的数量最高开到`8`个就 OK 了，`8`个之后就不会有再大的性能提升。
 >
 > ❞
 
 同时也可以稍微调整一下每个工作进程能够打开的文件句柄数：
 
-```
+```plain
 # 每个Worker能打开的文件描述符，最少调整至1W以上，负荷较高建议2-3W  
 worker_rlimit_nofile 20000;  
 ```
@@ -1388,22 +1392,23 @@ worker_rlimit_nofile 20000;
 >
 > ❞
 
-#### 优化五、开启CPU亲和机制
+#### 优化五、开启 CPU 亲和机制
 
-对于并发编程较为熟悉的伙伴都知道，因为进程/线程数往往都会远超出系统CPU的核心数，因为操作系统执行的原理本质上是采用时间片切换机制，也就是一个CPU核心会在多个进程之间不断频繁切换，造成很大的性能损耗。
+对于并发编程较为熟悉的伙伴都知道，因为进程/线程数往往都会远超出系统 CPU 的核心数，因为操作系统执行的原理本质上是采用时间片切换机制，也就是一个
+CPU 核心会在多个进程之间不断频繁切换，造成很大的性能损耗。
 
-而CPU亲和机制则是指将每个`Nginx`的工作进程，绑定在固定的CPU核心上，从而减小CPU切换带来的时间开销和资源损耗，开启方式如下：
+而 CPU 亲和机制则是指将每个`Nginx`的工作进程，绑定在固定的 CPU 核心上，从而减小 CPU 切换带来的时间开销和资源损耗，开启方式如下：
 
-```
+```plain
 worker_cpu_affinity auto;  
 ```
 
-#### 优化六、开启epoll模型及调整并发连接数
+#### 优化六、开启 epoll 模型及调整并发连接数
 
 在最开始就提到过：`Nginx、Redis`都是基于多路复用模型去实现的程序，但最初版的多路复用模型`select/poll`最大只能监听`1024`
 个连接，而`epoll`则属于`select/poll`接口的增强版，因此采用该模型能够大程度上提升单个`Worker`的性能，如下：
 
-```
+```plain
 events {  
     # 使用epoll网络模型  
     use epoll;  
@@ -1414,7 +1419,7 @@ events {
 
 > ❝
 >
-> 这里对于`select/poll/epoll`模型就不展开细说了，后面的IO模型文章中会详细剖析。
+> 这里对于`select/poll/epoll`模型就不展开细说了，后面的 IO 模型文章中会详细剖析。
 >
 > ❞
 

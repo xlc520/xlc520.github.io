@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot万能导出excel工具
+excerpt: 
 description: 
 date: 2023-02-25
 category: Java
@@ -10,33 +11,33 @@ timeline: true
 icon: java
 ---
 
-# SpringBoot万能导出excel工具
+# SpringBoot 万能导出 excel 工具
 
 > 类是不确定的 ，User ？Student ? District ? 不确定。
 >
-> 但是呢我们封装出来的函数，要足够支撑不同的类，我们自动去读取遍历list ，然后导出生成文件。
+> 但是呢我们封装出来的函数，要足够支撑不同的类，我们自动去读取遍历 list ，然后导出生成文件。
 
 ## **核心的思路是什么 ？**
 
-其实就还是利用csv文件的内容格式本质 ，看这两幅图 ：
+其实就还是利用 csv 文件的内容格式本质 ，看这两幅图 ：
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316796-0.png)
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316796-1.png)
 
-我们要实现万能的类导出excel ！！！
+我们要实现万能的类导出 excel ！！！
 
 思路是什么 ：
 
-① 我们从不确定的类 的集合list 中，取出 里面的类。
+① 我们从不确定的类 的集合 list 中，取出 里面的类。
 
 反射一手，拿出里面的属性名， 做第一行表格行标题名称拼接。
 
 ②拼接内容
 
-因为类不确定，那么我们就采取反射把类全部字段属性作为key丢到map里面，同时把值丢到value里面。
+因为类不确定，那么我们就采取反射把类全部字段属性作为 key 丢到 map 里面，同时把值丢到 value 里面。
 
-这样我们拼接内容的时候只需要根据map 嘎嘎一顿遍历 拼接即可。
+这样我们拼接内容的时候只需要根据 map 嘎嘎一顿遍历 拼接即可。
 
 ## **1.依赖**
 
@@ -206,21 +207,21 @@ public class MyCsvFileUtil {
 }
 ```
 
-### 代码注意点（各种小封装）：
+### 代码注意点（各种小封装）
 
-①类转map
+①类转 map
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316796-2.png)
 
-② 反射转map 取字段属性名 拼接 标题
+② 反射转 map 取字段属性名 拼接 标题
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316796-3.png)
 
-③ 针对`list<不确定类>` 转化成 `list<map> `，然后拼接excel内容
+③ 针对`list<不确定类>` 转化成 `list<map>`，然后拼接 excel 内容
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316796-4.png)
 
-### 测试代码：
+### 测试代码
 
 ```java
 @RequestMapping("/createCsvFileJcTest")
@@ -245,14 +246,14 @@ public void createCsvFileJcTest() {
 看看效果：
 
 ![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
-1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
-xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+1' version='1.1' xmlns='<http://www.w3.org/2000/svg>' xmlns:
+xlink='<http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg> stroke='none' stroke-width='1' fill='none'
 fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
 x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316797-6.png)
 
-导出的excel文件内容：
+导出的 excel 文件内容：
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316797-7.png)
 
@@ -264,7 +265,7 @@ x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316797-9.png)
 
-可以看到数据导出也是OK的：
+可以看到数据导出也是 OK 的：
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316797-10.png)
 
@@ -349,7 +350,7 @@ public static void main(String[] args) {
 
 然后反手就搞到我们前面的文章使用例子里面：
 
-```
+```plain
 String tableNames = MyCsvFileUtil.buildCsvFileTableNamesNew( MyCsvFileUtil.resolveExcelTableName(dataList.get(0)));
 ```
 
@@ -366,4 +367,3 @@ String tableNames = MyCsvFileUtil.buildCsvFileTableNamesNew( MyCsvFileUtil.resol
 打开看看效果：
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1677318316798-16.png)
-

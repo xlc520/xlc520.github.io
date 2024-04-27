@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: ES6语法详解
+excerpt: 
 description: 
 date: 2022-06-26
 category: Java
@@ -13,11 +14,9 @@ timeline: true
 icon: java
 ---
 
+# ES6 语法详解
 
-
-# ES6语法详解
-
-## let变量
+## let 变量
 
 `let`声明的变量在`let`命令所在的代码块中有效。不存在变量提升，只能先声明后使用。
 
@@ -45,13 +44,14 @@ let a = 1;  var a = 2;   //报错，var声明有变量提升作用
 
 在块级作用域中，用`let`声明的变量只在当前作用域中有效，且不会受到外部的影响，所以块级作用域可以替代自执行函数表达式。
 
-理论上，函数在块级作用域中声明行为和`let`类似，但在es6浏览器环境中，为了兼容老版本，函数声明与`var`声明变量类似，会提升到全局作用域头部，和当前块级作用域的头部，为了避免差异，可以将函数声明写成函数表达式。
+理论上，函数在块级作用域中声明行为和`let`类似，但在 es6 浏览器环境中，为了兼容老版本，函数声明与`var`
+声明变量类似，会提升到全局作用域头部，和当前块级作用域的头部，为了避免差异，可以将函数声明写成函数表达式。
 
 ```javascript
 let fn = function () {};    //函数表达式
 ```
 
-## const常量
+## const 常量
 
 声明常量必须马上赋值且不能再改变。`const`和`let`有类似的特点：在块级作用域内有效，声明不提升，存在暂存死区，不可重复声明。
 
@@ -194,7 +194,7 @@ s.endsWidth('word');       //true
 s.includes('o');           //true 
 ```
 
-`charAt()` 用于返回给定位置的字符，对于编码大于0xFFFF的字符用`at()`方法。
+`charAt()` 用于返回给定位置的字符，对于编码大于 0xFFFF 的字符用`at()`方法。
 
 ```javascript
 'ab'.charAt(0)  //'a'
@@ -204,7 +204,8 @@ s.includes('o');           //true
 
 ### 模版字符串
 
-用于字符串拼接，`{}`中可以进行运算、引用对象、调用函数，非字符串类型会被转成字符串。可以嵌套使用，`{}`中可以再使用模版字符串。如果字符串中有反引号要用反斜杠转义。
+用于字符串拼接，`{}`中可以进行运算、引用对象、调用函数，非字符串类型会被转成字符串。可以嵌套使用，`{}`
+中可以再使用模版字符串。如果字符串中有反引号要用反斜杠转义。
 
 ```javascript
 let name = 'zq';
@@ -255,7 +256,7 @@ let reg = new RegExp(/abc/g, i).flags  //'i'
 
 ## 数值相关
 
-### Number对象扩展
+### Number 对象扩展
 
 `ES6`在`Number`对象上提供了新的方法。
 
@@ -270,7 +271,8 @@ Number.isFinite(Infinity)  //false
 
 `Number.isNaN()`检测一个值是否为`NaN`，只有`NaN`才会返回`true`，其他值一律返回`false`。
 
-> 全局方法`isFinite()`和`isNaN()`会将传入的值转成数字类型再判断，`Number.isFinite()`和`Number.isNaN()`方法参数必须是数值类型，否则直接返回`false`。
+> 全局方法`isFinite()`和`isNaN()`会将传入的值转成数字类型再判断，`Number.isFinite()`和`Number.isNaN()`
+> 方法参数必须是数值类型，否则直接返回`false`。
 
 ```javascript
 isNaN('NaN')          //true
@@ -288,7 +290,7 @@ Number.isInteger(2)    //true
 Number.isInteger(2.0)  //true
 ```
 
-### Math对象扩展
+### Math 对象扩展
 
 `Math.trunc()`方法返回数值的整数部分。
 
@@ -309,12 +311,12 @@ Math.trunc = Math.trunc || function(x) {
 
 `ES6`新增了**三角函数**：
 
-- `Math.sinh(x)` 返回x的双曲正弦
-- `Math.cosh(x)` 返回x的双曲余弦
-- `Math.tanh(x)` 返回x的双曲正切
-- `Math.asinh(x)` 返回x的反双曲正弦
-- `Math.acosh(x)` 返回x的反双曲余弦
-- `Math.atanh(x)` 返回x的反双曲正切
+- `Math.sinh(x)` 返回 x 的双曲正弦
+- `Math.cosh(x)` 返回 x 的双曲余弦
+- `Math.tanh(x)` 返回 x 的双曲正切
+- `Math.asinh(x)` 返回 x 的反双曲正弦
+- `Math.acosh(x)` 返回 x 的反双曲余弦
+- `Math.atanh(x)` 返回 x 的反双曲正切
 
 ### 指数运算符
 
@@ -393,9 +395,10 @@ function fn (x=undefined, y) {}
 fn(,2);
 ```
 
-### length属性
+### length 属性
 
-指定了默认值以后，函数的`length`属性，将返回没有指定默认值的参数个数。如果设置了默认值的参数不是尾参数，那么`length`属性也不再计入后面的参数。
+指定了默认值以后，函数的`length`属性，将返回没有指定默认值的参数个数。如果设置了默认值的参数不是尾参数，那么`length`
+属性也不再计入后面的参数。
 
 ```javascript
 function fn (x, y=1, z) {};
@@ -420,9 +423,10 @@ f(2) // 2
 }
 ```
 
-### rest参数
+### rest 参数
 
-`ES6` 引入 `rest` 参数（形式为`...变量名`），用于获取函数的多余参数，`rest` 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。`...变量`后不能再有参数，否则报错。
+`ES6` 引入 `rest` 参数（形式为`...变量名`），用于获取函数的多余参数，`rest`
+参数搭配的变量是一个数组，该变量将多余的参数放入数组中。`...变量`后不能再有参数，否则报错。
 
 函数的`length`属性不包括`rest`参数。
 
@@ -438,9 +442,10 @@ fn(1,2,3).length;  //1
 
 从 `ES5` 开始，函数内部可以设定为严格模式。`ES7`规定只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。
 
-### name属性
+### name 属性
 
-函数的`name`属性，返回该函数的函数名。如果将一个匿名函数赋值给一个变量，`ES5` 的`name`属性，会返回空字符串，而 `ES6` 的`name`属性会返回实际的函数名。
+函数的`name`属性，返回该函数的函数名。如果将一个匿名函数赋值给一个变量，`ES5` 的`name`属性，会返回空字符串，而 `ES6` 的`name`
+属性会返回实际的函数名。
 
 ```javascript
 let fn = () => {}
@@ -471,13 +476,13 @@ fn.name    //'a'
 
 除了`this`，以下三个变量在箭头函数之中也是不存在的，指向外层函数的对应变量：`arguments`、`super`、`new.target`。
 
-不能用`call()`、`apply()`、`bind()`这些方法去改变this的指向。
+不能用`call()`、`apply()`、`bind()`这些方法去改变 this 的指向。
 
 ## 数组的扩展
 
 ### 扩展运算符
 
-扩展运算符用三个点号表示，功能是把数组或类数组对象展开成一系列用逗号隔开的值（数组）,和...rest相反。
+扩展运算符用三个点号表示，功能是把数组或类数组对象展开成一系列用逗号隔开的值（数组）,和...rest 相反。
 
 扩展运算符后面还可以放置表达式。
 
@@ -492,7 +497,7 @@ let x = 1;
 [...[], 1]  //[1]
 ```
 
-扩展运算符可以展开数组，所以不再需要apply方法，将数组转为函数的参数。
+扩展运算符可以展开数组，所以不再需要 apply 方法，将数组转为函数的参数。
 
 ```javascript
 Math.max.apply(null, [14, 3, 77])
@@ -533,7 +538,7 @@ let arr2 = [4,5];
 arr1.push(...arr2);
 ```
 
-扩展运算符其他应用: **复制数组**，**合并数组**，**展开字符串**(有Iterato接口的对象)，****
+扩展运算符其他应用: **复制数组**，**合并数组**，**展开字符串**(有 Iterato 接口的对象)，****
 
 ```javascript
 let arr = [1,2];
@@ -545,7 +550,8 @@ let arr3 = [...'hello'];   //展开字符串
 
 ### Array.from()
 
-`Array.from`方法用于将两类对象转为真正的数组：类似数组的对象和可遍历（`iterable`）的对象（包括 `ES6` 新增的数据结构 `Set` 和 `Map`）。[将类数组转成数组](https://link.segmentfault.com/?enc=7TBM4qWk0KvtKHeEfNIU3w%3D%3D.%2BOpU5EeurIhyb8WliOadB0lXgsBJVbhY711Ce9SUdBJZQDSXXbEAM5bKZrs1jim5HdBHQ%2B9nEkasCiMSTYwRW42mOBSmnEngEhWrN%2FLmuge01wDlT86RrImxi%2F6teelWP9zk%2BTVV%2BIeXaqfI2oaxgz9Dx2zjUHDwv86hznUhYVj79HYNdyDCyJTOp1zBPYf5)
+`Array.from`方法用于将两类对象转为真正的数组：类似数组的对象和可遍历（`iterable`）的对象（包括 `ES6` 新增的数据结构 `Set`
+和 `Map`）。[将类数组转成数组](https://link.segmentfault.com/?enc=7TBM4qWk0KvtKHeEfNIU3w%3D%3D.%2BOpU5EeurIhyb8WliOadB0lXgsBJVbhY711Ce9SUdBJZQDSXXbEAM5bKZrs1jim5HdBHQ%2B9nEkasCiMSTYwRW42mOBSmnEngEhWrN%2FLmuge01wDlT86RrImxi%2F6teelWP9zk%2BTVV%2BIeXaqfI2oaxgz9Dx2zjUHDwv86hznUhYVj79HYNdyDCyJTOp1zBPYf5)
 
 ```javascript
 let arrayLike = {
@@ -579,7 +585,9 @@ const toArray = (() =>
 
 实际应用中，常见的类似数组的对象是 DOM 操作返回的 `NodeList` 集合，以及函数内部的 `arguments` 对象。`Array.form()` 都可以转换。
 
-`Array.from` 还可以接受第二个参数，作用类似于数组的 `map` 方法，用来对每个元素进行处理，将处理后的值放入返回的数组。如果 `map` 函数里面用到了 `this` 关键字，还可以传入 `Array.from` 的第三个参数，用来绑定 `this`。
+`Array.from` 还可以接受第二个参数，作用类似于数组的 `map`
+方法，用来对每个元素进行处理，将处理后的值放入返回的数组。如果 `map` 函数里面用到了 `this` 关键字，还可以传入 `Array.from`
+的第三个参数，用来绑定 `this`。
 
 ```javascript
 Array.from([1, 2, 3], (x) => x * x);
@@ -608,9 +616,11 @@ Array.of(2)   // [2]
 Array(2)  //[undefinde, undefined]
 ```
 
-### find()和findIndex()
+### find()和 findIndex()
 
-`find` 方法找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为 `true` 的成员，然后返回该成员。如果没有符合条件的成员，则返回 `undefined`。
+`find`
+方法找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为 `true`
+的成员，然后返回该成员。如果没有符合条件的成员，则返回 `undefined`。
 
 ```javascript
 [1,2,3].find(v => v>2);   //3
@@ -644,7 +654,8 @@ arr[0].name = 'Tim';
 
 ### keys(), values(), entries() 方法
 
-`keys()` 是对键名的遍历，`values()` 是对键值的遍历，`entries()` 是对键值对的遍历。`keys(), values(), entries()` 返回一个遍历器对象。可以用 `for...of` 循环进行遍历。
+`keys()` 是对键名的遍历，`values()` 是对键值的遍历，`entries()` 是对键值对的遍历。`keys(), values(), entries()`
+返回一个遍历器对象。可以用 `for...of` 循环进行遍历。
 
 ### includes() 方法
 
@@ -697,7 +708,8 @@ ES5 对空位的处理不一致。大多数情况下会被忽略。
 
 ES6 会将空位转为 undefined。
 
-Array.from 方法、扩展运算符（...）、entries()、keys()、values()、find() 和 findIndex() 会将数组的空位，转为 undefined ；for···of 会遍历空位。
+Array.from 方法、扩展运算符（...）、entries()、keys()、values()、find() 和 findIndex() 会将数组的空位，转为 undefined ；for···of
+会遍历空位。
 
 ## 对象的扩展
 
@@ -857,7 +869,7 @@ Object.getOwnPropertyDescriptor(obj, 'foo')
 
 **Reflect.ownKeys** 返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
 
-### __ proto __属性
+### __proto__属性
 
 用来读取或设置当前对象的 `prototype` 对象。实现上，`__proto__`调用的是`Object.prototype.__proto__`。
 
@@ -921,7 +933,8 @@ const obj = {
 
 ## Symbel
 
-ES5 的对象属性名都是字符串，这容易造成属性名的冲突，为了保证每个属性的名字都是独一无二的，这样就从根本上防止属性名的冲突。这就是 ES6 引入Symbol的原因。
+ES5 的对象属性名都是字符串，这容易造成属性名的冲突，为了保证每个属性的名字都是独一无二的，这样就从根本上防止属性名的冲突。这就是
+ES6 引入 Symbol 的原因。
 
 它是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
 
@@ -933,7 +946,8 @@ typeof s
 
 s 是一个独一无二的值。
 
-Symbol 函数前不能使用 `new` 命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。也就是说，由于 Symbol 值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型。
+Symbol 函数前不能使用 `new` 命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。也就是说，由于 Symbol
+值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型。
 
 Symbol 函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
 
@@ -945,9 +959,9 @@ s1 // Symbol(foo)
 s1.toString() // "Symbol(foo)"
 ```
 
-如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。
+如果 Symbol 的参数是一个对象，就会调用该对象的 toString 方法，将其转为字符串，然后才生成一个 Symbol 值。
 
-Symbol 函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+Symbol 函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的 Symbol 函数的返回值是不相等的。
 
 Symbol 值不能与其他类型的值进行运算，会报错。但是，Symbol 值可以显式转为字符串。也可以转为布尔值，但是不能转为数值。
 
@@ -987,9 +1001,10 @@ Symbol 值作为对象属性名时，不能用点运算符。
 
 在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中。
 
-## Module模块
+## Module 模块
 
-`ES6` 模块通过`export`命令显式指定输出的代码，再通过`import`命令输入。使用模块自动采用严格模式。[严格模式详解](https://link.segmentfault.com/?enc=1gqS2d%2BHX2rNigzRaRiK9w%3D%3D.p%2F9KZRIufKJXjX29hQ8D27gL5UnNsPRc%2BdtMVanU71Ir975mR%2ByRyEs8MVq0EQyF%2Bk7QztHAKp%2Bm7S%2FJMlEEJmTYwf6XEvniadeVni7aMbk%3D)
+`ES6` 模块通过`export`命令显式指定输出的代码，再通过`import`
+命令输入。使用模块自动采用严格模式。[严格模式详解](https://link.segmentfault.com/?enc=1gqS2d%2BHX2rNigzRaRiK9w%3D%3D.p%2F9KZRIufKJXjX29hQ8D27gL5UnNsPRc%2BdtMVanU71Ir975mR%2ByRyEs8MVq0EQyF%2Bk7QztHAKp%2Bm7S%2FJMlEEJmTYwf6XEvniadeVni7aMbk%3D)
 
 ### export
 
@@ -1043,7 +1058,8 @@ function () {
 
 ### import
 
-使用`import`加载模块。[import - MDN](https://link.segmentfault.com/?enc=ARF3XMHuI%2B65E8pPDrk7tA%3D%3D.z7wzeodzC5kDDuFlv9x8LVD%2FI7kxCCFp8oA7SjOc62fEvwbbh9XR6qMyPeXKLTL5i2%2BOL0i9LkG9%2Bpjf85EwZjcyHtfwMs0CX9ju846bXXS1FajvjAB17YpsD952EJdn)
+使用`import`
+加载模块。[import - MDN](https://link.segmentfault.com/?enc=ARF3XMHuI%2B65E8pPDrk7tA%3D%3D.z7wzeodzC5kDDuFlv9x8LVD%2FI7kxCCFp8oA7SjOc62fEvwbbh9XR6qMyPeXKLTL5i2%2BOL0i9LkG9%2Bpjf85EwZjcyHtfwMs0CX9ju846bXXS1FajvjAB17YpsD952EJdn)
 
 ```javascript
 import {a, b} from './test'
@@ -1121,7 +1137,8 @@ export {foo, fn};
 
 ### 模块在浏览器中加载
 
-加载`javascript`脚本使用`<script>`标签，可使用`defer`或`async`实现异步加载，`defer`会等到页面渲染完，其他脚本执行完再执行，`async`只要资源加载完就终断页面渲染立即执行，不能保证多个`async`脚本按顺序执行。
+加载`javascript`脚本使用`<script>`标签，可使用`defer`或`async`实现异步加载，`defer`
+会等到页面渲染完，其他脚本执行完再执行，`async`只要资源加载完就终断页面渲染立即执行，不能保证多个`async`脚本按顺序执行。
 
 在浏览器中可以使用`<script>`标签加载模块，但需要`type='module'`属性。
 
@@ -1138,4 +1155,3 @@ export {foo, fn};
     import a from './test.js';
 </script>
 ```
-

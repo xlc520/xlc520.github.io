@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Boot - Netty - WebSocket 实现消息推送
+excerpt: 
 description: 
 date: 2022-08-21
 category: Java
@@ -12,11 +13,11 @@ icon: java
 
 # Spring Boot - Netty - WebSocket 实现消息推送
 
-## **关于Netty**
+## **关于 Netty**
 
 Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂性而提供一个易于使用的 API 的客户端/服务器框架。
 
-## **Maven依赖**
+## **Maven 依赖**
 
 ```xml
 <dependencies>
@@ -32,7 +33,7 @@ Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂�
 
 ## **SpringBootApplication**
 
-启动器中需要new一个NettyServer，并显式调用启动netty。
+启动器中需要 new 一个 NettyServer，并显式调用启动 netty。
 
 ```java
 @SpringBootApplication
@@ -51,7 +52,7 @@ public class SpringCloudStudyDemoApplication {
 
 ## **NettyServer**
 
-启动的NettyServer，这里进行配置
+启动的 NettyServer，这里进行配置
 
 ```java
 public class NettyServer {
@@ -98,7 +99,7 @@ public class NettyServer {
 
 ## **MyChannelHandlerPool**
 
-通道组池，管理所有websocket连接
+通道组池，管理所有 websocket 连接
 
 ```java
 public class MyChannelHandlerPool {
@@ -112,11 +113,11 @@ public class MyChannelHandlerPool {
 
 ## **MyWebSocketHandler**
 
-处理ws一下几种情况：
+处理 ws 一下几种情况：
 
-- channelActive与客户端建立连接
-- channelInactive与客户端断开连接
-- channelRead0客户端发送消息处理
+- channelActive 与客户端建立连接
+- channelInactive 与客户端断开连接
+- channelRead0 客户端发送消息处理
 
 ```java
 public class NettyServer {
@@ -163,7 +164,7 @@ public class NettyServer {
 
 ## **socket.html**
 
-主要是连接ws，发送消息，以及消息反馈
+主要是连接 ws，发送消息，以及消息反馈
 
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1transitional.dtd">
@@ -221,7 +222,7 @@ public class NettyServer {
 
 ## **Controller**
 
-写好了html当然还需要一个controller来引导页面。
+写好了 html 当然还需要一个 controller 来引导页面。
 
 ```java
 @RestController
@@ -245,17 +246,17 @@ public class IndexController {
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16612195691462.png)
 
-## **改造netty支持url参数**
+## **改造 netty 支持 url 参数**
 
-1.首先，调整一下加载handler的顺序，优先`MyWebSocketHandler`在`WebSocketServerProtocolHandler`之上。
+1.首先，调整一下加载 handler 的顺序，优先`MyWebSocketHandler`在`WebSocketServerProtocolHandler`之上。
 
-```
+```plain
 ch.pipeline().addLast(new MyWebSocketHandler());
 ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws", null, true, 65536 * 10));
 ```
 
 2.其次，改造`MyWebSocketHandler` 的`channelRead`方法，首次连接会是一个`FullHttpRequest`
-类型，可以通过`FullHttpRequest.uri()`获取完整ws的URL地址，之后接受信息的话，会是一个`TextWebSocketFrame`类型。
+类型，可以通过`FullHttpRequest.uri()`获取完整 ws 的 URL 地址，之后接受信息的话，会是一个`TextWebSocketFrame`类型。
 
 ```java
 public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
@@ -332,15 +333,15 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocke
 }
 ```
 
-3.html中的ws地址也进行改造
+3.html 中的 ws 地址也进行改造
 
-```
+```plain
 socket = new WebSocket("ws://127.0.0.1:12345/ws?uid=666&gid=777");
 ```
 
 4.改造后控制台输出情况
 
-```
+```plain
 收到新连接
 与客户端建立连接，通道开启！
 接收到的参数是：{"uid":"666","gid":"777"}
@@ -352,6 +353,6 @@ socket = new WebSocket("ws://127.0.0.1:12345/ws?uid=666&gid=777");
 
 > failed: WebSocket opening handshake timed out
 
-听说是ssl wss的情况下才会出现，来自 @around-gao 的解决方法：
+听说是 ssl wss 的情况下才会出现，来自 @around-gao 的解决方法：
 
 把`MyWebSocketHandler`和`WebSocketServerProtocolHandler`调下顺序就好了。

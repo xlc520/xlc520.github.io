@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 集成 Caffeine
+excerpt: 
 description: 
 date: 2023-09-11
 category: Java
@@ -14,7 +15,7 @@ icon: java
 
 其他参考：
 
-https://www.cnblogs.com/rickiyang/p/11074158.html
+<https://www.cnblogs.com/rickiyang/p/11074158.html>
 
 **环境配置：**
 
@@ -24,10 +25,10 @@ https://www.cnblogs.com/rickiyang/p/11074158.html
 
 **参考地址：**
 
-- [Spring Boot缓存实战 Caffeine](https://www.jianshu.com/p/c72fb0c787fc)
-- [Caffeine Cache-高性能Java本地缓存组件](https://www.cnblogs.com/rickiyang/p/11074158.html)
+- [Spring Boot 缓存实战 Caffeine](https://www.jianshu.com/p/c72fb0c787fc)
+- [Caffeine Cache-高性能 Java 本地缓存组件](https://www.cnblogs.com/rickiyang/p/11074158.html)
 - 博文示例项目 Github
-  地址：https://github.com/my-dlq/blog-example/tree/master/springboot/springboot-caffeine-cache-example
+  地址：<https://github.com/my-dlq/blog-example/tree/master/springboot/springboot-caffeine-cache-example>
 
 ## 一、本地缓存介绍
 
@@ -643,9 +644,9 @@ public class Application2 {
 
 ## 六、SpringBoot 集成 Caffeine 方式三（新）
 
-> 2023年10月12日21:40
+> 2023 年 10 月 12 日 21:40
 
-### 1、@Cacheable相关注解
+### 1、@Cacheable 相关注解
 
 #### 1.1 相关依赖
 
@@ -660,7 +661,8 @@ public class Application2 {
 
 #### 1.2 常用注解
 
-- **@Cacheable** ：表示该方法支持缓存。当调用被注解的方法时，如果对应的键已经存在缓存，则不再执行方法体，而从缓存中直接返回。当方法返回null时，将不进行缓存操作。
+- **@Cacheable** ：表示该方法支持缓存。当调用被注解的方法时，如果对应的键已经存在缓存，则不再执行方法体，而从缓存中直接返回。当方法返回
+  null 时，将不进行缓存操作。
 - **@CachePut** ：表示执行该方法后，其值将作为最新结果更新到缓存中，每次都会执行该方法。
 - **@CacheEvict** ：表示执行该方法后，将触发缓存清除操作。
 - **@Caching** ：用于组合前三个注解，例如：
@@ -675,26 +677,26 @@ public User find(Integer id) {
 
 #### 1.3 常用注解属性
 
-- **cacheNames/value** ：缓存组件的名字，即cacheManager中缓存的名称。
-- **key** ：缓存数据时使用的key。默认使用方法参数值，也可以使用SpEL表达式进行编写。
-- **keyGenerator** ：和key二选一使用。
+- **cacheNames/value** ：缓存组件的名字，即 cacheManager 中缓存的名称。
+- **key** ：缓存数据时使用的 key。默认使用方法参数值，也可以使用 SpEL 表达式进行编写。
+- **keyGenerator** ：和 key 二选一使用。
 - **cacheManager** ：指定使用的缓存管理器。
-- **condition** ：在方法执行开始前检查，在符合condition的情况下，进行缓存
-- **unless** ：在方法执行完成后检查，在符合unless的情况下，不进行缓存
-- **sync** ：是否使用同步模式。若使用同步模式，在多个线程同时对一个key进行load时，其他线程将被阻塞。
+- **condition** ：在方法执行开始前检查，在符合 condition 的情况下，进行缓存
+- **unless** ：在方法执行完成后检查，在符合 unless 的情况下，不进行缓存
+- **sync** ：是否使用同步模式。若使用同步模式，在多个线程同时对一个 key 进行 load 时，其他线程将被阻塞。
 
 #### 1.4 缓存同步模式
 
-sync开启或关闭，在Cache和LoadingCache中的表现是不一致的：
+sync 开启或关闭，在 Cache 和 LoadingCache 中的表现是不一致的：
 
-- Cache中，sync表示是否需要所有线程同步等待
-- LoadingCache中，sync表示在读取不存在/已驱逐的key时，是否执行被注解方法
+- Cache 中，sync 表示是否需要所有线程同步等待
+- LoadingCache 中，sync 表示在读取不存在/已驱逐的 key 时，是否执行被注解方法
 
 ### 2、实战
 
 #### 2.1 引入依赖
 
-```
+```plain
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-cache</artifactId>
@@ -706,7 +708,7 @@ sync开启或关闭，在Cache和LoadingCache中的表现是不一致的：
 </dependency>
 ```
 
-##### 2.2 缓存常量CacheConstants
+##### 2.2 缓存常量 CacheConstants
 
 创建缓存常量类，把公共的常量提取一层，复用，这里也可以通过配置文件加载这些数据，例如`@ConfigurationProperties`和`@Value`
 
@@ -725,7 +727,7 @@ public class CacheConstants {
 }
 ```
 
-#### 2.3 缓存配置类CacheConfig
+#### 2.3 缓存配置类 CacheConfig
 
 ```java
 @Configuration
@@ -769,7 +771,7 @@ public class CacheConfig {
 
 #### 2.4 调用缓存
 
-这里要注意的是Cache和@Transactional一样也使用了代理，类内调用将失效
+这里要注意的是 Cache 和@Transactional 一样也使用了代理，类内调用将失效
 
 ```java
 /**
@@ -789,4 +791,3 @@ public UserEntity getUserByUserId(Integer userId){
     return userEntity;
 }
 ```
-

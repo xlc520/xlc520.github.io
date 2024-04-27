@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java isEmpty和isBlank的用法区别
+excerpt: 
 description: 
 date: 2023-10-31
 category: Java
@@ -10,15 +11,14 @@ timeline: true
 icon: java
 ---
 
+# Java isEmpty 和 isBlank 的用法区别
 
-
-# Java isEmpty和isBlank的用法区别
-
-也许你两个都不知道，也许你除了`isEmpty`/`isNotEmpty`/`isNotBlank`/`isBlank`外，并不知道还有`isAnyEmpty`/`isNoneEmpty`/`isAnyBlank`/`isNoneBlank`的存在。
+也许你两个都不知道，也许你除了`isEmpty`/`isNotEmpty`/`isNotBlank`/`isBlank`
+外，并不知道还有`isAnyEmpty`/`isNoneEmpty`/`isAnyBlank`/`isNoneBlank`的存在。
 
 come on ,让我们一起来探索`org.apache.commons.lang3.StringUtils;`这个工具类。
 
-## isEmpty系列
+## isEmpty 系列
 
 ### StringUtils.isEmpty()
 
@@ -57,7 +57,7 @@ public static boolean isNotEmpty(final CharSequence cs) {
 
 ### StringUtils.isAnyEmpty()
 
-是否有一个为空，只有一个为空，就为true。
+是否有一个为空，只有一个为空，就为 true。
 
 ```java
 StringUtils.isAnyEmpty(null) = true
@@ -87,7 +87,7 @@ public static boolean isAnyEmpty(final CharSequence... css) {
 
 ### StringUtils.isNoneEmpty()
 
-相当于`!isAnyEmpty(css)` , 必须所有的值都不为空才返回true
+相当于`!isAnyEmpty(css)` , 必须所有的值都不为空才返回 true
 
 ```java
 /
@@ -112,7 +112,7 @@ public static boolean isNoneEmpty(final CharSequence... css) {{
 }
 ```
 
-## isBank系列
+## isBank 系列
 
 ### StringUtils.isBlank()
 
@@ -147,7 +147,7 @@ public static boolean isBlank(final CharSequence cs) {
 
 ### StringUtils.isNotBlank()
 
- 是否真的不为空，不是空格或者空值，相当于`!isBlank();`
+是否真的不为空，不是空格或者空值，相当于`!isBlank();`
 
 ```java
 public static boolean isNotBlank(final CharSequence cs) {
@@ -189,7 +189,7 @@ public static boolean isAnyBlank(final CharSequence... css) {
 
 ### StringUtils.isNoneBlank()
 
-是否全部都不包含空值或空格。面试宝典，公众号Java精选，回复java面试，获取在线面试资料，支持随时随地刷题。
+是否全部都不包含空值或空格。面试宝典，公众号 Java 精选，回复 java 面试，获取在线面试资料，支持随时随地刷题。
 
 ```java
 StringUtils.isNoneBlank(null) = false
@@ -210,4 +210,3 @@ public static boolean isNoneBlank(final CharSequence... css) {
   return !isAnyBlank(css);
 }
 ```
-

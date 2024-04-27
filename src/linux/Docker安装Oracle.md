@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Docker安装Oracle
+excerpt: 
 description: 
 date: 2022-08-17
 category: Linux
@@ -10,9 +11,9 @@ timeline: true
 icon: linux
 ---
 
-# Docker安装Oracle
+# Docker 安装 Oracle
 
-## 通过Docker 安装 Oracle11g
+## 通过 Docker 安装 Oracle11g
 
 ### 1. 背景
 
@@ -23,7 +24,7 @@ icon: linux
 
 #### 前期准备
 
-**Docker安装**
+**Docker 安装**
 
 ```sh
 #升级yum
@@ -166,10 +167,10 @@ docker exec -it oracle bash
 
 #### 3.3.1. 编辑环境变量
 
-优化冒泡排序和选择排序zip
+优化冒泡排序和选择排序 zip
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/star.png)
 
-0星超过10%的资源595KB
+0 星超过 10%的资源 595KB
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/arrowDownWhite.png)
 
@@ -197,13 +198,13 @@ source /etc/profile
 ln -s $ORACLE_HOME/bin/sqlplus /usr/bin
 ```
 
-#### 3.3.3. 切换到oracle用户
+#### 3.3.3. 切换到 oracle 用户
 
 ```linux
 su - oracle
 ```
 
-#### 3.4. 登录oracle
+#### 3.4. 登录 oracle
 
 ```linux
 sqlplus /nolog   --登录
@@ -212,9 +213,9 @@ conn /as sysdba
 
 ![20220726194234](https://bitbucket.org/xlc520/blogasset/raw/main/images3/406b808f765627beab8bc6268aa7a23f.png)
 
-#### 3.5. Oracle操作
+#### 3.5. Oracle 操作
 
-#### 3.5.1. 修改sys、system用户密码
+#### 3.5.1. 修改 sys、system 用户密码
 
 ```sql
 alter user system identified by system ;--修改system用户账号密码；
@@ -272,7 +273,7 @@ show user;
 
 ![20220726194951](https://bitbucket.org/xlc520/blogasset/raw/main/images3/90628c41e2934c62baf062d8cf60f3ed.png)
 
-## 通过Docker 安装Oracle12C
+## 通过 Docker 安装 Oracle12C
 
 ```yaml
 version: "3.6"
@@ -299,7 +300,7 @@ services:
 
 ```
 
-## 通过Docker 安装 Oracle18c
+## 通过 Docker 安装 Oracle18c
 
 1、拉取 oracle18c 镜像
 
@@ -315,7 +316,7 @@ docker run -d --name oracle18c -p 1521:1521 -v /IT_zhengqing/soft/db/oracle18c/d
 
 运行之后查看容器日志
 
-## 通过Docker 安装 Oracle19c
+## 通过 Docker 安装 Oracle19c
 
 ### 第一种
 
@@ -366,9 +367,9 @@ mkdir -p /root/oracle19/oradata
 chmod 777 /root/oracle19/oradata
 ```
 
-### 第三步：安装Oracle
+### 第三步：安装 Oracle
 
-1、安装oracle，并把配置挂载到本地文件
+1、安装 oracle，并把配置挂载到本地文件
 
 ```sh
 docker run -d  \
@@ -426,7 +427,7 @@ docker-compose up
 docker-compose up -d
 ```
 
-查看oracle是否安装成功
+查看 oracle 是否安装成功
 
 ```sh
 # 查看启动日志
@@ -440,7 +441,7 @@ docker logs -ft orcl19
 > docker stop orcl19c_03
 > docker rm orcl19c_03
 
-### 第四步：连接Oracle
+### 第四步：连接 Oracle
 
 ```sh
 docker exec -it orcl19 /bin/bash
@@ -454,11 +455,11 @@ show pdbs;
 
 ![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_16,color_FFFFFF,t_70,g_se,x_16.png)
 
-还可以通过访问https://localhost:5502/em
+还可以通过访问<https://localhost:5502/em>
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142552.png)
 
-```
+```plain
 username：sys
 password：123456
 Container Name：ORCLPDB
@@ -466,13 +467,13 @@ Container Name：ORCLPDB
 
 ![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142553.png)
 
-**注意 ：是https，不是http**
+**注意 ：是 https，不是 http**
 
-## 关于Oracle12C默认用户名system密码不正确登录不上解决方案
+## 关于 Oracle12C 默认用户名 system 密码不正确登录不上解决方案
 
 解决方案：
 
-1.使用sysdba账号 登陆后 可以修改其他账号密码
+1.使用 sysdba 账号 登陆后 可以修改其他账号密码
 
 运行 cmd 按如下输入命令
 
@@ -486,7 +487,7 @@ sqlplus / as sysdba
 
 alter user 用户名 account unlock; --------- 解除锁定(必须带“;”号)
 
-以system用户名为例，即命令为
+以 system 用户名为例，即命令为
 
 ```sql
 alter user system account unlock;
@@ -496,7 +497,7 @@ alter user system account unlock;
 
 alter user 用户名 identified by 密码; -------------修改密码（密码加不加双引号均可，必须带“;”号）
 
-以用户名system密码dhee为例，即命令为
+以用户名 system 密码 dhee 为例，即命令为
 
 ```sql
 alter user system identified by dhee;
@@ -511,11 +512,10 @@ select distinct owner from all_objects
 
 如果你在安装的时候没有设置密码的话
 
-oracle有三个默认的用户名和密码
+oracle 有三个默认的用户名和密码
 
 1.用户名:sys密码:change_on_install
 
 2.用户名:system密码:manager
 
 3.用户名:scott密码:tiger
-

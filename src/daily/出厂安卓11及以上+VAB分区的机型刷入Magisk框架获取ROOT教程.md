@@ -1,7 +1,8 @@
 ---
 author: xlc520
 title: 出厂安卓11及以上+VAB分区的机型刷入Magisk框架获取ROOT教程
-description: 
+excerpt: 出厂安卓11及以上+VAB分区的机型刷入Magisk框架获取ROOT教程
+description: 出厂安卓11及以上+VAB分区的机型刷入Magisk框架获取ROOT教程
 date: 2023-11-27
 category: daily
 tag: daily
@@ -10,12 +11,12 @@ timeline: true
 icon: type
 ---
 
-# 出厂安卓11及以上+VAB分区的机型刷入Magisk框架获取ROOT教程
+# 出厂安卓 11 及以上+VAB 分区的机型刷入 Magisk 框架获取 ROOT 教程
 
-总得来说，现阶段对于【出厂】就是基于 Android 11 （**并且是V-AB 分区结构**）及以上系统底层的机型刷入完整可用的 Magisk ROOT
+总得来说，现阶段对于【出厂】就是基于 Android 11 （**并且是 V-AB 分区结构**）及以上系统底层的机型刷入完整可用的 Magisk ROOT
 权限主要步骤如下
 
-**① 解除BL锁（****前提****）**
+**① 解除 BL 锁（****前提****）**
 
 **② 获取到当前机型系统的版本****卡刷包****固件**
 
@@ -25,15 +26,16 @@ icon: type
 
 **⑤ 通过“platform-tools”将修补并打包好的 boot.img** **使用 fastboot 命令** **刷入到手机**
 
-掌握这几个步骤，你基本可以给大部分机型制作修补boot镜像从而获取ROOT权限了。
+掌握这几个步骤，你基本可以给大部分机型制作修补 boot 镜像从而获取 ROOT 权限了。
 
-**对于上述ROOT攻略的补充说明**
+**对于上述 ROOT 攻略的补充说明**
 
-（1）此方法需要一台 Windows 电脑。【出厂】安卓11的意思是，一台手机的第一个系统版本底层是安卓11，而不是通过系统更新的方式升级到安卓11。
+（1）此方法需要一台 Windows 电脑。【出厂】安卓 11 的意思是，一台手机的第一个系统版本底层是安卓 11，而不是通过系统更新的方式升级到安卓
+11。
 
-（2）小米手机MIUI各版本固件可以在这里下载（记得下载卡刷包的固件）：
+（2）小米手机 MIUI 各版本固件可以在这里下载（记得下载卡刷包的固件）：
 
-https://xiaomirom.com/
+<https://xiaomirom.com/>
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829770473-0.png)
 
@@ -41,9 +43,9 @@ https://xiaomirom.com/
 
 （3）**payload_dumper** 工具官方下载。
 
-Go 版：https://github.com/ssut/payload-dumper-go/releases
+Go 版：<https://github.com/ssut/payload-dumper-go/releases>
 
-Python 版：https://androidfilehost.com/?fid=818070582850510260
+Python 版：<https://androidfilehost.com/?fid=818070582850510260>
 
 **二者的区别**
 
@@ -74,7 +76,7 @@ platform-tools.zip，然后将解包之后获得（修补版 boot.img ）的、�
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829770473-5.png)
 
-随后将手机重启至fastboot模式(以MIUI为例：关机后，同时按住开机键和音量下键)。
+随后将手机重启至 fastboot 模式(以 MIUI 为例：关机后，同时按住开机键和音量下键)。
 
 在 platform-tools 根目录的地址栏输入“**cmd**”三个字母，按回车键即可打开命令行，并自动定位到当前文件夹。
 
@@ -87,7 +89,8 @@ platform-tools.zip，然后将解包之后获得（修补版 boot.img ）的、�
 （命令行页面必须出现这个）
 
 然后在命令行页面输入“**fastboot devices**
-”，回车，即可输出当前已链接设备的序列号（如果没有输出任何内容，可能是电脑系统缺少安卓fastboot驱动，文末会提供），这就意味着手机已经连接成功。接下来就可以刷入
+”，回车，即可输出当前已链接设备的序列号（如果没有输出任何内容，可能是电脑系统缺少安卓 fastboot
+驱动，文末会提供），这就意味着手机已经连接成功。接下来就可以刷入
 boot.img 了。
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829770474-9.png)
@@ -110,7 +113,7 @@ boot.img 了。
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829770474-11.png)
 
-（5）对于类似于小米13 系列机型（安卓底层「出厂」版本高于安卓11 ）来说，由于安卓 13 已经将 ramdisk 从 boot.img 中移除，并单独放到了
+（5）对于类似于小米 13 系列机型（安卓底层「出厂」版本高于安卓 11 ）来说，由于安卓 13 已经将 ramdisk 从 boot.img 中移除，并单独放到了
 init_boot.img 中，而 Magisk 主要是往 ramdisk 中打补丁，因此这种情况下，系统版本『出厂』就是安卓 13 的机型获取 ROOT 过程相比安卓
 12 有所变化：上述需要修补的和刷入的文件变为了 init_boot.img，而不是此前的 boot.img 。同时刷入的命令也有所不同。
 
@@ -124,6 +127,7 @@ init_boot.img 中，而 Magisk 主要是往 ramdisk 中打补丁，因此这种�
 
 **fastboot reboot**
 
-（6）使用联发科处理器的机型，请谨慎解锁ROOT刷机，风险较高，一旦变砖黑屏，需要去售后，无法像高通那样通过 9008 的方式强刷开机，非常麻烦。
+（6）使用联发科处理器的机型，请谨慎解锁 ROOT 刷机，风险较高，一旦变砖黑屏，需要去售后，无法像高通那样通过 9008 的方式强刷开机，非常麻烦。
 
-（7）有能力的读者建议多使用 ADB 命令，可以直观的了解到各种步骤以及核心的原理，方便之后换机或者有些地方有小改动的时候，自己可以快速的上手。如果你嫌麻烦，也可以使用从酷安找到一些第三方的一键刷入Boot工具。
+（7）有能力的读者建议多使用 ADB 命令，可以直观的了解到各种步骤以及核心的原理，方便之后换机或者有些地方有小改动的时候，自己可以快速的上手。如果你嫌麻烦，也可以使用从酷安找到一些第三方的一键刷入
+Boot 工具。

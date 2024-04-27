@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Openssl一键自签证书
+excerpt: 
 description: Openssl一键自签证书
 date: 2022-01-18
 category: other
@@ -9,7 +10,8 @@ article: true
 timeline: true
 icon: type
 ---
-# Openssl一键自签证书
+
+# Openssl 一键自签证书
 
 `vim openssl.sh`
 
@@ -32,7 +34,5 @@ else
     echo "openssl 未安装"
 fi
 ```
-
-
 
 `bash openssl.sh`

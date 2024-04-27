@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 从 Maven 构建到 Docker 部署的完整指南
+excerpt: 
 description: 
 date: 2023-12-02
 category: Java
@@ -10,11 +11,9 @@ timeline: true
 icon: java
 ---
 
-
-
 # 从 Maven 构建到 Docker 部署的完整指南
 
-## 1 使用Dockerfile部署
+## 1 使用 Dockerfile 部署
 
 ```dockerfile
 # 使用Java 8基础镜像
@@ -60,23 +59,24 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 包含如下基本功能：
 
-- 设置时区为Asia/Shanghai
+- 设置时区为 Asia/Shanghai
 - 自动获取 maven 应用包名，不需要额外修改即可使用。
 - 自动识别 profile 使用的配置文件 不管是 `application-dev.yml` 、`*-test.yml`、 `*.prod.yml` 都可以识别出来。
-- 默认暴漏8080端口
+- 默认暴漏 8080 端口
 
 以下是它的主要特点和功能：
 
-- **基础镜像** ：使用了 Java 8 我自定义的镜像，你们使用dockerhub 上的就行 的基础镜像，这适用于许多传统的 Java 应用程序。
+- **基础镜像** ：使用了 Java 8 我自定义的镜像，你们使用 dockerhub 上的就行 的基础镜像，这适用于许多传统的 Java 应用程序。
 - **时区设置** ：设置时区为 Asia/Shanghai。这是一个重要的设置，特别是对于需要关注本地时间的应用程序。如果需要，可以轻松更改为其他时区。
 - **工作目录** ：在容器内设置了 /app 作为工作目录。
-- **文件复制** ：将构建的 Spring Boot 应用 jar 文件以及相关的配置文件（application.yml 和 `application-${activatedProperties}.yml`）复制到镜像中，自动识别 profile 使用的配置文件 。
+- **文件复制** ：将构建的 Spring Boot 应用 jar 文件以及相关的配置文件（application.yml
+  和 `application-${activatedProperties}.yml`）复制到镜像中，自动识别 profile 使用的配置文件 。
 - **端口暴露** ：默认暴露了 8080 端口，这是 Spring Boot 应用的常用端口。
 - **Java 虚拟机设置** ：
-  - 启用了服务器模式，优化长时间运行的性能。
-  - 设置了初始和最大堆大小。
-  - 启用了 G1 垃圾收集器，适用于需要更可预测停顿时间和更好性能的应用程序。
-  - 配置了在内存溢出时生成堆转储文件，有助于调试内存问题。
+    - 启用了服务器模式，优化长时间运行的性能。
+    - 设置了初始和最大堆大小。
+    - 启用了 G1 垃圾收集器，适用于需要更可预测停顿时间和更好性能的应用程序。
+    - 配置了在内存溢出时生成堆转储文件，有助于调试内存问题。
 - **环境变量** ：允许通过 `APP_ENV` 命令行的应用 配置项。
 - **目录创建** ：创建了用于存储内存转储文件和日志文件的目录。
 - **启动命令** ：定义了容器启动时执行的命令，包括 Java 虚拟机参数、日志文件设置和应用 jar 文件的执行。
@@ -86,7 +86,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 管理 Docker 容器有时会显得复杂。为此，我们使用 Bash 脚本来简化这一过程。下面是这个脚本的核心要点：
 
 - **安全性优先：** 使用 `set -e` 确保脚本在出现任何错误时立即停止，防止问题扩散。
-- **灵活配置：** 通过设置变量 `CONTAINER_NAME` 和 `IMAGE_NAME`，脚本可以灵活适应不同的项目需求，会根据maven打包环境替换
+- **灵活配置：** 通过设置变量 `CONTAINER_NAME` 和 `IMAGE_NAME`，脚本可以灵活适应不同的项目需求，会根据 maven 打包环境替换
 - **容器重启：** 如果容器正在运行，脚本会先停止并删除它，然后重新构建和启动，保证环境的干净和更新。
 - **一键执行：** 无论是构建新镜像还是启动新容器，一切操作都可通过脚本一键完成。
 
@@ -132,11 +132,12 @@ if [ "$running" != "true" ]; then
 fi
 ```
 
-`docker load -i java8.tar` 这一步对于下面Docker-Compose 可能是需要的。
+`docker load -i java8.tar` 这一步对于下面 Docker-Compose 可能是需要的。
 
 ## 3 集成 Docker 管理脚本与 Maven：完善构建流程
 
-要将前面提到的 Docker 管理脚本（restart.sh）以及 Dockerfile 与 Maven 打包工具集成，我们可以利用 Maven 的 `maven-resources-plugin` 插件。这个插件允许我们在 Maven 的构建过程中复制和处理资源文件。
+要将前面提到的 Docker 管理脚本（restart.sh）以及 Dockerfile 与 Maven 打包工具集成，我们可以利用 Maven
+的 `maven-resources-plugin` 插件。这个插件允许我们在 Maven 的构建过程中复制和处理资源文件。
 
 下面是如何配置这个插件，以及它在整个过程中的作用：
 
@@ -169,7 +170,7 @@ fi
 </plugin>
 ```
 
-可以跟 profile 结合起来，只有jar包的的时候才用Docker
+可以跟 profile 结合起来，只有 jar 包的的时候才用 Docker
 
 ```xml
 <profiles>
@@ -224,11 +225,12 @@ fi
 
 - outputDirectory 设置为 `${project.build.directory}`，这意味着资源将被复制到 Maven 的构建目录中。
 - 在 `<resources>`部分，我们定义了要包括的具体资源。
-  - directory 指定资源所在的目录，这里是 `src/main/resources`。
-  - filtering 设置为 true，允许对资源文件进行过滤处理，这对于包含需要替换的 Maven 属性的文件很有用。
-  - includes 标签下，我们明确列出了要包含的文件：Dockerfile 和 `restart.sh`。
+    - directory 指定资源所在的目录，这里是 `src/main/resources`。
+    - filtering 设置为 true，允许对资源文件进行过滤处理，这对于包含需要替换的 Maven 属性的文件很有用。
+    - includes 标签下，我们明确列出了要包含的文件：Dockerfile 和 `restart.sh`。
 
-通过这种方式，Maven 在构建过程中会自动将 Dockerfile 和 restart.sh 脚本复制到指定的输出目录。这样做的好处是，你可以确保在最终的发版物中包含了这些对于部署和管理 Docker 容器至关重要的文件，实现了项目的一体化管理。
+通过这种方式，Maven 在构建过程中会自动将 Dockerfile 和 restart.sh 脚本复制到指定的输出目录。这样做的好处是，你可以确保在最终的发版物中包含了这些对于部署和管理
+Docker 容器至关重要的文件，实现了项目的一体化管理。
 
 ## 4 从 Dockerfile 到 Docker-Compose：简化和自动化应用部署
 

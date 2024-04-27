@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot中如何优雅的使用多线程
+excerpt: 
 description: 
 date: 2022-08-09
 category: Java
@@ -10,17 +11,17 @@ timeline: true
 icon: java
 ---
 
+# SpringBoot 中如何优雅的使用多线程
 
+> 本文带你快速了解@Async 注解的用法，包括异步方法无返回值、有返回值，最后总结了@Async 注解失效的几个坑。
 
-# SpringBoot中如何优雅的使用多线程
-
-> 本文带你快速了解@Async注解的用法，包括异步方法无返回值、有返回值，最后总结了@Async注解失效的几个坑。
-
-在 SpringBoot 应用中，经常会遇到在一个接口中，同时做事情1，事情2，事情3，如果同步执行的话，则本次接口时间取决于事情1 2 3执行时间之和；如果三件事同时执行，则本次接口时间取决于事情1 2 3执行时间最长的那个，合理使用多线程，可以大大缩短接口时间。那么在 SpringBoot 应用中如何优雅的使用多线程呢？
+在 SpringBoot 应用中，经常会遇到在一个接口中，同时做事情 1，事情 2，事情 3，如果同步执行的话，则本次接口时间取决于事情 1 2 3
+执行时间之和；如果三件事同时执行，则本次接口时间取决于事情 1 2 3 执行时间最长的那个，合理使用多线程，可以大大缩短接口时间。那么在
+SpringBoot 应用中如何优雅的使用多线程呢？
 
 ## 快速使用
 
-SpringBoot应用中需要添加`@EnableAsync`注解，来开启异步调用，一般还会配置一个线程池，异步的方法交给特定的线程池完成，如下：
+SpringBoot 应用中需要添加`@EnableAsync`注解，来开启异步调用，一般还会配置一个线程池，异步的方法交给特定的线程池完成，如下：
 
 ```java
 @Configuration
@@ -108,9 +109,9 @@ public class AsyncService {
 
 ## 获取异步方法返回值
 
-当异步方法有返回值时，如何获取异步方法执行的返回结果呢？这时需要异步调用的方法带有返回值CompletableFuture。
+当异步方法有返回值时，如何获取异步方法执行的返回结果呢？这时需要异步调用的方法带有返回值 CompletableFuture。
 
-CompletableFuture是对Feature的增强，Feature只能处理简单的异步任务，而CompletableFuture可以将多个异步任务进行复杂的组合。如下：
+CompletableFuture 是对 Feature 的增强，Feature 只能处理简单的异步任务，而 CompletableFuture 可以将多个异步任务进行复杂的组合。如下：
 
 ```java
 @RestController
@@ -182,17 +183,16 @@ do something1: create order; do something2: reduce account; do something3: save 
 
 `@Async`注解会在以下几个场景失效，也就是说明明使用了`@Async`注解，但就没有走多线程。
 
-- 异步方法使用static关键词修饰；
-- 异步类不是一个Spring容器的bean（一般使用注解`@Component`和`@Service`，并且能被Spring扫描到）；
-- SpringBoot应用中没有添加`@EnableAsync`注解；
-- 在同一个类中，一个方法调用另外一个有@Async注解的方法，注解不会生效。原因是@Async注解的方法，是在代理类中执行的。
+- 异步方法使用 static 关键词修饰；
+- 异步类不是一个 Spring 容器的 bean（一般使用注解`@Component`和`@Service`，并且能被 Spring 扫描到）；
+- SpringBoot 应用中没有添加`@EnableAsync`注解；
+- 在同一个类中，一个方法调用另外一个有@Async 注解的方法，注解不会生效。原因是@Async 注解的方法，是在代理类中执行的。
 
-需要注意的是： 异步方法使用注解@Async的返回值只能为void或者Future及其子类，当返回结果为其他类型时，方法还是会异步执行，但是返回值都是null，部分源码如下：
+需要注意的是： 异步方法使用注解@Async 的返回值只能为 void 或者 Future 及其子类，当返回结果为其他类型时，方法还是会异步执行，但是返回值都是
+null，部分源码如下：
 
 AsyncExecutionInterceptor#invoke
 
 ![image.png](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/5/28/1725ba6de41fa8b1~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp)
 
-
-
-通过上边几个示例，@Async实际还是通过Future或CompletableFuture来异步执行的，Spring又封装了一下，让我们使用的更方便。
+通过上边几个示例，@Async 实际还是通过 Future 或 CompletableFuture 来异步执行的，Spring 又封装了一下，让我们使用的更方便。

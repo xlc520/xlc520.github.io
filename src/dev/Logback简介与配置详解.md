@@ -1,7 +1,8 @@
 ---
 author: xlc520
-title: Java
-description: Java
+title: Logback 简介
+excerpt:
+description:
 date: 2022-01-05
 category: Java
 tag: Java
@@ -10,41 +11,41 @@ timeline: true
 icon: java
 ---
 
+## Logback 简介
 
+官方网址：<https://logback.qos.ch/>
 
-## Logback简介
+Logback 是一款为 Java 应用程序设计的日志框架，旨在提供高性能、灵活性和可扩展性。它是 log4j 项目的继任者，并被广泛用于 Java
+应用程序的日志记录。
 
-官方网址：https://logback.qos.ch/
+Logback 分为三个主要的模块：logback-core、logback-classic、和 logback-access。
 
-Logback是一款为Java应用程序设计的日志框架，旨在提供高性能、灵活性和可扩展性。它是log4j项目的继任者，并被广泛用于Java应用程序的日志记录。
+- logback-core 提供了基本的日志功能。
+- logback-classic 建立在 logback-core 之上，兼容 SLF4J 和 log4j API，提供了一套强大的日志框架。
+- logback-access 允许通过 servlet 容器的访问日志功能来记录 HTTP 请求。（）
 
-Logback分为三个主要的模块：logback-core、logback-classic、和logback-access。
-
-- logback-core提供了基本的日志功能。
-- logback-classic建立在logback-core之上，兼容SLF4J和log4j API，提供了一套强大的日志框架。
-- logback-access允许通过servlet容器的访问日志功能来记录HTTP请求。（）
-
-Spring Boot默认集成了Logback，并用INFO级别输出到控制台。 由于Spring Boot通常使用嵌入式Servlet容器，并且这些容器已经具备了记录访问日志的功能，因此在默认情况下不需要引入logback-access。
+Spring Boot 默认集成了 Logback，并用 INFO 级别输出到控制台。 由于 Spring Boot 通常使用嵌入式 Servlet
+容器，并且这些容器已经具备了记录访问日志的功能，因此在默认情况下不需要引入 logback-access。
 
 Logback 具有许多优点，其中一些包括：
 
 - 性能高效
 
-Logback被设计为高性能的日志框架，具有较低的运行时开销。
+Logback 被设计为高性能的日志框架，具有较低的运行时开销。
 
 异步日志记录和可配置的缓冲机制有助于提高性能。
 
 - 灵活的配置
 
-Logback的配置文件采用XML格式（通常命名为logback.xml），允许用户以声明式的方式配置日志输出。
+Logback 的配置文件采用 XML 格式（通常命名为 logback.xml），允许用户以声明式的方式配置日志输出。
 
-支持通过Groovy脚本进行配置，提供更灵活的选项。
+支持通过 Groovy 脚本进行配置，提供更灵活的选项。
 
-- 丰富的Appender
+- 丰富的 Appender
 
-提供多种Appender用于将日志输出到不同的目的地，如控制台、文件、数据库等。
+提供多种 Appender 用于将日志输出到不同的目的地，如控制台、文件、数据库等。
 
-支持异步Appender以提高性能。
+支持异步 Appender 以提高性能。
 
 - 简单而强大的 API
 
@@ -54,17 +55,19 @@ Logback 的 API 设计简单易用，同时具备强大的功能。它继承了 
 
 作为一个成熟而受欢迎的日志框架，Logback 拥有广泛的社区支持和活跃的开发者社群。这意味着开发者可以在社区中获取丰富的资源、文档和支持。
 
-## springboot配置logback
+## springboot 配置 logback
 
-在src/main/resources目录下创建名为logback-spring.xml或者logback.xml的Logback配置文件。Spring Boot默认会加载类路径下的logback-spring.xml文件。如果该文件不存在，则会尝试加载logback.xml。如果我们使用的是别的配置名称，则需要在springboot 的application.yml配置文件中经行配置：
+在 src/main/resources 目录下创建名为 logback-spring.xml 或者 logback.xml 的 Logback 配置文件。Spring Boot 默认会加载类路径下的
+logback-spring.xml 文件。如果该文件不存在，则会尝试加载 logback.xml。如果我们使用的是别的配置名称，则需要在 springboot 的
+application.yml 配置文件中经行配置：
 
-```
+```plain
 # 日志配置
 logging:
   config: classpath:mylogback.xml
 ```
 
-## logback.xml的配置完整示例
+## logback.xml 的配置完整示例
 
 - 同步配置文件
 
@@ -72,31 +75,31 @@ logging:
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 日志存放路径 -->
- <property name="log.path" value="/data/xjdoc/logs" />
+    <property name="log.path" value="/data/xjdoc/logs"/>
     <!-- 日志输出格式 -->
- <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
- <!-- 控制台输出 -->
- <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-  <encoder>
-   <pattern>${log.pattern}</pattern>
-  </encoder>
- </appender>
- 
- <!-- 系统日志输出 -->
- <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-     <file>${log.path}/sys-info.log</file>
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志输出 -->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
-  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-   <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
-   <!-- 日志最大的历史 60天 -->
-   <maxHistory>60</maxHistory>
-  </rollingPolicy>
-  <encoder>
-   <pattern>${log.pattern}</pattern>
-  </encoder>
-  <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
             <level>INFO</level>
             <!-- 匹配时的操作：接收（记录） -->
@@ -104,16 +107,16 @@ logging:
             <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
- </appender>
- 
- <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-     <file>${log.path}/sys-error.log</file>
+    </appender>
+
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-error.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
             <fileNamePattern>${log.path}/sys-error.%d{yyyy-MM-dd}.log</fileNamePattern>
-   <!-- 日志最大的历史 60天 -->
-   <maxHistory>60</maxHistory>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>${log.pattern}</pattern>
@@ -121,23 +124,23 @@ logging:
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
             <level>ERROR</level>
-   <!-- 匹配时的操作：接收（记录） -->
+            <!-- 匹配时的操作：接收（记录） -->
             <onMatch>ACCEPT</onMatch>
-   <!-- 不匹配时的操作：拒绝（不记录） -->
+            <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
 
- <!-- 系统模块日志级别控制  -->
- <logger name="cn.xj" level="info" />
- <!-- Spring日志级别控制  -->
- <logger name="org.springframework" level="warn" />
- 
- <!--系统操作日志-->
+    <!-- 系统模块日志级别控制  -->
+    <logger name="cn.xj" level="info"/>
+    <!-- Spring日志级别控制  -->
+    <logger name="org.springframework" level="warn"/>
+
+    <!--系统操作日志-->
     <root level="info">
-       <appender-ref ref="console" />
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+        <appender-ref ref="console"/>
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
     </root>
 
 </configuration> 
@@ -149,31 +152,31 @@ logging:
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 日志存放路径 -->
- <property name="log.path" value="/data/xjdoc/logs" />
+    <property name="log.path" value="/data/xjdoc/logs"/>
     <!-- 日志输出格式 -->
- <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
- <!-- 控制台输出 -->
- <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-  <encoder>
-   <pattern>${log.pattern}</pattern>
-  </encoder>
- </appender>
- 
- <!-- 系统日志输出 -->
- <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-     <file>${log.path}/sys-info.log</file>
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志输出 -->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
-  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-   <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
-   <!-- 日志最大的历史 60天 -->
-   <maxHistory>60</maxHistory>
-  </rollingPolicy>
-  <encoder>
-   <pattern>${log.pattern}</pattern>
-  </encoder>
-  <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
             <level>INFO</level>
             <!-- 匹配时的操作：接收（记录） -->
@@ -181,16 +184,16 @@ logging:
             <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
- </appender>
- 
- <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-     <file>${log.path}/sys-error.log</file>
+    </appender>
+
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-error.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
             <fileNamePattern>${log.path}/sys-error.%d{yyyy-MM-dd}.log</fileNamePattern>
-   <!-- 日志最大的历史 60天 -->
-   <maxHistory>60</maxHistory>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>${log.pattern}</pattern>
@@ -198,9 +201,9 @@ logging:
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
             <level>ERROR</level>
-   <!-- 匹配时的操作：接收（记录） -->
+            <!-- 匹配时的操作：接收（记录） -->
             <onMatch>ACCEPT</onMatch>
-   <!-- 不匹配时的操作：拒绝（不记录） -->
+            <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
@@ -237,58 +240,58 @@ logging:
     </appender>
 
     <!-- 系统模块日志级别控制  -->
-    <logger name="cn.xj" level="info" />
+    <logger name="cn.xj" level="info"/>
     <!-- Spring日志级别控制  -->
-    <logger name="org.springframework" level="warn" />
+    <logger name="org.springframework" level="warn"/>
 
- 
- <!--系统操作日志-->
+
+    <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="console" />
-        <appender-ref ref="async_file_info" />
-        <appender-ref ref="async_file_error" />
+        <appender-ref ref="console"/>
+        <appender-ref ref="async_file_info"/>
+        <appender-ref ref="async_file_error"/>
     </root>
 
 </configuration> 
 ```
 
-## logback.xml的配置详解
-
-
+## logback.xml 的配置详解
 
 ### property
 
 ```xml
     <!-- 日志存放路径 -->
- <property name="log.path" value="/data/xjdoc/logs" />
-    <!-- 日志输出格式 -->
- <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+<property name="log.path" value="/data/xjdoc/logs"/>
+        <!-- 日志输出格式 -->
+<property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 ```
 
 `<property>` 元素用于定义属性，允许在配置文件的其他地方引用这些属性;说明如下：
 
 **log.path**
 
-这行配置定义了一个名为 log.path 的属性，其值为 /data/xjdoc/logs。这个属性可以在配置文件的其他地方通过 ${log.path} 进行引用。这种属性的定义用于集中管理日志存放路径，方便在多处引用时进行统一修改。
+这行配置定义了一个名为 log.path 的属性，其值为 /data/xjdoc/logs。这个属性可以在配置文件的其他地方通过 ${log.path}
+进行引用。这种属性的定义用于集中管理日志存放路径，方便在多处引用时进行统一修改。
 
 **log.pattern**
 
-这行配置定义了一个名为 log.pattern 的属性，其值为一个复杂的日志输出格式。这个属性可以在配置文件的其他地方通过 ${log.pattern} 进行引用。这种属性的定义用于集中管理日志输出格式，方便在多处引用时进行统一修改。
+这行配置定义了一个名为 log.pattern 的属性，其值为一个复杂的日志输出格式。这个属性可以在配置文件的其他地方通过
+${log.pattern} 进行引用。这种属性的定义用于集中管理日志输出格式，方便在多处引用时进行统一修改。
 
 - `%d{HH:mm:ss.SSS}`: 输出日志的时间戳，精确到毫秒。
 
-| 转换模式                        | 结果示例                  |
-| :------------------------------ | :------------------------ |
-| %d                              | 2006-10-20 14:06:49,812   |
-| %date                           | 2006-10-20 14:06:49,812   |
-| %date{ISO8601}                  | 2006-10-20 14:06:49,812   |
-| %date{HH:mm:ss.SSS}             | 14:06:49.812              |
-| %d{HH:mm:ss.SSS}                | 14:06:49.812              |
-| %date{dd MMM yyyy;HH:mm:ss.SSS} | 20 oct. 2006;14:06:49.812 |
+| 转换模式                              | 结果示例                      |
+|:----------------------------------|:--------------------------|
+| %d                                | 2006-10-20 14:06:49,812   |
+| %date                             | 2006-10-20 14:06:49,812   |
+| %date{ISO8601}                    | 2006-10-20 14:06:49,812   |
+| %date{HH:mm:ss.SSS}               | 14:06:49.812              |
+| %d{HH:mm:ss.SSS}                  | 14:06:49.812              |
+| `%date{dd MMM yyyy;HH:mm:ss.SSS}` | 20 oct. 2006;14:06:49.812 |
 
 - `[%thread]`: 输出线程名。
-- `%-5level`: 输出日志级别，左对齐占5个字符的宽度。
-- `%logger{20}`: 输出 logger 名称，占20个字符的宽度。
+- `%-5level`: 输出日志级别，左对齐占 5 个字符的宽度。
+- `%logger{20}`: 输出 logger 名称，占 20 个字符的宽度。
 - `[%method,%line]`: 输出调用方法和行号。
 - `%msg`: 输出日志消息。
 - `%n`: 输出平台特定的换行符。
@@ -296,27 +299,28 @@ logging:
 ### appender
 
 ```xml
- <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-     <file>${log.path}/sys-info.log</file>
-        <!-- 循环政策：基于时间创建日志文件 -->
-  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 日志文件名格式 -->
-   <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
-   <!-- 日志最大的历史 60天 -->
-   <maxHistory>60</maxHistory>
-  </rollingPolicy>
-  <encoder>
-   <pattern>${log.pattern}</pattern>
-  </encoder>
-  <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <!-- 过滤的级别 -->
-            <level>INFO</level>
-            <!-- 匹配时的操作：接收（记录） -->
-            <onMatch>ACCEPT</onMatch>
-            <!-- 不匹配时的操作：拒绝（不记录） -->
-            <onMismatch>DENY</onMismatch>
-        </filter>
- </appender>
+
+<appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${log.path}/sys-info.log</file>
+    <!-- 循环政策：基于时间创建日志文件 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- 日志文件名格式 -->
+        <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+        <!-- 日志最大的历史 60天 -->
+        <maxHistory>60</maxHistory>
+    </rollingPolicy>
+    <encoder>
+        <pattern>${log.pattern}</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <!-- 过滤的级别 -->
+        <level>INFO</level>
+        <!-- 匹配时的操作：接收（记录） -->
+        <onMatch>ACCEPT</onMatch>
+        <!-- 不匹配时的操作：拒绝（不记录） -->
+        <onMismatch>DENY</onMismatch>
+    </filter>
+</appender>
 ```
 
 **`<appender>` 元素**
@@ -339,7 +343,7 @@ class="ch.qos.logback.core.ConsoleAppender"
 
 class="ch.qos.logback.core.RollingFileAppender"
 
-在FileAppender的基础上，支持滚动策略，可以按照一定规则滚动创建日志文件，例如按时间、文件大小等。
+在 FileAppender 的基础上，支持滚动策略，可以按照一定规则滚动创建日志文件，例如按时间、文件大小等。
 
 - AsyncAppender（异步输出）
 
@@ -347,7 +351,7 @@ class="ch.qos.logback.core.AsyncAppender"
 
 用于异步输出日志，可以提高性能，特别适用于高吞吐的应用。
 
-包装其他Appender，将日志记录过程异步执行。
+包装其他 Appender，将日志记录过程异步执行。
 
 **滚动策略 (`<rollingPolicy>` 元素)**
 
@@ -391,9 +395,9 @@ maxFileSize 属性定义了每个日志文件的最大大小。
 
 ```xml
     <!-- 系统模块日志级别控制  -->
-    <logger name="cn.xj" level="info" />
-    <!-- Spring日志级别控制  -->
-    <logger name="org.springframework" level="warn" />
+<logger name="cn.xj" level="info"/>
+        <!-- Spring日志级别控制  -->
+<logger name="org.springframework" level="warn"/>
 ```
 
 **name 属性**
@@ -446,14 +450,16 @@ ERROR 级别的日志通常需要开发者及时关注和处理。
 
 ### root
 
-在 Logback 配置文件中，`<root>` 元素用于配置根 Logger，它是整个日志系统的根节点。根 Logger 拥有最高级别，通常用于设置全局的日志级别和全局的 Appender（附加器）。
+在 Logback 配置文件中，`<root>` 元素用于配置根 Logger，它是整个日志系统的根节点。根 Logger 拥有最高级别，通常用于设置全局的日志级别和全局的
+Appender（附加器）。
 
 ```xml
-    <root level="info">
-        <appender-ref ref="console" />
-        <appender-ref ref="async_file_info" />
-        <appender-ref ref="async_file_error" />
-    </root>
+
+<root level="info">
+    <appender-ref ref="console"/>
+    <appender-ref ref="async_file_info"/>
+    <appender-ref ref="async_file_error"/>
+</root>
 ```
 
 **level 属性**
@@ -462,8 +468,10 @@ level 属性定义了根 Logger 的默认日志级别，表示整个日志系统
 
 **`<appender-ref>` 元素**
 
-`<appender-ref>` 元素用于引用一个或多个 Appender，将其关联到根 Logger，即设置根 Logger 的输出目的地。可以有多个`<appender-ref>`元素，表示将日志输出到多个目的地。
+`<appender-ref>` 元素用于引用一个或多个 Appender，将其关联到根 Logger，即设置根 Logger
+的输出目的地。可以有多个`<appender-ref>`元素，表示将日志输出到多个目的地。
 
 ## 总结
 
-Logback 是一个强大且灵活的日志框架，它为 Java 应用程序提供了先进的日志记录功能。通过合理配置，可以满足各种应用场景的需求，从而更好地帮助开发者监控和调试应用程序。希望本文对 Logback 的简介和配置提供了清晰的指导，使你能更好地使用 Logback 进行日志记录。
+Logback 是一个强大且灵活的日志框架，它为 Java 应用程序提供了先进的日志记录功能。通过合理配置，可以满足各种应用场景的需求，从而更好地帮助开发者监控和调试应用程序。希望本文对
+Logback 的简介和配置提供了清晰的指导，使你能更好地使用 Logback 进行日志记录。

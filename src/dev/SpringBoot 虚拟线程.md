@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 虚拟线程
+excerpt: 
 description: 
 date: 2023-12-07
 category: Java
@@ -179,8 +180,8 @@ public class HomeController {
 }
 ```
 
-我们有一个GetMapping返回所有结果，我们的数据库中有 1000 条数据。我们已经让线程休眠 1
-秒。让我们看看我们的Product实体和ProductRepository。
+我们有一个 GetMapping 返回所有结果，我们的数据库中有 1000 条数据。我们已经让线程休眠 1
+秒。让我们看看我们的 Product 实体和 ProductRepository。
 
 ```java
 package org.anil.virtualthread;
@@ -271,14 +272,14 @@ public class VirtualthreadApplication {
 }
 ```
 
-现在让我们设置JMeter。我们将有 1000 个请求，该请求将在 3 秒内增加。并且这样的状态会持续200秒。每 3 秒，将触发 1000
+现在让我们设置 JMeter。我们将有 1000 个请求，该请求将在 3 秒内增加。并且这样的状态会持续 200 秒。每 3 秒，将触发 1000
 个 `GET (“/thread”)` 请求。我们还添加了响应时间图侦听器。
 
 现在让我们运行测试并等待 200 秒。
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700667020609-1.png)
 
-从图中我们可以看到，一旦Tomcat的整个线程池被利用，响应时间从3600毫秒猛增到5200毫秒。从那时起，只有当以前的线程被释放时，它才保持这种状态。
+从图中我们可以看到，一旦 Tomcat 的整个线程池被利用，响应时间从 3600 毫秒猛增到 5200 毫秒。从那时起，只有当以前的线程被释放时，它才保持这种状态。
 
 现在让我们在启用虚拟线程功能的情况下运行负载测试。
 

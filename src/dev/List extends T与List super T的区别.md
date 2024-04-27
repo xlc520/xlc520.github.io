@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: List extends T与List super T的区别
+excerpt: 
 description: Java
 date: 2023-10-20
 category: Java
@@ -10,9 +11,9 @@ timeline: true
 icon: java
 ---
 
-# List<? extends T>与List<? super T>的区别
+# List<? extends T>与 List<? super T>的区别
 
-**List<? extends T>与List<? super T>的区别**
+**List<? extends T>与 List<? super T>的区别**
 
 这个问题，初级工程师在做面试题时会出现。高级工程师很少会遇到，但实际上，不少工作了 5 年左右的工程师也回答的不是很好。基于此，整理了本文，分享给大家！
 
@@ -22,12 +23,12 @@ icon: java
 
 ## 1）`？`
 
-？表示类型通配符，即具体传什么参数类型，在List定义时不用考虑。
+？表示类型通配符，即具体传什么参数类型，在 List 定义时不用考虑。
 
 ## 2）`<T>`
 
-这里的 `<>` 表示泛型，T 表示泛型中装载的类型为T类型，等到需要的时候，我们可以具体这个 T。我们在使用动态数组实现 ArrayList
-的时候，如果希望这个 ArrayList 不仅仅支持一个类型的话，我们可以给这个 ArrayList 定义泛型，泛型中存放的是T类型。在实际创建出这个
+这里的 `<>` 表示泛型，T 表示泛型中装载的类型为 T 类型，等到需要的时候，我们可以具体这个 T。我们在使用动态数组实现 ArrayList
+的时候，如果希望这个 ArrayList 不仅仅支持一个类型的话，我们可以给这个 ArrayList 定义泛型，泛型中存放的是 T 类型。在实际创建出这个
 ArrayList 对象时，我们可以指定泛型中的具体类型。
 
 ## 3）`<? extends T>`
@@ -36,10 +37,10 @@ ArrayList 对象时，我们可以指定泛型中的具体类型。
 
 ## 4）`<? super T>`
 
-类型下界，这里的?可以是T类型或者T的超类类型，但不代表我们可以往里面添加任意超类类型的元素。
+类型下界，这里的?可以是 T 类型或者 T 的超类类型，但不代表我们可以往里面添加任意超类类型的元素。
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1697803438447-1.png)
 
-**在List中引入通配符界限限制的假设**
+**在 List 中引入通配符界限限制的假设**
 
 不管是`List<? extends T>`还是`List<? super T>`，如果能读取元素，那么这个元素一定能转化为 T 类型，注意不是强制类型转换，强制类型转换是容易出现问题。
 
@@ -62,7 +63,7 @@ T 的任意子类可以向上转型成 T 的任何超类。
 
 元素是可以进行向上转型的，因此，我们可以这样做来读取元素。
 
-```
+```plain
 List<? extends Number> list = new ArrayList<>(); 
 Number number = list.get(0);
 ```
@@ -110,7 +111,7 @@ public static void main(String[] args) {
 
 **List<? super T>**
 
-`List<? super T>`是被设计用来添加数据的泛型，并且只能添加 T 类型或其子类类型的元素。面试宝典：https://www.yoodb.com
+`List<? super T>`是被设计用来添加数据的泛型，并且只能添加 T 类型或其子类类型的元素。面试宝典：<https://www.yoodb.com>
 
 为什么只能是 T 类型及其子类型元素，超类类型的元素不可以吗？
 
@@ -156,10 +157,10 @@ Integer integer1= (Integer) list2.get(0);
 
 **总结**
 
-（1）`List<? extends T>`适用于读取数据，读取出来的数据全部用T类型接收。如果我们往此 list 中添加 T
-类型不同的子类的话，各种子类无法相互转换，因此不能添加元素，但可接受初始赋值。公众 号Java精选，回复java面试，获取面试资料，支持在线刷题。
+（1）`List<? extends T>`适用于读取数据，读取出来的数据全部用 T 类型接收。如果我们往此 list 中添加 T
+类型不同的子类的话，各种子类无法相互转换，因此不能添加元素，但可接受初始赋值。公众 号 Java 精选，回复 java 面试，获取面试资料，支持在线刷题。
 
-（2）`List<? super T>`适用于添加元素，只能添加 T 类型或其子类类型。因为这些类型都能转换为T的任意超类类型（向上转型），因此我们可以对此
+（2）`List<? super T>`适用于添加元素，只能添加 T 类型或其子类类型。因为这些类型都能转换为 T 的任意超类类型（向上转型），因此我们可以对此
 list 添加元素。只能用 Object 类型来接收获取到的元素，但是这些元素原本的类型会丢失。
 
 **更加通俗易懂的例子**
@@ -184,8 +185,8 @@ List<? extends Number> foo3 = new ArrayList<Double>();  // Double extends Number
 
 给定上述可能的赋值语句，能保证你从`List foo3`中取出什么样类型的对象？
 
-- 你可以读取一个`Number`对象，因为上面任意一个list都包含`Number`对象或者`Number`
-  子类的对象（上面的Number、Integer、Double都可以转型成Number，并且是安全的，所以读取总是可以的）。如下代码就不会报错：
+- 你可以读取一个`Number`对象，因为上面任意一个 list 都包含`Number`对象或者`Number`
+  子类的对象（上面的 Number、Integer、Double 都可以转型成 Number，并且是安全的，所以读取总是可以的）。如下代码就不会报错：
 
 ```java
 List<? extends Number> foo4 = new ArrayList<Integer>();
@@ -193,7 +194,8 @@ Number number = foo4.get(0);
 ```
 
 - 你不能读取一个`Integer`对象，因为`foo3`可能指向的是`List<Double>`
-  （与其运行时发现Double转成Integer报错，不如编译时就不让从`foo3`中取`Integer`对象）。如下代码编译时会报`Incompatible types`
+  （与其运行时发现 Double 转成 Integer 报错，不如编译时就不让从`foo3`中取`Integer`
+  对象）。如下代码编译时会报`Incompatible types`
   错的：
 
 ```java
@@ -201,8 +203,8 @@ List<? extends Number> foo4 = new ArrayList<Integer>();
 Integer number = foo4.get(0);
 ```
 
-因为编译的时候编译器只知道foo4引用是一个List<? extends Number>，要到运行时才会绑定到new ArrayList()
-，所以编译的时候是无法判断foo4指向的List中到底是什么类型，唯一能确定的就是这个类型是Number的子类（或者就是Number类）。
+因为编译的时候编译器只知道 foo4 引用是一个 List<? extends Number>，要到运行时才会绑定到 new ArrayList()
+，所以编译的时候是无法判断 foo4 指向的 List 中到底是什么类型，唯一能确定的就是这个类型是 Number 的子类（或者就是 Number 类）。
 
 - 你也不能读取一个`Double`对象，因为`foo3`可能指向的是`List<Integer>`。
 
@@ -217,7 +219,8 @@ List<? extends Number> foo4 = new ArrayList<Integer>();
 foo4.add(new Integer(1));
 ```
 
-因为编译期间是无法知道foo4指向的ArrayList中到底放的是什么类型，只有到运行时才知道（就是Java所谓的晚绑定或运行时绑定）。与其到运行时发现往一个ArrayList中add一个Integer导致抛出类型转换异常，倒不如编译时就报错，即使ArrayList中放的就是Integer类型。
+因为编译期间是无法知道 foo4 指向的 ArrayList 中到底放的是什么类型，只有到运行时才知道（就是 Java 所谓的晚绑定或运行时绑定）。与其到运行时发现往一个
+ArrayList 中 add 一个 Integer 导致抛出类型转换异常，倒不如编译时就报错，即使 ArrayList 中放的就是 Integer 类型。
 
 - 你不能添加一个`Double`对象，因为`foo3`可能指向的是`List<Integer>`。
 - 你不能添加一个`Number`对象，因为`foo3`可能指向的是`List<Integer>`。
@@ -249,7 +252,7 @@ List<? super Integer> foo3 = new ArrayList<Object>();   // Object is a superclas
 
 给定上述可能的赋值语句，你能往`List foo3`中添加什么类型的对象从而保证它对于所有可能的`ArrayList`都是合法的呢？
 
-- 你可以添加一个`Integer`实例，因为`Integer`类型对于上述所有的list都是合法的。
+- 你可以添加一个`Integer`实例，因为`Integer`类型对于上述所有的 list 都是合法的。
 - 你可以添加任何`Integer`子类的实例，因为一个`Integer`子类的实例都可以向上转型成上面列表中的元素类型。
 - 你不可以添加`Double`类型，因为`foo3`可能指向的是`ArrayList<Integer>`。
 - 你不可以添加`Number`类型，因为`foo3`可能指向的是`ArrayList<Integer>`。
@@ -257,11 +260,11 @@ List<? super Integer> foo3 = new ArrayList<Object>();   // Object is a superclas
 
 ## `PECS`
 
-`PECS`是"Producer Extends,Consumer Super"（生产者用Extends，消费者用Super）的缩写。
+`PECS`是"Producer Extends,Consumer Super"（生产者用 Extends，消费者用 Super）的缩写。
 
-- "Producer Extends"的意思是，如果你需要一个`List`去生产`T`类型values（也就是说你需要去list中读取`T`
+- "Producer Extends"的意思是，如果你需要一个`List`去生产`T`类型 values（也就是说你需要去 list 中读取`T`
   类型实例），你需要声明这个`List`中的元素为`? extends T`，例如`List<? extends Integer>`，但是你不能往里面添加元素。
-- "Consumer Super"的意思是，如果你需要一个`List`去消费`T`类型values（也就是说你需要往list中添加`T`
-  类型实例），你需要声明这个`List`中的元素为`? super T`，例如`List<? super Integer>`。但是不能保证你从这个list中读取出来对象类型。
-- 如果你既需要往list中写，也需要从list中读，那么你就不能用通配符`?`，必须用精确的类型，比如`List<Integer>`。
-- 可以参考JDK源码中的Collections类的copy方法，来理解PECS，源码在文末有。
+- "Consumer Super"的意思是，如果你需要一个`List`去消费`T`类型 values（也就是说你需要往 list 中添加`T`
+  类型实例），你需要声明这个`List`中的元素为`? super T`，例如`List<? super Integer>`。但是不能保证你从这个 list 中读取出来对象类型。
+- 如果你既需要往 list 中写，也需要从 list 中读，那么你就不能用通配符`?`，必须用精确的类型，比如`List<Integer>`。
+- 可以参考 JDK 源码中的 Collections 类的 copy 方法，来理解 PECS，源码在文末有。

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: JavaScript数组去重方法合集
+excerpt: 
 description: JavaScript数组去重方法合集
 date: 2023-11-16
 category: JavaScript
@@ -10,11 +11,9 @@ timeline: true
 icon: java
 ---
 
+# JavaScript 数组去重方法合集
 
-
-# JavaScript数组去重方法合集
-
-## **01. 双重for循环**
+## **01. 双重 for 循环**
 
 ```javascript
 
@@ -32,8 +31,6 @@ function deduplication(arr){
 var arr2  = deduplication(arr);
 console.log(arr2);
 ```
-
-
 
 ## **02. for 循环 + indexOf 去重**
 
@@ -56,8 +53,6 @@ var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
   console.log(arr2);  
 ```
 
-
-
 ## **03. indexOf 方法**
 
 ```javascript
@@ -76,9 +71,7 @@ var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
 
 ```
 
-
-
-## **04. includes实现数组去重**
+## **04. includes 实现数组去重**
 
 ```javascript
 var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
@@ -95,8 +88,6 @@ var arr2 = deduplication(arr);
 console.log(arr2);
 ```
 
-
-
 ## **05. filter() 去重**
 
 ```javascript
@@ -108,9 +99,7 @@ var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
 console.log(newArr);
 ```
 
-
-
-## **06. ES6 Set结构 new Set()** 
+## **06. ES6 Set 结构 new Set()**
 
 ```javascript
 var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
@@ -122,4 +111,3 @@ var arr = [2,2,3,8,2,2,5,5,12,33,43,5,4,15,9];
 var arr2 = deduplication(arr)
 console.log(arr2); 
 ```
-

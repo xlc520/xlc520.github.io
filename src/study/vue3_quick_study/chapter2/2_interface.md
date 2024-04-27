@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 接口
+excerpt: 
 description: 
 date: 2022-07-23
 category: Vue
@@ -9,19 +10,23 @@ article: true
 dateline: true
 icon: vue
 ---
+
 # 2. 接口
 
-TypeScript 的核心原则之一是对值所具有的结构进行类型检查。我们使用接口（Interfaces）来定义对象的类型。`接口是对象的状态(属性)和行为(方法)的抽象(描述)`  
-
+TypeScript
+的核心原则之一是对值所具有的结构进行类型检查。我们使用接口（Interfaces）来定义对象的类型。`接口是对象的状态(属性)和行为(方法)的抽象(描述)`
 
 ## 接口初探
+
 需求: 创建人的对象, 需要对人的属性进行一定的约束
-```
+
+```plain
 id是number类型, 必须有, 只读的
 name是string类型, 必须有
 age是number类型, 必须有
 sex是string类型, 可以没有
 ```
+
 下面通过一个简单示例来观察接口是如何工作的：
 
 ```typescript
@@ -58,7 +63,7 @@ const person1: IPerson = {
 }
 ```
 
-类型检查器会查看对象内部的属性是否与IPerson接口描述一致, 如果不一致就会提示类型错误。
+类型检查器会查看对象内部的属性是否与 IPerson 接口描述一致, 如果不一致就会提示类型错误。
 
 ## 可选属性
 
@@ -114,7 +119,8 @@ person2.id = 2 // error
 
 ### readonly vs const
 
-最简单判断该用 `readonly` 还是 `const` 的方法是看要把它做为变量使用还是做为一个属性。 做为变量使用的话用 `const`，若做为属性则使用 `readonly`。
+最简单判断该用 `readonly` 还是 `const` 的方法是看要把它做为变量使用还是做为一个属性。 做为变量使用的话用 `const`
+，若做为属性则使用 `readonly`。
 
 ## 函数类型
 
@@ -146,7 +152,7 @@ console.log(mySearch('abcd', 'bc'))
 
 ### 类实现接口
 
-与 C# 或 Java 里接口的基本作用一样，TypeScript 也能够用它来明确的强制一个类去符合某种契约。  
+与 C# 或 Java 里接口的基本作用一样，TypeScript 也能够用它来明确的强制一个类去符合某种契约。
 
 ```typescript
 /* 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 整合 Socket 实战案例
+excerpt: 
 description: 
 date: 2022-11-23
 category: Java
@@ -14,7 +15,7 @@ icon: java
 
 # SpringBoot 整合 Socket 实战案例
 
-### 功能场景点：
+### 功能场景点
 
 1. 群发，所有人都能收到
 2. 局部群发，部分人群都能收到
@@ -24,11 +25,11 @@ icon: java
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-0.png)
 
-可以看到内容不多，也就是说，springboot 整合socket， 跟着我学，轻轻松松。
+可以看到内容不多，也就是说，springboot 整合 socket， 跟着我学，轻轻松松。
 
 不多说，开始：
 
-##### ① pom引入核心依赖
+##### ① pom 引入核心依赖
 
 ```xml
 <dependencies>
@@ -54,7 +55,7 @@ icon: java
 </dependencies>
 ```
 
-##### ② yml加上配置项
+##### ② yml 加上配置项
 
 ```yaml
 server:
@@ -73,7 +74,7 @@ socketio:
    pingInterval: 25000
 ```
 
-##### ③ 创建socket配置加载类 MySocketConfig.java
+##### ③ 创建 socket 配置加载类 MySocketConfig.java
 
 ```java
 import com.corundumstudio.socketio.SocketConfig;
@@ -277,7 +278,7 @@ public class MySocketHandler {
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-2.png)
 
-##### ⑥ 封装的socket 小函数
+##### ⑥ 封装的 socket 小函数
 
 SocketUtil.java
 
@@ -365,7 +366,7 @@ public class SocketUtil {
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-3.png)
 
-##### ⑦写1个接口，模拟场景，前端页面调用后端接口，做消息推送
+##### ⑦写 1 个接口，模拟场景，前端页面调用后端接口，做消息推送
 
 TestController.java
 
@@ -415,11 +416,11 @@ public class TestController {
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-4.png)
 
-好了，7步了。一切已经就绪了。
+好了，7 步了。一切已经就绪了。
 
 ### 前端简单页面
 
-接下来搞点前端HTML页面， 玩一玩看看效果:
+接下来搞点前端 HTML 页面， 玩一玩看看效果:
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-5.png)
 
@@ -613,9 +614,9 @@ TestClientStudentPU.html
 
 OK，把项目跑起来，开始玩。
 
-直接访问客户端页面 模拟学生 JC连接socket：
+直接访问客户端页面 模拟学生 JC 连接 socket：
 
-> http://127.0.0.1:8089/TestClientStudentJC.html
+> <http://127.0.0.1:8089/TestClientStudentJC.html>
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207389-7.png)
 
@@ -639,13 +640,13 @@ OK，把项目跑起来，开始玩。
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207390-12.png)
 
-前端使用JS推到这个系统频道：
+前端使用 JS 推到这个系统频道：
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207390-13.png)
 
 > ps： 其实前端给服务端推消息，其实调用接口就可以。
 
-OK，进入核心应用场景1：
+OK，进入核心应用场景 1：
 
 ##### 群发，所有人都能收到
 
@@ -669,13 +670,13 @@ OK，进入核心应用场景1：
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207390-15.png)
 
-##### 然后是场景2，局部群发，部分人群都能收到
+##### 然后是场景 2，局部群发，部分人群都能收到
 
-其实也就是通过HTML 客户端监听主题做区分就好：
+其实也就是通过 HTML 客户端监听主题做区分就好：
 
-直接拉人口，升3 ：
+直接拉人口，升 3 ：
 
-模拟2个学生，1个老师都连接上了socket
+模拟 2 个学生，1 个老师都连接上了 socket
 
 当然，老师监听的是 老师频道：
 
@@ -701,11 +702,11 @@ OK，进入核心应用场景1：
 
 ##### 最后一个场景，也就是单点推送，指定某个人收到
 
-模拟 学生 PU 给 学生JC 推消息：
+模拟 学生 PU 给 学生 JC 推消息：
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207390-19.png)
 
-可以看到在学生频道的JC正常收到了PU的消息：
+可以看到在学生频道的 JC 正常收到了 PU 的消息：
 
 ![SpringBoot整合Socket](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1669203207391-20.png)
 

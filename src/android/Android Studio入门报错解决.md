@@ -1,6 +1,7 @@
 author: xlc520
-title: Android Studio入门报错解决
-description: Android Studio入门报错解决
+title: Android Studio 入门报错解决
+excerpt: Android Studio 入门报错解决
+description: Android Studio 入门报错解决
 date: 2024-03-30
 category: Android
 tag: Android
@@ -8,13 +9,13 @@ article: true
 timeline: true
 icon: android
 
-# Android Studio入门报错解决
+# Android Studio 入门报错解决
 
 在自己的项目外接部署环境的时候遇到报错如标题～
 
 二话不说直接上代码，解决方法如下：
 
-需要在Gradle Scripts -> `settings.gradle 界面做更新`将
+需要在 Gradle Scripts -> `settings.gradle 界面做更新`将
 
 ```groovy
 repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -28,7 +29,7 @@ RepositoriesMode.PREFER_SETTINGS
 repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 ```
 
-再在repositories添加一行如下代码
+再在 repositories 添加一行如下代码
 
 ```groovy
 // 本地存放依赖的路径,按下面的顺序获取jar包，1与2都是从本地获取不冲突;3从阿里私服获取；4从maven服务器获取

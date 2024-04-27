@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Optional非空判断
+excerpt: 
 description: 
 date: 2022-07-11
 category: Java
@@ -10,17 +11,18 @@ timeline: true
 icon: java
 ---
 
-
-
-# Optional非空判断
+# Optional 非空判断
 
 ## 1.前言
 
-相信不少小伙伴已经被java的NPE(Null Pointer Exception)所谓的空指针异常搞的头昏脑涨, 有大佬说过“防止 NPE，是程序员的基本修养。”但是修养归修养，也是我们程序员最头疼的问题之一，那么我们今天就要尽可能的利用Java8的新特性 Optional来尽量简化代码同时高效处理NPE（Null Pointer Exception 空指针异常）
+相信不少小伙伴已经被 java 的 NPE(Null Pointer Exception)所谓的空指针异常搞的头昏脑涨, 有大佬说过“防止
+NPE，是程序员的基本修养。”但是修养归修养，也是我们程序员最头疼的问题之一，那么我们今天就要尽可能的利用 Java8 的新特性
+Optional 来尽量简化代码同时高效处理 NPE（Null Pointer Exception 空指针异常）
 
-### 2.认识Optional并使用
+### 2.认识 Optional 并使用
 
-简单来说，Opitonal类就是Java提供的为了解决大家平时判断对象是否为空用 会用 null!=obj 这样的方式存在的判断，从而令人头疼导致NPE（Null Pointer Exception 空指针异常），同时Optional的存在可以让代码更加简单，可读性跟高，代码写起来更高效.
+简单来说，Opitonal 类就是 Java 提供的为了解决大家平时判断对象是否为空用 会用 null!=obj 这样的方式存在的判断，从而令人头疼导致
+NPE（Null Pointer Exception 空指针异常），同时 Optional 的存在可以让代码更加简单，可读性跟高，代码写起来更高效.
 
 ```java
    常规判断：
@@ -38,7 +40,7 @@ icon: java
         return Optional.ofNullable(person).orElse("person为null");
 ```
 
-测试展示类Person代码(如果有朋友不明白可以看一下这个)：
+测试展示类 Person 代码(如果有朋友不明白可以看一下这个)：
 
 ```java
 public class Person {
@@ -71,11 +73,11 @@ public class Person {
 }
 ```
 
-下面，我们就高效的学习一下神奇的Optional类！
+下面，我们就高效的学习一下神奇的 Optional 类！
 
-#### 2.1 Optional对象创建
+#### 2.1 Optional 对象创建
 
-首先我们先打开Optional的内部,去一探究竟 **先把几个创建Optional对象的方法提取出来**
+首先我们先打开 Optional 的内部,去一探究竟 **先把几个创建 Optional 对象的方法提取出来**
 
 ```java
 public final class Optional<T> {
@@ -118,11 +120,11 @@ public final class Optional<T> {
         Optional<String> optOfNullable2 = Optional.ofNullable("optional");
 ```
 
-我们关于创建Optional对象的内部方法大致分析完毕 接下来也正式的进入Optional的学习与使用中
+我们关于创建 Optional 对象的内部方法大致分析完毕 接下来也正式的进入 Optional 的学习与使用中
 
 #### 2.2 Optional.get()方法(返回对象的值)
 
-**get()方法是返回一个option的实例值** 源码：
+**get()方法是返回一个 option 的实例值** 源码：
 
 ```java
     public T get() {
@@ -133,7 +135,7 @@ public final class Optional<T> {
     }
 ```
 
-**也就是如果value不为空则做返回，如果为空则抛出异常 "No value present"** 简单实例展示
+**也就是如果 value 不为空则做返回，如果为空则抛出异常 "No value present"** 简单实例展示
 
 ```java
         Person person=new Person();
@@ -143,7 +145,7 @@ public final class Optional<T> {
 
 #### 2.3 Optional.isPresent()方法(判读是否为空)
 
-**isPresent()方法就是会返回一个boolean类型值，如果对象不为空则为真，如果为空则false** 源码:
+**isPresent()方法就是会返回一个 boolean 类型值，如果对象不为空则为真，如果为空则 false** 源码:
 
 ```java
  public boolean isPresent() {
@@ -185,11 +187,12 @@ public final class Optional<T> {
         Optional.ofNullable(person).ifPresent(p -> System.out.println("年龄"+p.getAge()));
 ```
 
-**如果对象不为空，则会打印这个年龄**，因为内部已经做了NPE（非空判断），所以就不用担心空指针异常了
+**如果对象不为空，则会打印这个年龄**，因为内部已经做了 NPE（非空判断），所以就不用担心空指针异常了
 
 #### 2.5 Optional.filter()方法(过滤对象)
 
-**filter()方法大致意思是，接受一个对象，然后对他进行条件过滤，如果条件符合则返回Optional对象本身，如果不符合则返回空Optional** 源码：
+**filter()方法大致意思是，接受一个对象，然后对他进行条件过滤，如果条件符合则返回 Optional 对象本身，如果不符合则返回空
+Optional** 源码：
 
 ```java
     public Optional<T> filter(Predicate<? super T> predicate) {
@@ -213,7 +216,7 @@ public final class Optional<T> {
 
 #### 2.6 Optional.map()方法(对象进行二次包装)
 
-**map()方法将对应Funcation函数式接口中的对象，进行二次运算，封装成新的对象然后返回在Optional中** 源码：
+**map()方法将对应 Funcation 函数式接口中的对象，进行二次运算，封装成新的对象然后返回在 Optional 中** 源码：
 
 ```java
  public<U> Optional<U> map(Function<? super T, ? extends U> mapper) {
@@ -236,9 +239,9 @@ public final class Optional<T> {
         String optName = Optional.ofNullable(person).map(p -> person.getName()).orElse("name为空");
 ```
 
-#### 2.7 Optional.flatMap()方法(Optional对象进行二次包装)
+#### 2.7 Optional.flatMap()方法(Optional 对象进行二次包装)
 
-**map()方法将对应Optional< Funcation >函数式接口中的对象，进行二次运算，封装成新的对象然后返回在Optional中** 源码:
+**map()方法将对应 Optional< Funcation >函数式接口中的对象，进行二次运算，封装成新的对象然后返回在 Optional 中** 源码:
 
 ```java
 public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
@@ -263,7 +266,7 @@ Optional<Object> optName = Optional.ofNullable(person)
 
 #### 2.8 Optional.orElse()方法(为空返回对象)
 
-**常用方法之一，这个方法意思是如果包装对象为空的话，就执行orElse方法里的value，如果非空，则返回写入对象** 源码:
+**常用方法之一，这个方法意思是如果包装对象为空的话，就执行 orElse 方法里的 value，如果非空，则返回写入对象** 源码:
 
 ```java
 public T orElse(T other) {
@@ -280,9 +283,9 @@ person.setAge(2);
 Optional.ofNullable(person).orElse(new Person("小明", 2));
 ```
 
-#### 2.9 Optional.orElseGet()方法(为空返回Supplier对象)
+#### 2.9 Optional.orElseGet()方法(为空返回 Supplier 对象)
 
-**这个与orElse很相似，入参不一样，入参为Supplier对象，为空返回传入对象的.get()方法，如果非空则返回当前对象** 源码:
+**这个与 orElse 很相似，入参不一样，入参为 Supplier 对象，为空返回传入对象的.get()方法，如果非空则返回当前对象** 源码:
 
 ```java
 public T orElseGet(Supplier<? extends T> other) {
@@ -298,11 +301,14 @@ Optional<Supplier<Person>> sup=Optional.ofNullable(Person::new);
 Optional.ofNullable(person).orElseGet(sup.get());
 ```
 
-**说真的对于Supplier对象我也懵逼了一下，去网上简单查阅才得知 Supplier也是创建对象的一种方式,简单来说，Suppiler是一个接口，是类似Spring的懒加载，声明之后并不会占用内存，只有执行了get()方法之后，才会调用构造方法创建出对象 创建对象的语法的话就是`Supplier<Person> supPerson= Person::new;`** 需要使用时`supPerson.get()`即可
+**说真的对于 Supplier 对象我也懵逼了一下，去网上简单查阅才得知 Supplier 也是创建对象的一种方式,简单来说，Suppiler
+是一个接口，是类似 Spring 的懒加载，声明之后并不会占用内存，只有执行了 get()方法之后，才会调用构造方法创建出对象
+创建对象的语法的话就是`Supplier<Person> supPerson= Person::new;`** 需要使用时`supPerson.get()`即可
 
 #### 2.10 Optional.orElseThrow()方法(为空返回异常)
 
-**这个我个人在实战中也经常用到这个方法，方法作用的话就是如果为空，就抛出你定义的异常，如果不为空返回当前对象，在实战中所有异常肯定是要处理好的，为了代码的可读性** 源码：
+**这个我个人在实战中也经常用到这个方法，方法作用的话就是如果为空，就抛出你定义的异常，如果不为空返回当前对象，在实战中所有异常肯定是要处理好的，为了代码的可读性
+** 源码：
 
 ```java
 public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
@@ -324,19 +330,21 @@ Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询
 
 #### 2.11 相似方法进行对比分析
 
-可能小伙伴看到这，没用用过的话会觉得orElse()和orElseGet()还有orElseThrow()很相似，map()和flatMap()好相似 哈哈哈不用着急，都是从这一步过来的，我再给大家总结一下不同方法的异同点 **orElse()和orElseGet()和orElseThrow()的异同点**
+可能小伙伴看到这，没用用过的话会觉得 orElse()和 orElseGet()还有 orElseThrow()很相似，map()和 flatMap()好相似
+哈哈哈不用着急，都是从这一步过来的，我再给大家总结一下不同方法的异同点 **orElse()和 orElseGet()和 orElseThrow()的异同点**
 
-> 方法效果类似，如果对象不为空，则返回对象，如果为空，则返回方法体中的对应参数，所以可以看出这三个方法体中参数是不一样的 orElse（T 对象） orElseGet（Supplier < T >对象） orElseThrow（异常）
+> 方法效果类似，如果对象不为空，则返回对象，如果为空，则返回方法体中的对应参数，所以可以看出这三个方法体中参数是不一样的
+> orElse（T 对象） orElseGet（Supplier < T >对象） orElseThrow（异常）
 
-**map()和orElseGet的异同点**
+**map()和 orElseGet 的异同点**
 
-> 方法效果类似，对方法参数进行二次包装，并返回,入参不同 map（function函数） flatmap（Optional< function >函数）
+> 方法效果类似，对方法参数进行二次包装，并返回,入参不同 map（function 函数） flatmap（Optional< function >函数）
 
-具体要怎么用，要根据业务场景以及代码规范来定义，下面可以简单看一下我在实战中怎用使用神奇的Optional
+具体要怎么用，要根据业务场景以及代码规范来定义，下面可以简单看一下我在实战中怎用使用神奇的 Optional
 
 ## 3.实战场景再现
 
-场景1： 在service层中 查询一个对象，返回之后判断是否为空并做处理
+场景 1： 在 service 层中 查询一个对象，返回之后判断是否为空并做处理
 
 ```java
 //查询一个对象
@@ -345,7 +353,7 @@ Member member = memberService.selectByIdNo(request.getCertificateNo());
 Optional.ofNullable(member).orElseThrow(() -> new ServiceException("没有查询的相关数据"));
 ```
 
-场景2： 我们可以在dao接口层中定义返回值时就加上Optional 例如： 我使用的是jpa，其他也同理
+场景 2： 我们可以在 dao 接口层中定义返回值时就加上 Optional 例如： 我使用的是 jpa，其他也同理
 
 ```java
 public interface LocationRepository extends JpaRepository<Location, String> {
@@ -353,7 +361,7 @@ public interface LocationRepository extends JpaRepository<Location, String> {
 }
 ```
 
-然在是Service中
+然在是 Service 中
 
 ```java
 public TerminalVO findById(String id) {
@@ -377,11 +385,13 @@ public TerminalVO findById(String id) {
 }
 ```
 
-**实战场景还有很多，包括return时可以判断是否返回当前值还是跳转到另一个方法体中，什么的还有很多，如果大家没有经验的小伙伴还想进行学习，可以评论一下我会回复大家**
+**实战场景还有很多，包括 return 时可以判断是否返回当前值还是跳转到另一个方法体中，什么的还有很多，如果大家没有经验的小伙伴还想进行学习，可以评论一下我会回复大家
+**
 
-## 4.Optional使用注意事项
+## 4.Optional 使用注意事项
 
-**Optional真么好用，真的可以完全替代if判断吗？** 我想这肯定是大家使用完之后Optional之后可能会产生的想法，**答案是否定的** 举一个最简单的栗子： 例子1： 如果我只想判断对象的某一个变量是否为空并且做出判断呢？
+**Optional 真么好用，真的可以完全替代 if 判断吗？** 我想这肯定是大家使用完之后 Optional 之后可能会产生的想法，**答案是否定的
+** 举一个最简单的栗子： 例子 1： 如果我只想判断对象的某一个变量是否为空并且做出判断呢？
 
 ```java
 Person person=new Person();
@@ -395,15 +405,18 @@ if(StringUtils.isNotBlank(person.getName())){
 Optional.ofNullable(person).map(p -> p.getName()).orElse("name为空");
 ```
 
-我觉得这个例子就能很好的说明这个问题，**只是一个很简单判断，如果用了Optional我们还需要考虑包装值，考虑代码书写，考虑方法调用，虽然只有一行，但是可读性并不好，如果别的程序员去读，我觉得肯定没有if看的明显**
+我觉得这个例子就能很好的说明这个问题，**只是一个很简单判断，如果用了 Optional
+我们还需要考虑包装值，考虑代码书写，考虑方法调用，虽然只有一行，但是可读性并不好，如果别的程序员去读，我觉得肯定没有 if 看的明显
+**
 
-## 5.jdk1.9对Optional优化
+## 5.jdk1.9 对 Optional 优化
 
-首先增加了三个方法: **or()、ifPresentOrElse() 和 stream()。** **or()** 与orElse等方法相似，如果对象不为空返回对象，如果为空则返回or()方法中预设的值。 **ifPresentOrElse()** 方法有两个参数：一个 Consumer 和一个 Runnable。如果对象不为空，会执行 Consumer 的动作，否则运行 Runnable。相比ifPresent（）多了OrElse判断。 **stream()**将Optional转换成stream，如果有值就返回包含值的stream，如果没值，就返回空的stream。
+首先增加了三个方法: **or()、ifPresentOrElse() 和 stream()。** **or()** 与 orElse 等方法相似，如果对象不为空返回对象，如果为空则返回
+or()方法中预设的值。 **ifPresentOrElse()** 方法有两个参数：一个 Consumer 和一个 Runnable。如果对象不为空，会执行 Consumer
+的动作，否则运行 Runnable。相比 ifPresent（）多了 OrElse 判断。 **stream()**将 Optional 转换成 stream，如果有值就返回包含值的
+stream，如果没值，就返回空的 stream。
 
-因为这个jdk1.9的Optional具体我没有测试，同时也发现有蛮好的文章已经也能让大家明白jdk1.9的option的优化,我就不深入去说了。
-
-
+因为这个 jdk1.9 的 Optional 具体我没有测试，同时也发现有蛮好的文章已经也能让大家明白 jdk1.9 的 option 的优化,我就不深入去说了。
 
 ## 6.更多用法
 
@@ -427,7 +440,7 @@ public String getCity(User user)  throws Exception{
 }
 ```
 
-JAVA8写法
+JAVA8 写法
 
 ```java
 public String getCity(User user) throws Exception{
@@ -450,7 +463,7 @@ if(user!=null){
 }
 ```
 
-JAVA8写法
+JAVA8 写法
 
 ```java
 Optional.ofNullable(user)
@@ -478,7 +491,7 @@ public User getUser(User user) throws Exception{
 }
 ```
 
-java8写法
+java8 写法
 
 ```java
 public User getUser(User user) {
@@ -491,4 +504,3 @@ public User getUser(User user) {
         });
 }
 ```
-

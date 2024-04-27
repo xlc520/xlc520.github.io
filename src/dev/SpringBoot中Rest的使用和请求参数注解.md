@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot中Rest的使用和请求参数注解
+excerpt: 
 description: 
 date: 2022-07-02
 category: Java
@@ -10,13 +11,11 @@ timeline: true
 icon: java
 ---
 
+# SpringBoot 中 Rest 的使用和请求参数注解
 
+## Rest 的使用和原理
 
-# SpringBoot中Rest的使用和请求参数注解
-
-## Rest的使用和原理
-
-Rest风格支持（使用HTTP请求方式动词来表示对资源的操作）
+Rest 风格支持（使用 HTTP 请求方式动词来表示对资源的操作）
 • 以前：/getUser 获取用户 /deleteUser 删除用户 /editUser 修改用户 /saveUser 保存用户
 • 现在： /user GET-获取用户 DELETE-删除用户 PUT-修改用户 POST-保存用户。
 看下面的一个例子，这是一个表单：
@@ -45,7 +44,8 @@ Rest风格支持（使用HTTP请求方式动词来表示对资源的操作）
 </html>
 ```
 
-处理上述表单提交的controller。但是我们以put方式和delete方式提交表单时，发现返回的都是GET-张三，不支持put和delete请求。
+处理上述表单提交的 controller。但是我们以 put 方式和 delete 方式提交表单时，发现返回的都是 GET-张三，不支持 put 和 delete
+请求。
 
 ```java
 @RestController
@@ -74,7 +74,10 @@ public class UserController {
 }
 ```
 
-在**WebMvcAutoConfiguration**中**hiddenHttpMethodFilter**方法，返回一个**filter**->**OrderedHiddenHttpMethodFilter**。**OrderedHiddenHttpMethodFilter**继承自**HiddenHttpMethodFilter**。@ConditionalOnMissingBean({HiddenHttpMethodFilter.class})需要之前**HiddenHttpMethodFilter**没有被注入，并且 @ConditionalOnProperty(prefix = "spring.mvc.hiddenmethod.filter", name = {"enabled"})要求spring.mvc.hiddenmethod.filter.enabled=true.
+在**WebMvcAutoConfiguration**中**hiddenHttpMethodFilter**方法，返回一个**filter**->**OrderedHiddenHttpMethodFilter**。*
+*OrderedHiddenHttpMethodFilter**继承自**HiddenHttpMethodFilter**。@ConditionalOnMissingBean(
+{HiddenHttpMethodFilter.class})需要之前**HiddenHttpMethodFilter**没有被注入，并且 @ConditionalOnProperty(prefix = "
+spring.mvc.hiddenmethod.filter", name = {"enabled"})要求 spring.mvc.hiddenmethod.filter.enabled=true.
 
 ```java
 @Bean
@@ -106,7 +109,8 @@ public class OrderedHiddenHttpMethodFilter extends HiddenHttpMethodFilter implem
 }
 ```
 
-**HiddenHttpMethodFilter**中有个**DEFAULT_METHOD_PARAM**字段"**_method**"。所以我们在提交表单时也要提交一个"**_method**"参数。并且spring.mvc.hiddenmethod.filter.enabled=true.
+**HiddenHttpMethodFilter**中有个**DEFAULT_METHOD_PARAM**字段"**_method**"。所以我们在提交表单时也要提交一个"**_method**"
+参数。并且 spring.mvc.hiddenmethod.filter.enabled=true.
 
 ```java
 public class HiddenHttpMethodFilter extends OncePerRequestFilter {
@@ -185,7 +189,7 @@ public class HiddenHttpMethodFilter extends OncePerRequestFilter {
 </html>
 ```
 
-配置yaml:
+配置 yaml:
 
 ```yaml
 spring:
@@ -195,19 +199,22 @@ spring:
         enabled: true #开启页面表单的Rest功能
 ```
 
-**修改表单，配置yaml之后，再点击delete 和put就可以发送delete 和put请求了。**
+**修改表单，配置 yaml 之后，再点击 delete 和 put 就可以发送 delete 和 put 请求了。**
 
-### Rest原理
+### Rest 原理
 
-表单提交要使用REST的时候：
+表单提交要使用 REST 的时候：
 
 - 表单提交会带上**_method=PUT**
-- **请求过来被**HiddenHttpMethodFilter拦截
-- 1.如果请求正常，并且是POST（if ("POST".equals(request.getMethod()) && request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == null) ）则获取**_method**的值
-- - 2.获取到**_method**的值，如果是**ALLOWED_METHODS**里的方法（**PUT**.**DELETE**.**PATCH**）则将方法传给包装模式类**requesWrapper**，requesWrapper只改变了请求方式。
+- **请求过来被**HiddenHttpMethodFilter 拦截
+- 1.如果请求正常，并且是 POST（if ("POST".equals(request.getMethod()) && request.getAttribute(
+  WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == null) ）则获取**_method**的值
+-
+    - 2.获取到**_method**的值，如果是**ALLOWED_METHODS**里的方法（**PUT**.**DELETE**.**PATCH**）则将方法传给包装模式类**
+      requesWrapper**，requesWrapper 只改变了请求方式。
 
-**原生request（post），包装模式requesWrapper重写了getMethod方法，返回的是传入的值。**
-**过滤器链放行的时候用wrapper。以后的方法调用getMethod是调用requesWrapper的。**
+**原生 request（post），包装模式 requesWrapper 重写了 getMethod 方法，返回的是传入的值。**
+**过滤器链放行的时候用 wrapper。以后的方法调用 getMethod 是调用 requesWrapper 的。**
 
 ```java
 @Override
@@ -239,21 +246,21 @@ private static final List<String> ALLOWED_METHODS =
 ```java
 private static class HttpMethodRequestWrapper extends HttpServletRequestWrapper {
 
-		private final String method;
+  private final String method;
 
-		public HttpMethodRequestWrapper(HttpServletRequest request, String method) {
-			super(request);
-			this.method = method;
-		}
+  public HttpMethodRequestWrapper(HttpServletRequest request, String method) {
+   super(request);
+   this.method = method;
+  }
 
-		@Override
-		public String getMethod() {
-			return this.method;
-		}
-	}
+  @Override
+  public String getMethod() {
+   return this.method;
+  }
+ }
 ```
 
-### 将_method改成其他名字
+### 将_method 改成其他名字
 
 将**_method**改成了**_m**,此时因为程序中无法获取**_m**，所以我们表单中点击**delete**依然是**post**,因此我们需要再更改表单即可。
 
@@ -275,7 +282,7 @@ public class RestConfig {
 }
 ```
 
-**修改form表单，添加_m：**
+**修改 form 表单，添加_m：**
 
 ```html
 <!DOCTYPE html>
@@ -306,9 +313,9 @@ public class RestConfig {
 </html>
 ```
 
-### Rest使用客户端工具
+### Rest 使用客户端工具
 
-- **如PostMan直接发送Put、delete等方式请求，无需Filter。**表单只能用get,post请求。
+- **如 PostMan 直接发送 Put、delete 等方式请求，无需 Filter。**表单只能用 get,post 请求。
 
 ## 请求处理----参数注解
 
@@ -318,32 +325,35 @@ public class RestConfig {
 
 ##### **@PathVariable**
 
-作用：`@PathVariable`是spring3.0的一个新功能：接收请求路径中占位符的值，将URL中占位符参数`{xxx}`绑定到处理器类的方法形参中`@PathVariable(“xxx“)`，上如果有多个占位符，形参列表需要定义多个参数，不是很方便，可以直接定义一个map集合`@PathVariable Map<String,String> kv`，会自动映射多个参数；
+作用：`@PathVariable`是 spring3.0 的一个新功能：接收请求路径中占位符的值，将 URL 中占位符参数`{xxx}`
+绑定到处理器类的方法形参中`@PathVariable(“xxx“)`，上如果有多个占位符，形参列表需要定义多个参数，不是很方便，可以直接定义一个
+map 集合`@PathVariable Map<String,String> kv`，会自动映射多个参数；
 
 ##### @RequestParam
 
-@RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上
+@RequestParam 主要用于将请求参数区域的数据映射到控制层方法的参数上
 
 ```java
 @RequestParam(value=”参数名”,required=”true/false”,defaultValue=””)
 ```
 
-- `value`：请求中传入参数的名称，即前端传过来时定义的参数名。如果不设置value值，则前端定义的参数名必须和后端接口参数名相同
-- `required`：该参数是否为必传项。默认是true，表示请求中一定要传入对应的参数，否则会报404错误；如果设置为false，当请求中没有此参数，将会默认为null。而对于基本数据类型的变量，则必须有值，这时会抛出空指针异常。如果允许空值，则接口中变量需要使用包装类来声明。
+- `value`：请求中传入参数的名称，即前端传过来时定义的参数名。如果不设置 value 值，则前端定义的参数名必须和后端接口参数名相同
+- `required`：该参数是否为必传项。默认是 true，表示请求中一定要传入对应的参数，否则会报 404 错误；如果设置为
+  false，当请求中没有此参数，将会默认为 null。而对于基本数据类型的变量，则必须有值，这时会抛出空指针异常。如果允许空值，则接口中变量需要使用包装类来声明。
 - `defaultValue`：参数的默认值，如果请求中没有同名的参数时，该变量默认为此值。
 
 ##### @RequestBody
 
-作用：@RequestBody主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)
+作用：@RequestBody 主要用来接收前端传递给后端的 json 字符串中的数据的(请求体中的数据的)
 
-- GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交
-- 在后端的同一个接收方法里，@RequestBody与@RequestParam()可以同时使用，@RequestBody最多只能有一个，而@RequestParam()可以有多个
-- 如果参数时放在请求体application/json传入后台的话，那么后台要用@RequestBody才能接收到
-- 如果不是放在请求体中的话，那么后台接收前台传过来的参数时，要用@RequestParam来接收，或者形参前 什么也不写也能接收
+- GET 方式无请求体，所以使用@RequestBody 接收数据时，前端不能使用 GET 方式提交数据，而是用 POST 方式进行提交
+- 在后端的同一个接收方法里，@RequestBody 与@RequestParam()可以同时使用，@RequestBody 最多只能有一个，而@RequestParam()可以有多个
+- 如果参数时放在请求体 application/json 传入后台的话，那么后台要用@RequestBody 才能接收到
+- 如果不是放在请求体中的话，那么后台接收前台传过来的参数时，要用@RequestParam 来接收，或者形参前 什么也不写也能接收
 
 ##### **@CookieValue**
 
-同请求头类似，可以获取cookie属性，也可以将获取到的属性封装为cookie对象
+同请求头类似，可以获取 cookie 属性，也可以将获取到的属性封装为 cookie 对象
 
 ##### **@RequestAttribute**
 
@@ -391,9 +401,9 @@ public Map test2(@MatrixVariable("low") String low,
 //{"path":"sell","low":34,"brand":["byd","audi","yd"]}
 ```
 
-#### 示例：
+#### 示例
 
-请求地址如果为：http://localhost:9999/car/2/owner/zhangsan?age=18&inters=basketball&inters=football
+请求地址如果为：<http://localhost:9999/car/2/owner/zhangsan?age=18&inters=basketball&inters=football>
 
 ```java
 @PathVariable("id") Integer id: 获取路径中{id}
@@ -407,7 +417,6 @@ public Map test2(@MatrixVariable("low") String low,
 @CookieValue("_ga") String _ga： 获取cookie中_ga的值
 @CookieValue("_ga") Cookie cookie) ： 获取cookie
 ```
-
 
 ```java
 import javax.servlet.http.Cookie;

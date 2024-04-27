@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 改造BeanUtils优雅实现List数据拷贝
+excerpt: 
 description: 
 date: 2022-06-27
 category: Java
@@ -10,17 +11,11 @@ timeline: true
 icon: java
 ---
 
-
-
-# 改造BeanUtils优雅实现List数据拷贝
+# 改造 BeanUtils 优雅实现 List 数据拷贝
 
 BeanUtils.copyProperties();确实为我们做了很多事情，虽然不能完美完成深拷贝，但是对于 po、vo、dto 的拷贝已经足够用了。但是其还是有一些不够完美的地方。
 
-
-
 不足几点如下：
-
-
 
 **①**不能拷贝 list，而拷贝 list 的情况又大量存在，因此会有许多重复代码。
 
@@ -31,8 +26,6 @@ for (S source : sources) {
     list.add(target);
 }
 ```
-
-
 
 **②**有一些简单的查询，仅仅需要转换一下 vo 也需要 new Vo()。
 
@@ -45,17 +38,10 @@ public Vo findById(Integer id) {
 }
 ```
 
-
-
-**③**这种拷贝方式是没有返回值的，jdk8 支持 stream() 操作之后，支持不是很友好，不方便 lambda 表达式的使用，因此我们决定通过集成 BeanUtils 类，自己造一个方便用的轮子。
-
-
+**③**这种拷贝方式是没有返回值的，jdk8 支持 stream() 操作之后，支持不是很友好，不方便 lambda 表达式的使用，因此我们决定通过集成
+BeanUtils 类，自己造一个方便用的轮子。
 
 **使用**
-
-
-
-
 
 我们将新创建一个轮子 BeanConvertUtils，使用如下，当我们要转换 po、vo 时，只需要：
 
@@ -80,8 +66,6 @@ public Vo findById(Integer id) {
  );
 }
 ```
-
-
 
 当我们要拷贝 list 的时候也很简单：
 
@@ -111,9 +95,7 @@ public List<Vo> findAll() {
 }
 ```
 
-
-
-### 代码如下：
+### 代码如下
 
 ```java
 /**
@@ -194,32 +176,18 @@ public class BeanConvertUtils extends BeanUtils {
 }
 ```
 
-
-
 **性能**
 
-
-
-
-
-由于只是 BeanUtils 的一个封装，跟原来的代码性能几乎差不多，如果要说差一点也没错，毕竟多了一层函数堆栈的调用，但是基本可以忽略不计。主要的性能还是由 BeanUtils 决定。
-
-
+由于只是 BeanUtils 的一个封装，跟原来的代码性能几乎差不多，如果要说差一点也没错，毕竟多了一层函数堆栈的调用，但是基本可以忽略不计。主要的性能还是由
+BeanUtils 决定。
 
 **提醒**
 
-
-
-
-
 不知道大家对这个 BeanConvertUtils 工具类感觉怎么样，自己在项目中倒是大量使用，也很方便。
-
-
 
 但是有两点要提醒：
 
 此方法依旧不能解决深层次的深拷贝问题，详细的可以 google 一下 BeanUtils 的深拷贝问题。‘
 
-
-
-如果 source 或者 targetSupplier 只要有一个为 null，本工具类不像 BeanUtils 一样抛出异常，而是返回 null，因为笔者认为调用方如果把 null 进行准换，那就是想转换为 null，为不为空应该由调用方自己负责。
+如果 source 或者 targetSupplier 只要有一个为 null，本工具类不像 BeanUtils 一样抛出异常，而是返回 null，因为笔者认为调用方如果把
+null 进行准换，那就是想转换为 null，为不为空应该由调用方自己负责。

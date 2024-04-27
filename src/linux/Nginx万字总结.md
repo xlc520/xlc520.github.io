@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Nginx万字总结
+excerpt: 
 description: 万字总结，体系化带你全面认识 Nginx
 date: 2022-03-21
 category: Linux
@@ -16,7 +17,9 @@ icon: type
 
 ![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/71499A3FDD1EB5D9F173A41782597C20.jpg)
 
-`Nginx` 是开源、高性能、高可靠的 `Web` 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 `Nginx` 最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是， `Nginx` 是免费的并可以商业化，配置使用也比较简单。
+`Nginx` 是开源、高性能、高可靠的 `Web` 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24
+小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 `Nginx`
+最重要的考量，其占用内存少、并发能力强、能支持高达 5w 个并发连接数，最重要的是， `Nginx` 是免费的并可以商业化，配置使用也比较简单。
 
 # Nginx 特点
 
@@ -35,7 +38,9 @@ Nginx 的最重要的几个使用场景：
 2. 反向代理服务，延伸出包括缓存、负载均衡等；
 3. `API` 服务， `OpenResty` ；
 
-对于前端来说 `Node.js` 并不陌生， `Nginx` 和 `Node.js` 的很多理念类似， `HTTP` 服务器、事件驱动、异步非阻塞等，且 `Nginx` 的大部分功能使用 `Node.js` 也可以实现，但 `Nginx` 和 `Node.js` 并不冲突，都有自己擅长的领域。`Nginx` 擅长于底层服务器端资源的处理（静态资源处理转发、反向代理，负载均衡等）， `Node.js` 更擅长上层具体业务逻辑的处理，两者可以完美组合。
+对于前端来说 `Node.js` 并不陌生， `Nginx` 和 `Node.js` 的很多理念类似， `HTTP` 服务器、事件驱动、异步非阻塞等，且 `Nginx`
+的大部分功能使用 `Node.js` 也可以实现，但 `Nginx` 和 `Node.js` 并不冲突，都有自己擅长的领域。`Nginx`
+擅长于底层服务器端资源的处理（静态资源处理转发、反向代理，负载均衡等）， `Node.js` 更擅长上层具体业务逻辑的处理，两者可以完美组合。
 
 用一张图表示：![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/8B346DD20EA825CB156510DBE93383F9.jpg)
 
@@ -131,7 +136,7 @@ nginx -t         # 检查配置是否有问题
 复制代码
 ```
 
-#   Nginx 核心配置
+# Nginx 核心配置
 
 ## 配置文件结构
 
@@ -262,7 +267,8 @@ worker_cpu_affinity 0001 0010 0100 1000; # 4个物理核心，4个worker子进�
 
 ![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/36DEAFC3AD23969A9EFBFB601B9EB51B.jpg)
 
-将每个 `worker` 子进程与特定 `CPU` 物理核心绑定，优势在于，避免同一个 `worker` 子进程在不同的 `CPU` 核心上切换，缓存失效，降低性能。但其并不能真正的避免进程切换。
+将每个 `worker` 子进程与特定 `CPU` 物理核心绑定，优势在于，避免同一个 `worker` 子进程在不同的 `CPU`
+核心上切换，缓存失效，降低性能。但其并不能真正的避免进程切换。
 
 ### worker_priority
 
@@ -273,9 +279,9 @@ worker_priority -10; # 120-10=110，110就是最终的优先级
 复制代码
 ```
 
-`Linux` 默认进程的优先级值是120，值越小越优先；`nice` 定范围为 `-20` 到 `+19` 。
+`Linux` 默认进程的优先级值是 120，值越小越优先；`nice` 定范围为 `-20` 到 `+19` 。
 
-[备注] 应用的默认优先级值是120加上 `nice` 值等于它最终的值，这个值越小，优先级越高。
+[备注] 应用的默认优先级值是 120 加上 `nice` 值等于它最终的值，这个值越小，优先级越高。
 
 ### worker_shutdown_timeout
 
@@ -524,8 +530,10 @@ location /test/ {
 复制代码
 ```
 
-- 不带 `/` 当访问 `www.nginx-test.com/test` 时， `Nginx` 先找是否有 `test` 目录，如果有则找 `test` 目录下的 `index.html` ；如果没有 `test` 目录， `nginx` 则会找是否有 `test` 文件。
-- 带 `/` 当访问 `www.nginx-test.com/test` 时， `Nginx` 先找是否有 `test` 目录，如果有则找 `test` 目录下的 `index.html` ，如果没有它也不会去找是否存在 `test` 文件。
+- 不带 `/` 当访问 `www.nginx-test.com/test` 时， `Nginx` 先找是否有 `test` 目录，如果有则找 `test` 目录下的 `index.html`
+  ；如果没有 `test` 目录， `nginx` 则会找是否有 `test` 文件。
+- 带 `/` 当访问 `www.nginx-test.com/test` 时， `Nginx` 先找是否有 `test` 目录，如果有则找 `test` 目录下的 `index.html`
+  ，如果没有它也不会去找是否存在 `test` 文件。
 
 ### return
 
@@ -572,8 +580,8 @@ location / {
 
 - `last` 重写后的 `URL` 发起新请求，再次进入 `server` 段，重试 `location` 的中的匹配；
 - `break` 直接使用重写后的 `URL` ，不再匹配其它 `location` 中语句；
-- `redirect` 返回302临时重定向；
-- `permanent` 返回301永久重定向；
+- `redirect` 返回 302 临时重定向；
+- `permanent` 返回 301 永久重定向；
 
 ```bash
 server{
@@ -602,7 +610,9 @@ server{
 按照这个配置我们来分析：
 
 - 当访问 `fe.lion.club/search` 时，会自动帮我们重定向到 `https://www.baidu.com`。
-- 当访问 `fe.lion.club/images/1.jpg` 时，第一步重写 `URL` 为 `fe.lion.club/pics/1.jpg` ，找到 `pics` 的 `location` ，继续重写 `URL` 为 `fe.lion.club/photos/1.jpg` ，找到 `/photos` 的 `location` 后，去 `html/photos` 目录下寻找 `1.jpg` 静态资源。
+- 当访问 `fe.lion.club/images/1.jpg` 时，第一步重写 `URL` 为 `fe.lion.club/pics/1.jpg` ，找到 `pics` 的 `location`
+  ，继续重写 `URL` 为 `fe.lion.club/photos/1.jpg` ，找到 `/photos` 的 `location` 后，去 `html/photos` 目录下寻找 `1.jpg`
+  静态资源。
 
 ## if 指令
 
@@ -620,7 +630,7 @@ if($http_user_agent ~ Chrome){
 
 `condition` 判断条件：
 
-- `$variable` 仅为变量时，值为空或以0开头字符串都会被当做 `false` 处理；
+- `$variable` 仅为变量时，值为空或以 0 开头字符串都会被当做 `false` 处理；
 - `=` 或 `!=` 相等或不等；
 - `~` 正则匹配；
 - `! ~` 非正则匹配；
@@ -682,35 +692,35 @@ server {
 
 下面列举些项目中常用的变量：
 
-| 变量名               | 含义                                                         |
-| -------------------- | ------------------------------------------------------------ |
-| `remote_addr`        | 客户端 `IP` 地址                                             |
-| `remote_port`        | 客户端端口                                                   |
-| `server_addr`        | 服务端 `IP` 地址                                             |
-| `server_port`        | 服务端端口                                                   |
-| `server_protocol`    | 服务端协议                                                   |
-| `binary_remote_addr` | 二进制格式的客户端 `IP` 地址                                 |
-| `connection`         | `TCP` 连接的序号，递增                                       |
-| `connection_request` | `TCP` 连接当前的请求数量                                     |
-| `uri`                | 请求的URL，不包含参数                                        |
-| `request_uri`        | 请求的URL，包含参数                                          |
-| `scheme`             | 协议名， `http` 或 `https`                                   |
-| `request_method`     | 请求方法                                                     |
-| `request_length`     | 全部请求的长度，包含请求行、请求头、请求体                   |
-| `args`               | 全部参数字符串                                               |
-| `arg_参数名`         | 获取特定参数值                                               |
-| `is_args`            | `URL` 中是否有参数，有的话返回 `?` ，否则返回空              |
-| `query_string`       | 与 `args` 相同                                               |
+| 变量名                  | 含义                                                                        |
+|----------------------|---------------------------------------------------------------------------|
+| `remote_addr`        | 客户端 `IP` 地址                                                               |
+| `remote_port`        | 客户端端口                                                                     |
+| `server_addr`        | 服务端 `IP` 地址                                                               |
+| `server_port`        | 服务端端口                                                                     |
+| `server_protocol`    | 服务端协议                                                                     |
+| `binary_remote_addr` | 二进制格式的客户端 `IP` 地址                                                         |
+| `connection`         | `TCP` 连接的序号，递增                                                            |
+| `connection_request` | `TCP` 连接当前的请求数量                                                           |
+| `uri`                | 请求的 URL，不包含参数                                                             |
+| `request_uri`        | 请求的 URL，包含参数                                                              |
+| `scheme`             | 协议名， `http` 或 `https`                                                     |
+| `request_method`     | 请求方法                                                                      |
+| `request_length`     | 全部请求的长度，包含请求行、请求头、请求体                                                     |
+| `args`               | 全部参数字符串                                                                   |
+| `arg_参数名`            | 获取特定参数值                                                                   |
+| `is_args`            | `URL` 中是否有参数，有的话返回 `?` ，否则返回空                                             |
+| `query_string`       | 与 `args` 相同                                                               |
 | `host`               | 请求信息中的 `Host` ，如果请求中没有 `Host` 行，则在请求头中找，最后使用 `nginx` 中设置的 `server_name` 。 |
-| `http_user_agent`    | 用户浏览器                                                   |
-| `http_referer`       | 从哪些链接过来的请求                                         |
-| `http_via`           | 每经过一层代理服务器，都会添加相应的信息                     |
-| `http_cookie`        | 获取用户 `cookie`                                            |
-| `request_time`       | 处理请求已消耗的时间                                         |
-| `https`              | 是否开启了 `https` ，是则返回 `on` ，否则返回空              |
-| `request_filename`   | 磁盘文件系统待访问文件的完整路径                             |
-| `document_root`      | 由 `URI` 和 `root/alias` 规则生成的文件夹路径                |
-| `limit_rate`         | 返回响应时的速度上限值                                       |
+| `http_user_agent`    | 用户浏览器                                                                     |
+| `http_referer`       | 从哪些链接过来的请求                                                                |
+| `http_via`           | 每经过一层代理服务器，都会添加相应的信息                                                      |
+| `http_cookie`        | 获取用户 `cookie`                                                             |
+| `request_time`       | 处理请求已消耗的时间                                                                |
+| `https`              | 是否开启了 `https` ，是则返回 `on` ，否则返回空                                           |
+| `request_filename`   | 磁盘文件系统待访问文件的完整路径                                                          |
+| `document_root`      | 由 `URI` 和 `root/alias` 规则生成的文件夹路径                                         |
+| `limit_rate`         | 返回响应时的速度上限值                                                               |
 
 实例演示 `var.conf` ：
 
@@ -751,7 +761,8 @@ document_root: $document_root
 复制代码
 ```
 
-当我们访问 `http://var.lion-test.club:8081/test?pid=121414&cid=sadasd` 时，由于 `Nginx` 中写了 `return` 方法，因此 `chrome` 浏览器会默认为我们下载一个文件，下面展示的就是下载的文件内容：
+当我们访问 `http://var.lion-test.club:8081/test?pid=121414&cid=sadasd` 时，由于 `Nginx` 中写了 `return`
+方法，因此 `chrome` 浏览器会默认为我们下载一个文件，下面展示的就是下载的文件内容：
 
 ```go
 remote_addr: 27.16.220.84
@@ -793,7 +804,8 @@ document_root: /usr/share/nginx/html
 
 ## 正向代理
 
-> 正向代理，意思是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。
+> 正向代理，意思是一个位于客户端和原始服务器(origin server)
+> 之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。
 
 正向代理是为我们服务的，即为客户端服务的，客户端可以根据正向代理访问到它本身无法访问到的服务器资源。
 
@@ -801,7 +813,8 @@ document_root: /usr/share/nginx/html
 
 ## 反向代理
 
-> - 反向代理*（Reverse Proxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。
+> - 反向代理*（Reverse Proxy）方式是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给
+    internet 上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。
 
 反向代理是为服务端服务的，反向代理可以帮助服务器接收来自客户端的请求，帮助服务器做请求转发，负载均衡等。
 
@@ -821,7 +834,8 @@ document_root: /usr/share/nginx/html
 
 ![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/62CEDC6012FD06BE5829E0D1F0C0A70D.jpg)
 
-一般来说，都需要将动态资源和静态资源分开，由于 `Nginx` 的高并发和静态资源缓存等特性，经常将静态资源部署在 `Nginx` 上。如果请求的是静态资源，直接到静态资源目录获取资源，如果是动态资源的请求，则利用反向代理的原理，把请求转发给对应后台应用去处理，从而实现动静分离。
+一般来说，都需要将动态资源和静态资源分开，由于 `Nginx` 的高并发和静态资源缓存等特性，经常将静态资源部署在 `Nginx`
+上。如果请求的是静态资源，直接到静态资源目录获取资源，如果是动态资源的请求，则利用反向代理的原理，把请求转发给对应后台应用去处理，从而实现动静分离。
 
 使用前后端分离后，可以很大程度提升静态资源的访问速度，即使动态服务不可用，静态资源的访问也不会受到影响。
 
@@ -833,9 +847,11 @@ document_root: /usr/share/nginx/html
 
 很明显这是由于服务器性能的瓶颈造成的问题，除了堆机器之外，最重要的做法就是负载均衡。
 
-请求爆发式增长的情况下，单个机器性能再强劲也无法满足要求了，这个时候集群的概念产生了，单个服务器解决不了的问题，可以使用多个服务器，然后将请求分发到各个服务器上，将负载分发到不同的服务器，这就是负载均衡，核心是「分摊压力」。`Nginx` 实现负载均衡，一般来说指的是将请求转发给服务器集群。
+请求爆发式增长的情况下，单个机器性能再强劲也无法满足要求了，这个时候集群的概念产生了，单个服务器解决不了的问题，可以使用多个服务器，然后将请求分发到各个服务器上，将负载分发到不同的服务器，这就是负载均衡，核心是「分摊压力」。`Nginx`
+实现负载均衡，一般来说指的是将请求转发给服务器集群。
 
-举个具体的例子，晚高峰乘坐地铁的时候，入站口经常会有地铁工作人员大喇叭“请走 `B` 口， `B` 口人少车空....”，这个工作人员的作用就是负载均衡。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/AD09098E0C911544847085B4CAC3B922.jpg)
+举个具体的例子，晚高峰乘坐地铁的时候，入站口经常会有地铁工作人员大喇叭“请走 `B` 口， `B`
+口人少车空……”，这个工作人员的作用就是负载均衡。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/AD09098E0C911544847085B4CAC3B922.jpg)
 
 `Nginx` 实现负载均衡的策略：
 
@@ -844,11 +860,10 @@ document_root: /usr/share/nginx/html
 - 最快响应时间策略：优先分配给响应时间最短的服务器。
 - 客户端 `ip` 绑定策略：来自同一个 `ip` 的请求永远只分配一台服务器，有效解决了动态网页存在的 `session` 共享问题。
 
- 
-
 # Nginx 实战配置
 
-在配置反向代理和负载均衡等等功能之前，有两个核心模块是我们必须要掌握的，这两个模块应该说是 `Nginx` 应用配置中的核心，它们分别是：`upstream` 、`proxy_pass` 。
+在配置反向代理和负载均衡等等功能之前，有两个核心模块是我们必须要掌握的，这两个模块应该说是 `Nginx`
+应用配置中的核心，它们分别是：`upstream` 、`proxy_pass` 。
 
 ## upstream
 
@@ -896,7 +911,7 @@ upstream back_end_server{
 
 `parameters` 可选值：
 
-- `weight=number` 权重值，默认为1；
+- `weight=number` 权重值，默认为 1；
 - `max_conns=number` 上游服务器的最大并发连接数；
 - `fail_timeout=time` 服务器不可用的判定时间；
 - `max_fails=numer` 服务器不可用的检查次数；
@@ -980,7 +995,8 @@ proxy_pass http://127.0.0.1:8081/proxy
 1. `proxy_pass http://192.168.100.33:8081`
 2. `proxy_pass http://192.168.100.33:8081/`
 
-这两种[游戏账号买号](https://www.fgba.net/)[地图](https://www.fgba.net/sitemap.xml)用法的区别就是带 `/` 和不带 `/` ，在配置代理时它们的区别可大了：
+这两种[游戏账号买号](https://www.fgba.net/)[地图](https://www.fgba.net/sitemap.xml)用法的区别就是带 `/` 和不带 `/`
+，在配置代理时它们的区别可大了：
 
 - 不带 `/` 意味着 `Nginx` 不会修改用户 `URL` ，而是直接透传给上游的应用服务器；
 - 带 `/` 意味着 `Nginx` 会修改用户 `URL` ，修改方法是将 `location` 后的 `URL` 从用户 `URL` 中删除；
@@ -1237,7 +1253,8 @@ server {
 
 ## 配置缓存
 
-缓存可以非常有效的提升性能，因此不论是客户端（浏览器），还是代理服务器（ `Nginx` ），乃至上游服务器都多少会涉及到缓存。可见缓存在每个环节都是非常重要的。下面让我们来学习 `Nginx` 中如何设置缓存策略。
+缓存可以非常有效的提升性能，因此不论是客户端（浏览器），还是代理服务器（ `Nginx`
+），乃至上游服务器都多少会涉及到缓存。可见缓存在每个环节都是非常重要的。下面让我们来学习 `Nginx` 中如何设置缓存策略。
 
 ### proxy_cache
 
@@ -1270,7 +1287,7 @@ server {
 - `path` 缓存文件的存放路径；
 - `level path` 的目录层级；
 - `keys_zone` 设置共享内存；
-- `inactive` 在指定时间内没有被访问，缓存会被清理，默认10分钟；
+- `inactive` 在指定时间内没有被访问，缓存会被清理，默认 10 分钟；
 
 ### proxy_cache_key
 
@@ -1430,7 +1447,7 @@ server {
 
 这就是 `HTTPS` 的基本运作原理，使用对称加密和非对称机密配合使用，保证传输内容的安全性。
 
-关于HTTPS更多知识，可以查看作者的另外一篇文章《学习 HTTP 协议》。
+关于 HTTPS 更多知识，可以查看作者的另外一篇文章《学习 HTTP 协议》。
 
 ### 配置证书
 
@@ -1492,7 +1509,8 @@ http://news.company.com/dir/other.html 不同源，主机不同
 
 现在我在 `fe.server.com` 对 `dev.server.com` 发起请求一定会出现跨域。
 
-现在我们只需要启动一个 `Nginx` 服务器，将 `server_name` 设置为 `fe.server.com` 然后设置相应的 `location` 以拦截前端需要跨域的请求，最后将请求代理回 `dev.server.com` 。如下面的配置：
+现在我们只需要启动一个 `Nginx` 服务器，将 `server_name` 设置为 `fe.server.com` 然后设置相应的 `location`
+以拦截前端需要跨域的请求，最后将请求代理回 `dev.server.com` 。如下面的配置：
 
 ```perl
 server {
@@ -1505,7 +1523,8 @@ server {
 复制代码
 ```
 
-这样可以完美绕过浏览器的同源策略：`fe.server.com` 访问 `Nginx` 的 `fe.server.com` 属于同源访问，而 `Nginx` 对服务端转发的请求不会触发浏览器的同源策略。
+这样可以完美绕过浏览器的同源策略：`fe.server.com` 访问 `Nginx` 的 `fe.server.com` 属于同源访问，而 `Nginx`
+对服务端转发的请求不会触发浏览器的同源策略。
 
 ## 配置开启 gzip 压缩
 
@@ -1513,7 +1532,13 @@ server {
 
 对于文本文件， `GZiP` 的效果非常明显，开启后传输所需流量大约会降至 `1/4~1/3` 。
 
-并不是每个浏览器都支持 `gzip` 的，如何知道客户端是否支持 `gzip` 呢，请求头中的 `Accept-Encoding` 来标识对压缩的支持。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/DC5A4809DE3FB73D3EB476CE3DF4812B.jpg)启用 `gzip` 同时需要客户端和服务端的支持，如果客户端支持 `gzip` 的解析，那么只要服务端能够返回 `gzip` 的文件就可以启用 `gzip` 了,我们可以通过 `Nginx` 的配置来让服务端支持 `gzip` 。下面的 `respone` 中 `content-encoding:gzip` ，指服务端开启了 `gzip` 的压缩方式。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/18E25498B234ACA57C02FE349368ED22.jpg)在 `/etc/nginx/conf.d/` 文件夹中新建配置文件 `gzip.conf` ：
+并不是每个浏览器都支持 `gzip` 的，如何知道客户端是否支持 `gzip` 呢，请求头中的 `Accept-Encoding`
+来标识对压缩的支持。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/DC5A4809DE3FB73D3EB476CE3DF4812B.jpg)
+启用 `gzip` 同时需要客户端和服务端的支持，如果客户端支持 `gzip` 的解析，那么只要服务端能够返回 `gzip`
+的文件就可以启用 `gzip` 了,我们可以通过 `Nginx` 的配置来让服务端支持 `gzip` 。下面的 `respone` 中 `content-encoding:gzip`
+，指服务端开启了 `gzip`
+的压缩方式。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/18E25498B234ACA57C02FE349368ED22.jpg)
+在 `/etc/nginx/conf.d/` 文件夹中新建配置文件 `gzip.conf` ：
 
 ```shell
 # # 默认off，是否开启gzip
@@ -1546,9 +1571,11 @@ gzip_http_version 1.1;
 复制代码
 ```
 
-其实也可以通过前端构建工具例如 `webpack` 、`rollup` 等在打生产包时就做好 `Gzip` 压缩，然后放到 `Nginx` 服务器中，这样可以减少服务器的开销，加快访问速度。
+其实也可以通过前端构建工具例如 `webpack` 、`rollup` 等在打生产包时就做好 `Gzip` 压缩，然后放到 `Nginx`
+服务器中，这样可以减少服务器的开销，加快访问速度。
 
-关于 `Nginx` 的实际应用就学习到这里，相信通过掌握了 `Nginx` 核心配置以及实战配置，之后再遇到什么需求，我们也能轻松应对。接下来，让我们再深入一点学习下 `Nginx` 的架构。
+关于 `Nginx` 的实际应用就学习到这里，相信通过掌握了 `Nginx`
+核心配置以及实战配置，之后再遇到什么需求，我们也能轻松应对。接下来，让我们再深入一点学习下 `Nginx` 的架构。
 
 # Nginx 架构
 
@@ -1566,8 +1593,9 @@ gzip_http_version 1.1;
 
   用来管理子进程的，其本身并不真正处理用户请求。
 
-- - 某个子进程 `down` 掉的话，它会向 `Master` 进程发送一条消息，表明自己不可用了，此时 `Master` 进程会去新起一个子进程。
-  - 某个配置文件被修改了 `Master` 进程会去通知 `work` 进程获取新的配置信息，这也就是我们所说的热部署。
+-
+    - 某个子进程 `down` 掉的话，它会向 `Master` 进程发送一条消息，表明自己不可用了，此时 `Master` 进程会去新起一个子进程。
+    - 某个配置文件被修改了 `Master` 进程会去通知 `work` 进程获取新的配置信息，这也就是我们所说的热部署。
 
 - 子进程间是通过共享内存的方式进行通信的。
 
@@ -1585,5 +1613,6 @@ gzip_http_version 1.1;
 
 ## Nginx 模块化管理机制
 
-`Nginx` 的内部结构是由核心部分和一系列的功能模块所组成。这样划分是为了使得每个模块的功能相对简单，便于开发，同时也便于对系统进行功能扩展。`Nginx` 的模块是互相独立的,低耦合高内聚。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/B69DA539374F988BE5A69DB55FD4B77C.jpg)
-
+`Nginx`
+的内部结构是由核心部分和一系列的功能模块所组成。这样划分是为了使得每个模块的功能相对简单，便于开发，同时也便于对系统进行功能扩展。`Nginx`
+的模块是互相独立的,低耦合高内聚。![img](https://image.z.itpub.net/zitpub.net/JPG/2021-03-31/B69DA539374F988BE5A69DB55FD4B77C.jpg)

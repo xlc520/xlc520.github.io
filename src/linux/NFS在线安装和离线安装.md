@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: NFS在线安装和离线安装
+excerpt: 
 description: 
 date: 2023-03-27
 category: Linux
@@ -10,9 +11,9 @@ timeline: true
 icon: linux
 ---
 
-# NFS在线安装和离线安装
+# NFS 在线安装和离线安装
 
-## 1. 在线安装：
+## 1. 在线安装
 
 #### 第一步：在文件主服务器上安装 `nfs-kernel-server`
 
@@ -79,7 +80,7 @@ rm -rf docker
 
 #### 第一步：在外网环境下打包安装包和依赖
 
-##### `nfs-kernel-server` 服务：
+##### `nfs-kernel-server` 服务
 
 ```bash
 # rpcbind nfs-kernel-server nfs-common net-tools
@@ -124,7 +125,7 @@ sudo cp /etc/apt/sources.list.back /etc/apt/sources.list
 
 `nfs-common` 服务：
 
-离线打包步骤和 `nfs-kernel-server `相同，把上面的 `nfs-kernel-server` 替换为 `nfs-common` 直接执行
+离线打包步骤和 `nfs-kernel-server`相同，把上面的 `nfs-kernel-server` 替换为 `nfs-common` 直接执行
 
 ## NFS 漏洞：showmount -e 信息泄露
 
@@ -160,11 +161,11 @@ showmount -e 192.168.1.2
 clnt_create: RPC: Port mapper failure - Authentication error
 ```
 
-
-
 ## 开机自动挂载
 
-如果按本文上面的部分配置好，NFS即部署好了，但是如果你重启客户端系统，发现不能随机器一起挂载，需要再次手动操作挂载，这样操作比较麻烦，因此我们需要设置开机自动挂载。我们不要把挂载项写到/etc/fstab文件中，因为开机时先挂载本机磁盘再启动网络，而NFS是需要网络启动后才能挂载的，所以我们把挂载命令写入到/etc/rc.d/rc.local文件中即可。
+如果按本文上面的部分配置好，NFS 即部署好了，但是如果你重启客户端系统，发现不能随机器一起挂载，需要再次手动操作挂载，这样操作比较麻烦，因此我们需要设置开机自动挂载。我们不要把挂载项写到/etc/fstab
+文件中，因为开机时先挂载本机磁盘再启动网络，而 NFS 是需要网络启动后才能挂载的，所以我们把挂载命令写入到/etc/rc.d/rc.local
+文件中即可。
 
 ```shell
 vim /etc/rc.d/rc.local
@@ -241,4 +242,3 @@ reboot
 # 重启，避免不会同步
 /etc/init.d/rpcbind restart
 ```
-

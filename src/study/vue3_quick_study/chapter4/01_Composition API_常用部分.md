@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Composition API
+excerpt: 
 description: 
 date: 2022-07-30
 category: Vue
@@ -9,27 +10,26 @@ article: true
 dateline: true
 icon: vue
 ---
+
 # 1. Composition API(常用部分)
 
-文档: 
+文档:
 
-​	https://composition-api.vuejs.org/zh/api.html
+​ <https://composition-api.vuejs.org/zh/api.html>
 
 ## 1) setup
 
-- 新的option, 所有的组合API函数都在此使用, 只在初始化时执行一次
+- 新的 option, 所有的组合 API 函数都在此使用, 只在初始化时执行一次
 - 函数如果返回对象, 对象中的属性或方法, 模板中可以直接使用
 
 ## 2) ref
 
 - 作用: 定义一个数据的响应式
-- 语法: const xxx = ref(initValue): 
-  - 创建一个包含响应式数据的引用(reference)对象
-  - js中操作数据: xxx.value
-  - 模板中操作数据: 不需要.value
--  一般用来定义一个基本类型的响应式数据
-
-
+- 语法: const xxx = ref(initValue):
+    - 创建一个包含响应式数据的引用(reference)对象
+    - js 中操作数据: xxx.value
+    - 模板中操作数据: 不需要.value
+- 一般用来定义一个基本类型的响应式数据
 
 ```vue
 <template>
@@ -136,15 +136,13 @@ export default {
 </script>
 ```
 
+## 4) 比较 Vue2 与 Vue3 的响应式(重要)
 
+## vue2 的响应式
 
-## 4) 比较Vue2与Vue3的响应式(重要)
-
-## vue2的响应式
-
-- 核心: 
-  - 对象: 通过defineProperty对对象的已有属性值的读取和修改进行劫持(监视/拦截)
-  - 数组: 通过重写数组更新数组一系列更新元素的方法来实现元素修改的劫持
+- 核心:
+    - 对象: 通过 defineProperty 对对象的已有属性值的读取和修改进行劫持(监视/拦截)
+    - 数组: 通过重写数组更新数组一系列更新元素的方法来实现元素修改的劫持
 
 ```js
 Object.defineProperty(data, 'count', {
@@ -154,38 +152,36 @@ Object.defineProperty(data, 'count', {
 ```
 
 - 问题
-  - 对象直接新添加的属性或删除已有属性, 界面不会自动更新
-  - 直接通过下标替换元素或更新length, 界面不会自动更新   arr[1] = {}
+    - 对象直接新添加的属性或删除已有属性, 界面不会自动更新
+    - 直接通过下标替换元素或更新 length, 界面不会自动更新 arr[1] = {}
 
-## Vue3的响应式
+## Vue3 的响应式
 
-- 核心: 
-  - 通过Proxy(代理):  拦截对data任意属性的任意(13种)操作, 包括属性值的读写, 属性的添加, 属性的删除等...
-  - 通过 Reflect(反射):  动态对被代理对象的相应属性进行特定的操作
-  - 文档:
-    - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
-    - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+- 核心:
+    - 通过 Proxy(代理):  拦截对 data 任意属性的任意(13 种)操作, 包括属性值的读写, 属性的添加, 属性的删除等...
+    - 通过 Reflect(反射):  动态对被代理对象的相应属性进行特定的操作
+    - 文档:
+        - <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy>
+        - <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect>
 
 ```js
 new Proxy(data, {
-	// 拦截读取属性值
+ // 拦截读取属性值
     get (target, prop) {
-    	return Reflect.get(target, prop)
+     return Reflect.get(target, prop)
     },
     // 拦截设置属性值或添加新属性
     set (target, prop, value) {
-    	return Reflect.set(target, prop, value)
+     return Reflect.set(target, prop, value)
     },
     // 拦截删除属性
     deleteProperty (target, prop) {
-    	return Reflect.deleteProperty(target, prop)
+     return Reflect.deleteProperty(target, prop)
     }
 })
 
 proxy.name = 'tom'   
 ```
-
-
 
 ```html
 <!DOCTYPE html>
@@ -242,30 +238,28 @@ proxy.name = 'tom'
 </html>
 ```
 
+## 5) setup 细节
 
+- setup 执行的时机
+    - 在 beforeCreate 之前执行(一次), 此时组件对象还没有创建
+    - this 是 undefined, 不能通过 this 来访问 data/computed/methods / props
+    - 其实所有的 composition API 相关回调函数中也都不可以
 
-## 5) setup细节
+- setup 的返回值
+    - 一般都返回一个对象: 为模板提供数据, 也就是模板中可以直接使用此对象中的所有属性/方法
+    - 返回对象中的属性会与 data 函数返回对象的属性合并成为组件对象的属性
+    - 返回对象中的方法会与 methods 中的方法合并成功组件对象的方法
+    - 如果有重名, setup 优先
+    - 注意:
+    - 一般不要混合使用: methods 中可以访问 setup 提供的属性和方法, 但在 setup 方法中不能访问 data 和 methods
+    - setup 不能是一个 async 函数: 因为返回值不再是 return 的对象, 而是 promise, 模板看不到 return 对象中的属性数据
 
-- setup执行的时机
-  - 在beforeCreate之前执行(一次), 此时组件对象还没有创建
-  - this是undefined, 不能通过this来访问data/computed/methods / props
-  - 其实所有的composition API相关回调函数中也都不可以
-
-- setup的返回值
-  - 一般都返回一个对象: 为模板提供数据, 也就是模板中可以直接使用此对象中的所有属性/方法
-  - 返回对象中的属性会与data函数返回对象的属性合并成为组件对象的属性
-  - 返回对象中的方法会与methods中的方法合并成功组件对象的方法
-  - 如果有重名, setup优先
-  -  注意: 
-    -  一般不要混合使用: methods中可以访问setup提供的属性和方法, 但在setup方法中不能访问data和methods
-    - setup不能是一个async函数: 因为返回值不再是return的对象, 而是promise, 模板看不到return对象中的属性数据
-
-- setup的参数
-  - setup(props, context) / setup(props, {attrs, slots, emit})
-  - props: 包含props配置声明且传入了的所有属性的对象
-  - attrs: 包含没有在props配置中声明的属性的对象, 相当于 this.$attrs
-  - slots: 包含所有传入的插槽内容的对象, 相当于 this.$slots
-  - emit: 用来分发自定义事件的函数, 相当于 this.$emit
+- setup 的参数
+    - setup(props, context) / setup(props, {attrs, slots, emit})
+    - props: 包含 props 配置声明且传入了的所有属性的对象
+    - attrs: 包含没有在 props 配置中声明的属性的对象, 相当于 this.$attrs
+    - slots: 包含所有传入的插槽内容的对象, 相当于 this.$slots
+    - emit: 用来分发自定义事件的函数, 相当于 this.$emit
 
 ```vue
 <template>
@@ -382,16 +376,14 @@ export default defineComponent({
 </script>
 ```
 
+## 6) reactive 与 ref-细节
 
-
-## 6) reactive与ref-细节
-
--  是Vue3的 composition API中2个最重要的响应式API
--  ref用来处理基本类型数据, reactive用来处理对象(递归深度响应式)
--  如果用ref对象/数组, 内部会自动将对象/数组转换为reactive的代理对象
--  ref内部: 通过给value属性添加getter/setter来实现对数据的劫持
--  reactive内部: 通过使用Proxy来实现对对象内部所有数据的劫持, 并通过Reflect操作对象内部数据
--  ref的数据操作: 在js中要.value, 在模板中不需要(内部解析模板时会自动添加.value)
+- 是 Vue3 的 composition API 中 2 个最重要的响应式 API
+- ref 用来处理基本类型数据, reactive 用来处理对象(递归深度响应式)
+- 如果用 ref 对象/数组, 内部会自动将对象/数组转换为 reactive 的代理对象
+- ref 内部: 通过给 value 属性添加 getter/setter 来实现对数据的劫持
+- reactive 内部: 通过使用 Proxy 来实现对对象内部所有数据的劫持, 并通过 Reflect 操作对象内部数据
+- ref 的数据操作: 在 js 中要.value, 在模板中不需要(内部解析模板时会自动添加.value)
 
 ```vue
 <template>
@@ -441,26 +433,23 @@ export default {
 
 ```
 
-
-
-
 ## 7) 计算属性与监视
 
-- computed函数: 
-  - 与computed配置功能一致
-  - 只有getter
-  - 有getter和setter
+- computed 函数:
+    - 与 computed 配置功能一致
+    - 只有 getter
+    - 有 getter 和 setter
 
-- watch函数
-  -  与watch配置功能一致
-  -  监视指定的一个或多个响应式数据, 一旦数据变化, 就自动执行监视回调
-  -  默认初始时不执行回调, 但可以通过配置immediate为true, 来指定初始时立即执行第一次
-  -  通过配置deep为true, 来指定深度监视
+- watch 函数
+    - 与 watch 配置功能一致
+    - 监视指定的一个或多个响应式数据, 一旦数据变化, 就自动执行监视回调
+    - 默认初始时不执行回调, 但可以通过配置 immediate 为 true, 来指定初始时立即执行第一次
+    - 通过配置 deep 为 true, 来指定深度监视
 
-- watchEffect函数
-  - 不用直接指定要监视的数据, 回调函数中使用的哪些响应式数据就监视哪些响应式数据
-  - 默认初始时就会执行第一次, 从而可以收集需要监视的数据
-  - 监视数据发生变化时回调
+- watchEffect 函数
+    - 不用直接指定要监视的数据, 回调函数中使用的哪些响应式数据就监视哪些响应式数据
+    - 默认初始时就会执行第一次, 从而可以收集需要监视的数据
+    - 监视数据发生变化时回调
 
 ```vue
 <template>
@@ -585,15 +574,13 @@ export default {
 
 ```
 
-
-
 ## 8) 生命周期
 
-**vue2.x的生命周期**
+**vue2.x 的生命周期**
 
 ![lifecycle_2](https://vipkshttps3.wiz.cn/ks/note/view/49c30824-dcdf-4bd0-af2a-708f490b44a1/10311b3b-496c-41f1-8df3-c87572008080/index_files/1604629129730-y1h.png)
 
-**vue3的生命周期**
+**vue3 的生命周期**
 
 ![lifecycle_3](https://vipkshttps3.wiz.cn/ks/note/view/49c30824-dcdf-4bd0-af2a-708f490b44a1/10311b3b-496c-41f1-8df3-c87572008080/index_files/1604629129585-tqn.png)
 
@@ -738,19 +725,15 @@ export default {
 
 ```
 
+## 09) 自定义 hook 函数
 
+- 使用 Vue3 的组合 API 封装的可复用的功能函数
 
-## 09) 自定义hook函数
+- 自定义 hook 的作用类似于 vue2 中的 mixin 技术
 
+- 自定义 Hook 的优势: 很清楚复用功能代码的来源, 更清楚易懂
 
-
-- 使用Vue3的组合API封装的可复用的功能函数
-
-- 自定义hook的作用类似于vue2中的mixin技术
-
-- 自定义Hook的优势: 很清楚复用功能代码的来源, 更清楚易懂
-
-- 需求1: 收集用户鼠标点击的页面坐标
+- 需求 1: 收集用户鼠标点击的页面坐标
 
   hooks/useMousePosition.ts
 
@@ -783,8 +766,6 @@ export default function useMousePosition () {
   return {x, y}
 }
 ```
-
-
 
 ```vue
 <template>
@@ -819,11 +800,9 @@ export default {
 </script>
 ```
 
+- 利用 TS 泛型强化类型检查
 
-
-- 利用TS泛型强化类型检查
-
-- 需求2: 封装发ajax请求的hook函数 
+- 需求 2: 封装发 ajax 请求的 hook 函数
 
   hooks/useRequest.ts
 
@@ -857,8 +836,6 @@ export default function useUrlLoader<T>(url: string) {
   }
 }
 ```
-
-
 
 ```vue
 <template>
@@ -923,13 +900,11 @@ export default {
 
 ```
 
-
-
 ## 10) toRefs
 
- 把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref 
+把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref
 
- 应用: 当从合成函数返回响应式对象时，toRefs 非常有用，这样消费组件就可以在不丢失响应式的情况下对返回的对象进行分解使用
+应用: 当从合成函数返回响应式对象时，toRefs 非常有用，这样消费组件就可以在不丢失响应式的情况下对返回的对象进行分解使用
 
 问题: reactive 对象取出的所有属性值都是非响应式的
 
@@ -999,11 +974,9 @@ function useReatureX() {
 
 ```
 
+## 11) ref 获取元素
 
-
-## 11) ref获取元素
-
-利用ref函数获取组件中的标签元素
+利用 ref 函数获取组件中的标签元素
 
 功能需求: 让输入框自动获取焦点
 

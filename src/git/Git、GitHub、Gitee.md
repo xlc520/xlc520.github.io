@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title:  Git、GitHub、Gitee
+excerpt: 
 description:  Git、GitHub、Gitee使用
 date: 2022-02-13
 category: Git
@@ -12,55 +13,61 @@ icon: type
 
 # Git、GitHub、Gitee
 
-## 一：Git介绍与Mac下如何生成ssh key
+## 一：Git 介绍与 Mac 下如何生成 ssh key
 
-git是分布式的代码管理工具，远程的代码管理是基于ssh的，所以要使用远程的git则需要ssh的配置。简单的说，Git -
-版本控制工具；Github是一个网站，提供给用户空间创建git仓储，保存用户的一些数据文档或者代码等；GitLab是基于Git的项目管理软件
-
-​
-首先，使用代码管理工具把本地的代码上传到服务器时需要加密处理，加密传输的算法有很多种，git可使用rsa，rsa要解决的一个核心问题是，如何使用一对特定的数字，使其中一个数字可以用来加密，而另外一个数字可以用来解密。这两个数字就是你在使用git和github，gitlab的时候所遇到的public
-key也就是公钥以及private key私钥。
+git 是分布式的代码管理工具，远程的代码管理是基于 ssh 的，所以要使用远程的 git 则需要 ssh 的配置。简单的说，Git -
+版本控制工具；Github 是一个网站，提供给用户空间创建 git 仓储，保存用户的一些数据文档或者代码等；GitLab 是基于 Git 的项目管理软件
 
 ​
-其中，公钥就是那个用来加密的数字，这也就是为什么你在本机生成了公钥之后，要上传到github的原因。从github发回来的，用那公钥加密过的数据，可以用你本地的私钥来还原。如果你的key丢失了，不管是公钥还是私钥，丢失一个都不能用了，解决方法也很简单，删除原有的key，重新再生成一次，然后在github.com里再设置一次就行
+首先，使用代码管理工具把本地的代码上传到服务器时需要加密处理，加密传输的算法有很多种，git 可使用 rsa，rsa
+要解决的一个核心问题是，如何使用一对特定的数字，使其中一个数字可以用来加密，而另外一个数字可以用来解密。这两个数字就是你在使用
+git 和 github，gitlab 的时候所遇到的 public
+key 也就是公钥以及 private key 私钥。
 
-在个人电脑生成ssh密钥后，会同时生成一个公开密钥和一个私有密钥，默认情况下在用户主目录下的.ssh目录中，密钥为id_rsa，公开密钥为id_rsa.pub。
+​
+其中，公钥就是那个用来加密的数字，这也就是为什么你在本机生成了公钥之后，要上传到 github 的原因。从 github
+发回来的，用那公钥加密过的数据，可以用你本地的私钥来还原。如果你的 key 丢失了，不管是公钥还是私钥，丢失一个都不能用了，解决方法也很简单，删除原有的
+key，重新再生成一次，然后在 github.com 里再设置一次就行
+
+在个人电脑生成 ssh 密钥后，会同时生成一个公开密钥和一个私有密钥，默认情况下在用户主目录下的.ssh 目录中，密钥为 id_rsa，公开密钥为
+id_rsa.pub。
 
 密钥和公开密钥是共同使用的，协同开发中，一般会将公钥配置在服务器中，这样方便经常登录，也不需要输入密码，这是现在集群和各种云平台常用的登录方式，密钥在本地不被泄漏就非常安全。
 
-- 步骤1.检查是否已经存在SSH Key
+- 步骤 1.检查是否已经存在 SSH Key
 
 打开电脑终端，输入以下命令：
 
 ls -al ~/.ssh
 
-会出现两种情况 ，如步骤2所示
+会出现两种情况 ，如步骤 2 所示
 
-- 步骤2. 生成/设置SSH Key
+- 步骤 2. 生成/设置 SSH Key
 
 继续上一步可能出现的情况
 
-（1）情况一：终端出现文件id_rsa.pub 或 id_dsa.pub，则表示该电脑已经存在SSH Key，此时可继续输入命令：
+（1）情况一：终端出现文件 id_rsa.pub 或 id_dsa.pub，则表示该电脑已经存在 SSH Key，此时可继续输入命令：
 
 pbcopy < ~/.ssh/id_rsa.pub
 
-这样你需要的SSH Key 就已经复制到粘贴板上了，然后进行步骤3
+这样你需要的 SSH Key 就已经复制到粘贴板上了，然后进行步骤 3
 
-（2）情况二：终端未出现id_rsa.pub 或 id_dsa.pub文件，表示该电脑还没有配置SSH Key，此时需要输入命令：
+（2）情况二：终端未出现 id_rsa.pub 或 id_dsa.pub 文件，表示该电脑还没有配置 SSH Key，此时需要输入命令：
 
-ssh-keygen -t rsa -C "your_email@example.com"
+ssh-keygen -t rsa -C "<your_email@example.com>"
 
-默认会在相应路径下（/your_home_path）生成id_rsa和id_rsa.pub两个文件，此时终端会显示：
+默认会在相应路径下（/your_home_path）生成 id_rsa 和 id_rsa.pub 两个文件，此时终端会显示：
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1644164187476-6676ff38-2c76-44cb-a75e-93295b945a75.png)
 
 连续回车即可，也可能会让你输入密码，密码就是你的开机密码
 
-此时再输入命令：ls -al ~/.ssh 就会出现id_rsa.pub 和 id_dsa.pub两个文件，然后重复情况一的步骤即输入以下命令再进行步骤3即可：
+此时再输入命令：ls -al ~/.ssh 就会出现 id_rsa.pub 和 id_dsa.pub 两个文件，然后重复情况一的步骤即输入以下命令再进行步骤 3
+即可：
 
 pbcopy < ~/.ssh/id_rsa.pub
 
-- 步骤3.将SSH Key添加到Github和Gitee中
+- 步骤 3.将 SSH Key 添加到 Github 和 Gitee 中
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1644163954973-29d7b898-0036-4f48-b13b-b771f3b3064b.png)
 
@@ -70,7 +77,7 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 ***图：Gitee\***[
 
-](https://blog.csdn.net/wsdxsyb/article/details/81904472)
+](<https://blog.csdn.net/wsdxsyb/article/details/81904472>)
 
 ## 二：常用命令
 
@@ -86,39 +93,39 @@ pbcopy < ~/.ssh/id_rsa.pub
 1. 将代码从工作区添加暂存区 git add .
 2. 查看尚未暂存的更新 git diff
 
-1. 添加提交信息 git commit -m 'xxxx'（commit注释写错，执行 git commit --amend
+1. 添加提交信息 git commit -m 'xxxx'（commit 注释写错，执行 git commit --amend
 
-此时会进入默认vim编辑器，修改注释完毕后保存）
+此时会进入默认 vim 编辑器，修改注释完毕后保存）
 
-1. 推送代码到远程分支 git push origin dev、强制推送git push -f origin dev（常在git rebase后使用）
+1. 推送代码到远程分支 git push origin dev、强制推送 git push -f origin dev（常在 git rebase 后使用）
 2. 拉取远程分支代码 git pull origin dev
 
 1. 合并分支 git merge dev
-2. 查看git状态 git status
+2. 查看 git 状态 git status
 
 1. 查看提交历史 git log
 2. 查看命令历史 git reflog
 
-1. 把本地未push的分叉提交历史整理成直线 git rebase origin/dev、回到rebase执行之前的状态 git rebase --abort
+1. 把本地未 push 的分叉提交历史整理成直线 git rebase origin/dev、回到 rebase 执行之前的状态 git rebase --abort
 2. 回退版本 git reset --hard commit_id、回退上一个版本 git reset --soft HEAD^ 等于 git reset --soft HEAD~1
 
 1. 修改分支名 git branch -m oldBranchName newBranchName、git push origin :oldBranchName、git push --set-upstream origin
    newBranchName
-2. 查看git配置 git config --global --list、git config --global user.name
+2. 查看 git 配置 git config --global --list、git config --global user.name
 
 1. git config --global --add user.name newName（增）
 2. git config --global --unset user.name（删）
 
 1. git config --global user.name newName（改）
-2. 配置Git用户名和邮箱
+2. 配置 Git 用户名和邮箱
 
 git config --global user.name "Your Name"
 
-git config --global user.email "email@example.com"
+git config --global user.email "<email@example.com>"
 
 ## 三：提交规范
 
-https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular
+<https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular>
 
 - feat 增加新功能
 - fix 修复问题/BUG
@@ -140,7 +147,7 @@ https://github.com/conventional-changelog/conventional-changelog/tree/master/pac
 
 - wip 开发中
 
-## 四：CodeReview常用缩写
+## 四：CodeReview 常用缩写
 
 PR: Pull Request. 拉取请求，给其他项目提交代码
 
@@ -159,4 +166,4 @@ TL;DR: Too Long; Didn't Read. 太长懒得看。也有很多文档在做简略�
 
 TBD: To Be Done(or Defined/Discussed/Decided/Determined). 根据语境不同意义有所区别，但一般都是还没搞定的意思
 
-注意：dev代表分支名（可随便命名）
+注意：dev 代表分支名（可随便命名）

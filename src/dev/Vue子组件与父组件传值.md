@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Vue 子组件与父组件传值
+excerpt: 
 description: 
 date: 2022-07-08
 category: Java
@@ -10,13 +11,12 @@ timeline: true
 icon: java
 ---
 
-
-
 # Vue 子组件与父组件传值
 
-## 一、通过父组件给子组件传递函数类型的props实现
+## 一、通过父组件给子组件传递函数类型的 props 实现
 
-注意：通过props父子组件的设置接收的名称要一样，绑定的名字（`:getChildInfo`）和接收的一样（`props: ['getChildInfo']`）,当调用的时候使用this.xxx.xx范围要对应。
+注意：通过 props 父子组件的设置接收的名称要一样，绑定的名字（`:getChildInfo`）和接收的一样（`props: ['getChildInfo']`
+）,当调用的时候使用 this.xxx.xx 范围要对应。
 
 父组件：
 
@@ -32,13 +32,13 @@ icon: java
 props: ['getChildInfo']
 
 sendChildInfo() {
-	this.getChildInfo(数据);
+ this.getChildInfo(数据);
 }
 ```
 
 ## 二、通过父组件给子组件绑定自定义事件实现
 
-### **第一种方式：**
+### **第一种方式**
 
 父组件：
 
@@ -52,11 +52,11 @@ sendChildInfo() {
 <button @click="send"></button>
 
 send() {
-	this.$emit('haha');
+ this.$emit('haha');
 }
 ```
 
-### **第二种方式：**
+### **第二种方式**
 
 父组件：
 
@@ -64,7 +64,7 @@ send() {
 <child ref="xxx"></child>
 
 mounted() {
-	this.$refs.xxx.$on('haha', this.test);
+ this.$refs.xxx.$on('haha', this.test);
 }
 ```
 
@@ -74,25 +74,21 @@ mounted() {
 <button @click="send"></button>
 
 send() {
-	this.$emit('haha');
+ this.$emit('haha');
 }
 ```
 
-### 注意：
+### 注意
 
 1. 若想让自定义事件只能触发一次，可以使用`once`修饰符，或者`$once`方法。
 
-2. 组件上也可以绑定原生DOM事件，需要使用`native`修饰符
+2. 组件上也可以绑定原生 DOM 事件，需要使用`native`修饰符
 
    ```vue
    <Child @click.native="xxx"></Child>
    ```
 
-3. 通过`this.$refs.xxx.$on('haha', 回调)`绑定自定义事件时，回调要么配置在methods中，要么用箭头函数，否则this的指向会出问题。
-
-
-
-
+3. 通过`this.$refs.xxx.$on('haha', 回调)`绑定自定义事件时，回调要么配置在 methods 中，要么用箭头函数，否则 this 的指向会出问题。
 
 ## 其他参考
 
@@ -139,7 +135,7 @@ testData(data){
 
 这种方式要简单得多，
 
-1，子组件中绑定ref
+1，子组件中绑定 ref
 
 ```vue
 <template>
@@ -157,7 +153,7 @@ getData(){
     },
 ```
 
-然后再父组件注册子组件后绑定ref，调用子组件的函数获取数据
+然后再父组件注册子组件后绑定 ref，调用子组件的函数获取数据
 
 ```vue
 <AuthTree ref="authTree">
@@ -170,12 +166,9 @@ getData(){
 console.log( this.$refs.authTree.getData());
 ```
 
-
-
 **注意：**
 
 ```typescript
 emits.emit("setAcctStatusPilh",res.data.acctType);  //如果组件lazy为true，打开时组件未祖册，无法设置
 this.$refs.pilhacctmthlyblginfsgmt.getAcctType(res.data.acctType);  //如果组件lazy为false，打开时组件未祖册，无法设置
 ```
-

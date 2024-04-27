@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Steam
+excerpt: 
 description: Steam
 date: 2022-01-15
 category: other
@@ -9,9 +10,10 @@ article: true
 timeline: true
 icon: type
 ---
+
 # Steam
 
-电脑桌面按win+R	
+电脑桌面按 win+R
 steam://install/1198260 《Beneath steel clouds》（锁区）
 steam://install/1084630 《Sacred Sword Princesses》（锁区）
 steam://install/1024800 《Femdom Waifu》（锁区）
@@ -27,7 +29,7 @@ steam://install/1121310 《ViRo Playspace》（锁区）
 steam://install/865570 《pact with a witch》（锁区）
 steam://install/1245610 《AChat》（锁区）
 steam://install/720380 《Ancestors Legacy Free Peasant Edition》
-steam://install/8500 《EVE》（Steam锁区）
-steam://install/1172470 《Apex》（Steam锁区）
+steam://install/8500 《EVE》（Steam 锁区）
+steam://install/1172470 《Apex》（Steam 锁区）
 steam://install/1205560 《对魔忍雪风体验版》（锁区）
-steam://install/1330250 《对魔忍COLLECTION：决战竞技场》（锁区） 
+steam://install/1330250 《对魔忍 COLLECTION：决战竞技场》（锁区）

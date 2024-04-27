@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Java8多线程CompletableFuture
+excerpt: 
 description: 
 date: 2022-09-03
 category: Java
@@ -10,14 +11,13 @@ timeline: true
 icon: java
 ---
 
+# Java8 多线程 CompletableFuture
 
+日常开发中，我们都会用到线程池，一般会用 execute()和 submit()方法提交任务。但是当你用过 CompletableFuture
+之后，就会发现以前的线程池处理任务有多难用，功能有多简陋，CompletableFuture 又是多么简洁优雅。
 
-# Java8多线程CompletableFuture
-
-日常开发中，我们都会用到线程池，一般会用execute()和submit()方法提交任务。但是当你用过CompletableFuture之后，就会发现以前的线程池处理任务有多难用，功能有多简陋，CompletableFuture又是多么简洁优雅。
-
-要知道CompletableFuture已经随着Java8发布7年了，还没有过它就有点说不过去了。
-今天5分钟带你深入浅出CompletableFuture实用教程。
+要知道 CompletableFuture 已经随着 Java8 发布 7 年了，还没有过它就有点说不过去了。
+今天 5 分钟带你深入浅出 CompletableFuture 实用教程。
 
 ## 1. 使用线程池处理任务
 
@@ -61,7 +61,7 @@ icon: java
 
 输出结果：
 
-```
+```plain
     结果1
     结果2
     结果3
@@ -70,14 +70,14 @@ icon: java
 一般大家都会这样使用线程池，但是有没有思考过这样使用有没有什么问题？
 反正我发现两个比较严重的问题：
 
-1. 获取结果时，调用的future.get()方法，会阻塞当前线程，直到返回结果，大大降低性能
+1. 获取结果时，调用的 future.get()方法，会阻塞当前线程，直到返回结果，大大降低性能
 2. 有一半的代码在写怎么使用线程，其实我们不应该关心怎么使用线程，更应该关注任务的处理
 
-有没有具体的优化方案呢？当然有了，请出来我们今天的主角CompletableFuture
+有没有具体的优化方案呢？当然有了，请出来我们今天的主角 CompletableFuture
 
-## 2. 使用CompletableFuture重构任务处理
+## 2. 使用 CompletableFuture 重构任务处理
 
-看一下使用CompletableFuture改造后代码：
+看一下使用 CompletableFuture 改造后代码：
 
 ```java
     /**
@@ -120,21 +120,21 @@ icon: java
 
 输出结果：
 
-```
+```plain
     结果1
     结果2
     结果3
 ```
 
-代码中使用了CompletableFuture的两个方法，
+代码中使用了 CompletableFuture 的两个方法，
 supplyAsync()方法作用是提交异步任务，有两个传参，任务和自定义线程池。
 whenCompleteAsync()方法作用是异步获取结果，也有两个传参，结果和异常信息。
 
-代码经过CompletableFuture改造后，是多么的简洁优雅。
+代码经过 CompletableFuture 改造后，是多么的简洁优雅。
 提交任务也不用再关心线程池是怎么使用了，获取结果也不用再阻塞当前线程了。
 
-如果你比较倔强，还想同步获取结果，可以使用whenComplete()方法，或者单独调用join()方法。
-join()方法配合Stream流是这样用的：
+如果你比较倔强，还想同步获取结果，可以使用 whenComplete()方法，或者单独调用 join()方法。
+join()方法配合 Stream 流是这样用的：
 
 ```java
     /**
@@ -171,13 +171,13 @@ join()方法配合Stream流是这样用的：
 
 输出结果：
 
-```
+```plain
     [结果1,结果2,结果3]
 ```
 
-多么的简洁优雅啊！原来executorService.submit()这种使用线程池的方式，可以彻底丢掉了。
+多么的简洁优雅啊！原来 executorService.submit()这种使用线程池的方式，可以彻底丢掉了。
 
-## 3. CompletableFuture更多妙用
+## 3. CompletableFuture 更多妙用
 
 ### 3.1 等待所有任务执行完成
 
@@ -223,13 +223,13 @@ join()方法配合Stream流是这样用的：
 
 输出结果：
 
-```
+```plain
     结果2
     结果3
     结果1
 ```
 
-Low不Low？十年前可以这样写，Java8都已经发布7年了，你还不会用Java8的写法？看一下使用CompletableFuture是怎么重构的：
+Low 不 Low？十年前可以这样写，Java8 都已经发布 7 年了，你还不会用 Java8 的写法？看一下使用 CompletableFuture 是怎么重构的：
 
 ```java
     /**
@@ -265,7 +265,7 @@ Low不Low？十年前可以这样写，Java8都已经发布7年了，你还不�
 
 输出结果：
 
-```
+```plain
     结果3
     结果1
     结果2
@@ -273,17 +273,17 @@ Low不Low？十年前可以这样写，Java8都已经发布7年了，你还不�
 
 代码看着有点乱，其实逻辑很清晰。
 
-1. 遍历list集合，提交CompletableFuture任务，把结果转换成数组
-2. 再把数组放到CompletableFuture的allOf()方法里面
-3. 最后调用join()方法阻塞等待所有任务执行完成
+1. 遍历 list 集合，提交 CompletableFuture 任务，把结果转换成数组
+2. 再把数组放到 CompletableFuture 的 allOf()方法里面
+3. 最后调用 join()方法阻塞等待所有任务执行完成
 
-CompletableFuture的allOf()方法的作用就是，等待所有任务处理完成。
+CompletableFuture 的 allOf()方法的作用就是，等待所有任务处理完成。
 这样写是不是简洁优雅了许多？
 
 ### 3.2 任何一个任务处理完成就返回
 
 如果要实现这样一个需求，往线程池提交一批任务，只要有其中一个任务处理完成就返回。
-该怎么做？如果你手动实现这个逻辑的话，代码肯定复杂且低效，有了CompletableFuture就非常简单了，只需调用anyOf()方法就行了。
+该怎么做？如果你手动实现这个逻辑的话，代码肯定复杂且低效，有了 CompletableFuture 就非常简单了，只需调用 anyOf()方法就行了。
 
 ```java
     /**
@@ -322,7 +322,7 @@ CompletableFuture的allOf()方法的作用就是，等待所有任务处理完�
 
 输出结果：
 
-```
+```plain
     结果3
 ```
 
@@ -333,9 +333,10 @@ CompletableFuture的allOf()方法的作用就是，等待所有任务处理完�
 有这么一个需求：
 一个线程处理完成，把处理的结果交给另一个线程继续处理，怎么实现？
 
-你是不是想到了一堆工具，线程池、CountDownLatch、Semaphore、ReentrantLock、Synchronized，该怎么进行组合使用呢？AB组合还是BC组合？
+你是不是想到了一堆工具，线程池、CountDownLatch、Semaphore、ReentrantLock、Synchronized，该怎么进行组合使用呢？AB 组合还是 BC
+组合？
 
-别瞎想了，你写的肯定没有CompletableFuture好用，看一下CompletableFuture是怎么用的：
+别瞎想了，你写的肯定没有 CompletableFuture 好用，看一下 CompletableFuture 是怎么用的：
 
 ```java
     /**
@@ -375,19 +376,19 @@ CompletableFuture的allOf()方法的作用就是，等待所有任务处理完�
 
 输出结果：
 
-```
+```plain
     结果1结果2
 ```
 
-代码主要用到了CompletableFuture的thenApplyAsync()方法，作用就是异步处理上一个线程的结果。
+代码主要用到了 CompletableFuture 的 thenApplyAsync()方法，作用就是异步处理上一个线程的结果。
 
 是不是太方便了？
 
-这么好用的CompletableFuture还有没有其他功能？当然有。
+这么好用的 CompletableFuture 还有没有其他功能？当然有。
 
-## 4. CompletableFuture常用API
+## 4. CompletableFuture 常用 API
 
-### 4.1 CompletableFuture常用API说明
+### 4.1 CompletableFuture 常用 API 说明
 
 1. 提交任务
    supplyAsync
@@ -405,27 +406,27 @@ CompletableFuture的allOf()方法的作用就是，等待所有任务处理完�
    thenCombine thenCombineAsync
    thenAcceptBoth thenAcceptBothAsync
 
-API太多，有点眼花缭乱，很容易分类。
-带run的方法，无入参，无返回值。
-带accept的方法，有入参，无返回值。
-带supply的方法，无入参，有返回值。
-带apply的方法，有入参，有返回值。
-带handle的方法，有入参，有返回值，并且带异常处理。
-以Async结尾的方法，都是异步的，否则是同步的。
-以Either结尾的方法，只需完成任意一个。
-以Both/Combine结尾的方法，必须所有都完成。
+API 太多，有点眼花缭乱，很容易分类。
+带 run 的方法，无入参，无返回值。
+带 accept 的方法，有入参，无返回值。
+带 supply 的方法，无入参，有返回值。
+带 apply 的方法，有入参，有返回值。
+带 handle 的方法，有入参，有返回值，并且带异常处理。
+以 Async 结尾的方法，都是异步的，否则是同步的。
+以 Either 结尾的方法，只需完成任意一个。
+以 Both/Combine 结尾的方法，必须所有都完成。
 
 1. 获取结果
    join 阻塞等待，不会抛异常
    get 阻塞等待，会抛异常
-   complete(T value) 不阻塞，如果任务已完成，返回处理结果。如果没完成，则返回传参value。
+   complete(T value) 不阻塞，如果任务已完成，返回处理结果。如果没完成，则返回传参 value。
    completeExceptionally(Throwable ex) 不阻塞，如果任务已完成，返回处理结果。如果没完成，抛异常。
 
-### 4. CompletableFuture常用API使用示例
+### 4. CompletableFuture 常用 API 使用示例
 
 用最常见的煮饭来举例：
 
-### 4.1 then、handle方法使用示例
+### 4.1 then、handle 方法使用示例
 
 ```java
     /**
@@ -469,7 +470,7 @@ API太多，有点眼花缭乱，很容易分类。
 
 输出结果可能是：
 
-```
+```plain
     1. 开始淘米
     2. 淘米完成
     3. 开始煮饭
@@ -479,7 +480,7 @@ API太多，有点眼花缭乱，很容易分类。
 
 也可能是：
 
-```
+```plain
     1. 开始淘米
     2. 淘米完成
     3. 开始煮饭
@@ -487,7 +488,7 @@ API太多，有点眼花缭乱，很容易分类。
     5. 今天没饭吃
 ```
 
-### 4.2 complete方法使用示例
+### 4.2 complete 方法使用示例
 
 ```java
     /**
@@ -515,17 +516,17 @@ API太多，有点眼花缭乱，很容易分类。
 
 输出结果：
 
-```
+```plain
     饭还没做好，我点外卖了
 ```
 
-如果把注释的sleep()方法放开，输出结果就是:
+如果把注释的 sleep()方法放开，输出结果就是:
 
-```
+```plain
     饭做好了
 ```
 
-### 4.3 either方法使用示例
+### 4.3 either 方法使用示例
 
 ```java
     /**
@@ -555,13 +556,13 @@ API太多，有点眼花缭乱，很容易分类。
 
 输出结果可能是：
 
-```
+```plain
     饭做好了
 ```
 
 也可能是：
 
-```
+```plain
     外卖到了
 ```
 

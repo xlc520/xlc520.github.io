@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 使用docker快速安装oracle
+excerpt: 
 description: 使用docker快速安装oracle
 date: 2022-03-02
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: type
 ---
 
-# 使用docker快速安装oracle
+# 使用 docker 快速安装 oracle
 
 1.拉取镜像:
 
@@ -18,7 +19,7 @@ icon: type
 docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
 ```
 
-2.创建容器 
+2.创建容器
 
 ```sh
 docker run -d -p 1521:1521 --name oracle11g registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
@@ -51,13 +52,13 @@ ln -s $ORACLE_HOME/bin/sqlplus /usr/bin
 source /etc/profile
 ```
 
-切换到oracle 用户
+切换到 oracle 用户
 
 `su - oracle`
 
-登录sqlplus并修改sys、system用户密码
+登录 sqlplus 并修改 sys、system 用户密码
 
-- 登录sqlplus
+- 登录 sqlplus
 
 ```sql
 sqlplus /nolog
@@ -79,7 +80,7 @@ alter user sys identified by sys;
 ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;
 ```
 
-- scott用户的开启
+- scott 用户的开启
 
   SCOTT 是 ORACLE 内部的一个实例用户，下面有 emp、dept 等实例表，这些表和表间的关系演示了关系型数据库的一些基本原理。
 
@@ -96,4 +97,3 @@ docker restart oracle11g
 ```
 
 现在可以用`system`用户连接,密码:`system`
-

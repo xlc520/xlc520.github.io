@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 卸载windows服务，删除 windows 服务
+excerpt: 
 description: 卸载windows服务，删除 windows 服务
 date: 2022-01-27
 category: other
@@ -10,13 +11,13 @@ timeline: true
 icon: type
 ---
 
-# 卸载windows服务，删除 windows 服务
+# 卸载 windows 服务，删除 windows 服务
 
 ## 方法/步骤
 
 1. 1
 
-   windows提供了基于命令窗口删除服务的功能，就是在命令窗口输入
+   windows 提供了基于命令窗口删除服务的功能，就是在命令窗口输入
 
    **sc delete 服务名称**
 
@@ -42,5 +43,3 @@ icon: type
    ![怎么卸载windows服务，删除 windows 服务](https://bitbucket.org/xlc520/blogasset/raw/main/images2/0d55dc7bd28286894d4ac40465f97fbd4d7c37a6.jpg)
 
    ![怎么卸载windows服务，删除 windows 服务](https://bitbucket.org/xlc520/blogasset/raw/main/images2/7efc527c34b33c41c0b6a0f4887de137c8762ea6.jpg)
-
-   

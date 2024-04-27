@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 金额计算BigDecimal及踩坑
+excerpt: 
 description: 
 date: 2022-07-15
 category: Java
@@ -10,9 +11,7 @@ timeline: true
 icon: java
 ---
 
-
-
-# 金额计算BigDecimal及踩坑
+# 金额计算 BigDecimal 及踩坑
 
 除非在一些非常简单的场景，结算汇金类的业务也不会直接用`BigDecimal`来计算金额，原因有两点：
 
@@ -34,12 +33,13 @@ System.out.println("bd2 = " + bd2);
 
 输出到控制台的结果是：
 
-```
+```plain
 bd1 = 0.01000000000000000020816681711721685132943093776702880859375
 bd2 = 0.01
 ```
 
-造成这种差异的原因是0.1这个数字计算机是无法精确表示的，送给`BigDecimal`的时候就已经丢精度了，而`BigDecimal#valueOf`的实现却完全不同
+造成这种差异的原因是 0.1 这个数字计算机是无法精确表示的，送给`BigDecimal`的时候就已经丢精度了，而`BigDecimal#valueOf`
+的实现却完全不同
 
 ```java
 public static BigDecimal valueOf(double val) {
@@ -51,7 +51,9 @@ public static BigDecimal valueOf(double val) {
 }
 ```
 
-它使用了浮点数相应的字符串来构造`BigDecimal`对象，因此避免了精度问题。所以大家要尽量要使用字符串而不是浮点数去构造`BigDecimal`对象，如果实在不行，就使用`BigDecimal#valueOf()`方法吧。
+它使用了浮点数相应的字符串来构造`BigDecimal`
+对象，因此避免了精度问题。所以大家要尽量要使用字符串而不是浮点数去构造`BigDecimal`
+对象，如果实在不行，就使用`BigDecimal#valueOf()`方法吧。
 
 ### 1.2 等值比较
 
@@ -64,7 +66,7 @@ System.out.println(bd1.compareTo(bd2));
 
 控制台的输出将会是：
 
-```
+```plain
 false
 0
 ```
@@ -83,15 +85,17 @@ a.divide(b) // results in the following exception.
 
 结果会抛出异常：
 
-```
+```plain
 java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
 ```
 
-关于这个异常，Oracle的官方文档有具体说明
+关于这个异常，Oracle 的官方文档有具体说明
 
-If the quotient has a nonterminating decimal expansion and the operation is specified to return an exact result, an ArithmeticException is thrown. Otherwise, the exact result of the division is returned, as done for other operations.
+If the quotient has a nonterminating decimal expansion and the operation is specified to return an exact result, an
+ArithmeticException is thrown. Otherwise, the exact result of the division is returned, as done for other operations.
 
-大意是，如果除法的商的结果是一个无限小数但是我们期望返回精确的结果，那程序就会抛出异常。回到我们的这个例子，我们需要告诉`JVM`我们不需要返回精确的结果就好了
+大意是，如果除法的商的结果是一个无限小数但是我们期望返回精确的结果，那程序就会抛出异常。回到我们的这个例子，我们需要告诉`JVM`
+我们不需要返回精确的结果就好了
 
 ```java
 BigDecimal a = new BigDecimal("1.0");
@@ -127,11 +131,12 @@ System.out.println(a.divide(b, 2, RoundingMode.HALF_UP).multiply(c)); // 0.990
 System.out.println(a.multiply(c).divide(b, 2, RoundingMode.HALF_UP)); // 1.00
 ```
 
-别小看这这0.01的差别，在汇金领域，会产生非常大的金额差异。
+别小看这这 0.01 的差别，在汇金领域，会产生非常大的金额差异。
 
 ## 2. 最佳实践
 
-关于金额计算，很多业务团队会基于`BigDecimal`再封装一个`Money`类，其实我们直接可以用一个半官方的`Money`类：JSR 354 ,虽然没能在`Java 9`中成为`Java`标准，很有可能集成到后续的`Java`版本中成为官方库。
+关于金额计算，很多业务团队会基于`BigDecimal`再封装一个`Money`类，其实我们直接可以用一个半官方的`Money`类：JSR 354
+,虽然没能在`Java 9`中成为`Java`标准，很有可能集成到后续的`Java`版本中成为官方库。
 
 ### 2.1 `maven`坐标
 

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 泛型
+excerpt: 
 description: 
 date: 2022-07-26
 category: Vue
@@ -9,11 +10,13 @@ article: true
 dateline: true
 icon: vue
 ---
+
 # 5. 泛型
 
 指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定具体类型的一种特性。
 
 ## 引入
+
 下面创建一个函数, 实现功能: 根据指定的数量 `count` 和数据 `value` , 创建一个包含 `count` 个 `value` 的数组
 不用泛型的话，这个函数可能是下面这样：
 
@@ -61,11 +64,10 @@ const result = swap<string, number>('abc', 123)
 console.log(result[0].length, result[1].toFixed())
 ```
 
-
 ## 泛型接口
 
 在定义接口时, 为接口中的属性或方法定义泛型类型  
-在使用接口时, 再指定具体的泛型类型  
+在使用接口时, 再指定具体的泛型类型
 
 ```typescript
 interface IbaseCRUD <T> {
@@ -109,7 +111,7 @@ console.log(userCRUD.data)
 ## 泛型类
 
 在定义类时, 为类中的属性或方法定义泛型类型
-在创建类的实例时, 再指定特定的泛型类型  
+在创建类的实例时, 再指定特定的泛型类型
 
 ```typescript
 class GenericNumber<T> {

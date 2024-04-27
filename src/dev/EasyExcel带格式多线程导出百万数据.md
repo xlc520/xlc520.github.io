@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: EasyExcel带格式多线程导出百万数据
+excerpt: 
 description: 
 date: 2023-03-16
 category: Java
@@ -10,54 +11,57 @@ timeline: true
 icon: java
 ---
 
-# EasyExcel带格式多线程导出百万数据
+# EasyExcel 带格式多线程导出百万数据
 
 ## 1. 背景说明
 
 针对明细报表，用户会选择针对当前明细数据进行导出，便于本地或者线下进行处理或者计算等需求。不过一般在这种大数据量的导出任务下，会引发以下问题：
 1） 响应时间较慢； 2） 内存资源占用过大，基本上一个大数据量的导出会消耗可视化服务的所有资源，引起内存回收，其它接口无响应；
-考虑到单个excel文件过大，采用压缩文件流zip的方式，一个excel只有一个页签，一个页签最多十万条数据，所以少于十万条数据，会导出excel文件，而非zip压缩文件。另外，这里导出功能的速率不能单以数据条数为量级进行衡量，平常一般一万条数据就是1M字节。较为准确的公式如下（借此就可以评估出很多数据导出的文件大小）：
+考虑到单个 excel 文件过大，采用压缩文件流 zip 的方式，一个 excel 只有一个页签，一个页签最多十万条数据，所以少于十万条数据，会导出
+excel 文件，而非 zip 压缩文件。另外，这里导出功能的速率不能单以数据条数为量级进行衡量，平常一般一万条数据就是 1M
+字节。较为准确的公式如下（借此就可以评估出很多数据导出的文件大小）：
 
-
-> 文件大小1M字节 = 字段列数15个 * 数据条数一万条
+> 文件大小 1M 字节 = 字段列数 15 个 * 数据条数一万条
 
 ## 2. 方案概述
 
-### （1）大数据量导出问题主要是以下三个地方：
+### （1）大数据量导出问题主要是以下三个地方
 
 1）资源占用 2）内存（也是资源的一个，单独说明） 3）响应时间 针对以上三个问题，大方向考虑的是多线程结合数据流写入的方式。**多线程
-**：使用空间换时间，主要是加快接口响应时间，但是这里线程数不宜过多，一味加快响应时间提升线程数，资源占用会非常严重，故会考虑线程池，线程池的线程数为10；
+**：使用空间换时间，主要是加快接口响应时间，但是这里线程数不宜过多，一味加快响应时间提升线程数，资源占用会非常严重，故会考虑线程池，线程池的线程数为
+10；
 **数据流**
-：数据的IO-读取/写入等操作一般都是通过“数据包”的方式，即将结果数据作为一个整体，这样如果数据量多的话，会非常占用内存，所以采用数据流的方式，而且导出的时候会进行格式设置（单元格合并、背景色、字体样式等），一直使用的是Alibaba
-EasyExcel组件，并且Alibaba EasyExcel组件支持数据流的方式读取/写入数据。
+：数据的 IO-读取/写入等操作一般都是通过“数据包”的方式，即将结果数据作为一个整体，这样如果数据量多的话，会非常占用内存，所以采用数据流的方式，而且导出的时候会进行格式设置（单元格合并、背景色、字体样式等），一直使用的是
+Alibaba
+EasyExcel 组件，并且 Alibaba EasyExcel 组件支持数据流的方式读取/写入数据。
 
-### （2）将写入导出Excel等功能单独分开成一个微服务：
+### （2）将写入导出 Excel 等功能单独分开成一个微服务
 
 **注意：如果单个服务分配的资源足够的话，可以不用将导出功能与原应用服务拆开，这里可以省略**1）抢占资源
 2）由于导出功能内存溢出，如果不做分离独立，整个应用服务也会宕机
 
-### （3）注意：
+### （3）注意
 
-1）多线程下，同一页签的写入不可同步，即Alibaba EasyExcel组件的文件写入流SheetWriter是异步的；
-2）多线程下，每个线程所用的文件写入SheetWriter是一个复制，依旧会占用大量内存；
+1）多线程下，同一页签的写入不可同步，即 Alibaba EasyExcel 组件的文件写入流 SheetWriter 是异步的；
+2）多线程下，每个线程所用的文件写入 SheetWriter 是一个复制，依旧会占用大量内存；
 3）微服务拆分时，数据读取和文件写入是在一个线程下的，所以新的微服务也要实现一套数据读取逻辑；
 4）压缩文件使用压缩文件流，ZipOutputStream，不需要暂存本地；
 
-### （4）方案设计：
+### （4）方案设计
 
 ![导出方案](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d7cac7fb35ac4281893cb491db958517.png)
 
 ##### 标注说明
 
-1） 阈值可以进行设置，考虑到业务场景以及资源使用，这里阈值数据量为100w条，超过一百万会导出空表（而非导出一百万数据） 2）
-导出进行多线程，启用最多十个多线程（默认最多一百万条数据，一个sheet页十万条数据），每个线程会进行两个动作，查询数据以及数据写入操作，（如果数据量较少，依旧是适用的）
-3） 说明图，以86万数据为例，也就是说会启用九个文件写入线程，一个文件写入线程生成一个excel导出文件；
+1） 阈值可以进行设置，考虑到业务场景以及资源使用，这里阈值数据量为 100w 条，超过一百万会导出空表（而非导出一百万数据） 2）
+导出进行多线程，启用最多十个多线程（默认最多一百万条数据，一个 sheet 页十万条数据），每个线程会进行两个动作，查询数据以及数据写入操作，（如果数据量较少，依旧是适用的）
+3） 说明图，以 86 万数据为例，也就是说会启用九个文件写入线程，一个文件写入线程生成一个 excel 导出文件；
 ![多线程同步](https://bitbucket.org/xlc520/blogasset/raw/main/images3/e9895c6acda54729a964c4d369945356.png)4）
-线程池为队列线程，即后来的线程进入排队等待，队列长度（线程池大小）为10； 5）
-每个文件写入线程会生成最多十个sheet（默认一个sheet页十万数据）写入线程（最后一个文件写入线程可能会少于十个）。
+线程池为队列线程，即后来的线程进入排队等待，队列长度（线程池大小）为 10； 5）
+每个文件写入线程会生成最多十个 sheet（默认一个 sheet 页十万数据）写入线程（最后一个文件写入线程可能会少于十个）。
 ![写入示例](https://bitbucket.org/xlc520/blogasset/raw/main/images3/4cf7654c7e6d4537aeeba3c3a4624d5a.png)
 
-### （5）maven依赖：
+### （5）maven 依赖
 
 ```xml
 <!-- easyexcel -->
@@ -70,8 +74,9 @@ EasyExcel组件，并且Alibaba EasyExcel组件支持数据流的方式读取/�
 
 ## 3. 详细设计
 
-（1）文件写入多线程，按每个文件十万条数据进行导出，每个文件写入线程生成一个excel文件（单页签）； ROW_SIZE：一次查询的数据量，此处设置为10000条
-ROW_PAGE：一个页签多少次查询，此处设置为10次；
+（1）文件写入多线程，按每个文件十万条数据进行导出，每个文件写入线程生成一个 excel 文件（单页签）； ROW_SIZE：一次查询的数据量，此处设置为
+10000 条
+ROW_PAGE：一个页签多少次查询，此处设置为 10 次；
 
 ```java
 private static Interger ROW_SIZE = 10000;
@@ -85,7 +90,7 @@ for(int i=0;i<sheetCount;i++){
 }
 ```
 
-（2）sheet写入多线程，最后一个文件写入线程的最后一个sheet写入线程可能不足1W条数据；
+（2）sheet 写入多线程，最后一个文件写入线程的最后一个 sheet 写入线程可能不足 1W 条数据；
 
 ```java
 // 单sheet页写入数
@@ -97,7 +102,8 @@ for(int j=0;j<sheetThreadCount;j++) {
 threadSignal.await();
 ```
 
-（3）异步写入sheet文件，不同的文件写入线程写入不同的文件，所以只需要保证同一个文件写入线程下不同sheet写入线程的[excelWriter](https://so.csdn.net/so/search?q=excelWriter&spm=1001.2101.3001.7020)
+（3）异步写入 sheet 文件，不同的文件写入线程写入不同的文件，所以只需要保证同一个文件写入线程下不同 sheet
+写入线程的[excelWriter](https://so.csdn.net/so/search?q=excelWriter&spm=1001.2101.3001.7020)
 异步即可；
 
 ```java
@@ -110,8 +116,8 @@ Synchronized(excelWriter){
 }
 ```
 
-（4）压缩文件，将多个excel压缩成一个zip，最后上传至fast
-dfs，返回前端下载地址，使用[hutool](https://so.csdn.net/so/search?q=hutool&spm=1001.2101.3001.7020)封装的ZipUtil方法；\
+（4）压缩文件，将多个 excel 压缩成一个 zip，最后上传至 fast
+dfs，返回前端下载地址，使用[hutool](https://so.csdn.net/so/search?q=hutool&spm=1001.2101.3001.7020)封装的 ZipUtil 方法；\
 
 ```java
 package cn.hutool.core.util;
@@ -126,20 +132,21 @@ return path + "?filename=" + fileName;
 
 ## 4. 缓存
 
-每次请求是生成一个文件并上传至FastDFS服务器上，然后将下载路径返回给前端，有时多个用户频繁下载同一个文件（或者用户短时间内点击同一个下载任务）。针对以上情况，考虑采用缓存，将第一次的数据缓存下来。
-① 请求参数较多，需要根据参数判断是否为同一个下载文件请求； ##：数据集ID ##：过滤器 ##：数据量 ##：数据集字段（先根据ID排序，再进行拼接）
-② 设置过期时间（30分钟），不考虑数据一致性的问题（即数据源数据更改后，再更新缓存）。仅仅是做初步工作，即短时间内，只要符合条件①且时间未过期，就采用同一份数据；
+每次请求是生成一个文件并上传至 FastDFS 服务器上，然后将下载路径返回给前端，有时多个用户频繁下载同一个文件（或者用户短时间内点击同一个下载任务）。针对以上情况，考虑采用缓存，将第一次的数据缓存下来。
+① 请求参数较多，需要根据参数判断是否为同一个下载文件请求； ##：数据集 ID ##：过滤器 ##：数据量 ##：数据集字段（先根据 ID
+排序，再进行拼接）
+② 设置过期时间（30 分钟），不考虑数据一致性的问题（即数据源数据更改后，再更新缓存）。仅仅是做初步工作，即短时间内，只要符合条件①且时间未过期，就采用同一份数据；
 ③ 当请求下载的为同一份文件时，只是文件名不同时，依旧采用同一份缓存数据；
 注：针对于数据一致性的问题，不对单个数据的内容变更进行考虑，原因是大数据量下，数据是否有变更的判断较为复杂，不现实。这里只判断在相同的请求条件下的总条数。
 
 ## 5. 可行性验证
 
-（1）单个文件写入下，176个字段，14140条数据，excel大小15M，响应时间为14.66s（未报错，未触发异常）
+（1）单个文件写入下，176 个字段，14140 条数据，excel 大小 15M，响应时间为 14.66s（未报错，未触发异常）
 ![图6-1 多字段的导出验证](https://bitbucket.org/xlc520/blogasset/raw/main/images3/a6e3f3c7cdff4326a30f8a4afe5ae8f1.png)
 
-（2）单个文件写入下，14个字段，98万数据，excel大小为96M，响应时间为42.41s（未报错，未触发异常）
+（2）单个文件写入下，14 个字段，98 万数据，excel 大小为 96M，响应时间为 42.41s（未报错，未触发异常）
 ![图6-2 百万数据量的导出验证](https://bitbucket.org/xlc520/blogasset/raw/main/images3/884bfccf766b4b27aaaec31bb99de499.png)
-（3）拆分微服务下，14个字段，98万数据，zip大小为104M，平均响应时间为27.34s（未报错，未触发异常）
+（3）拆分微服务下，14 个字段，98 万数据，zip 大小为 104M，平均响应时间为 27.34s（未报错，未触发异常）
 ![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f9767a04fff7459eb0e881738ca5952b.png)
 
 ## 6. 代码
@@ -149,13 +156,13 @@ TableExport.java
 
 ```java
 public String exportTable(ExportTable exportTable) throws Exception {
-		StringBuffer path = new StringBuffer();
+  StringBuffer path = new StringBuffer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         StringBuffer sign = new StringBuffer ();
         //redis key
         sign.append(exportTable.getId());
-		try {
-			// 用来记录需要为 行 列设置样式
+  try {
+   // 用来记录需要为 行 列设置样式
             Map<String, Map<Integer, List<Map<Integer, ExportTable.ExportColumn.Font>>>> map = new HashMap<>();
             sign.append("##").append(String.join(",", fields.stream().map(e-> e.isShow()?"true":"false").collect(Collectors.toList())));
             setFontStyle(0, 0, exportTable.getFields(), map);
@@ -260,13 +267,13 @@ public String exportTable(ExportTable exportTable) throws Exception {
             e.printStackTrace();
         }
         return path.toString();
-	}
-	
-	private void writeExcel(ExcelWriter excelWriter){
-		//数据查询
-		// todo
-		synchronized (excelWriter) {
-		WriteSheet writeSheet = EasyExcel.writerSheet(0, "第" + 1 + "页数据")
+ }
+ 
+ private void writeExcel(ExcelWriter excelWriter){
+  //数据查询
+  // todo
+  synchronized (excelWriter) {
+  WriteSheet writeSheet = EasyExcel.writerSheet(0, "第" + 1 + "页数据")
                             // 这里放入动态头
                             .head(head)
                             //传入样式
@@ -276,11 +283,11 @@ public String exportTable(ExportTable exportTable) throws Exception {
                             // 当然这里数据也可以用 List<List<String>> 去传入
                             .build();
                     excelWriter.write(lists, writeSheet);
-		}
-	}
+  }
+ }
 ```
 
-Excel导出的文件流样式处理类。
+Excel 导出的文件流样式处理类。
 CellColorSheetWriteHandler.java
 
 ```java
@@ -451,7 +458,7 @@ public class CellColorSheetWriteHandler implements CellWriteHandler
 }
 ```
 
-Excel导出的默认样式设置类。
+Excel 导出的默认样式设置类。
 EasyExcelUtils.java
 
 ```java
@@ -493,7 +500,7 @@ public static HorizontalCellStyleStrategy getStyleStrategy(){
     }
 ```
 
-Excel导出合并单元格处理类。
+Excel 导出合并单元格处理类。
 MergeStrategy.class
 
 ```java

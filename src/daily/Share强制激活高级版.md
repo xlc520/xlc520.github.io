@@ -1,7 +1,8 @@
 ---
 author: xlc520
 title: Share强制激活高级版
-description: 
+excerpt: Share强制激活高级版
+description: Share强制激活高级版
 date: 2022-08-22
 category: daily
 tag: daily
@@ -10,29 +11,29 @@ timeline: true
 icon: date
 ---
 
-# Share强制激活高级版
+# Share 强制激活高级版
 
 ​
 
-由于Share停更，高级版也无法激活了，所以这里给出强制激活的方法[来自酷安用户屈指西风几时来]
+由于 Share 停更，高级版也无法激活了，所以这里给出强制激活的方法[来自酷安用户屈指西风几时来]
 
 下面是效果图
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//Screenshot_20220501_120140_com.hengye.share.jpg)
 
-## 下载原版Share及小黄鸟抓包软件
+## 下载原版 Share 及小黄鸟抓包软件
 
-https://tidecherish.lanzout.com/b01jf9w1i
+<https://tidecherish.lanzout.com/b01jf9w1i>
 
 提取码:`Meow`
 
-## 打开Share进入高级版激活码界面
+## 打开 Share 进入高级版激活码界面
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//Screenshot_20220501_120738_com.hengye.share.jpg)
 
-## 输入1111111-2222-3333-4444-555555555555之后不要点确定
+## 输入 1111111-2222-3333-4444-555555555555 之后不要点确定
 
-## 打开小黄鸟，安装证书之后目标选择Share
+## 打开小黄鸟，安装证书之后目标选择 Share
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//Screenshot_20220501_121008_com.guoshi.httpcanary.premium_edit_104977836891272.jpg)
 
@@ -40,13 +41,13 @@ https://tidecherish.lanzout.com/b01jf9w1i
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//Screenshot_20220501_121123_com.guoshi.httpcanary.premium_edit_104993550089707.jpg)
 
-## 切换到Share，点击确定
+## 切换到 Share，点击确定
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//Screenshot_20220501_121353_com.hengye.share.jpg)
 
 ## 弹出弹窗的同时小黄鸟提示抓包成功，返回小黄鸟
 
-找到api.yehengye.com开头的抓包记录，修改响应为
+找到 api.yehengye.com 开头的抓包记录，修改响应为
 
 {"code":0,"data":{"code":"喵柒破解","activated":true,"orderld":"","activeC
 
@@ -60,8 +61,8 @@ ount":0,"timestamp":
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3//result-2022-05-01-12-23-34.png)
 
-## 保存后返回Share重新输入
+## 保存后返回 Share 重新输入
 
-```
+```plain
 1111111-2222-3333-4444-555555555555
 ```

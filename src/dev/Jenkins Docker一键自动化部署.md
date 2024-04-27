@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Jenkins Docker一键自动化部署
+excerpt: 
 description: 
 date: 2022-11-09
 category: Java
@@ -13,7 +14,7 @@ timeline: true
 icon: java
 ---
 
-# Jenkins Docker一键自动化部署
+# Jenkins Docker 一键自动化部署
 
 - 环境：CentOS7 + Git (Gitee)
 - 实现步骤：在 Docker 安装 Jenkins，配置 Jenkins 基本信息，利用 Dockerfile 和 Shell 脚本实现项目自动拉取打包并运行。
@@ -24,64 +25,64 @@ icon: java
 
 ### **1. 确保 yum 包更新到最新**
 
-```
+```plain
 yum update
 ```
 
 ### **2. 卸载旧版本（如果安装过旧版本的话）**
 
-```
+```plain
 yum remove docker  docker-common docker-selinux docker-engine
 ```
 
 ### **3. 安装需要的软件包**
 
-```
+```plain
 yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
 
 ### **4. 设置 yum 源**
 
-```
+```plain
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
 ### **5. 安装 Docker**
 
-```
+```plain
 yum install docker-ce  #由于repo中默认只开启stable仓库，故这里安装的是最新稳定版17.12.0yum install <自己的版本>  # 例如：sudo yum install docker-ce-17.12.0.ce
 
 ```
 
 ### **6. 启动并设置开机启动**
 
-```
+```plain
 systemctl start dockersystemctl enable docker
 
 ```
 
 ### **7. 验证安装是否成功**
 
-```
+```plain
 docker version
 
 ```
 
 ## **二、安装 Jenkins**
 
-Jenkins 中文官网：https://www.jenkins.io/zh/
+Jenkins 中文官网：<https://www.jenkins.io/zh/>
 
 ### **1. 安装 Jenkins**
 
 Docker 安装一切都是那么简单。注意检查 8080 是否已经占用，如果占用请修改端口。
 
-```
+```plain
 docker run --name jenkins -u root --rm -d -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
 ```
 
 如果没改端口号的话，安装完成后访问地址：
 
-```
+```plain
 http://{部署Jenkins所在服务IP}:8080
 ```
 
@@ -89,13 +90,13 @@ http://{部署Jenkins所在服务IP}:8080
 
 ### **2. 初始化 Jenkins**
 
-详情见官网教程：https://www.jenkins.io/zh/doc
+详情见官网教程：<https://www.jenkins.io/zh/doc>
 
-####    
+####
 
 #### **2.1 解锁 Jenkins**
 
-```
+```plain
 # 进入Jenkins容器docker exec -it {Jenkins容器名} bash  # 例如 docker exec -it jenkins bash
 # 查看密码cat /var/lib/jenkins/secrets/initialAdminPassword
 # 复制密码到输入框里面
@@ -123,7 +124,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 - 安装 Maven Integration
 - 安装 Publish Over SSH（如果不需要远程推送，不用安装）
-- 如果使用 Gitee 码云，安装插件Gitee（自带 Git 不用单独安装）
+- 如果使用 Gitee 码云，安装插件 Gitee（自带 Git 不用单独安装）
 
 ### **2. 配置 Maven**
 
@@ -131,7 +132,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096704-3.png)
 
-##    
+##
 
 ## **四、创建任务**
 
@@ -141,7 +142,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096704-4.png)
 
-###    
+###
 
 ### **2. 源码管理**
 
@@ -151,7 +152,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096705-6.png)
 
-###    
+###
 
 ### **3. 构建触发器**
 
@@ -161,7 +162,7 @@ http://{部署Jenkins所在服务IP}:8080
 
 此处命令只是 install，看是否能生成 jar 包。
 
-```
+```plain
 clean install -Dmaven.test.skip=true
 ```
 
@@ -181,7 +182,7 @@ clean install -Dmaven.test.skip=true
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096706-9.png)
 
-###    
+###
 
 ### **2. 查看日志**
 
@@ -195,11 +196,11 @@ clean install -Dmaven.test.skip=true
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096706-11.png)
 
-###    
+###
 
 ### **3. 查看项目位置**
 
-```
+```plain
 cd /var/jenkins_home/workspacell # 即可查看是否存在
 ```
 
@@ -213,11 +214,11 @@ cd /var/jenkins_home/workspacell # 即可查看是否存在
 
 其内容如下：（大致就是使用 JDK 8，把 jar 包添加到 docker 然后运行 prd 配置文件。详细可以查看其他教程）
 
-```
+```plain
 FROM jdk:8VOLUME /tmpADD target/zx-order-0.0.1-SNAPSHOT.jar app.jarEXPOSE 8888ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar","--spring.profiles.active=prd"]
 ```
 
-###    
+###
 
 ### **2. 修改 Jenkins 任务配置**
 
@@ -229,7 +230,7 @@ FROM jdk:8VOLUME /tmpADD target/zx-order-0.0.1-SNAPSHOT.jar app.jarEXPOSE 8888EN
 
 "-t" 指定新镜像名，"." 表示 Dockfile 在当前路径。
 
-```
+```plain
 cd /var/jenkins_home/workspace/zx-order-apidocker stop zx-order || truedocker rm zx-order || truedocker rmi zx-order || truedocker build -t zx-order .docker run -d -p 8888:8888 --name zx-order zx-order:latest
 ```
 
@@ -237,15 +238,15 @@ cd /var/jenkins_home/workspace/zx-order-apidocker stop zx-order || truedocker rm
 \1. 上图用了 docker logs -f 是为了方便看日志，真实环境不要用，因为会一直等待日志，构建任务会失败；
 \2. 加 "|| true" 是如果命令执行失败也会继续实行，为了防止第一次没有该镜像报错；
 
-### 3. 保存：点击保存即可；
+### 3. 保存：点击保存即可
 
-### 4. 构建：查看 Jenkins 控制台输出，输出如下，证明成功；
+### 4. 构建：查看 Jenkins 控制台输出，输出如下，证明成功
 
 ![Jenkins+Docker](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667833096707-14.png)
 
 ### 5. 验证
 
-```
+```plain
 docker ps # 查看是否有自己的容器docker logs # 自己的容器名，查看日志是否正确# 打开浏览器访问项目
 
 ```

@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 并行任务
+excerpt: 
 description: 
 date: 2022-07-16
 category: Java
@@ -12,7 +13,7 @@ icon: java
 
 # SpringBoot 并行任务
 
-## 第一种：把参数配置到.properties文件中：
+## 第一种：把参数配置到.properties 文件中
 
 代码：
 
@@ -47,14 +48,14 @@ public class ScheduledTask {
 }
 ```
 
-application.properties文件：
+application.properties 文件：
 
-```
+```plain
 jobs.fixedDelay=5000
 jobs.cron=0/5 * *  * * ?
 ```
 
-SpringBootCron2Application.java中：
+SpringBootCron2Application.java 中：
 
 ```java
 package com.accord;
@@ -72,20 +73,20 @@ public class SpringBootCron2Application {
 }
 ```
 
-> 注：@EnableScheduling  这个一定要加上；否则，不会定时启动任务！
+> 注：@EnableScheduling 这个一定要加上；否则，不会定时启动任务！
 
-@Scheduled中的参数说明：
+@Scheduled 中的参数说明：
 
-- `@Scheduled(fixedRate=2000)`：上一次开始执行时间点后2秒再次执行；
-- `@Scheduled(fixedDelay=2000)`：上一次执行完毕时间点后2秒再次执行；
-- `@Scheduled(initialDelay=1000, fixedDelay=2000)`：第一次延迟1秒执行，然后在上一次执行完毕时间点后2秒再次执行；
-- `@Scheduled(cron="* * * * * ?")`：按cron规则执行。
+- `@Scheduled(fixedRate=2000)`：上一次开始执行时间点后 2 秒再次执行；
+- `@Scheduled(fixedDelay=2000)`：上一次执行完毕时间点后 2 秒再次执行；
+- `@Scheduled(initialDelay=1000, fixedDelay=2000)`：第一次延迟 1 秒执行，然后在上一次执行完毕时间点后 2 秒再次执行；
+- `@Scheduled(cron="* * * * * ?")`：按 cron 规则执行。
 
-在线Cron表达式生成器：`http://cron.qqe2.com/`
+在线 Cron 表达式生成器：`http://cron.qqe2.com/`
 
 ## 第二种定时任务：单线程和多线程
 
-### 1、创建定时任务：
+### 1、创建定时任务
 
 ```java
 package com.accord.task;
@@ -133,21 +134,20 @@ public class ScheduledTask2 {
 }
 ```
 
-使用 @Scheduled来创建定时任务 这个注解用来标注一个定时任务方法。
+使用 @Scheduled 来创建定时任务 这个注解用来标注一个定时任务方法。
 
-通过看 @Scheduled源码可以看出它支持多种参数：
+通过看 @Scheduled 源码可以看出它支持多种参数：
 
-- cron：cron表达式，指定任务在特定时间执行；
-- fixedDelay：表示上一次任务执行完成后多久再次执行，参数类型为long，单位ms；
-- fixedDelayString：与fixedDelay含义一样，只是参数类型变为String；
-- fixedRate：表示按一定的频率执行任务，参数类型为long，单位ms；
-- fixedRateString: 与fixedRate的含义一样，只是将参数类型变为String；
-- initialDelay：表示延迟多久再第一次执行任务，参数类型为long，单位ms；
-- initialDelayString：与initialDelay的含义一样，只是将参数类型变为String；
+- cron：cron 表达式，指定任务在特定时间执行；
+- fixedDelay：表示上一次任务执行完成后多久再次执行，参数类型为 long，单位 ms；
+- fixedDelayString：与 fixedDelay 含义一样，只是参数类型变为 String；
+- fixedRate：表示按一定的频率执行任务，参数类型为 long，单位 ms；
+- fixedRateString: 与 fixedRate 的含义一样，只是将参数类型变为 String；
+- initialDelay：表示延迟多久再第一次执行任务，参数类型为 long，单位 ms；
+- initialDelayString：与 initialDelay 的含义一样，只是将参数类型变为 String；
 - zone：时区，默认为当前时区，一般没有用到。
-- 
 
-### 2、开启定时任务：
+### 2、开启定时任务
 
 ```java
 package com.accord;
@@ -165,7 +165,7 @@ public class SpringBootCron2Application {
 }
 ```
 
-> 注：这里的 @EnableScheduling  注解，它的作用是发现注解 @Scheduled的任务并由后台执行。没有它的话将无法执行定时任务。
+> 注：这里的 @EnableScheduling 注解，它的作用是发现注解 @Scheduled 的任务并由后台执行。没有它的话将无法执行定时任务。
 
 引用官方文档原文：
 
@@ -173,15 +173,17 @@ public class SpringBootCron2Application {
 
 ### 3、执行结果（单线程）
 
-就完成了一个简单的定时任务模型，下面执行springBoot观察执行结果：
+就完成了一个简单的定时任务模型，下面执行 springBoot 观察执行结果：
 
 [![图片](https://img-blog.csdn.net/20180301143615719)
 
 从控制台输入的结果中我们可以看出所有的定时任务都是在同一个线程池用同一个线程来处理的，那么我们如何来并发的处理各定时任务呢，请继续向下看。
 
-### 4、多线程处理定时任务：
+### 4、多线程处理定时任务
 
-看到控制台输出的结果，所有的定时任务都是通过一个线程来处理的，我估计是在定时任务的配置中设定了一个`SingleThreadScheduledExecutor`，于是我看了源码，从`ScheduledAnnotationBeanPostProcessor`类开始一路找下去。果然，在`ScheduledTaskRegistrar`（定时任务注册类）中的`ScheduleTasks`中又这样一段判断：
+看到控制台输出的结果，所有的定时任务都是通过一个线程来处理的，我估计是在定时任务的配置中设定了一个`SingleThreadScheduledExecutor`
+，于是我看了源码，从`ScheduledAnnotationBeanPostProcessor`类开始一路找下去。果然，在`ScheduledTaskRegistrar`
+（定时任务注册类）中的`ScheduleTasks`中又这样一段判断：
 
 ```java
 if (this.taskScheduler == null) {
@@ -207,7 +209,8 @@ public void setScheduler(Object scheduler) {
 }
 ```
 
-这样问题就很简单了，我们只需用调用这个方法显式的设置一个`ScheduledExecutorService`就可以达到并发的效果了。我们要做的仅仅是实现`SchedulingConfigurer`接口，重写`configureTasks`方法就OK了；
+这样问题就很简单了，我们只需用调用这个方法显式的设置一个`ScheduledExecutorService`
+就可以达到并发的效果了。我们要做的仅仅是实现`SchedulingConfigurer`接口，重写`configureTasks`方法就 OK 了；
 
 ```java
 package com.accord.task;

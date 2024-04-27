@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: VUE下拉列表动态切换(人人组件)
+excerpt: 
 description: 
 date: 2022-07-05
 category: Java
@@ -10,13 +11,11 @@ timeline: true
 icon: java
 ---
 
-
-
-# VUE下拉列表动态切换(人人组件)
+# VUE 下拉列表动态切换(人人组件)
 
 ## 方法一
 
-vue前端
+vue 前端
 
 ```vue
  <el-form-item label="大类" prop="busiLines">
@@ -29,14 +28,14 @@ vue前端
 </el-form-item>
 ```
 
-setup或者data中添加
+setup 或者 data 中添加
 
-```
+```plain
 busi_dict:"",
 dataList:[] as any[], // 属性需要做类型断言处理,
 ```
 
-methods中添加方法：
+methods 中添加方法：
 
 ```tsx
 selectchange(value){
@@ -53,7 +52,7 @@ selectchange(value){
 
 ## 方法二
 
-ren-select组件中添加watch
+ren-select 组件中添加 watch
 
 ```typescript
 watch: {
@@ -70,7 +69,7 @@ watch: {
 },
 ```
 
-vue前端
+vue 前端
 
 ```vue
 <el-form-item label="大类" prop="busiLines">
@@ -81,7 +80,7 @@ vue前端
 </el-form-item>
 ```
 
-methods中添加方法：
+methods 中添加方法：
 
 ```typescript
 selectchange(value){
@@ -95,13 +94,12 @@ selectchange(value){
 },
 ```
 
-## 注意：
+## 注意
 
-如果下拉列表用字典，打开时会显示字典值的key，所以可以加一个钩子
+如果下拉列表用字典，打开时会显示字典值的 key，所以可以加一个钩子
 
 ```typescript
 updated(){
     this.selectchange(this.dataForm.busiLines);
   },
 ```
-

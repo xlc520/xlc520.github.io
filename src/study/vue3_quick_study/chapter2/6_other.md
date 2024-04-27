@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 声明
+excerpt: 
 description: 
 date: 2022-07-27
 category: Vue
@@ -9,17 +10,19 @@ article: true
 dateline: true
 icon: vue
 ---
+
 # 6. 其它
 
 ## 声明文件
 
-当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能  
+当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能
 
-什么是声明语句  
+什么是声明语句
 
-假如我们想使用第三方库 jQuery，一种常见的方式是在 html 中通过 `<script>` 标签引入 `jQuery`，然后就可以使用全局变量 `$` 或 `jQuery` 了。  
+假如我们想使用第三方库 jQuery，一种常见的方式是在 html 中通过 `<script>` 标签引入 `jQuery`，然后就可以使用全局变量 `$`
+或 `jQuery` 了。
 
-但是在 ts 中，编译器并不知道 $ 或 jQuery 是什么东西  
+但是在 ts 中，编译器并不知道 $ 或 jQuery 是什么东西
 
 ```typescript
 /* 
@@ -50,18 +53,19 @@ jQuery('#foo');
 
 一般声明文件都会单独写成一个 `xxx.d.ts` 文件
 
-创建 `01_jQuery.d.ts`, 将声明语句定义其中, TS编译器会扫描并加载项目中所有的TS声明文件
+创建 `01_jQuery.d.ts`, 将声明语句定义其中, TS 编译器会扫描并加载项目中所有的 TS 声明文件
+
 ```typescript
 declare var jQuery: (selector: string) => any;
 ```
 
-很多的第三方库都定义了对应的声明文件库, 库文件名一般为 `@types/xxx`, 可以在 `https://www.npmjs.com/package/package` 进行搜索  
+很多的第三方库都定义了对应的声明文件库, 库文件名一般为 `@types/xxx`, 可以在 `https://www.npmjs.com/package/package` 进行搜索
 
-有的第三库在下载时就会自动下载对应的声明文件库(比如: webpack),有的可能需要单独下载(比如jQuery/react)
+有的第三库在下载时就会自动下载对应的声明文件库(比如: webpack),有的可能需要单独下载(比如 jQuery/react)
 
 ## 内置对象
 
-JavaScript 中有很多内置对象，它们可以直接在 TypeScript 中当做定义好了的类型。  
+JavaScript 中有很多内置对象，它们可以直接在 TypeScript 中当做定义好了的类型。
 
 内置对象是指根据标准在全局作用域（Global）上存在的对象。这里的标准是指 ECMAScript 和其他环境（比如 DOM）的标准。
 
@@ -72,7 +76,7 @@ JavaScript 中有很多内置对象，它们可以直接在 TypeScript 中当做
 > String  
 > Date  
 > RegExp  
-> Error  
+> Error
 
 ```typescript
 /* 1. ECMAScript 的内置对象 */
@@ -93,7 +97,7 @@ b = true
 > HTMLElement  
 > DocumentFragment  
 > Event  
-> NodeList  
+> NodeList
 
 ```typescript
 const div: HTMLElement = document.getElementById('test')
@@ -103,7 +107,3 @@ document.addEventListener('click', (event: MouseEvent) => {
 })
 const fragment: DocumentFragment = document.createDocumentFragment()
 ```
-
-
-
-

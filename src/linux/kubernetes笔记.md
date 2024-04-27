@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: kubernetes笔记
+excerpt: 
 description:
 date: 2023-02-05
 category: Linux
@@ -12,9 +13,9 @@ timeline: true
 icon: linux
 ---
 
-# kubernetes笔记
+# kubernetes 笔记
 
-## master单机集群配置
+## master 单机集群配置
 
 ```json
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -61,11 +62,11 @@ networking:
 scheduler: {}
 ```
 
-## kuberneets 安装dashboard pod初始化失败
+## kuberneets 安装 dashboard pod 初始化失败
 
-### kubernetes版本为1.26.0
+### kubernetes 版本为 1.26.0
 
-```
+```plain
 coderstory@k8s-master:~/k8s$ kubectl version
 WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
 Client Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.26.0", GitCommit:"b46a3f887ca979b1a5d14fd39cb1af43e7e5d12d", GitTreeState:"clean", BuildDate:"2022-12-08T19:58:30Z", GoVersion:"go1.19.4", Compiler:"gc", Platform:"linux/amd64"}
@@ -74,9 +75,9 @@ Server Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.26.0", GitCom
 coderstory@k8s-master:~/k8s$ 
 ```
 
-### cni插件已安装calico且已工作
+### cni 插件已安装 calico 且已工作
 
-```
+```plain
 coderstory@k8s-master:~/k8s$ kubectl get pod -n kube-system
 NAME                                      READY   STATUS    RESTARTS   AGE
 calico-kube-controllers-57b57c56f-xhqxt   1/1     Running   0          2d23h
@@ -94,9 +95,9 @@ kube-proxy-kqx45                          1/1     Running   0          2d23h
 kube-scheduler-k8s-master                 1/1     Running   0          3d
 ```
 
-### 使用 kubectl create -f dashboard.yaml创建后，get pod一直没就绪
+### 使用 kubectl create -f dashboard.yaml 创建后，get pod 一直没就绪
 
-```
+```plain
 coderstory@k8s-master:~/k8s$ kubectl get pod  -n kubernetes-dashboard
 NAME                                        READY   STATUS              RESTARTS   AGE
 dashboard-metrics-scraper-976d575c7-n2krt   0/1     ContainerCreating   0          29m
@@ -104,9 +105,9 @@ kubernetes-dashboard-7978989845-fvlqg       0/1     ContainerCreating   0       
 coderstory@k8s-master:~/k8s$ 
 ```
 
-### 查看pod详情的时候看到警告信息
+### 查看 pod 详情的时候看到警告信息
 
-```
+```plain
 coderstory@k8s-master:~/k8s$ kubectl describe pod kubernetes -n kubernetes-dashboard
 Events:
   Type     Reason                  Age                    From               Message
@@ -115,4 +116,3 @@ Events:
   Warning  FailedCreatePodSandBox  28m                    kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "3a59c4c17814dcbc0064b39d39c8c893bf4e5b5d423b44ef74d6742021c90f75": plugin type="calico" failed (add): error getting ClusterInformation: connection is unauthorized: Unauthorized
   Normal   SandboxChanged          3m51s (x116 over 28m)  kubelet            Pod sandbox changed, it will be killed and re-created.
 ```
-

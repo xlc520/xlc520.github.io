@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Linux脚本工具
+excerpt: 
 description: Linux脚本工具
 date: 2022-01-21
 category: other
@@ -9,13 +10,14 @@ article: true
 timeline: true
 icon: type
 ---
-# Linux脚本工具
+
+# Linux 脚本工具
 
 ## EdNovas 的 Toolbox 工具箱
 
- **脚本地址**
+**脚本地址**
 
-https://github.com/wdm1732418365/vpstoolbox
+<https://github.com/wdm1732418365/vpstoolbox>
 
 最新版：
 
@@ -23,6 +25,3 @@ https://github.com/wdm1732418365/vpstoolbox
 CODE
 wget -N https://raw.githubusercontent.com/wdm1732418365/vpstoolbox/main/ednovastool.sh && chmod +x ednovastool.sh && ./ednovastool.sh
 ```
-
-
-

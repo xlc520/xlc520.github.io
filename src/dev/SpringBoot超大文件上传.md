@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot超大文件上传
+excerpt: 
 description: 
 date: 2022-11-22
 category: Java
@@ -10,26 +11,27 @@ timeline: true
 icon: java
 ---
 
-
-
-# SpringBoot超大文件上传
+# SpringBoot 超大文件上传
 
 ## **一. 秒传**
 
 ### 1、什么是秒传
 
-通俗的说，你把要上传的东西上传，服务器会先做**MD5**校验，如果服务器上有一样的东西，它就直接给你个新地址，其实你下载的都是服务器上的同一个文件，想要不秒传，其实只要让**MD5**改变，就是对文件本身做一下修改（改名字不行），例如一个文本文件，你多加几个字，MD5就变了，就不会秒传了。
+通俗的说，你把要上传的东西上传，服务器会先做**MD5**校验，如果服务器上有一样的东西，它就直接给你个新地址，其实你下载的都是服务器上的同一个文件，想要不秒传，其实只要让
+**MD5**改变，就是对文件本身做一下修改（改名字不行），例如一个文本文件，你多加几个字，MD5 就变了，就不会秒传了。
 
 ### 2、本文实现的秒传核心逻辑
 
-- 利用redis的set方法存放文件上传状态，其中key为文件上传的md5，value为是否上传完成的标志位。
-- 当标志位true为上传已经完成，此时如果有相同文件上传，则进入秒传逻辑。如果标志位为false，则说明还没上传完成，此时需要在调用set的方法，保存块号文件记录的路径，其中key为上传文件md5加一个固定前缀，value为块号文件记录路径
+- 利用 redis 的 set 方法存放文件上传状态，其中 key 为文件上传的 md5，value 为是否上传完成的标志位。
+- 当标志位 true 为上传已经完成，此时如果有相同文件上传，则进入秒传逻辑。如果标志位为 false，则说明还没上传完成，此时需要在调用
+  set 的方法，保存块号文件记录的路径，其中 key 为上传文件 md5 加一个固定前缀，value 为块号文件记录路径
 
 ## **二. 分片上传**
 
 ### 1、什么是分片上传
 
-分片上传，就是将所要上传的文件，按照一定的大小，将整个文件分隔成多个数据块（我们称之为Part）来进行分别上传，上传完之后再由服务端对所有上传的文件进行汇总整合成原始的文件。
+分片上传，就是将所要上传的文件，按照一定的大小，将整个文件分隔成多个数据块（我们称之为
+Part）来进行分别上传，上传完之后再由服务端对所有上传的文件进行汇总整合成原始的文件。
 
 ### 2、分片上传的场景
 
@@ -64,26 +66,28 @@ icon: java
 **b、方案二、本文实现的步骤**
 
 - 前端（客户端）需要根据固定大小对文件进行分片，请求后端（服务端）时要带上分片序号和大小
-- 服务端创建conf文件用来记录分块位置，conf文件长度为总分片数，每上传一个分块即向conf文件中写入一个127，那么没上传的位置就是默认的0,已上传的就是`Byte.MAX_VALUE` 127（这步是实现断点续传和秒传的核心步骤）
+- 服务端创建 conf 文件用来记录分块位置，conf 文件长度为总分片数，每上传一个分块即向 conf 文件中写入一个 127，那么没上传的位置就是默认的
+  0,已上传的就是`Byte.MAX_VALUE` 127（这步是实现断点续传和秒传的核心步骤）
 - 服务器按照请求数据中给的分片序号和每片分块大小（分片大小是固定且一样的）算出开始位置，与读取到的文件片段数据，写入文件。
 
 #### 5、分片上传/断点上传代码实现
 
-前端采用百度提供的webuploader的插件，进行分片。因本文主要介绍服务端代码实现，webuploader如何进行分片，具体实现可以查看如下链接:
+前端采用百度提供的 webuploader 的插件，进行分片。因本文主要介绍服务端代码实现，webuploader
+如何进行分片，具体实现可以查看如下链接:
 
-- *http://fex.baidu.com/webuploader/getting-started.html*
+- *<http://fex.baidu.com/webuploader/getting-started.html>*
 
 后端用两种方式实现文件写入，一种是用**RandomAccessFile**，如果对**RandomAccessFile**不熟悉的朋友，可以查看如下链接:
 
-- *https://blog.csdn.net/dimudan2015/article/details/81910690*
+- *<https://blog.csdn.net/dimudan2015/article/details/81910690>*
 
 另一种是使用**MappedByteBuffer**，对**MappedByteBuffer**不熟悉的朋友，可以查看如下链接进行了解:
 
-- *https://www.jianshu.com/p/f90866dcbffc*
+- *<https://www.jianshu.com/p/f90866dcbffc>*
 
 ## **四. 后端进行写入操作的核心代码**
 
-### 1、RandomAccessFile实现方式
+### 1、RandomAccessFile 实现方式
 
 ```java
 @UploadMode(mode = UploadModeEnum.RANDOM_ACCESS)    
@@ -124,7 +128,7 @@ public class RandomAccessUploadStrategy extends SliceUploadTemplate {
 }    
 ```
 
-### 2、MappedByteBuffer实现方式
+### 2、MappedByteBuffer 实现方式
 
 ```java
 @UploadMode(mode = UploadModeEnum.MAPPED_BYTEBUFFER)    
@@ -332,6 +336,8 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
 
 ## **五. 总结**
 
-在实现分片上传的过程，需要前端和后端配合，比如前后端的上传块号的文件大小，前后端必须得要一致，否则上传就会有问题。其次文件相关操作正常都是要搭建一个文件服务器的，比如使用**fastdfs**、**hdfs**等。
+在实现分片上传的过程，需要前端和后端配合，比如前后端的上传块号的文件大小，前后端必须得要一致，否则上传就会有问题。其次文件相关操作正常都是要搭建一个文件服务器的，比如使用
+**fastdfs**、**hdfs**等。
 
-本示例代码在电脑配置为4核内存8G情况下，上传24G大小的文件，上传时间需要30多分钟，主要时间耗费在前端的**md5**值计算，后端写入的速度还是比较快。
+本示例代码在电脑配置为 4 核内存 8G 情况下，上传 24G 大小的文件，上传时间需要 30 多分钟，主要时间耗费在前端的**md5**
+值计算，后端写入的速度还是比较快。

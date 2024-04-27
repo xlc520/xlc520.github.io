@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: API
+excerpt: 
 description: API
 date: 2022-01-12
 category: Tools
@@ -11,11 +12,12 @@ article: true
 dateline: true
 icon: type
 ---
+
 # API
 
 ## hutool
 
-一个小而全的 Java 工具类库，通过静态方法封装，并提供详细完整的中文文档和注释，使Java拥有函数式语言般的优雅。
+一个小而全的 Java 工具类库，通过静态方法封装，并提供详细完整的中文文档和注释，使 Java 拥有函数式语言般的优雅。
 
 [https://hutool.cn/](https://hutool.cn/)
 

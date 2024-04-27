@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 六十多个 vscode 插件，助你打造最强编辑器
+excerpt: 
 description: 六十多个 vscode 插件，助你打造最强编辑器
 date: 2022-05-21
 category: Java
@@ -156,7 +157,7 @@ icon: java
 
 运行代码，可以在编辑器中查看结果，前端同学可以在控制台看 `console.log` ，还有很多其他玩法，具体使用参考此篇文章
 
-👉👉 VSCode插件推荐 | Code Runner: 代码一键运行，支持超过40种语言
+👉👉 VSCode 插件推荐 | Code Runner: 代码一键运行，支持超过 40 种语言
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/55906fc48cdc4d7d8b3939e3fecc20bb.jpg)
 
@@ -178,7 +179,7 @@ icon: java
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d735fa7441ba41918ac87515eb1b889f.jpg)
 
-查看颜色详细信息的插件，可以小窗口显示颜色值，rgb,hsl,cmyk,hex等等，可以在配置项里添加要展示的信息类型。
+查看颜色详细信息的插件，可以小窗口显示颜色值，rgb,hsl,cmyk,hex 等等，可以在配置项里添加要展示的信息类型。
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5fcf52fdf4d743438ce04dd3abf335bc.jpg)
 
@@ -188,7 +189,7 @@ icon: java
 
 检查代码中单词拼写是否正确，当单词不正常的时候，就会在下方出现波浪线进行提示，还可以自定义词典，忽略某个单词的检查等，更多用法参考下面链接。
 
-👉👉 VSCode中插件Code Spell Checker
+👉👉 VSCode 中插件 Code Spell Checker
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f88a2af524fc4e19967ac6c4625ca171.jpg)
 
@@ -206,7 +207,7 @@ icon: java
 
 配置文件的具体内容和使用方法可以看这一篇，很详细。
 
-👉👉 VSCode配置 Debugger for Chrome插件
+👉👉 VSCode 配置 Debugger for Chrome 插件
 
 ## Git History
 
@@ -223,7 +224,7 @@ icon: java
 
 还有其他很多的操作，详情查阅下方链接。
 
-👉👉 [VsCode中好用的git源代码管理插件GitLens](https://link.juejin.cn/?target=https%3A%2F%2Fwww.jianshu.com%2Fp%2Fa91cb8a2e55d)
+👉👉 [VsCode 中好用的 git 源代码管理插件 GitLens](https://link.juejin.cn/?target=https%3A%2F%2Fwww.jianshu.com%2Fp%2Fa91cb8a2e55d)
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/555a1cf5377a4e6780a33bae9bf68fc0.jpg)
 
@@ -260,7 +261,7 @@ icon: java
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1cba70a7f5e249bf88c9fe5d182af588.jpg)
 
 文件比较界的大拿肯定是 `Beyond Compare` 了，但是它是收费的！那么 `Partial Diff`
-这款神奇的插件就成为了良好的替代品，选中一代码，右键` Select Text for Compare`
+这款神奇的插件就成为了良好的替代品，选中一代码，右键`Select Text for Compare`
 ，选中另外一部分代码，右键`Compare Text with Previous Selection`即可。我的是中文的，就更明显了🤣🤣
 
 ![45.gif](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0909cd037c894052abfdfd51878eb461.jpg)
@@ -294,7 +295,7 @@ icon: java
 
 实时显示代码的运行结果，使用方法请跳转链接
 
-👉👉[ VS Code插件之Quokka.js](https://link.juejin.cn/?target=http%3A%2F%2Fwww.duocaichajian.com%2Fplugin%2F43.html)
+👉👉[VS Code 插件之 Quokka.js](https://link.juejin.cn/?target=http%3A%2F%2Fwww.duocaichajian.com%2Fplugin%2F43.html)
 
 ![vsc-intro.gif](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6544d46e54534e48aca2d0532ab2e94a.jpg)
 
@@ -331,7 +332,7 @@ icon: java
 可以通过点击类名迅速定位到样式的定义。不知道是不是我自己的原因，有的时候会失效，需要点击 **禁用** ，再点击 **启用**
 就好使了。具体使用方法参考链接
 
-👉👉 [cssPeek插件大大提升你的开发效率](https://link.juejin.cn/?target=https%3A%2F%2Fcloud.tencent.com%2Fdeveloper%2Fnews%2F424186)
+👉👉 [cssPeek 插件大大提升你的开发效率](https://link.juejin.cn/?target=https%3A%2F%2Fcloud.tencent.com%2Fdeveloper%2Fnews%2F424186)
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/37758d06d88949b59ac3e3b5f82700f0.jpg)
 
@@ -483,7 +484,7 @@ icon: java
 
 在根目录下新建 `prettier.config.cjson` 文件，在里面书写自己想要的格式就行了。更具体的配置内容查看链接
 
-👉👉 # vscode 使用Prettier插件格式化配置使用
+👉👉 # vscode 使用 Prettier 插件格式化配置使用
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/dc1655149c624a9da511d737151e4253.jpg)
 

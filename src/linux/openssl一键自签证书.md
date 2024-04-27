@@ -19,7 +19,7 @@ sticky: false
 # 你可以自定义页脚
 # footer: 这是测试显示的页脚
 ---
-# Openssl一键自签证书
+# Openssl 一键自签证书
 
 `vim openssl.sh`
 
@@ -42,7 +42,5 @@ else
     echo "openssl 未安装"
 fi
 ```
-
-
 
 `bash openssl.sh`

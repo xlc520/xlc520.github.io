@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Alist常用样式代码
+excerpt: 
 description: 
 date: 2022-10-21
 category: Script
@@ -12,9 +13,9 @@ dateline: true
 icon: script
 ---
 
-# Alist常用样式代码
+# Alist 常用样式代码
 
-## 黑猫：
+## 黑猫
 
 ```css
  
@@ -49,7 +50,7 @@ icon: script
   </div>
 ```
 
-## 白猫：
+## 白猫
 
 ```css
 <!--白小猫咪-->
@@ -80,7 +81,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </script>
 ```
 
-## 鼠标点击出随机颜色的爱心:
+## 鼠标点击出随机颜色的爱心
 
 ```html
 <!--鼠标点击出随机颜色的爱心-->
@@ -148,7 +149,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
     </script>
 ```
 
-## 隐藏右上角复制直链、下载切换布局等：
+## 隐藏右上角复制直链、下载切换布局等
 
 ```css
 <!--隐藏右上角-->
@@ -159,7 +160,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </style>
 ```
 
-## 全白无框：
+## 全白无框
 
 ```css
 <!--全白无框-->
@@ -184,18 +185,18 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </style>
 ```
 
-## 备案信息：
+## 备案信息
 
 ```css
 <!--备案信息--> 
 </style>
     <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" rel=" stylesheet ">
     <div id="customize" style="display:none;
-	text-align:center;
-	">
+ text-align:center;
+ ">
         <br />
         <div style="font-size:13px;
-	">
+ ">
             <span class="nav-item">
                 <a class="nav-link" href="http://lizong.top/" target="_blank">
                     <i class="fa-solid fa-copyright" style="color:#9932CC" aria-hidden="true"></i>
@@ -205,14 +206,14 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
             <span class="nav-item">
                 <a class="nav-link" href="https://beian.miit.gov.cn/" target="_blank">
                     <i class="fa fa-balance-scale" style="color:#9932CC;
-	" aria-hidden="true"></i>
+ " aria-hidden="true"></i>
                      鄂ICP备xxxxxx号-x |
                 </a>
             </span>
             <span class="nav-item">
                 <a class="nav-link" href="https://github.com/Xhofe/alist" target="_blank">
                     <i class="fa fa-heart" style="color:#9932CC;
-	" aria-hidden="true"></i>
+ " aria-hidden="true"></i>
                      由Alist驱动
                 </a>
             </span>
@@ -221,16 +222,16 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
     </div>
     <script>
         let interval = setInterval(() => {
-	if (document.querySelector(".footer")) {
-	document.querySelector("#customize").style.display = "";
-	clearInterval(interval);
+ if (document.querySelector(".footer")) {
+ document.querySelector("#customize").style.display = "";
+ clearInterval(interval);
 }
 },200);
-	</script>
+ </script>
 </font>
 ```
 
-## 底部网站运行时间：
+## 底部网站运行时间
 
 ```css
 <!--开站时间开始-->       
@@ -262,7 +263,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </script> 
 ```
 
-##  自定义背景：替换url即可
+## 自定义背景：替换 url 即可
 
 ```css
 <!--自定义背景-->
@@ -289,7 +290,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 
 **不建议删除底部文字 请尊重开发者的劳动成果，谢谢**
 
-## **去掉底部的管理文字**：
+## **去掉底部的管理文字**
 
 ```css
 <!---去掉底部管理--->
@@ -300,7 +301,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </style>
 ```
 
-## 去掉底部的 `Powered by Alist：`
+## 去掉底部的 Powered by Alist
 
 ```css
 <!--去掉底部Powered by Alist--->
@@ -311,7 +312,7 @@ jsonPath: " https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.mod
 </style>
 ```
 
-## 去掉底部`Powered by Alist`和管理文字：
+## 去掉底部`Powered by Alist`和管理文字
 
 ```css
 <!---去掉底部文字--->
@@ -320,4 +321,3 @@ type="text/css"> .footer {
 display: none !important; } 
 </style>
 ```
-

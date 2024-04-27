@@ -1,7 +1,8 @@
 ---
 author: xlc520
 title: 使用webpack打包TS
-description: 
+excerpt:
+description:
 date: 2022-07-21
 category: Vue
 tag: Vue
@@ -9,11 +10,12 @@ article: true
 dateline: true
 icon: vue
 ---
-# 4. 使用webpack打包TS
+
+# 4. 使用 webpack 打包 TS
 
 ## 下载依赖
 
-```
+```shell
 yarn add -D typescript
 yarn add -D webpack webpack-cli
 yarn add -D webpack-dev-server
@@ -22,7 +24,7 @@ yarn add -D ts-loader
 yarn add -D cross-env
 ```
 
-## 入口JS: src/main.ts
+## 入口 JS: src/main.ts
 
 ```typescript
 // import './01_helloworld'
@@ -30,7 +32,7 @@ yarn add -D cross-env
 document.write('Hello Webpack TS!')
 ```
 
-## index页面: public/index.html
+## index 页面: public/index.html
 
 ```html
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ document.write('Hello Webpack TS!')
   <title>webpack & TS</title>
 </head>
 <body>
-  
+
 </body>
 </html>
 ```
@@ -50,13 +52,13 @@ document.write('Hello Webpack TS!')
 ## build/webpack.config.js
 
 ```javascript
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 const isProd = process.env.NODE_ENV === 'production' // 是否生产环境
 
-function resolve (dir) {
+function resolve(dir) {
   return path.resolve(__dirname, '..', dir)
 }
 
@@ -82,8 +84,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin({
-    }),
+    new CleanWebpackPlugin({}),
 
     new HtmlWebpackPlugin({
       template: './public/index.html'
@@ -107,17 +108,14 @@ module.exports = {
 
 ## 配置打包命令
 
-```
+```json
 "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
 "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
 ```
 
 ## 运行与打包
 
-```
+```shell
 yarn dev
 yarn build
 ```
-
-
-

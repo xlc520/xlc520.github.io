@@ -1,7 +1,8 @@
 ---
 author: xlc520
 title: Logback 配置文件优化
-description: 
+excerpt:
+description:
 date: 2022-06-30
 category: Java
 tag: Java
@@ -18,7 +19,7 @@ icon: java
 - 2.通过异步输出日志减少磁盘`IO`提高性能
 - 3.异步输出日志的原理
 
-### 02、配置文件logback-spring.xml
+### 02、配置文件 logback-spring.xml
 
 `SpringBoot`工程自带`logback`和`slf4j`
 的依赖，所以重点放在编写配置文件上，需要引入什么依赖，日志依赖冲突统统都不需要我们管了。`logback`框架会默认加载`classpath`
@@ -69,9 +70,9 @@ icon: java
     </appender>
 
     <root level="info">
-        <appender-ref ref="CONSOLE-LOG" />
-        <appender-ref ref="INFO-LOG" />
-        <appender-ref ref="ERROR-LOG" />
+        <appender-ref ref="CONSOLE-LOG"/>
+        <appender-ref ref="INFO-LOG"/>
+        <appender-ref ref="ERROR-LOG"/>
     </root>
 </configuration>
 ```
@@ -101,28 +102,29 @@ icon: java
 
 ### 03、logback 高级特性异步输出日志
 
-之前的日志配置方式是基于同步的，每次日志输出到文件都会进行一次磁盘IO。采用异步写日志的方式而不让此次写日志发生磁盘IO，阻塞线程从而造成不必要的性能损耗。异步输出日志的方式很简单，添加一个基于异步写日志的`appender`
+之前的日志配置方式是基于同步的，每次日志输出到文件都会进行一次磁盘 IO。采用异步写日志的方式而不让此次写日志发生磁盘
+IO，阻塞线程从而造成不必要的性能损耗。异步输出日志的方式很简单，添加一个基于异步写日志的`appender`
 ，并指向原先配置的`appender`即可
 
 ```xml
  <!-- 异步输出 -->
-    <appender name="ASYNC-INFO" class="ch.qos.logback.classic.AsyncAppender">
-        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
-        <discardingThreshold>0</discardingThreshold>
-        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
-        <queueSize>256</queueSize>
-        <!-- 添加附加的appender,最多只能添加一个 -->
-        <appender-ref ref="INFO-LOG"/>
-    </appender>
+<appender name="ASYNC-INFO" class="ch.qos.logback.classic.AsyncAppender">
+    <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+    <discardingThreshold>0</discardingThreshold>
+    <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+    <queueSize>256</queueSize>
+    <!-- 添加附加的appender,最多只能添加一个 -->
+    <appender-ref ref="INFO-LOG"/>
+</appender>
 
-    <appender name="ASYNC-ERROR" class="ch.qos.logback.classic.AsyncAppender">
-        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
-        <discardingThreshold>0</discardingThreshold>
-        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
-        <queueSize>256</queueSize>
-        <!-- 添加附加的appender,最多只能添加一个 -->
-        <appender-ref ref="ERROR-LOG"/>
-    </appender>
+<appender name="ASYNC-ERROR" class="ch.qos.logback.classic.AsyncAppender">
+<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+<discardingThreshold>0</discardingThreshold>
+<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+<queueSize>256</queueSize>
+<!-- 添加附加的appender,最多只能添加一个 -->
+<appender-ref ref="ERROR-LOG"/>
+</appender>
 ```
 
 ### 04、异步输出日志性能测试
@@ -141,7 +143,7 @@ icon: java
 ### 07、同步输出日志
 
 - 线程数：100
-- `Ramp-Up Loop`(可以理解为启动线程所用时间) ：0 可以理解为100个线程同时启用
+- `Ramp-Up Loop`(可以理解为启动线程所用时间) ：0 可以理解为 100 个线程同时启用
 - 测试结果
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204021.png)
@@ -156,7 +158,7 @@ icon: java
 
 ![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204022.png)
 
-TPS 为 497.5/sec ， 性能提升了10多倍！！！
+TPS 为 497.5/sec ， 性能提升了 10 多倍！！！
 
 ### 09、异步日志输出原理
 
@@ -166,7 +168,7 @@ TPS 为 497.5/sec ， 性能提升了10多倍！！！
 
 异步输出日志中最关键的就是配置文件中`ch.qos.logback.classic``AsyncAppenderBase``append`
 
-```
+```plain
 //来自阿里大佬的《LeetCode刷题答案》pdf新鲜出炉
 //年末面试必备！大家可以关注公众号TJ君，回复LeetCode领取。
 
@@ -179,11 +181,11 @@ protected void append(E eventObject) {
 ```
 
 通过队列情况判断是否需要丢弃日志，不丢弃的话将它放到阻塞队列中，通过查看代码，这个阻塞队列为`ArrayBlockingQueueu`
-，默认大小为256，可以通过配置文件进行修改。`Logger.info(...)`到`append(...)`
+，默认大小为 256，可以通过配置文件进行修改。`Logger.info(...)`到`append(...)`
 就结束了，只做了将日志塞入到阻塞队列的事，然后继续执行`Logger.info(...)`下面的语句了。在`AsyncAppenderBase`
 类中定义了一个`Worker`线程，`run`方法中的关键部分代码如下:
 
-```
+```plain
 E e = parent.blockingQueue.take();
 aai.appendLoopOnAppenders(e);
 ```
@@ -195,5 +197,4 @@ aai.appendLoopOnAppenders(e);
 
 最主要的两个方法就是`encode``write``encode`
 
-来源：https://juejin.cn/post/6844903909920604174
-
+来源：<https://juejin.cn/post/6844903909920604174>

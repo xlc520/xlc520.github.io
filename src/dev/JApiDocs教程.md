@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: JApiDocs教程
+excerpt: 
 description: JApiDocs教程
 date: 2022-02-12
 category: Java
@@ -9,11 +10,12 @@ article: true
 timeline: true
 icon: type
 ---
-# JApiDocs教程
 
-一、Maven依赖
+# JApiDocs 教程
 
-```
+一、Maven 依赖
+
+```plain
 <!--  JApiDocs  -->
 <dependency>
    <groupId>io.github.yedaxia</groupId>
@@ -26,10 +28,11 @@ icon: type
 
 ### 1. 分组名称 @description
 
-*注：官方文档中注明分组名称@description，但是实际应用中不需要加入注解，像下例所示，直接写注释即可。（类上写不写都行，方法上如果加上@description反而不显示）*
+*注：官方文档中注明分组名称@description，但是实际应用中不需要加入注解，像下例所示，直接写注释即可。（类上写不写都行，方法上如果加上@description
+反而不显示）*
 例：
 
-```
+```plain
 /**
  * 用户接口
  */
@@ -59,7 +62,7 @@ public class testInterface {
 
 例：
 
-```
+```plain
 /**
      * @description 保存用户
      * @param docId  医生id
@@ -70,11 +73,11 @@ public RoleInfo getAdviceList(String docId){
 }
 ```
 
-#### （2）在相应的bean对象里添加注释
+#### （2）在相应的 bean 对象里添加注释
 
 例：
 
-```
+```plain
 public class RemindInfo implements Serializable {
   private long remindId;  //提醒id
   private String remindContent;  //提醒信息
@@ -86,10 +89,10 @@ public class RemindInfo implements Serializable {
 
 #### （1）@RestController 或 @ResponseBody
 
-返回json数据类型
+返回 json 数据类型
 例：
 
-```
+```plain
 /**
  * 用户接口
  */
@@ -114,7 +117,7 @@ public class testInterface {
 
 #### （2）请求类型
 
-```
+```plain
 @PostMapping("advice")/@GetMapping("advice")
     public RoleInfo getAdviceList(String docId){
         return roleService.FindRoleBydocId(docId);
@@ -127,18 +130,20 @@ public class testInterface {
 
 ##### a.实现
 
-JApiDocs 默认只导出声明了@ApiDoc的接口，我们前面通过设置config.setAutoGenerate(Boolean.TRUE) 来解除了这个限制。如果你不希望把所有的接口都导出，你可以把autoGenerate设置关闭，在相关Controller类或者接口方法上通过添加@ApiDoc来确定哪些接口需要导出。
+JApiDocs 默认只导出声明了@ApiDoc 的接口，我们前面通过设置 config.setAutoGenerate(Boolean.TRUE)
+来解除了这个限制。如果你不希望把所有的接口都导出，你可以把 autoGenerate 设置关闭，在相关 Controller 类或者接口方法上通过添加@ApiDoc
+来确定哪些接口需要导出。
 
 ##### b.其他设置
 
-result: 这个可以直接声明返回的对象类型，如果你声明了，将会覆盖SpringBoot的返回对象
+result: 这个可以直接声明返回的对象类型，如果你声明了，将会覆盖 SpringBoot 的返回对象
 stringResult：返回字符串，在返回结果比较简单，而不想创建一个专门的返回类，则可以考虑使用这个属性。
-url: 请求URL，扩展字段，用于支持非SpringBoot项目
-method: 请求方法，扩展字段，用于支持非SpringBoot项目
+url: 请求 URL，扩展字段，用于支持非 SpringBoot 项目
+method: 请求方法，扩展字段，用于支持非 SpringBoot 项目
 
 例：
 
-```
+```plain
 @ApiDoc(result = AdminVO.class, url = "/api/v1/admin/login2", method = "post")
 stringResult 实例，在文档中将会自动格式化json字符串：
 @ApiDoc(stringResult = "{code: 0, data: 'success'}")
@@ -146,11 +151,11 @@ stringResult 实例，在文档中将会自动格式化json字符串：
 public Map customJsonResult(){}
 ```
 
-### (2)@Ignore (忽略Controller，接口，字段)
+### (2)@Ignore (忽略 Controller，接口，字段)
 
-例：忽略Controller
+例：忽略 Controller
 
-```
+```plain
 @Ignore
 public class UserController { 
 
@@ -159,9 +164,9 @@ public class UserController {
 
 ## 三、配置参数
 
-在任意一个main入口执行下面的代码：
+在任意一个 main 入口执行下面的代码：
 
-```
+```plain
 DocsConfig config = new DocsConfig();
 config.setProjectPath("your springboot project path"); // 项目根目录
 config.setProjectName("ProjectName"); // 项目名称
@@ -175,7 +180,7 @@ Docs.buildHtmlDocs(config); // 执行生成文档
 
 ### （1）Markdown
 
-```
+```plain
   config.addPlugin(new MarkdownDocPlugin());
 ```
 
@@ -185,17 +190,19 @@ Docs.buildHtmlDocs(config); // 执行生成文档
 
 ## 五、自定义代码模板
 
-JApiDocs 除了支持文档导出，目前也支持生成了 Android 和 iOS 的返回对象代码，对应 Java 和 Object-C 语言， 如果你想修改代码模板，可以通过以下的方法：
+JApiDocs 除了支持文档导出，目前也支持生成了 Android 和 iOS 的返回对象代码，对应 Java 和 Object-C 语言，
+如果你想修改代码模板，可以通过以下的方法：
 
 ### （1）定义代码模板
 
-把源码中library项目resources目录下的代码模板拷贝一份，其中，IOS_表示 Object-C 代码模板，JAVA_开头表示 Java代码， 模板中类似${CLASS_NAME}的符号是替换变量，具体含义你可以结合生成的代码进行理解，然后按照你想要的代码模板进行修改即可。
+把源码中 library 项目 resources 目录下的代码模板拷贝一份，其中，IOS_表示 Object-C 代码模板，JAVA_开头表示 Java 代码，
+模板中类似${CLASS_NAME}的符号是替换变量，具体含义你可以结合生成的代码进行理解，然后按照你想要的代码模板进行修改即可。
 
 ### （2）选择新的模板
 
-通过DocsConfig配置模板路径替换成新的模板：
+通过 DocsConfig 配置模板路径替换成新的模板：
 
-```
+```plain
 docsConfig.setResourcePath("模板路径");
 ```
 
@@ -205,7 +212,7 @@ JApiDocs 提供了插件接口，你可以通过插件接口来实现更多丰�
 
 ### （1）实现 IPluginSupport 接口
 
-```
+```plain
 public class CustomPlugin implements IPluginSupport{
       @Override
       public void execute(List<ControllerNode> controllerNodeList){
@@ -216,7 +223,7 @@ public class CustomPlugin implements IPluginSupport{
 
 ### （2）添加插件
 
-```
+```plain
  config.addPlugin(new CustomPlugin());
 ```
 
@@ -224,19 +231,19 @@ public class CustomPlugin implements IPluginSupport{
 
 ### 1、如何排查错误？
 
-关闭自动生成config.setAutoGenerate(Boolean.FALSE)，使用@ApiDoc 来一个个接口导出排查问题。
+关闭自动生成 config.setAutoGenerate(Boolean.FALSE)，使用@ApiDoc 来一个个接口导出排查问题。
 
 ### 2、多模块找不到相关类源码？
 
-如果源码路径没有全部识别出来，可以通过config.addJavaSrcPath来添加模块的源码路径，注意要添加到src/main/java这一级。
+如果源码路径没有全部识别出来，可以通过 config.addJavaSrcPath 来添加模块的源码路径，注意要添加到 src/main/java 这一级。
 
 ## 八、自定义注释模板
 
-这是我针对JApiDocs，对我的模板进行了一定的调整，以方便对JApiDocs的使用，大家可以参考一下。
+这是我针对 JApiDocs，对我的模板进行了一定的调整，以方便对 JApiDocs 的使用，大家可以参考一下。
 
 ### （1）Live Templates
 
-```
+```plain
   /**
  * TODO
  * @create_by: 作者名字
@@ -248,7 +255,7 @@ public class CustomPlugin implements IPluginSupport{
 
 ### （2）File Header
 
-```
+```plain
 /**
  * @Author 作者名字
  * @Date ${DATE} ${TIME}
@@ -259,8 +266,8 @@ public class CustomPlugin implements IPluginSupport{
 
 具体如何实现自定义方法注释，类注释。可以参考下面的文章：
 
-> https://blog.csdn.net/qq_38675373/article/details/105886922
+> <https://blog.csdn.net/qq_38675373/article/details/105886922>
 
-JApiDocs官方文档地址：
+JApiDocs 官方文档地址：
 
-> https://japidocs.agilestudio.cn/#/
+> <https://japidocs.agilestudio.cn/#/>

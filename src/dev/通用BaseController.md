@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 通用BaseController
+excerpt: 
 description: 
 date: 2023-11-14
 category: Java
@@ -10,11 +11,9 @@ timeline: true
 icon: java
 ---
 
+# 通用 BaseController
 
-
-# 通用BaseController
-
-## 第一步 引入MybatisPlus的jar包
+## 第一步 引入 MybatisPlus 的 jar 包
 
 ```xml
 <dependency>
@@ -24,7 +23,7 @@ icon: java
 </dependency>
 ```
 
-## 第二步 编写util类
+## 第二步 编写 util 类
 
 ```java
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -133,13 +132,16 @@ public class ApprenticeUtil {
 }
 ```
 
-反射获取字段值，这段Java代码演示了如何使用反射获得指定对象的属性值。方法的泛型表示，可以接受任意类型的参数`entity`。在此代码中，首先通过反射获取参数`entity`对象所对应类的属性，即`value`。
+反射获取字段值，这段 Java 代码演示了如何使用反射获得指定对象的属性值。方法的泛型表示，可以接受任意类型的参数`entity`
+。在此代码中，首先通过反射获取参数`entity`对象所对应类的属性，即`value`。
 
-接着通过Java内置的Introspector机制获取`id`属性的JavaBean规范访问器PropertyDescriptor，并从该对象提取出对应的getter方法。最后，利用Spring框架提供的工具类ReflectionUtils得到方法后来调用该getter方法，获取属性值并返回。需要注意，在反射机制下如果要访问私有成员变量或方法时，应先调用其setAccessible(true)方法以获得权限。
+接着通过 Java 内置的 Introspector 机制获取`id`属性的 JavaBean 规范访问器 PropertyDescriptor，并从该对象提取出对应的
+getter 方法。最后，利用 Spring 框架提供的工具类 ReflectionUtils 得到方法后来调用该 getter
+方法，获取属性值并返回。需要注意，在反射机制下如果要访问私有成员变量或方法时，应先调用其 setAccessible(true)方法以获得权限。
 
-## 第三步 编写BaseController类
+## 第三步 编写 BaseController 类
 
-下面是我们的BaseController类
+下面是我们的 BaseController 类
 
 ```java
 import cn.hutool.core.util.StrUtil;
@@ -251,11 +253,15 @@ public class BaseController<S extends IService<E>, E> {
 }
 ```
 
-这段Java代码展示了一个基本的基于Spring Boot框架开发的RESTful API接口实现。BaseController是一个较为通用的Controller基类，通过泛型使其可以处理各种实体类型对应的请求（比如增、删、改、查等）。
+这段 Java 代码展示了一个基本的基于 Spring Boot 框架开发的 RESTful API 接口实现。BaseController 是一个较为通用的
+Controller 基类，通过泛型使其可以处理各种实体类型对应的请求（比如增、删、改、查等）。
 
-具体来说，该类中包含了五个基本HTTP操作（POST, GET），通过不同参数和请求方式对实体对象进行CRUD操作，即添加(insert)、删除(delete)、修改(update)、查询(getById)、存储(save)、列表查询(list)、分页查询(page)、统计数量(count)。同时，通过Spring Boot自带的Web开发框架中的注解，将每个方法暴露为一个Restful API。
+具体来说，该类中包含了五个基本 HTTP 操作（POST, GET），通过不同参数和请求方式对实体对象进行 CRUD 操作，即添加(insert)、删除(
+delete)、修改(update)、查询(getById)、存储(save)、列表查询(list)、分页查询(page)、统计数量(count)。同时，通过 Spring Boot 自带的
+Web 开发框架中的注解，将每个方法暴露为一个 Restful API。
 
-需要注意的是，该控制器只是一个模板，实际使用时需要继承该控制器并传入相应的Service类作为泛型S的参数，并实现具体的CRUD方法。
+需要注意的是，该控制器只是一个模板，实际使用时需要继承该控制器并传入相应的 Service 类作为泛型 S 的参数，并实现具体的 CRUD
+方法。
 
 ## 第四步 设置分页插件
 
@@ -285,7 +291,7 @@ public class MybatisPlusConfig {
 }
 ```
 
-## 第五步 继承BaseController类
+## 第五步 继承 BaseController 类
 
 ```java
 import com.wangfugui.apprentice.dao.domain.Dynamic;
@@ -324,4 +330,3 @@ public class BlogController extends BaseController<IBlogService, Blog>{
 
 }
 ```
-

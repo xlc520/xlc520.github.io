@@ -1,30 +1,17 @@
 
-
-
-
-
-
-# Android Studio国内镜像源配置
-
-
+# Android Studio 国内镜像源配置
 
 ## 1.安装
 
-https://blog.csdn.net/qq_55878784/article/details/126821781
+<https://blog.csdn.net/qq_55878784/article/details/126821781>
 
 ## 2.配置
-
-
 
 ```groovy
 腾讯： https://mirrors.cloud.tencent.com/AndroidSDK/
 
 阿里： https://mirrors.aliyun.com/android.googlesource.com/
 ```
-
-
-
-
 
 ```groovy
 maven { url 'https://maven.aliyun.com/repository/public' }
@@ -98,7 +85,7 @@ dependencyResolutionManagement {
 }
 ```
 
-**`gradle7.0`之前(project的build.gradle)**
+**`gradle7.0`之前(project 的 build.gradle)**
 
 ```groovy
 buildscript {

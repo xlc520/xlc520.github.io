@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: MySQL压缩版安装配置
+excerpt: 
 description: MySQL压缩版安装配置
 date: 2022-01-24
 category: other
@@ -10,16 +11,16 @@ timeline: true
 icon: type
 ---
 
-# MySQL压缩版安装配置
+# MySQL 压缩版安装配置
 
 ## 1 下载
 
-官网：https://www.mysql.com/
-最新版下载地址：https://dev.mysql.com/downloads/mysql/
-多版本下载地址：https://downloads.mysql.com/archives/community/
-在这里，我使用的是MySQL8.0.19解压缩版，附上下载链接：https://cdn.mysql.com/archives/mysql-8.0/mysql-8.0.19-winx64.zip
+官网：<https://www.mysql.com/>
+最新版下载地址：<https://dev.mysql.com/downloads/mysql/>
+多版本下载地址：<https://downloads.mysql.com/archives/community/>
+在这里，我使用的是 MySQL8.0.19 解压缩版，附上下载链接：<https://cdn.mysql.com/archives/mysql-8.0/mysql-8.0.19-winx64.zip>
 
-此时的MySQL版本已经更新到8.0.23，所以我需要进入多版本链接进行下载。
+此时的 MySQL 版本已经更新到 8.0.23，所以我需要进入多版本链接进行下载。
 
 **注意：**
 
@@ -36,16 +37,16 @@ icon: type
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png)
 
-接下来创建我们的数据库文件存放位置，这里我在mysql解压目录的同级目录下创建了`databases`文件夹，作为数据库存放目录
+接下来创建我们的数据库文件存放位置，这里我在 mysql 解压目录的同级目录下创建了`databases`文件夹，作为数据库存放目录
 
 接下来进行初始化安装：
-用管理员身份打开cmd命令，并进入到mysql解压目录下的bin目录，如：`D:\ProgramFiles\MySQL8\bin`
+用管理员身份打开 cmd 命令，并进入到 mysql 解压目录下的 bin 目录，如：`D:\ProgramFiles\MySQL8\bin`
 
-**2、创建一个名为my.ini的文件：**
+**2、创建一个名为 my.ini 的文件：**
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/ZmFuZ3poZW5naGVpdGk.png)
 
-**3、修改my.ini文件：**
+**3、修改 my.ini 文件：**
 
 ```sql
 [mysql]
@@ -97,20 +98,21 @@ default-character-set=utf8
 
 **特别要注意：**
 
-（1）D:\\Program Files\\mysql\\data 这个目录一定要是“\\”，千万别弄成“\”不然会报错，或者可以用“/”；
-（2）Mysq安装目录和数据存放目录一定要修改为你自己设定的目录，除非你设置的目录与上述一致。
+（1）D:\Program Files\mysql\data 这个目录一定要是“\”，千万别弄成“\”不然会报错，或者可以用“/”；
+（2）Mysq 安装目录和数据存放目录一定要修改为你自己设定的目录，除非你设置的目录与上述一致。
 
 ## 3.配置
 
-3.用管理员身份打开cmd窗口：win -> windows系统 -> 右击命令提示符 -> 更多 -> 以管理员身份运行
+3.用管理员身份打开 cmd 窗口：win -> windows 系统 -> 右击命令提示符 -> 更多 -> 以管理员身份运行
 
-4.进入到bin目录下
+4.进入到 bin 目录下
 
 5.执行 `mysqld --install` 命令安装（执行 `mysqld --remove` 卸载安装）
 
 6.继续执行 `mysqld --initialize --user=root --console` 命令
 
-注意：初始化完成后MySQL会给root用户创建一个默认随机密码，下图白色部分就是密码，同时在data目录下也添加了相关的配置文件，如果密码有字符辨识不了，则把date目录下的文件都删了，重新执行这一步。
+注意：初始化完成后 MySQL 会给 root 用户创建一个默认随机密码，下图白色部分就是密码，同时在 data
+目录下也添加了相关的配置文件，如果密码有字符辨识不了，则把 date 目录下的文件都删了，重新执行这一步。
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/1780812-20190829212537656-1187829463.png)
 
@@ -118,24 +120,24 @@ default-character-set=utf8
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/1780812-20190829212232857-537058421.png)
 
-8.执行`mysql -uroot -pqLBiVku7k%f`登录MySQL（-u后面是用户名，-p后面是密码，即上面的默认随机密码）
+8.执行`mysql -uroot -pqLBiVku7k%f`登录 MySQL（-u 后面是用户名，-p 后面是密码，即上面的默认随机密码）
 
 9.修改密码
 
-mysql版本是7:
+mysql 版本是 7:
 
 `set password = password('root');`
 
-注意：如果mysql版本是8或以上，则使用 alter user 'root'@'localhost' identified by '新的密码'; 修改密码
+注意：如果 mysql 版本是 8 或以上，则使用 alter user 'root'@'localhost' identified by '新的密码'; 修改密码
 
 `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';`
-这样我们就可以将`roo`t账户的密码修改为`123456`了，将`123456`处替换为你们要修改的密码，回车执行就可以了。
+这样我们就可以将`roo`t 账户的密码修改为`123456`了，将`123456`处替换为你们要修改的密码，回车执行就可以了。
 
-12.登录MySQL后可以添加一个用户
+12.登录 MySQL 后可以添加一个用户
 
 添加格式：
 
-grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
+grant 权限 on 数据库.表 to 用户名@'IP 地址' identified by '密码'
 
 实例：
 
@@ -151,22 +153,22 @@ grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20200131203311761.png)
 
 解决办法：
-下载vcruntime140_1.dll，链接：https://cn.dll-files.com/vcruntime140_1.dll.html
+下载 vcruntime140_1.dll，链接：<https://cn.dll-files.com/vcruntime140_1.dll.html>
 
 ![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images2/16422331874666.png)
 下载完成后，解压提取文件，将提取出来的`vcruntime140_1.dll`文件复制到我们的`C:\Windows\System32`
 ![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images2/16422331874677.png)
-**注意, 32位版本的`vcruntime140_1.dll`需要复制到`C:\Windows\SysWOW64`下**
+**注意, 32 位版本的`vcruntime140_1.dll`需要复制到`C:\Windows\SysWOW64`下**
 
-### tips2：
+### tips2
 
-mysqld –initialize-insecure自动生成无密码的root用户；
-mysqld –initialize自动生成带随机密码的root用户；
-mysqld -remove移除自己的mysqld服务；
-net stop mysql命令，停止mysql服务
-如果报错，清空data文件夹，最好还是删掉data文件，重新执行remove--initialize--install--start（这些不是命令）流程即可；
+mysqld –initialize-insecure 自动生成无密码的 root 用户；
+mysqld –initialize 自动生成带随机密码的 root 用户；
+mysqld -remove 移除自己的 mysqld 服务；
+net stop mysql 命令，停止 mysql 服务
+如果报错，清空 data 文件夹，最好还是删掉 data 文件，重新执行 remove--initialize--install--start（这些不是命令）流程即可；
 
-## 5 配置mysql的环境变量
+## 5 配置 mysql 的环境变量
 
 ```vbnet
 MYSQL_HOME
@@ -176,11 +178,10 @@ D:\Program Files\mysql
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20200303112518670.png)
 
-点击Path，增加：
+点击 Path，增加：
 
 ```python
 %MYSQL_HOME%\bin;
 ```
 
 ![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20190831112741174.png)
-

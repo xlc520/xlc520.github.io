@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: Spring Boot - Mybatis Plus - ClickHouse 轻松实现增删改查
+excerpt: 
 description: 
 date: 2022-05-27
 category: Java
@@ -12,15 +13,15 @@ icon: java
 
 # Spring Boot - Mybatis Plus - ClickHouse 轻松实现增删改查
 
-## 项目场景：
+## 项目场景
 
-**ClickHouse 操作基于 Mybatis-puls源码扩展开发。解决ClickHouse的修改和删除 SQL操作与Mysql不相同。**
+**ClickHouse 操作基于 Mybatis-puls 源码扩展开发。解决 ClickHouse 的修改和删除 SQL 操作与 Mysql 不相同。**
 
-## 基于 **Mybatis-puls**：
+## 基于 **Mybatis-puls**
 
 update 、updateById 、 delete 函数
 
-1、`SqlMethodDiv.java` 文件枚举类，对sql脚本定义
+1、`SqlMethodDiv.java` 文件枚举类，对 sql 脚本定义
 
 ```java
 package com.demo.infrastructure.injector.enums;
@@ -182,7 +183,7 @@ public class ClickHouseSqlInjector extends DefaultSqlInjector {
 }
 ```
 
-4、编写SuperMapper 继承BaseMapper，让所有Mapper 继承extends
+4、编写 SuperMapper 继承 BaseMapper，让所有 Mapper 继承 extends
 
 ```java
 package com.demo.domain.mapper;
@@ -306,4 +307,4 @@ public class UserMapperTest {
 
 ## 源码
 
-https://github.com/saimen90/clickhouse
+<https://github.com/saimen90/clickhouse>

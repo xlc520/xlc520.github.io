@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot 内置工具类
+excerpt: 
 description: SpringBoot 内置工具类
 date: 2022-05-01
 category: Java
@@ -9,8 +10,6 @@ article: true
 timeline: true
 icon: java
 ---
-
-
 
 # SpringBoot 内置工具类
 
@@ -257,7 +256,7 @@ icon: java
    // 获取 URL
    static URL getURL(String resourceLocation) 
    // 获取文件（在 JAR 包内无法正常使用，需要是一个独立的文件）
-   static File	getFile(String resourceLocation)
+   static File getFile(String resourceLocation)
    复制代码
    ```
 

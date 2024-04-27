@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: 敏感词检测API服务wordscheck
+excerpt: 
 description: 
 date: 2023-11-28
 category: Java
@@ -10,7 +11,7 @@ timeline: true
 icon: java
 ---
 
-# 敏感词检测API服务wordscheck
+# 敏感词检测 API 服务 wordscheck
 
 **什么是 wordscheck ？**
 
@@ -42,7 +43,7 @@ icon: java
 
 构建镜像和容器运行的基本命令如下👇
 
-```
+```plain
 # 下载代码
 git clone https://github.com/bosnzt/wordscheck.git
   
@@ -74,7 +75,7 @@ docker run -d \
 
 本地端口不冲突就行，不确定的话可以用命令查一下
 
-```
+```plain
 # 查看端口占用
 netstat -tunlp | grep 端口号
 ```
@@ -95,7 +96,7 @@ netstat -tunlp | grep 端口号
 
 如果你熟悉命令行，可能用 `docker cli` 更快捷
 
-```
+```plain
 # 运行容器
 docker run -d \
    --restart unless-stopped \
@@ -106,7 +107,7 @@ docker run -d \
 
 也可以用 `docker-compose` 安装，将下面的内容保存为 `docker-compose.yml` 文件
 
-```
+```plain
 version: '3'
 
 services:
@@ -120,7 +121,7 @@ services:
 
 然后执行下面的命令
 
-```
+```plain
 # 新建文件夹 wordscheck
 mkdir -p /volume1/docker/wordscheck
 
@@ -141,7 +142,7 @@ docker-compose up -d
 
 但是如果你直接在浏览器中输入 `http://群晖IP:8187` ，会看到下面的错误
 
-```
+```plain
 404 page not found
 ```
 
@@ -149,13 +150,13 @@ docker-compose up -d
 
 需要通过 `curl` 来验证，用 `SSH` 客户端登录到群晖后，在命令行执行
 
-```
+```plain
 curl http://192.168.0.197:8187/health
 ```
 
 如果状态正常，会返回
 
-```
+```plain
 {"code":"0"}
 ```
 
@@ -163,7 +164,7 @@ curl http://192.168.0.197:8187/health
 
 测试下敏感词服务
 
-```
+```plain
 curl -H "Accept: application/json" \
      -H "Content-type: application/json" \
      -X POST \
@@ -175,7 +176,7 @@ curl -H "Accept: application/json" \
 
 在输出格式化之后是👇下面这样的
 
-```
+```plain
 {  
     "code":"0",  
     "msg":"检测成功",  
@@ -202,10 +203,11 @@ curl -H "Accept: application/json" \
 
 # 参考文档
 
-> bosnzt/wordscheck: 敏感词检测，违禁词过滤，敏感词过滤，敏感词库，一键启动，本地运行，私有化部署，1分钟接入完成，支持docker，支持在线api
-> 地址：https://github.com/bosnzt/wordscheck
+> bosnzt/wordscheck: 敏感词检测，违禁词过滤，敏感词过滤，敏感词库，一键启动，本地运行，私有化部署，1 分钟接入完成，支持
+> docker，支持在线 api
+> 地址：<https://github.com/bosnzt/wordscheck>
 >
-> 介绍 - Powered by MinDoc 地址：https://doc.wordscheck.com/docs/docs
+> 介绍 - Powered by MinDoc 地址：<https://doc.wordscheck.com/docs/docs>
 >
 > 文本识别_智能鉴黄_敏感词过滤_涉政检测_在线体验_wordscheck
-> 地址：https://www.wordscheck.com/
+> 地址：<https://www.wordscheck.com/>

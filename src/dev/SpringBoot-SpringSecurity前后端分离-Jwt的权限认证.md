@@ -1,6 +1,7 @@
 ---
 author: xlc520
 title: SpringBoot-SpringSecurity前后端分离-Jwt的权限认证
+excerpt: 
 description: 
 date: 2022-02-13
 category: Java
@@ -10,24 +11,27 @@ timeline: true
 icon: type
 ---
 
-# SpringBoot-SpringSecurity前后端分离-Jwt的权限认证
+# SpringBoot-SpringSecurity 前后端分离-Jwt 的权限认证
 
 ## 前言
 
-一般来说，我们用SpringSecurity默认的话是前后端整在一起的，比如thymeleaf或者Freemarker，SpringSecurity还自带login登录页,还让你配置登出页,错误页。
-但是现在前后端分离才是正道，前后端分离的话，那就需要将返回的页面换成Json格式交给前端处理了
+一般来说，我们用 SpringSecurity 默认的话是前后端整在一起的，比如 thymeleaf 或者 Freemarker，SpringSecurity 还自带 login
+登录页,还让你配置登出页,错误页。
+但是现在前后端分离才是正道，前后端分离的话，那就需要将返回的页面换成 Json 格式交给前端处理了
 
-SpringSecurity默认的是采用Session来判断请求的用户是否登录的，但是不方便分布式的扩展，虽然SpringSecurity也支持采用SpringSession来管理分布式下的用户状态，不过现在分布式的还是无状态的Jwt比较主流。 所以下面说下怎么让SpringSecurity变成前后端分离，采用Jwt来做认证的
+SpringSecurity 默认的是采用 Session 来判断请求的用户是否登录的，但是不方便分布式的扩展，虽然 SpringSecurity 也支持采用
+SpringSession 来管理分布式下的用户状态，不过现在分布式的还是无状态的 Jwt 比较主流。 所以下面说下怎么让 SpringSecurity
+变成前后端分离，采用 Jwt 来做认证的
 
-## 一、五个handler一个filter两个User
+## 一、五个 handler 一个 filter 两个 User
 
-5个handler，分别是
+5 个 handler，分别是
 
-- 实现AuthenticationEntryPoint接口,当匿名请求需要登录的接口时,拦截处理
-- 实现AuthenticationSuccessHandler接口,当登录成功后,该处理类的方法被调用
-- 实现AuthenticationFailureHandler接口,当登录失败后,该处理类的方法被调用
-- 实现AccessDeniedHandler接口,当登录后,访问接口没有权限的时候,该处理类的方法被调用
-- 实现LogoutSuccessHandler接口,注销的时候调用
+- 实现 AuthenticationEntryPoint 接口,当匿名请求需要登录的接口时,拦截处理
+- 实现 AuthenticationSuccessHandler 接口,当登录成功后,该处理类的方法被调用
+- 实现 AuthenticationFailureHandler 接口,当登录失败后,该处理类的方法被调用
+- 实现 AccessDeniedHandler 接口,当登录后,访问接口没有权限的时候,该处理类的方法被调用
+- 实现 LogoutSuccessHandler 接口,注销的时候调用
 
 ### 1.1 AuthenticationEntryPoint
 
@@ -42,8 +46,8 @@ SpringSecurity默认的是采用Session来判断请求的用户是否登录的�
 public class CustomerAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-	    //设置response状态码，返回错误信息等
-	    ...
+     //设置response状态码，返回错误信息等
+     ...
         ResponseUtil.out(401, ResultUtil.failure(ErrorCodeConstants.REQUIRED_LOGIN_ERROR));
     }
 }
@@ -53,7 +57,7 @@ public class CustomerAuthenticationEntryPoint implements AuthenticationEntryPoin
 ### 1.2 AuthenticationSuccessHandler
 
 这里是我们输入的用户名和密码登录成功后，调用的方法
-简单的说就是获取用户信息，使用JWT生成token，然后返回token
+简单的说就是获取用户信息，使用 JWT 生成 token，然后返回 token
 
 ```java
 /**
@@ -67,7 +71,7 @@ public class CustomerAuthenticationSuccessHandler implements AuthenticationSucce
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-    	//简单的说就是获取当前用户，拿到用户名或者userId，创建token，返回
+     //简单的说就是获取当前用户，拿到用户名或者userId，创建token，返回
         log.info("登陆成功...");
         CustomerUserDetails principal = (CustomerUserDetails) authentication.getPrincipal();
         //颁发token
@@ -83,7 +87,7 @@ public class CustomerAuthenticationSuccessHandler implements AuthenticationSucce
 ### 1.3 AuthenticationFailureHandler
 
 有登陆成功就有登录失败
-登录失败的时候调用这个方法，可以在其中做登录错误限制或者其他操作，我这里直接就是设置响应头的状态码为401，返回
+登录失败的时候调用这个方法，可以在其中做登录错误限制或者其他操作，我这里直接就是设置响应头的状态码为 401，返回
 
 ```java
 /**
@@ -98,7 +102,7 @@ public class CustomerAuthenticationFailHandler implements AuthenticationFailureH
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
     //设置response状态码，返回错误信息等
-    	....
+     ....
         ResponseUtil.out(401, ResultUtil.failure(ErrorCodeConstants.LOGIN_UNMATCH_ERROR));
     }
 
@@ -108,9 +112,10 @@ public class CustomerAuthenticationFailHandler implements AuthenticationFailureH
 
 ### 1.4 LogoutSuccessHandler
 
-登出注销的时候调用，Jwt有个缺点就是无法主动控制失效，可以采用Jwt+session的方式，比如删除存储在Redis的token
+登出注销的时候调用，Jwt 有个缺点就是无法主动控制失效，可以采用 Jwt+session 的方式，比如删除存储在 Redis 的 token
 
-这里需要注意，如果将SpringSecurity的session配置为无状态，或者不保存session，这里authentication为null！！ ，注意空指针问题。（详情见下面的配置WebSecurityConfigurerAdapter）
+这里需要注意，如果将 SpringSecurity 的 session 配置为无状态，或者不保存 session，这里 authentication 为 null！！
+，注意空指针问题。（详情见下面的配置 WebSecurityConfigurerAdapter）
 
 ```java
 /**
@@ -149,19 +154,22 @@ public class CustomerRestAccessDeniedHandler implements AccessDeniedHandler {
 
 ```
 
-### 1.6 一个过滤器OncePerRequestFilter
+### 1.6 一个过滤器 OncePerRequestFilter
 
 这里算是一个小重点。
-上面我们在登录成功后，返回了一个token，那怎么使用这个token呢？
+上面我们在登录成功后，返回了一个 token，那怎么使用这个 token 呢？
 
-前端发起请求的时候将token放在请求头中，在过滤器中对请求头进行解析。
+前端发起请求的时候将 token 放在请求头中，在过滤器中对请求头进行解析。
 
-1. 如果有accessToken的请求头（可以自已定义名字），取出token，解析token，解析成功说明token正确，将解析出来的用户信息放到SpringSecurity的上下文中
-2. 如果有accessToken的请求头，解析token失败（无效token，或者过期失效），取不到用户信息，放行
-3. 没有accessToken的请求头，放行
+1. 如果有 accessToken 的请求头（可以自已定义名字），取出 token，解析 token，解析成功说明 token 正确，将解析出来的用户信息放到
+   SpringSecurity 的上下文中
+2. 如果有 accessToken 的请求头，解析 token 失败（无效 token，或者过期失效），取不到用户信息，放行
+3. 没有 accessToken 的请求头，放行
 
-这里可能有人会疑惑，为什么token失效都要放行呢？
-这是因为SpringSecurity会自己去做登录的认证和权限的校验，靠的就是我们放在SpringSecurity上下文中的`SecurityContextHolder.getContext().setAuthentication(authentication);`，没有拿到`authentication`，放行了，SpringSecurity还是会走到认证和校验，这个时候就会发现没有登录没有权限。
+这里可能有人会疑惑，为什么 token 失效都要放行呢？
+这是因为 SpringSecurity 会自己去做登录的认证和权限的校验，靠的就是我们放在 SpringSecurity
+上下文中的`SecurityContextHolder.getContext().setAuthentication(authentication);`，没有拿到`authentication`
+，放行了，SpringSecurity 还是会走到认证和校验，这个时候就会发现没有登录没有权限。
 
 > 旧版本, 最新在底部
 
@@ -200,10 +208,10 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         
-    	//请求头为 accessToken
-    	//请求体为 Bearer token
+     //请求头为 accessToken
+     //请求体为 Bearer token
 
-    	String authHeader = request.getHeader(SecurityConstants.HEADER);
+     String authHeader = request.getHeader(SecurityConstants.HEADER);
 
         if (authHeader != null && authHeader.startsWith(SecurityConstants.TOKEN_SPLIT)) {
 
@@ -225,11 +233,12 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 ```
 
-### 1.7 实现UserDetails扩充字段
+### 1.7 实现 UserDetails 扩充字段
 
-这个接口表示的用户信息，SpringSecurity默认实现了一个User，不过字段寥寥无几，只有username，password这些，而且后面获取用户信息的时候也是获取的UserDetail。
+这个接口表示的用户信息，SpringSecurity 默认实现了一个 User，不过字段寥寥无几，只有 username，password 这些，而且后面获取用户信息的时候也是获取的
+UserDetail。
 
-于是我们将自己的数据库的User作为拓展，自己实现这个接口。**继承的是数据库对应的User，而不是SpringSecurity的User**
+于是我们将自己的数据库的 User 作为拓展，自己实现这个接口。**继承的是数据库对应的 User，而不是 SpringSecurity 的 User**
 
 ```java
 package com.zgd.shop.web.config.auth.user;
@@ -311,9 +320,10 @@ public class CustomerUserDetails extends User implements UserDetails {
 
 ```
 
-### 1.8 实现UserDetailsService
+### 1.8 实现 UserDetailsService
 
-SpringSecurity在登录的时候，回去数据库（或其他来源），根据username获取正确的user信息，就会根据这个service类，拿到用户的信息和权限。我们自己实现
+SpringSecurity 在登录的时候，回去数据库（或其他来源），根据 username 获取正确的 user 信息，就会根据这个 service
+类，拿到用户的信息和权限。我们自己实现
 
 ```java
 import com.alibaba.fastjson.JSON;
@@ -506,17 +516,18 @@ public class ResponseUtil {
 }
 ```
 
-## 二、配置WebSecurityConfigurerAdapter
+## 二、配置 WebSecurityConfigurerAdapter
 
-我们需要将上面定义的handler和filter，注册到SpringSecurity。同时配置一些放行的url
+我们需要将上面定义的 handler 和 filter，注册到 SpringSecurity。同时配置一些放行的 url
 
-**这里有一点需要注意：如果配置了下面的SessionCreationPolicy.STATELESS**，则SpringSecurity不会保存session会话，在`/logout`登出的时候会拿不到用户实体对象。
+**这里有一点需要注意：如果配置了下面的 SessionCreationPolicy.STATELESS**，则 SpringSecurity 不会保存 session
+会话，在`/logout`登出的时候会拿不到用户实体对象。
 
-```
+```plain
 http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 ```
 
-如果登出注销不依赖SpringSecurity，并且session交给redis的token来管理的话，可以按上面的配置。
+如果登出注销不依赖 SpringSecurity，并且 session 交给 redis 的 token 来管理的话，可以按上面的配置。
 
 ```java
 package com.zgd.shop.web.config;
@@ -591,9 +602,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     /**
      * antMatchers: ant的通配符规则
-     * ?	匹配任何单字符
-     * *	匹配0或者任意数量的字符，不包含"/"
-     * **	匹配0或者更多的目录，包含"/"
+     * ? 匹配任何单字符
+     * * 匹配0或者任意数量的字符，不包含"/"
+     * ** 匹配0或者更多的目录，包含"/"
      */
     http
             .headers()
@@ -650,43 +661,51 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 三、其他
 
-大概到这就差不多了，启动，localhost:8080/login，使用postman，采用form-data，post提交，参数是username和password，调用，返回token。
+大概到这就差不多了，启动，localhost:8080/login，使用 postman，采用 form-data，post 提交，参数是 username 和 password，调用，返回
+token。
 
-将token放在header中，请求接口。ok
+将 token 放在 header 中，请求接口。ok
 
 ### 3.1 不足之处
 
 上面是最简单的处理，还有很多优化的地方。比如
 
-1. 控制token销毁？
-   使用redis+token组合，不仅解析token，还判断redis是否有这个token。注销和主动失效token：删除redis的key
-2. 控制token过期时间？如果用户在token过期前1秒还在操作，下1秒就需要重新登录，肯定不好
-   1、考虑加入refreshToken，过期时间比token长，前端在拿到token的同时获取过期时间，在过期前一分钟用refreshToken调用refresh接口，重新获取新的token。
-   2、 将返回的jwtToken设置短一点的过期时间，redis再存这个token，过期时间设置长一点。如果请求过来token过期，查询redis，如果redis还存在，返回新的token。（为什么redis的过期时间大于token的？因为redis的过期是可控的，手动可删除，以redis的为准）
-3. 每次请求都会被`OncePerRequestFilter` 拦截，每次都会被`UserDetailService`中的获取用户数据请求数据库，可以考虑做缓存，还是用redis或者直接保存内存中
+1. 控制 token 销毁？
+   使用 redis+token 组合，不仅解析 token，还判断 redis 是否有这个 token。注销和主动失效 token：删除 redis 的 key
+2. 控制 token 过期时间？如果用户在 token 过期前 1 秒还在操作，下 1 秒就需要重新登录，肯定不好
+   1、考虑加入 refreshToken，过期时间比 token 长，前端在拿到 token 的同时获取过期时间，在过期前一分钟用 refreshToken 调用
+   refresh 接口，重新获取新的 token。
+   2、 将返回的 jwtToken 设置短一点的过期时间，redis 再存这个 token，过期时间设置长一点。如果请求过来 token 过期，查询
+   redis，如果 redis 还存在，返回新的 token。（为什么 redis 的过期时间大于 token 的？因为 redis 的过期是可控的，手动可删除，以
+   redis 的为准）
+3. 每次请求都会被`OncePerRequestFilter` 拦截，每次都会被`UserDetailService`中的获取用户数据请求数据库，可以考虑做缓存，还是用
+   redis 或者直接保存内存中
 
 ### 3.2 解决
 
 > 更新 2019-07-19
 
-这是针对上面的2.2说的，也就是redis时间久一点，jwt过期后如果redis没过期，颁发新的jwt。
-不过更推荐的是**前端判断过期时间，在过期之前调用refresh接口拿到新的jwt**。
+这是针对上面的 2.2 说的，也就是 redis 时间久一点，jwt 过期后如果 redis 没过期，颁发新的 jwt。
+不过更推荐的是**前端判断过期时间，在过期之前调用 refresh 接口拿到新的 jwt**。
 
 为什么这样？
-如果redis过期时间是一周，jwt是一个小时，那么一个小时后，拿着这个过期的jwt去调，就可以想创建多少个新的jwt就创建，只要没过redis的过期时间。 当然这是在没对过期的jwt做限制的情况下，如果要考虑做限制，比如对redis的value加一个字段，保存当前jwt，刷新后就用新的jwt覆盖，refresh接口判断当前的过期jwt是不是和redis这个一样。
+如果 redis 过期时间是一周，jwt 是一个小时，那么一个小时后，拿着这个过期的 jwt 去调，就可以想创建多少个新的 jwt 就创建，只要没过
+redis 的过期时间。 当然这是在没对过期的 jwt 做限制的情况下，如果要考虑做限制，比如对 redis 的 value 加一个字段，保存当前
+jwt，刷新后就用新的 jwt 覆盖，refresh 接口判断当前的过期 jwt 是不是和 redis 这个一样。
 
-总之还需要判断刷新token的时候，过期jwt是否合法的问题。总不能去年的过期token也拿来刷新吧。
-而在过期前去刷新token的话，至少不会发生这种事情
+总之还需要判断刷新 token 的时候，过期 jwt 是否合法的问题。总不能去年的过期 token 也拿来刷新吧。
+而在过期前去刷新 token 的话，至少不会发生这种事情
 
-不过我这里自己写demo，采用的还是2.2的方式，也就是过期后给个新的，思路如下：
+不过我这里自己写 demo，采用的还是 2.2 的方式，也就是过期后给个新的，思路如下：
 
-1. 登录后颁发token，token有个时间戳，同时以username拼装作为key，保存这个时间戳到缓存（redis，cache）
-2. 请求来了，过滤器解析token，没过期的话，还需要比较缓存中的时间戳和token的时间戳是不是一样 ，如果时间戳不一样，说明该token不能刷新。无视
+1. 登录后颁发 token，token 有个时间戳，同时以 username 拼装作为 key，保存这个时间戳到缓存（redis，cache）
+2. 请求来了，过滤器解析 token，没过期的话，还需要比较缓存中的时间戳和 token 的时间戳是不是一样 ，如果时间戳不一样，说明该
+   token 不能刷新。无视
 3. 注销，清除缓存数据
 
-这样就可以避免token过期后，我还能拿到这个token无限制的refresh。
+这样就可以避免 token 过期后，我还能拿到这个 token 无限制的 refresh。
 
-不过这个还是有细节方面问题，并发下同时刷新token这些并没有考虑，部分代码如下
+不过这个还是有细节方面问题，并发下同时刷新 token 这些并没有考虑，部分代码如下
 
 > 旧版本, 最新在底部
 
@@ -733,10 +752,10 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         
-    	//请求头为 accessToken
-    	//请求体为 Bearer token
+     //请求头为 accessToken
+     //请求体为 Bearer token
 
-    	String authHeader = request.getHeader(SecurityConstants.HEADER);
+     String authHeader = request.getHeader(SecurityConstants.HEADER);
 
         if (authHeader != null && authHeader.startsWith(SecurityConstants.TOKEN_SPLIT)) {
 
@@ -854,11 +873,13 @@ public class UserTokenManager {
 
 > 2019-09-30
 
-针对token解析的过滤器做了优化:
+针对 token 解析的过滤器做了优化:
 
-1. 如果redis的session没过期, 但是请求头的token过期了, 判断时间戳一致后, 颁发新token并返回
-2. 如果redis的session没过期, 但是请求头的token过期了, 时间戳不一致, 说明当前请求的token无法刷新token, 设置响应码为401返回
-3. 如果请求头的token过期了, 但是redis的session失效或未找到, 直接放行, 交给后面的权限校验处理(也就是没有给上下文`SecurityContextHolder`设置登录信息, 后面如果判断这个请求缺少权限会自行处理)
+1. 如果 redis 的 session 没过期, 但是请求头的 token 过期了, 判断时间戳一致后, 颁发新 token 并返回
+2. 如果 redis 的 session 没过期, 但是请求头的 token 过期了, 时间戳不一致, 说明当前请求的 token 无法刷新 token, 设置响应码为
+   401 返回
+3. 如果请求头的 token 过期了, 但是 redis 的 session 失效或未找到, 直接放行, 交给后面的权限校验处理(
+   也就是没有给上下文`SecurityContextHolder`设置登录信息, 后面如果判断这个请求缺少权限会自行处理)
 
 ```java
 package com.zgd.shop.web.auth.filter;
@@ -907,10 +928,10 @@ public class CustomerJwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         
-    	//请求头为 accessToken
-    	//请求体为 Bearer token
+     //请求头为 accessToken
+     //请求体为 Bearer token
 
-    	String authHeader = request.getHeader(SecurityConstants.HEADER);
+     String authHeader = request.getHeader(SecurityConstants.HEADER);
 
         if (authHeader != null && authHeader.startsWith(SecurityConstants.TOKEN_SPLIT)) {
             //请求头有token
