@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Logback 配置文件优化
 
 **01、通过阅读本篇文章将了解到**
@@ -22,7 +20,11 @@ icon: java
 
 ### 02、配置文件logback-spring.xml
 
-`SpringBoot`工程自带`logback`和`slf4j`的依赖，所以重点放在编写配置文件上，需要引入什么依赖，日志依赖冲突统统都不需要我们管了。`logback`框架会默认加载`classpath`下命名为`logback-spring`或`logback`的配置文件。将所有日志都存储在一个文件中文件大小也随着应用的运行越来越大并且不好排查问题，正确的做法应该是将`error`日志和其他日志分开，并且不同级别的日志根据时间段进行记录存储。
+`SpringBoot`工程自带`logback`和`slf4j`
+的依赖，所以重点放在编写配置文件上，需要引入什么依赖，日志依赖冲突统统都不需要我们管了。`logback`框架会默认加载`classpath`
+下命名为`logback-spring`或`logback`
+的配置文件。将所有日志都存储在一个文件中文件大小也随着应用的运行越来越大并且不好排查问题，正确的做法应该是将`error`
+日志和其他日志分开，并且不同级别的日志根据时间段进行记录存储。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -95,11 +97,12 @@ icon: java
 
 - `<fileNamePattern>`标签指定生成日志保存地址 通过这样配置已经实现了分类分天手机日志的目标了
 
-![图片](https://static.xlc520.tk/blogImage/640-16556915204025.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204025.jpeg)
 
 ### 03、logback 高级特性异步输出日志
 
-之前的日志配置方式是基于同步的，每次日志输出到文件都会进行一次磁盘IO。采用异步写日志的方式而不让此次写日志发生磁盘IO，阻塞线程从而造成不必要的性能损耗。异步输出日志的方式很简单，添加一个基于异步写日志的`appender`，并指向原先配置的`appender`即可
+之前的日志配置方式是基于同步的，每次日志输出到文件都会进行一次磁盘IO。采用异步写日志的方式而不让此次写日志发生磁盘IO，阻塞线程从而造成不必要的性能损耗。异步输出日志的方式很简单，添加一个基于异步写日志的`appender`
+，并指向原先配置的`appender`即可
 
 ```xml
  <!-- 异步输出 -->
@@ -141,7 +144,7 @@ icon: java
 - `Ramp-Up Loop`(可以理解为启动线程所用时间) ：0 可以理解为100个线程同时启用
 - 测试结果
 
-![图片](https://static.xlc520.tk/blogImage/640-16556915204021.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204021.png)
 
 重点关注指标 Throughput【TPS】 吞吐量：系统在单位时间内处理请求的数量，在同步输出日志中 TPS 为 44.2/sec
 
@@ -151,7 +154,7 @@ icon: java
 - `Ramp-Up Loop`：0
 - 测试结果
 
-![图片](https://static.xlc520.tk/blogImage/640-16556915204022.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204022.png)
 
 TPS 为 497.5/sec ， 性能提升了10多倍！！！
 
@@ -159,7 +162,7 @@ TPS 为 497.5/sec ， 性能提升了10多倍！！！
 
 从`logback`框架下的`Logger.info`方法开始追踪。一路的方法调用路径如下图所示：
 
-![图片](https://static.xlc520.tk/blogImage/640-16556915204023.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204023.png)
 
 异步输出日志中最关键的就是配置文件中`ch.qos.logback.classic``AsyncAppenderBase``append`
 
@@ -175,16 +178,20 @@ protected void append(E eventObject) {
     }
 ```
 
-通过队列情况判断是否需要丢弃日志，不丢弃的话将它放到阻塞队列中，通过查看代码，这个阻塞队列为`ArrayBlockingQueueu`，默认大小为256，可以通过配置文件进行修改。`Logger.info(...)`到`append(...)`就结束了，只做了将日志塞入到阻塞队列的事，然后继续执行`Logger.info(...)`下面的语句了。在`AsyncAppenderBase`类中定义了一个`Worker`线程，`run`方法中的关键部分代码如下:
+通过队列情况判断是否需要丢弃日志，不丢弃的话将它放到阻塞队列中，通过查看代码，这个阻塞队列为`ArrayBlockingQueueu`
+，默认大小为256，可以通过配置文件进行修改。`Logger.info(...)`到`append(...)`
+就结束了，只做了将日志塞入到阻塞队列的事，然后继续执行`Logger.info(...)`下面的语句了。在`AsyncAppenderBase`
+类中定义了一个`Worker`线程，`run`方法中的关键部分代码如下:
 
 ```
 E e = parent.blockingQueue.take();
 aai.appendLoopOnAppenders(e);
 ```
 
-从阻塞队列中取出一个日志，并调用`AppenderAttachableImpl`类中的`appendLoopOnAppenders`方法维护一个`Append`列表。`Worker`线程中调用方法过程主要如下图：
+从阻塞队列中取出一个日志，并调用`AppenderAttachableImpl`类中的`appendLoopOnAppenders`方法维护一个`Append`列表。`Worker`
+线程中调用方法过程主要如下图：
 
-![图片](https://static.xlc520.tk/blogImage/640-16556915204024.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16556915204024.png)
 
 最主要的两个方法就是`encode``write``encode`
 

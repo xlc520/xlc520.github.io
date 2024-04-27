@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Spring Boot 企业规范
 
 ```
@@ -27,11 +25,11 @@ Spring Boot 是一种广泛使用且非常流行的企业级高性能框架。�
 
 ##### 基于类型
 
-![图片](https://static.xlc520.tk/blogImage/640-1700667020609-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700667020609-0.png)
 
 ##### **基于功能模块**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446082-1.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446082-1.png)
 
 ### **2、使用设计模式**
 
@@ -43,7 +41,8 @@ Spring Boot 是一种广泛使用且非常流行的企业级高性能框架。�
 
 我们可以非常轻松地使用启动器依赖项，而无需一一添加单个依赖项。这些入门依赖项已与所需的依赖项捆绑在一起。
 
-例如，如果我们添加 spring-boot-starter-web 依赖项，默认情况下它会与 jackson、spring-core、spring-mvc 和 spring-boot-starter-tomcat 依赖项捆绑在一起。
+例如，如果我们添加 spring-boot-starter-web 依赖项，默认情况下它会与 jackson、spring-core、spring-mvc 和
+spring-boot-starter-tomcat 依赖项捆绑在一起。
 
 所以我们不需要关心单独添加依赖项。
 
@@ -57,7 +56,7 @@ Spring Boot 是一种广泛使用且非常流行的企业级高性能框架。�
 
 不要使用同一包的不同版本，如果存在多个依赖项，请始终使用`<properties>`指定版本。
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-2.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-2.png)
 
 ### **5、使用 Lombok**
 
@@ -78,11 +77,9 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 👉点击查看：Java成神之路-进阶架构视频！
 ```
 
-
-
 ### **6、将构造函数注入与 Lombok 一起使用**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-3.png)
 
 当我们谈论依赖注入时，有两种类型。
 
@@ -98,7 +95,7 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 
 ### **7、使用 slf4j 日志**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-4.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-4.png)
 
 - 日志记录非常重要。
 - 如果我们的应用程序在生产过程中出现问题，日志记录是找出根本原因的唯一方法。
@@ -111,7 +108,7 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 
 ### **8、控制器仅用于路由**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-5.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-5.png)
 
 - 控制器专用于路由。
 - 它是无状态且单身的。
@@ -127,7 +124,7 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 
 ### **10、避免空指针异常**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-6.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-6.png)
 
 - 为了避免 NullPointerException，我们可以使用 java.util 包中的 Optional。
 - 我们还可以使用空安全库。例如：Apache Commons StringUtils
@@ -142,11 +139,12 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 - 使用接口类型而不是实现。
 - 使用 isEmpty() 而不是 size() 以获得更好的可读性。
 - 不返回空值，可以返回空集合。
-- 如果我们使用对象作为要存储在基于哈希的集合中的数据，则应重写 equals() 和 hashCode() 方法。请查看这篇文章“HashMap 内部是如何工作的”。
+- 如果我们使用对象作为要存储在基于哈希的集合中的数据，则应重写 equals() 和 hashCode() 方法。请查看这篇文章“HashMap
+  内部是如何工作的”。
 
 ### **12、使用分页**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-7.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-7.png)
 
 这将提高应用程序的性能。
 
@@ -156,7 +154,8 @@ Lombok 是一个 Java 库，可用于减少代码并允许我们使用其注释�
 
 在谈论应用程序性能时，缓存是另一个重要因素。
 
-默认情况下，Spring Boot 通过 ConcurrentHashMap 提供缓存，我们可以通过 @EnableCaching 注解来实现这一点。如果我们对默认缓存不满意，可以使用 Redis、Hazelcast 或任何其他分布式缓存实现。
+默认情况下，Spring Boot 通过 ConcurrentHashMap 提供缓存，我们可以通过 @EnableCaching 注解来实现这一点。如果我们对默认缓存不满意，可以使用
+Redis、Hazelcast 或任何其他分布式缓存实现。
 
 Redis 和 Hazelcast 是内存缓存方法。我们还可以使用数据库缓存实现。
 
@@ -169,14 +168,14 @@ Redis 和 Hazelcast 是内存缓存方法。我们还可以使用数据库缓存
 
 ### **15、使用自定义响应对象**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446083-8.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446083-8.png)
 
 - 自定义响应对象可用于返回包含某些特定数据的对象，并满足 HTTP 状态代码、API 代码、消息等要求。
 - 我们可以使用构建器设计模式来创建具有自定义属性的自定义响应对象。
 
 ### **16、删除不必要的代码、变量、方法和类。**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446084-9.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446084-9.png)
 
 - 未使用的变量声明将占用一些内存。
 - 删除未使用的方法、类等，因为它会影响应用程序的性能。
@@ -191,7 +190,7 @@ Redis 和 Hazelcast 是内存缓存方法。我们还可以使用数据库缓存
 
 ### **18、对类、方法、函数、变量和其他属性使用有意义的词语。**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446084-10.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446084-10.png)
 
 - 这看起来很简单，但影响却是巨大的。
 
@@ -205,11 +204,9 @@ Redis 和 Hazelcast 是内存缓存方法。我们还可以使用数据库缓存
 
 - 如果我们有意义地使用此功能，则可以减少声明注释行。由于它具有有意义的名称，新开发人员可以通过阅读代码轻松理解。
 
-  
-
 ### **19、使用正确的大小写进行声明**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446084-11.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446084-11.png)
 
 有许多不同的大小写，如大写、小写、驼峰命名、帕斯卡命名、蛇命名、大蛇式命名、短横线命名等。
 
@@ -233,7 +230,7 @@ Redis 和 Hazelcast 是内存缓存方法。我们还可以使用数据库缓存
 
 ### **21、使用通用的代码格式样式**
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829446084-12.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829446084-12.png)
 
 - 格式样式因开发人员而异。编码风格的改变也被认为是一种改变，并且会使代码合并变得非常困难。
 - 为了避免这种情况，团队可以采用通用的编码格式。

@@ -10,25 +10,18 @@ timeline: true
 icon: linux
 ---
 
-
-
 # Linux无论怎么设置开机启动级别为图形化启动（级别5），启动后却没有进入图形化界面，一直进入命令行模式，如何解决？
 
 环境：CentOS 7.3
 
 **现象简单描述**：
 
-偶然遇到一个系统每次开机启动都默认进入了命令行模式，每次开机都需要输入startx或者init 5进入图形化界面。启动期间没有报错项，唯一就是启动级别明明是runlevel5，但是进入的却是runlevel3。
+偶然遇到一个系统每次开机启动都默认进入了命令行模式，每次开机都需要输入startx或者init
+5进入图形化界面。启动期间没有报错项，唯一就是启动级别明明是runlevel5，但是进入的却是runlevel3。
 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-8a79263cd27fc8794234052614fad7ed_r.jpg)
 
-
-![img](https://static.xlc520.tk/blogImage/v2-8a79263cd27fc8794234052614fad7ed_r.jpg)
-
-
-
-![img](https://static.xlc520.tk/blogImage/v2-b003e2e88a990f28d34b632cfc633b3e_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-b003e2e88a990f28d34b632cfc633b3e_r.jpg)
 
 **startx与init 5区别**
 
@@ -41,19 +34,19 @@ icon: linux
 
 > systemctl get-default
 
-![img](https://static.xlc520.tk/blogImage/v2-a3040b761b076098bb9b688bfb835f69_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-a3040b761b076098bb9b688bfb835f69_r.jpg)
 
 再查看软链接目录下是否有误：
 
 > ls -al /etc/systemd/system/
 
-![img](https://static.xlc520.tk/blogImage/v2-2e028bdf7ea4e0697861d4f096b272aa_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-2e028bdf7ea4e0697861d4f096b272aa_r.jpg)
 
 2、排查开机启动项
 
 > cat /etc/rc.d/rc.local
 
-![img](https://static.xlc520.tk/blogImage/v2-822cc5cdeec7d67cb8e2d16fb7284cbf_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-822cc5cdeec7d67cb8e2d16fb7284cbf_r.jpg)
 
 并无有关设置启动级别的条目，这里大家也不要试了，这里我试过将startx加入到这里开机运行，结果开机直接卡在了桌面，进不去。和这里应该是没有关系的。
 
@@ -63,49 +56,40 @@ icon: linux
 
 > cat /boot/grub2/grub.cfg
 
-![img](https://static.xlc520.tk/blogImage/v2-3ffc729159af0dbbfb2d5f9ab59e9996_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-3ffc729159af0dbbfb2d5f9ab59e9996_r.jpg)
 
-
-
-**成功实现了不管如何设置启动级别，系统都 默认启动的级别都是这里设置的内容**。这样的话，我们可以联想一下，即使遇到了这样的情况，我们可以直**接在这里指定启动级别，就可以简单解决眼下的问题**。
-
-
+**成功实现了不管如何设置启动级别，系统都 默认启动的级别都是这里设置的内容**。这样的话，我们可以联想一下，即使遇到了这样的情况，我们可以直
+**接在这里指定启动级别，就可以简单解决眼下的问题**。
 
 Linux无论怎么设置开机启动级别为命令行模式（级别3），启动后却没有进入命令行模式，一直进入图形化启动这个问题也是和此类似。
 
-
-
 4、**可以排查其他开机自启项目**，可能有某个服务包含了设置启动级别的配置文件，这个大家可以继续往下研究是否有这样的服务可做到。
 
-**这里我在虚拟机里有做过测试，已确定是由哪一个服务也可以导致该现象的发生**：该服务名为**gdm**与**display-manager**。下面简单介绍下：
+**这里我在虚拟机里有做过测试，已确定是由哪一个服务也可以导致该现象的发生**：该服务名为**gdm**与**display-manager**
+。下面简单介绍下：
 
 关于gdm引用一段从别的地方摘抄的话：
 
-GDM (The GNOME Display Manager)是GNOME显示环境的管理器，并被用来替代原来的X Display Manager。与其竞争者(X3DM,KDM,WDM)不同，GDM是完全重写的，并不包含任何XDM的代码。GDM可以运行并管理本地和远程登录的X服务器(通过XDMCP)。gdm仅仅是一个脚本，实际上是通过他来运行GDM二进制可执行文件。gdm-stop是用来迅速终止当前正在运行的gdm守护进程的一个脚本。gdm-restart脚本将迅速重启当前守护进程。然而gdm-safe-restart会当所有人都注销后再重启。gdmsetup是一种可以很简单的修改多数常用选项的图形化界面工具。GNOME的帮助里有更完整的文档，在“应用程序”/“系统工具”这一章节。
+GDM (The GNOME Display Manager)是GNOME显示环境的管理器，并被用来替代原来的X Display Manager。与其竞争者(X3DM,KDM,WDM)
+不同，GDM是完全重写的，并不包含任何XDM的代码。GDM可以运行并管理本地和远程登录的X服务器(通过XDMCP)
+。gdm仅仅是一个脚本，实际上是通过他来运行GDM二进制可执行文件。gdm-stop是用来迅速终止当前正在运行的gdm守护进程的一个脚本。gdm-restart脚本将迅速重启当前守护进程。然而gdm-safe-restart会当所有人都注销后再重启。gdmsetup是一种可以很简单的修改多数常用选项的图形化界面工具。GNOME的帮助里有更完整的文档，在“应用程序”/“系统工具”这一章节。
 
 简单的说，就是gdm是关于桌面显示的关键部分，可用于管理用户登录这些方面的内容
 
-
-
 下面我们直接测试该服务如果设置开机不自启动，会产生什么样的现象：
 
-![img](https://static.xlc520.tk/blogImage/v2-b04965446234d2582cac0f0babb1dbe6_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-b04965446234d2582cac0f0babb1dbe6_r.jpg)
 
-![img](https://static.xlc520.tk/blogImage/v2-a13c66244680f02646ec57bc32d89455_r.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-a13c66244680f02646ec57bc32d89455_r.jpg)
 
-**重启后进入了命令行模式，也实现了无论如何设置开机启动级别，但是开机依然进入了命令行。这个时候你就要注意看看是不是这个服务被设置成开机不自启动了**。
-
-
+**重启后进入了命令行模式，也实现了无论如何设置开机启动级别，但是开机依然进入了命令行。这个时候你就要注意看看是不是这个服务被设置成开机不自启动了
+**。
 
 另外，我们如果不小心把display-manager设置开机不自启动的话，其实也就是取消了gdm的自启。只是现象可能有点差异：下面我只是简单描述下：
 
 1）重启后会有一个卡住在检测那里，显示1min30s的读条，之后进去卡住，然后如果此时按一下Enter键，可以直接进入命令行模式；
 
-
-
 2）重启后直接进入了命令行，这两个现象是我在虚拟机里测试的结果，第一条暂时无法重现了，我就这么简单描述了。
-
-
 
 5、此外，当安装iBus输入法后，在卸载iBus后也会无法进入图形用户界面。这个原因就是ibus和gnome很多都是绑定在一起的，卸载ibus后会导致gdm服务的状态被改变，从而导致了故障的发生。解决办法就是把gdm设置开机自启重启即可。
 

@@ -16,13 +16,14 @@ icon: linux
 
 ### 1. 背景
 
-`Oracle` 作为全球最强大的关系型数据库，应用在各行各业。但是在 `Linux` 中安装 `Oracle` 非常麻烦，为了一次装好，也方便将来直接可以导出镜像在各平台移植使用，所以选择用 `Docker` 安装，并做详细记录，方便今后参考。
+`Oracle` 作为全球最强大的关系型数据库，应用在各行各业。但是在 `Linux` 中安装 `Oracle`
+非常麻烦，为了一次装好，也方便将来直接可以导出镜像在各平台移植使用，所以选择用 `Docker` 安装，并做详细记录，方便今后参考。
 
 ### 2. 安装
 
 #### 前期准备
 
- **Docker安装**
+**Docker安装**
 
 ```sh
 #升级yum
@@ -69,7 +70,7 @@ sudo systemctl restart docker
 
 安装成功界面
 
-![在这里插入图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
 #### 2.1. 环境准备
 
@@ -116,7 +117,7 @@ docker search oracle_11g
 
 `Oracle` 镜像文件比较大，请检查自己磁盘空间。此处用一个博主上传的镜像，来演示。
 
-![20220726155418](https://static.xlc520.tk/blogImage/55b32c05eba117fc562fc792bc4f4e48.png)
+![20220726155418](https://bitbucket.org/xlc520/blogasset/raw/main/images3/55b32c05eba117fc562fc792bc4f4e48.png)
 
 #### 2.3. 拉取镜像
 
@@ -132,7 +133,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
 mkdir -p /data/oracle10g
 ```
 
-![20220726160152](https://static.xlc520.tk/blogImage/e2f1c073cd96b5c22c9816a356040be3.png)
+![20220726160152](https://bitbucket.org/xlc520/blogasset/raw/main/images3/e2f1c073cd96b5c22c9816a356040be3.png)
 
 ### 3. 容器操作
 
@@ -159,18 +160,18 @@ docker exec -it oracle bash
 
 此时 `sqlplus` 是不可以用的，需要配置一下环境变量。
 
-![20220726163736](https://static.xlc520.tk/blogImage/9a34b3e6187fe82094f7098c412e6d04.png)
+![20220726163736](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9a34b3e6187fe82094f7098c412e6d04.png)
 
 切换回到容器中的 `root` 用户，密码为 `helowin` 。
 
 #### 3.3.1. 编辑环境变量
 
 优化冒泡排序和选择排序zip
-![img](https://static.xlc520.tk/blogImage/star.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/star.png)
 
 0星超过10%的资源595KB
 
-![img](https://static.xlc520.tk/blogImage/arrowDownWhite.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/arrowDownWhite.png)
 
 ```shell
 vi /etc/profile
@@ -209,7 +210,7 @@ sqlplus /nolog   --登录
 conn /as sysdba
 ```
 
-![20220726194234](https://static.xlc520.tk/blogImage/406b808f765627beab8bc6268aa7a23f.png)
+![20220726194234](https://bitbucket.org/xlc520/blogasset/raw/main/images3/406b808f765627beab8bc6268aa7a23f.png)
 
 #### 3.5. Oracle操作
 
@@ -221,9 +222,9 @@ alter user sys identified by sys ;--修改sys用户账号密码；
 ```
 
 冒泡排序和选择法排序的源代码
-![img](https://static.xlc520.tk/blogImage/star.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/star.png)
 
-![img](https://static.xlc520.tk/blogImage/arrowDownWhite.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/arrowDownWhite.png)
 
 #### 3.5.2. 添加和授权用户
 
@@ -240,7 +241,7 @@ alter system set processes=1000 scope=spfile; --修改数据库最大连接数�
 show parameter password
 ```
 
-![20220726194511](https://static.xlc520.tk/blogImage/9be1155ed596594ade6034c40f6aba5e.png)
+![20220726194511](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9be1155ed596594ade6034c40f6aba5e.png)
 
 #### 3.5.4. 检查用户
 
@@ -248,7 +249,7 @@ show parameter password
 select * from v$pwfile_users;
 ```
 
-![20220726194528](https://static.xlc520.tk/blogImage/8f47412dc3c4e984f0a9833d6af75204.png)
+![20220726194528](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8f47412dc3c4e984f0a9833d6af75204.png)
 
 #### 3.6. 重启服务
 
@@ -259,7 +260,7 @@ startup; --启动数据库
 show user;
 ```
 
-![20220726194844](https://static.xlc520.tk/blogImage/0fc4a051c1a40e4f9bbc034534553497.png)
+![20220726194844](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0fc4a051c1a40e4f9bbc034534553497.png)
 
 ### 4. 远程登录
 
@@ -269,11 +270,7 @@ show user;
 - User: test
 - PassWord：test
 
-![20220726194951](https://static.xlc520.tk/blogImage/90628c41e2934c62baf062d8cf60f3ed.png)
-
-
-
-
+![20220726194951](https://bitbucket.org/xlc520/blogasset/raw/main/images3/90628c41e2934c62baf062d8cf60f3ed.png)
 
 ## 通过Docker 安装Oracle12C
 
@@ -302,21 +299,21 @@ services:
 
 ```
 
-
-
 ## 通过Docker 安装 Oracle18c
 
 1、拉取 oracle18c 镜像
+
 ```sh
 docker pull registry.cn-hangzhou.aliyuncs.com/zhengqing/oracle18c
 ```
+
 2、运行
+
 ```sh
 docker run -d --name oracle18c -p 1521:1521 -v /IT_zhengqing/soft/db/oracle18c/data:/opt/oracle registry.cn-hangzhou.aliyuncs.com/zhengqing/oracle18c
 ```
+
 运行之后查看容器日志
-
-
 
 ## 通过Docker 安装 Oracle19c
 
@@ -357,7 +354,7 @@ services:
 docker pull registry.cn-hangzhou.aliyuncs.com/zhuyijun/oracle:19c
 ```
 
-![在这里插入图片描述](https://static.xlc520.tk/blogImage/2031bd4759e54c4c9dd4249ab2e29eee.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2031bd4759e54c4c9dd4249ab2e29eee.png)
 
 ### 第二步：创建挂载文件
 
@@ -436,7 +433,7 @@ docker-compose up -d
 docker logs -ft orcl19
 ```
 
-![在这里插入图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142541.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142541.png)
 
 > 注意：
 > 如果安装失败 ,执行以下命令
@@ -455,11 +452,11 @@ show pdbs;
 
 这样就可以了
 
-![在这里插入图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_16,color_FFFFFF,t_70,g_se,x_16.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_16,color_FFFFFF,t_70,g_se,x_16.png)
 
 还可以通过访问https://localhost:5502/em
 
-![img](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142552.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142552.png)
 
 ```
 username：sys
@@ -467,11 +464,9 @@ password：123456
 Container Name：ORCLPDB
 ```
 
-![在这里插入图片描述](https://static.xlc520.tk/blogImage/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142553.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images3/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56iL5bqP54y_55qEQ29kZeaXpeW4uA==,size_20,color_FFFFFF,t_70,g_se,x_16-16607879142553.png)
 
 **注意 ：是https，不是http**
-
-
 
 ## 关于Oracle12C默认用户名system密码不正确登录不上解决方案
 
@@ -479,7 +474,7 @@ Container Name：ORCLPDB
 
 1.使用sysdba账号 登陆后 可以修改其他账号密码
 
-运行 cmd 按如下输入命令 
+运行 cmd 按如下输入命令
 
 ```sql
 以sys登陆 超级用户（sysdba）

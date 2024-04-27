@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Docker搭建ELK日志分析系统
 
 ## 方法一
@@ -22,19 +20,17 @@ icon: java
 - Logstash
   用Ruby编写的，我们可以使用管道输入和输出数据到任何位置。一个可以抓取，转换，存储事件到ElasticSearch的ETL管道。打包版本在JRuby上运行，并使用几十个线程进行并行的数据处理，利用了JVM的线程功能。
 
-  
 
 - Kibana
   基于web的数据分析，为ElasticSearch仪表板的工具。充分利用ElasticSearch的搜索功能，以秒为单位可视化数据。支持Lucene的查询字符串的语法和Elasticsearch的过滤功能。
-
-
 
 ### 前提
 
 - 本文中架构基于docker搭建，需要您了解docker的基本概念，基本操作和docker1.9之后的自定义overlay网络
 
 > 本文只介绍了最简化搭建。如果您用于生产，还需要在如下方面完善
-> 1.elastic是有存储目录，需要在docker中进行数据卷映射。配置文件elasticsearch.yml需要根据自己需求自行配置。请参考：https://hub.docker.com/_/elasticsearch/
+>
+1.elastic是有存储目录，需要在docker中进行数据卷映射。配置文件elasticsearch.yml需要根据自己需求自行配置。请参考：https://hub.docker.com/_/elasticsearch/
 > 2.Dockerhub官方提供的镜像基于不同的基础镜像，不利于网络传输！建议根据自己组织内部镜像重新创建！
 
 ### Docker搭建ELK的javaweb应用日志收集存储分析系统
@@ -95,7 +91,8 @@ docker run  -d \
 ```
 
 - 采用自定义网络multihost，ip随机分配
-- 在宿主机启动logstash，容器端口3456映射到宿主机端口3456.(这么做是假设您的应用不是docker化的，所以ip不在自定义网络multihost内.如果web应用docker化，并与logstash共同使用同一个自定义网络，则端口不需要对外映射)
+- 在宿主机启动logstash，容器端口3456映射到宿主机端口3456.(
+  这么做是假设您的应用不是docker化的，所以ip不在自定义网络multihost内.如果web应用docker化，并与logstash共同使用同一个自定义网络，则端口不需要对外映射)
 - 容器配置文件/config-dir/logstash.conf映射到宿主机当前目录下面。即你需要将logstash.conf放到当前目录"$PWD"下启动。（这个目录可以调整）
 
 ### 第五步：web应用log4j日志TCP输出
@@ -117,13 +114,12 @@ log4j.appender.tcp.Application=ssmm
 
 > 最重要的事不要忘了，启动您的web应用。日志才能发过去！
 
-
-
 ## 方法二
 
 ### 写在前面
 
-为了方便搭建，我们使用 https://github.com/deviantony/docker-elk 这个开源项目，这个项目维护了 ELK 技术栈最近的三个版本，也就是 7.x、6.x、5.x ，本文将使用最新版本。
+为了方便搭建，我们使用 https://github.com/deviantony/docker-elk 这个开源项目，这个项目维护了 ELK 技术栈最近的三个版本，也就是
+7.x、6.x、5.x ，本文将使用最新版本。
 
 用于开发测试的基础环境使用一台1c2g的虚拟机即可，当然机器资源越多我们的服务运行效率也会越高、相同时间内数据处理能力也就越大。而用于一般生产环境建议根据自己具体情况给予更多资源。
 
@@ -212,7 +208,8 @@ kibana_1         | {"type":"log","@timestamp":"2020-05-03T03:47:40Z","tags":["in
 
 启动过程中的日志会类似上面这样，因为首次启动需要从官网镜像仓库中下载相关镜像，所以会慢一些。当你看到终端输出类似上面的日志时，说明服务已经启动完毕。
 
-为了验证，我们可以使用浏览器或者 curl 等工具访问机器地址加端口号 9200，并使用默认用户名 `elastic` 和默认密码 `changeme` 来访问 Elasticsearch HTTP 端口，如果一切正常，你将看到类似下面的结果。
+为了验证，我们可以使用浏览器或者 curl 等工具访问机器地址加端口号 9200，并使用默认用户名 `elastic` 和默认密码 `changeme`
+来访问 Elasticsearch HTTP 端口，如果一切正常，你将看到类似下面的结果。
 
 ```json
 {
@@ -262,13 +259,17 @@ Changed password for user elastic
 PASSWORD elastic = PGevNMuv7PhVnaYg7vJw
 ```
 
-将密码妥善保存后，我们需要将 `docker-compose.yml` 配置文件中的 elasticsearch 服务的 `ELASTIC_PASSWORD` 去掉，这样可以确保服务启动只使用我们刚刚重置后的密码（keystore）。以及需要对 kibana 、 logstash 配置文件中的信息进行替换，将文件中的 **elastic** 用户的密码进行更新，相关文件我们在开篇的目录结构中有提过，暂时先修改下面三个文件就可以了：
+将密码妥善保存后，我们需要将 `docker-compose.yml` 配置文件中的 elasticsearch 服务的 `ELASTIC_PASSWORD`
+去掉，这样可以确保服务启动只使用我们刚刚重置后的密码（keystore）。以及需要对 kibana 、 logstash 配置文件中的信息进行替换，将文件中的
+**elastic** 用户的密码进行更新，相关文件我们在开篇的目录结构中有提过，暂时先修改下面三个文件就可以了：
 
 - kibana/config/kibana.yml
 - logstash/config/logstash.yml
 - logstash/pipeline/logstash.conf
 
-需要注意的是， logstash pipeline 需要一个高权限账号，当前测试开发过程中，可以使用上面重置后的 elastic 账号和密码，如果是生产使用可以参考官方文档 [Configuring Security in Logstash](https://www.elastic.co/guide/en/logstash/current/ls-security.html) 进行操作，分配一个新的专用账号。
+需要注意的是， logstash pipeline 需要一个高权限账号，当前测试开发过程中，可以使用上面重置后的 elastic
+账号和密码，如果是生产使用可以参考官方文档 [Configuring Security in Logstash](https://www.elastic.co/guide/en/logstash/current/ls-security.html)
+进行操作，分配一个新的专用账号。
 
 在配置修改完毕后，我们执行 `docker-compose restart` 重启相关服务。
 
@@ -286,69 +287,37 @@ Restarting docker-elk_elasticsearch_1 ... done
 
 启动之后，我们使用浏览器访问服务器IP+端口5601，打开 kibana 控制台。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-6e81c345d57b1ed67e834c655a3082e0_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-6e81c345d57b1ed67e834c655a3082e0_r.jpg)
 
 使用elastic 账号和密码登录后，就能够看到 Kibana 的界面了，如果第一次使用，会看到欢迎界面。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-30151461a0b7a7412a7063e446439074_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-30151461a0b7a7412a7063e446439074_r.jpg)
 
 在登陆之后，第一次使用，可以考虑导入示例数据，来帮助了解 Kibana 的基础功能。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-b0ea3bd33d02838d4e15d0787a7a4659_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-b0ea3bd33d02838d4e15d0787a7a4659_r.jpg)
 
 接下来就是自由探索的过程了，: )
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-c97fac3f23e7d384ba71843dfdfe64d7_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-c97fac3f23e7d384ba71843dfdfe64d7_r.jpg)
 
 ### 关闭付费组件
 
 打开设置界面，选择 Elasticsearch 模块中的 License Management ，可以看到默认软件会启动为期一个月的高级功能试用。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-423450e256c5e034f24a9aa2ca0494b6_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-423450e256c5e034f24a9aa2ca0494b6_r.jpg)
 
 在 [官方订阅](https://www.elastic.co/cn/subscriptions) 页面，我们可以看到官方支持的订阅类型，一般来说，如果没有特殊需求，使用基础版本就好。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-7aa7bf6822c363babdb3cb1eee874383_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-7aa7bf6822c363babdb3cb1eee874383_r.jpg)
 
 如果你想要了解软件当前运行状态，除了登陆机器，查看宿主机和容器状态外，在监控界面，我们也可以方便快捷的看到单节点中各个服务的运行状态和资源占用。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-36d9b830184f14f9e36e03943150c3e9_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-36d9b830184f14f9e36e03943150c3e9_r.jpg)
 
 选择“Revert to Basic license”，选择回退到基础版本，可以看到整个界面都简洁了不少，至此如果不付费的话，就可以安心合法的使用软件了。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-7303bb065fbfdf67f66064f7a9d9246f_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-7303bb065fbfdf67f66064f7a9d9246f_r.jpg)
 
 当然，你也可以在 elasticsearch.yml 配置文件中的 `xpack.license.self_generated.type` 修改为 `basic` 来禁用 X-Pack 相关功能。
 
@@ -392,18 +361,21 @@ environment:
   bootstrap.memory_lock: "true"
 ```
 
-Java 堆大小同样需要调整，默认的数值如下，在生产环境中太小了，更详细的内容可以参考[这里](https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html)。
+Java
+堆大小同样需要调整，默认的数值如下，在生产环境中太小了，更详细的内容可以参考[这里](https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html)。
 
 ```yaml
 environment:
   ES_JAVA_OPTS: "-Xmx1g -Xms1g"
 ```
 
-如果你真实使用在生产环节，务必开启 TLS 和密码认证，此处为了不额外扩展篇幅（以及懒得申请通配符证书/配置自签名）先使用关闭安全配置的方式忽略这个设置 : )
+如果你真实使用在生产环节，务必开启 TLS
+和密码认证，此处为了不额外扩展篇幅（以及懒得申请通配符证书/配置自签名）先使用关闭安全配置的方式忽略这个设置 : )
 
 ### 修改配置支持多实例
 
-官方多实例方案（[这篇官方指引](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)），采取在 compose 中定义三个不同的服务，然后使用第一个服务作为 Master 对外暴露服务，我们先以该方案为基础，并进行一些调整。
+官方多实例方案（[这篇官方指引](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)），采取在
+compose 中定义三个不同的服务，然后使用第一个服务作为 Master 对外暴露服务，我们先以该方案为基础，并进行一些调整。
 
 首先创建服务所需要的数据目录，并赋予所需要的权限。
 
@@ -413,7 +385,8 @@ chmod g+rwx data/*
 chgrp 0 data/*
 ```
 
-之前在单节点中，我们挂载的数据使用的是容器的数据卷方案，在这里，我们可以考虑使用性能更好的文件映射替换之前的方案，当然也可以配合[储存插件](https://docs.docker.com/engine/extend/legacy_plugins/)使用：
+之前在单节点中，我们挂载的数据使用的是容器的数据卷方案，在这里，我们可以考虑使用性能更好的文件映射替换之前的方案，当然也可以配合[储存插件](https://docs.docker.com/engine/extend/legacy_plugins/)
+使用：
 
 ```yaml
 volumes:
@@ -421,7 +394,8 @@ volumes:
   - ./data:/usr/share/elasticsearch/data:rw
 ```
 
-考虑到多实例之间配置几乎一致，并且如果要单独维护太过啰嗦，我们可以将 `elasticsearch.yml` 内的配置使用环境变量的方式写在 compose 配置文件中：
+考虑到多实例之间配置几乎一致，并且如果要单独维护太过啰嗦，我们可以将 `elasticsearch.yml` 内的配置使用环境变量的方式写在
+compose 配置文件中：
 
 ```yaml
 environment:
@@ -646,17 +620,15 @@ networks:
 
 启动服务之后，打开 kibana 可以看到多实例的 ELK 环境就配置完毕了。
 
-
-
-![img](https://static.xlc520.tk/blogImage/v2-c83ad60df4275a2343c45b92f09ab8ae_r.jpg)
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/v2-c83ad60df4275a2343c45b92f09ab8ae_r.jpg)
 
 ### 其他
 
-官网文档对于配置的内容描述有不少，感兴趣的同学可以进一步了解，比如这篇[ Important System Configuration ](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html)，原理同样适用于一些其他的应用。
+官网文档对于配置的内容描述有不少，感兴趣的同学可以进一步了解，比如这篇[ Important System Configuration ](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html)
+，原理同样适用于一些其他的应用。
 
-关于如何使用各种 beat 服务进行日志上报，可以参考官方之前给出的[示例文件](https://github.com/elastic/stack-docker/blob/master/docker-compose.yml)。
+关于如何使用各种 beat
+服务进行日志上报，可以参考官方之前给出的[示例文件](https://github.com/elastic/stack-docker/blob/master/docker-compose.yml)。
 
 ### 最后
 

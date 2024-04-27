@@ -10,15 +10,11 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot 集成 Caffeine
 
 其他参考：
 
 https://www.cnblogs.com/rickiyang/p/11074158.html
-
-
 
 **环境配置：**
 
@@ -30,38 +26,41 @@ https://www.cnblogs.com/rickiyang/p/11074158.html
 
 - [Spring Boot缓存实战 Caffeine](https://www.jianshu.com/p/c72fb0c787fc)
 - [Caffeine Cache-高性能Java本地缓存组件](https://www.cnblogs.com/rickiyang/p/11074158.html)
-- 博文示例项目 Github 地址：https://github.com/my-dlq/blog-example/tree/master/springboot/springboot-caffeine-cache-example
+- 博文示例项目 Github
+  地址：https://github.com/my-dlq/blog-example/tree/master/springboot/springboot-caffeine-cache-example
 
 ## 一、本地缓存介绍
 
 缓存在日常开发中启动至关重要的作用，由于是存储在内存中，数据的读取速度是非常快的，能大量减少对数据库的访问，减少数据库的压力。
 
-之前介绍过 Redis 这种 NoSql 作为缓存组件，它能够很好的作为分布式缓存组件提供多个服务间的缓存，但是 Redis 这种还是需要网络开销，增加时耗。本地缓存是直接从本地内存中读取，没有网络开销，例如秒杀系统或者数据量小的缓存等，比远程缓存更合适。
+之前介绍过 Redis 这种 NoSql 作为缓存组件，它能够很好的作为分布式缓存组件提供多个服务间的缓存，但是 Redis
+这种还是需要网络开销，增加时耗。本地缓存是直接从本地内存中读取，没有网络开销，例如秒杀系统或者数据量小的缓存等，比远程缓存更合适。
 
 ## 二、缓存组件 Caffeine 介绍
 
-按 Caffeine Github 文档描述，Caffeine 是基于 JAVA 8 的高性能缓存库。并且在 spring5 (springboot 2.x) 后，spring 官方放弃了 Guava，而使用了性能更优秀的 Caffeine 作为默认缓存组件。
+按 Caffeine Github 文档描述，Caffeine 是基于 JAVA 8 的高性能缓存库。并且在 spring5 (springboot 2.x) 后，spring 官方放弃了
+Guava，而使用了性能更优秀的 Caffeine 作为默认缓存组件。
 
 ### 1、Caffeine 性能
 
 可以通过下图观测到，在下面缓存组件中 Caffeine 性能是其中最好的。
 
-![img](https://static.xlc520.tk/blogImage/Spring-Boot-Caffeine.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/Spring-Boot-Caffeine.png)
 
 ### 2、Caffeine 配置说明
 
-| 参数              |   类型   | 描述                                                         |
-| ----------------- | :------: | ------------------------------------------------------------ |
-| initialCapacity   | integer  | 初始的缓存空间大小                                           |
-| maximumSize       |   long   | 缓存的最大条数                                               |
-| maximumWeight     |   long   | 缓存的最大权重                                               |
-| expireAfterAccess | duration | 最后一次写入或访问后，指定经过多长的时间过期                 |
-| expireAfterWrite  | duration | 最后一次写入后，指定经过多长的时间缓存过期                   |
+| 参数                |    类型    | 描述                             |
+|-------------------|:--------:|--------------------------------|
+| initialCapacity   | integer  | 初始的缓存空间大小                      |
+| maximumSize       |   long   | 缓存的最大条数                        |
+| maximumWeight     |   long   | 缓存的最大权重                        |
+| expireAfterAccess | duration | 最后一次写入或访问后，指定经过多长的时间过期         |
+| expireAfterWrite  | duration | 最后一次写入后，指定经过多长的时间缓存过期          |
 | refreshAfterWrite | duration | 创建缓存或者最近一次更新缓存后，经过指定的时间间隔后刷新缓存 |
-| weakKeys          | boolean  | 打开 key 的弱引用                                            |
-| weakValues        | boolean  | 打开 value 的弱引用                                          |
-| softValues        | boolean  | 打开 value 的软引用                                          |
-| recordStats       |    -     | 开发统计功能                                                 |
+| weakKeys          | boolean  | 打开 key 的弱引用                    |
+| weakValues        | boolean  | 打开 value 的弱引用                  |
+| softValues        | boolean  | 打开 value 的软引用                  |
+| recordStats       |    -     | 开发统计功能                         |
 
 **注意：**
 
@@ -641,8 +640,6 @@ public class Application2 {
 
 }
 ```
-
-
 
 ## 六、SpringBoot 集成 Caffeine 方式三（新）
 

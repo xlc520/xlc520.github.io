@@ -12,15 +12,14 @@ timeline: true
 icon: java
 ---
 
-
-
 # 10 个优化技巧，减少 Docker 镜像大小
 
 ## 什么是 docker？
 
 Docker 是一种容器引擎，可以在容器内运行一段代码。Docker 镜像是在任何地方运行您的应用程序而无需担心应用程序依赖性的方式。
 
-要构建镜像，docker 使用一个名为 Dockerfile 的文件。Dockerfile 是一个包含许多指令（RUN、COPY、EXPOSE 等）的文件。成功执行这些命令后，docker 将创建一个镜像供我们在任何地方使用。
+要构建镜像，docker 使用一个名为 Dockerfile 的文件。Dockerfile 是一个包含许多指令（RUN、COPY、EXPOSE 等）的文件。成功执行这些命令后，docker
+将创建一个镜像供我们在任何地方使用。
 
 ## 为什么要减小 docker 镜像大小？
 
@@ -60,7 +59,11 @@ apt install python3 -y
 
 从下图中可以看出，通过减少层数，可以减少一些 MB 的大小。
 
-![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
+![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
+1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
+xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
+x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
 ## 2：使用 Docker Squash 减小镜像大小
 
@@ -78,7 +81,11 @@ pip install docker-squash
 docker-squash image:old -t image:new
 ```
 
-![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
+![图片](data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1
+1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:
+xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none'
+fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect
+x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E)
 
 ## 3：使用较小的基础镜像
 
@@ -88,7 +95,8 @@ docker-squash image:old -t image:new
 
 python:3.9 的大小约为 1.3 GB，而 python:3.9-slim 的大小仅为 1 GB 左右。
 
-您可以使用 alpine 版本进一步减少镜像。alpine 镜像是专门为作为容器运行而设计的，而且体积非常小。python:3.9-alpine 镜像只有 49 MB。
+您可以使用 alpine 版本进一步减少镜像。alpine 镜像是专门为作为容器运行而设计的，而且体积非常小。python:3.9-alpine 镜像只有
+49 MB。
 
 ## 4：使用多阶段构建来减小大小
 
@@ -118,7 +126,8 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-这里我们使用两个阶段从 docker 文件创建镜像。在 Stage-1 中，我们复制代码并构建它，在 stage-2 中，我们使用在 stage-1 中构建的代码在 Nginx 中运行。
+这里我们使用两个阶段从 docker 文件创建镜像。在 Stage-1 中，我们复制代码并构建它，在 stage-2 中，我们使用在 stage-1 中构建的代码在
+Nginx 中运行。
 
 ## 5：apt 安装中使用 --no-install-recommends 标志
 
@@ -132,7 +141,8 @@ apt install curl --no-install-recommends -y && \
 apt install python3 -y --no-install-recommends
 ```
 
-如下图所示，带有 new 标签的镜像由于添加了此标志而减少了 5MB。当我们要安装多个包时，这将非常有帮助。![图片](https://static.xlc520.tk/blogImage/640-1679364162221-0.png)
+如下图所示，带有 new 标签的镜像由于添加了此标志而减少了
+5MB。当我们要安装多个包时，这将非常有帮助。![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1679364162221-0.png)
 
 您可以在 apk add 命令中添加 --no-cache。
 
@@ -149,7 +159,7 @@ apt install python3 -y --no-install-recommends && \
 rm -rf /var/lib/apt/lists/*
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1679364162221-1.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1679364162221-1.png)
 
 从上图中可以看出，我们已将 docker 镜像的大小减少了约 41 MB。
 
@@ -157,7 +167,8 @@ rm -rf /var/lib/apt/lists/*
 
 如果您不想将某些文件复制到 docker 镜像，那么使用 .dockerignore 文件可以为您节省一些空间。
 
-在构建上下文中有一些隐藏的文件/文件夹，您可以使用 ADD 或 COPY 命令（如 .git 等）将其传输到镜像。包含一个 .dockerignore 文件以减小 docker 镜像大小是一个很好的做法。
+在构建上下文中有一些隐藏的文件/文件夹，您可以使用 ADD 或 COPY 命令（如 .git 等）将其传输到镜像。包含一个 .dockerignore 文件以减小
+docker 镜像大小是一个很好的做法。
 
 `.dockerignore` 文件示例。
 

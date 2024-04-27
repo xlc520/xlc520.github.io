@@ -12,15 +12,15 @@ icon: type
 
 # Podman开源的容器
 
-![图片](https://static.xlc520.tk/blogImage/640-1674185164154-0.png)
-
-
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185164154-0.png)
 
 ### 什么是Podman？
 
-Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。Podman 提供与 Docker 非常相似的功能。正如前面提到的那样，它不需要在你的系统上运行任何守护进程，并且它也可以在没有 root 权限的情况下运行。
+Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。Podman 提供与 Docker
+非常相似的功能。正如前面提到的那样，它不需要在你的系统上运行任何守护进程，并且它也可以在没有 root 权限的情况下运行。
 
-Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像。Podman 提供了一个与 Docker 兼容的命令行前端来管理 Docker 镜像。
+Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像。Podman 提供了一个与 Docker 兼容的命令行前端来管理
+Docker 镜像。
 
 Podman 官网地址：https://podman.io/
 
@@ -31,8 +31,14 @@ Podman 官网地址：https://podman.io/
 - 在docker的运行体系中，需要多个daemon才能调用到OCI的实现RunC。
 - 在容器管理的链路中，Docker Engine的实现就是dockerd
 - daemon，它在linux中需要以root运行，dockerd调用containerd，containerd调用containerd-shim，然后才能调用runC。顾名思义shim起的作用也就是“垫片”，避免父进程退出影响容器的运训
-- podman直接调用OCI,runtime（runC），通过common作为容器进程的管理工具，但不需要dockerd这种以root身份运行的守护进程。([点击下载2021年最新阿里p7面试题](http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&mid=2247499357&idx=1&sn=77697f0fbec449d80e58cafbfb1f7eb4&chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&scene=21#wechat_redirect)教程) 
-- 在podman体系中，有个称之为common的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common的父则通常是1号进程。podman中的common其实相当于docker体系中的containerd-shim。
+-
+
+podman直接调用OCI,runtime（runC），通过common作为容器进程的管理工具，但不需要dockerd这种以root身份运行的守护进程。([点击下载2021年最新阿里p7面试题](http://mp.weixin.qq.com/s?__biz=MzU5NTgzMDYyMA==&mid=2247499357&idx=1&sn=77697f0fbec449d80e58cafbfb1f7eb4&chksm=fe694c6ec91ec578753a087ef6d28719f095f9750d3d13785c253b719dc0b08a89fe3df53700&scene=21#wechat_redirect)
+教程)
+
+-
+
+在podman体系中，有个称之为common的守护进程，其运行路径通常是/usr/libexec/podman/conmon，它是各个容器进程的父进程，每个容器各有一个，common的父则通常是1号进程。podman中的common其实相当于docker体系中的containerd-shim。
 
 图中所体现的事情是，podman不需要守护进程，而dorker需要守护进程。在这个图的示意中，dorcker的containerd-shim与podman的common被归在Container一层。
 
@@ -156,7 +162,8 @@ CONTAINER ID  IMAGE                             COMMAND           CREATED       
 
 #### 检查正在运行的容器
 
-您可以“检查”正在运行的容器的元数据和有关其自身的详细信息。我们甚至可以使用 inspect 子命令查看分配给容器的 IP 地址。由于容器以无根模式运行，因此未分配 IP 地址，并且该值将在检查的输出中列为“无”。
+您可以“检查”正在运行的容器的元数据和有关其自身的详细信息。我们甚至可以使用 inspect 子命令查看分配给容器的 IP
+地址。由于容器以无根模式运行，因此未分配 IP 地址，并且该值将在检查的输出中列为“无”。
 
 ```
 [root@localhost ~]# podman inspect -l | grep IPAddress\": 
@@ -309,7 +316,8 @@ alias docker='podman'
 
 在允许没有root特权的用户运行Podman之前，管理员必须安装或构建Podman并完成以下配置
 
-cgroup V2Linux内核功能允许用户限制普通用户容器可以使用的资源，如果使用cgroupV2启用了运行Podman的Linux发行版，则可能需要更改默认的OCI运行时。某些较旧的版本runc不适用于cgroupV2，必须切换到备用OCI运行时crun。
+cgroup
+V2Linux内核功能允许用户限制普通用户容器可以使用的资源，如果使用cgroupV2启用了运行Podman的Linux发行版，则可能需要更改默认的OCI运行时。某些较旧的版本runc不适用于cgroupV2，必须切换到备用OCI运行时crun。
 
 ```
 [root@localhost ~]# yum -y install crun     //centos8系统自带

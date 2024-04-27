@@ -10,30 +10,30 @@ timeline: true
 icon: java
 ---
 
-
-
 # Java8的Lambda表达式
 
 ## 一、引言
 
-java8最大的特性就是引入Lambda表达式，即函数式编程，可以将行为进行传递。**总结就是：使用不可变值与函数，函数对不可变值进行处理，映射成另一个值。**
+java8最大的特性就是引入Lambda表达式，即函数式编程，可以将行为进行传递。**总结就是：使用不可变值与函数，函数对不可变值进行处理，映射成另一个值。
+**
 
 ## 二、java重要的函数式接口
 
 #### 1、什么是函数式接口
 
-函数接口是只有一个抽象方法的接口，用作 Lambda 表达式的类型。使用@FunctionalInterface注解修饰的类，编译器会检测该类是否只有一个抽象方法或接口，否则，会报错。可以有多个默认方法，静态方法。
+函数接口是只有一个抽象方法的接口，用作 Lambda
+表达式的类型。使用@FunctionalInterface注解修饰的类，编译器会检测该类是否只有一个抽象方法或接口，否则，会报错。可以有多个默认方法，静态方法。
 
 ##### 1.1 java8自带的常用函数式接口。
 
-| 函数接口       | 抽象方法        | 功能                   | 参数   | 返回类型 | 示例                   |
-| -------------- | --------------- | ---------------------- | ------ | -------- | ---------------------- |
-| Predicate      | test(T t)       | 判断真假               | T      | boolean  | 9龙的身高大于185cm吗？ |
-| Consumer       | accept(T t)     | 消费消息               | T      | void     | 输出一个值             |
-| Function       | R apply(T t)    | 将T映射为R（转换功能） | T      | R        | 获得student对象的名字  |
-| Supplier       | T get()         | 生产消息               | None   | T        | 工厂方法               |
-| UnaryOperator  | T apply(T t)    | 一元操作               | T      | T        | 逻辑非（!）            |
-| BinaryOperator | apply(T t, U u) | 二元操作               | (T，T) | (T)      | 求两个数的乘积（*）    |
+| 函数接口           | 抽象方法            | 功能           | 参数    | 返回类型    | 示例             |
+|----------------|-----------------|--------------|-------|---------|----------------|
+| Predicate      | test(T t)       | 判断真假         | T     | boolean | 9龙的身高大于185cm吗？ |
+| Consumer       | accept(T t)     | 消费消息         | T     | void    | 输出一个值          |
+| Function       | R apply(T t)    | 将T映射为R（转换功能） | T     | R       | 获得student对象的名字 |
+| Supplier       | T get()         | 生产消息         | None  | T       | 工厂方法           |
+| UnaryOperator  | T apply(T t)    | 一元操作         | T     | T       | 逻辑非（!）         |
+| BinaryOperator | apply(T t, U u) | 二元操作         | (T，T) | (T)     | 求两个数的乘积（*）     |
 
 ```java
 public class Test {
@@ -90,11 +90,12 @@ public class Test {
 
 以上演示了lambda接口的使用及自定义一个函数式接口并使用。下面，我们看看java8将函数式接口封装到流中如何高效的帮助我们处理集合。
 
-**注意：Student::getName**例子中这种编写lambda表达式的方式称为**方法引用。**格式为**ClassNmae::methodName**。是不是很神奇，java8就是这么迷人。
+**注意：Student::getName**例子中这种编写lambda表达式的方式称为**方法引用。**格式为**ClassNmae::methodName**
+。是不是很神奇，java8就是这么迷人。
 
 **示例：本篇所有示例都基于以下三个类。OutstandingClass：班级；Student：学生；SpecialityEnum：特长。**
 
-![img](https://static.xlc520.tk/blogImage/16ae40638d420acdtplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae40638d420acdtplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ##### 1.2 惰性求值与及早求值
 
@@ -127,7 +128,7 @@ public class TestCase {
 
 顾名思义，起**过滤筛选**的作用。**内部就是Predicate接口。惰性求值。**
 
-![img](https://static.xlc520.tk/blogImage/16ae40638d2c0a51tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae40638d2c0a51tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 比如我们筛选出出身高小于180的同学。
 
@@ -153,7 +154,7 @@ public class TestCase {
 
 **转换功能，内部就是Function接口。惰性求值**
 
-![img](https://static.xlc520.tk/blogImage/16ae40638d1c6610tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae40638d1c6610tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -178,7 +179,7 @@ public class TestCase {
 
 **将多个Stream合并为一个Stream。惰性求值**
 
-![img](https://static.xlc520.tk/blogImage/16ae40638c4cca86tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae40638c4cca86tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -235,7 +236,10 @@ public class TestCase {
 //Student{name='路飞', age=22, stature=175, specialities=null}
 ```
 
-**max、min接收一个Comparator**（例子中使用java8自带的静态函数，只需要传进需要比较值即可。）并且返回一个Optional对象，该对象是java8新增的类，专门为了防止null引发的空指针异常。可以使用max.isPresent()判断是否有值；可以使用max.orElse(new Student())，当值为null时就使用给定值；也可以使用max.orElseGet(() -> new Student());这需要传入一个Supplier的lambda表达式。
+**max、min接收一个Comparator**
+（例子中使用java8自带的静态函数，只需要传进需要比较值即可。）并且返回一个Optional对象，该对象是java8新增的类，专门为了防止null引发的空指针异常。可以使用max.isPresent()
+判断是否有值；可以使用max.orElse(new Student())，当值为null时就使用给定值；也可以使用max.orElseGet(() -> new Student())
+;这需要传入一个Supplier的lambda表达式。
 
 ##### 2.6 count
 
@@ -262,7 +266,7 @@ public class TestCase {
 **reduce 操作可以实现从一组值中生成一个值**。在上述例子中用到的 count 、 min 和 max 方
 法，因为常用而被纳入标准库中。事实上，这些方法都是 reduce 操作。**及早求值。**
 
-![img](https://static.xlc520.tk/blogImage/16ae40638c52397btplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae40638c52397btplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 ```java
 public class TestCase {
@@ -282,7 +286,8 @@ public class TestCase {
 #### 3.1 转换成值
 
 **收集器，一种通用的、从流生成复杂值的结构。**只要将它传给 collect 方法，所有
-的流就都可以使用它了。标准类库已经提供了一些有用的收集器，**以下示例代码中的收集器都是从 java.util.stream.Collectors 类中静态导入的。**
+的流就都可以使用它了。标准类库已经提供了一些有用的收集器，**以下示例代码中的收集器都是从 java.util.stream.Collectors
+类中静态导入的。**
 
 ```java
 public class CollectorsTest {
@@ -332,7 +337,7 @@ maxBy或者minBy就是求最大值与最小值。
 
 **常用的流操作是将其分解成两个集合，Collectors.partitioningBy帮我们实现了，接收一个Predicate函数式接口。**
 
-![img](https://static.xlc520.tk/blogImage/16ae4063943b9487tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae4063943b9487tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 将示例学生分为会唱歌与不会唱歌的两个集合。
 
@@ -352,7 +357,7 @@ public class PartitioningByTest {
 数据分组是一种更自然的分割数据操作，与将数据分成 ture 和 false 两部分不同，**可以使**
 **用任意值对数据分组。Collectors.groupingBy接收一个Function做转换。**
 
-![img](https://static.xlc520.tk/blogImage/16ae4063f5d78c78tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/16ae4063f5d78c78tplv-t2oaga2asx-zoom-in-crop-mark4536000.jpeg)
 
 **如图，我们使用groupingBy将根据进行分组为圆形一组，三角形一组，正方形一组。**
 
@@ -392,7 +397,8 @@ public class JoiningTest {
 //[路飞,红发,白胡子]
 ```
 
-**joining接收三个参数，第一个是分界符，第二个是前缀符，第三个是结束符。也可以不传入参数Collectors.joining()，这样就是直接拼接。**
+**joining接收三个参数，第一个是分界符，第二个是前缀符，第三个是结束符。也可以不传入参数Collectors.joining()，这样就是直接拼接。
+**
 
 ## 四、总结
 

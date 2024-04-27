@@ -13,18 +13,17 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot整合Mybatis-plus及用法
 
 ## 一、mybatis-plus简介：
 
-Mybatis-Plus（简称MP）是一个 Mybatis 的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提高效率而生。这是官方给的定义，关于mybatis-plus的更多介绍及特性，可以参考mybatis-plus官网。那么它是怎么增强的呢？其实就是它已经封装好了一些crud方法，我们不需要再写xml了，直接调用这些方法就行，就类似于JPA。并且3.X系列支持lambda语法,让我在写条件构造的时候少了很多的"魔法值",从代码结构上更简洁了.
+Mybatis-Plus（简称MP）是一个 Mybatis 的增强工具，在 Mybatis
+的基础上只做增强不做改变，为简化开发、提高效率而生。这是官方给的定义，关于mybatis-plus的更多介绍及特性，可以参考mybatis-plus官网。那么它是怎么增强的呢？其实就是它已经封装好了一些crud方法，我们不需要再写xml了，直接调用这些方法就行，就类似于JPA。并且3.X系列支持lambda语法,让我在写条件构造的时候少了很多的"
+魔法值",从代码结构上更简洁了.
 
 ## 二、springboot整合mybatis-plus案例
 
 pom.xml配置
-
 
 ```xml
 <dependencies>
@@ -610,7 +609,8 @@ public class UserInfoPlusController {
 }
 ```
 
-以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data jpa框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的
+以上就是mybatis-plus的小案例，mybatis-plus它像我之前使用的spring data
+jpa框架不用写sql语句，就可以实现简单的增删改查、批量操作、分页mybatis-plus功能还是比较强大，能减少我们写很多代码，我个人还是比较喜欢用这个mybatis-plus的
 
 mybatis-plus只是mybatis的增强版，它不影响mybatis的使用，我们可以写我们自定的方法以及sql，接下来我们看一个小案例
 
@@ -701,4 +701,4 @@ controller层新增方法
 2.**UpdateWrapper** ： Update 条件封装，用于Entity对象更新操作
 3.条件构造器使用中的各个方法格式和说明
 
-![image-20220620164733512](https://static.xlc520.tk/blogImage/image-20220620164733512.png)
+![image-20220620164733512](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620164733512.png)

@@ -9,6 +9,7 @@ article: true
 timeline: true
 icon: type
 ---
+
 # 漏洞监控平台——Monitor
 
 ## **写在前面的话**
@@ -66,38 +67,38 @@ icon: type
 
 #### CNNVD
 
--  每天推送企业微信卡片消息
--  Web端漏洞信息表格展示
--  每周五统计漏洞数量（高危、中危、低危）
--  高危漏洞信息醒目标注
+- 每天推送企业微信卡片消息
+- Web端漏洞信息表格展示
+- 每周五统计漏洞数量（高危、中危、低危）
+- 高危漏洞信息醒目标注
 
 #### 微软官方漏洞消息
 
--  每天推送企业微信卡片消息
--  Web端漏洞信息表格展示
+- 每天推送企业微信卡片消息
+- Web端漏洞信息表格展示
 
 #### Github
 
--  每天推送企业微信卡片消息
--  点击卡片消息自动跳转对应Github链接
+- 每天推送企业微信卡片消息
+- 点击卡片消息自动跳转对应Github链接
 
 #### 展示效果
 
 效果如下图
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328639935.webp)cve
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328639935.webp)cve
 
 **当点击CNNVD的消息卡片时，会跳转到相对应的Web端以表格形式展示**，如下图：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328639936.webp)cnnvd
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328639936.webp)cnnvd
 
 **点击微软漏洞消息的漏洞卡片时，也会跳转到相对应的Web端表格展示**，如下图：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328639937.webp)微软
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328639937.webp)微软
 
 **点击Github的漏洞消息通知时，跳转到相对于的Github地址**，如下图：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328639938.webp)github
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328639938.webp)github
 
 ## **项目部署**
 
@@ -148,7 +149,7 @@ yum install -y nginx
 
 装好后，查看版本，检查是否安装成功，如下图：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328639939.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328639939.webp)
 
 然后找到nginx的配置文件，具体位置为：
 
@@ -179,15 +180,16 @@ server {
 
 **如果修改，请修改monitor.py的24行和excel_html.py的11行。**
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328640040.webp)image-20220122141836235
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328640040.webp)image-20220122141836235
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328640041.webp)image-20220122142248502
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328640041.webp)image-20220122142248502
 
 ### 配置企业微信推送
 
-这个需要先到企业微信创建一个企业，并自建一个应用，**获取到自定义应用的 Secret和注册的企业 corpid**，就可以了。修改位置在**wechat_api.py\**文件\******的14行至17行**，如下图：
+这个需要先到企业微信创建一个企业，并自建一个应用，**获取到自定义应用的 Secret和注册的企业 corpid**，就可以了。修改位置在**
+wechat_api.py\**文件\******的14行至17行**，如下图：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346328640042.webp)image-20220122142707821
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346328640042.webp)image-20220122142707821
 
 启动监控脚本，命令如下：
 

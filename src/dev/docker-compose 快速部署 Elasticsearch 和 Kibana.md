@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # docker-compose 快速部署 Elasticsearch 和 Kibana
 
 ## 一、概述
@@ -19,8 +17,10 @@ icon: java
 使用 Docker Compose 快速部署 Elasticsearch 和 Kibana 可以帮助您在本地或开发环境中轻松设置和管理这两个重要的工具，用于存储和可视化日志数据、监控和搜索。以下是一个概述的步骤：
 
 1. 准备 Docker 和 Docker Compose：确保您已经安装了 Docker 和 Docker Compose。您可以从 Docker 官方网站上获取它们的安装程序。
-2. 创建 Docker Compose 配置文件：创建一个名为 docker-compose.yml 的文件，它将定义 Elasticsearch 和 Kibana 的容器配置。这个文件应该包括服务名称、映像、环境变量、端口映射等信息。
-3. 配置 Elasticsearch：在 docker-compose.yml 文件中，配置 Elasticsearch 容器。您通常需要指定节点名称、发现类型等设置。使用容器版本的 Elasticsearch 镜像。
+2. 创建 Docker Compose 配置文件：创建一个名为 docker-compose.yml 的文件，它将定义 Elasticsearch 和 Kibana
+   的容器配置。这个文件应该包括服务名称、映像、环境变量、端口映射等信息。
+3. 配置 Elasticsearch：在 docker-compose.yml 文件中，配置 Elasticsearch 容器。您通常需要指定节点名称、发现类型等设置。使用容器版本的
+   Elasticsearch 镜像。
 4. 配置 Kibana：在 docker-compose.yml 文件中，配置 Kibana 容器。指定要监听的端口，并确保它依赖于 Elasticsearch 服务。
 5. 数据卷设置：在 docker-compose.yml 文件中，通常会使用数据卷来保存 Elasticsearch 数据。这确保了数据的持久性。
 6. 启动容器：在终端中，导航到包含 `docker-compose.yml` 文件的目录，并运行以下命令以启动 Elasticsearch 和 Kibana。
@@ -31,23 +31,28 @@ docker-compose up -d
 ```
 
 1. 等待服务启动：容器启动后，等待一段时间以确保 Elasticsearch 和 Kibana 完全启动。
-2. 访问 Kibana 控制台：打开您的浏览器，访问 Kibana 控制台的地址，默认情况下是：`http://localhost:5601`。默认情况下，Kibana 不需要用户名和密码。
+2. 访问 Kibana 控制台：打开您的浏览器，访问 Kibana 控制台的地址，默认情况下是：`http://localhost:5601`。默认情况下，Kibana
+   不需要用户名和密码。
 3. 开始使用：现在，您可以使用 Kibana 控制台来管理和可视化 Elasticsearch 中的数据，执行查询、创建仪表板等操作。
 
-这些步骤将帮助您快速部署 Elasticsearch 和 Kibana，以便进行日志分析、数据可视化和搜索等操作。请注意，您可以根据需要在 `docker-compose.yml` 文件中更改版本和配置选项。确保您的系统资源足够以支持 Elasticsearch 和 Kibana 的运行。
+这些步骤将帮助您快速部署 Elasticsearch 和
+Kibana，以便进行日志分析、数据可视化和搜索等操作。请注意，您可以根据需要在 `docker-compose.yml` 文件中更改版本和配置选项。确保您的系统资源足够以支持
+Elasticsearch 和 Kibana 的运行。
 
-
-
-![图片](https://static.xlc520.tk/blogImage/640-1698065409894-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1698065409894-0.png)
 
 ## 二、开始编排部署（Elasticsearch 和 Kibana）
 
-`Elasticsearch` 是一个**开源的分布式搜索和分析引擎**，最初由 Elasticsearch N.V.（现在是 Elastic N.V.）开发并维护。它是基于 `Apache Lucene` 搜索引擎构建的，专门设计用于处理和分析大规模的数据，提供了强大的全文搜索、结构化数据存储、分析和可视化功能。以下是 Elasticsearch 的主要特点和用途的概述：
+`Elasticsearch` 是一个**开源的分布式搜索和分析引擎**，最初由 Elasticsearch N.V.（现在是 Elastic
+N.V.）开发并维护。它是基于 `Apache Lucene` 搜索引擎构建的，专门设计用于处理和分析大规模的数据，提供了强大的全文搜索、结构化数据存储、分析和可视化功能。以下是
+Elasticsearch 的主要特点和用途的概述：
 
 - **分布式和实时**：`Elasticsearch`是一个分布式系统，可以轻松地扩展到数百台服务器，以处理大量数据。它提供了实时搜索和分析，可以在毫秒级别内响应查询。
 - **全文搜索**：`Elasticsearch` 以其卓越的全文搜索能力而闻名，可以对大量文本数据进行高效的搜索。它支持分词、模糊查询、通配符搜索、近似匹配等功能。
-- **结构化和非结构化数据**：`Elasticsearch` 不仅支持全文搜索，还能够存储和索引结构化数据，如 `JSON`、`XML` 等。这使得它非常适用于存储各种类型的数据，从日志和事件数据到产品目录和传感器数据。
-- **多种用途**：`Elasticsearch` 可用于多种用途，包括搜索引擎、日志和事件数据分析、性能监控、安全信息与事件管理 (`SIEM`)、文档存储、实时仪表板和可视化等。
+- **结构化和非结构化数据**：`Elasticsearch` 不仅支持全文搜索，还能够存储和索引结构化数据，如 `JSON`、`XML`
+  等。这使得它非常适用于存储各种类型的数据，从日志和事件数据到产品目录和传感器数据。
+- **多种用途**：`Elasticsearch` 可用于多种用途，包括搜索引擎、日志和事件数据分析、性能监控、安全信息与事件管理 (`SIEM`)
+  、文档存储、实时仪表板和可视化等。
 - **RESTful API**：`Elasticsearch` 提供了一个易于使用的 `RESTful API`，使开发人员能够通过 HTTP 请求执行各种操作，包括索引管理、搜索、分析和聚合。
 - **分析和聚合**：`Elasticsearch` 提供了丰富的分析和聚合功能，允许您从数据中提取有价值的见解。您可以执行聚合操作，生成图表和仪表板，以可视化数据。
 - **插件生态系统**：`Elasticsearch` 具有丰富的插件生态系统，可以通过插件扩展其功能，包括监控、安全、报告等。
@@ -55,17 +60,18 @@ docker-compose up -d
 - **强大的社区支持**：Elasticsearch 拥有广泛的社区支持，有大量的文档、教程和第三方工具可用于帮助您学习和使用它。
 - **商业支持**：Elastic N.V. 提供了 Elasticsearch 的商业支持和托管服务，以满足企业级需求。
 
-总之，Elasticsearch 是一个强大且多才多艺的搜索和分析引擎，适用于各种用途，从全文搜索到日志分析和可视化数据。它在各种行业中被广泛使用，包括**搜索引擎**、**电子商务**、**日志管理**、**安全信息与事件管理、科学研究**和更多领域。
-![图片](https://static.xlc520.tk/blogImage/640-1698065409894-1.png)
+总之，Elasticsearch 是一个强大且多才多艺的搜索和分析引擎，适用于各种用途，从全文搜索到日志分析和可视化数据。它在各种行业中被广泛使用，包括
+**搜索引擎**、**电子商务**、**日志管理**、**安全信息与事件管理、科学研究**和更多领域。
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1698065409894-1.png)
 
 服务布局：
 
-| 服务名称/主机名 | 开放端口 |      |
-| --------------- | -------- | ---- |
-| node-1          | 9200     | 1G   |
-| node-2          | 9201     | 1G   |
-| node-3          | 9202     | 1G   |
-| kibana          | 5601     | 不限 |
+| 服务名称/主机名 | 开放端口 |    |
+|----------|------|----|
+| node-1   | 9200 | 1G |
+| node-2   | 9201 | 1G |
+| node-3   | 9202 | 1G |
+| kibana   | 5601 | 不限 |
 
 ### 1）部署 docker
 
@@ -488,10 +494,10 @@ curl localhost:9200
 curl localhost:9200/_cat/health
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1698065409894-2.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1698065409894-2.png)
 
 kibana：`http://ip:5601/`
 
-![图片](https://static.xlc520.tk/blogImage/640-1698065409894-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1698065409894-3.png)
 
 git 地址：https://gitee.com/hadoop-bigdata/docker-compose-es-kibana.git

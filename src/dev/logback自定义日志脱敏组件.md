@@ -10,15 +10,14 @@ timeline: true
 icon: java
 ---
 
-
-
 # logback - 自定义日志脱敏组件
 
 ## 前言
 
 在我们书写代码的时候，会书写许多日志代码，但是有些敏感数据是需要进行安全脱敏处理的。
 
-对于日志脱敏的方式有很多，常见的有**①使用conversionRule标签，继承MessageConverter②书写一个脱敏工具类，在打印日志的时候对特定特字段进行脱敏返回。**
+对于日志脱敏的方式有很多，常见的有**①使用conversionRule标签，继承MessageConverter②书写一个脱敏工具类，在打印日志的时候对特定特字段进行脱敏返回。
+**
 
 两种方式各有优缺点：
 
@@ -32,8 +31,8 @@ icon: java
 
 ### 一、自定义脱敏组件 - 脱敏效果演示
 
-![需要脱敏的日志](https://static.xlc520.tk/blogImage/20210129141855313.png)
-![控制台脱敏结果](https://static.xlc520.tk/blogImage/20210129141946269.png)
+![需要脱敏的日志](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210129141855313.png)
+![控制台脱敏结果](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210129141946269.png)
 
 ### 二、自定义脱敏组件 - 使用方式
 
@@ -98,7 +97,7 @@ pers.liuchengyin.logbackadvice.LcyFileAppender
 ##### 3、添加脱敏配置文件(logback-desensitize.yml)
 
 该配置文件应该放在resources文件下
-![图片](https://static.xlc520.tk/blogImage/20210129150716849.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210129150716849.png)
 
 ### 三、自定义脱敏组件 - 脱敏规范
 
@@ -190,7 +189,8 @@ log-desensitize:
 脱敏后：136****7861
 
 **2、以符号作为起始、结束节点作为脱敏标志**
-`emai:"@>(4,7)"`，`@`为脱敏标志，`>`表示其为结束节点，`<`表示其为开始节点。即@>表示对@之前的进行脱敏，@<表示对@之后的进行脱敏。这个示例就是@前的数据的第4-7位进行脱敏。`注意：这种规则里的双引号、括号不能省略`，`其次:和=不能作为标志符号，因为和匹配规则有冲突`
+`emai:"@>(4,7)"`，`@`为脱敏标志，`>`表示其为结束节点，`<`表示其为开始节点。即@>表示对@之前的进行脱敏，@<
+表示对@之后的进行脱敏。这个示例就是@前的数据的第4-7位进行脱敏。`注意：这种规则里的双引号、括号不能省略`，`其次:和=不能作为标志符号，因为和匹配规则有冲突`
 原始数据：`123456789@qq.com`
 `"@>(4,7)"`脱敏后：`123****89@qq.com`
 `"@<(1,3)"`脱敏后：`123456789@***com`
@@ -245,7 +245,7 @@ patterns:
 
 [Jar包Github地址 - logback-desensitization-1.0.0.jar](https://github.com/liuchengyin01/LogbackDesensitization/tree/master/repo/pers/liuchengyin/logback-desensitization/1.0.0)
 
-![图片](https://static.xlc520.tk/blogImage/20210129201007764.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210129201007764.png)
 
 Github地址：[Logback和slf4j的日志脱敏组件Demo](https://github.com/liuchengyin01/LogbackDesensitization)
 

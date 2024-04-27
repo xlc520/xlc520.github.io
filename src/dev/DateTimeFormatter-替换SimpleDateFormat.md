@@ -10,25 +10,24 @@ timeline: true
 icon: java
 ---
 
-
-
 # DateTimeFormatter-替换SimpleDateFormat
 
 我们先来看看SImpleDateFormat类的部分源码，如图 1所示。
 
-![img](https://static.xlc520.tk/blogImage/20210502205438290.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210502205438290.png)
 
 图 1
 
 接着再来看看DateTimeFormatter类的部分源码，如 图2所示。
 
-![img](https://static.xlc520.tk/blogImage/20210502205459779.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/20210502205459779.png)
 
 图 2
 
 由上可知，与SimpleDateFormat不同的是，DateTimeFormatter不但是不变对象，它还是线程安全的。线程的概念我们会在后面涉及到。
 
-现在我们只需要记住：因为**SimpleDateFormat不是线程安全的**，使用的时候，只能在方法内部创建新的局部变量。而**DateTimeFormatter可以只创建一个实例，到处引用**。
+现在我们只需要记住：因为**SimpleDateFormat不是线程安全的**，使用的时候，只能在方法内部创建新的局部变量。而*
+*DateTimeFormatter可以只创建一个实例，到处引用**。
 
 接下来，我们来说一说DateTimeFormatter类的常用方法
 
@@ -125,7 +124,9 @@ Fri, April/02/2021 23:27
 
 在格式化字符串中，如果需要输出固定字符，可以用’xxx’表示。
 
-当我们直接调用"System.out.println()"对一个ZonedDateTime或者LocalDateTime实例进行打印的时候，实际上，调用的是它们的toString()方法，**默认的toString()方法显示的字符串就是按照ISO 8601格式显示的**，我们可以通过DateTimeFormatter预定义的几个静态变量来引用。
+当我们直接调用"System.out.println()"
+对一个ZonedDateTime或者LocalDateTime实例进行打印的时候，实际上，调用的是它们的toString()方法，**默认的toString()
+方法显示的字符串就是按照ISO 8601格式显示的**，我们可以通过DateTimeFormatter预定义的几个静态变量来引用。
 
 范例3：过DateTimeFormatter预定义静态变量
 

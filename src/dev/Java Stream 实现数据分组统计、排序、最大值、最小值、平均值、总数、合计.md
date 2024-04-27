@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Java Stream 实现数据分组统计、排序、最大值、最小值、平均值、总数、合计
 
 Java8对数据处理可谓十分流畅，既不改变数据，又能对数据进行很好的处理，今天给大家演示下，用Java8的Stream如何对数据进行分组统计，排序，求和等
@@ -56,11 +54,11 @@ public void list(){
 
 结果如下：
 
-![图片](https://static.xlc520.tk/blogImage/640-1692672109213-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1692672109213-0.png)
 
 #### 分组统计：
 
-![图片](https://static.xlc520.tk/blogImage/640-1692672109213-1.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1692672109213-1.png)
 
 ```java
 @GetMapping("/list")
@@ -77,7 +75,8 @@ public void list(){
 
 > ❝
 >
-> 其中Collectors.groupingBy(InputForm::getCreateUserName, Collectors.counting())返回的是一个Map集合，InputForm::getCreateUserName代表key，Collectors.counting()代表value，我是按照创建人的姓名进行统计
+> 其中Collectors.groupingBy(InputForm::getCreateUserName, Collectors.counting())返回的是一个Map集合，InputForm::
+> getCreateUserName代表key，Collectors.counting()代表value，我是按照创建人的姓名进行统计
 >
 > ❞
 
@@ -98,7 +97,7 @@ public Map<String, List<InputForm>> list(){
 }
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1692672109213-2.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1692672109213-2.png)
 
 #### 求最大值，最小值
 
@@ -116,7 +115,7 @@ public Map<String, List<InputForm>> list(){
 }
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1692672109213-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1692672109213-3.png)
 
 可以看到此id是最小的，最大值雷同
 

@@ -1,10 +1,10 @@
 ---
-author: xlc520
 title: 算法
 description: 各类算法，刷题
 date: 2022-05-28
 category: algorithm
 tag: algorithm
+author: xlc520
 article: true
 timeline: true
 icon: article

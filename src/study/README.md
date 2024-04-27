@@ -1,10 +1,10 @@
 ---
-author: xlc520
 title: Study
 description: Study
 date: 2022-01-01
 category: Study
 tag: Study
+author: xlc520
 article: true
 dateline: true
 icon: note

@@ -10,13 +10,14 @@ timeline: true
 icon: java
 ---
 
-
-
 # 快速使用
 
-`mybatis-plus`作为`mybatis`的增强工具，它的出现极大的简化了开发中的数据库操作，但是长久以来，它的**联表查询**能力一直被大家所诟病。一旦遇到`left join`或`right join`的左右连接，你还是得老老实实的打开xml文件，手写上一大段的sql语句。
+`mybatis-plus`作为`mybatis`的增强工具，它的出现极大的简化了开发中的数据库操作，但是长久以来，它的**联表查询**
+能力一直被大家所诟病。一旦遇到`left join`或`right join`的左右连接，你还是得老老实实的打开xml文件，手写上一大段的sql语句。
 
-直到前几天，偶然碰到了这么一款叫做`mybatis-plus-join`的工具（后面就简称`mpj`了），使用了一下，不得不说真香！彻底将我从xml地狱中解放了出来，终于可以以类似`mybatis-plus`中`QueryWrapper`的方式来进行联表查询了，话不多说，我们下面开始体验。
+直到前几天，偶然碰到了这么一款叫做`mybatis-plus-join`的工具（后面就简称`mpj`
+了），使用了一下，不得不说真香！彻底将我从xml地狱中解放了出来，终于可以以类似`mybatis-plus`中`QueryWrapper`
+的方式来进行联表查询了，话不多说，我们下面开始体验。
 
 ## **引入依赖**
 
@@ -43,21 +44,22 @@ icon: java
 
 订单表：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873680.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873680.png)
 
 用户表，包含用户姓名：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873681.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873681.png)
 
 商品表，包含商品名称和单价：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873682.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873682.png)
 
 在订单表中，通过用户id和商品id与其他两张表进行关联。
 
 ## **修改Mapper**
 
-以往在使用`myatis-plus`的时候，我们的`Mapper`层接口都是直接继承的`BaseMapper`，使用`mpj`后需要对其进行修改，改为继承`MPJBaseMapper`接口。
+以往在使用`myatis-plus`的时候，我们的`Mapper`层接口都是直接继承的`BaseMapper`，使用`mpj`
+后需要对其进行修改，改为继承`MPJBaseMapper`接口。
 
 ```java
 @Mapper
@@ -65,11 +67,13 @@ public interface OrderMapper extends MPJBaseMapper<Order> {
 }
 ```
 
-对其余两个表的`Mapper`接口也进行相同的改造。此外，我们的`service`也可以选择继承`MPJBaseService`，`serviceImpl`选择继承`MPJBaseServiceImpl`，这两者为非必须继承。
+对其余两个表的`Mapper`接口也进行相同的改造。此外，我们的`service`也可以选择继承`MPJBaseService`，`serviceImpl`
+选择继承`MPJBaseServiceImpl`，这两者为非必须继承。
 
 ## **查询**
 
-`Mapper`接口改造完成后，我们把它注入到`Service`中，虽然说我们要完成3张表的联表查询，但是以`Order`作为主表的话，那么只注入这一个对应的`OrderMapper`就可以，非常简单。
+`Mapper`接口改造完成后，我们把它注入到`Service`中，虽然说我们要完成3张表的联表查询，但是以`Order`
+作为主表的话，那么只注入这一个对应的`OrderMapper`就可以，非常简单。
 
 ```java
 @Service
@@ -101,11 +105,12 @@ public void getOrder() {
 
 不看代码，我们先调用接口来看一下执行结果：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873683.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873683.png)
 
 可以看到，成功查询出了关联表中的信息，下面我们一点点介绍上面代码的语义。
 
-首先，调用`mapper`的`selectJoinList()`方法，进行关联查询，返回多条结果。后面的第一个参数`OrderDto.class`代表接收返回查询结果的类，作用和我们之前在`xml`中写的`resultType`类似。
+首先，调用`mapper`的`selectJoinList()`方法，进行关联查询，返回多条结果。后面的第一个参数`OrderDto.class`
+代表接收返回查询结果的类，作用和我们之前在`xml`中写的`resultType`类似。
 
 这个类可以直接继承实体，再添加上需要在关联查询中返回的列即可：
 
@@ -125,13 +130,15 @@ public class OrderDto extends Order {
 - `selectAll()`：查询指定实体类的全部字段
 - `select()`：查询指定的字段，支持可变长参数同时查询多个字段，但是在同一个`select`中只能查询相同表的字段，所以如果查询多张表的字段需要分开写
 - `selectAs()`：字段别名查询，用于数据库字段与接收结果的`dto`中属性名称不一致时转换
-- `leftJoin()`：左连接，其中第一个参数是参与联表的表对应的实体类，第二个参数是这张表联表的`ON`字段，第三个参数是参与联表的`ON`的另一个实体类属性
+- `leftJoin()`：左连接，其中第一个参数是参与联表的表对应的实体类，第二个参数是这张表联表的`ON`
+  字段，第三个参数是参与联表的`ON`的另一个实体类属性
 
-除此之外，还可以正常调用`mybatis-plus`中的各种原生方法，文档中还提到，默认主表别名是`t`，其他的表别名以先后调用的顺序使用`t1`、`t2`、`t3`以此类推。
+除此之外，还可以正常调用`mybatis-plus`中的各种原生方法，文档中还提到，默认主表别名是`t`
+，其他的表别名以先后调用的顺序使用`t1`、`t2`、`t3`以此类推。
 
 我们用插件读取日志转化为可读的sql语句，可以看到两条左连接条件都被正确地添加到了sql中：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873694.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873694.png)
 
 ### MPJQueryWrapper
 
@@ -153,7 +160,8 @@ public void getOrderSimple() {
 }
 ```
 
-运行结果与之前完全相同，需要注意的是，这样写时在引用表名时不要使用数据库中的原表名，主表默认使用`t`，其他表使用`join`语句中我们为它起的别名，如果使用原表名在运行中会出现报错。
+运行结果与之前完全相同，需要注意的是，这样写时在引用表名时不要使用数据库中的原表名，主表默认使用`t`，其他表使用`join`
+语句中我们为它起的别名，如果使用原表名在运行中会出现报错。
 
 并且，在`MPJQueryWrapper`中，可以更灵活的支持子查询操作，如果业务比较复杂，那么使用这种方式也是不错的选择。
 
@@ -192,15 +200,14 @@ public void page() {
 
 注意在这里需要添加一个分页参数的`Page`对象，我们再执行上面的代码，并对日志进行解析，查看sql语句：
 
-![mybatis-plus-join](https://static.xlc520.tk/blogImage/640-16586333873695.png)
+![mybatis-plus-join](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16586333873695.png)
 
 可以看到底层通过添加`limit`进行了分页，同理，`MPJQueryWrapper`也可以这样进行分页。
 
-
-
 # 官方介绍及使用
 
-mybatis-plus-join是mybatis plus的一个多表插件，上手简单，十分钟不到就能学会全部使用方式，只要会用mp就会用这个插件，仅仅依赖了lombok，而且是扩展mp的构造器并非更改原本的构造器，不会对原有项目产生一点点影响，相信大多数项目都有这俩插件，四舍五入就是没依赖。
+mybatis-plus-join是mybatis
+plus的一个多表插件，上手简单，十分钟不到就能学会全部使用方式，只要会用mp就会用这个插件，仅仅依赖了lombok，而且是扩展mp的构造器并非更改原本的构造器，不会对原有项目产生一点点影响，相信大多数项目都有这俩插件，四舍五入就是没依赖。
 
 mybatis-plus-join示例：
 
@@ -233,19 +240,15 @@ mybatis plus：3.2.0版本依赖地址：
  </dependency>
 ```
 
-
-
 ## 版本对应关系（此处只显示对应的最新版本）
 
 > 标注：*号代表，从起始版本之后都是可以使用的
 
-| Mybatis-plus | Mybatis-plus-join                                       |
-| ------------ | ------------------------------------------------------- |
-| 3.2.0        | 1.2.0                                                   |
-| 3.3.1 - 3.42 | 1.0.2                                                   |
+| Mybatis-plus | Mybatis-plus-join                                |
+|--------------|--------------------------------------------------|
+| 3.2.0        | 1.2.0                                            |
+| 3.3.1 - 3.42 | 1.0.2                                            |
 | 3.4.3.4 - *  | 1.0.3 、1.0.4、1.0.5、1.0.6、1.0.8、1.0.9、1.1.1、1.1.2 |
-
-
 
 ## 怎么使用
 
@@ -303,9 +306,10 @@ mybatis plus：3.2.0版本依赖地址：
 
 `joinPage -> page`
 
-**注意：这几个方法，前面俩参数和mp的用法一致，最后一个class类型的是返回类型，这个主要是大多数多表操作都是需要有额外字段，所以需要额外定义，而`Wrapper<E> wrapper`中的这个需要填写在需要构建条件的实体，这个实体是任意的，不强制，创建条件构造器的时候定义的那个对象就是主表**
+*
 
-
+*注意：这几个方法，前面俩参数和mp的用法一致，最后一个class类型的是返回类型，这个主要是大多数多表操作都是需要有额外字段，所以需要额外定义，而`Wrapper<E> wrapper`
+中的这个需要填写在需要构建条件的实体，这个实体是任意的，不强制，创建条件构造器的时候定义的那个对象就是主表**
 
 ## 基本使用方法
 
@@ -367,8 +371,6 @@ SELECT 1 as id
  ON users_age.id = users.age_id
 
 ```
-
-
 
 下面来看构造器的使用：
 
@@ -450,8 +452,6 @@ FROM
 	LEFT JOIN users_age AS u_a ON u_a.id = userMaster.age_id;
 ```
 
-
-
 ### 一对一查询映射
 
 ```java
@@ -500,10 +500,6 @@ FROM users users
 
 ```
 
-
-
-
-
 ### 多对多查询映射
 
 ```java
@@ -536,8 +532,6 @@ FROM users_age AS users_age
 ]
 ```
 
-
-
 ### 返回基础类型数据
 
 ```java
@@ -566,8 +560,6 @@ System.out.println(userName);
 // 输出结果："我是名字1"
 
 ```
-
-
 
 ### 根据实体不为空的数据查询
 
@@ -604,8 +596,6 @@ where
 
 ```
 
-
-
 ### notDefaultSelectAll() 不默认查询主表全部的字段
 
 ```java
@@ -640,8 +630,6 @@ where
 
 
 ```
-
-
 
 ### selectAs() 查询添加别名
 
@@ -733,8 +721,6 @@ where (
 	users_age.age_name = '95'
 )
 ```
-
-
 
 ### joinAnd() join添加条件
 

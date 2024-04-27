@@ -14,9 +14,9 @@ icon: others
 
 # 新版QQ修改彩色颜色字体代码教程
 
-QQ群彩色昵称， 
+QQ群彩色昵称，
 
- 玩过的都知道，以前是可以直接设置的，但新版QQ群昵称好像不太行！效果自测！
+玩过的都知道，以前是可以直接设置的，但新版QQ群昵称好像不太行！效果自测！
 
 这里我就分享 **两类** 颜色代码吧，用的话把后面的颜色替换成自己的昵称就行了其实找一个旧版QQ，复制好改完的昵称就会在剪切板显示颜色代码
 
@@ -30,11 +30,12 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ## 详细教程如下:
 
-随便找一个群，找到编辑群昵称 选择自己想修改的颜色，这里我举例红色，红色代码是<&ÿÿ5@>红色，我们把红色二个文字删掉，直接把<&ÿÿ5@>复制粘贴到群昵称编辑里面，点击确定，我们来看看效果如何滑稽
+随便找一个群，找到编辑群昵称 选择自己想修改的颜色，这里我举例红色，红色代码是<&ÿÿ5@>红色，我们把红色二个文字删掉，直接把<
+&ÿÿ5@>复制粘贴到群昵称编辑里面，点击确定，我们来看看效果如何滑稽
 
 ## 纯色昵称代码：
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289982.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289982.jpeg)
 
 ```
 <&ÿĀĀĀ>黑色
@@ -54,7 +55,7 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ### 彩色昵称代码
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289981.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289981.jpeg)
 
 代码如下
 
@@ -148,12 +149,12 @@ q群改群昵称颜色代码合集（ **需要SVIP** ） 不喜勿喷，不喜�
 
 ## 效果展示
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289982.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289982.png)
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289983.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289983.jpeg)
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289984.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289984.jpeg)
 
-![img](https://static.xlc520.tk/blogImage/1620-16536501289985.jpeg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1620-16536501289985.jpeg)
 
-   效果图来源于网络，若无意侵权，联系删除即可！
+效果图来源于网络，若无意侵权，联系删除即可！

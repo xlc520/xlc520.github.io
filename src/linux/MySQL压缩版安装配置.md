@@ -9,6 +9,7 @@ article: true
 timeline: true
 icon: type
 ---
+
 # MySQL压缩版安装配置
 
 ## 1 下载
@@ -23,7 +24,7 @@ icon: type
 **注意：**
 
 - 旧版本中存在漏洞
-- ![image-20220115155838758](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/image-20220115155838758.png)
+- ![image-20220115155838758](https://bitbucket.org/xlc520/blogasset/raw/main/images2/image-20220115155838758.png)
 
 ## 2 安装
 
@@ -33,7 +34,7 @@ icon: type
 
 右键进行解压，解压后的目录如下图所示：
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU3NzU0Mw.png)
 
 接下来创建我们的数据库文件存放位置，这里我在mysql解压目录的同级目录下创建了`databases`文件夹，作为数据库存放目录
 
@@ -42,9 +43,9 @@ icon: type
 
 **2、创建一个名为my.ini的文件：**
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ZmFuZ3poZW5naGVpdGk.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/ZmFuZ3poZW5naGVpdGk.png)
 
- **3、修改my.ini文件：**
+**3、修改my.ini文件：**
 
 ```sql
 [mysql]
@@ -105,23 +106,21 @@ default-character-set=utf8
 
 4.进入到bin目录下
 
- 5.执行 `mysqld --install` 命令安装（执行 `mysqld --remove` 卸载安装）
+5.执行 `mysqld --install` 命令安装（执行 `mysqld --remove` 卸载安装）
 
 6.继续执行 `mysqld --initialize --user=root --console` 命令
 
 注意：初始化完成后MySQL会给root用户创建一个默认随机密码，下图白色部分就是密码，同时在data目录下也添加了相关的配置文件，如果密码有字符辨识不了，则把date目录下的文件都删了，重新执行这一步。
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/1780812-20190829212537656-1187829463.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/1780812-20190829212537656-1187829463.png)
 
- 7.执行`net start mysql`启动服务（执行`net stop mysql`关闭服务）
+7.执行`net start mysql`启动服务（执行`net stop mysql`关闭服务）
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/1780812-20190829212232857-537058421.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/1780812-20190829212232857-537058421.png)
 
- 
+8.执行`mysql -uroot -pqLBiVku7k%f`登录MySQL（-u后面是用户名，-p后面是密码，即上面的默认随机密码）
 
- 8.执行`mysql -uroot -pqLBiVku7k%f`登录MySQL（-u后面是用户名，-p后面是密码，即上面的默认随机密码）
-
- 9.修改密码
+9.修改密码
 
 mysql版本是7:
 
@@ -149,17 +148,15 @@ grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
 安装过程中如果出现以下错误，是我们的电脑缺少运行时环境。
 **注：**在这里我们有出现这种情况，但为了以防万一，还是给大家说一下，这里的图片用的网图，如有侵权，请评论删图！
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20200131203311761.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20200131203311761.png)
 
 解决办法：
 下载vcruntime140_1.dll，链接：https://cn.dll-files.com/vcruntime140_1.dll.html
 
-![在这里插入图片描述](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/16422331874666.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images2/16422331874666.png)
 下载完成后，解压提取文件，将提取出来的`vcruntime140_1.dll`文件复制到我们的`C:\Windows\System32`
-![在这里插入图片描述](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/16422331874677.png)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images2/16422331874677.png)
 **注意, 32位版本的`vcruntime140_1.dll`需要复制到`C:\Windows\SysWOW64`下**
-
-
 
 ### tips2：
 
@@ -169,10 +166,6 @@ mysqld -remove移除自己的mysqld服务；
 net stop mysql命令，停止mysql服务
 如果报错，清空data文件夹，最好还是删掉data文件，重新执行remove--initialize--install--start（这些不是命令）流程即可；
 
-
-
-
-
 ## 5 配置mysql的环境变量
 
 ```vbnet
@@ -181,7 +174,7 @@ MYSQL_HOME
 D:\Program Files\mysql
 ```
 
- ![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20200303112518670.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20200303112518670.png)
 
 点击Path，增加：
 
@@ -189,5 +182,5 @@ D:\Program Files\mysql
 %MYSQL_HOME%\bin;
 ```
 
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20190831112741174.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20190831112741174.png)
 

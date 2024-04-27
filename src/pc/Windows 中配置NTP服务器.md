@@ -26,7 +26,7 @@ icon: computer
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Config
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1699510219664-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-0.png)
 
 找到名为 AnnounceFlags的注册表值，将其修改为 5。这个值决定了Windows主机是否向网络中的其他设备宣告自己是一个NTP服务器。
 
@@ -38,7 +38,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Config
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpServer
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1699510219664-1.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-1.png)
 
 找到名为 Enabled 的注册表值，将其修改为 1。这将启用Windows主机的NTP服务器功能。
 
@@ -50,10 +50,8 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpSe
 net start w32time
 ```
 
- 这将启动时间服务以应用你的配置更改。
- ![图片](https://static.xlc520.tk/blogImage/640-1699510219664-2.png)
-
-
+这将启动时间服务以应用你的配置更改。
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-2.png)
 
 ## **步骤5：验证NTP服务器**
 
@@ -63,11 +61,9 @@ net start w32time
 w32tm /stripchart /computer:127.0.0.1
 ```
 
-
-
 输出将显示一系列时间数据点，包括偏移值。这些数据点反映了主机与指定NTP服务器之间的时间同步情况。偏移值应接近零，这表示时间同步正常。
 
-![图片](https://static.xlc520.tk/blogImage/640-1699510219664-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-3.png)
 
 恭喜！你已成功将你的Windows7主机配置为NTP服务器。其他设备现在可以使用你的主机作为时间源来确保准确的时间同步。其他设备（如windows）验证结果如下：
 
@@ -75,7 +71,7 @@ w32tm /stripchart /computer:127.0.0.1
 w32tm /stripchart /computer:NTP服务器IP
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1699510219664-4.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-4.png)
 在windows下如果需要修改时间服务器地址，进入控制面板，选择日期和时间，再选择Internet时间，勾选与Internet时间服务器同步，服务器地址填写你需要的地址或域名即可
 
-![图片](https://static.xlc520.tk/blogImage/640-1699510219664-5.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1699510219664-5.png)

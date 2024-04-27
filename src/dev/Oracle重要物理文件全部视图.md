@@ -1,0 +1,41 @@
+---
+author: xlc520
+title: Oracle重要物理文件全部视图
+description: 
+date: 2024-04-18
+category: Java
+tag: Java
+article: true
+timeline: true
+icon: java
+---
+
+
+
+# Oracle重要物理文件全部视图
+
+```sql
+-- 数据文件视图
+SELECT * FROM DBA_DATA_FILES;  
+SELECT * FROM DBA_EXTENTS;
+SELECT * FROM USER_EXTENTS;
+SELECT * FROM DBA_FREE_SPACE;
+SELECT * FROM USER_FREE_SPACE;
+SELECT * FROM V$DATAFILE;
+SELECT * FROM V$DATAFILE_HEADER;
+-- 日志文件视图
+SELECT * FROM V$LOG;
+SELECT * FROM V$LOGFILE;
+SELECT * FROM V$LOG_HISTORY;
+-- 控制文件视图
+SELECT * FROM V$DATABASE;
+SELECT * FROM V$CONTROLFILE;
+SELECT * FROM V$CONTROLFILE_RECORD_SECTION;
+SELECT * FROM V$PARAMETER;
+
+-- 参数文件视图
+SELECT * FROM V$PARAMETER;
+SELECT * FROM V$PARAMETER2;
+SELECT * FROM V$SPPARAMETER;
+```
+

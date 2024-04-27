@@ -159,7 +159,9 @@ sudo sysctl --system
 
 #### 2）安装容器 docker（所有节点）
 
-> 提示：v1.24 之前的 Kubernetes 版本包括与 Docker Engine 的直接集成，使用名为 dockershim 的组件。这种特殊的直接整合不再是 Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
+> 提示：v1.24 之前的 Kubernetes 版本包括与 Docker Engine 的直接集成，使用名为 dockershim 的组件。这种特殊的直接整合不再是
+> Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你
+> 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
 
 ```
 # 配置yum源
@@ -199,7 +201,8 @@ systemctl reload docker
 systemctl status docker containerd
 ```
 
-> 【温馨提示】dockerd 实际真实调用的还是 containerd 的 api 接口，containerd 是 dockerd 和 runC 之间的一个中间交流组件。所以启动 docker 服务的时候，也会启动 containerd 服务的。
+> 【温馨提示】dockerd 实际真实调用的还是 containerd 的 api 接口，containerd 是 dockerd 和 runC 之间的一个中间交流组件。所以启动
+> docker 服务的时候，也会启动 containerd 服务的。
 
 #### 3）配置 k8s yum 源（所有节点）
 
@@ -223,11 +226,13 @@ sed -i "s#k8s.gcr.io/pause#registry.aliyuncs.com/google_containers/pause#g"     
 grep sandbox_image  /etc/containerd/config.toml
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653044-0.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653044-0.png)
 
 #### 5）配置 containerd cgroup 驱动程序 systemd（所有节点）
 
-> kubernets 自ｖ 1.24.0 后，就不再使用 docker.shim，替换采用 containerd 作为容器运行时端点。因此需要安装 containerd（在 docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是 containerd。
+> kubernets 自ｖ 1.24.0 后，就不再使用 docker.shim，替换采用 containerd 作为容器运行时端点。因此需要安装 containerd（在
+> docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是
+> containerd。
 
 ```
 sed -i 's#SystemdCgroup = false#SystemdCgroup = true#g' /etc/containerd/config.toml
@@ -248,15 +253,16 @@ systemctl enable --now kubelet
 systemctl status kubelet
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653044-1.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653044-1.png)
 
 查看日志，发现有报错，报错如下：
 
 > kubelet.service: Main process exited, code=exited, status=1/FAILURE kubelet.service: Failed with result 'exit-code'.
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-2.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-2.png)
 
-> 【解释】重新安装（或第一次安装）k8s，未经过 kubeadm init 或者 kubeadm join 后，kubelet 会不断重启，这个是正常现象……，执行 init 或 join 后问题会自动解决，对此官网有如下描述，也就是此时不用理会 kubelet.service。
+> 【解释】重新安装（或第一次安装）k8s，未经过 kubeadm init 或者 kubeadm join 后，kubelet 会不断重启，这个是正常现象……，执行 init
+> 或 join 后问题会自动解决，对此官网有如下描述，也就是此时不用理会 kubelet.service。
 
 查看版本
 
@@ -265,7 +271,7 @@ kubectl version
 yum info kubeadm
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-3.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-3.png)
 
 #### 7）使用 kubeadm 初始化集群（master 节点）
 
@@ -335,13 +341,14 @@ echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bash_profile
 source  ~/.bash_profile
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-4.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-4.png)
 
 发现节点还是有问题，查看日志 /var/log/messages
 
-> "Container runtime network not ready" networkReady="NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized"
+> "Container runtime network not ready" networkReady="NetworkReady=false reason:NetworkPluginNotReady message:Network
+> plugin returns error: cni plugin not initialized"
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-5.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-5.png)
 
 接下来就是安装 Pod 网络插件
 
@@ -362,7 +369,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 再查看 node 节点，就已经正常了
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-6.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-6.png)
 
 #### 9）node 节点加入 k8s 集群
 
@@ -395,7 +402,8 @@ kubeadm token list
 openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
 
-如果执行 kubeadm init 时没有记录下加入集群的命令，可以通过以下命令重新创建（推荐）一般不用上面的分别获取 token 和 ca-cert-hash 方式，执行以下命令一气呵成：
+如果执行 kubeadm init 时没有记录下加入集群的命令，可以通过以下命令重新创建（推荐）一般不用上面的分别获取 token 和
+ca-cert-hash 方式，执行以下命令一气呵成：
 
 ```
 kubeadm token create --print-join-command
@@ -408,7 +416,7 @@ kubectl get pods -A
 kubectl get nodes
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-7.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-7.png)
 
 #### 10）配置 IPVS
 
@@ -441,7 +449,7 @@ yum install ipset ipvsadm -y
 kubectl edit  configmap -n kube-system  kube-proxy
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-8.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-8.png)
 
 4、重启 kube-proxy
 
@@ -454,7 +462,7 @@ kubectl get pod -n kube-system | grep kube-proxy |awk '{system("kubectl delete p
 kubectl get pod -n kube-system | grep kube-proxy
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-9.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-9.png)
 
 5、查看 ipvs 转发规则
 
@@ -462,7 +470,7 @@ kubectl get pod -n kube-system | grep kube-proxy
 ipvsadm -Ln
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-10.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-10.png)
 
 #### 11）集群高可用配置
 
@@ -470,11 +478,11 @@ ipvsadm -Ln
 
 使用堆叠（stacked）控制平面节点，其中 etcd 节点与控制平面节点共存（本章使用），架构图如下：
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-11.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-11.png)
 
 使用外部 etcd 节点，其中 etcd 在与控制平面不同的节点上运行，架构图如下：
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653045-12.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653045-12.png)
 
 这里新增一台机器作为另外一个 master 节点：192.168.0.116 配置跟上面 master 节点一样。只是不需要最后一步初始化了。
 
@@ -586,7 +594,9 @@ sudo sysctl --system
 
 7、安装容器 docker（所有节点）
 
-> 提示：v1.24 之前的 Kubernetes 版本包括与 Docker Engine 的直接集成，使用名为 dockershim 的组件。这种特殊的直接整合不再是 Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
+> 提示：v1.24 之前的 Kubernetes 版本包括与 Docker Engine 的直接集成，使用名为 dockershim 的组件。这种特殊的直接整合不再是
+> Kubernetes 的一部分 （这次删除被作为 v1.20 发行版本的一部分宣布）。你可以阅读检查 Dockershim 弃用是否会影响你
+> 以了解此删除可能会如何影响你。要了解如何使用 dockershim 进行迁移，请参阅从 dockershim 迁移。
 
 ```
 # 配置yum源
@@ -626,7 +636,8 @@ systemctl reload docker
 systemctl status docker containerd
 ```
 
-> 【温馨提示】dockerd 实际真实调用的还是 containerd 的 api 接口，containerd 是 dockerd 和 runC 之间的一个中间交流组件。所以启动 docker 服务的时候，也会启动 containerd 服务的。
+> 【温馨提示】dockerd 实际真实调用的还是 containerd 的 api 接口，containerd 是 dockerd 和 runC 之间的一个中间交流组件。所以启动
+> docker 服务的时候，也会启动 containerd 服务的。
 
 #### 8、配置 k8s yum 源（所有节点）
 
@@ -650,11 +661,11 @@ sed -i "s#k8s.gcr.io/pause#registry.aliyuncs.com/google_containers/pause#g"     
 grep sandbox_image  /etc/containerd/config.toml
 ```
 
-
-
 #### 10、配置 containerd cgroup 驱动程序 systemd
 
-> kubernets 自ｖ 1.24.0 后，就不再使用 docker.shim，替换采用 containerd 作为容器运行时端点。因此需要安装 containerd（在 docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是 containerd。
+> kubernets 自ｖ 1.24.0 后，就不再使用 docker.shim，替换采用 containerd 作为容器运行时端点。因此需要安装 containerd（在
+> docker 的基础下安装），上面安装 docker 的时候就自动安装了 containerd 了。这里的 docker 只是作为客户端而已。容器引擎还是
+> containerd。
 
 ```
 sed -i 's#SystemdCgroup = false#SystemdCgroup = true#g' /etc/containerd/config.toml
@@ -696,7 +707,7 @@ kubeadm join cluster-endpoint:6443 --token wswrfw.fc81au4yvy6ovmhh --discovery-t
 # --certificate-key ... 将导致从集群中的 kubeadm-certs Secret 下载控制平面证书并使用给定的密钥进行解密。这里的值
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-13.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-13.png)
 
 根据提示执行如下命令：
 
@@ -713,13 +724,14 @@ kubectl get nodes
 kubectl get pods -A -owide
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-14.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-14.png)
 
-虽然现在已经有两个 master 了，但是对外还是只能有一个入口的，所以还得要一个负载均衡器，如果一个 master 挂了，会自动切到另外一个 master 节点。
+虽然现在已经有两个 master 了，但是对外还是只能有一个入口的，所以还得要一个负载均衡器，如果一个 master 挂了，会自动切到另外一个
+master 节点。
 
 #### 12）部署 Nginx+Keepalived 高可用负载均衡器
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-15.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-15.png)
 
 1、安装 Nginx 和 Keepalived
 
@@ -909,9 +921,7 @@ systemctl restart keepalived && systemctl enable keepalived && systemctl status 
 ip a
 ```
 
-
-
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-16.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-16.png)
 
 6、修改 hosts（所有节点）
 
@@ -933,7 +943,7 @@ ip a
 curl -k https://cluster-endpoint:16443/version
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-17.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-17.png)
 
 高可用测试验证，将 k8s-master-168-0-113 节点关机
 
@@ -944,7 +954,8 @@ kubectl get nodes -A
 kubectl get pods -A
 ```
 
-> 【温馨提示】堆叠集群存在耦合失败的风险。如果一个节点发生故障，则 etcd 成员和控制平面实例都将丢失， 并且冗余会受到影响。你可以通过添加更多控制平面节点来降低此风险。另外，搜索公众号编程技术圈后台回复“1024”，获取一份惊喜礼包。
+> 【温馨提示】堆叠集群存在耦合失败的风险。如果一个节点发生故障，则 etcd 成员和控制平面实例都将丢失，
+> 并且冗余会受到影响。你可以通过添加更多控制平面节点来降低此风险。另外，搜索公众号编程技术圈后台回复“1024”，获取一份惊喜礼包。
 
 ### 三、k8s 管理平台 dashboard 环境部署
 
@@ -1276,7 +1287,7 @@ spec:
           emptyDir: {}
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-18.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-18.png)
 
 重新部署
 
@@ -1286,7 +1297,7 @@ kubectl apply -f recommended.yaml
 kubectl get svc,pods -n kubernetes-dashboard
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-19.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-19.png)
 
 #### 2）创建登录用户
 
@@ -1328,11 +1339,11 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 登录：https://cluster-endpoint:31443
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-20.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-20.png)
 
 输入上面创建的 token 登录
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-21.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-21.png)
 
 ### 四、k8s 镜像仓库 harbor 环境部署
 
@@ -1439,7 +1450,7 @@ kubectl taint nodes k8s-master2-168-0-116 node-role.kubernetes.io/control-plane:
 kubectl apply -f deploy.yaml
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-22.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-22.png)
 
 #### 5）安装 nfs
 
@@ -1566,25 +1577,25 @@ chmod 600 /etc/rsyncd_users.db
 
 rsyncd.conf 参数
 
-| rsyncd.conf 参数    | 参数说明                                                     |
-| :------------------ | :----------------------------------------------------------- |
-| uid=root            | rsync 使用的用户。                                           |
-| gid=root            | rsync 使用的用户组（用户所在的组）                           |
+| rsyncd.conf 参数      | 参数说明                                                                         |
+|:--------------------|:-----------------------------------------------------------------------------|
+| uid=root            | rsync 使用的用户。                                                                 |
+| gid=root            | rsync 使用的用户组（用户所在的组）                                                         |
 | use chroot=no       | 如果为 true，daemon 会在客户端传输文件前“chroot to the path”。这是一种安全配置，因为我们大多数都在内网，所以不配也没关系 |
-| max connections=200 | 设置最大连接数，默认 0，意思无限制，负值为关闭这个模块       |
-| timeout=400         | 默认为 0，表示 no timeout，建议 300-600（5-10 分钟）         |
-| pid file            | rsync daemon 启动后将其进程 pid 写入此文件。如果这个文件存在，rsync 不会覆盖该文件，而是会终止 |
-| lock file           | 指定 lock 文件用来支持“max connections”参数，使得总连接数不会超过限制 |
-| log file            | 不设或者设置错误，rsync 会使用 rsyslog 输出相关日志信息      |
-| ignore errors       | 忽略 I/O 错误                                                |
-| read only=false     | 指定客户端是否可以上传文件，默认对所有模块为 true            |
-| list=false          | 是否允许客户端可以查看可用模块列表，默认为可以               |
-| hosts allow         | 指定可以联系的客户端主机名或和 ip 地址或地址段，默认情况没有此参数，即都可以连接 |
-| hosts deny          | 指定不可以联系的客户端主机名或 ip 地址或地址段，默认情况没有此参数，即都可以连接 |
-| auth users          | 指定以空格或逗号分隔的用户可以使用哪些模块，用户不需要在本地系统中存在。默认为所有用户无密码访问 |
-| secrets file        | 指定用户名和密码存放的文件，格式；用户名；密码，密码不超过 8 位 |
-| [backup]            | 这里就是模块名称，需用中括号扩起来，起名称没有特殊要求，但最好是有意义的名称，便于以后维护 |
-| path                | 这个模块中，daemon 使用的文件系统或目录，目录的权限要注意和配置文件中的权限一致，否则会遇到读写的问题 |
+| max connections=200 | 设置最大连接数，默认 0，意思无限制，负值为关闭这个模块                                                 |
+| timeout=400         | 默认为 0，表示 no timeout，建议 300-600（5-10 分钟）                                      |
+| pid file            | rsync daemon 启动后将其进程 pid 写入此文件。如果这个文件存在，rsync 不会覆盖该文件，而是会终止                  |
+| lock file           | 指定 lock 文件用来支持“max connections”参数，使得总连接数不会超过限制                               |
+| log file            | 不设或者设置错误，rsync 会使用 rsyslog 输出相关日志信息                                          |
+| ignore errors       | 忽略 I/O 错误                                                                    |
+| read only=false     | 指定客户端是否可以上传文件，默认对所有模块为 true                                                  |
+| list=false          | 是否允许客户端可以查看可用模块列表，默认为可以                                                      |
+| hosts allow         | 指定可以联系的客户端主机名或和 ip 地址或地址段，默认情况没有此参数，即都可以连接                                   |
+| hosts deny          | 指定不可以联系的客户端主机名或 ip 地址或地址段，默认情况没有此参数，即都可以连接                                   |
+| auth users          | 指定以空格或逗号分隔的用户可以使用哪些模块，用户不需要在本地系统中存在。默认为所有用户无密码访问                             |
+| secrets file        | 指定用户名和密码存放的文件，格式；用户名；密码，密码不超过 8 位                                            |
+| [backup]            | 这里就是模块名称，需用中括号扩起来，起名称没有特殊要求，但最好是有意义的名称，便于以后维护                                |
+| path                | 这个模块中，daemon 使用的文件系统或目录，目录的权限要注意和配置文件中的权限一致，否则会遇到读写的问题                       |
 
 【4】rsync 常用命令参数详解
 
@@ -1652,7 +1663,8 @@ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/
 
 2、helm 安装 nfs provisioner
 
-> 【温馨提示】默认镜像是无法访问的，这里使用 dockerhub 搜索到的镜像willdockerhub/nfs-subdir-external-provisioner:v4.0.2，还有就是 StorageClass 不分命名空间，所有在所有命名空间下都可以使用。
+> 【温馨提示】默认镜像是无法访问的，这里使用 dockerhub 搜索到的镜像willdockerhub/nfs-subdir-external-provisioner:
+> v4.0.2，还有就是 StorageClass 不分命名空间，所有在所有命名空间下都可以使用。
 
 ```
 helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
@@ -1675,7 +1687,7 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
 kubectl get pods,deploy,sc -n nfs-provisioner
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-23.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-23.png)
 
 #### 7）部署 Harbor（Https 方式）
 
@@ -1723,7 +1735,7 @@ helm install myharbor --namespace harbor harbor/harbor \
 kubectl get ingress,svc,pods,pvc -n harbor
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-24.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-24.png)
 
 ### 5、ingress 没有 ADDRESS 问题解决
 
@@ -1817,19 +1829,19 @@ helm install myharbor --namespace harbor harbor/harbor \
   --set harborAdminPassword=Harbor12345
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-25.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-25.png)
 
 5、访问 harbor
 
 https://myharbor.com
 账号/密码：admin/Harbor12345
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-26.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-26.png)
 
 6、harbor 常见操作
 【1】创建项目 bigdata
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653046-27.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653046-27.png)
 
 【2】配置私有仓库
 在文件/etc/docker/daemon.json添加如下内容：
@@ -1851,7 +1863,7 @@ docker login https://myharbor.com
 #账号/密码：admin/Harbor12345
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-28.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653047-28.png)
 
 【4】打标签并把镜像上传到 harbor
 
@@ -1862,9 +1874,10 @@ docker push myharbor.com/bigdata/pause:3.6
 
 7、修改 containerd 配置
 
-以前使用 docker-engine 的时候，只需要修改/etc/docker/daemon.json 就行，但是新版的 k8s 已经使用 containerd 了，所以这里需要做相关配置，要不然 containerd 会失败。证书（ca.crt）可以在页面上下载：
+以前使用 docker-engine 的时候，只需要修改/etc/docker/daemon.json 就行，但是新版的 k8s 已经使用 containerd
+了，所以这里需要做相关配置，要不然 containerd 会失败。证书（ca.crt）可以在页面上下载：
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-29.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653047-29.png)
 
 创建域名目录
 
@@ -1895,7 +1908,7 @@ cp ca.crt /etc/containerd/myharbor.com/
           endpoint = ["https://myharbor.com"]
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-30.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653047-30.png)
 
 重启 containerd
 
@@ -1937,6 +1950,6 @@ EOF
 crictl pull myharbor.com/bigdata/mysql:5.7.38
 ```
 
-![K8S高可用部署](https://static.xlc520.tk/blogImage/640-1667642653047-31.png)
+![K8S高可用部署](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1667642653047-31.png)
 
 Kubernetes（k8s）最新版最完整版基础环境部署+master 高可用实现详细步骤就到这里了

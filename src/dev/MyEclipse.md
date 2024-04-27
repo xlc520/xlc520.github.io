@@ -9,6 +9,7 @@ article: true
 timeline: true
 icon: type
 ---
+
 # MyEclipsev2021永久激活版
 
 ### 激活码
@@ -38,20 +39,20 @@ icon: type
 
 1、在软件学堂下载软件安装包，并对压缩包进行解压得到安装程序和破解文件。
 2、然后双击运行软件安装程序，按照安装向导进行安装。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280930579127.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280930579127.jpg)
 3、接受软件安装协议，点击Next进行下一步。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931029971.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931029971.jpg)
 4、选择软件安装位置，一般默认安装在c盘，用户也可自定义选择其他位置，注意千万不要出现中文目录。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931116442.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931116442.jpg)
 5、软件正在安装中，请用户耐心等待。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931181934.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931181934.jpg)
 6、待到安装完成后，退出安装向导。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931248968.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931248968.jpg)
 7、接下来进入软件主界面，在弹出注册界面，点击Enter License默认进入。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931301641123212.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931301641123212.jpg)
 8、然后将软件包中的注册码输入到该界面中，再点击Enable Now。
 9、接着载点击Activate Now即可完成激活啦。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202106280931445590.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202106280931445590.jpg)
 
 ### 功能介绍
 
@@ -70,19 +71,20 @@ icon: type
 点击Windows → preference → WorkSpace
 或者搜索workspace
 选择编码格式，默认为GBK，不过选择UTF-8为好。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202107091052554606.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202107091052554606.jpg)
 成功更改工作空间编码之后，如果对默认字体不适应，可以选择更改字体。
 更改字体
 点击Windows → preference → General →Appearence → Color and Fonts → Basic
 或者搜索Colors and fonts
 选择 Text font ，点击Edit编辑，就可以更改字体了，选择合适的就行。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202107091053019148.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202107091053019148.jpg)
 字体设置完之后，最好顺便设置下注释模版，注释模版就是在使用/** */这种注释的时候，会自动按照所设置的注释模版注释。注释是个好习惯。
 设置注释模版
-Class类的注释模板打开Eclipse/MyEclipse工具，点击 Window->[Pr](http://www.xue51.com/zt/Premierebbdq/)eferences弹出首选项设置窗口，Java->Code Style->Code Template选项列表，点击Types。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/20210709105305842.jpg)
+Class类的注释模板打开Eclipse/MyEclipse工具，点击 Window->[Pr](http://www.xue51.com/zt/Premierebbdq/)
+eferences弹出首选项设置窗口，Java->Code Style->Code Template选项列表，点击Types。
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/20210709105305842.jpg)
 可以输入/**，然后回车或按shift+alt+j快捷键补齐注释内容。
-![img](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/202107091053091687.jpg)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images2/202107091053091687.jpg)
 注释模版代码:
 1、/**
 2、* Title: ${type_name}

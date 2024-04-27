@@ -10,21 +10,18 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot 虚拟线程
 
 首先，虚拟线程是 Project Loom 的一部分。
 
 此外，Loom 不会加速内存计算，例如并行流，这不是 Loom 的目标。
 
-我们正在研究如何使用可用的相同硬件来提高应用程序吞吐量，即充分利用 CPU 的潜力，为此我们花费了大量精力。截至目前，我们能够利用 2% 到 3% 的 CPU。我在这篇博客中详细讨论了这一点：
-
-
+我们正在研究如何使用可用的相同硬件来提高应用程序吞吐量，即充分利用 CPU 的潜力，为此我们花费了大量精力。截至目前，我们能够利用
+2% 到 3% 的 CPU。我在这篇博客中详细讨论了这一点：
 
 让我们快速设置我们的 Spring Boot 项目。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -110,7 +107,7 @@ icon: java
 
 由于 Project Loom 处于预览阶段，我们需要启用预览功能。
 
-```
+```java
 package org.anil.virtualthread;
 
 import lombok.extern.slf4j.Slf4j;
@@ -142,7 +139,7 @@ public class VirtualthreadApplication {
 
 到目前为止，我们需要为 Tomcat 服务器配置虚拟线程设置。将来，这可能会在自动配置本身中得到解决。
 
-```
+```java
 package org.anil.virtualthread;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -182,9 +179,10 @@ public class HomeController {
 }
 ```
 
-我们有一个GetMapping返回所有结果，我们的数据库中有 1000 条数据。我们已经让线程休眠 1 秒。让我们看看我们的Product实体和ProductRepository。
+我们有一个GetMapping返回所有结果，我们的数据库中有 1000 条数据。我们已经让线程休眠 1
+秒。让我们看看我们的Product实体和ProductRepository。
 
-```
+```java
 package org.anil.virtualthread;
 
 import jakarta.persistence.Entity;
@@ -214,7 +212,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
 让我们看看我们的 application.yaml
 
-```
+```yaml
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -244,7 +242,7 @@ spring:
 
 现在，我们首先通过注释以下行来运行应用程序，**这将在普通线程上运行我们的应用程序**。
 
-```
+```java
 package org.anil.virtualthread;
 
 import lombok.extern.slf4j.Slf4j;
@@ -273,19 +271,18 @@ public class VirtualthreadApplication {
 }
 ```
 
-现在让我们设置JMeter。我们将有 1000 个请求，该请求将在 3 秒内增加。并且这样的状态会持续200秒。每 3 秒，将触发 1000 个 `GET (“/thread”)` 请求。我们还添加了响应时间图侦听器。
-
-![图片](https://static.xlc520.tk/blogImage/640.png)图片
+现在让我们设置JMeter。我们将有 1000 个请求，该请求将在 3 秒内增加。并且这样的状态会持续200秒。每 3 秒，将触发 1000
+个 `GET (“/thread”)` 请求。我们还添加了响应时间图侦听器。
 
 现在让我们运行测试并等待 200 秒。
 
-![图片](https://static.xlc520.tk/blogImage/640-1700667020609-1.png)图片
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700667020609-1.png)
 
 从图中我们可以看到，一旦Tomcat的整个线程池被利用，响应时间从3600毫秒猛增到5200毫秒。从那时起，只有当以前的线程被释放时，它才保持这种状态。
 
 现在让我们在启用虚拟线程功能的情况下运行负载测试。
 
-```
+```java
 package org.anil.virtualthread;
 
 import lombok.extern.slf4j.Slf4j;
@@ -317,7 +314,7 @@ public class VirtualthreadApplication {
 
 现在让我们运行测试并等待 200 秒。
 
-![图片](https://static.xlc520.tk/blogImage/640-1700667020609-2.png)图片
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700667020609-2.png)
 
 显然，现在并发 1000 个请求的响应时间几乎略高于 1000 毫秒，有时甚至会达到 1400 毫秒，这比我们使用普通线程时要好得多。
 

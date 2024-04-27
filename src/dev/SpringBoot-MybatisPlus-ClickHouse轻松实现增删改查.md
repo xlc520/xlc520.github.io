@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Spring Boot - Mybatis Plus - ClickHouse 轻松实现增删改查
 
 ## 项目场景：
@@ -302,12 +300,10 @@ public class UserMapperTest {
 }
 ```
 
-![image-20220524224012350](https://static.xlc520.tk/blogImage/image-20220524224012350.png)
+![image-20220524224012350](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220524224012350.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-16534030656526.png)
-
-
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16534030656526.png)
 
 ## 源码
 
- https://github.com/saimen90/clickhouse
+https://github.com/saimen90/clickhouse

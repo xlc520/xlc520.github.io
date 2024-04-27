@@ -162,19 +162,17 @@ dmp文件导出一般用的比较多的是三种,分别是: 导出整个数据�
 
 我们以自己的数据库为例,假设我们的数据库的实例为"Oracle"
 
-可以通过"任务管理器---->服务"中查看自己的数据库实例  
+可以通过"任务管理器---->服务"中查看自己的数据库实例
 
 一般信息是 已启用 自动 本地系统
 
-打开cmd命令行 : 
+打开cmd命令行 :
 
-1: 将数据库Oracle完全导出,用户名system密码manager导出到 c:daochu.dmp中 
+1: 将数据库Oracle完全导出,用户名system密码manager导出到 c:daochu.dmp中
 
 ```sql
 exp system/manager@Oracle file=c:daochu.dmp full=y
 ```
-
-
 
 2: 将数据库中RFD用户与,JYZGCX用户的表导出
 
@@ -182,11 +180,9 @@ exp system/manager@Oracle file=c:daochu.dmp full=y
 exp system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
 ```
 
-
-
 3: 将数据库中的表T_USER,T_ROLE导出
 
-　system为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以
+system为用户名，manager为密码，ORACLE为数据库实例名，其实不一定非的用system用户，只要是拥有管理员权限的用户都可以
 
 ```sql
 exp JYZGCX/JYZGCX@Oracle file = d:datanewsmgnt.dmp tables = (T_USER,T_ROLE)
@@ -204,23 +200,23 @@ exp cop/cop@133.96.84.39:1521/coprule file=/home/oracle/cop_20160902.dmp owner=c
 exp zop/zop@orcl file= D:\zop_bak.dmp owner=zop log=D:\zop_ba.log
 ```
 
+**dmp文件的导入**
 
-
-**dmp文件的导入**　
-
-步骤如下: 
+步骤如下:
 
 机器环境是windows7,其实也无所谓,命令行不都是样的么
 
-\1. 打开"开始" --->输入cmd,打开cmd命令窗口,输入: sqlplus/as sysdba; 然后使用conn / as sysdba;这样就可以以超级管理员的最高权限登录,当然这决定于init.ora文件中的数据库初始化参数.
+\1. 打开"开始" --->输入cmd,打开cmd命令窗口,输入: sqlplus/as sysdba; 然后使用conn / as
+sysdba;这样就可以以超级管理员的最高权限登录,当然这决定于init.ora文件中的数据库初始化参数.
 
-\2. 上面sysdba登录后,就可以创建表空间和用户了. 
+\2. 上面sysdba登录后,就可以创建表空间和用户了.
 
-　　(打开"开始"-->输入cmd-->sqlplus/nolog; 输入conn/as sysdba 管理员账户登录;)
+(打开"开始"-->输入cmd-->sqlplus/nolog; 输入conn/as sysdba 管理员账户登录;)
 
-由于我们已经有dmp文件了,可以用notepad++ 打开dmp文件,进去按ctrl+f 去查找tablespace,可以找到这个dmp文件对应的表空间,然后根据表空间的信息去创建表空间,这样才能导入dmp文件.
+由于我们已经有dmp文件了,可以用notepad++ 打开dmp文件,进去按ctrl+f
+去查找tablespace,可以找到这个dmp文件对应的表空间,然后根据表空间的信息去创建表空间,这样才能导入dmp文件.
 
- 然后就是创建表空间,命令如下:
+然后就是创建表空间,命令如下:
 
 ```sql
 create tablespace USERS
@@ -236,7 +232,7 @@ autoxtend onnext 32m maxsize 2048m
 extend management local;
 ```
 
-　创建test用户,密码也是test222,使用上面创建的表空间
+创建test用户,密码也是test222,使用上面创建的表空间
 
 ```sql
 create user test identifiles by test222
@@ -244,13 +240,13 @@ create user test identifiles by test222
  default tablespace USERS
 ```
 
-　给创建的test用户分配权限,为了方便可以直接分配dba权限
+给创建的test用户分配权限,为了方便可以直接分配dba权限
 
 `grant dba to test;`
 
-　这样一来,我们前期的准备工作就完成了,然后就可以关掉刚刚的命令窗口了.
+这样一来,我们前期的准备工作就完成了,然后就可以关掉刚刚的命令窗口了.
 
-  打开"开始" --->输入cmd(是cmd窗口不是sqlplus窗口)
+打开"开始" --->输入cmd(是cmd窗口不是sqlplus窗口)
 
 由于上面的步骤中,创建了test用户,所以我们往test用户去导入数据
 
@@ -260,21 +256,21 @@ create user test identifiles by test222
 imp test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" full =y;
 ```
 
- 下面解释一下上面的语句:
+下面解释一下上面的语句:
 
-　　test是上面创建的登录数据库的用户名
+test是上面创建的登录数据库的用户名
 
-　　test222是上面的登录数据库的密码
+test222是上面的登录数据库的密码
 
-　　localhost: 代表你的数据库是本机还是远程导入,需要的可以随时替换ip地址
+localhost: 代表你的数据库是本机还是远程导入,需要的可以随时替换ip地址
 
-　　orcl: 是实例的名称
+orcl: 是实例的名称
 
-　　file: 后面是你的dmp的文件路径
+file: 后面是你的dmp的文件路径
 
-　　full=y : 全部导入
+full=y : 全部导入
 
-以上就是oracle数据库导出和导入dmp文件的两种方法.　　　
+以上就是oracle数据库导出和导入dmp文件的两种方法.
 
  ```sql
  --数据的导入
@@ -291,9 +287,7 @@ imp test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" 
  数据库时可以连上的。可以用tnsping TEST 来获得数据库TEST能否连上。
  ```
 
-
-
-####  2、数据泵方法：
+#### 2、数据泵方法：
 
 创建directory:
 
@@ -334,7 +328,7 @@ remap_schema=源数据库用户名:目标数据库用户名,二者不同时必�
 
 `select ＊　from dba_directories;`
 
-3.创建逻辑目录，该命令不会在操作系统创建真正的目录，最好以system等管理员创建。 
+3.创建逻辑目录，该命令不会在操作系统创建真正的目录，最好以system等管理员创建。
 
 `create directory testdata1 as 'd:testdump';`
 
@@ -343,16 +337,13 @@ remap_schema=源数据库用户名:目标数据库用户名,二者不同时必�
 
 `grant read,write on directory testdata1 to xinxiaoyong;`
 
-
 5.导出数据
 
-1)按用户导 
+1)按用户导
 
 ```sql
 expdp xinxiaoyong/***123456***@orcl schemas=xinxiaoyong dumpfile=expdp.dmp directory=testdata1;
 ```
-
-
 
 2)并行进程
 
@@ -361,42 +352,32 @@ parallel expdp xinxiaoyong/***123456***@orcl
 directory=testdata1 dumpfile=xinxiaoyong3.dmp parallel=***40*** job_name=xinxiaoyong3
 ```
 
-
-
-3)按表名导 
+3)按表名导
 
 ```sql
 expdp xinxiaoyong/***123456***@orcl tables=emp,dept dumpfile=expdp.dmp directory=testdata1;
 ```
 
-
-
-4)按查询条件导 
+4)按查询条件导
 
 ```sql
 expdp xinxiaoyong/***123456***@orcl 
 directory=testdata1 dumpfile=expdp.dmp tables=emp query='WHERE deptno=20';
 ```
 
-
-
-5)按表空间导 
+5)按表空间导
 
 ```sql
 expdp system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=temp,example;
 ```
 
-
-
-6)导整个数据库 
+6)导整个数据库
 
 ```sql
 expdp system/manager directory=testdata1 dumpfile=full.dmp FULL=y;
 ```
 
-
-
- 6.还原数据
+6.还原数据
 1)导到指定用户下
 
 ```sql
@@ -410,19 +391,19 @@ owner impdp system/manager
 directory=testdata1 dumpfile=expdp.dmp tables=xinxiaoyong.dept remap_schema =xinxiaoyong:system;
 ```
 
-3)导入表空间 
+3)导入表空间
 
 ```sqal
 impdp system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=example;
 ```
 
-4)导入数据库 
+4)导入数据库
 
 ```sql
 impdb system/manager directory=dump_dir dumpfile=full.dmp FULL=y;
 ```
 
-5)追加数据 
+5)追加数据
 
 ```sql
 impdp system/manager 
@@ -431,42 +412,35 @@ directory=testdata1 dumpfile=expdp.dmp schemas=system table_exists_action;
 
 #### 3、PLSQL方法：
 
- 登录plsql工具，所使用用户为源数据库有导出权限（exp_full_database,dba等）的用户。
+登录plsql工具，所使用用户为源数据库有导出权限（exp_full_database,dba等）的用户。
 
-  1.导出建表语句（包括存储结构） 
+1.导出建表语句（包括存储结构）
 
-  导出步骤tools ->export user object，选择要导出的对象，导出.sql格式文件并等待导出完成，如 下图：
+导出步骤tools ->export user object，选择要导出的对象，导出.sql格式文件并等待导出完成，如 下图：
 
- ![image-20220620092932901](https://static.xlc520.tk/blogImage/image-20220620092932901.png)
+![image-20220620092932901](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620092932901.png)
 
-导出数据文件 ;
-   2.导出步骤tools ->export tables，选择要导出的表及导出的格式进行导出。 
+导出数据文件 ; 2.导出步骤tools ->export tables，选择要导出的表及导出的格式进行导出。
 
-   导出为dmp格式，如下图：
+导出为dmp格式，如下图：
 
-![image-20220620092943308](https://static.xlc520.tk/blogImage/image-20220620092943308.png)
+![image-20220620092943308](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620092943308.png)
 
-导出为sql格式，如下图： 
+导出为sql格式，如下图：
 
-![image-20220620092949353](https://static.xlc520.tk/blogImage/image-20220620092949353.png)
+![image-20220620092949353](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620092949353.png)
 
-导出为pde格式，如下图： 
+导出为pde格式，如下图：
 
-![image-20220620092954469](https://static.xlc520.tk/blogImage/image-20220620092954469.png)
+![image-20220620092954469](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220620092954469.png)
 
- 提示说明：采用第三方工具导出导入整个数据库的话，耗时较长，一定要有足够
+提示说明：采用第三方工具导出导入整个数据库的话，耗时较长，一定要有足够
 
- 的时间来操作(数据量大的话需要好几个小时)。
+的时间来操作(数据量大的话需要好几个小时)。
 
- 
-
-3.导入建表语句 
-   导入步骤tools->import tables->SQL Inserts 导入.sql文件 
-4.导入数据； 
-   tools->import talbes，然后再根据导出的数据格式选择导入dmp文件，或者sql文件，
-或者pde文件。 
-   提示说明：导入之前最好把以前的表删除，当然导入另外数据库除外。 
-      另外导入时当发现进度条一直卡在一个点，而且导出的文件不再增大时，甚至是提示程序
+3.导入建表语句 导入步骤tools->import tables->SQL Inserts 导入.sql文件
+4.导入数据； tools->import talbes，然后再根据导出的数据格式选择导入dmp文件，或者sql文件，
+或者pde文件。 提示说明：导入之前最好把以前的表删除，当然导入另外数据库除外。 另外导入时当发现进度条一直卡在一个点，而且导出的文件不再增大时，甚至是提示程序
 未响应，千万不要以为程序卡死了，这个导入导出就是比较缓慢，只要没有提示报错，
 
 或者导入完成就不要停止程序。

@@ -9,13 +9,10 @@ article: true
 dateline: true
 icon: type
 ---
+
 # 开源后台管理项目
 
-
-
 ### 时间：2022年5月16日
-
-
 
 **1. D2admin**
 
@@ -27,7 +24,7 @@ icon: type
 
 开源协议：MIT
 
-![图片](https://static.xlc520.tk/blogImage/640-1674185256162-0.png)图片
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185256162-0.png)图片
 
 **2. vue-element-admin**
 
@@ -39,7 +36,6 @@ icon: type
 
 开源协议：MIT Java项目分享
 
-
 **3. JEECG-BOOT**
 
 开源地址：https://github.com/zhangdaiscott/jeecg-boot
@@ -49,8 +45,6 @@ icon: type
 效果预览：http://boot.jeecg.com/
 
 开源协议：Apache-2.0 License
-
-
 
 **4. GIN-VUE-ADMIN**
 
@@ -90,9 +84,7 @@ icon: type
 
 效果预览：https://vue.ruoyi.vip/index
 
-开源协议：MIT License  Java项目分享  最新整理全集，找项目不累啦 06版
-
-
+开源协议：MIT License Java项目分享 最新整理全集，找项目不累啦 06版
 
 **8. renren-fast-vue**
 
@@ -104,7 +96,7 @@ icon: type
 
 开源协议：MIT License
 
-![图片](https://static.xlc520.tk/blogImage/640-1674185256162-3.png)图片
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185256162-3.png)图片
 
 **9. ant-design-pro**
 
@@ -126,7 +118,6 @@ icon: type
 
 开源协议：MIT License
 
-
 **11. material-dashboard**
 
 开源地址：https://github.com/creativetimofficial/material-dashboard#demo
@@ -137,7 +128,7 @@ icon: type
 
 开源协议：MIT License
 
-![图片](https://static.xlc520.tk/blogImage/640-1674185258456-6.png)图片
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185258456-6.png)图片
 
 **12.EAdmin**
 
@@ -149,15 +140,9 @@ icon: type
 
 开源协议：无 Java项目分享
 
-![图片](https://static.xlc520.tk/blogImage/640-1674185260023-9.png)
-
-
-
-
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674185260023-9.png)
 
 ### 时间：2022年1月21日
-
-
 
 1、vue-Element-Admin
 
@@ -169,8 +154,6 @@ Github Star 数 45100， Github 地址：
 
 一个基于 vue2.0 和 Eelement 的控制面板 UI 框架。
 
-
-
 2、AdminLTE
 
 Github Star 数 32000 ， Github 地址：
@@ -178,8 +161,6 @@ Github Star 数 32000 ， Github 地址：
 [https://github.com/almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE)
 
 [https://adminlte.io/](https://adminlte.io/)
-
-
 
 3、ant-design-pro
 
@@ -189,8 +170,6 @@ Github Star 数 22600，Github 地址：
 
 开箱即用的中台前端/设计解决方案
 
-
-
 4、tabler
 
 Github Star 数 20000， Github 地址：
@@ -198,8 +177,6 @@ Github Star 数 20000， Github 地址：
 [https://github.com/tabler/tabler](https://github.com/tabler/tabler)
 
 构建在 BootStrap 4 之上的免费的 HTML 控制面板框架
-
-
 
 5、ng2-admin
 
@@ -209,8 +186,6 @@ Github Star 数 19000， Github 地址：
 
 基于 Angular 2, Bootstrap 4 和 Webpack 的后台管理面板框架。
 
-
-
 6、Gentelella
 
 Github Star 数 18300， Github 地址：
@@ -218,8 +193,6 @@ Github Star 数 18300， Github 地址：
 [https://github.com/puikinsh/gentelella](https://github.com/puikinsh/gentelella)
 
 一个基于 Bootstarp 的免费的后台控制面板。
-
-
 
 7、iview-admin
 
@@ -229,8 +202,6 @@ Github Star 数 13700，Github 地址：
 
 基于 iView 的 Vue 2.0 控制面板。
 
-
-
 8、blur-admin
 
 Github Star 数 10600，Github 地址：
@@ -238,8 +209,6 @@ Github Star 数 10600，Github 地址：
 [https://github.com/akveo/blur-admin](https://github.com/akveo/blur-admin)
 
 基于 Angular 和 Bootstrap 的后台管理面板框架。
-
-
 
 9、vue-admin
 
@@ -249,8 +218,6 @@ Github Star 数 9400，Github 地址：
 
 基于 Vue 和 Bulma 的控制面板。
 
-
-
 10、material-dashboard
 
 Github Star 数 8600，Github 地址：
@@ -258,8 +225,6 @@ Github Star 数 8600，Github 地址：
 [https://github.com/creativetimofficial/material-dashboard](https://github.com/creativetimofficial/material-dashboard)
 
 基于 Bootstrap 4 和 Material 风格的控制面板。
-
-
 
 11、pearadmin
 

@@ -10,13 +10,11 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot定时任务动态管理通用解决方案
 
 ## 一、功能说明
 
-  SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改
+SpringBoot的定时任务的加强工具，实现对SpringBoot原生的定时任务进行动态管理,完全兼容原生@Scheduled注解,无需对原本的定时任务进行修改
 
 ## 二、快速使用
 
@@ -73,7 +71,7 @@ public class SuperScheduledConfig {
 3、使用@DependsOn注解强制依赖SuperScheduledConfig类，让SpringBoot实例化SuperScheduledPostProcessor类之前先实例化SuperScheduledConfig类
 4、主要实现逻辑在postProcessAfterInitialization()方法中
 
-![image-20220524212320260](https://static.xlc520.tk/blogImage/image-20220524212320260.png)
+![image-20220524212320260](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220524212320260.png)
 
 ```java
 @DependsOn({"superScheduledConfig"})
@@ -173,7 +171,7 @@ public class SuperScheduledPostProcessor implements BeanPostProcessor, Applicati
 3、实现ApplicationRunner接口，在所有bean初始化结束之后，运行自定义逻辑
 4、主要实现逻辑在run()方法中
 
-![image-20220524212339560](https://static.xlc520.tk/blogImage/image-20220524212339560.png)
+![image-20220524212339560](https://bitbucket.org/xlc520/blogasset/raw/main/images3/image-20220524212339560.png)
 
 ```java
 @DependsOn("threadPoolTaskScheduler")

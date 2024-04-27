@@ -16,45 +16,46 @@ icon: java
 
 ### **1. 什么Pinia？**
 
-  Pinia开始于大概2019年，最初是作为一个实验为Vue重新设计状态管理，让它用起来像组合式API（Composition API）。从那时到现在，最初的设计原则依然是相同的，并且目前同时兼容Vue2、Vue3，也并不要求你使用Composition API；Pinia本质上依然是一个状态管理的库，用于跨组件、页面进行状态共享（这点和Vuex、Redux一样）；
+Pinia开始于大概2019年，最初是作为一个实验为Vue重新设计状态管理，让它用起来像组合式API（Composition
+API）。从那时到现在，最初的设计原则依然是相同的，并且目前同时兼容Vue2、Vue3，也并不要求你使用Composition
+API；Pinia本质上依然是一个状态管理的库，用于跨组件、页面进行状态共享（这点和Vuex、Redux一样）；
 
-   详见官网：https://pinia.vuejs.org/zh/introduction.html
+详见官网：https://pinia.vuejs.org/zh/introduction.html
 
 ### **2. pinia和vuex的区别？**
 
 **(1). 有了vuex，为什么还要推出pinia？**
 
- A. Pinia 最初是为了探索 Vuex 的下一次迭代会是什么样子，结合了 Vuex 5 核心团队讨论中的许多想法；
+A. Pinia 最初是为了探索 Vuex 的下一次迭代会是什么样子，结合了 Vuex 5 核心团队讨论中的许多想法；
 
- B. 最终，团队意识到Pinia已经实现了Vuex5中大部分内容，所以最终决定用Pinia来替代Vuex；
+B. 最终，团队意识到Pinia已经实现了Vuex5中大部分内容，所以最终决定用Pinia来替代Vuex；
 
- C. 与 Vuex 相比，Pinia 提供了一个更简单的 API，具有更少的仪式，提供了 Composition-API 风格的 API； 
+C. 与 Vuex 相比，Pinia 提供了一个更简单的 API，具有更少的仪式，提供了 Composition-API 风格的 API；
 
- D. 最重要的是，在与 TypeScript 一起使用时具有可靠的类型推断支持；
+D. 最重要的是，在与 TypeScript 一起使用时具有可靠的类型推断支持；
 
 **(2). 与vuex相比，pinia的优势有哪些？**
 
-  A. mutations 不再存在，在store中，无论是在**getter 或 actions中**，都可以**直接通过this(代表store实例)来直接修改state中的数据**。
+A. mutations 不再存在，在store中，无论是在**getter 或 actions中**，都可以**直接通过this(代表store实例)来直接修改state中的数据
+**。
 
-  B. 更友好的TypeScript支持，Vuex之前对TS的支持很不友好；
+B. 更友好的TypeScript支持，Vuex之前对TS的支持很不友好；
 
-  C. 不再有modules的嵌套结构，不再有命名空间的概念了。你可以灵活使用每一个store，它们是通过扁平化的方式来相互使用的。
+C. 不再有modules的嵌套结构，不再有命名空间的概念了。你可以灵活使用每一个store，它们是通过扁平化的方式来相互使用的。
 
-  **注：在pinia里，扁平化定义多个store即可，store与store之间直接通过import引入，相互调用即可。**
+**注：在pinia里，扁平化定义多个store即可，store与store之间直接通过import引入，相互调用即可。**
 
-![img](https://static.xlc520.tk/blogImage/1031302-20230115083853292-561688627.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1031302-20230115083853292-561688627.png)
 
 ### **3. 核心总结**
 
-![img](https://static.xlc520.tk/blogImage/1031302-20230115115754024-1151644537.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1031302-20230115115754024-1151644537.png)
 
 ### **4. 快速入门**
 
 **(1). 引入和注册**
 
- 先通过**【npm install pinia】**安装，然后创建一个 pinia 实例(根 store)并将其传递给应用：
+先通过**【npm install pinia】**安装，然后创建一个 pinia 实例(根 store)并将其传递给应用：
 
 ```javascript
 import { createApp } from 'vue'
@@ -70,11 +71,13 @@ app.mount('#app')
 
 **(2). 定义store**
 
-  A. defineStore 第一个参数，比如这里的 “role”，  是你的应用中 Store 的**唯一 ID，不能重复**；Pinia 使用它来将 store 连接到 **devtools** 调试工具 **【与调用无关】**
+A. defineStore 第一个参数，比如这里的 “role”， 是你的应用中 Store 的**唯一 ID，不能重复**；Pinia 使用它来将 store 连接到 *
+*devtools** 调试工具 **【与调用无关】**
 
-  B. 对 `defineStore()` 的返回值进行任意命名，但最好使用 store 的名字，同时以 **`use` 开头 → 中间为 store的名称 → 以 `Store` 结尾**。(比如 `useUserStore`，`useRoleStore`，`useProductStore`)
+B. 对 `defineStore()` 的返回值进行任意命名，但最好使用 store 的名字，同时以 **`use` 开头 → 中间为 store的名称 → 以 `Store`
+结尾**。(比如 `useUserStore`，`useRoleStore`，`useProductStore`)
 
-  C.  `state` 是 store 的数据 (`data`)，`getters` 是 store 的计算属性 (`computed`)，而 `actions` 则是方法 (`methods`)。
+C.  `state` 是 store 的数据 (`data`)，`getters` 是 store 的计算属性 (`computed`)，而 `actions` 则是方法 (`methods`)。
 
 ```javascript
 import { defineStore } from 'pinia'
@@ -94,13 +97,13 @@ export const useRolerStore = defineStore('role', {
 
 **(3). 调用**
 
-   A. 引入上述定义的Store，进行使用即可。
+A. 引入上述定义的Store，进行使用即可。
 
-   B. 这里返回的变量名称，命名规则，**一般为：去掉前面的use，保留后面的部分 （比如：userStore、roleStore）**。
+B. 这里返回的变量名称，命名规则，**一般为：去掉前面的use，保留后面的部分 （比如：userStore、roleStore）**。
 
-   C. state、getter、action中的属性或方法都**直接通过 roleStore.xxx 的形式直接调用即可**
+C. state、getter、action中的属性或方法都**直接通过 roleStore.xxx 的形式直接调用即可**
 
-   D. 至于解构、修改的几种方式，详见后面
+D. 至于解构、修改的几种方式，详见后面
 
 ```javascript
 <script setup>
@@ -129,17 +132,15 @@ const myTest = () => {
 </script>
 ```
 
- 
-
 ## 二. state
 
 ### **1. 作用**
 
 (1). state主要是用来进行数据存储的。
 
-(2).  state 被定义为一个返回初始状态的函数，可以有如下两种写法
+(2). state 被定义为一个返回初始状态的函数，可以有如下两种写法
 
-  **A.  箭头函数+return**
+**A. 箭头函数+return**
 
 ```javascript
 const useStore = defineStore('storeId', {
@@ -154,7 +155,7 @@ const useStore = defineStore('storeId', {
 })
 ```
 
-  **B. 省略return，简化写法**
+**B. 省略return，简化写法**
 
 ```javascript
 const useStore = defineStore('storeId', {
@@ -186,11 +187,10 @@ const useUser1Store = defineStore("user1", {
 export default useUser1Store;
 ```
 
- 
-
 ### **2. 调用**
 
- **总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `，即可调用`state`中的数据。**
+**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `
+，即可调用`state`中的数据。**
 
 (1). 在`<script setup> `中调用
 
@@ -238,8 +238,6 @@ const user1Store = useUser1Store();
 </script>
 ```
 
- 
-
 ## 三. getter
 
 ### **1. 说明**
@@ -248,7 +246,7 @@ const user1Store = useUser1Store();
 
 **(2). getter中如何调用state中的数据呢？**
 
- **方案1：第一个参数就是state**
+**方案1：第一个参数就是state**
 
 ```javascript
 getters: {
@@ -260,7 +258,7 @@ getters: {
 	},
 ```
 
- **方案2： 使用this关键字，这里的this相当于store实例，可以调用state、getters、actions中的任何数据or方法。**
+**方案2： 使用this关键字，这里的this相当于store实例，可以调用state、getters、actions中的任何数据or方法。**
 
 ```javascript
 getters: {
@@ -274,7 +272,7 @@ getters: {
 
 **(3). 如何向getter传递参数？**
 
-  需要getter中返回一个function函数
+需要getter中返回一个function函数
 
 ```javascript
 getters: {
@@ -292,7 +290,7 @@ getters: {
 
 **(4). 如何调用其它store中的state呢？**
 
-  **引入其它的store，实例化调用即可。**
+**引入其它的store，实例化调用即可。**
 
 ```javascript
 import { defineStore } from "pinia";
@@ -319,7 +317,7 @@ const useUser1Store = defineStore("user1", {
 });
 ```
 
-**(5). 分享完整代码**  
+**(5). 分享完整代码**
 
 role1中代码：
 
@@ -335,11 +333,10 @@ const useRole1Store = defineStore("role1", {
 export default useRole1Store;
 ```
 
- 
-
 ### **2. 调用**
 
-**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `，即可调用`getters`中的数据。**
+**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script>` or `<template>`中，直接通过`user1Store.xxx `
+，即可调用`getters`中的数据。**
 
 (1). 在`<script setup>` 中调用
 
@@ -374,8 +371,6 @@ console.log(`getTotalNum：${user1Store.getTotalNum}`);
 </script>
 ```
 
- 
-
 ## 四. action
 
 ### **1. 说明**
@@ -404,7 +399,8 @@ export const useUsers = defineStore('users', {
 
 ### **2. 调用**
 
-**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script> `or` <template>`中，直接通过`user1Store.xxx` ，即可调用`actions`中的方法。**
+**总结：首先实例化store实例，比如这里的user1Store，然后无论是在`<script> `or` <template>`中，直接通过`user1Store.xxx`
+，即可调用`actions`中的方法。**
 
 (1). 在`<script setup> `中调用
 
@@ -440,13 +436,11 @@ const myTest = () => {
 <style scoped></style>
 ```
 
- 
-
 ## 五. 常用Api
 
 ### **1. 解构相关**
 
-  直接解构出来的state中变量不支持响应式，这里需要借助vue的**toRefs** 或者 pinia的**storeToRefs**实现解构后的响应式
+直接解构出来的state中变量不支持响应式，这里需要借助vue的**toRefs** 或者 pinia的**storeToRefs**实现解构后的响应式
 
 ```javascript
 <script setup>
@@ -465,11 +459,9 @@ const Test1 = () => {
 </script>
 ```
 
- 
-
 ### **2. 修改state中的值**
 
-  可以直接修改 或者 调用` $patch`方法，可以同时修改多个对象
+可以直接修改 或者 调用` $patch`方法，可以同时修改多个对象
 
 ```javascript
 // 2. 修改state中的值
@@ -487,11 +479,9 @@ const Test3 = () => {
 };
 ```
 
- 
-
 ### **3. 重置 `$reset() `方法将状态 重置 到其初始值**
 
- 调用`$reset`方法，可以将state中的数据重置为初始化的状态。
+调用`$reset`方法，可以将state中的数据重置为初始化的状态。
 
 ```javascript
 // 3. 重置 $reset() 方法将状态 重置 到其初始值
@@ -500,11 +490,9 @@ const Test4 = () => {
 };
 ```
 
- 
-
 ### **4. 替换State**
 
- $state 属性设置为新对象来替换 Store 的整个状态 [了解]
+$state 属性设置为新对象来替换 Store 的整个状态 [了解]
 
 ```javascript
 const Test5 = () => {
@@ -515,22 +503,21 @@ const Test5 = () => {
 };
 ```
 
- 
-
 ## 六. setup简化写法
 
 1. 与 Vue 组合式 API 的 setup 函数 相似，我们可以传入一个函数，该函数定义了一些响应式属性和方法，并且返回一个带有我们想暴露出去的属性和方法的对象
 2. 在 Setup Store 中：
 
-  (1).  `ref() `就是` state` 属性
+(1).  `ref() `就是` state` 属性
 
-  (2).  `computed() `就是 `getters`
+(2).  `computed() `就是 `getters`
 
-  (3).  `function() `就是` actions`
+(3).  `function() `就是` actions`
 
-  注：Setup store 比 Option Store 带来了更多的灵活性，因为你可以在一个 store 内创建侦听器，并自由地使用任何组合式函数。不过，请记住，使用组合式函数会让 SSR 变得更加复杂。
+注：Setup store 比 Option Store 带来了更多的灵活性，因为你可以在一个 store 内创建侦听器，并自由地使用任何组合式函数。不过，请记住，使用组合式函数会让
+SSR 变得更加复杂。
 
-**3.  这里的myNum为ref对象，导出去后，不需要再写 .value了，直接使用user2Store.myNum即可**
+**3. 这里的myNum为ref对象，导出去后，不需要再写 .value了，直接使用user2Store.myNum即可**
 
 store代码：
 
@@ -581,8 +568,6 @@ const useUser2Store = defineStore("counter", () => {
 
 export default useUser2Store;
 ```
-
-
 
 # 教程二
 
@@ -907,7 +892,8 @@ const reset = () => {
 
 ### 4.5.5 批量更改state数据
 
-前面我们修改state的数据是都是一条一条修改的，比如store.name="张三"等等，如果我们一次性需要修改很多条数据的话，有更加简便的方法，使用store的$patch方法，修改app.vue代码，添加一个批量更改数据的方法。
+前面我们修改state的数据是都是一条一条修改的，比如store.name="张三"
+等等，如果我们一次性需要修改很多条数据的话，有更加简便的方法，使用store的$patch方法，修改app.vue代码，添加一个批量更改数据的方法。
 
 **代码如下：**
 

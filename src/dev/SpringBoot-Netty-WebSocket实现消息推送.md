@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # Spring Boot - Netty - WebSocket 实现消息推送
 
 ## **关于Netty**
@@ -241,11 +239,11 @@ public class IndexController {
 
 ## **效果演示**
 
-![图片](https://static.xlc520.tk/blogImage/640-16612195691460.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16612195691460.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-16612195691461.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16612195691461.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-16612195691462.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16612195691462.png)
 
 ## **改造netty支持url参数**
 
@@ -256,7 +254,8 @@ ch.pipeline().addLast(new MyWebSocketHandler());
 ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws", null, true, 65536 * 10));
 ```
 
-2.其次，改造`MyWebSocketHandler` 的`channelRead`方法，首次连接会是一个`FullHttpRequest`类型，可以通过`FullHttpRequest.uri()`获取完整ws的URL地址，之后接受信息的话，会是一个`TextWebSocketFrame`类型。
+2.其次，改造`MyWebSocketHandler` 的`channelRead`方法，首次连接会是一个`FullHttpRequest`
+类型，可以通过`FullHttpRequest.uri()`获取完整ws的URL地址，之后接受信息的话，会是一个`TextWebSocketFrame`类型。
 
 ```java
 public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {

@@ -18,17 +18,15 @@ icon: java
 
 因为需要服务端主动向客户端发送消息，所以很容易的就想到了用WebSocket来实现这一功能。
 
- WebSocket就不做介绍了，上链接：https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket
+WebSocket就不做介绍了，上链接：https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket
 
- 前端略微复杂，需要在一张位置分布图上进行鼠标描点定位各个设备和根据不同屏幕大小渲染，本文不做介绍，只是简单地用页面样式进行效果呈现。
+前端略微复杂，需要在一张位置分布图上进行鼠标描点定位各个设备和根据不同屏幕大小渲染，本文不做介绍，只是简单地用页面样式进行效果呈现。
 
 **绿色代表正常，红色代表异常**
 
 预期效果，未接收到请求前----->id为3的提交了异常，id为3的王五变成了红色
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015031414701-272219147.png)　　　　![img](https://static.xlc520.tk/blogImage/2519868-20211015031659597-188497867.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015031414701-272219147.png)![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015031659597-188497867.png)
 
 ## 实现-前端：
 
@@ -158,13 +156,13 @@ icon: java
 
 项目结构是这样子的，后面的代码关键注释都有，就不重复描述了
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015032104670-873058355.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015032104670-873058355.png)
 
- 1、新建SpringBoot工程，选择web和WebSockt依赖
+1、新建SpringBoot工程，选择web和WebSockt依赖
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015105941687-95294147.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015105941687-95294147.png)
 
- 2、配置application.yml
+2、配置application.yml
 
 ```yaml
 #端口
@@ -301,19 +299,19 @@ public class WebSocketController {
 
 控制台输出，连接成功
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015113024421-1327852737.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113024421-1327852737.png)
 
- 2、因为是模拟数据，所以全部显示正常，没有异常提交时的页面呈现
+2、因为是模拟数据，所以全部显示正常，没有异常提交时的页面呈现
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015113143733-1496142658.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113143733-1496142658.png)
 
- 3、接下来，我们用接口测试工具Postman提交一个异常
+3、接下来，我们用接口测试工具Postman提交一个异常
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015113458808-127776265.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113458808-127776265.png)
 
- **注意id为3的这个数据的状态变化**
+**注意id为3的这个数据的状态变化**
 
-![img](https://static.xlc520.tk/blogImage/2519868-20211015113537561-246899024.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/2519868-20211015113537561-246899024.png)
 
 我们可以看到，id为3的王五状态已经变成异常的了，实时通讯成功。
 

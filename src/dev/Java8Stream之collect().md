@@ -10,13 +10,9 @@ timeline: true
 icon: java
 ---
 
-
-
 # Java 8 Stream 之 collect()
 
 # 前言
-
-
 
 本身我是一个比较偏向少使用Stream的人，因为调试比较不方便。
 
@@ -24,30 +20,19 @@ icon: java
 
 所以还是忍不住想分享一些奇技淫巧。
 
-
-
 # 正文
 
+Stream流 其实操作分三大块 ：
 
-
-Stream流 其实操作分三大块 ： 
-
- 创建
- 处理 
- 收集
-
+创建
+处理
+收集
 
 我今天想分享的是 收集 这part的玩法。
 
-![img](https://static.xlc520.tk/blogImage/3426558c692f4273921554c6c043e41b.png)
-
- 
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/3426558c692f4273921554c6c043e41b.png)
 
 OK，开始结合代码示例一起玩下：
-
-
 
 lombok依赖引入，代码简洁一点：
 
@@ -60,10 +45,7 @@ lombok依赖引入，代码简洁一点：
         </dependency>	
 ```
 
-
-准备一个UserDTO.java 
-
-
+准备一个UserDTO.java
 
 ```java
 @Data
@@ -89,10 +71,7 @@ public class UserDTO {
 }
 ```
 
-
-
 准备一个模拟获取List的函数：
-
 
 ```java
     private static List<UserDTO> getUserList() {
@@ -119,17 +98,11 @@ public class UserDTO {
     }
 ```
 
-
-
-
-
 ## 第一个小玩法
 
-## 将集合通过Stream.collect() 转换成其他集合/数组：  
+## 将集合通过Stream.collect() 转换成其他集合/数组：
 
 现在拿`List<UserDTO> `做例子
-
-
 
 转成  `HashSet<UserDTO> `：
 
@@ -141,8 +114,6 @@ public class UserDTO {
         HashSet<UserDTO> usersHashSet = usersStream.collect(Collectors.toCollection(HashSet::new));
 ```
 
-
-
 转成  `Set<UserDTO> usersSet` ：
 
 ```java
@@ -152,8 +123,6 @@ public class UserDTO {
  
         Set<UserDTO> usersSet = usersStream.collect(Collectors.toSet());
 ```
-
-
 
 转成  `ArrayList<UserDTO> `：
 
@@ -165,8 +134,6 @@ public class UserDTO {
         ArrayList<UserDTO> usersArrayList = usersStream.collect(Collectors.toCollection(ArrayList::new));
 ```
 
-
-
 转成  `Object[] objects` ：
 
 ```java
@@ -176,8 +143,6 @@ public class UserDTO {
  
         Object[] objects = usersStream.toArray();
 ```
-
-
 
 转成  `UserDTO[] users `：
 
@@ -192,21 +157,13 @@ public class UserDTO {
         }
 ```
 
-
-
 ## 第二个小玩法
 
 ## 聚合（求和、最小、最大、平均值、分组）
 
-
-
 ### 找出年龄最大：
 
-
-
 stream.max（）
-
-
 
 写法 1：
 
@@ -221,7 +178,7 @@ stream.max（）
 }
 ```
 
-写法2： 
+写法2：
 
  ```
  List<UserDTO> userList = getUserList(); Stream<UserDTO> usersStream = userList.stream();
@@ -234,22 +191,16 @@ stream.max（）
 
 效果：
 
-![img](https://static.xlc520.tk/blogImage/75c5e09c2fa54cfebbcbb3c85e06fa57.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/75c5e09c2fa54cfebbcbb3c85e06fa57.png)
 
- 输出：
+输出：
 
-> 
+>
 > UserDTO(name=小秋, age=30, sex=男, hasOrientation=true)
-
-
 
 ### 找出年龄最小：
 
-
-
 stream.min（）
-
-
 
 写法 1：
 
@@ -261,20 +212,13 @@ stream.min（）
  }
  ```
 
-写法2： 
-
+写法2：
 
  ```
  Optional<UserDTO> min = usersStream.collect(Collectors.minBy((s1, s2) -> s1.getAge() - 2.getAge()));
  ```
 
-
-
-
-
 ### 求平均值：
-
-
 
  ```
  List<UserDTO> userList = getUserList();
@@ -284,43 +228,29 @@ stream.min（）
 
 效果：
 
-![img](https://static.xlc520.tk/blogImage/49bc1d66e04c490aa4dcd19935f56ac6.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/49bc1d66e04c490aa4dcd19935f56ac6.png)
 
 ### 求和：
 
-
-
 写法1：
-
-
 
  ```
  Integer reduceAgeSum = usersStream.map(UserDTO::getAge).reduce(0, Integer::sum);
  ```
 
-
-
 写法2：
-
 
  ```
  int ageSumNew = usersStream.mapToInt(UserDTO::getAge).sum();
  ```
 
-
-
-### 统计数量：  
+### 统计数量：
 
  ```
  long countNew = usersStream.count();
  ```
 
-
 ### 简单分组：
-
-
 
 按照具体年龄分组:
 
@@ -329,17 +259,11 @@ stream.min（）
  Map<Integer, List<UserDTO>> ageGroupMap = usersStream.collect(Collectors.groupingBy((UserDTO::getAge)));
  ```
 
-效果： 
+效果：
 
-![img](https://static.xlc520.tk/blogImage/497c8a9436fd42ae94c9bbbbda1e0a57.png)
-
- 
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/497c8a9436fd42ae94c9bbbbda1e0a57.png)
 
 分组过程加写判断逻辑：
-
-  
 
  ```
  //按照性别 分为"男"一组  "女"一组
@@ -354,15 +278,9 @@ stream.min（）
 
 效果：
 
- ![img](https://static.xlc520.tk/blogImage/71e5c6bb9fd143fabf251e98c610092a.png)
-
- 
-
-
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/71e5c6bb9fd143fabf251e98c610092a.png)
 
 ### 多级复杂分组：
-
-
 
  ```
  //多级分组
@@ -384,6 +302,6 @@ stream.min（）
 
 效果：
 
-![img](https://static.xlc520.tk/blogImage/a22f1c8f49954825840c34c955d43972.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/a22f1c8f49954825840c34c955d43972.png)
 
  

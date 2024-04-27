@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringCloud Gateway API接口安全设计（加密 、签名）
 
 ## 1 防止数据抓包窃取
@@ -19,15 +17,17 @@ icon: java
 ### 1.1 风险简述
 
 简述：当用户登录时，恶意攻击者可以用抓包工具可以拿到用户提交的表单信息，可以获取用户的账号密码，进而可以恶意访问网站。
-![图片](https://static.xlc520.tk/blogImage/1a25b48aa07f4da7adeed28003850f74.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1a25b48aa07f4da7adeed28003850f74.png)
 
 ### 1.2 RSA 非对称加密
 
 #### 1.2.1 RSA简介4
 
-RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。
+RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron
+Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。
 
-1973年，在英国政府通讯总部工作的数学家克利福德·柯克斯（Clifford Cocks）在一个内部文件中提出了一个相同的算法，但他的发现被列入机密，一直到1997年才被发表。对极大整数做因数分解的难度决定了RSA算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用RSA加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的RSA钥匙才可能被强力方式解破。到目前为止，世界上还没有任何可靠的攻击RSA算法的方式。只要其钥匙的长度足够长，用RSA加密的信息实际上是不能被解破的。
+1973年，在英国政府通讯总部工作的数学家克利福德·柯克斯（Clifford
+Cocks）在一个内部文件中提出了一个相同的算法，但他的发现被列入机密，一直到1997年才被发表。对极大整数做因数分解的难度决定了RSA算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用RSA加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的RSA钥匙才可能被强力方式解破。到目前为止，世界上还没有任何可靠的攻击RSA算法的方式。只要其钥匙的长度足够长，用RSA加密的信息实际上是不能被解破的。
 
 1983年麻省理工学院在美国为RSA算法申请了专利。这个专利2000年9月21日失效。由于该算法在申请专利前就已经被发表了，在世界上大多数其它地区这个专利权不被承认。
 
@@ -217,13 +217,13 @@ public class RsaTest {
 
 ```
 
-![图片](https://static.xlc520.tk/blogImage/d7432b5d395347cc8f3b204a099006d0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d7432b5d395347cc8f3b204a099006d0.png)
 
 ### 1.3 案例
 
 SpringCloud Gateway + SpringBoot + Nacos+redis
-![图片](https://static.xlc520.tk/blogImage/954f481924b640e885c315ac9f33b60e.png)
-![图片](https://static.xlc520.tk/blogImage/1f7df432d04e4ecebf95161316c4eb8c.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/954f481924b640e885c315ac9f33b60e.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1f7df432d04e4ecebf95161316c4eb8c.png)
 
 #### 1.3.1 前端登录代码
 
@@ -677,11 +677,11 @@ public class UserService {
 
 **登录：返回token**
 
-![图片](https://static.xlc520.tk/blogImage/4b616048f06847b281fa138fee22fce2.png)
-![图片](https://static.xlc520.tk/blogImage/9f37befbcec5431f936c0f95a0435e35.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/4b616048f06847b281fa138fee22fce2.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9f37befbcec5431f936c0f95a0435e35.png)
 **查询：**
 
-![图片](https://static.xlc520.tk/blogImage/cacc9233186d40829f143319b6638f0c.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/cacc9233186d40829f143319b6638f0c.png)
 
 ## 2 设置URL有效时长
 
@@ -690,11 +690,11 @@ public class UserService {
 ### 2.1 前端代码
 
 **在header中添加时间戳**
-![图片](https://static.xlc520.tk/blogImage/c608c6d808fa4d30a5318638e56eb520.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c608c6d808fa4d30a5318638e56eb520.png)
 
 ### 2.2 后端验证时间戳
 
-![图片](https://static.xlc520.tk/blogImage/0cd2632ba1ba4effa0158648c07ce14d.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0cd2632ba1ba4effa0158648c07ce14d.png)
 
 ```java
  private Long getDateTimestamp(HttpHeaders httpHeaders) {
@@ -715,7 +715,7 @@ public class UserService {
 
 ### 2.3 测试不传时间戳
 
-![图片](https://static.xlc520.tk/blogImage/34c5e25305384149b8cb25236dcdfe9a.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/34c5e25305384149b8cb25236dcdfe9a.png)
 
 ## 3 确保URL唯一性
 
@@ -723,11 +723,11 @@ public class UserService {
 
 ### 3.1 修改前端请求参数
 
-![图片](https://static.xlc520.tk/blogImage/a7a2c3ad23d74f6a93a98738776f1568.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/a7a2c3ad23d74f6a93a98738776f1568.png)
 
 ### 3.2 后端增加验证RequestId
 
-![图片](https://static.xlc520.tk/blogImage/14ff62fc309947d19b859c4311502c0a.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/14ff62fc309947d19b859c4311502c0a.png)
 
 ```java
 private String getRequestId(HttpHeaders headers) {
@@ -1119,13 +1119,13 @@ public class GatewayFilterConfig implements GlobalFilter, Ordered {
 ### 4.4 测试登录
 
 **发现验签成功**
-![图片](https://static.xlc520.tk/blogImage/8e17d38de0eb4144980a740cd16b1d99-16540481454245.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8e17d38de0eb4144980a740cd16b1d99-16540481454245.png)
 
 ### 4.5 测试查询
 
 验签成功
 
-![图片](https://static.xlc520.tk/blogImage/4080582e2887418c8cf53cf3e40ce517.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/4080582e2887418c8cf53cf3e40ce517.png)
 
 ## 5 码云地址
 

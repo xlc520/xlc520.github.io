@@ -9,6 +9,7 @@ article: true
 timeline: true
 icon: type
 ---
+
 # Nginx从安装到高可用
 
 ### 一、Nginx安装
@@ -74,7 +75,7 @@ mkdir /var/temp/nginx -p
 
 注：代表在命令行中换行，用于提高可读性配置命令：
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346363259473.jpg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346363259473.jpg)
 
 ##### 7、make编译&安装
 
@@ -175,7 +176,8 @@ upstream [proxyName] {
 ### 四、upstream指令参数
 
 - `max_conns`：限制最大同时连接数 1.11.5之前只能用于商业版
-- `slow_start`：单位秒，权重在指定时间内从1上升到指定值，不适用与hash负载均衡、随机负载均衡 如果在 upstream 中只有一台 server，则该参数失效（商业版才有）
+- `slow_start`：单位秒，权重在指定时间内从1上升到指定值，不适用与hash负载均衡、随机负载均衡 如果在 upstream 中只有一台
+  server，则该参数失效（商业版才有）
 - `down`：禁止访问
 - `backup`：备用机 只有在其他服务器无法访问的时候才能访问到 不适用与hash负载均衡、随机负载均衡
 - `max_fails`：表示失败几次，则标记server已宕机，剔出上游服务 默认值1
@@ -340,7 +342,9 @@ tar -zxvf keepalived-2.0.18.tar.gz
 ./configure --prefix=/usr/local/keepalived --sysconf=/etc
 ```
 
-- **prefix**：keepalived安装的位置sysconf：keepalived核心配置文件所在位置，固定位置，改成其他位置则keepalived启动不了，`/var/log/messages`中会报错
+- **prefix**
+  ：keepalived安装的位置sysconf：keepalived核心配置文件所在位置，固定位置，改成其他位置则keepalived启动不了，`/var/log/messages`
+  中会报错
 - **sysconf**：keepalived核心配置文件所在位置，固定位置，改成其他位置则keepalived启动不了，`/var/log/messages`中会报错
 
 配置过程中可能会出现警告信息，如下所示：
@@ -451,7 +455,7 @@ systemctl restart keepalived.service
 
 ##### 4、实现双机主备高可用
 
-![图片](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/640-164346363259474.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images2/640-164346363259474.webp)
 
 (1)修改备机配置
 
@@ -632,7 +636,8 @@ systemctl restart keepalived
 
 - 客户端将请求发往LVS，LVS会选择一台服务器响应请求，服务器将结果返回给LVS，LVS再返回给客户端。
 - 在NAT模式中，服务器的网关必须指向LVS，否则报文无法送达客户端
-- NAT 技术将请求的报文和响应的报文都需要通过LVS进行地址改写，因此网站访问量比较大的时候负载均衡调度器有比较大的瓶颈，一般要求最多之能 10-20 台节点
+- NAT 技术将请求的报文和响应的报文都需要通过LVS进行地址改写，因此网站访问量比较大的时候负载均衡调度器有比较大的瓶颈，一般要求最多之能
+  10-20 台节点
 - NAT 模式支持对 IP 地址和端口进行转换。即用户请求的端口和真实服务器的端口可以不一致
 
 (2)TUN模式
@@ -843,15 +848,19 @@ ipvsadm -Ln --stats
 
 - 最小连接数（Least Connections 简写’lc’）：把新的连接请求分配到当前连接数最小的服务器。
 
-- 加权最少连接数（Weight Least Connections 简写’wlc’）：服务器的处理性能用数值来代表，权重越大处理的请求越多。Real Server 有可能会存在性能上的差异，wlc动态获取不同服务器的负载状况，把请求分发到性能好并且比较空闲的服务器。
+- 加权最少连接数（Weight Least Connections 简写’wlc’）：服务器的处理性能用数值来代表，权重越大处理的请求越多。Real Server
+  有可能会存在性能上的差异，wlc动态获取不同服务器的负载状况，把请求分发到性能好并且比较空闲的服务器。
 
-- 最短期望延迟（Shortest Expected Delay 简写’sed’）：特殊的wlc算法。举例阐述，假设有ABC三台服务器，权重分别为1、2、3 。如果使用wlc算法的话，当一个新请求进来，它可能会分给ABC中的任意一个。使用sed算法后会进行如下运算：
+- 最短期望延迟（Shortest Expected Delay 简写’sed’）：特殊的wlc算法。举例阐述，假设有ABC三台服务器，权重分别为1、2、3
+  。如果使用wlc算法的话，当一个新请求进来，它可能会分给ABC中的任意一个。使用sed算法后会进行如下运算：
 
-- - A：（1+1）/1=2
-  - B：（1+2）/2=3/2
-  - C：（1+3）/3=4/3
+-
+    - A：（1+1）/1=2
+    - B：（1+2）/2=3/2
+    - C：（1+3）/3=4/3
 
-最终结果，会把这个请求交给得出运算结果最小的服务器。最少队列调度（Never Queue 简写’nq’）：永不使用队列。如果有Real Server的连接数等于0，则直接把这个请求分配过去，不需要在排队等待运算了（sed运算）。
+最终结果，会把这个请求交给得出运算结果最小的服务器。最少队列调度（Never Queue 简写’nq’）：永不使用队列。如果有Real
+Server的连接数等于0，则直接把这个请求分配过去，不需要在排队等待运算了（sed运算）。
 
 ### 八、搭建Keepalived+Lvs+Nginx高可用集群负载均衡
 
@@ -998,3 +1007,93 @@ virtual_server 192.168.1.150 80{
     }
 }
 ```
+
+## 九、其他配置或参数说明
+
+```properties
+proxy_cache_path  #代理缓存的路径
+#语法格式
+proxy_cache_path path [levels=levels] [use_temp_path=on|off] keys_zone=name:size [inactive=time] [max_size=size] [manager_files=number] [manager_sleep=time] [manager_threshold=time] [loader_files=number] [loader_sleep=time] [loader_threshold=time] [purger=on|off] [purger_files=number] [purger_sleep=time] [purger_threshold=time];
+
+proxy_cache #开启或关闭代理缓存
+#语法格式
+proxy_cache zone | off;  #zone为内存区域的名称，即上面中keys_zone设置的名称。
+
+proxy_cache_key #定义如何生成缓存的键
+#语法格式
+proxy_cache_key string;  #string为生成Key的规则，如proxy_host$request_uri。
+
+proxy_cache_valid  #缓存生效的状态码与过期时间。
+#语法格式
+proxy_cache_valid [code ...] time;  #code为状态码，time为有效时间，可以根据状态码设置不同的缓存时间。如：proxy_cache_valid 200 302 30m;
+
+proxy_cache_min_uses #设置资源被请求多少次后被缓存。
+#语法格式
+proxy_cache_min_uses number;  #number为次数，默认为1。
+
+proxy_cache_use_stale #当后端出现异常时，是否允许Nginx返回缓存作为响应。
+#语法格式
+proxy_cache_use_stale error;  #error为错误类型
+
+proxy_cache_lock  #是否开启锁机制
+#语法格式
+proxy_cache_lock on | off;
+
+proxy_cache_lock_timeout #配置锁超时机制，超出规定时间后会释放请求。
+#语法格式
+proxy_cache_lock_timeout time;
+
+proxy_cache_methods #设置对于那些HTTP方法开启缓存。
+#语法格式
+proxy_cache_methods method;  #method为请求方法类型，如GET、HEAD等。
+
+proxy_no_cache #设置不存储缓存的条件，符合时不会保存。
+#语法格式
+proxy_no_cache string...;  #string为条件，如arg_nocache $arg_comment;
+
+proxy_cache_bypass  #设置不读取缓存的条件，符合时不会从缓存中读取。
+#语法格式
+proxy_cache_bypass string...;  #与上面proxy_no_cache的配置方法类似。
+
+add_header  #配置往响应头中添加字段信息。
+#语法格式
+add_header fieldName fieldValue;
+
+$upstream_cache_status #记录了缓存是否命中的信息，存在以下多种情况：
+MISS：请求未命中缓存。
+HIT：请求命中缓存。
+EXPIRED：请求命中缓存但缓存已过期。
+STALE：请求命中了陈旧缓存。
+REVALIDDATED：Nginx验证陈旧缓存依然有效。
+UPDATING：命中的缓存内容陈旧，但正在更新缓存。
+BYPASS：响应结果是从原始服务器获取的。
+#注：这是一个Nginx内置变量，与上面的参数不同。
+```
+
+### 配置示例：
+
+```properties
+server{  
+    location / {  
+        # 使用名为nginx_cache的缓存空间  
+        proxy_cache hot_cache;  
+        # 对于200、206、304、301、302状态码的数据缓存1天  
+        proxy_cache_valid 200 206 304 301 302 1d;  
+        # 对于其他状态的数据缓存30分钟  
+        proxy_cache_valid any 30m;  
+        # 定义生成缓存键的规则（请求的url+参数作为key）  
+        proxy_cache_key $host$uri$is_args$args;  
+        # 资源至少被重复访问三次后再加入缓存  
+        proxy_cache_min_uses 3;  
+        # 出现重复请求时，只让一个去后端读数据，其他的从缓存中读取  
+        proxy_cache_lock on;  
+        # 上面的锁超时时间为3s，超过3s未获取数据，其他请求直接去后端  
+        proxy_cache_lock_timeout 3s;  
+        # 对于请求参数或cookie中声明了不缓存的数据，不再加入缓存  
+        proxy_no_cache $cookie_nocache $arg_nocache $arg_comment;  
+        # 在响应头中添加一个缓存是否命中的状态（便于调试）  
+        add_header Cache-status $upstream_cache_status;  
+    }
+}
+```
+

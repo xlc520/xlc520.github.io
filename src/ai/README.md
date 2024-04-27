@@ -1,10 +1,10 @@
 ---
-author: xlc520
 title: AI
 description: AI分类
 date: 2023-07-01
 category: AI
 tag: AI
+author: xlc520
 article: true
 timeline: true
 icon: type

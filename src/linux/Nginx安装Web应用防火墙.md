@@ -9,11 +9,13 @@ article: true
 timeline: true
 icon: type
 ---
+
 # Nginx安装Web应用防火墙
 
 LNMP一键安装包 ngx_lua_waf waf(web应用防火墙) 安装设置。WAF中文名是Web应用防火墙，WAF能够根据规则拦截SQL注入、恶意请求、黑客扫描等HTTP请求从而保护WEB应用的安全。
 
-今天我们要说的是一个比较简单好用的基于lua的waf：ngx_lua_waf。它是一个基于lua-nginx-module(openresty)的web应用防火墙，https://github.com/loveshell/ngx_lua_waf。
+今天我们要说的是一个比较简单好用的基于lua的waf：ngx_lua_waf。它是一个基于lua-nginx-module(openresty)
+的web应用防火墙，https://github.com/loveshell/ngx_lua_waf。
 
 用途：
 
@@ -29,7 +31,8 @@ LNMP一键安装包 ngx_lua_waf waf(web应用防火墙) 安装设置。WAF中文
 
 ### 1. lua支持安装
 
-LNMP一键安装包从1.5开始增加了lua支持的选项，可以通过修改lnmp.conf中Enable_Nginx_Lua后的参数为 y 来启用lua，如果没安装lnmp，修改lnmp.conf后保存，安装完lnmp就是支持lua的，如果已经安装好lnmp，也是按前面修改lnmp.conf
+LNMP一键安装包从1.5开始增加了lua支持的选项，可以通过修改lnmp.conf中Enable_Nginx_Lua后的参数为 y
+来启用lua，如果没安装lnmp，修改lnmp.conf后保存，安装完lnmp就是支持lua的，如果已经安装好lnmp，也是按前面修改lnmp.conf
 
 然后lnmp安装包目录下运行`./upgrade.sh nginx` 升级nginx
 
@@ -37,7 +40,8 @@ LNMP一键安装包从1.5开始增加了lua支持的选项，可以通过修改l
 ./upgrade.sh nginx
 ```
 
-输入当前nginx版本号或更新的nginx版本号，升级完成就是支持lua的了。如果出错，请重新下载完整版的LNMP安装包lnmp**-full.tar.gz，再次安装。
+输入当前nginx版本号或更新的nginx版本号，升级完成就是支持lua的了。如果出错，请重新下载完整版的LNMP安装包lnmp**
+-full.tar.gz，再次安装。
 
 ### 2. 安装ngx_lua_waf
 
@@ -120,6 +124,6 @@ ngx_lua_waf安装到此结束。
 
 ### 4. ngx_lua_waf效果图
 
-![ngx_lua_waf waf(web应用防火墙)](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ngcb15.jpg)
-![ngx_lua_waf waf(web应用防火墙)](https://gh.xlc520.tk/xlc520/MyImage/raw/main/MdImg/ngcb15-16419157753881.jpg)
+![ngx_lua_waf waf(web应用防火墙)](https://bitbucket.org/xlc520/blogasset/raw/main/images2/ngcb15.jpg)
+![ngx_lua_waf waf(web应用防火墙)](https://bitbucket.org/xlc520/blogasset/raw/main/images2/ngcb15-16419157753881.jpg)
 

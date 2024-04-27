@@ -10,8 +10,6 @@ timeline: true
 icon: type
 ---
 
-
-
 # Spring Cloud Alibaba
 
 互联网时代，面对复杂业务，讲究 **分而治之** 。将一个大的单体系统拆分为若干个微服务，保证每个系统的职责单一，可以垂直深度扩展。
@@ -33,14 +31,17 @@ icon: type
 - **分布式链路追踪** 。查看接口的调用链路，为性能优化、排查问题提供输入
 - **自动化部署** 。持续集成，快速部署应用。
 
-围绕这些功能模块，`Spring Cloud Alibaba` 为我们提供了微服务化开发的一站式解决方案，我们只需要少量的`Spring 注解` 和 `yaml配置`，便可以快速构建出一套微服务系统。真的是创业者的福音。
+围绕这些功能模块，`Spring Cloud Alibaba` 为我们提供了微服务化开发的一站式解决方案，我们只需要少量的`Spring 注解`
+和 `yaml配置`，便可以快速构建出一套微服务系统。真的是创业者的福音。
 
 **那么这套生态规范都提供了哪些技术框架呢？**
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184769926-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184769926-0.png)
+
 ## 一、Spring Boot（服务基座）
 
-Spring Boot 是Spring框架的扩展，提供更加 `丰富的注解`，根据 **约定胜于配置** 原则，与市场主流的开源框架打通， 设计了 `Starter` 和 `AutoConfiguration` 机制，简化配置流程，通过简单的jar包引入，快速具备组件集成能力。大大提高了程序员的开发效率。
+Spring Boot 是Spring框架的扩展，提供更加 `丰富的注解`，根据 **约定胜于配置** 原则，与市场主流的开源框架打通，
+设计了 `Starter` 和 `AutoConfiguration` 机制，简化配置流程，通过简单的jar包引入，快速具备组件集成能力。大大提高了程序员的开发效率。
 
 **特点：**
 
@@ -52,7 +53,9 @@ Spring Boot 是Spring框架的扩展，提供更加 `丰富的注解`，根据 *
 
 Nacos 是阿里巴巴的开源的项目，全称 Naming Configuration Service ，专注于服务发现和配置管理领域。
 
-Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。功能齐全，可以替换之前的 `Spring Cloud Netflix Eureka`、`Spring Cloud Config`、`Spring Cloud Bus`，野心巨大。
+Nacos 致力于帮助您发现、配置和管理微服务。Nacos
+提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。功能齐全，可以替换之前的 `Spring Cloud Netflix Eureka`、`Spring Cloud Config`、`Spring Cloud Bus`
+，野心巨大。
 
 客户端语言方面目前支持 Java，go 、python、 C# 和 C++等主流语言
 
@@ -66,7 +69,7 @@ Nacos 有一个控制台，可以帮助用户管理服务，监控服务状态�
 
 Nacos 官方提供的集群部署架构图：
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184769926-3.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184769926-3.jpeg)
 
 > https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html
 
@@ -91,7 +94,7 @@ Nacos 官方提供的集群部署架构图：
 
 当然 `OpenResty` 也可能成为单点故障，为了保证高可用，我们需要借助 `Keepalived`
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184773759-6.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184773759-6.jpeg)
 
 客户端请求 VIP，然后请求打到了 OpenResty，由 OpenResty 转发给具体的某个 Nacos 节点。
 
@@ -160,7 +163,8 @@ public String hello() {
 
 RestTemplate + Ribbon 每次发起远程服务调用时，都需要填写`远程目标地址`，还要配置各种参数，非常麻烦。
 
-Feign 是一个轻量级的 Restful HTTP 客户端，**内嵌了 Ribbon 作为客户端的负载均衡** 。面向接口编程，使用时只需要定义一个接口并加上`@FeignClient`注解，非常方便。
+Feign 是一个轻量级的 Restful HTTP 客户端，**内嵌了 Ribbon 作为客户端的负载均衡**
+。面向接口编程，使用时只需要定义一个接口并加上`@FeignClient`注解，非常方便。
 
 OpenFeign 是 `Feign` 的增强版。对 Feign 进一步封装，支持 Spring MVC 的标准注解和HttpMessageConverts
 
@@ -179,15 +183,18 @@ public interface OrderService {
  public String createOrder();
 ```
 
-其中，`@FeignClient(value = "${provider.name}")` 定义了服务提供方的工程名，底层自动打通了注册中心，会拿到 `artifactId` 对应的IP列表，根据一定的负载均衡算法，可以将请求打到目标服务器上。
+其中，`@FeignClient(value = "${provider.name}")` 定义了服务提供方的工程名，底层自动打通了注册中心，会拿到 `artifactId`
+对应的IP列表，根据一定的负载均衡算法，可以将请求打到目标服务器上。
 
-OpenFeign 默认等待接口返回数据的时间是 1 秒，超过这个时间就会报错。如果想调整这个时间，可以修改配置项 `feign.client.config.default.readTimeout`
+OpenFeign 默认等待接口返回数据的时间是 1
+秒，超过这个时间就会报错。如果想调整这个时间，可以修改配置项 `feign.client.config.default.readTimeout`
 
 ## 五、Dubbo Spring Cloud（远程调用）
 
-`RestTemplate + Ribbon` 和 `OpenFeign` 都是基于HTTP协议调用远程接口。而 `Dubbo Spring Cloud` 是基于 TCP 协议来调用远程接口。相比 HTTP 的大量的请求头，TCP 更轻量级。
+`RestTemplate + Ribbon` 和 `OpenFeign` 都是基于HTTP协议调用远程接口。而 `Dubbo Spring Cloud` 是基于 TCP 协议来调用远程接口。相比
+HTTP 的大量的请求头，TCP 更轻量级。
 
-Dubbo Spring Cloud = Spring Cloud  + Dubbo
+Dubbo Spring Cloud = Spring Cloud + Dubbo
 
 **特性：**
 
@@ -205,14 +212,15 @@ Dubbo Spring Cloud = Spring Cloud  + Dubbo
 </dependency>
 ```
 
-注意：虽然是将 Dubbo 集成到了 Spring Cloud，增加了一些 `注解` 和 `yaml` 配置项，开发更方便，但大部分调用玩法还是遵守 Dubbo 框架那一套。
+注意：虽然是将 Dubbo 集成到了 Spring Cloud，增加了一些 `注解` 和 `yaml` 配置项，开发更方便，但大部分调用玩法还是遵守 Dubbo
+框架那一套。
 
 **几个重要的配置项：**
 
-- dubbo.scan.base-packages  # dubbo 服务扫描基准包，上报注册服务
-- dubbo.protocol.name: dubbo  # 支持的协议
-- dubbo.protocol.port: -1  # dubbo 协议端口（ -1 表示自增端口，从 20880 开始）
-- dubbo.registry.address  # 注册中心地址
+- dubbo.scan.base-packages # dubbo 服务扫描基准包，上报注册服务
+- dubbo.protocol.name: dubbo # 支持的协议
+- dubbo.protocol.port: -1 # dubbo 协议端口（ -1 表示自增端口，从 20880 开始）
+- dubbo.registry.address # 注册中心地址
 
 ## 六、Spring Cloud Gateway（网关）
 
@@ -220,9 +228,10 @@ Dubbo Spring Cloud = Spring Cloud  + Dubbo
 
 网关充当反向代理的角色，作为流量的第一入口，承载了很多基础的、公共的模块功能，如：流控、鉴权、监控、路由转发等。
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184784231-9.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184784231-9.jpeg)
 
-Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区停止了维护。官方后来推出了 Spring Cloud Gateway，**其底层是基于 WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。
+Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区停止了维护。官方后来推出了 Spring Cloud Gateway，**其底层是基于
+WebFlux 框架** ，而WebFlux框架的底层采用高性能通讯框架 Netty，性能是 Zuul 的 1.6 倍。
 
 **核心组件：**
 
@@ -232,9 +241,11 @@ Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区�
 
 2、断言（Predicate）
 
-如果返回为true，当前路由才有效，才会路由到具体的服务。官方提供了很多`内置路由断言`，如果满足不了你的诉求，也可以`自定义路由断言工厂`。
+如果返回为true，当前路由才有效，才会路由到具体的服务。官方提供了很多`内置路由断言`
+，如果满足不了你的诉求，也可以`自定义路由断言工厂`。
 
-所有的路由断言工厂都是继承自 `AbstractRoutePredicateFactory`，自定义类的命名也有固定规则，`“配置名”+RoutePredicateFactory`。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
+所有的路由断言工厂都是继承自 `AbstractRoutePredicateFactory`，自定义类的命名也有固定规则，`“配置名”+RoutePredicateFactory`
+。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
 
 3、过滤器（Filter）
 
@@ -242,9 +253,11 @@ Spring Cloud 生态早期的网关是 Netflix 公司的Zuul，后来Zuul社区�
 
 跟上面的断言类似，除了官方提供的过滤器，也支持自定义。
 
-**局部过滤器** ：继承自 `AbstractGatewayFilterFactory`，自定义类的命名也有固定规则，`“配置名”+GatewayFilterFactory`。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
+**局部过滤器** ：继承自 `AbstractGatewayFilterFactory`，自定义类的命名也有固定规则，`“配置名”+GatewayFilterFactory`
+。这样，在yaml配置时，只需要写`前面定义的配置名`即可。
 
-**全局过滤器** ：实现`GlobalFilter`,`Ordered` 两个接口，实现逻辑跟上面的局部过滤器类似。这里就不展开了。其中的 `Ordered` 接口主要是负责优先级，数值越小，优先级越高。
+**全局过滤器** ：实现`GlobalFilter`,`Ordered` 两个接口，实现逻辑跟上面的局部过滤器类似。这里就不展开了。其中的 `Ordered`
+接口主要是负责优先级，数值越小，优先级越高。
 
 **依赖包：**
 
@@ -275,7 +288,8 @@ spring:
            
 ```
 
-当然，服务提供方的地址可能经常变化，为了动态感知，我们引入 Nacos 注册中心，用于服务的注册、发现，统一管理服务的IP地址。网关路由转发时，只需从 Nacos 动态获取即可。
+当然，服务提供方的地址可能经常变化，为了动态感知，我们引入 Nacos 注册中心，用于服务的注册、发现，统一管理服务的IP地址。网关路由转发时，只需从
+Nacos 动态获取即可。
 
 ## 七、Sentinel（熔断、限流、降级）
 
@@ -286,7 +300,8 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 **同类竞品框架：**
 
 - Hystrix 框架已经停止维护；
-- Resilience4j 一种轻量级容错库，专为 Java 8 和函数式编程而设计。通过装饰器的方式，以使用断路器，速率限制器，重试或隔板来增强任何功能接口，lambda 表达式或方法引用。
+- Resilience4j 一种轻量级容错库，专为 Java 8 和函数式编程而设计。通过装饰器的方式，以使用断路器，速率限制器，重试或隔板来增强任何功能接口，lambda
+  表达式或方法引用。
 
 **流控规则：**
 
@@ -298,20 +313,23 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 
 - 阈值类型
 
-- - QPS：每秒接收的请求数
-  - 线程数：能使用的业务线程数
+-
+    - QPS：每秒接收的请求数
+    - 线程数：能使用的业务线程数
 
 - 流控模式
 
-- - 直接：达到条件后，直接执行某个流控效果
-  - 关联：如果访问关联接口B达到了阈值，则让接口A返回失败
-  - 链路：记录从入口资源的流量，达到条件也只限流入口资源
+-
+    - 直接：达到条件后，直接执行某个流控效果
+    - 关联：如果访问关联接口B达到了阈值，则让接口A返回失败
+    - 链路：记录从入口资源的流量，达到条件也只限流入口资源
 
 - 流控效果
 
-- - 快速失败：直接返回失败结果
-  - Warm Up：预热，开始有一个缓冲期，初始值 = 阈值/ codeFactor(默认 3)，然后慢慢达到设置的阈值
-  - 排队等待：让请求以均匀的速度通过，如果请求超过阈值就等待，如果等待超时则返回失败
+-
+    - 快速失败：直接返回失败结果
+    - Warm Up：预热，开始有一个缓冲期，初始值 = 阈值/ codeFactor(默认 3)，然后慢慢达到设置的阈值
+    - 排队等待：让请求以均匀的速度通过，如果请求超过阈值就等待，如果等待超时则返回失败
 
 **降级规则：**
 
@@ -333,7 +351,8 @@ Sentinel 是阿里开源的流控框架，提供了简单易用的控制台，�
 
 **@SentinelResource注解**
 
-`@SentinelResource` 注解可以根据实际情况定制化功能，跟 `Hystrix` 的 `@HystrixCommand` 注解功能类似。达到阈值后，系统的默认提示是一段英文，很不友好，所以我们要`自定义兜底方法`。
+`@SentinelResource` 注解可以根据实际情况定制化功能，跟 `Hystrix` 的 `@HystrixCommand`
+注解功能类似。达到阈值后，系统的默认提示是一段英文，很不友好，所以我们要`自定义兜底方法`。
 
 ```
 // 资源名称为handle1 
@@ -359,20 +378,22 @@ public String blockHandlerTestHandler(String params, BlockException blockExcepti
 
 **集群流控：**
 
-单机限流很容易做，但是互联网很多应用都是集群部署，毕竟其下游还挂载着 mysql、或者其他微服务，为了防止对下游的大流量冲击，采用集群流控。防止单机的流量不均匀， 理想下 QPS = 单机阈值 * 节点数
+单机限流很容易做，但是互联网很多应用都是集群部署，毕竟其下游还挂载着 mysql、或者其他微服务，为了防止对下游的大流量冲击，采用集群流控。防止单机的流量不均匀，
+理想下 QPS = 单机阈值 * 节点数
 
 ## 八、Seata（分布式事务）
 
 事务的原子性和持久性可以确保在一个事务内，更新多条数据，要么都成功，要么都失败。在一个系统内部，我们可以使用数据库事务来保证数据一致性。那如果一笔交易，涉及到跨多个系统、多个数据库的时候，用单一的数据库事务就没办法解决了，此时需要引入分布式事务
 
-Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，默认 AT 模式 ，为用户打造一站式的分布式解决方案。
+Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA
+事务模式，默认 AT 模式 ，为用户打造一站式的分布式解决方案。
 
 **优点：**
 
 - 对业务无侵入：即减少技术架构上的微服务化所带来的分布式事务问题对业务的侵入
 - 高性能：减少分布式事务解决方案所带来的性能消耗
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184804718-12.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184804718-12.jpeg)
 **Seata有3个基本组成部分** ：
 
 - 事务管理器（TM）：定义全局事务的范围：开始全局事务，提交或回滚全局事务。
@@ -386,7 +407,8 @@ Seata 是一款开源的分布式事务解决方案，致力于提供高性能�
 - RM 向 TC 注册分支事务，TC 返回分支事务ID ，并将其纳入 XID 对应全局事务的管辖
 - RM 执行本地业务表操作，并记录 `undo_log` 日志，提交本地事务
 - 当所有的 RM 都执行完后，TM 向 TC 发起针对 XID 的全局提交或回滚决议
-- TC 调度 XID 下管辖的全部分支事务完成提交或回滚请求。如果提交，删除 `undo_log` 日志就可以了。如果是回滚，根据 `undo_log` 表记录逆向回滚本地事务，把数据还原，最后再删除 `undo_log` 日志。
+- TC 调度 XID 下管辖的全部分支事务完成提交或回滚请求。如果提交，删除 `undo_log` 日志就可以了。如果是回滚，根据 `undo_log`
+  表记录逆向回滚本地事务，把数据还原，最后再删除 `undo_log` 日志。
 
 **关于 Seata 之前写过很多文章，这里就不展开了，感兴趣可以看看**
 
@@ -396,7 +418,8 @@ Seata 是一款开源的分布式事务解决方案，致力于提供高性能�
 
 ## 九、Spring Cloud Stream （异步消息）
 
-Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底层消息中间件的差异。支持的MQ 框架有 `RabbitMQ`、`Kafka`、`RocketMQ` 等
+Spring Cloud Stream 是统一消息中间件编程模型的框架，屏蔽了底层消息中间件的差异。支持的MQ
+框架有 `RabbitMQ`、`Kafka`、`RocketMQ` 等
 
 **常用注解：**
 
@@ -474,7 +497,8 @@ public class SendMessageService {
 
 ## 十、SkyWalking（分布式链路追踪）
 
-SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云原生架构、容器（Docker、k8s、Mesos）而设计。通过探针收集应用的指标，进行分布式链路追踪，**感知服务间的调用链路关系** 。
+SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云原生架构、容器（Docker、k8s、Mesos）而设计。通过探针收集应用的指标，进行分布式链路追踪，
+**感知服务间的调用链路关系** 。
 
 **特性：**
 
@@ -484,11 +508,14 @@ SkyWalking 是 一款 APM（应用性能监控）系统，专为微服务、云�
 - 多个语言自动探针。包括 Java，.NET Core 和 Node.JS。
 - 强大的可视化后台
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184808450-15.jpeg)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184808450-15.jpeg)
 
-- 上部分 Agent ：负责从应用中，收集链路信息，发送给 SkyWalking OAP 服务器。目前支持 SkyWalking、Zikpin、Jaeger 等提供的 Tracing 数据信息。而我们目前采用的是，SkyWalking Agent 收集 SkyWalking Tracing 数据，传递给服务器。
-- 下部分 SkyWalking OAP ：负责接收 Agent 发送的 Tracing 数据信息，然后进行分析(Analysis Core) ，存储到外部存储器( Storage )，最终提供查询( Query )功能。
-- 右部分 Storage ：Tracing 数据存储。目前支持 ES、MySQL、Sharding Sphere、TiDB、H2 多种存储器。**而我们目前采用的是 ES** ，主要考虑是 SkyWalking 开发团队自己的生产环境采用 ES 为主。
+- 上部分 Agent ：负责从应用中，收集链路信息，发送给 SkyWalking OAP 服务器。目前支持 SkyWalking、Zikpin、Jaeger 等提供的
+  Tracing 数据信息。而我们目前采用的是，SkyWalking Agent 收集 SkyWalking Tracing 数据，传递给服务器。
+- 下部分 SkyWalking OAP ：负责接收 Agent 发送的 Tracing 数据信息，然后进行分析(Analysis Core) ，存储到外部存储器( Storage )
+  ，最终提供查询( Query )功能。
+- 右部分 Storage ：Tracing 数据存储。目前支持 ES、MySQL、Sharding Sphere、TiDB、H2 多种存储器。**而我们目前采用的是 ES** ，主要考虑是
+  SkyWalking 开发团队自己的生产环境采用 ES 为主。
 - 左部分 SkyWalking UI ：负责提供控台，查看链路等等。
 
 SkyWalking 部署起来还是很简单的，apache官网直接下载并解压即可。
@@ -513,7 +540,8 @@ SkyWalking 快速入门手册：
 
 无论是集群化，还是周边的生态建设，都不完备。而 XXL-JOB，可以完美解决这些问题。
 
-XXL-JOB 是一款分布式任务调度框架，依赖的组件少（仅依赖 Java 和 MySQL），开箱即用。并提供了可视化界面，统计任务数据，动态修改任务执行时间，内置邮件报警，支持任务分片和任务失败重试。
+XXL-JOB 是一款分布式任务调度框架，依赖的组件少（仅依赖 Java 和
+MySQL），开箱即用。并提供了可视化界面，统计任务数据，动态修改任务执行时间，内置邮件报警，支持任务分片和任务失败重试。
 
 **核心模块：**
 

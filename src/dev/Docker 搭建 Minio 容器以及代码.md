@@ -10,13 +10,13 @@ timeline: true
 icon: java
 ---
 
-
-
 # Docker 搭建 Minio 容器以及代码
 
 ### 简介：
 
-> Minio 是一个基于Apache License v2.0开源协议的对象存储服务，虽然轻量，却拥有着不错的性能。它兼容亚马逊S3云存储服务接口，非常适合于存储大容量非结构化的数据。例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几 kb 到最大 5T 不等。最重要的是免费
+> Minio 是一个基于Apache License
+> v2.0开源协议的对象存储服务，虽然轻量，却拥有着不错的性能。它兼容亚马逊S3云存储服务接口，非常适合于存储大容量非结构化的数据。例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几
+> kb 到最大 5T 不等。最重要的是免费
 
 ### 说明：
 
@@ -24,13 +24,11 @@ icon: java
 
 Docker官方镜像(https://hub.docker.com/r/minio/minio)
 
-
-
 ### 1、寻找Minio镜像
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-001.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-001.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-48.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-48.png)
 
 ### 2、下载Minio镜像
 
@@ -43,12 +41,12 @@ docker pull minio/minio
 docker images
 ```
 
-| 命令                                                      | 描述                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------ |
+| 命令                                                        | 描述                                                         |
+|-----------------------------------------------------------|------------------------------------------------------------|
 | docker pull minio/minio                                   | 下载最新版Minio镜像 (其实此命令就等同于 : docker pull minio/minio:latest ) |
-| docker pull minio/minio:RELEASE.2023-11-20T22-40-07Z.fips | 下载指定版本的Minio镜像 (xxx指具体版本号)                    |
+| docker pull minio/minio:RELEASE.2023-11-20T22-40-07Z.fips | 下载指定版本的Minio镜像 (xxx指具体版本号)                                 |
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-49.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-49.png)
 
 ### 3、创建目录
 
@@ -80,58 +78,56 @@ docker run \
 
 ```
 
-| 命令                                                         | 描述                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| -p 9000:9000 -p 9090:9090                                    | 这是端口映射，前一个是服务器的端口，后一个是客户端也就是api接口访问的端口地址 |
-| --name minio                                                 | 这是给新创建的容器命名的选项，名字是 "minio"                 |
-| --net=host                                                   | 这是网络设置，表示容器将使用主机的网络栈，这样就不需要在容器内部配置网络 |
-| -d --restart=always                                          | 这是运行容器的其他选项，-d使容器在后台运行，--restart=always表示容器总是会在退出后自动重启 |
-| -e "MINIO_ACCESS_KEY=minioadmin"                             | 用户名                                                       |
-| -e "MINIO_SECRET_KEY=minioadmin"                             | 密码                                                         |
-| -v /opt/minio/data:/data                                     | 这意味着将宿主机上的 /opt/minio/data 目录挂载到容器内的 /data 目录 |
-| -v /opt/minio/config:/root/.minio                            | 将宿主机上的 /opt/minio/config 目录挂载到容器内的 /root/.minio 目录 |
+| 命令                                                                  | 描述                                                                               |
+|---------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| -p 9000:9000 -p 9090:9090                                           | 这是端口映射，前一个是服务器的端口，后一个是客户端也就是api接口访问的端口地址                                         |
+| --name minio                                                        | 这是给新创建的容器命名的选项，名字是 "minio"                                                       |
+| --net=host                                                          | 这是网络设置，表示容器将使用主机的网络栈，这样就不需要在容器内部配置网络                                             |
+| -d --restart=always                                                 | 这是运行容器的其他选项，-d使容器在后台运行，--restart=always表示容器总是会在退出后自动重启                           |
+| -e "MINIO_ACCESS_KEY=minioadmin"                                    | 用户名                                                                              |
+| -e "MINIO_SECRET_KEY=minioadmin"                                    | 密码                                                                               |
+| -v /opt/minio/data:/data                                            | 这意味着将宿主机上的 /opt/minio/data 目录挂载到容器内的 /data 目录                                    |
+| -v /opt/minio/config:/root/.minio                                   | 将宿主机上的 /opt/minio/config 目录挂载到容器内的 /root/.minio 目录                               |
 | minio/minio server /data --console-address ":9090" -address ":9000" | 这是容器内要运行的命令，启动一个名为 "minio" 的服务器，数据存储在 /data 目录下，服务器的控制台地址为 ":9090"，服务地址为 ":9000" |
-| \                                                            | 换行                                                         |
+| \                                                                   | 换行                                                                               |
 
 ### 4.1、访问操作
 
 访问：http://47.117.160.102:9090/login用户名：密码 minioadmin：minioadmin
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-50.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-50.png)
 
 ### 4.2、创建用户
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-51.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-51.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221162-52.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221162-52.png)
 
 ### 4.3、创建组
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-53.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-53.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-54.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-54.png)
 
 ### 4.4、创建Buckets
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-55.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-55.png)
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-56.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-56.png)
 
 ### 4.5、创建Access Keys
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-57.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-57.png)
 
 ### 4.6、文件上传
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-58.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-58.png)
 
 ### 4.6、浏览器访问上传文件
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-59.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-59.png)
 
 ### 4.6.1、输入ip:19000/Buckets名/文件名，如果不行，看看端口是否开放
-
-
 
 ### 5、Springboot简单使用
 
@@ -229,8 +225,6 @@ public class MinioConfig {
 ```
 
 ### 5.4、创建MinIO工具类
-
-
 
 ```java
 
@@ -661,8 +655,6 @@ public class MinioUtils {
 
 ### 5.5、创建Controller
 
-
-
 ```java
 @Slf4j
 @RestController
@@ -757,11 +749,11 @@ public class OSSController {
 
 使用Postman调用http://localhost:3333/oss/upload 接口，选择某个文件测试上传功能，如下图所示：
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-61.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-61.png)
 
 ### 6.2、文件下载
 
 在浏览器中，调用http://localhost:3333/oss/download?fileName=1701436432918.gif 接口，验证文件下载接口，如下图所示：
 
-![图片](https://static.xlc520.tk/blogImage/640-1703602221163-62.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1703602221163-62.png)
 

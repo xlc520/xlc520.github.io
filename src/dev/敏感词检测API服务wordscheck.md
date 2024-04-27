@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # 敏感词检测API服务wordscheck
 
 **什么是 wordscheck ？**
@@ -70,7 +68,7 @@ docker run -d \
 
 在注册表中搜索 `wordscheck` ，选择第一个 `wbsu2003/wordscheck`，版本选择 `latest`。
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-0.png)
 
 ## 端口
 
@@ -81,17 +79,17 @@ docker run -d \
 netstat -tunlp | grep 端口号
 ```
 
-| 本地端口 | 容器端口 |
-| :------: | :------: |
-|  `8187`  |  `8080`  |
+|  本地端口  |  容器端口  |
+|:------:|:------:|
+| `8187` | `8080` |
 
 默认没有暴露端口
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-1.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-1.png)
 
 需要点 `+` 号自己添加
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-2.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-2.png)
 
 # 命令行安装
 
@@ -139,7 +137,7 @@ docker-compose up -d
 
 容器启动后，在日志中会看到
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-3.png)
 
 但是如果你直接在浏览器中输入 `http://群晖IP:8187` ，会看到下面的错误
 
@@ -147,7 +145,7 @@ docker-compose up -d
 404 page not found
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-4.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-4.png)
 
 需要通过 `curl` 来验证，用 `SSH` 客户端登录到群晖后，在命令行执行
 
@@ -161,7 +159,7 @@ curl http://192.168.0.197:8187/health
 {"code":"0"}
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-5.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-5.png)
 
 测试下敏感词服务
 
@@ -173,7 +171,7 @@ curl -H "Accept: application/json" \
      http://192.168.0.197:8187/wordscheck
 ```
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921250-6.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921250-6.png)
 
 在输出格式化之后是👇下面这样的
 
@@ -196,11 +194,11 @@ curl -H "Accept: application/json" \
 
 如果觉得 `curl` 不方便，可以试试 `api` 工具
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921251-7.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921251-7.png)
 
 官方提供了 `http` 和 `rpc` 的不同语言的调用示例，需要自己根据需要进行选择
 
-![图片](https://static.xlc520.tk/blogImage/640-1700829921251-8.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1700829921251-8.png)
 
 # 参考文档
 

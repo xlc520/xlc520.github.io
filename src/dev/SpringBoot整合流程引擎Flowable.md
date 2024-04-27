@@ -12,13 +12,15 @@ icon: java
 
 # Spring Boot 整合流程引擎 Flowable
 
-流程引擎，也算是一个比较常见的工具了，我们在日常的很多开发中都会用到，当然用的最多的就是 OA 系统了，但是在一些非 OA 系统中，我们也会涉及到，比如一个 CRM 中，可能会有合同管理的需求，合同的审批，也是需要流程引擎的。
+流程引擎，也算是一个比较常见的工具了，我们在日常的很多开发中都会用到，当然用的最多的就是 OA 系统了，但是在一些非 OA
+系统中，我们也会涉及到，比如一个 CRM 中，可能会有合同管理的需求，合同的审批，也是需要流程引擎的。
 
 所以今天我们来简单聊聊流程引擎，顺便写一个简单的例子，小伙伴们一起来感受下流程引擎到底是个啥。
 
 ## 1. 流程引擎介绍
 
-Flowable 是一个使用 Java 编写的轻量级业务流程引擎。Flowable 流程引擎可用于部署 BPMN2.0 流程定义（用于定义流程的行业 XML 标准），创建这些流程定义的流程实例，进行查询，访问运行中或历史的流程实例与相关数据，等等。
+Flowable 是一个使用 Java 编写的轻量级业务流程引擎。Flowable 流程引擎可用于部署 BPMN2.0 流程定义（用于定义流程的行业 XML
+标准），创建这些流程定义的流程实例，进行查询，访问运行中或历史的流程实例与相关数据，等等。
 
 Java 领域另一个流程引擎是 Activiti，不过我觉得这两个东西，只要你会使用其中一个，另一个就不在话下。
 
@@ -28,7 +30,7 @@ Java 领域另一个流程引擎是 Activiti，不过我觉得这两个东西，
 
 首先我们创建一个 Spring Boot 项目，引入 Web、和 MySQL 驱动两个依赖，如下图：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_mysql](https://static.xlc520.tk/blogImage/19013239_62852db7da56536801.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_mysql](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013239_62852db7da56536801.png)
 
 项目创建成功之后，我们引入 flowable 依赖，如下：
 
@@ -56,15 +58,16 @@ spring:
 
 默认的表比较多，截图只是其中一部分。
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_02](https://static.xlc520.tk/blogImage/19013239_62852db80079472215.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_02](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013239_62852db80079472215.png)
 
 ## 3. 画流程图
 
-画流程图算是比较有挑战的一个步骤了，也是流程引擎使用的关键。官方提供了一些流程引擎绘制工具，这个我就不说了，感兴趣的小伙伴可以自行去体验；IDEA 也自带了一个流程可视化的工具，但是特别难用，我这里也就 不说了。
+画流程图算是比较有挑战的一个步骤了，也是流程引擎使用的关键。官方提供了一些流程引擎绘制工具，这个我就不说了，感兴趣的小伙伴可以自行去体验；IDEA
+也自带了一个流程可视化的工具，但是特别难用，我这里也就 不说了。
 
 这里说一下我常用的 IDEA 插件 **Flowable BPMN visualizer**，如下图：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程图_03](https://static.xlc520.tk/blogImage/19013240_62852db81d94797834.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程图_03](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db81d94797834.png)
 
 插件怎么安装就不用我教了吧，小伙伴们自行安装即可。
 
@@ -72,7 +75,7 @@ spring:
 
 接下来我们在 processes 目录下，新建一个 BPMN 文件（插件装好了就有这个选项了），如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程图_04](https://static.xlc520.tk/blogImage/19013240_62852db84066473563.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程图_04](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db84066473563.png)
 
 我们来画个请假的流程，就叫做 ask_for_leave.bpmn20.xml，注意最后面的 `.bpmn20.xml` 是固定后缀。
 
@@ -80,7 +83,7 @@ spring:
 
 我的请假流程画出来是这样：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_05](https://static.xlc520.tk/blogImage/19013240_62852db8574fe29098.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_流程引擎_05](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db8574fe29098.png)
 
 员工发起一个请假流程，首先是组长审核，组长审核通过了，就进入到经理审核，经理审核通过了，这个流程就结束了，如果组长审核未通过或者经理审核未通过，则流程给员工发送一个请假失败的通知，流程结束。
 
@@ -122,7 +125,8 @@ spring:
 - `<process>` ： 表示一个完整的工作流程。
 - `<startEvent>` ： 工作流中起点位置，也就是图中的绿色按钮。
 - `<endEvent>` ： 工作流中结束位置，也就是图中的红色按钮。
-- `<userTask>` ： 代表一个任务审核节点（组长、经理等角色），这个节点上有一个`flowable:assignee` 属性，这表示这个节点该由谁来处理，将来在 Java 代码中调用的时候，我们需要指定对应的处理人的 ID 或者其他唯一标记。
+- `<userTask>` ： 代表一个任务审核节点（组长、经理等角色），这个节点上有一个`flowable:assignee` 属性，这表示这个节点该由谁来处理，将来在
+  Java 代码中调用的时候，我们需要指定对应的处理人的 ID 或者其他唯一标记。
 - `<serviceTask>`：这是服务任务，在具体的实现中，这个任务可以做任何事情。
 - `<exclusiveGateway>` ： 逻辑判断节点，相当于流程图中的菱形框。
 - `<sequenceFlow>` ：链接各个节点的线条，sourceRef 属性表示线的起始节点，targetRef 属性表示线指向的节点，我们图中的线条都属于这种。
@@ -251,11 +255,12 @@ void askForLeave() {
 }
 ```
 
-首先由员工发起一个请假流程，map 中存放的 leaveTask 是我们在 XML 流程文件中提前定义好的，提前定义好当前这个任务创建之后，该由谁来处理，这里我们是假设由工号为 1000 的员工来发起这样一个请假流程。同时，我们还设置了一些额外信息。ask_for_leave 是我们在 XML 文件中定义的一个 process 的名称。
+首先由员工发起一个请假流程，map 中存放的 leaveTask 是我们在 XML 流程文件中提前定义好的，提前定义好当前这个任务创建之后，该由谁来处理，这里我们是假设由工号为
+1000 的员工来发起这样一个请假流程。同时，我们还设置了一些额外信息。ask_for_leave 是我们在 XML 文件中定义的一个 process 的名称。
 
 好啦，现在我们执行这个单元测试方法，执行完成后，控制台会打印出当前这个流程的 id，我们拿着这个 id 去访问 4.2 小节的接口，结果如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_java_06](https://static.xlc520.tk/blogImage/19013240_62852db86702137091.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_java_06](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db86702137091.png)
 
 可以看到，请假用红色的框框起来了，说明当前流程走到了这一步。
 
@@ -282,11 +287,12 @@ void submitToZuzhang() {
 }
 ```
 
-首先我们利用 staffId 查找到当前员工的 id，进而找到当前员工需要执行的任务，遍历这个任务，调用 taskService.complete 方法将任务提交给组长，注意在 map 中指定组长的 id。
+首先我们利用 staffId 查找到当前员工的 id，进而找到当前员工需要执行的任务，遍历这个任务，调用 taskService.complete
+方法将任务提交给组长，注意在 map 中指定组长的 id。
 
 提交完成后，我们再去看流程图片，如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_mysql_07](https://static.xlc520.tk/blogImage/19013240_62852db8757ea39709.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_mysql_07](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db8757ea39709.png)
 
 可以看到，流程图走到组长审批了。
 
@@ -337,7 +343,7 @@ void zuZhangReject() {
 
 假设这里执行了同意，那么流程图如下：
 
-![Spring Boot 整合流程引擎 Flowable，so easy_spring boot_08](https://static.xlc520.tk/blogImage/19013240_62852db88301484841.png)
+![Spring Boot 整合流程引擎 Flowable，so easy_spring boot_08](https://bitbucket.org/xlc520/blogasset/raw/main/images3/19013240_62852db88301484841.png)
 
 ### 4.6 经理审批
 
@@ -412,9 +418,9 @@ java.sql.SQLSyntaxErrorException: Table 'mes_design_test.act_ge_property' doesn'
 
 我的数据库是MySQL8。
 
-​    经过查询和尝试，原因是：在这个数据库里面，已经有一个数据库里面有activiti的这些表了，它检索的时候全库检索查到它了，所以flowable不去建表了，但是我们指定的这个schema里卖弄还是空的，所以它报了找不到表。
+​ 经过查询和尝试，原因是：在这个数据库里面，已经有一个数据库里面有activiti的这些表了，它检索的时候全库检索查到它了，所以flowable不去建表了，但是我们指定的这个schema里卖弄还是空的，所以它报了找不到表。
 
-​    解决方法：mysql的链接上加上参数如下，让本schema成为默认的schema。
+​ 解决方法：mysql的链接上加上参数如下，让本schema成为默认的schema。
 
 ```javascript
 &nullCatalogMeansCurrent=true

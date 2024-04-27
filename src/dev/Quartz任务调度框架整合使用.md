@@ -10,14 +10,12 @@ timeline: true
 icon: java
 ---
 
-
-
 # Quartz - 任务调度框架整合使用
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548287.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548287.png)
 
-
-各种实现自定义定时任务的方案，从Quartz到Xxl-job，再到Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz 的保姆级教程，在这里分享给大家；
+各种实现自定义定时任务的方案，从Quartz到Xxl-job，再到Elastic-job，能聊的都聊了一圈儿；刚刚好手头有一份关于 Quartz
+的保姆级教程，在这里分享给大家；
 
 ## 1前言
 
@@ -25,7 +23,8 @@ icon: java
 
 很多开源的项目管理框架都已经做了 Quartz 的集成。我们居然连这么常用得东西居然没有做成模块化，实在是不应该。
 
-Quartz是`OpenSymphony`开源组织在`Job scheduling`领域又一个开源项目，完全由Java开发，可以用来执行定时任务，类似于`java.util.Timer`。但是相较于Timer， Quartz增加了很多功能：
+Quartz是`OpenSymphony`开源组织在`Job scheduling`
+领域又一个开源项目，完全由Java开发，可以用来执行定时任务，类似于`java.util.Timer`。但是相较于Timer， Quartz增加了很多功能：
 
 - 持久性作业 - 就是保持调度定时的状态;
 - 作业管理 - 对调度作业进行有效的管理;
@@ -45,7 +44,7 @@ Quartz 的核心类有以下三部分：
 
 主要关系如下：
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548281.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548281.png)
 
 ## 3Demo
 
@@ -113,15 +112,16 @@ public static void main(String[] args) throws Exception {
 
 日志打印情况：
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548282.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548282.png)
 
 ## 4JobDetail
 
 JobDetail 的作用是绑定 Job，是一个任务实例，它为 Job 添加了许多扩展参数。
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548293.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548293.png)
 
-每次`Scheduler`调度执行一个Job的时候，首先会拿到对应的Job，然后创建该Job实例，再去执行Job中的`execute()`的内容，任务执行结束后，关联的Job对象实例会被释放，且会被JVM GC清除。
+每次`Scheduler`调度执行一个Job的时候，首先会拿到对应的Job，然后创建该Job实例，再去执行Job中的`execute()`
+的内容，任务执行结束后，关联的Job对象实例会被释放，且会被JVM GC清除。
 
 **为什么设计成JobDetail + Job，不直接使用Job？**
 
@@ -283,7 +283,7 @@ TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("* * *
 
 Cron 表达式这里不介绍，贴个图跳过
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548294.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548294.png)
 
 顺便推荐一个非常好用的Cron 表达式在线生成，反解析的工具：www.matools.com/cron 非常好用，点几下，就能得到自己想要的cron表达式；
 
@@ -291,7 +291,7 @@ Cron 表达式这里不介绍，贴个图跳过
 
 下面集成应用截图来自 Ruoyi 框架：
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548295.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548295.png)
 
 从上面的截图中，可以看到这个定时任务模块实现了：
 
@@ -803,7 +803,7 @@ public int insertJob(QuartzJob job) throws Exception {
 
 再手动启动任务，根据 ID 来启动任务：
 
-![图片](https://static.xlc520.tk/blogImage/640-16535411548296.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-16535411548296.png)
 
 实现代码：
 
@@ -876,15 +876,21 @@ public void init() throws Exception {
 
 Quartz定时任务默认都是并发执行的，不会等待上一次任务执行完毕，只要间隔时间到就会执行, 如果定时任执行太长，会长时间占用资源，导致其它任务堵塞。
 
-`@DisallowConcurrentExecution` 禁止并发执行多个相同定义的JobDetail, 这个注解是加在Job类上的, 但意思并不是不能同时执行多个Job, 而是不能并发执行同一个`Job Definition`(由JobDetail定义), 但是可以同时执行多个不同的JobDetail。
+`@DisallowConcurrentExecution` 禁止并发执行多个相同定义的JobDetail, 这个注解是加在Job类上的, 但意思并不是不能同时执行多个Job,
+而是不能并发执行同一个`Job Definition`(由JobDetail定义), 但是可以同时执行多个不同的JobDetail。
 
-举例说明，我们有一个Job类,叫做SayHelloJob, 并在这个Job上加了这个注解, 然后在这个Job上定义了很多个`JobDetail`, `如sayHelloToJoeJobDetail`, `sayHelloToMikeJobDetail`, 那么当scheduler启动时, 不会并发执行多个`sayHelloToJoeJobDetail`或者`sayHelloToMikeJobDetail`, 但可以同时执行`sayHelloToJoeJobDetail`跟`sayHelloToMikeJobDetail`
+举例说明，我们有一个Job类,叫做SayHelloJob, 并在这个Job上加了这个注解,
+然后在这个Job上定义了很多个`JobDetail`, `如sayHelloToJoeJobDetail`, `sayHelloToMikeJobDetail`, 那么当scheduler启动时,
+不会并发执行多个`sayHelloToJoeJobDetail`或者`sayHelloToMikeJobDetail`, 但可以同时执行`sayHelloToJoeJobDetail`
+跟`sayHelloToMikeJobDetail`
 
 `@PersistJobDataAfterExecution` 同样, 也是加在Job上。表示当正常执行完Job后, JobDataMap中的数据应该被改动, 以被下一次调用时用。
 
-当使用 `@PersistJobDataAfterExecution` 注解时, 为了避免并发时, 存储数据造成混乱, 强烈建议把 `@DisallowConcurrentExecution` 注解也加上。
+当使用 `@PersistJobDataAfterExecution` 注解时, 为了避免并发时, 存储数据造成混乱,
+强烈建议把 `@DisallowConcurrentExecution` 注解也加上。
 
-测试代码，设定的时间间隔为3秒,但job执行时间是5秒,设置 `@DisallowConcurrentExecution`以 后程序会等任务执行完毕以后再去执行,否则会在3秒时再启用新的线程执行。
+测试代码，设定的时间间隔为3秒,但job执行时间是5秒,设置 `@DisallowConcurrentExecution`以
+后程序会等任务执行完毕以后再去执行,否则会在3秒时再启用新的线程执行。
 
 ### 阻止特定时间运行
 

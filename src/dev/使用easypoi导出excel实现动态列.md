@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # 使用 easypoi 导出 excel 实现动态列
 
 ### 说明
@@ -45,17 +43,15 @@ icon: java
 
 变更前样式
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184514758-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184514758-0.png)
 
 变更后样式
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184514758-3.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184514758-3.png)
 
 ### 代码解析
 
 ##### 动态生成列头
-
-
 
 ```java
   private List<ExcelExportEntity> dynamicNewAddExcel(Map<String, PlatformStatisParamRespData> paramInfo) {
@@ -270,7 +266,7 @@ public class BiPlatformStatisRespDTO implements Serializable {
 
 ##### 测试结果示例
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184521222-6.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184521222-6.png)
 
 ##### 测试数据json示例
 

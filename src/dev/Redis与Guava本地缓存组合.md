@@ -13,15 +13,15 @@ timeline: true
 icon: java
 ---
 
-
-
 # Redis与Guava本地缓存组合
 
-![Redis与本地缓存组合](https://static.xlc520.tk/blogImage/98d8c80f6ae24256832ae271c74d81f2tplv-k3u1fbpfcp-zoom-crop-mark3024302430241702.webp)
+![Redis与本地缓存组合](https://bitbucket.org/xlc520/blogasset/raw/main/images3/98d8c80f6ae24256832ae271c74d81f2tplv-k3u1fbpfcp-zoom-crop-mark3024302430241702.webp)
 
 ## 前言
 
-- 我们开发中经常用到Redis作为缓存，将高频数据放在Redis中能够提高业务性能，降低MySQL等关系型数据库压力，甚至一些系统使用Redis进行数据持久化，Redis松散的文档结构非常适合业务系统开发，在精确查询，数据统计业务有着很大的优势。但是高频数据流处理系统中，Redis的压力也会很大，同时I/0开销才是耗时的主要原因，这时候为了降低Redis读写压力我们可以用到本地缓存，Guava为我们提供了优秀的本地缓存API，包含了过期策略等等，编码难度低，个人非常推荐。
+-
+
+我们开发中经常用到Redis作为缓存，将高频数据放在Redis中能够提高业务性能，降低MySQL等关系型数据库压力，甚至一些系统使用Redis进行数据持久化，Redis松散的文档结构非常适合业务系统开发，在精确查询，数据统计业务有着很大的优势。但是高频数据流处理系统中，Redis的压力也会很大，同时I/0开销才是耗时的主要原因，这时候为了降低Redis读写压力我们可以用到本地缓存，Guava为我们提供了优秀的本地缓存API，包含了过期策略等等，编码难度低，个人非常推荐。
 
 ## 设计示例
 
@@ -31,7 +31,7 @@ icon: java
 
 ### 流程图
 
-![Redis懒加载缓存.png](https://static.xlc520.tk/blogImage/98a4b375d0444e589b217a94065219aatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
+![Redis懒加载缓存.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/98a4b375d0444e589b217a94065219aatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
 
 ### 代码示例
 
@@ -139,11 +139,13 @@ public class Xx {
 
 ### 流程图
 
-![本地缓存.png](https://static.xlc520.tk/blogImage/1028922154004ccc9c2811c75325efdctplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
+![本地缓存.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/1028922154004ccc9c2811c75325efdctplv-k3u1fbpfcp-zoom-in-crop-mark4536000.png)
 
 ### 业务场景
 
-> 在流处数处理过程中，微服务对多个设备上传的数据进行处理，每个设备有一个code,流数据的频率高，在消息队列发送过程中使用分区发送，我们需要为设备code生成对应的自增号，用自增号对kafka中topic分区数进行取模，这样如果有10000台设备，自增号就是0~9999，在取模后就进行分区发送就可以做到每个分区均匀分布，这个自增号我们使用redis的自增数生成，生成后放到redis的hash结构进行缓存，每次来一个设备，我们就去这个hash缓存中取，没有取到就使用自增数生成一个，然后放到redis的hash缓存中，这时候每个设备的自增数一经生成是不会再发生改变的，我们就想到使用本地缓存进行优化，避免高频的调用redis去获取，降低redis压力，下面链接为我写的关于kafka分区消费的文章，大家可以去看看 [Kafka分区发送及消费实战](https://juejin.cn/post/6995746569580445709)
+>
+在流处数处理过程中，微服务对多个设备上传的数据进行处理，每个设备有一个code,流数据的频率高，在消息队列发送过程中使用分区发送，我们需要为设备code生成对应的自增号，用自增号对kafka中topic分区数进行取模，这样如果有10000台设备，自增号就是0~
+9999，在取模后就进行分区发送就可以做到每个分区均匀分布，这个自增号我们使用redis的自增数生成，生成后放到redis的hash结构进行缓存，每次来一个设备，我们就去这个hash缓存中取，没有取到就使用自增数生成一个，然后放到redis的hash缓存中，这时候每个设备的自增数一经生成是不会再发生改变的，我们就想到使用本地缓存进行优化，避免高频的调用redis去获取，降低redis压力，下面链接为我写的关于kafka分区消费的文章，大家可以去看看 [Kafka分区发送及消费实战](https://juejin.cn/post/6995746569580445709)
 
 ### 代码示例
 
@@ -225,4 +227,5 @@ public class DeviceIncCache {
 
 ## 后记
 
-> redis提供了丰富的数据类型及api，非常适合业务系统开发，统计计数（increment，decrement），标记位（bitmap）,松散数据（hash）,先进先出、队列式读取（list）；guava缓存作为本地缓存，能够高效的读取的同时，提供了大量api方便我们控制本地缓存的数据量及冷数据淘汰；我们充分的学习这些特性能够帮助我们在业务开发中更加轻松灵活，在空间与时间上找到一个平衡点。
+>
+redis提供了丰富的数据类型及api，非常适合业务系统开发，统计计数（increment，decrement），标记位（bitmap）,松散数据（hash）,先进先出、队列式读取（list）；guava缓存作为本地缓存，能够高效的读取的同时，提供了大量api方便我们控制本地缓存的数据量及冷数据淘汰；我们充分的学习这些特性能够帮助我们在业务开发中更加轻松灵活，在空间与时间上找到一个平衡点。

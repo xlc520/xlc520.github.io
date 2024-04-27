@@ -18,8 +18,6 @@ icon: others
 
 https://www.backblaze.com
 
- 
-
 ## 免费额度
 
 存储容量：10GB
@@ -36,19 +34,16 @@ BUCKET(桶)：100个
 
 BUCKET(桶)文件数：无限
 
- 
-
 超出了额度，收费$0.005 per GB per month for additional storage beyond 10 GB 和 $0.01 per GB beyond the free daily 1 GB.
 
 这点流量能干点啥？
 
-不过Backblaze加入了CloudFlare的 带宽联盟（ Bandwidth Alliance） ，所以Backblaze与CloudFlare之间的流量直接免费，也就是每天**无限量**下行流量。
+不过Backblaze加入了CloudFlare的 带宽联盟（ Bandwidth Alliance） ，所以Backblaze与CloudFlare之间的流量直接免费，也就是每天*
+*无限量**下行流量。
 
 配上CloudFlare配置缓存时间更久一些，辣么下载请求无限次免费啦。看看联盟有没有你熟悉的LOGO？
 
-![img](https://static.xlc520.tk/blogImage/c57394926b319339.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/c57394926b319339.png)
 
 ## 注册账号
 
@@ -60,11 +55,9 @@ https://www.backblaze.com/b2/sign-up.html
 
 **提醒一下，界面右下角可以切换到简体中文**
 
-![img](https://static.xlc520.tk/blogImage/6aa0b5180f158c7a.png)
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6aa0b5180f158c7a.png)
 
- 
-
-##  创建BUCKET
+## 创建BUCKET
 
 1）登陆平台 - 创作一个桶
 
@@ -72,23 +65,17 @@ https://www.backblaze.com/b2/sign-up.html
 
 **特别提醒：桶名称要复杂一些，小心被刷流量！建议生成UUID**
 
-![img](https://static.xlc520.tk/blogImage/6bcae128a5aae3f2.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/6bcae128a5aae3f2.png)
 
 2）创建成功后 点击 【上载/下载】可以去上传一个文件！
 
-![img](https://static.xlc520.tk/blogImage/d059f7012f8e6c7f.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d059f7012f8e6c7f.png)
 
 3）上传成功后，单机文件可以看见文件详情内容
 
 特别要记住友好URL中的域名，如图是 **f004.backblazeb2.com**
 
-![img](https://static.xlc520.tk/blogImage/5080cc13667c7a8b.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/5080cc13667c7a8b.png)
 
 ## 配置CF
 
@@ -98,9 +85,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 **没有域名？参考文章：[人人都可申请拥有EU.org免费域名](https://51.ruyo.net/17863.html)**
 
-![img](https://static.xlc520.tk/blogImage/f7fe01ec953be195.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/f7fe01ec953be195.png)
 
 2）解析完成后，浏览器打开地址 https://b2.i0lo1o.eu.org/file/ruyonet123/default.png
 
@@ -108,9 +93,7 @@ https://www.backblaze.com/b2/sign-up.html
 
 经过一波骚操作，访问URL提示：Error 522 错误？？
 
-![img](https://static.xlc520.tk/blogImage/d8f4f762cf8bb6a5.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/d8f4f762cf8bb6a5.png)
 
 错误原因
 
@@ -118,11 +101,10 @@ Cloudflare 通过纯 HTTP 而不是 HTTPS 访问上游服务器。
 
 但是Backblaze 仅支持安全的 HTTPS 连接，因此 HTTP 请求失败。
 
-为了解决这个问题，在 Cloudflare 仪表板的 【SSL/TLS 部分】，将加密模式从“灵活”更改为“完全（严格）”，以便 Cloudflare 通过 HTTPS 连接到 Backblaze，并且需要 CA 颁发的证书。
+为了解决这个问题，在 Cloudflare 仪表板的 【SSL/TLS 部分】，将加密模式从“灵活”更改为“完全（严格）”，以便 Cloudflare 通过 HTTPS
+连接到 Backblaze，并且需要 CA 颁发的证书。
 
-![img](https://static.xlc520.tk/blogImage/15904fb466238d83.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/15904fb466238d83.png)
 
 ### 设置缓存
 
@@ -132,9 +114,7 @@ B2 桶 - 自己创建的桶 - 桶设定
 
 桶信息填写(缓存一个月)：`{"cache-control":"max-age=2592000"}`
 
-![img](https://static.xlc520.tk/blogImage/935e290f3246a582.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/935e290f3246a582.png)
 
 **Cloudflare 域名仪表盘 - 规则 - 页面规则 - 创建页面规则**
 
@@ -142,11 +122,7 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 设置选择： 缓存级别 - 标准，边缘缓存TTL - 1个月
 
-![img](https://static.xlc520.tk/blogImage/370cfd749d6b3126.png)
-
- 
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/370cfd749d6b3126.png)
 
 ### 隐藏桶名
 
@@ -156,9 +132,7 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 **Cloudflare 域名仪表盘 - 规则 - 转换规则- 创建转换规则 - 重写URL**
 
-![img](https://static.xlc520.tk/blogImage/238a2376952d1ca8.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/238a2376952d1ca8.png)
 
 传入请求匹配时：`b2.i0lo1o.eu.org`
 
@@ -166,11 +140,7 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 这里一定要填写你自己的域名哈~~ 举一反三噢~
 
- 
-
 **然后浏览器打开URL：https://b2.i0lo1o.eu.org/default.png**
-
- 
 
 ## API密钥
 
@@ -178,23 +148,17 @@ URL输入 上一步中设置的域名 `https://b2.i0lo1o.eu.org/*`
 
 名称随意，允许访问桶 建议选择1个，其他默认即可
 
-![img](https://static.xlc520.tk/blogImage/542c803a7f301bc8.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/542c803a7f301bc8.png)
 
 2）提交成功，一定要记住记住相关信息，关了以后密钥就看不到了，只能重新创建
 
-![img](https://static.xlc520.tk/blogImage/0372c8e08620f583.png)
-
- 
+![img](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0372c8e08620f583.png)
 
 ## 文件上传
 
 ### 官网上传
 
 直接登陆官网，在桶里直接上传！
-
- 
 
 ### WP插件
 
@@ -204,21 +168,15 @@ wordpress.org/plugins/updraftplus/
 
 wordpress.org/plugins/ilab-media-tools/
 
- 
-
 ### SDK
 
 官方提供多种语音的SDK
 
 https://github.com/Backblaze/
 
-
-
 ### 其他
 
 ShareX，MiXplorer
-
- 
 
 ## 最后总结
 

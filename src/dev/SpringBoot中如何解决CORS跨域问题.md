@@ -10,8 +10,6 @@ timeline: true
 icon: java
 ---
 
-
-
 # SpringBoot中如何解决CORS跨域问题
 
 CORS（Cross-Origin Resource Sharing）"跨域资源共享"，是一个W3C标准，它允许浏览器向跨域服务器发送Ajax请求，打破了Ajax只能访问本站内的资源限制。
@@ -60,7 +58,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 当项目中还有一个自定义过滤器，并且在过滤器中通过 `response.getWriter().print()`直接向客户端输出返回信息：
 
-![图片](https://static.xlc520.tk/blogImage/640-1674184416050-0.png)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images3/640-1674184416050-0.png)
 
 在这种情况下是不会继续执行后面的过滤器链的。
 
