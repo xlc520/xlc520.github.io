@@ -1,12 +1,13 @@
-# [xlc520.github.io](https://xlc520.github.io/)
+> [blog.ciberviler.top](https://blog.ciberviler.top/)
+>
+> [xlc520.github.io](https://xlc520.github.io/)
 
 ![Alt](https://repobeats.axiom.co/api/embed/73ed9c9935e88559365a8fdf99e933621916339d.svg "Repobeats analytics image")
 
-个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程、java开发及其报错解决、Python及其报错解决、环境安装及其报错解决、日常学习、文章、美文。
+丰富的知识笔记库，包含各类工具、知识技巧等的个人类笔记博客。个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程、java开发及其报错解决、Python及其报错解决、环境安装及其报错解决、日常学习、文章、美文。
 
 <p align="center">
  <img width="200px" src="https://avatars.githubusercontent.com/u/56480807?s=400&u=35fd0849b4836090297776ba863242a2267690ac&v=4"  alt="GitHub Readme Stats" />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://camo.githubusercontent.com/a5c7c7397871b9348b88302ac5cd56ddbf8774b3/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f73792d7265636f7264732f73746174696366696c65406d61737465722f696d616765732f3230323030372f6875616a692e676966">
  <h2 align="center">xlc520 - Lin Cheng</h2>
  <p align="center">立志要如山，行道要如水。不如山，不能坚定；不如水，不能曲达。<br/>
 Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not as good as water, not quda.
@@ -64,7 +65,7 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
       </td>
       <td width="25%" align="center">
         <span>𝗦𝘂𝗯𝗹𝗶𝗺𝗲 𝗧𝗲𝘅𝘁 𝟯</span><br><br><br>
-        <img height="64px" src="https://cdn.worldvectorlogo.com/logos/sublime-text.svg">
+        <img height="64px" src="https://cdn.svgporn.com/logos/sublimetext-icon.svg">
       </td>
       <td width="25%" align="center">
         <span>𝗚𝗶𝘁</span><br><br><br>
@@ -85,9 +86,10 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
 
 ---
 
-<h2><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/> Hey! Nice to see you.</h2>
+<h2><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/>
+Hey! Nice to see you.</h2>
 
-​			Welcome to my page!
+​ Welcome to my page!
 
 - 🌱 I’m currently learning Java、Python、Vue.
 - 🔭 I’m currently working on ...

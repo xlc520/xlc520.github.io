@@ -2,9 +2,9 @@
 home: true
 layout: BlogHome
 icon: home
-title: 博客主页
+title: 丰富的知识笔记库
 heroImage: /logo.svg
-heroText: StudyNote - 个人学习笔记
+heroText: StudyNote - 丰富的知识笔记库
 heroFullScreen: true
 bgImage: https://api.vvhan.com/api/bing?rand=sj
 tagline: 昨夜西风凋碧树，独上高楼，望尽天涯路。<br><br>衣带渐宽终不悔，为伊消得人憔悴。<br><br>众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。

@@ -6,7 +6,7 @@ export default navbar([
   { text: 'Linux', link: '/linux/', icon: 'logos:linux-tux' },
   {
     text: '学习',
-    icon: 'arcticons:studyplus',
+    icon: 'simple-icons:studyverse',
     prefix: '/study/',
     children: [
       {
@@ -21,7 +21,7 @@ export default navbar([
       },
     ],
   },
-  { text: 'AI', link: '/ai/', icon: 'token-branded:cgpt' },
+  { text: 'AI', link: '/ai/', icon: 'arcticons:ai-score' },
   { text: '算法', link: '/algorithm/', icon: 'icon-park:database-power' },
   { text: '脚本', link: '/script/', icon: 'vscode-icons:file-type-script' },
   { text: '工具', link: '/tools/', icon: 'icon-park:toolkit' },

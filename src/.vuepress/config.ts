@@ -5,8 +5,9 @@ import theme from './theme.js';
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
-  title: 'StudyNote',
-  description: '个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。',
+  title: 'StudyNote - 丰富的知识笔记库',
+  description:
+    '丰富的知识笔记库，包含各类工具、知识技巧等的个人类笔记博客。个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程。',
   theme,
   // Enable it with pwa
   // shouldPrefetch: false,
