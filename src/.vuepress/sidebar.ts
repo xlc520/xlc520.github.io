@@ -14,7 +14,7 @@ export default sidebar({
   '/pc/': 'structure',
   '/essay/': 'structure',
   '/other/': 'structure',
-  '/': [
-    '' /* / */,
-  ],
+  '/android/': 'structure',
+  '/finance/': 'structure',
+  '/': ['' /* / */],
 });

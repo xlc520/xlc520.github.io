@@ -2,6 +2,7 @@
 >
 > [xlc520.github.io](https://xlc520.github.io/)
 
+
 ![Alt](https://repobeats.axiom.co/api/embed/73ed9c9935e88559365a8fdf99e933621916339d.svg "Repobeats analytics image")
 
 丰富的知识笔记库，包含各类工具、知识技巧等的个人类笔记博客。个人学习的笔记，记录学习过程遇到的问题，学到的知识，收集各种学习工具，各种技巧，各种使用教程、java开发及其报错解决、Python及其报错解决、环境安装及其报错解决、日常学习、文章、美文。
@@ -27,6 +28,21 @@ Aspire to be like a mountain and walk like water. Not as firm as a mountain; Not
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anuraghazra/github-readme-stats?color=0088ff" />
     </a>
    </p>
+
+<img src="https://readme-typing-svg.demolab.com
+?font=Fira+Code&pause=5000&color=03C65A&center=true&vCenter=true&random=false&width=435&lines=%E5%A4%A9%E5%A4%A9%E5%BC%80%E5%BF%83%E3%80%81%E4%B8%87%E4%BA%8B%E5%A4%A7%E5%90%89%E3%80%81%E8%B4%A2%E6%BA%90%E5%B9%BF%E8%BF%9B"
+alt="Typing SVG" />
+
+<!-- Joke 笑话 -->
+<div>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://readme-jokes.vercel.app/api?hideBorder&bgColor=%23121212" />
+    <source media="(prefers-color-scheme: light)" srcset="https://readme-jokes.vercel.app/api?hideBorder&bgColor=%ffffff" />
+    <img alt="Jokes Card" src="https://readme-jokes.vercel.app/api?hideBorder&bgColor=%23121212" />
+  </picture>
+</div>
+
+
 <h3 align="center">Things I code with</h3>
 <p align="center">
     <img alt="Java" src="https://img.shields.io/badge/-Java-informational?style=flat-square&logo=java&logoColor=white" />

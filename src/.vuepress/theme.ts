@@ -110,7 +110,7 @@ export default hopeTheme({
       excerptLength: 100,
     },
     components: {
-      components: ['Badge', 'VPCard'],
+      components: ['Badge', 'VPBanner', 'VPCard', 'Share', 'SiteInfo'],
     },
     // comment: {
     //   // You should generate and use your own comment service
