@@ -13,6 +13,58 @@ icon: java
 
 # Informix SQL 函数用法
 
+
+
+> 2024年5月7日14:53:55
+
+ informix 获取当前时间，时间格式
+
+```sql
+-- 默认 YYYY - MM - DD
+
+select today from dual;
+
+-- 格式 YYYY - MM - DD HH:mm:ss:000
+
+select current from dual;
+
+-- 格式 YYYY/MM/DD
+
+select to_char(current,'%Y/%m/%d') from dual;
+
+-- 格式 HHmmss
+
+select to_char(current, '%H%M%S') from dual;
+
+-- 格式 yy-mm-dd
+
+select TO_CHAR(today,'%y-%m-%d')  from dual;
+
+-- 格式 Monday August mm YYYY
+
+select TO_CHAR(today,'%A %B %d %Y') from dual;
+
+select YEAR(today), MONTH(today) from dual;
+
+
+-- 当前月份往后推3个月
+select to_char(ADD_MONTHS(current, 3), '%Y%m')  from dual;
+
+start_time='2020-08-28 22:12:13'
+
+extend(start_time,year to month)='2020-08'
+
+extend(start_time,hour to hour)='22'
+
+to_char，to_date('20200828221543','%Y%m%d%H%M%S')
+```
+
+
+
+
+
+>2024-04-19
+
 一、内部函数
 
 1、内部合计函数
