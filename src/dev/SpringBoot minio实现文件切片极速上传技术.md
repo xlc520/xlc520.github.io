@@ -93,7 +93,7 @@ actions:
 mkdir minio
 ```
 
-![image-20230602135307138](E:/source/Git/blogAsset/images/2024/60b5bfabdc374010ae78417804fa6838tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602135307138](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/60b5bfabdc374010ae78417804fa6838tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 使用docker查看目标镜像状况
 
@@ -103,7 +103,7 @@ mkdir minio
 docker search minio
 ```
 
-![image-20230602135607197](E:/source/Git/blogAsset/images/2024/5938f976031043bfb5b9abb2a9ef9f69tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602135607197](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/5938f976031043bfb5b9abb2a9ef9f69tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 使用docker拉去镜像
 
@@ -111,7 +111,7 @@ docker search minio
 docker pull minio/minio
 ```
 
-![image-20230602135831281](E:/source/Git/blogAsset/images/2024/c27f66a70a034682a1974f428444c260tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602135831281](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/c27f66a70a034682a1974f428444c260tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 查看镜像是否拉取成功
 
@@ -119,7 +119,7 @@ docker pull minio/minio
 docker images
 ```
 
-![image-20230602135955611](E:/source/Git/blogAsset/images/2024/92c3cde36c504ac298d810977af035bctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602135955611](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/92c3cde36c504ac298d810977af035bctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 启动Minio容器
 
@@ -127,11 +127,11 @@ docker images
 docker run -p 9000:9000 -p 9090:9090      --net=host      --name minio      -d --restart=always      -e "MINIO_ACCESS_KEY=IT@WangHui"      -e "MINIO_SECRET_KEY=IT@WangHui"            minio/minio server      /data --console-address ":9000" -address ":9090"
 ```
 
-![image-20230602190132177](E:/source/Git/blogAsset/images/2024/9bd0755f871e4d12852e3965a476bf2ftplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602190132177](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/9bd0755f871e4d12852e3965a476bf2ftplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 注意一下，对于密码强度是有要求的，不然报错
 
-![image-20230602141629246](E:/source/Git/blogAsset/images/2024/e387b021181641368f92e1a106047e44tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602141629246](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/e387b021181641368f92e1a106047e44tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 > 这是一个运行 MinIO 容器的 Docker 命令，具体参数解释如下：
 >
@@ -153,7 +153,7 @@ docker run -p 9000:9000 -p 9090:9090      --net=host      --name minio      -d -
 
 **报错警告**
 
-![image-20230602141205823](E:/source/Git/blogAsset/images/2024/362f52869314435aad7e31c70d5c6eb2tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602141205823](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/362f52869314435aad7e31c70d5c6eb2tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 > 原因：
 >
@@ -172,11 +172,11 @@ docker ps -a #查看运行容器
 docker rm -f minio #根据容器名删除容器（自己注意辨别自己的）
 ```
 
-![image-20230602141858749](E:/source/Git/blogAsset/images/2024/c61c6f3666fb479799a20ca22f003a4ctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602141858749](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/c61c6f3666fb479799a20ca22f003a4ctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 当启动后在浏览器访问`http://localhost:9000`就可以访问minio的图形化界面了，如图所示：
 
-![image-20230602145737224](E:/source/Git/blogAsset/images/2024/0803a51866a749cca92286a566a35cc7tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602145737224](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/0803a51866a749cca92286a566a35cc7tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 **用户名密码就是启动参数里面的数据**
 
@@ -237,7 +237,7 @@ firewall-cmd --list-ports
 
 ### 代码结构
 
-![在这里插入图片描述](E:/source/Git/blogAsset/images/2024/b968c2dc99a64109ada312375a96b77ctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![在这里插入图片描述](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/b968c2dc99a64109ada312375a96b77ctplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 引入项目依赖
 
@@ -269,15 +269,15 @@ firewall-cmd --list-ports
 
 ### 创建容器桶
 
-![image-20230602190714793](E:/source/Git/blogAsset/images/2024/924a69e9d0284f659af0256dbaf348a3tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602190714793](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/924a69e9d0284f659af0256dbaf348a3tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
-![image-20230602190746796](E:/source/Git/blogAsset/images/2024/3204f163d860402a8fdcad5695d256e5tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602190746796](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/3204f163d860402a8fdcad5695d256e5tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 获取API访问凭证
 
-![image-20230602190838023](E:/source/Git/blogAsset/images/2024/cbdbc6c08f5047739ddc6f50b5038b57tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602190838023](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/cbdbc6c08f5047739ddc6f50b5038b57tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
-![image-20230602190920343](E:/source/Git/blogAsset/images/2024/57ed1e61729948faaacd7416a7089c17tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602190920343](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/57ed1e61729948faaacd7416a7089c17tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### 编写配置文件
 
@@ -1185,13 +1185,13 @@ public class MinioFileUploadController {
 
 ### Minio大文件上传
 
-![image-20230602194324777](E:/source/Git/blogAsset/images/2024/e1a6c97ade9743c28de3413cd32c9f63tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602194324777](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/e1a6c97ade9743c28de3413cd32c9f63tplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
-![image-20230602194339597](E:/source/Git/blogAsset/images/2024/d5e43c9b6542440fb093cbd49020e98dtplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602194339597](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/d5e43c9b6542440fb093cbd49020e98dtplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 ### Minio大文件地址
 
-![image-20230602194437754](E:/source/Git/blogAsset/images/2024/389c077a08844bdda2a04144b0230ccetplv-k3u1fbpfcp-jj-mark3024000q75.webp)
+![image-20230602194437754](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/389c077a08844bdda2a04144b0230ccetplv-k3u1fbpfcp-jj-mark3024000q75.webp)
 
 
 

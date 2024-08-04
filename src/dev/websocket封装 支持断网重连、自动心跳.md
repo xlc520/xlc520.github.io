@@ -24,8 +24,6 @@ actions:
 
 # websocket封装 支持断网重连、自动心跳
 
-
-
 **简介**
 
 **websocket在前端开发中，是一个必须掌握的技术！你可以不用，但必须掌握！**
@@ -55,8 +53,6 @@ ws.onclose = function() {
 ```
 
 但是，要封装一个支持断网重连、自动心跳的websokect没有那么容易！
-
-
 
 **封装成功演示**
 
@@ -155,21 +151,21 @@ ws.onopen(() => {});
 
 启动项目，我们会发现控制台已经有了提示
 
-![图片](E:/source/Git/blogAsset/images/2024/640.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640.webp)
 
 **心跳验证：**
 
 等待一段时间后，我们可以看到ws连接里，前端已经发送了多次心跳数据
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1719123928052-1.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1719123928052-1.webp)
 
 服务端与客户端也一直在进行数据交互
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1719123928052-2.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1719123928052-2.webp)
 
 **断网重连验证：**
 
-可以看到，当我们断开服务端的时候，断网重连被自动触发。![图片](E:/source/Git/blogAsset/images/2024/640-1719123928052-3.webp)
+可以看到，当我们断开服务端的时候，断网重连被自动触发。![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1719123928052-3.webp)
 
 ## **技术路线**
 
@@ -368,7 +364,8 @@ public connect(): void {
 
 **处理重连逻辑**
 
-在 handleReconnect 方法中，实现了实际的重连逻辑。该方法会递增 reconnectAttempts，检查是否达到最大重连次数，如果没有达到，则在指定的重连间隔后再次调用 connect 方法尝试重连。
+在 handleReconnect 方法中，实现了实际的重连逻辑。该方法会递增 reconnectAttempts，检查是否达到最大重连次数，如果没有达到，则在指定的重连间隔后再次调用
+connect 方法尝试重连。
 
 ```javascript
 private handleReconnect(): void {
@@ -402,7 +399,8 @@ public close(): void {
 
 **自动心跳封装**
 
-自动心跳（Automatic Heartbeat）是一种在网络通信中常用的机制，用于维持连接的活跃状态，检测连接是否仍然有效，并及时发现和处理连接断开或故障的情况。心跳机制通过定期发送“心跳”消息（通常是一个简单的 ping 或者 pong 消息）来确认连接双方的状态。
+自动心跳（Automatic Heartbeat）是一种在网络通信中常用的机制，用于维持连接的活跃状态，检测连接是否仍然有效，并及时发现和处理连接断开或故障的情况。心跳机制通过定期发送“心跳”消息（通常是一个简单的
+ping 或者 pong 消息）来确认连接双方的状态。
 
 实现自动心跳的基本思路
 

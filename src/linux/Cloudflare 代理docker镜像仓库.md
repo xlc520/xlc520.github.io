@@ -22,8 +22,6 @@ actions:
     link: /Cloudflare 代理docker镜像仓库/
 ```
 
-
-
 前提条件：
 
 1、一个cloudflare账号
@@ -36,9 +34,7 @@ actions:
 
 安装后执行` wrangler login` 会自动跳转到浏览器进行身份验证，我们在页面中选择allow
 
-![图片](E:/source/Git/blogAsset/images/2024/640.webp)image-20240611171124989
-
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-32.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-32.webp)
 
 ## 方式一
 
@@ -60,9 +56,9 @@ wrangler whoami
 
 或者页面上查看
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-33.webp)image-20240611160642190
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-33.webp)
 
-\#创建 KV namespace
+#创建 KV namespace
 
 ```
 ➜  hammal-demo: wrangler kv:namespace create docker_cache
@@ -92,27 +88,26 @@ kv_namespaces = [
 ### 部署应用 ➜ hammal-demo git:(main) ✗ wrangler deploy ⛅️ wrangler 3.59.0 (update available 3.60.1) ------------------------------------------------------- Total Upload: 5.59 KiB / gzip: 1.78 KiB Your worker has access to the following bindings: - KV Namespaces: - HAMMAL_CACHE: 00fe5*******1063847bf Uploaded docker-proxy (1.05 sec) Published docker-proxy (4.16 sec) https://docker-proxy.121324124.workers.dev Current Deployment ID: 0794aebc-*****087e01014b44 Current Version ID: 0794aeb*******087e01014b44 Note: Deployment ID has been renamed to Version ID. Deployment ID is present to maintain compatibility with the previous behavior of this command. This output will change in a future version of Wrangler. To learn more visit: https://developers.cloudflare.com/workers/configuration/versions-and-deployments
 ```
 
-
-
 部署后我们就可以在页面上看到这个应用了
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-34.webp)image-20240611161359858
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-34.webp)
 
 添加自定义域名
 
-虽然Cloudflare Workers为我们应用提供了`workers.dev` 域名,但是该域名被墙，这里我们还需要自定义一个域名，我的lishuai.fun的域名就是在Cloudflare ，这里添加自定义域后Cloudflare  会帮我做dns解析以及证书。
+虽然Cloudflare Workers为我们应用提供了`workers.dev` 域名,但是该域名被墙，这里我们还需要自定义一个域名，我的lishuai.fun的域名就是在Cloudflare
+，这里添加自定义域后Cloudflare 会帮我做dns解析以及证书。
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-35.webp)image-20240611162301081
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-35.webp)
 
 添加后如下
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-36.webp)image-20240611162803433
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-36.webp)
 
 ### 使用
 
 #### 直接使用
 
-比如我们要下载busybox:1.30  这个镜像，直接使用就是下载 proxy.lishuai.fun/busybox:1.30
+比如我们要下载busybox:1.30 这个镜像，直接使用就是下载 proxy.lishuai.fun/busybox:1.30
 
 ```
 [root@dev-tools ~]# docker pull proxy.lishuai.fun/busybox:1.30
@@ -173,7 +168,7 @@ docker.io/library/nginx:1.2
 
 我们还可以查看访问日志
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-37.webp)image-20240611163428141
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-37.webp)
 
 #### 获取其他镜像源镜像
 
@@ -189,8 +184,6 @@ docker.io/library/nginx:1.2
 git clone https://github.com/ciiiii/cloudflare-docker-proxy.git
  cd cloudflare-docker-proxy
 ```
-
-
 
 ### 配置代理仓库
 
@@ -226,7 +219,7 @@ const routes = {
 
 这里我部署时候只代理了dockerhub ，这里也就添加一个域名，还是使用proxy-demo.lishuai.fun 这个域名，用来和方式一做区分
 
-![图片](E:/source/Git/blogAsset/images/2024/640-1718468729245-38.webp)image-20240611165935495
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1718468729245-38.webp)
 
 ### 使用
 
@@ -300,10 +293,6 @@ Status: Downloaded newer image for grafana/grafana:8.4.1
 docker.io/grafana/grafana:8.4.1
 ```
 
-
-
-
-
 ## 使用cloudflare-docker-proxy 代理docker镜像仓库的一些补充说明
 
 在前面cloudflare-docker-proxy 的项目例子里我们使用`docker pull proxy-demo.lishuai.fun/grafana/grafana:8.3.1`
@@ -315,9 +304,15 @@ docker.io/grafana/grafana:8.4.1
 Error response from daemon: pull access denied for proxy-demo.lishuai.fun/nginx, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
 ```
 
-这里是这样的，如果是docker官方提供的镜像，默认是在library这个命名空间下的，`library` 命名空间下的镜像是docker官方维护的,我们通过docker官方地址下载是可以省略命名空间的名字，下载nginx镜像实际上下载的是`docker.io/library/nginx:1.21`
+这里是这样的，如果是docker官方提供的镜像，默认是在library这个命名空间下的，`library`
 
-我们使用代理的地址下载时候命名空间名称就不能省略，需要使用`proxy-demo.lishuai.fun/library/nginx:1.21`下载，如果是镜像本身就有命名空间，比如`docker.io/grafana/grafana:8.3.1` 是由 Grafana Labs 维护的镜像,就直接使用`proxy-demo.lishuai.fun/grafana/grafana:8.3.1`下载即可
+命名空间下的镜像是docker官方维护的,我们通过docker官方地址下载是可以省略命名空间的名字，下载nginx镜像实际上下载的是`docker.io/library/nginx:1.21`
+
+我们使用代理的地址下载时候命名空间名称就不能省略，需要使用`proxy-demo.lishuai.fun/library/nginx:1.21`
+
+下载，如果是镜像本身就有命名空间，比如`docker.io/grafana/grafana:8.3.1` 是由 Grafana Labs
+
+维护的镜像,就直接使用`proxy-demo.lishuai.fun/grafana/grafana:8.3.1`下载即可
 
 
 

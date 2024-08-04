@@ -26,7 +26,10 @@ actions:
 
 ### cf tunnel 是什么？
 
-> Cloudflare Tunnel为您提供了一种安全的方式，将您的资源连接到Cloudflare，而无需公共可路由的IP地址。使用Tunnel，您不会将流量发送到外部IP地址，而是在您的基础设施中创建一个轻量级的守护程序，仅向Cloudflare的全球网络创建出站连接。Cloudflare Tunnel可以安全地将HTTP Web服务器、SSH服务器、远程桌面和其他协议连接到Cloudflare。这样，您的源站可以通过Cloudflare提供流量，而不会容易受到绕过Cloudflare的攻击。
+> Cloudflare
+>
+Tunnel为您提供了一种安全的方式，将您的资源连接到Cloudflare，而无需公共可路由的IP地址。使用Tunnel，您不会将流量发送到外部IP地址，而是在您的基础设施中创建一个轻量级的守护程序，仅向Cloudflare的全球网络创建出站连接。Cloudflare
+> Tunnel可以安全地将HTTP Web服务器、SSH服务器、远程桌面和其他协议连接到Cloudflare。这样，您的源站可以通过Cloudflare提供流量，而不会容易受到绕过Cloudflare的攻击。
 
 *（摘自官方文档）*
 
@@ -44,43 +47,39 @@ actions:
 
 用户 —> cf服务器 —> cf侧tunnel设置入口 --(加密)–> 服务器侧的tunnel出口 → 本机项目
 
-![流程](E:/source/Git/blogAsset/images/2024/434450a3b007e4730f6bddc45c9c8300d59d7cd6.jpeg)
+![流程](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/434450a3b007e4730f6bddc45c9c8300d59d7cd6.jpeg)
 
 ### 开始搭建
 
 1. 在Cloudflare的侧边栏中，找到并点击`Zero Trust` 菜单。如果是首次使用，需要进行订阅，选择免费套餐进行开通。
 
-![1](E:/source/Git/blogAsset/images/2024/1686c86ae9810ed5471ce436746fe84047e26949_2_269x500.png)
-
+![1](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/1686c86ae9810ed5471ce436746fe84047e26949_2_269x500.png)
 
 #### 2. 在进入Zero Trust面板后，从侧边栏中找到并点击`Tunnel` 菜单。
 
-![2](E:/source/Git/blogAsset/images/2024/5c827c3bad07a645e7e07c2de17e81d59f89e15d.png)
+![2](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/5c827c3bad07a645e7e07c2de17e81d59f89e15d.png)
 
 #### 3. 创建一条隧道（cf侧）
 
-![3](E:/source/Git/blogAsset/images/2024/02cb3149d94ba32fc195572fd389656e1bdb5685_2_690x357.png)
-
+![3](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/02cb3149d94ba32fc195572fd389656e1bdb5685_2_690x357.png)
 
 3.1 隧道类型选`Cloudflared`
 
-![4](E:/source/Git/blogAsset/images/2024/864a1395ed78cd3c4d70754631497db7df3f3059_2_593x500.png)
-
+![4](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/864a1395ed78cd3c4d70754631497db7df3f3059_2_593x500.png)
 
 3.2 设置隧道名，名字随便取，我个人习惯于取能够辨识服务器的名称。
 
-![5](E:/source/Git/blogAsset/images/2024/cbe68a5e604f599e7999bd73014339a480936704_2_690x476.png)
+![5](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/cbe68a5e604f599e7999bd73014339a480936704_2_690x476.png)
 
 3.3 安装环境选`Docker`，记得复制docker的安装命令以备后用。
 
-![6](E:/source/Git/blogAsset/images/2024/4d511ac73106944616e94027000100be04229862_2_412x500.png)
-
+![6](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/4d511ac73106944616e94027000100be04229862_2_412x500.png)
 
 3.4 不用点下一步，直接在左上角点击返回，即可确认隧道已成功创建。
 
-![7](E:/source/Git/blogAsset/images/2024/caa0578923ff704b38f6b459dfbe542b15716379_2_527x500.png)
+![7](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/caa0578923ff704b38f6b459dfbe542b15716379_2_527x500.png)
 
-![8](E:/source/Git/blogAsset/images/2024/a0f3fc6a86582798683703cebbca069dabf3078b_2_690x387.png)
+![8](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/a0f3fc6a86582798683703cebbca069dabf3078b_2_690x387.png)
 
 #### 4. 服务器侧隧道设置
 
@@ -90,12 +89,18 @@ actions:
 docker run cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiMjQ4MmIzM2Y3Njc3YWE5OWE5NThiZjcxNTdkMzU1ZmYiLCJ0IjoiOTFmYzdhOWQtYThiZC00MmY2LThlOTEtMDMwYWZjNDA3MjRmIiwicyI6IlkyRm1OamM0TXpZdE1qVTBaaTAwTTJZNUxUZ3hOV1V0TXpOaE9XVmpNV1F4Wm1ZeCJ9
 ```
 
-先别着急用，需要添加几个docker参数，**注意network需要设置为host**。讲一下我之前遇到的坑，docker启动容器默认会使用桥接模式（bridge），在后面域名绑定时，`127.0.0.1:port`是cloudflared这个容器内部的地址，如果你的项目也是使用docker的桥接模式启动的，那么就无法找到对应的服务。当然也可以用`172.17.0.1:port`这个地址进行绑定，但还是建议让cloudflared容器以host模式启动。
+先别着急用，需要添加几个docker参数，**注意network需要设置为host**
+。讲一下我之前遇到的坑，docker启动容器默认会使用桥接模式（bridge），在后面域名绑定时，`127.0.0.1:port`
+是cloudflared这个容器内部的地址，如果你的项目也是使用docker的桥接模式启动的，那么就无法找到对应的服务。当然也可以用`172.17.0.1:port`
+这个地址进行绑定，但还是建议让cloudflared容器以host模式启动。
 
 docker启动命令
 
 ```css
-docker run -d --restart always --network host --name cloudflared cloudflare/cloudflared tunnel --no-autoupdate run --token eyJhIjoiMjQ4MmIzM2Y3Njc3YWE5OWE5NThiZjcxNTdkMzU1ZmYiLCJ0IjoiOTFmYzdhOWQtYThiZC00MmY2LThlOTEtMDMwYWZjNDA3MjRmIiwicyI6IlkyRm1OamM0TXpZdE1qVTBaaTAwTTJZNUxUZ3hOV1V0TXpOaE9XVmpNV1F4Wm1ZeCJ9
+docker run -d --restart always --network host --name cloudflared cloudflare
+
+/
+cloudflared tunnel --no-autoupdate run --token eyJhIjoiMjQ4MmIzM2Y3Njc3YWE5OWE5NThiZjcxNTdkMzU1ZmYiLCJ0IjoiOTFmYzdhOWQtYThiZC00MmY2LThlOTEtMDMwYWZjNDA3MjRmIiwicyI6IlkyRm1OamM0TXpZdE1qVTBaaTAwTTJZNUxUZ3hOV1V0TXpOaE9XVmpNV1F4Wm1ZeCJ9
 ```
 
 or
@@ -118,18 +123,15 @@ services:
 
 5.1 点击前面创建的隧道`Configure`
 
-![9](E:/source/Git/blogAsset/images/2024/5c2314c9ffef2d038efb2893347cd21cf49a551f_2_690x479.png)
-
+![9](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/5c2314c9ffef2d038efb2893347cd21cf49a551f_2_690x479.png)
 
 5.2 添加`Public Hostname`
 
-![10](E:/source/Git/blogAsset/images/2024/8283349ea1a8c64fc4a881a0473c2b832e0792a1_2_648x500.png)
-
+![10](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/8283349ea1a8c64fc4a881a0473c2b832e0792a1_2_648x500.png)
 
 5.3 配置域名与服务器上的项目端口，类型有很多可选的，选http即可。
 
-![11](E:/source/Git/blogAsset/images/2024/9c762d00a84e6eb13431e8d9c6aae83764b2f419_2_689x417.png)
-
+![11](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/9c762d00a84e6eb13431e8d9c6aae83764b2f419_2_689x417.png)
 
 5.4 配置完成后，尝试访问你的域名以确认是否设置成功。
 
