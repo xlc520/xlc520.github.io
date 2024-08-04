@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Cloudflare 代理docker镜像仓库
-    link: /Cloudflare 代理docker镜像仓库/
+    link: /linux/Cloudflare 代理docker镜像仓库
 ```
 
 前提条件：

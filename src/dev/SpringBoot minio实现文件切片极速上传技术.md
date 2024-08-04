@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: SpringBoot MinIO实现文件切片极速上传技术
-    link: /SpringBoot minio实现文件切片极速上传技术/
+    link: /dev/SpringBoot minio实现文件切片极速上传技术
 ```
 
 # SpringBoot minio实现文件切片极速上传技术

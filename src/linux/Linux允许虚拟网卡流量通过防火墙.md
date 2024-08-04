@@ -19,14 +19,13 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Linux允许虚拟网卡流量通过防火墙
-    link: /Linux允许虚拟网卡流量通过防火墙/
+    link: /linux/Linux允许虚拟网卡流量通过防火墙
 ```
 
 # Linux允许虚拟网卡流量通过防火墙
 
-
-
-在Ubuntu系统中，如果希望允许通过防火墙的虚拟网卡流量，需要对防火墙规则进行相应的配置。以下是使用`iptables`和`ufw`（Uncomplicated Firewall）两种常见防火墙工具的配置方法。
+在Ubuntu系统中，如果希望允许通过防火墙的虚拟网卡流量，需要对防火墙规则进行相应的配置。以下是使用`iptables`和`ufw`
+（Uncomplicated Firewall）两种常见防火墙工具的配置方法。
 
 ### 使用 `iptables`
 
@@ -48,7 +47,8 @@ actions:
    ```
 
 3. **保存规则**：
-   保存规则以便系统重启后仍然有效。可以使用 `iptables-save` 和 `iptables-restore` 命令，或者使用 `netfilter-persistent` 工具。
+   保存规则以便系统重启后仍然有效。可以使用 `iptables-save` 和 `iptables-restore` 命令，或者使用 `netfilter-persistent`
+   工具。
 
    ```bash
    sudo apt-get install iptables-persistent

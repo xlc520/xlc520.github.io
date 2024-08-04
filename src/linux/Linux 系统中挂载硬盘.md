@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Linux 系统中挂载硬盘
-    link: /Linux 系统中挂载硬盘/
+    link: /linux/Linux 系统中挂载硬盘
 ```
 
 # Linux 系统中挂载硬盘

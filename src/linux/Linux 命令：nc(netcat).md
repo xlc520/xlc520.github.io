@@ -19,20 +19,18 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Linux 命令：nc(netcat)
-    link: /Linux 命令：nc(netcat)/
+    link: /linux/Linux 命令：nc(netcat)
 ```
-
-
 
 Linux 命令：nc(netcat)
 
-
-
 ## 1. 写在前面
 
-本文主要介绍 Linux `nc(netcat)` 命令: 通过 `TCP` 或 `UDP` 协议在两个计算机网络之间读取和写入数据，该命令因系统而异（`netcat`、`nc`、`ncat` 等）。
+本文主要介绍 Linux `nc(netcat)` 命令: 通过 `TCP` 或 `UDP`
+协议在两个计算机网络之间读取和写入数据，该命令因系统而异（`netcat`、`nc`、`ncat` 等）。
 
-`Netcat` 是跨平台的，可用于 Linux、macOS、Windows 和 BSD。可以使用 `Netcat` 来调试和监控网络连接、端口扫描/监听/重定向、传输数据（读写）、用作代理（TCP、SSH Socks、HTTP）等。
+`Netcat` 是跨平台的，可用于 Linux、macOS、Windows 和 BSD。可以使用 `Netcat` 来调试和监控网络连接、端口扫描/监听/重定向、传输数据（读写）、用作代理（TCP、SSH
+Socks、HTTP）等。
 
 本文解释了 `nc` 命令（Netcat OpenBSD 版本），并提供了使用示例。
 
@@ -80,11 +78,11 @@ nc [<options>] <host> <port>
 
 **Netcat 有两种工作模式：**
 
-- 连接模式（Connect mode）：在连接模式下，`Netcat` 作为客户端工作。该实用程序需要 
+- 连接模式（Connect mode）：在连接模式下，`Netcat` 作为客户端工作。该实用程序需要
 
   和 参数。
 
-- 监听模式（Listen mode）：在监听模式下，`Netcat` 作为服务器工作。省略 
+- 监听模式（Listen mode）：在监听模式下，`Netcat` 作为服务器工作。省略
 
   时，Netcat 会监听指定端口的所有可用地址。
 
@@ -92,17 +90,17 @@ nc [<options>] <host> <port>
 
 下表概述了常用的 nc 命令选项：
 
-| 参数              | 类型         | 描述                                       |
-| ----------------- | ------------ | ------------------------------------------ |
-| -4                | Protocol     | 仅使用 IPv4                                |
-| -6                | Protocol     | 仅使用 IPv6                                |
-| -U/--unixsock     | Protocol     | 使用 Unix 域套接字                         |
-| -u/--udp          | Protocol     | 使用 UDP 连接                              |
-| -p /--source-port | Connect mode | 设置本地主机使用的通信端口                 |
-| -s /--source      | Connect mode | 设置本地主机送出数据包的IP地址             |
-| -l/--listen       | Listen mode  | 监听连接，而不是使用连接模式               |
-| -k/--keep-open    | Listen mode  | 保持连接开放，以便同时进行多个连接         |
-| -v/--verbose      | Output       | 显示指令执行过程                           |
+| 参数                | 类型           | 描述                     |
+|-------------------|--------------|------------------------|
+| -4                | Protocol     | 仅使用 IPv4               |
+| -6                | Protocol     | 仅使用 IPv6               |
+| -U/--unixsock     | Protocol     | 使用 Unix 域套接字           |
+| -u/--udp          | Protocol     | 使用 UDP 连接              |
+| -p /--source-port | Connect mode | 设置本地主机使用的通信端口          |
+| -s /--source      | Connect mode | 设置本地主机送出数据包的IP地址       |
+| -l/--listen       | Listen mode  | 监听连接，而不是使用连接模式         |
+| -k/--keep-open    | Listen mode  | 保持连接开放，以便同时进行多个连接      |
+| -v/--verbose      | Output       | 显示指令执行过程               |
 | -z                | Output       | 使用0输入/输出模式，只在扫描通信端口时使用 |
 
 该列表并不全面。使用 man 命令查看手册页面以获取完整的选项列表：

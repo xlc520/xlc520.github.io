@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Spring统一结果 异常 日志
-    link: /Spring统一结果、异常、日志/
+    link: /dev/Spring统一结果、异常、日志
 ```
 
 # Spring 统一结果 异常 日志
@@ -30,15 +30,15 @@ actions:
 
 ### 统一结果的一般形式
 
-1.  是否响应成功；
-2.  响应状态码；
-3.  状态码描述；
-4.  响应数据
-5.  其他标识符
+1. 是否响应成功；
+2. 响应状态码；
+3. 状态码描述；
+4. 响应数据
+5. 其他标识符
 
 ### 结果类枚举
 
--   前三者可定义结果枚举，如：success，code，message
+- 前三者可定义结果枚举，如：success，code，message
 
 ```java
 @Getter
@@ -65,14 +65,14 @@ public enum ResultCodeEnum {
 
 ### 统一结果类
 
--   第5个属于自定义返回，利用前4者可定义统一返回对象
+- 第5个属于自定义返回，利用前4者可定义统一返回对象
 
 **注意：**
 
-1.  外接只可以调用统一返回类的方法，不可以直接创建，影刺构造器私有；
-2.  内置静态方法，返回对象；
-3.  为便于自定义统一结果的信息，建议使用链式编程，将返回对象设类本身，即return this;
-4.  响应数据由于为json格式，可定义为JsonObject或Map形式；
+1. 外接只可以调用统一返回类的方法，不可以直接创建，影刺构造器私有；
+2. 内置静态方法，返回对象；
+3. 为便于自定义统一结果的信息，建议使用链式编程，将返回对象设类本身，即return this;
+4. 响应数据由于为json格式，可定义为JsonObject或Map形式；
 
 ```java
 @Data
@@ -151,7 +151,7 @@ public class R {
 
 ### 控制层返回
 
--   视图层使用统一结果
+- 视图层使用统一结果
 
 ```java
 @RestController
@@ -169,7 +169,7 @@ public class TeacherAdminController {
 }    
 ```
 
--   json结果
+- json结果
 
 ```json
 {
@@ -216,11 +216,11 @@ _统一结果类的使用参考了mybatis-plus中R对象的设计_
 
 该类中的设计思路：
 
-1.  使用@ExceptionHandler注解捕获指定或自定义的异常；
-2.  使用@ControllerAdvice集成@ExceptionHandler的方法到一个类中；
-3.  必须定义一个通用的异常捕获方法，便于捕获未定义的异常信息；
-4.  自定一个异常类，捕获针对项目或业务的异常;
-5.  异常的对象信息补充到统一结果枚举中；
+1. 使用@ExceptionHandler注解捕获指定或自定义的异常；
+2. 使用@ControllerAdvice集成@ExceptionHandler的方法到一个类中；
+3. 必须定义一个通用的异常捕获方法，便于捕获未定义的异常信息；
+4. 自定一个异常类，捕获针对项目或业务的异常;
+5. 异常的对象信息补充到统一结果枚举中；
 
 ### 自定义全局异常类
 
@@ -315,7 +315,8 @@ _本节介绍统一异常较为简略，推荐博客[SpringBoot之全局异常�
 
 ### Logback
 
-关于logback的配置和介绍，可以参考[官网](http://logback.qos.ch/documentation.html "http://logback.qos.ch/documentation.html")或推荐博客[glmapper的logback博客](https://juejin.cn/post/6844903641535479821 "https://juejin.cn/post/6844903641535479821")，[logback-spring.xml配置文件](https://blog.csdn.net/xu_san_duo/article/details/80364600 "https://blog.csdn.net/xu_san_duo/article/details/80364600")
+关于logback的配置和介绍，可以参考[官网](http://logback.qos.ch/documentation.html "http://logback.qos.ch/documentation.html")
+或推荐博客[glmapper的logback博客](https://juejin.cn/post/6844903641535479821 "https://juejin.cn/post/6844903641535479821")，[logback-spring.xml配置文件](https://blog.csdn.net/xu_san_duo/article/details/80364600 "https://blog.csdn.net/xu_san_duo/article/details/80364600")
 
 ### 配置
 
@@ -519,7 +520,7 @@ _本节介绍统一异常较为简略，推荐博客[SpringBoot之全局异常�
 
 日志信息往往伴随着异常信息的输出，因此，我们需要修改统一异常的处理器，将异常信息以流的方式写到日志文件中
 
--   异常信息文件工具类
+- 异常信息文件工具类
 
 ```java
 @Slf4j
@@ -544,7 +545,7 @@ public class ExceptionUtil {
 }
 ```
 
--   修改统一异常处理器，将异常方法中的直接打印改为日志输入并打印
+- 修改统一异常处理器，将异常方法中的直接打印改为日志输入并打印
 
 ```java
 // ...
@@ -569,10 +570,8 @@ public class GlobalExceptionHandler {
 
 注意
 
-1.  日志的环境即spring.profiles.acticve，跟随项目启动；
-2.  启动后，即可到自定目录查找到生成的日志文件；
-3.  本地idea调试时，推荐Grep Console插件可实现控制台的自定义颜色输出
-
-
+1. 日志的环境即spring.profiles.acticve，跟随项目启动；
+2. 启动后，即可到自定目录查找到生成的日志文件；
+3. 本地idea调试时，推荐Grep Console插件可实现控制台的自定义颜色输出
 
 <Share colorful service="email,qq,qzone,qrcode,weibo,telegram,twitter" />

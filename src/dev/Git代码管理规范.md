@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Git代码管理规范
-    link: /Git代码管理规范/
+    link: /dev/Git代码管理规范
 ```
 
 # Git代码管理规范

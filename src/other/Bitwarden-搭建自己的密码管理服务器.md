@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Bitwarden-搭建自己的密码管理服务器
-    link: /Bitwarden-搭建自己的密码管理服务器/
+    link: /other/Bitwarden-搭建自己的密码管理服务器
 ```
 
 # Bitwarden-搭建自己的密码管理服务器

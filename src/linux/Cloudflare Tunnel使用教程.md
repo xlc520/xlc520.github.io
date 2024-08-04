@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Cloudflare Tunnel使用教程
-    link: /Cloudflare Tunnel使用教程/
+    link: /linux/Cloudflare Tunnel使用教程
 ```
 
 # Cloudflare Tunnel使用教程

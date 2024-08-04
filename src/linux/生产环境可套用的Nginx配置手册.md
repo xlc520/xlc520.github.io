@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: 生产环境可套用的Nginx配置手册
-    link: /生产环境可套用的Nginx配置手册/
+    link: /linux/生产环境可套用的Nginx配置手册
 ```
 
 # 生产环境可套用的Nginx配置手册
@@ -41,8 +41,6 @@ Ubuntu
 ```
 sudo apt update -ysudo apt install nginxsudo systemctl enable nginxsudo systemctl start nginx
 ```
-
-
 
 ## **Nginx 配置文件**
 
@@ -157,19 +155,15 @@ server {
 }
 ```
 
-
-
 ## **Nginx 命令操作**
 
 Nginx 的常用命令行操作如下：
 
-nginx -t  ：测试 Nginx 配置文件是否符合要求；
+nginx -t ：测试 Nginx 配置文件是否符合要求；
 
 nginx -s reload ：重新加载 Nginx 配置文件；
 
 nginx -V ：查看 Nginx 版本信息、编译参数等。
-
-
 
 ## **常用 Nginx 的 snippet**
 
@@ -339,7 +333,5 @@ location ~ /\.ht {
   return 404;
 }
 ```
-
-
 
 <Share colorful service="email,qq,qzone,qrcode,weibo,telegram,twitter" />

@@ -19,7 +19,7 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: websocket封装 支持断网重连、自动心跳
-    link: /websocket封装 支持断网重连、自动心跳/
+    link: /dev/websocket封装 支持断网重连、自动心跳
 ```
 
 # websocket封装 支持断网重连、自动心跳

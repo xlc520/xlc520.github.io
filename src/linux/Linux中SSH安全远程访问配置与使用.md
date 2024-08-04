@@ -19,12 +19,13 @@ color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
   - text: Linux中SSH安全远程访问配置与使用
-    link: /Linux中SSH安全远程访问配置与使用/
+    link: /linux/Linux中SSH安全远程访问配置与使用
 ```
 
 # Linux中SSH安全远程访问配置与使用
 
-SSH（Secure Shell）是一种加密的网络协议，为Linux系统提供了安全、加密的远程访问方式。通过正确配置和使用SSH，管理员可以远程管理服务器，传输文件，并确保通信的机密性。本文将深入探讨Linux中SSH的配置和使用，提供详实的示例代码，帮助管理员更全面地了解和运用SSH技术。
+SSH（Secure
+Shell）是一种加密的网络协议，为Linux系统提供了安全、加密的远程访问方式。通过正确配置和使用SSH，管理员可以远程管理服务器，传输文件，并确保通信的机密性。本文将深入探讨Linux中SSH的配置和使用，提供详实的示例代码，帮助管理员更全面地了解和运用SSH技术。
 
 ## 安装和启动SSH服务
 
