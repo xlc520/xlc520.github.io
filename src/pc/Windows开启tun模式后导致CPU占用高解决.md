@@ -1,5 +1,5 @@
 ---
-title: Windows开启tun模式后导致CPU占用100%解决
+title: Windows开启tun模式后导致CPU占用高解决
 excerpt: Windows开启tun模式后导致CPU占用100%解决方法
 description: Windows开启tun模式后导致CPU占用100%解决方法
 date: 2024-07-02
@@ -18,8 +18,8 @@ logo:
 color: var(--banner-text)
 background: rgba(217, 244, 208, 0.5)
 actions:
-  - text: Windows开启tun模式后导致CPU占用100%解决
-    link: /Windows开启tun模式后导致CPU占用100%解决/
+  - text: Windows开启tun模式后导致CPU占用高解决
+    link: /Windows开启tun模式后导致CPU占用高解决/
 ```
 
 # Windows开启tun模式后导致CPU占用100%解决
