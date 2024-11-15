@@ -24,9 +24,11 @@ actions:
 
 # Docker缩减Java镜像大小
 
-在当今的软件开发领域，微服务架构和容器化应用已成为常态。随着应用程序的复杂性和规模不断增加，开发者们面临的一个主要挑战是如何有效管理和优化应用程序的体积。尤其是在使用 Java 进行开发时，生成的 Docker 镜像往往会相对较大，这不仅影响了部署速度，还增加了网络传输的负担和存储成本。因此，如何精简镜像大小成为了每个开发者亟待解决的问题。
+在当今的软件开发领域，微服务架构和容器化应用已成为常态。随着应用程序的复杂性和规模不断增加，开发者们面临的一个主要挑战是如何有效管理和优化应用程序的体积。尤其是在使用
+Java 进行开发时，生成的 Docker 镜像往往会相对较大，这不仅影响了部署速度，还增加了网络传输的负担和存储成本。因此，如何精简镜像大小成为了每个开发者亟待解决的问题。
 
-本文将深入探讨如何通过 jlink 工具生成更小的 Java 运行时环境（JRE）镜像，并自动化整个过程。我们将分析不同模块的依赖关系，确保仅包括运行应用程序所需的最小模块。通过这样的方法，不仅可以提高应用程序的效率，还能优化资源的使用，让我们的微服务更加轻量、灵活。
+本文将深入探讨如何通过 jlink 工具生成更小的 Java
+运行时环境（JRE）镜像，并自动化整个过程。我们将分析不同模块的依赖关系，确保仅包括运行应用程序所需的最小模块。通过这样的方法，不仅可以提高应用程序的效率，还能优化资源的使用，让我们的微服务更加轻量、灵活。
 
 我们将使用之前文章中构建的Spring Web应用来演示这些技巧，该文章是关于使用RFC-9457规范进行错误处理。我们的应用仅包含两个端点：
 
@@ -84,7 +86,7 @@ public class UserController {
 
 已知应用程序（jar）的大小约为20MB。
 
-![图片](./../../../blogAsset/images/2024/640-1728611720648-5.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1728611720648-5.webp)
 
 为了在Docker镜像中打包我们的工件，我们需要在应用根目录中定义一个Dockerfile，如下所示：
 
@@ -115,7 +117,7 @@ docker build -t user-service .
 
 完成后，你应该会有一个名为user-service的Docker镜像，正如你所看到的，与应用程序工件的大小相比，镜像的大小相当大，约为674MB。
 
-![图片](./../../../blogAsset/images/2024/640-1730455841996-1.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841996-1.webp)
 
 等等，这只是一个只有两个端点的小项目，没有任何依赖项，那么对于一个有数十个依赖项和文件的应用来说，情况会如何呢？
 
@@ -183,9 +185,10 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 使用 `eclipse-temurin:17-jdk-alpine` 作为基础镜像构建完镜像后，我们得到了这个结果：
 
-![图片](./../../../blogAsset/images/2024/640-1730455841996-2.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841996-2.webp)
 
-看看两个镜像的大小，使用 `eclipse-temurin:17-jdk-alpine` 作为基础镜像的镜像大小为180MB，比使用 `openjdk:17-jdk-slim` 作为基础镜像的674MB小73%。
+看看两个镜像的大小，使用 `eclipse-temurin:17-jdk-alpine` 作为基础镜像的镜像大小为180MB，比使用 `openjdk:17-jdk-slim`
+作为基础镜像的674MB小73%。
 
 实际优化
 
@@ -195,13 +198,14 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 最重要的注意事项是“用户可以使用jlink创建更小的自定义运行时”。
 
-![图片](./../../../blogAsset/images/2024/640-1730455841996-3.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841996-3.webp)
 
 使用 jlink 构建自定义 JRE 镜像
 
 `jlink` 是一个工具，可用于创建仅包含运行应用所需模块的自定义运行时镜像。
 
-👉 如果你的应用不与数据库交互，则无需在镜像中包含 `java.sql` 模块。如果你不与桌面GUI交互，则无需在镜像中包含 `java.desktop` 模块，等等。
+👉 如果你的应用不与数据库交互，则无需在镜像中包含 `java.sql` 模块。如果你不与桌面GUI交互，则无需在镜像中包含 `java.desktop`
+模块，等等。
 
 这有点像JRE镜像的替代品，但可以更好地控制你想要在镜像中使用的模块。
 
@@ -255,9 +259,11 @@ ENTRYPOINT [ "java", "-jar", "/app/app.jar" ]
 
 我们有两个阶段，第一阶段用于使用 `jlink` 构建自定义JRE镜像，第二阶段用于将应用打包在一个精简的Alpine镜像中。
 
-在第一阶段，我们使用 `eclipse-temurin:17-jdk-alpine` 镜像来使用 `jlink` 构建自定义JRE镜像。然后，我们安装 `binutils`，这是 `jlink` 所需的，然后运行 `jlink` 来构建一个小型JRE镜像，使用 `--add-modules ALL-MODULE-PATH`（目前）包含运行应用所需的所有模块。
+在第一阶段，我们使用 `eclipse-temurin:17-jdk-alpine` 镜像来使用 `jlink` 构建自定义JRE镜像。然后，我们安装 `binutils`，这是
+`jlink` 所需的，然后运行 `jlink` 来构建一个小型JRE镜像，使用 `--add-modules ALL-MODULE-PATH`（目前）包含运行应用所需的所有模块。
 
-在第二阶段，我们使用Alpine镜像（其大小约为3MB）作为基础镜像来打包我们的应用，然后从第一阶段获取自定义JRE并将其用作 `JAVA_HOME`。
+在第二阶段，我们使用Alpine镜像（其大小约为3MB）作为基础镜像来打包我们的应用，然后从第一阶段获取自定义JRE并将其用作
+`JAVA_HOME`。
 
 Dockerfile的其余部分与之前的相同，只是复制工件并使用自定义用户（而不是root）设置入口点。
 
@@ -275,7 +281,7 @@ docker images user-service
 
 你会看到新Docker镜像的大小现在为85.3MB，比基础镜像小约95MB 🎉🥳
 
-![图片](./../../../blogAsset/images/2024/640-1730455841997-4.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841997-4.webp)
 
 为了确保镜像按预期工作，你可以运行以下命令：
 
@@ -285,12 +291,13 @@ docker run -p 8080:8080 user-service:jlink-all-modules-temurin
 
 你应该会看到应用按预期运行。
 
-![图片](./../../../blogAsset/images/2024/640-1730455841997-5.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841997-5.webp)
 
 这还不够 🤌🏽
 作为优秀的开发者，我们总是希望改进我们的工作，让我们看看如何进一步减少镜像的大小。
 
-目前镜像的大小依然较大，这是因为在 jlink 命令中使用 `--add-modules ALL-MODULE-PATH` 时，我们包含了运行应用程序所需的所有模块，但我们并不需要所有模块。让我们看看如何仅包含运行应用程序所需的模块，从而获得更小的镜像大小。
+目前镜像的大小依然较大，这是因为在 jlink 命令中使用 `--add-modules ALL-MODULE-PATH`
+时，我们包含了运行应用程序所需的所有模块，但我们并不需要所有模块。让我们看看如何仅包含运行应用程序所需的模块，从而获得更小的镜像大小。
 
 如何确定运行应用程序所需的模块？
 我们可以使用 JDK 附带的 jdeps 工具。jdeps 是一个可以分析 jar 文件依赖关系并生成所需模块列表的工具。
@@ -369,7 +376,7 @@ docker build -t user-service:jlink-known-modules-temurin -f Dockerfile.jlink-kno
 
 这里是构建后的镜像大小：
 
-![图片](./../../../blogAsset/images/2024/640-1730455841997-6.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841997-6.webp)
 
 我们得到了一个较小的镜像，大小为 57.8MB，而不是 85.3MB。
 
@@ -452,7 +459,7 @@ ENTRYPOINT [ "java", "-jar", "/app/app.jar" ]
 docker build -t user-service:jlink-with-jdeps.temurin -f Dockerfile.jlink-with-jdeps.temurin . --platform=linux/amd64
 ```
 
-![图片](./../../../blogAsset/images/2024/640-1730455841997-7.webp)
+![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640-1730455841997-7.webp)
 
 额外提示
 在结束之前，请注意，您可以使用 `.dockerignore` 文件排除某些文件和目录，以减少镜像在中间阶段的大小。
@@ -461,9 +468,11 @@ docker build -t user-service:jlink-with-jdeps.temurin -f Dockerfile.jlink-with-j
 
 结论
 
-通过本文的探讨，我们成功展示了如何利用 jlink 工具和 jdeps 工具来生成更加精简的 Java 镜像。我们不仅减少了镜像的体积，从 85.3MB 降至 57.8MB，节省了大量的存储和传输资源，而且还引入了自动化的过程，进一步提升了开发效率。
+通过本文的探讨，我们成功展示了如何利用 jlink 工具和 jdeps 工具来生成更加精简的 Java 镜像。我们不仅减少了镜像的体积，从
+85.3MB 降至 57.8MB，节省了大量的存储和传输资源，而且还引入了自动化的过程，进一步提升了开发效率。
 
-在持续追求优化的过程中，自动化工具和最佳实践是每个开发者的得力助手。通过使用 .dockerignore 文件来排除不必要的文件和目录，我们还可以在构建镜像的中间阶段进一步减少体积。选择一个适合的基础镜像并确保其安全性和兼容性，也同样重要。
+在持续追求优化的过程中，自动化工具和最佳实践是每个开发者的得力助手。通过使用 .dockerignore
+文件来排除不必要的文件和目录，我们还可以在构建镜像的中间阶段进一步减少体积。选择一个适合的基础镜像并确保其安全性和兼容性，也同样重要。
 
 最后，优化镜像不仅能提升应用程序的性能，更能增强整体系统的可维护性和可扩展性。希望大家能够在实际项目中应用这些技术，进一步推动软件开发的高效化和现代化。
 
