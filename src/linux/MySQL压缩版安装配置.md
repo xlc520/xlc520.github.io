@@ -170,7 +170,7 @@ net stop mysql 命令，停止 mysql 服务
 
 ## 5 配置 mysql 的环境变量
 
-```vbnet
+```text
 MYSQL_HOME
 
 D:\Program Files\mysql

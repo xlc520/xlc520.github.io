@@ -1,7 +1,7 @@
 ---
 author: xlc520
 title: 六十多个 vscode 插件，助你打造最强编辑器
-excerpt: 
+excerpt:
 description: 六十多个 vscode 插件，助你打造最强编辑器
 date: 2022-05-21
 category: Java
@@ -22,7 +22,8 @@ icon: java
 一是把它们 **分享** 给有需要的小伙伴们，二是通过此文向小伙伴们 **征集**
 其它好玩的插件，可以是任何类型的。有想要推荐其它插件的请评论区补充一下，我看到后会添加到文章中并标注出你的 **ID** 。
 
-注：本文只涉及插件的基本使用，也就是让你知道存在这样一种插件，以及大致了解这个插件可以做什么事，部分插件的详细配置过于复杂，有需要的小伙伴请自行冲浪。根据每个人电脑，`vscode`
+注：本文只涉及插件的基本使用，也就是让你知道存在这样一种插件，以及大致了解这个插件可以做什么事，部分插件的详细配置过于复杂，有需要的小伙伴请自行冲浪。根据每个人电脑，
+`vscode`
 配置，以及插件的不同，部分插件可能在你电脑上不会生效。文中提到的快捷键都是 `windows` 下的，其他操作系统的快捷键请自行了解。
 
 # 优化外观
@@ -195,7 +196,8 @@ icon: java
 
 ## Debugger for Chrome
 
-这款插件是专门为前端调试开发的，很方便调试，跟谷歌的控制台是一样的功能，安装以后，无需打开浏览器的控制台就能进行断点调试。对应的还有 `Debugger for Firefox`，`Debugger for Microsoft Edge`
+这款插件是专门为前端调试开发的，很方便调试，跟谷歌的控制台是一样的功能，安装以后，无需打开浏览器的控制台就能进行断点调试。对应的还有
+`Debugger for Firefox`，`Debugger for Microsoft Edge`
 等，其他的我没用过，大家按需安装即可，使用方法应该都大同小异。
 
 ![image.png](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9137ba93ccd74013947fc53b610ac733.jpg)
@@ -400,7 +402,6 @@ icon: java
     "param": "",
     "return": ""
   },
-复制代码
 ```
 
 ## Mithril Emmet

@@ -1,8 +1,8 @@
 ---
 author: xlc520
 title: Java实现异步编程的8种方式
-excerpt: 
-description: 
+excerpt:
+description:
 date: 2023-03-01
 category: Java
 tag: Java
@@ -48,7 +48,7 @@ icon: java
 
 ## 4.1 线程异步
 
-```typescript
+```java
 public class AsyncThread extends Thread {
 
     @Override
@@ -61,12 +61,11 @@ public class AsyncThread extends Thread {
         asyncThread.run();
     }
 }
-复制代码
 ```
 
 当然如果每次都创建一个`Thread`线程，频繁的创建、销毁，浪费系统资源，我们可以采用线程池：
 
-```typescript
+```java
 private ExecutorService executorService = Executors.newCachedThreadPool();
 
 public void fun() {
@@ -77,7 +76,6 @@ public void fun() {
         }
     });
 }
-复制代码
 ```
 
 可以将业务逻辑封装到`Runnable`或`Callable`中，交由线程池来执行。
@@ -114,16 +112,14 @@ public class FutureManager {
         manager.execute();
     }
 }
-复制代码
 ```
 
 输出结果：
 
-```sql
+```text
  --- task start --- 
  --- task finish ---
  Future get result: this is future execute final result!!!
-复制代码
 ```
 
 ### 4.2.1 Future 的不足之处
@@ -166,7 +162,6 @@ public class CompletableFutureCompose {
         thenRunAsync();
     }
 }
-复制代码
 ```
 
 我们不需要显式使用 ExecutorService，CompletableFuture 内部使用了`ForkJoinPool`来处理异步任务，如果在某些业务场景我们想自定义自己的异步线程池也是可以的。
@@ -215,12 +210,11 @@ public class TaskPoolConfig {
         return executor;
     }
 }
-复制代码
 ```
 
 ### 4.4.2 AsyncService
 
-```typescript
+```java
 public interface AsyncService {
 
     MessageResult sendSms(String callPrefix, String mobile, String actionType, String content);
@@ -262,8 +256,6 @@ public class AsyncServiceImpl implements AsyncService {
         }
     }
 }
-
-复制代码
 ```
 
 在实际项目中， 使用`@Async`
@@ -274,7 +266,7 @@ public class AsyncServiceImpl implements AsyncService {
 
 ### 4.5.1 定义事件
 
-```scala
+```java
 public class AsyncSendEmailEvent extends ApplicationEvent {
 
     /**
@@ -298,12 +290,11 @@ public class AsyncSendEmailEvent extends ApplicationEvent {
     private String targetUserId;
 
 }
-复制代码
 ```
 
 ### 4.5.2 定义事件处理器
 
-```less
+```java
 @Slf4j
 @Component
 public class AsyncSendEmailEventHandler implements ApplicationListener<AsyncSendEmailEvent> {
@@ -325,7 +316,6 @@ public class AsyncSendEmailEventHandler implements ApplicationListener<AsyncSend
         mesageHandler.sendsendEmailSms(email, subject, content, targerUserId);
       }
 }
-复制代码
 ```
 
 另外，可能有些时候采用 ApplicationEvent 实现异步的使用，当程序出现异常错误的时候，需要考虑补偿机制，那么这时候可以结合
@@ -336,7 +326,7 @@ Retry 重试来帮助我们避免这种异常造成数据不一致问题。
 
 ### 4.6.1 回调事件消息生产者
 
-```less
+```java
 @Slf4j
 @Component
 public class CallbackProducer {
@@ -359,12 +349,11 @@ public class CallbackProducer {
         });
     }
 }
-复制代码
 ```
 
 ### 4.6.2 回调事件消息消费者
 
-```less
+```java
 @Slf4j
 @Component
 @RabbitListener(queues = "message.callback", containerFactory = "rabbitListenerContainerFactory")
@@ -395,12 +384,11 @@ public class CallbackConsumer {
         }
     }
 }
-复制代码
 ```
 
 ## 4.7 ThreadUtil 异步工具类
 
-```ini
+```java
 @Slf4j
 public class ThreadUtils {
 
@@ -417,7 +405,6 @@ public class ThreadUtils {
         log.info("task finish!");
     }
 }
-复制代码
 ```
 
 ## 4.8 Guava 异步
@@ -442,7 +429,6 @@ public class ThreadUtils {
                 return 1;
             }
         });
-复制代码
 ```
 
 首先通过`MoreExecutors`类的静态方法`listeningDecorator`方法初始化一个`ListeningExecutorService`
@@ -451,7 +437,7 @@ public class ThreadUtils {
 `ListenableFuture`要做的工作，在 Callable 接口的实现类中定义，这里只是休眠了 1 秒钟然后返回一个数字 1，有了
 ListenableFuture 实例，可以执行此 Future 并执行 Future 完成之后的回调函数。
 
-```typescript
+```java
  Futures.addCallback(listenableFuture, new FutureCallback<Integer>() {
     @Override
     public void onSuccess(Integer result) {
@@ -465,7 +451,6 @@ ListenableFuture 实例，可以执行此 Future 并执行 Future 完成之后�
         t.printStackTrace();
     }
 });
-复制代码
 ```
 
 以上就是实现异步的 8 种方式

@@ -1,8 +1,8 @@
 ---
 author: xlc520
 title: SpringBoot之Logback日志文件配置
-excerpt: 
-description: 
+excerpt:
+description:
 date: 2023-03-03
 category: Java
 tag: Java
@@ -43,8 +43,9 @@ Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 - debug: 当此属性设置为 true 时，将打印出 logback 内部日志信息，实时查看 logback 运行状态。默认值为 false。示例：
 
 ```xml
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-<!--其他配置省略-->
+    <!--其他配置省略-->
 </configuration>
 ```
 
@@ -63,16 +64,25 @@ Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 示例：把 >=DEBUG 级别的日志都输出到控制台
 
 ```xml
-<configuration>
-　　　<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-　　　　　 <encoder>
-　　　　　　　　　<pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
-　　　　　 </encoder>
-　　　</appender>
 
-　　　<root level="DEBUG">
-　　　　　　<appender-ref ref="STDOUT" />
-　　　</root>
+<configuration>
+    　　　
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        　　　　　
+        <encoder>
+            　　　　　　　　　
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            　　　　　
+        </encoder>
+        　　　
+    </appender>
+
+    　　　
+    <root level="DEBUG">
+        　　　　　　
+        <appender-ref ref="STDOUT"/>
+        　　　
+    </root>
 </configuration>
 ```
 
@@ -88,19 +98,31 @@ Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR、WARN�
 示例：把 >= DEBUG 级别的日志都输出到 testFile.log 文件：
 
 ```xml
-<configuration>
-　　　　　　<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-　　　　　　　　<file>testFile.log</file>
-　　　　　　　　<append>true</append>
-　　　　　　　　<encoder>
-　　　　　　　　　　<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
-　　　　　　　　</encoder>
-　　　　　　</appender>
 
-　　　　　　<root level="DEBUG">
-　　　　　　<appender-ref ref="FILE" />
-　　　　　　</root>
-　　　　</configuration>
+<configuration>
+    　　　　　　
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        　　　　　　　　
+        <file>testFile.log</file>
+        　　　　　　　　
+        <append>true</append>
+        　　　　　　　　
+        <encoder>
+            　　　　　　　　　　
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            　　　　　　　　
+        </encoder>
+        　　　　　　
+    </appender>
+
+    　　　　　　
+    <root level="DEBUG">
+        　　　　　　
+        <appender-ref ref="FILE"/>
+        　　　　　　
+    </root>
+    　　　　
+</configuration>
 ```
 
 #### RollingFileAppender
@@ -146,34 +168,48 @@ RollingFileAppender
 示例：每天生成一个日志文件，保存 30 天的日志文件：
 
 ```xml
-<configuration>
-　　　　　　　　　　<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-　　　　　　　　　　　　<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-　　　　　　　　　　　　　　<fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-　　　　　　　　　　　　　　<maxHistory>30</maxHistory>
-　　　　　　　　　　　　</rollingPolicy>
-　　　　　　　　　　　　<encoder>
-　　　　　　　　　　　　　　<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
-　　　　　　　　　　　　</encoder>
-　　　　　　　　　　</appender>
 
-　　　　　　　　　　<root level="DEBUG">
-　　　　　　　　　　　　<appender-ref ref="FILE" />
-　　　　　　　　　　</root>
-　　　　　　　　</configuration>
+<configuration>
+    　　　　　　　　　　
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        　　　　　　　　　　　　
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            　　　　　　　　　　　　　　
+            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            　　　　　　　　　　　　　　
+            <maxHistory>30</maxHistory>
+            　　　　　　　　　　　　
+        </rollingPolicy>
+        　　　　　　　　　　　　
+        <encoder>
+            　　　　　　　　　　　　　　
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            　　　　　　　　　　　　
+        </encoder>
+        　　　　　　　　　　
+    </appender>
+
+    　　　　　　　　　　
+    <root level="DEBUG">
+        　　　　　　　　　　　　
+        <appender-ref ref="FILE"/>
+        　　　　　　　　　　
+    </root>
+    　　　　　　　　
+</configuration>
 ```
 
 ### `<logger>`
 
 `<logger>` ：用来设置某一个包或具体的某一个类的日志打印级别、以及指定。
-
-```： 仅有一个 name 属性，一个可选的 level 和一个可选的 addtivity 属性。
+仅有一个 name 属性，一个可选的 level 和一个可选的 addtivity 属性。
 
 可以包含零个或多个元素，标识这个 appender 将会添加到这个 logger。
 
 - name: 用来指定受此 loger 约束的某一个包或者具体的某一个类。
-- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值 INHERITED 或者同义词 NULL，代表强制执行上级的级别。
-如果未设置此属性，那么当前 loger 将会继承上级的级别。
+- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值 INHERITED 或者同义词
+  NULL，代表强制执行上级的级别。
+  如果未设置此属性，那么当前 loger 将会继承上级的级别。
 - addtivity: 是否向上级 logger 传递打印信息。默认是 true。可以包含零个或多个元素，标识这个 appender 将会添加到这个 logger。
 
 ### `<root>`
@@ -189,13 +225,13 @@ level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ER
 
 ```xml
 <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
-<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
-<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
-<logger name="org.hibernate.SQL" level="DEBUG" />
-<logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
-<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG"/>
+<logger name="org.hibernate.SQL" level="DEBUG"/>
+<logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
+<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
 
-<!--myibatis log configure-->
+        <!--myibatis log configure-->
 <logger name="com.apache.ibatis" level="TRACE"/>
 <logger name="java.sql.Connection" level="DEBUG"/>
 <logger name="java.sql.Statement" level="DEBUG"/>
@@ -210,9 +246,10 @@ default。但可以使用设置成其他名字，用于区分不同应用程序�
 示例：
 
 ```xml
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-     <contextName>myAppName</contextName>
-　　  <!--其他配置省略-->
+    <contextName>myAppName</contextName>
+    　　  <!--其他配置省略-->
 </configuration>
 ```
 
@@ -226,10 +263,13 @@ value: 的值时变量定义的值
 示例：
 
 ```xml
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-　　　<property name="APP_Name" value="myAppName" />
-　　　<contextName>${APP_Name}</contextName>
-　　　<!--其他配置省略-->
+    　　　
+    <property name="APP_Name" value="myAppName"/>
+    　　　
+    <contextName>${APP_Name}</contextName>
+    　　　<!--其他配置省略-->
 </configuration>
 ```
 
@@ -243,11 +283,14 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 示例：
 
 ```xml
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-　　　　　　<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
-　　　　　　<contextName>${bySecond}</contextName>
-　　　　　　<!-- 其他配置省略-->
-    </configuration>
+    　　　　　　
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    　　　　　　
+    <contextName>${bySecond}</contextName>
+    　　　　　　<!-- 其他配置省略-->
+</configuration>
 ```
 
 ## 完整配置 demo
@@ -259,7 +302,7 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 <configuration debug="false">
 
     <!--定义日志文件的存储地址，如果是在window中可以使用/开头的绝对地址，在linux中不要使用 / 开头的地址，因为其表示绝对地址，linux中要使用相对地址时 不要以 盘符开头即可-->
-    <property name="logPath" value="/logs" />
+    <property name="logPath" value="/logs"/>
     <!--日志文件保留天数，最长支持30天-->
     <property name="MaxHistory" value="30"/>
     <!--日志文件最大的大小，支持KB，MB-->
@@ -292,11 +335,11 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
     </appender>
 
     <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
-    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
-    <logger name="org.hibernate.SQL" level="DEBUG" />
-    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
-    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
 
     <!--mybatis log configure-->
     <logger name="com.apache.ibatis" level="TRACE"/>
@@ -306,7 +349,7 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 
     <!-- 日志输出级别 -->
     <root level="DEBUG">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
 </configuration>
@@ -342,7 +385,7 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 
         <encoder>
             <pattern>
-               %msg%n
+                %msg%n
             </pattern>
         </encoder>
         <!-- 滚动策略 -->
@@ -392,9 +435,9 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
     <!-- 项目名称 -->
-    <property name="PROJECT_NAME" value="small-and-beautiful-blog" />
+    <property name="PROJECT_NAME" value="small-and-beautiful-blog"/>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_HOME" value="./logs" />
+    <property name="LOG_HOME" value="./logs"/>
 
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -527,54 +570,54 @@ key: 标识此 的名字； datePattern: 设置将当前时间（解析配置文
         <!-- 默认情况下，当阻塞队列的剩余容量为20％时，它将丢弃TRACE，DEBUG和INFO级别的事件，仅保留WARN和ERROR级别的事件。要保留所有事件，请将discardingThreshold设置为0。 -->
         <discardingThreshold>0</discardingThreshold>
         <!-- 添加附加的appender,使用前面定义的name,最多只能添加一个 -->
-<appender-ref ref="REQUEST_FILE"/>
-</appender>
-<!-- 输出error信息到文件-->
-<logger name="error" additivity="true">
-<appender-ref ref="ERROR_FILE"/>
-</logger>
-<!-- 输出info信息到文件-->
-<logger name="info" additivity="true">
-<appender-ref ref="INFO_FILE"/>
-</logger>
-<!-- 输出request信息到文件-->
-<logger name="request" level="INFO" additivity="false">
-<appender-ref ref="REQUEST_FILE" />
-</logger>
-<!-- 输出SQL到控制台和文件-->
-<logger name="org.hibernate.SQL" additivity="false">
-<level value="DEBUG" />
-<appender-ref ref="SQL_FILE" />
-</logger>
-<!-- 输出SQL的参数到控制台和文件-->
-<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
-<level value="TRACE" />
-<appender-ref ref="SQL_FILE" />
-</logger>
-<!-- 开发环境下的日志配置 -->
-<springProfile name="dev">
-<root level="INFO">
-<appender-ref ref="CONSOLE" />
-<appender-ref ref="ERROR_FILE" />
-<appender-ref ref="INFO_FILE" />
-</root>
-</springProfile>
-<!-- 测试环境下的日志配置 -->
-<springProfile name="test">
-<root level="INFO">
-<appender-ref ref="CONSOLE" />
-<appender-ref ref="ERROR_FILE" />
-<appender-ref ref="INFO_FILE" />
-</root>
-</springProfile>
-<!-- 生产环境下的日志配置 -->
-<springProfile name="prod">
-<root level="INFO">
-<appender-ref ref="CONSOLE" />
-<appender-ref ref="ERROR_FILE" />
-<appender-ref ref="INFO_FILE" />
-</root>
-</springProfile>
+        <appender-ref ref="REQUEST_FILE"/>
+    </appender>
+    <!-- 输出error信息到文件-->
+    <logger name="error" additivity="true">
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+    <!-- 输出info信息到文件-->
+    <logger name="info" additivity="true">
+        <appender-ref ref="INFO_FILE"/>
+    </logger>
+    <!-- 输出request信息到文件-->
+    <logger name="request" level="INFO" additivity="false">
+        <appender-ref ref="REQUEST_FILE"/>
+    </logger>
+    <!-- 输出SQL到控制台和文件-->
+    <logger name="org.hibernate.SQL" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="SQL_FILE"/>
+    </logger>
+    <!-- 输出SQL的参数到控制台和文件-->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
+        <level value="TRACE"/>
+        <appender-ref ref="SQL_FILE"/>
+    </logger>
+    <!-- 开发环境下的日志配置 -->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+        </root>
+    </springProfile>
+    <!-- 测试环境下的日志配置 -->
+    <springProfile name="test">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+        </root>
+    </springProfile>
+    <!-- 生产环境下的日志配置 -->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+        </root>
+    </springProfile>
 </configuration>
 ```
 

@@ -1,7 +1,7 @@
 ---
 author: xlc520
 title: 免费随机图片api
-excerpt: 
+excerpt:
 description: 免费随机图片api接口
 date: 2022-03-20
 category: other
@@ -101,13 +101,13 @@ body { background-image: url(http://api.btstu.cn/sjbz/?lx=dongman);
 background-position: left top;  background-attachment:fixed; background-repeat:no-repeat;opacity:.9;}
 @media (max-width: 640px){
 body {
-   background-image: url(http://api.btstu.cn/sjbz/?lx=m_dongman);
+background-image: url(http://api.btstu.cn/sjbz/?lx=m_dongman);
 }
 }
 @media (max-width: 720px){
- body {
- background-image: url(http://api.btstu.cn/sjbz/?m_lx=suiji);
- }
+body {
+background-image: url(http://api.btstu.cn/sjbz/?m_lx=suiji);
+}
 }
 
 ```
@@ -118,7 +118,7 @@ body {
 
 ### 获取指定大小的随机图片
 
-```awk
+```text
 https://picsum.photos/200/300
 ```
 
@@ -127,7 +127,7 @@ https://picsum.photos/200/300
 
 如果你想要获得正方形图片，只需要如下代码
 
-```awk
+```text
 https://picsum.photos/200
 //等同于 https://picsum.photos/200/200
 ```
@@ -140,7 +140,7 @@ https://picsum.photos/200
 
 ------
 
-```awk
+```text
 https://picsum.photos/id/237/200/300
 ```
 
@@ -154,7 +154,7 @@ https://picsum.photos/id/237/200/300
 
 每次根据种子获得相同的随机图像，方法是在 URL 开头添加`/seed/ {seed}`。
 
-```awk
+```text
 https://picsum.photos/seed/picsum/200
 ```
 
@@ -166,7 +166,7 @@ https://picsum.photos/seed/picsum/200
 
 只需要在链接末尾添加`?grayscale`即可
 
-```awk
+```text
 https://picsum.photos/200/300?grayscale
 ```
 
@@ -178,7 +178,7 @@ https://picsum.photos/200/300?grayscale
 
 通过附加`?blur`到 url 的末尾获得模糊图像。
 
-```awk
+```text
 https://picsum.photos/200/200/?blur
 ```
 
@@ -186,7 +186,7 @@ https://picsum.photos/200/200/?blur
 
 可以通过提供介于 1 和 10 之间的数字来调整模糊量。
 
-```apache
+```text
 https://picsum.photos/200?blur=2
 ```
 
@@ -200,7 +200,7 @@ https://picsum.photos/200?blur=2
 
 例如，要获得灰度和模糊的特定图像。
 
-```awk
+```text
 https://picsum.photos/id/870/200?grayscale&blur=2
 ```
 
@@ -208,20 +208,20 @@ https://picsum.photos/id/870/200?grayscale&blur=2
 
 要在浏览器中请求多张相同大小的图像，请添加`random`查询参数以防止图像被缓存：
 
-```routeros
+```html
 <img src="https://picsum.photos/200/300?random=1">
 <img src="https://picsum.photos/200/300?random=2">
 ```
 
 如果您需要文件结尾，则可以添加`.jpg`到 url 的结尾。
 
-```awk
+```text
 https://picsum.photos/200/300.jpg
 ```
 
 要获取 WebP 格式的图像，可以将其添加`.webp`到 URL 的末尾。
 
-```awk
+```text
 https://picsum.photos/200/300.webp
 ```
 
@@ -271,12 +271,12 @@ https://picsum.photos/id/0/info
 
 ```json
 {
-        "id": "0",
-        "author": "Alejandro Escamilla",
-        "width": 5616,
-        "height": 3744,
-        "url": "https://unsplash.com/...",
-        "download_url": "https://picsum.photos/..."
+  "id": "0",
+  "author": "Alejandro Escamilla",
+  "width": 5616,
+  "height": 3744,
+  "url": "https://unsplash.com/...",
+  "download_url": "https://picsum.photos/..."
 }
 ```
 
@@ -308,10 +308,18 @@ JSON 数据
 
 ```json
 {
- "code":"200" #图片状态码
- "acgurl":"https:\/\/ws1.sinaimg.cn\/large\/0072Vf1pgy1foxkfy08umj31kw0w0nng.jpg" #图片地址
- "width":"2048" #图片宽
- "height":"1152" #图片高
+  "code": "200"
+  #
+  图片状态码
+  "acgurl": "https:\/\/ws1.sinaimg.cn\/large\/0072Vf1pgy1foxkfy08umj31kw0w0nng.jpg"
+  #
+  图片地址
+  "width": "2048"
+  #
+  图片宽
+  "height": "1152"
+  #
+  图片高
 }
 ```
 

@@ -1,8 +1,8 @@
 ---
 author: xlc520
 title: Oracle的数据 导入与导出-数据库
-excerpt: 
-description: 
+excerpt:
+description:
 date: 2022-06-29
 category: Linux
 tag: Linux
@@ -104,14 +104,20 @@ su - oracle
 登录 sqlplus 并修改 sys、system 用户密码
 
 ```sql
-sqlplus /nolog   --登录
+sqlplus
+/nolog   --登录
 conn /as sysdba  --
-alter user system identified by system;--修改system用户账号密码；
-alter user sys identified by system;--修改sys用户账号密码；
-create user test identified by test; -- 创建内部管理员账号密码；
+alter
+user system identified by system;--修改system用户账号密码；
+alter
+user sys identified by system;--修改sys用户账号密码；
+create
+user test identified by test; -- 创建内部管理员账号密码；
 grant connect,resource,dba to yan_test; --将dba权限授权给内部管理员账号和密码；
-ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED; --修改密码规则策略为密码永不过期；（会出现坑，后面讲解）
-alter system set processes=1000 scope=spfile; --修改数据库最大连接数据；
+ALTER
+PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED; --修改密码规则策略为密码永不过期；（会出现坑，后面讲解）
+alter
+system set processes=1000 scope=spfile; --修改数据库最大连接数据；
 ```
 
 修改以上信息后，需要重新启动数据库；
@@ -172,13 +178,15 @@ dmp 文件导出一般用的比较多的是三种,分别是: 导出整个数据�
 1: 将数据库 Oracle 完全导出,用户名 system 密码 manager 导出到 c:daochu.dmp 中
 
 ```sql
-exp system/manager@Oracle file=c:daochu.dmp full=y
+exp
+system/manager@Oracle file=c:daochu.dmp full=y
 ```
 
 2: 将数据库中 RFD 用户与,JYZGCX 用户的表导出
 
 ```sql
-exp system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
+exp
+system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
 ```
 
 3: 将数据库中的表 T_USER,T_ROLE 导出
@@ -186,19 +194,25 @@ exp system/manager@ORACLE file=d:daochu.dmp owner=(RFD,JYZGCX)
 system 为用户名，manager 为密码，ORACLE 为数据库实例名，其实不一定非的用 system 用户，只要是拥有管理员权限的用户都可以
 
 ```sql
-exp JYZGCX/JYZGCX@Oracle file = d:datanewsmgnt.dmp tables = (T_USER,T_ROLE)
+exp
+JYZGCX/JYZGCX@Oracle file = d:datanewsmgnt.dmp tables = (T_USER,T_ROLE)
 ```
 
 ```sql
 --备份某几张表  ！！！！
-exp smsc/smsc file=/data/oracle_bak/dmp/bakup0209_2.dmp tables=\(send_msg_his,send_msg,recv_msg_his,recv_msg\)
+exp
+smsc/smsc file=/data/oracle_bak/dmp/bakup0209_2.dmp tables=
+\(send_msg_his,send_msg,recv_msg_his,recv_msg
+\)
 --备份整个数据库 ！！！！
 --方式1
 exp smsc/smsc file=/data/oracle_bak/dmp/bakupsmmc0209_2.dmp full=y
 --方式2
 exp cop/cop@133.96.84.39:1521/coprule file=/home/oracle/cop_20160902.dmp owner=cop log=/home/oracle/cop.log
 --本机上
-exp zop/zop@orcl file= D:\zop_bak.dmp owner=zop log=D:\zop_ba.log
+exp zop/zop@orcl file= D:
+\zop_bak.dmp owner=zop log=D:
+\zop_ba.log
 ```
 
 **dmp 文件的导入**
@@ -220,7 +234,8 @@ sysdba;这样就可以以超级管理员的最高权限登录,当然这决定于
 然后就是创建表空间,命令如下:
 
 ```sql
-create tablespace USERS
+create
+tablespace USERS
 
 logging
 
@@ -236,7 +251,8 @@ extend management local;
 创建 test 用户,密码也是 test222,使用上面创建的表空间
 
 ```sql
-create user test identifiles by test222
+create
+user test identifiles by test222
 
  default tablespace USERS
 ```
@@ -254,7 +270,8 @@ create user test identifiles by test222
 直接输入如下的语句:
 
 ```sql
-imp test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" full =y;
+imp
+test/test222@localhost/orcl file="C:UsersxiejiachenDesktoptest20190630.DMP" full =y;
 ```
 
 下面解释一下上面的语句:
@@ -275,17 +292,26 @@ full=y : 全部导入
 
  ```sql
  --数据的导入
- --1 将D:\daochu.dmp 中的数据导入 TEST数据库中。
-  imp system/manager@TEST file=d:\daochu.dmp
-  imp aichannel/aichannel@TEST full=y file=d:\datanewsmgnt.dmp ignore=y
+--1 将D:\daochu.dmp 中的数据导入 TEST数据库中。
+imp
+system/manager@TEST file=d:
+\daochu.dmp
+  imp aichannel/aichannel@TEST full=y file=d:
+\datanewsmgnt.dmp ignore=y
  --上面可能有点问题，因为有的表已经存在，然后它就报错，对该表就不进行导入。
  -- 在后面加上 ignore=y 就可以了。
  --2 将d:daochu.dmp中的表table1 导入
- imp system/manager@TEST file=d:\daochu.dmp tables=(table1)
+ imp system/manager@TEST file=d:
+\daochu.dmp tables=(table1)
  --基本上上面的导入导出够用了。不少情况要先是将表彻底删除，然后导入。
- 注意：
- 操作者要有足够的权限，权限不够它会提示。
- 数据库时可以连上的。可以用tnsping TEST 来获得数据库TEST能否连上。
+ 注意
+：
+ 操作者要有足够的权限
+，权限不够它会提示
+。
+ 数据库时可以连上的
+。可以用tnsping TEST 来获得数据库TEST能否连上
+。
  ```
 
 #### 2、数据泵方法
@@ -293,7 +319,8 @@ full=y : 全部导入
 创建 directory:
 
 ```sql
-expdp(impdp) username/password@SERVICENAME:1521 
+expdp
+(impdp) username/password@SERVICENAME:1521 
 schemas=username dumpfile=file1.dmp logfile=file1.log 
 directory=testdata1 remap_schema=test:test;
 ```
@@ -301,24 +328,47 @@ directory=testdata1 remap_schema=test:test;
 数据库导出举例:
 
 ```sql
-expdp xinxiaoyong/123456@127.0.0.1:1521 schemas=xinxiaoyong dumpfile=test.dmp 
+expdp
+xinxiaoyong/123456@127.0.0.1:1521 schemas=xinxiaoyong dumpfile=test.dmp 
 
 logfile=test.log directory=testdata1;
 ```
 
 ```sql
-exp:导出命令，导出时必写。
-imp:导入命令，导入时必写,每次操作，二者只能选择一个执行。
-username:导出数据的用户名，必写;
-password:导出数据的密码，必写;
-@:地址符号，必写;
-SERVICENAME:Oracle的服务名，必写;
-1521:端口号，1521是默认的可以不写,非默认要写;
-schemas：导出操作的用户名;
-dumpfile：导出的文件;
-logfile:导出的日志文件,可以不写；
+exp
+:导出命令
+，导出时必写
+。
+imp:导入命令
+，导入时必写,每次操作
+，二者只能选择一个执行
+。
+username:导出数据的用户名
+，必写;
+password
+:导出数据的密码
+，必写;
+@:地址符号
+，
+必写;
+SERVICENAME
+:Oracle的服务名
+，必写;
+1521:端口号
+，1521是默认的可以不写,非默认要写;
+schemas
+：
+导出操作的用户名;
+dumpfile
+：
+导出的文件;
+logfile
+:导出的日志文件,可以不写
+；
 directory:创建的文件夹名称;
-remap_schema=源数据库用户名:目标数据库用户名,二者不同时必写，相同可以省略;
+remap_schema
+=源数据库用户名:目标数据库用户名,二者不同时必写
+，相同可以省略;
 ```
 
 1.查看表空间：
@@ -343,71 +393,82 @@ remap_schema=源数据库用户名:目标数据库用户名,二者不同时必�
 1)按用户导
 
 ```sql
-expdp xinxiaoyong/***123456***@orcl schemas=xinxiaoyong dumpfile=expdp.dmp directory=testdata1;
+expdp
+xinxiaoyong/***123456***@orcl schemas=xinxiaoyong dumpfile=expdp.dmp directory=testdata1;
 ```
 
 2)并行进程
 
 ```sql
-parallel expdp xinxiaoyong/***123456***@orcl 
+parallel
+expdp xinxiaoyong/***123456***@orcl 
 directory=testdata1 dumpfile=xinxiaoyong3.dmp parallel=***40*** job_name=xinxiaoyong3
 ```
 
 3)按表名导
 
 ```sql
-expdp xinxiaoyong/***123456***@orcl tables=emp,dept dumpfile=expdp.dmp directory=testdata1;
+expdp
+xinxiaoyong/***123456***@orcl tables=emp,dept dumpfile=expdp.dmp directory=testdata1;
 ```
 
 4)按查询条件导
 
 ```sql
-expdp xinxiaoyong/***123456***@orcl 
+expdp
+xinxiaoyong/***123456***@orcl 
 directory=testdata1 dumpfile=expdp.dmp tables=emp query='WHERE deptno=20';
 ```
 
 5)按表空间导
 
 ```sql
-expdp system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=temp,example;
+expdp
+system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=temp,example;
 ```
 
 6)导整个数据库
 
 ```sql
-expdp system/manager directory=testdata1 dumpfile=full.dmp FULL=y;
+expdp
+system/manager directory=testdata1 dumpfile=full.dmp FULL=y;
 ```
 
 6.还原数据
 1)导到指定用户下
 
 ```sql
- impdp xinxiaoyong/***123456*** directory=testdata1 dumpfile=expdp.dmp schemas=xinxiaoyong;
+ impdp
+xinxiaoyong/***123456*** directory=testdata1 dumpfile=expdp.dmp schemas=xinxiaoyong;
 ```
 
 2)改变表的
 
 ```sql
-owner impdp system/manager 
+owner
+impdp system/manager 
 directory=testdata1 dumpfile=expdp.dmp tables=xinxiaoyong.dept remap_schema =xinxiaoyong:system;
 ```
 
 3)导入表空间
 
-```sqal
-impdp system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=example;
+```sql
+impdp
+system/manager directory=testdata1 dumpfile=tablespace.dmp tablespaces=example;
 ```
 
 4)导入数据库
 
 ```sql
-impdb system/manager directory=dump_dir dumpfile=full.dmp FULL=y;
+impdb
+system/manager directory=dump_dir dumpfile=full.dmp FULL=y;
 ```
 
 5)追加数据
 
 ```sql
-impdp system/manager 
+impdp
+system/manager 
 directory=testdata1 dumpfile=expdp.dmp schemas=system table_exists_action;
 ```
 

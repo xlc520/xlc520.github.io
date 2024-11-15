@@ -32,7 +32,7 @@ KMS 服务。搭建方式有很多，本文主要是演示如何在自己的 lin
 
 ### 4 系统支持
 
-```none
+```text
 CentOS 6+，Debian 7+，Ubuntu 12+
 ```
 

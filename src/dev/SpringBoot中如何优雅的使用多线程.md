@@ -102,7 +102,6 @@ public class AsyncService {
 2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-7] x.gits.boot.system.service.AsyncService  : do something, message=index = 6
 2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-2] x.gits.boot.system.service.AsyncService  : do something, message=index = 1
 2020-04-19 23:42:42.488  INFO 21168 --- [ do-something-3] x.gits.boot.system.service.AsyncService  : do something, message=index = 2
-复制代码
 ```
 
 由此可见已经达到异步执行的效果了，并且使用到了咱们配置的线程池。
@@ -166,7 +165,7 @@ public class AsyncService {
 
 访问接口
 
-```vbnet
+```text
 C:\Users\Administrator>curl -X GET "http://localhost:8200/open/somethings" -H "accept: */*"
 do something1: create order; do something2: reduce account; do something3: save log
 ```

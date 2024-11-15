@@ -131,14 +131,19 @@ export default hopeTheme({
     mdEnhance: {
       align: true,
       attrs: true,
-      codetabs: true,
       component: true,
       demo: true,
-      figure: true,
-      imgLazyload: true,
-      imgSize: true,
+      // Please use @vuepress/plugin-markdown-image
+      // figure: false,
+      // imgLazyload: false,
+      // imgSize: false,
+      // Please use @vuepress/plugin-markdown-tab
+      // codetabs: false,
+      // tabs: false,
       include: true,
       mark: true,
+      plantuml: true,
+      spoiler: true,
       stylize: [
         {
           matcher: 'Recommended',
@@ -154,7 +159,7 @@ export default hopeTheme({
       ],
       sub: true,
       sup: true,
-      tabs: true,
+      tasklist: true,
       vPre: true,
 
       // 在启用之前安装 chart.js

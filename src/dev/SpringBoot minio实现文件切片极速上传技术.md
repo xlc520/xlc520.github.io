@@ -282,7 +282,7 @@ firewall-cmd --list-ports
 ### 编写配置文件
 
 ```yaml
-yaml复制代码server:
+server:
   port: 8080
 spring:
   servlet:

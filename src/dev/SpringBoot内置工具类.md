@@ -40,7 +40,6 @@ icon: java
    void isInstanceOf(Class type, Object obj, String message)
    // 要求参数 `subType` 必须是参数 superType 的子类或实现类，否则抛出异常，不予放行
    void isAssignable(Class superType, Class subType, String message)
-   复制代码
    ```
 
 ## 对象、数组、集合
@@ -62,7 +61,6 @@ icon: java
    String identityToString(Object obj)
    // 相当于 toString()方法，但参数为 null 时，返回字符串：""
    String getDisplayString(Object obj)
-   复制代码
    ```
 
 2. 判断工具
@@ -85,7 +83,6 @@ icon: java
             Map: Map.isEmpty()
     */
    boolean isEmpty(Object obj)
-   复制代码
    ```
 
 3. 其他工具方法
@@ -95,7 +92,6 @@ icon: java
    <A, O extends A> A[] addObjectToArray(A[] array, O obj)
    // 原生基础类型数组 --> 包装类数组
    Object[] toObjectArray(Object source)
-   复制代码
    ```
 
 ### StringUtils
@@ -119,7 +115,6 @@ icon: java
    boolean substringMatch(CharSequence str, int index, CharSequence substring)
    // 计算一个字符串中指定子串的出现次数
    int countOccurrencesOf(String str, String sub)
-   复制代码
    ```
 
 2. 字符串操作工具
@@ -147,7 +142,6 @@ icon: java
    String[] trimArrayElements(String[] array)
    // 将 URL 字符串进行解码
    String uriDecode(String source, Charset charset)
-   复制代码
    ```
 
 3. 路径相关工具方法
@@ -167,7 +161,6 @@ icon: java
    String unqualify(String qualifiedName)
    // 以指定字符作为分隔符，获取其最后一部分
    String unqualify(String qualifiedName, char separator)
-   复制代码
    ```
 
 ### CollectionUtils
@@ -187,7 +180,6 @@ icon: java
    boolean containsAny(Collection<?> source, Collection<?> candidates)
    // 判断 List/Set 中的每个元素是否唯一。即 List/Set 中不存在重复元素
    boolean hasUniqueObject(Collection<?> collection)
-   复制代码
    ```
 
 2. 集合操作工具
@@ -209,7 +201,6 @@ icon: java
    Object findValueOfType(Collection<?> collection, Class<?>[] types)
    // 返回 List/Set 中元素的类型
    Class<?> findCommonElementType(Collection<?> collection)
-   复制代码
    ```
 
 ## 文件、资源、IO 流
@@ -225,7 +216,6 @@ icon: java
    byte[] copyToByteArray(InputStream in)
    // 从输入流中读入到字符串中
    String copyToString(Reader in)
-   复制代码
    ```
 
 2. 输出
@@ -243,7 +233,6 @@ icon: java
    int copy(Reader in, Writer out)
    // 从字符串到输出流
    void copy(String in, Writer out)
-   复制代码
    ```
 
 ### ResourceUtils
@@ -257,7 +246,6 @@ icon: java
    static URL getURL(String resourceLocation) 
    // 获取文件（在 JAR 包内无法正常使用，需要是一个独立的文件）
    static File getFile(String resourceLocation)
-   复制代码
    ```
 
 2. Resource
@@ -271,7 +259,6 @@ icon: java
    ClassPathResource
    // Web 容器上下文中的资源（jar 包、war 包）
    ServletContextResource
-   复制代码
    ```
 
    ```java
@@ -287,7 +274,6 @@ icon: java
    InputStream getInputStream()
    // 获得资源的描述信息
    String getDescription()
-   复制代码
    ```
 
 ### StreamUtils
@@ -299,7 +285,6 @@ icon: java
    int copy(InputStream in, OutputStream out)
    void copy(String in, Charset charset, OutputStream out)
    long copyRange(InputStream in, OutputStream out, long start, long end)
-   复制代码
    ```
 
 2. 输出
@@ -308,8 +293,7 @@ icon: java
    byte[] copyToByteArray(InputStream in)
    String copyToString(InputStream in, Charset charset)
    // 舍弃输入流中的内容
-   int drain(InputStream in) 
-   复制代码
+   int drain(InputStream in)
    ```
 
 ## 反射、AOP
@@ -336,8 +320,7 @@ icon: java
    // 是否是从 Object 类继承而来的方法
    boolean isObjectMethod(Method method) 
    // 检查一个方法是否声明抛出指定异常
-   boolean declaresException(Method method, Class<?> exceptionType) 
-   复制代码
+   boolean declaresException(Method method, Class<?> exceptionType)
    ```
 
 2. 执行方法
@@ -350,8 +333,7 @@ icon: java
    // 取消 Java 权限检查。以便后续执行该私有方法
    void makeAccessible(Method method) 
    // 取消 Java 权限检查。以便后续执行私有构造方法
-   void makeAccessible(Constructor<?> ctor) 
-   复制代码
+   void makeAccessible(Constructor<?> ctor)
    ```
 
 3. 获取字段
@@ -362,8 +344,7 @@ icon: java
    // 同上，多提供了属性的类型
    Field findField(Class<?> clazz, String name, Class<?> type) 
    // 是否为一个 "public static final" 属性
-   boolean isPublicStaticFinal(Field field) 
-   复制代码
+   boolean isPublicStaticFinal(Field field)
    ```
 
 4. 设置字段
@@ -383,8 +364,7 @@ icon: java
    void doWithFields(Class<?> clazz, ReflectionUtils.FieldCallback fc, 
                      ReflectionUtils.FieldFilter ff) 
    // 同上，但不包括继承而来的属性
-   void doWithLocalFields(Class<?> clazz, ReflectionUtils.FieldCallback fc) 
-   复制代码
+   void doWithLocalFields(Class<?> clazz, ReflectionUtils.FieldCallback fc)
    ```
 
 ### AopUtils
@@ -398,7 +378,6 @@ icon: java
    isJdkDynamicProxy()
    // 判断是不是 CGLIB 代理对象
    boolean isCglibProxy()
-   复制代码
    ```
 
 2. 获取被代理对象的 class
@@ -406,7 +385,6 @@ icon: java
    ```java
    // 获取被代理的目标 class
    Class<?> getTargetClass()
-   复制代码
    ```
 
 ### AopContext
@@ -415,5 +393,4 @@ icon: java
 
    ```java
    Object currentProxy()
-   复制代码
    ```

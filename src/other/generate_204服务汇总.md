@@ -17,6 +17,8 @@ icon: others
 
 <https://www.google.cn/generate_204>
 
+http://www.google-analytics.com/generate_204
+
 <http://connect.rom.miui.com/generate_204>
 
 <http://www.google.com/generate_204>

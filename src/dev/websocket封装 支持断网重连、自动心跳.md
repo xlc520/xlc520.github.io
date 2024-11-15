@@ -151,8 +151,6 @@ ws.onopen(() => {});
 
 启动项目，我们会发现控制台已经有了提示
 
-![图片](https://bitbucket.org/xlc520/blogasset/raw/main/images/2024/640.webp)
-
 **心跳验证：**
 
 等待一段时间后，我们可以看到ws连接里，前端已经发送了多次心跳数据

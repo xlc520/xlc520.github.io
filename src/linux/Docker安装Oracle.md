@@ -1,8 +1,8 @@
 ---
 author: xlc520
 title: Docker安装Oracle
-excerpt: 
-description: 
+excerpt:
+description:
 date: 2022-08-17
 category: Linux
 tag: Linux
@@ -112,7 +112,7 @@ Server: Docker Engine - Community
 
 #### 2.2. 搜索镜像
 
-```linux
+```shell
 docker search oracle_11g
 ```
 
@@ -122,7 +122,7 @@ docker search oracle_11g
 
 #### 2.3. 拉取镜像
 
-```linux
+```shell
 docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
 ```
 
@@ -130,7 +130,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
 
 在 `CentOs` 宿主机构建一个目录用来存储 `Oracle` 的数据。
 
-```linux
+```shell
 mkdir -p /data/oracle10g
 ```
 
@@ -140,7 +140,7 @@ mkdir -p /data/oracle10g
 
 #### 3.1. 创建容器
 
-```linux
+```shell
 docker run  -itd -p 1521:1521 --name oracle --restart=always --mount source=oracle_vol,target=/home/oracle/app/oracle/oradata registry.aliyuncs.com/helowin/oracle_11g
 ```
 
@@ -153,7 +153,7 @@ docker run -it -d -p 1521:1521 -v /data/oracle10g:/data/oracle --name oracle10g 
 
 #### 3.2. 进入容器
 
-```linux
+```shell
 docker exec -it oracle bash
 ```
 
@@ -194,19 +194,19 @@ source /etc/profile
 
 #### 3.3.2. 添加软连接
 
-```linux
+```shell
 ln -s $ORACLE_HOME/bin/sqlplus /usr/bin
 ```
 
 #### 3.3.3. 切换到 oracle 用户
 
-```linux
+```shell
 su - oracle
 ```
 
 #### 3.4. 登录 oracle
 
-```linux
+```shell
 sqlplus /nolog   --登录
 conn /as sysdba
 ```
@@ -218,8 +218,10 @@ conn /as sysdba
 #### 3.5.1. 修改 sys、system 用户密码
 
 ```sql
-alter user system identified by system ;--修改system用户账号密码；
-alter user sys identified by sys ;--修改sys用户账号密码；
+alter
+user system identified by system ;--修改system用户账号密码；
+alter
+user sys identified by sys ;--修改sys用户账号密码；
 ```
 
 冒泡排序和选择法排序的源代码
@@ -230,16 +232,20 @@ alter user sys identified by sys ;--修改sys用户账号密码；
 #### 3.5.2. 添加和授权用户
 
 ```sql
-create user test identified by test; -- 创建内部管理员账号密码；
+create
+user test identified by test; -- 创建内部管理员账号密码；
 grant connect,resource,dba to test; --将dba权限授权给内部管理员账号和密码；
-ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED; --设置密码永不过期：
-alter system set processes=1000 scope=spfile; --修改数据库最大连接数据；
+ALTER
+PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED; --设置密码永不过期：
+alter
+system set processes=1000 scope=spfile; --修改数据库最大连接数据；
 ```
 
 #### 3.5.3. 查询
 
 ```sql
-show parameter password
+show
+parameter password
 ```
 
 ![20220726194511](https://bitbucket.org/xlc520/blogasset/raw/main/images3/9be1155ed596594ade6034c40f6aba5e.png)
@@ -247,7 +253,8 @@ show parameter password
 #### 3.5.4. 检查用户
 
 ```sql
-select * from v$pwfile_users;
+select *
+from v$pwfile_users;
 ```
 
 ![20220726194528](https://bitbucket.org/xlc520/blogasset/raw/main/images3/8f47412dc3c4e984f0a9833d6af75204.png)
@@ -255,10 +262,13 @@ select * from v$pwfile_users;
 #### 3.6. 重启服务
 
 ```sql
-conn /as sysdba;--保存数据库
-shutdown immediate; --关闭数据库
+conn
+/as sysdba;--保存数据库
+shutdown
+immediate; --关闭数据库
 startup; --启动数据库
-show user;
+show
+user;
 ```
 
 ![20220726194844](https://bitbucket.org/xlc520/blogasset/raw/main/images3/0fc4a051c1a40e4f9bbc034534553497.png)
@@ -351,7 +361,8 @@ services:
 
 ### 第二种
 
-```sh'# 下载镜像
+```shell
+# 下载镜像
 docker pull registry.cn-hangzhou.aliyuncs.com/zhuyijun/oracle:19c
 ```
 
@@ -478,7 +489,10 @@ Container Name：ORCLPDB
 运行 cmd 按如下输入命令
 
 ```sql
-以sys登陆 超级用户（sysdba）
+以sys登陆
+超级用户
+（sysdba
+）
 
 sqlplus / as sysdba 
 ````
@@ -490,7 +504,8 @@ alter user 用户名 account unlock; --------- 解除锁定(必须带“;”号)
 以 system 用户名为例，即命令为
 
 ```sql
-alter user system account unlock;
+alter
+user system account unlock;
 ```
 
 3.为该账户设置新密码
@@ -500,14 +515,16 @@ alter user 用户名 identified by 密码; -------------修改密码（密码加
 以用户名 system 密码 dhee 为例，即命令为
 
 ```sql
-alter user system identified by dhee;
+alter
+user system identified by dhee;
 ```
 
 如果可以登录任意的一个用户可以通过一下方法来知道当前有哪些用户。
 查看当前用户。
 
 ```sql
-select distinct owner from all_objects 
+select distinct owner
+from all_objects 
 ```
 
 如果你在安装的时候没有设置密码的话

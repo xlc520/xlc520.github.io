@@ -221,8 +221,12 @@ public class IpUrlLimitInterceptor implements HandlerInterceptor{
 
     }
 }
-复制代码如果想要执行我们的ip 解析拦截器，需要在spring boot的视图层进行拦截才会触发我们的拦截器。
-java复制代码@Configuration
+```
+
+如果想要执行我们的ip 解析拦截器，需要在spring boot的视图层进行拦截才会触发我们的拦截器。
+
+```java
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     IpUrlLimitInterceptor ipUrlLimitInterceptor;

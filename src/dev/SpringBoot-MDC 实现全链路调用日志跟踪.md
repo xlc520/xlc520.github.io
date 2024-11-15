@@ -1,13 +1,13 @@
 ---
 author: xlc520
 title: SpringBoot - MDC 实现全链路调用日志跟踪
-excerpt: 
-description: 
+excerpt:
+description:
 date: 2023-01-23
 category: Java
-tag: 
-- Java
-- SpringBoot 
+tag:
+  - Java
+  - SpringBoot
 article: true
 timeline: true
 icon: java
@@ -36,9 +36,8 @@ MDC（Mapped Diagnostic Context，映射调试上下文）是 log4j 、logback �
 
 代码简洁，日志风格统一，不需要在 log 打印中手动拼写 traceId，即
 
-```arduino
+```text
 LOGGER.info("traceId:{} ", traceId)
-复制代码
 ```
 
 ### MDC 使用
@@ -153,43 +152,80 @@ public class ThreadPoolExecutorMdcWrapper extends ThreadPoolExecutor {
 
 ```typescript
 public class ThreadMdcUtil {
-    public static void setTraceIdIfAbsent() {
-        if (MDC.get(Constants.TRACE_ID) == null) {
-            MDC.put(Constants.TRACE_ID, TraceIdUtil.getTraceId());
-        }
-    }
+  public static void
 
-    public static <T> Callable<T> wrap(final Callable<T> callable, final Map<String, String> context) {
-        return () -> {
-            if (context == null) {
-                MDC.clear();
-            } else {
-                MDC.setContextMap(context);
-            }
-            setTraceIdIfAbsent();
-            try {
-                return callable.call();
-            } finally {
-                MDC.clear();
-            }
-        };
+  setTraceIdIfAbsent() {
+    if (MDC.get(Constants.TRACE_ID) == null) {
+      MDC.put(Constants.TRACE_ID, TraceIdUtil.getTraceId());
     }
+  }
 
-    public static Runnable wrap(final Runnable runnable, final Map<String, String> context) {
-        return () -> {
-            if (context == null) {
-                MDC.clear();
-            } else {
-                MDC.setContextMap(context);
-            }
-            setTraceIdIfAbsent();
-            try {
-                runnable.run();
-            } finally {
-                MDC.clear();
-            }
-        };
+  public static<T>
+
+  Callable<T>
+
+  wrap(final
+
+  Callable<T>
+
+  callable
+,
+  final
+
+  Map<String, String>
+
+  context
+) {
+  return()
+
+-> {
+  if(context
+
+==
+  null
+) {
+  MDC
+.
+
+  clear();
+}
+
+else
+{
+  MDC.setContextMap(context);
+}
+setTraceIdIfAbsent();
+try {
+  return callable.call();
+} finally {
+  MDC.clear();
+}
+}
+;
+}
+
+public static
+Runnable
+wrap(final
+Runnable
+runnable, final
+Map < String, String > context
+)
+{
+  return () -> {
+    if (context == null) {
+      MDC.clear();
+    } else {
+      MDC.setContextMap(context);
     }
+    setTraceIdIfAbsent();
+    try {
+      runnable.run();
+    } finally {
+      MDC.clear();
+    }
+  };
+}
 }
 ```
 
@@ -202,23 +238,34 @@ public class ThreadMdcUtil {
 代码等同于以下写法，会更直观。
 
 ```typescript
-public static Runnable wrap(final Runnable runnable, final Map<String, String> context) {
-    return new Runnable() {
-        @Override
-        public void run() {
-            if (context == null) {
-                MDC.clear();
-            } else {
-                MDC.setContextMap(context);
-            }
-            setTraceIdIfAbsent();
-            try {
-                runnable.run();
-            } finally {
-                MDC.clear();
-            }
-        }
-    };
+public static
+Runnable
+wrap(final
+Runnable
+runnable, final
+Map < String, String > context
+)
+{
+  return new Runnable()
+  {
+  @Override
+  public
+    void run()
+    {
+      if (context == null) {
+        MDC.clear();
+      } else {
+        MDC.setContextMap(context);
+      }
+      setTraceIdIfAbsent();
+      try {
+        runnable.run();
+      } finally {
+        MDC.clear();
+      }
+    }
+  }
+  ;
 }
 ```
 
@@ -323,7 +370,7 @@ public class RestTemplateTraceIdInterceptor implements ClientHttpRequestIntercep
 
 为 RestTemplate 添加拦截器
 
-```arduino
+```text
 restTemplate.setInterceptors(Arrays.asList(new RestTemplateTraceIdInterceptor()));
 ```
 

@@ -300,7 +300,7 @@ public class OrderedProducer {
 当然，如果需要自定义的延时等级，可以通过在 broker 加载的配置中新增如下配置（例如下面增加了 1 天这个等级 1d）。配置文件在
 RocketMQ 安装目录下的 conf 目录中。
 
-```undefined
+```text
 messageDelayLevel = 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 1d
 ```
 

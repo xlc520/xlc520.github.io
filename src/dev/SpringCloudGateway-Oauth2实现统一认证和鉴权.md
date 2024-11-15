@@ -68,7 +68,6 @@ Spring Boot 2.2.0、Spring Cloud Hoxton 以上版本，本文将详细介绍该�
         <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
 </dependencies>
-复制代码
 ```
 
 - 在`application.yml`中添加相关配置，主要是 Nacos 和 Redis 相关配置；
@@ -97,14 +96,13 @@ management:
     web:
       exposure:
         include: "*"
-复制代码
+
 ```
 
 - 使用`keytool`生成 RSA 证书`jwt.jks`，复制到`resource`目录下，在 JDK 的`bin`目录下使用如下命令即可；
 
 ```plain
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
-复制代码
 ```
 
 - 创建`UserServiceImpl`类实现 Spring Security 的`UserDetailsService`接口，用于加载用户信息；
@@ -149,7 +147,6 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
 }
-复制代码
 ```
 
 - 添加认证服务相关配置`Oauth2ServerConfig`，需要配置加载用户信息的服务`UserServiceImpl`及 RSA 的钥匙对`KeyPair`；
@@ -213,7 +210,6 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
 }
-复制代码
 ```
 
 - 如果你想往 JWT 中添加自定义信息的话，比如说`登录用户的ID`，可以自己实现`TokenEnhancer`接口；
@@ -235,7 +231,6 @@ public class JwtTokenEnhancer implements TokenEnhancer {
         return accessToken;
     }
 }
-复制代码
 ```
 
 - 由于我们的网关服务需要 RSA 的公钥来验证签名是否合法，所以认证服务需要有个接口把公钥暴露出来；
@@ -259,7 +254,6 @@ public class KeyPairController {
     }
 
 }
-复制代码
 ```
 
 - 不要忘了还需要配置 Spring Security，允许获取公钥接口的访问；
@@ -293,7 +287,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-复制代码
 ```
 
 - 创建一个资源服务`ResourceServiceImpl`，初始化的时候把资源与角色匹配关系缓存到 Redis 中，方便网关服务进行鉴权的时候获取。
@@ -318,7 +311,6 @@ public class ResourceServiceImpl {
         redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
     }
 }
-复制代码
 ```
 
 ### micro-oauth2-gateway
@@ -359,7 +351,6 @@ public class ResourceServiceImpl {
         <version>8.16</version>
     </dependency>
 </dependencies>
-复制代码
 ```
 
 - 在`application.yml`中添加相关配置，主要是路由规则的配置、Oauth2 中 RSA 公钥的配置及路由白名单的配置；
@@ -409,7 +400,7 @@ secure:
     urls: #配置白名单路径
       - "/actuator/**"
       - "/auth/oauth/token"
-复制代码
+
 ```
 
 - 对网关服务进行配置安全配置，由于 Gateway 使用的是`WebFlux`，所以需要使用`@EnableWebFluxSecurity`注解开启；
@@ -453,7 +444,6 @@ public class ResourceServerConfig {
     }
 
 }
-复制代码
 ```
 
 - 在`WebFluxSecurity`中自定义鉴权操作需要实现`ReactiveAuthorizationManager`接口；
@@ -486,7 +476,6 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     }
 
 }
-复制代码
 ```
 
 - 这里我们还需要实现一个全局过滤器`AuthGlobalFilter`，当鉴权通过后将 JWT 令牌中的用户信息解析出来，然后存入请求的 Header
@@ -527,8 +516,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         return 0;
     }
 }
-
-复制代码
 ```
 
 ### micro-oauth2-api
@@ -544,7 +531,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 </dependencies>
-复制代码
 ```
 
 - 在`application.yml`添加相关配置，很常规的配置；
@@ -566,7 +552,7 @@ management:
     web:
       exposure:
         include: "*"
-复制代码
+
 ```
 
 - 创建一个测试接口，网关验证通过即可访问；
@@ -585,7 +571,6 @@ public class HelloController {
     }
 
 }
-复制代码
 ```
 
 - 创建一个`LoginUserHolder`组件，用于从请求的 Header 中直接获取登录用户信息；
@@ -611,7 +596,6 @@ public class LoginUserHolder {
         return userDTO;
     }
 }
-复制代码
 ```
 
 - 创建一个获取当前用户信息的接口。
@@ -634,7 +618,6 @@ public class UserController{
     }
 
 }
-复制代码
 ```
 
 ## 功能演示
