@@ -1,3 +1,29 @@
+---
+title: tinyMediaManager刮削
+excerpt:
+description: tinyMediaManager刮削
+date: 2024-11-10
+category: other
+tag: other
+author: xlc520
+article: true
+timeline: true
+icon: others
+---
+
+```component VPBanner
+title: tinyMediaManager刮削
+content: tinyMediaManager刮削
+logo: 
+color: var(--banner-text)
+background: rgba(217, 244, 208, 0.5)
+actions:
+  - text: tinyMediaManager刮削
+    link: /other/tinyMediaManager刮削
+```
+
+# tinyMediaManager刮削
+
 > 注意使用V3版本，V4版本收费！
 >
 > 所以升级V3版本即可，不要升级到V4版本！不要升级到V4版本！不要升级到V4版本！
@@ -395,4 +421,5 @@ cd /Applications/tinyMediaManager.app/Contents/Resources/Java/
 - [tinyMediaManager-5.0.4激活遇到的问题及解决方法](https://linux.do/t/topic/69690)
 
 - [https://blog.17lai.site/posts/e6d40157/#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85tinyMediaManager](https://blog.17lai.site/posts/e6d40157/#下载和安装tinyMediaManager)
-  
+
+<Share colorful service="email,qq,qzone,qrcode,weibo,telegram,twitter" />
